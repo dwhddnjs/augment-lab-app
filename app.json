@@ -8,7 +8,11 @@
     "scheme": "aramaugmentlabapp",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.aram-augment-lab",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -39,6 +43,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "f5d43fab-6563-4f66-9b31-8c2eeb7cee52"
+      }
+    },
+    "owner": "dwhddnjs"
   }
 }
