@@ -3,12 +3,18 @@
  * https://docs.expo.dev/guides/color-schemes/
  */
 
-import { Colors } from '@/constants/theme';
+import { Elevation, Radius, Theme, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export function useTheme() {
   const scheme = useColorScheme();
-  const theme = scheme === 'unspecified' ? 'light' : scheme;
+  const mode = scheme === 'unspecified' ? 'light' : scheme;
 
-  return Colors[theme];
+  return {
+    mode,
+    colors: Theme[mode],
+    typography: Typography,
+    radius: Radius,
+    elevation: Elevation,
+  };
 }
