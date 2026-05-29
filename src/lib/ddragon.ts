@@ -16,10 +16,11 @@ export function itemImageUrl(imageKey: string) {
   return `${CDN}/img/item/${imageKey}`;
 }
 
-// iconPath comes from CDragon — e.g. "game/assets/ux/cherry/augments/icons/warmup-routine.png"
+// iconPath from CDragon JSON: "/lol-game-data/assets/ASSETS/..."
+// CDragon serves these under plugins/rcp-be-lol-game-data/global/default/
 export function augmentImageUrl(iconPath: string) {
-  const normalized = iconPath.toLowerCase().replace(/^\//, '');
-  return `${CDRAGON_BASE}/${normalized}`;
+  const stripped = iconPath.replace(/^\/lol-game-data\/assets/i, '').toLowerCase();
+  return `${CDRAGON_BASE}/plugins/rcp-be-lol-game-data/global/default${stripped}`;
 }
 
 const CLASS_ICON_KEYS: Record<string, string> = {

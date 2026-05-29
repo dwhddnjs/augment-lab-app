@@ -41,6 +41,8 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="select-champion-modal" options={{ presentation: 'modal', headerShown: false, gestureEnabled: true }} />
+        <Stack.Screen name="draft" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
+        <Stack.Screen name="draft-result" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
       </Stack>
     </ThemeProvider>
   );

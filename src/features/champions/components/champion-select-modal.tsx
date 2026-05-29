@@ -1,14 +1,7 @@
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import {
-  FlatList,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { FlatList, Pressable, StyleSheet, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
@@ -67,12 +60,13 @@ export function ChampionSelectModal() {
   };
 
   const handleStart = () => {
-    router.navigate("/");
+    router.dismiss();
+    router.push({ pathname: '/draft', params: { championId: selectedId! } });
   };
 
   return (
     <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={styles.safeArea} edges={["top"]}>
         {/* Grabber */}
         <View style={styles.grabberContainer}>
           <View
@@ -80,94 +74,95 @@ export function ChampionSelectModal() {
           />
         </View>
 
-        <ThemedText type="heading">{translate("title")}</ThemedText>
+        <View style={{ paddingTop: 20, gap: 8 }}>
+          <ThemedText type="heading" style={{ fontSize: 26, lineHeight: 32 }}>
+            {translate("title")}
+          </ThemedText>
 
-        {/* Search bar */}
-        <View
-          style={[styles.searchBar, { backgroundColor: colors.surface.raised }]}
-        >
-          <Image
-            source="sf:magnifyingglass"
-            style={styles.searchIcon}
-            tintColor={colors.text.secondary}
-          />
-          <TextInput
-            value={query}
-            onChangeText={setQuery}
-            placeholder={translate("searchPlaceholder")}
-            placeholderTextColor={colors.text.tertiary}
-            style={[styles.searchInput, { color: colors.text.primary }]}
-            clearButtonMode="while-editing"
-            returnKeyType="search"
-          />
-        </View>
-
-        {/* Role filter chips */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.filterRow}
-        >
-          <Pressable
-            onPress={() => setSelectedTag(null)}
+          {/* Search bar */}
+          <View
             style={[
-              styles.filterChip,
-              {
-                backgroundColor:
-                  selectedTag === null
-                    ? colors.accent.default
-                    : colors.surface.raised,
-              },
+              styles.searchBar,
+              { backgroundColor: colors.surface.raised },
             ]}
           >
             <Image
-              source="sf:square.grid.2x2.fill"
-              style={styles.chipIcon}
-              tintColor={
-                selectedTag === null
-                  ? colors.accent.onAccent
-                  : colors.text.secondary
-              }
+              source="sf:magnifyingglass"
+              style={styles.searchIcon}
+              tintColor={colors.text.secondary}
             />
-          </Pressable>
+            <TextInput
+              value={query}
+              onChangeText={setQuery}
+              placeholder={translate("searchPlaceholder")}
+              placeholderTextColor={colors.text.tertiary}
+              style={[styles.searchInput, { color: colors.text.primary }]}
+              clearButtonMode="while-editing"
+              returnKeyType="search"
+            />
+          </View>
 
-          {TAGS.map((tag) => {
-            const isActive = selectedTag === tag;
-            const iconUrl = championClassIconUrl(tag);
-            return (
-              <Pressable
-                key={tag}
-                onPress={() => handleTagPress(tag)}
-                style={[
-                  styles.filterChip,
-                  {
-                    backgroundColor: isActive
-                      ? colors.accent.default
-                      : colors.surface.raised,
-                  },
-                ]}
-              >
-                {iconUrl ? (
-                  <Image
-                    source={{ uri: iconUrl }}
-                    style={styles.chipIcon}
-                    tintColor={
-                      isActive ? colors.accent.onAccent : colors.text.secondary
-                    }
-                    contentFit="contain"
-                  />
-                ) : (
-                  <ThemedText
-                    type="label"
-                    color={isActive ? "onAccent" : "secondary"}
-                  >
-                    {tag}
-                  </ThemedText>
-                )}
-              </Pressable>
-            );
-          })}
-        </ScrollView>
+          {/* Role filter chips */}
+          <View style={styles.filterRow}>
+            <Pressable
+              onPress={() => setSelectedTag(null)}
+              style={[
+                styles.filterChip,
+                {
+                  backgroundColor:
+                    selectedTag === null ? colors.accent.subtle : "transparent",
+                },
+              ]}
+            >
+              <Image
+                source="sf:square.grid.2x2.fill"
+                style={styles.chipIcon}
+                tintColor={
+                  selectedTag === null
+                    ? colors.accent.default
+                    : colors.text.secondary
+                }
+              />
+            </Pressable>
+
+            {TAGS.map((tag) => {
+              const isActive = selectedTag === tag;
+              const iconUrl = championClassIconUrl(tag);
+              return (
+                <Pressable
+                  key={tag}
+                  onPress={() => handleTagPress(tag)}
+                  style={[
+                    styles.filterChip,
+                    {
+                      backgroundColor: isActive
+                        ? colors.accent.subtle
+                        : "transparent",
+                    },
+                  ]}
+                >
+                  {iconUrl ? (
+                    <Image
+                      source={{ uri: iconUrl }}
+                      style={styles.chipIcon}
+                      tintColor={
+                        isActive ? colors.accent.default : colors.text.secondary
+                      }
+                      contentFit="contain"
+                    />
+                  ) : (
+                    <ThemedText
+                      type="label"
+                      color={isActive ? "accent" : "secondary"}
+                    >
+                      {tag}
+                    </ThemedText>
+                  )}
+                </Pressable>
+              );
+            })}
+          </View>
+        </View>
 
         {/* Champion grid */}
         <FlatList
@@ -175,7 +170,10 @@ export function ChampionSelectModal() {
           numColumns={4}
           keyExtractor={(c) => c.id}
           contentContainerStyle={styles.grid}
+          columnWrapperStyle={styles.gridRow}
+          showsVerticalScrollIndicator={false}
           contentInsetAdjustmentBehavior="automatic"
+          ListFooterComponent={<View style={{ height: 240 }} />}
           renderItem={({ item }) => {
             const isSelected = selectedId === item.id;
             return (
@@ -222,7 +220,7 @@ export function ChampionSelectModal() {
         >
           <ThemedText
             type="body"
-            style={{ fontWeight: "600", color: colors.accent.onAccent }}
+            style={{ fontWeight: "800", color: colors.accent.onAccent }}
           >
             {translate("start")}
           </ThemedText>
@@ -238,7 +236,7 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
-    paddingHorizontal: Spacing.three,
+    paddingHorizontal: Spacing.three + Spacing.one,
     paddingTop: Spacing.two,
     paddingBottom: Spacing.three,
     gap: Spacing.two,
@@ -256,9 +254,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderRadius: Radius.md,
-    paddingHorizontal: Spacing.two,
-    gap: Spacing.two,
-    height: 44,
+    paddingLeft: Spacing.three,
+    paddingRight: Spacing.two,
+    gap: Spacing.three,
+    height: 42,
   },
   searchIcon: {
     width: 18,
@@ -270,12 +269,14 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   filterRow: {
+    flexDirection: "row",
     gap: Spacing.two,
     paddingVertical: Spacing.one,
   },
   filterChip: {
-    width: 44,
-    height: 44,
+    // width: 44,
+    // height: 44,
+    padding: 6,
     borderRadius: Radius.md,
     alignItems: "center",
     justifyContent: "center",
@@ -288,8 +289,11 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
     paddingBottom: Spacing.three,
   },
+  gridRow: {
+    justifyContent: "flex-start",
+  },
   cell: {
-    flex: 1,
+    width: "25%",
     alignItems: "center",
     gap: Spacing.one,
     padding: Spacing.one,
@@ -301,7 +305,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   startButton: {
-    paddingVertical: Spacing.three,
+    paddingVertical: Spacing.double,
     borderRadius: Radius.xl,
     alignItems: "center",
   },
