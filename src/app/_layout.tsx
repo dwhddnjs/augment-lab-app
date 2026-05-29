@@ -4,17 +4,18 @@ import { Stack } from 'expo-router/stack';
 import { useColorScheme } from 'react-native';
 
 import { AnimatedSplashOverlay } from '@/components/navigation/animated-icon';
+import { Theme } from '@/constants/theme';
 
 const darkNavTheme = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    primary: '#1ED7A0',
-    background: '#0E0F12',
-    card: '#0E0F12',
-    text: '#F2F4F7',
-    border: '#26292F',
-    notification: '#F26D6D',
+    primary: Theme.dark.accent.default,
+    background: Theme.dark.surface.base,
+    card: Theme.dark.surface.base,
+    text: Theme.dark.text.primary,
+    border: Theme.dark.border.default,
+    notification: Theme.dark.status.danger.default,
   },
 };
 
@@ -22,12 +23,12 @@ const lightNavTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#10B187',
-    background: '#FAFBFC',
-    card: '#FAFBFC',
-    text: '#0E0F12',
-    border: '#D7DAE0',
-    notification: '#D0463F',
+    primary: Theme.light.accent.default,
+    background: Theme.light.surface.base,
+    card: Theme.light.surface.base,
+    text: Theme.light.text.primary,
+    border: Theme.light.border.default,
+    notification: Theme.light.status.danger.default,
   },
 };
 

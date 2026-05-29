@@ -89,7 +89,7 @@ src/
 2. **`src/features/<도메인>/`** — 해당 도메인에 종속된 모든 것. **다른 feature를 import하지 않는다** (공유가 필요하면 `hooks/` 또는 `lib/`로 끌어올림).
 3. **`src/components/`** — 도메인 무관한 공용 프리미티브만. feature 폴더를 import하지 않는다.
 4. **`src/hooks/`** — 여러 feature가 공유하는 글로벌 훅만 (테마·로케일·색상 스킴).
-5. **`src/lib/`** — 외부 클라이언트 + 순수 유틸. React 훅이 아님.
+5. **`src/lib/`** — 외부 클라이언트 + 순수 유틸. React 훅이 아님 (`i18n.ts`의 `useTranslation` 예외 — 로케일 인프라로 lib 유지).
 6. **새 도메인 코드** — 해당 feature가 있으면 그 안에, 없으면 `features/` 아래 신설.
 7. **공용 UI 후보 판단** — 한 feature에서만 쓰면 feature 안에, 2개 이상이면 `components/ui`로 승격.
 8. **`src/types/` 폴더 만들지 말 것** — 타입은 사용처(feature)와 동거.
