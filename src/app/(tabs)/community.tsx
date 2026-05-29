@@ -1,15 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { ThemedText } from '@/components/themed/themed-text';
+import { ThemedView } from '@/components/themed/themed-view';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
 export default function CommunityScreen() {
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
-        <ThemedText type="title">커뮤니티</ThemedText>
+        <ThemedText type="display">커뮤니티</ThemedText>
       </SafeAreaView>
     </ThemedView>
   );

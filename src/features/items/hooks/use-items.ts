@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
-import { useLocale } from './use-locale';
-import type { Item } from '@/types/item';
+import { useLocale } from '@/hooks/use-locale';
+import type { Item } from '@/features/items/types';
 
 const data: Record<string, Item[]> = {
-  ko: require('@/data/items.ko.json'),
-  en: require('@/data/items.en.json'),
+  ko: require('@/features/items/data/items.ko.json'),
+  en: require('@/features/items/data/items.en.json'),
 };
 
 export function useItems(): Item[] {

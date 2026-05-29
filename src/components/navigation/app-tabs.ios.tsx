@@ -1,19 +1,12 @@
-// Native fallback — runtime uses app-tabs.ios.tsx or app-tabs.android.tsx
 import { NativeTabs } from "expo-router/unstable-native-tabs";
-import { useColorScheme } from "react-native";
 
-import { Colors } from "@/constants/theme";
+import { useTheme } from "@/hooks/use-theme";
 
 export default function AppTabs() {
-  const scheme = useColorScheme();
-  const colors = Colors[scheme === "unspecified" ? "light" : scheme];
+  const { colors } = useTheme();
 
   return (
-    <NativeTabs
-      backgroundColor={colors.background}
-      indicatorColor={colors.backgroundElement}
-      labelStyle={{ selected: { color: colors.text } }}
-    >
+    <NativeTabs tintColor={colors.accent.default}>
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>메인</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="house" />
@@ -29,7 +22,7 @@ export default function AppTabs() {
         <NativeTabs.Trigger.Icon sf="person.crop.circle" />
       </NativeTabs.Trigger>
 
-      <NativeTabs.Trigger name="plus">
+      <NativeTabs.Trigger name="plus" role="search">
         <NativeTabs.Trigger.Label>추가</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="plus" />
       </NativeTabs.Trigger>

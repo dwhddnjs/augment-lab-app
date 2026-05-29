@@ -1,4 +1,4 @@
-import versionData from '@/data/version.json';
+import versionData from '@/lib/version.json';
 
 const BASE = 'https://ddragon.leagueoflegends.com';
 const CDN = `${BASE}/cdn/${versionData.ddragonVersion}`;
@@ -20,4 +20,19 @@ export function itemImageUrl(imageKey: string) {
 export function augmentImageUrl(iconPath: string) {
   const normalized = iconPath.toLowerCase().replace(/^\//, '');
   return `${CDRAGON_BASE}/${normalized}`;
+}
+
+const CLASS_ICON_KEYS: Record<string, string> = {
+  Fighter: 'fighter',
+  Mage: 'mage',
+  Assassin: 'assassin',
+  Tank: 'tank',
+  Marksman: 'marksman',
+  Support: 'support',
+};
+
+export function championClassIconUrl(tag: string): string | null {
+  const key = CLASS_ICON_KEYS[tag];
+  if (!key) return null;
+  return `${CDRAGON_BASE}/plugins/rcp-fe-lol-static-assets/global/default/npe-ft-role-icon-${key}.png`;
 }
