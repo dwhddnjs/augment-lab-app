@@ -183,3 +183,5 @@ const { mode, colors, typography, radius, elevation } = useTheme();
 ### React Compiler
 
 `app.json`에 `experiments.reactCompiler: true`가 설정되어 있어 React Compiler가 자동으로 실행됨. 프로파일링으로 필요가 확인되지 않는 한 `useMemo`/`useCallback`을 수동으로 추가하지 말 것.
+
+**예외**: `useFocusEffect` (Expo Router)는 안정적인 콜백 참조를 요구하므로 `useCallback`을 반드시 함께 사용할 것.

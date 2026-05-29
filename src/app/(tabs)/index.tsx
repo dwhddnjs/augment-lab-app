@@ -8,15 +8,42 @@ import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
 import { WebBadge } from '@/components/ui/web-badge';
 import { BottomTabInset, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { useTranslation } from '@/lib/i18n';
 
-function getDevMenuHint() {
+const t = {
+  ko: {
+    title: 'Expo에 오신 것을 환영합니다',
+    getStarted: '시작하기',
+    tryEditing: '파일 수정해보기',
+    devTools: '개발자 도구',
+    freshStart: '초기화',
+    devToolsWeb: '브라우저 개발자 도구 사용',
+    devToolsDevice: '기기를 흔들거나 터미널에서',
+    devToolsSimulatorAndroid: '누르세요',
+    devToolsSimulatorIos: '누르세요',
+  },
+  en: {
+    title: 'Welcome to Expo',
+    getStarted: 'get started',
+    tryEditing: 'Try editing',
+    devTools: 'Dev tools',
+    freshStart: 'Fresh start',
+    devToolsWeb: 'use browser devtools',
+    devToolsDevice: 'shake device or press',
+    devToolsSimulatorAndroid: 'in terminal',
+    devToolsSimulatorIos: 'in terminal',
+  },
+};
+
+function getDevMenuHint(translate: (key: keyof typeof t.en) => string) {
   if (Platform.OS === 'web') {
-    return <ThemedText type="label">use browser devtools</ThemedText>;
+    return <ThemedText type="label">{translate('devToolsWeb')}</ThemedText>;
   }
   if (Device.isDevice) {
     return (
       <ThemedText type="label">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
+        {translate('devToolsDevice')} <ThemedText type="code">m</ThemedText>{' '}
+        {translate('devToolsSimulatorIos')}
       </ThemedText>
     );
   }
@@ -29,28 +56,29 @@ function getDevMenuHint() {
 }
 
 export default function HomeScreen() {
+  const translate = useTranslation(t);
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.heroSection}>
           <AnimatedIcon />
           <ThemedText type="display" style={styles.title}>
-            Welcome to&nbsp;Expo
+            {translate('title')}
           </ThemedText>
         </ThemedView>
 
         <ThemedText type="code" style={styles.code}>
-          get started
+          {translate('getStarted')}
         </ThemedText>
 
         <ThemedView surface="raised" style={styles.stepContainer}>
           <HintRow
-            title="Try editing"
+            title={translate('tryEditing')}
             hint={<ThemedText type="code">src/app/(tabs)/index.tsx</ThemedText>}
           />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
+          <HintRow title={translate('devTools')} hint={getDevMenuHint(translate)} />
           <HintRow
-            title="Fresh start"
+            title={translate('freshStart')}
             hint={<ThemedText type="code">npm run reset-project</ThemedText>}
           />
         </ThemedView>
