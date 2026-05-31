@@ -53,10 +53,17 @@ export function DraftScreen() {
   const { width, height } = useWindowDimensions();
   const isLandscape = width > height;
   const screenW = isLandscape ? width : height;
+  const screenH = isLandscape ? height : width;
 
-  const hPad = Spacing.four;
-  const cardGap = Spacing.three;
-  const cardWidth = Math.floor((screenW - hPad * 2 - cardGap * 2) / 3);
+  const hPad = Spacing.four;   // 24
+  const cardGap = Spacing.three; // 16
+
+  // Width-constrained: fill 3 columns across
+  const cardWidthByW = Math.floor((screenW - hPad * 2 - cardGap * 2) / 3);
+  // Height-constrained: card should occupy at most 58% of screen height,
+  // leaving room for safe-area insets, header, and reroll button.
+  const cardWidthByH = Math.floor(screenH * 0.58 * (9 / 14));
+  const cardWidth = Math.min(cardWidthByW, cardWidthByH);
 
   // Drawer width in landscape
   const drawerWidth = Math.min(340, screenW * 0.38);
@@ -101,12 +108,13 @@ export function DraftScreen() {
       modes[idx] = 'reroll';
       setExitModes(modes);
 
+      // Wait for the fade-out (~200ms), then swap the augment so it fades back in.
       setTimeout(() => {
         reroll(idx);
         const resetModes: ExitModes = ['none', 'none', 'none'];
         setExitModes(resetModes);
         setAnimating(false);
-      }, 260);
+      }, 220);
     },
     [animating, reroll],
   );

@@ -31,11 +31,16 @@ export function DraftResultScreen() {
   }>();
 
   const { width, height } = useWindowDimensions();
-  const screenW = width > height ? width : height;
+  const isLandscape = width > height;
+  const screenW = isLandscape ? width : height;
+  const screenH = isLandscape ? height : width;
 
   const picked: Augment[] = pickedJson ? JSON.parse(pickedJson) : [];
 
-  const cardWidth = Math.floor((screenW - Spacing.four * 2 - Spacing.three * 3) / 4);
+  // Width-constrained: 4 columns; height-constrained: same 58% cap as draft screen
+  const cardWidthByW = Math.floor((screenW - Spacing.four * 2 - Spacing.three * 3) / 4);
+  const cardWidthByH = Math.floor(screenH * 0.58 * (9 / 14));
+  const cardWidth = Math.min(cardWidthByW, cardWidthByH);
 
   const handleHome = () => {
     router.dismissTo('/');
