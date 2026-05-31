@@ -1,49 +1,60 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useAugments } from '@/features/augments/hooks/use-augments';
-import type { Augment } from '@/features/augments/types';
+import type { Augment, AugmentRarity } from '@/features/augments/types';
 
-const RARITY_WEIGHTS: [number, number, number][] = [
-  [0.70, 0.25, 0.05],
-  [0.65, 0.27, 0.08],
-  [0.60, 0.28, 0.12],
-  [0.55, 0.30, 0.15],
+// Per-round [silver, gold] weights; prismatic = remainder. Higher rounds tilt rarer.
+const RARITY_WEIGHTS: [number, number][] = [
+  [0.70, 0.25],
+  [0.65, 0.27],
+  [0.60, 0.28],
+  [0.55, 0.30],
 ];
 
-function pickWeighted(pool: Augment[], round: number, count: number): Augment[] {
-  const [wSilver, wGold] = RARITY_WEIGHTS[Math.min(round, 3)];
+// Roll a single rarity for the whole round so all cards share one color.
+function rollRarity(round: number): AugmentRarity {
+  const [wSilver, wGold] = RARITY_WEIGHTS[Math.min(round, RARITY_WEIGHTS.length - 1)];
   const wPrismatic = 1 - wSilver - wGold;
+  const r = Math.random();
+  if (r < wPrismatic) return 'prismatic';
+  if (r < wPrismatic + wGold) return 'gold';
+  return 'silver';
+}
 
-  const silver = pool.filter((a) => a.rarity === 'silver');
-  const gold = pool.filter((a) => a.rarity === 'gold');
-  const prismatic = pool.filter((a) => a.rarity === 'prismatic');
-
+// Randomly pick `count` distinct augments from `pool`, marking them used.
+function sampleDistinct(pool: Augment[], count: number, used: Set<string>): Augment[] {
+  const available = pool.filter((a) => !used.has(a.id));
   const result: Augment[] = [];
-  const used = new Set<string>();
-
-  for (let i = 0; i < count; i++) {
-    const silverPool = silver.filter((a) => !used.has(a.id));
-    const goldPool = gold.filter((a) => !used.has(a.id));
-    const prismaticPool = prismatic.filter((a) => !used.has(a.id));
-
-    const r = Math.random();
-    let chooseFrom: Augment[];
-    if (r < wPrismatic && prismaticPool.length > 0) {
-      chooseFrom = prismaticPool;
-    } else if (r < wPrismatic + wGold && goldPool.length > 0) {
-      chooseFrom = goldPool;
-    } else if (silverPool.length > 0) {
-      chooseFrom = silverPool;
-    } else {
-      chooseFrom = [...goldPool, ...prismaticPool, ...silverPool].filter((a) => !used.has(a.id));
-    }
-
-    if (chooseFrom.length === 0) break;
-    const chosen = chooseFrom[Math.floor(Math.random() * chooseFrom.length)];
+  while (result.length < count && available.length > 0) {
+    const idx = Math.floor(Math.random() * available.length);
+    const [chosen] = available.splice(idx, 1);
     result.push(chosen);
     used.add(chosen.id);
   }
-
   return result;
+}
+
+// Draw `count` augments of a single rarity; if that pool is too small, fill the
+// remainder from any rarity so the round is never short.
+function drawOfRarity(
+  pool: Augment[],
+  rarity: AugmentRarity,
+  count: number,
+  used: Set<string> = new Set(),
+): Augment[] {
+  const result = sampleDistinct(
+    pool.filter((a) => a.rarity === rarity),
+    count,
+    used,
+  );
+  if (result.length < count) {
+    result.push(...sampleDistinct(pool, count - result.length, used));
+  }
+  return result;
+}
+
+// Same-rarity round: roll one rarity, then draw `count` of it.
+function pickWeighted(pool: Augment[], round: number, count: number): Augment[] {
+  return drawOfRarity(pool, rollRarity(round), count);
 }
 
 export function useDraft() {
@@ -73,14 +84,15 @@ export function useDraft() {
         ]);
         const pool = allAugments.filter((a) => !excludeIds.has(a.id));
         if (pool.length === 0) return prev;
-        const [replacement] = pickWeighted(pool, round, 1);
+        // Keep the same rarity as the card being rerolled so the row stays one color.
+        const [replacement] = drawOfRarity(pool, prev[idx].rarity, 1);
         if (!replacement) return prev;
         const next = [...prev];
         next[idx] = replacement;
         return next;
       });
     },
-    [allAugments, picked, round],
+    [allAugments, picked],
   );
 
   // Returns nextPicked; caller should navigate to /draft-result when round === 4
