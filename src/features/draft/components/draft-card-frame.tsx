@@ -1,8 +1,11 @@
+import { Image } from "expo-image";
 import { StyleSheet, Text, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { Radius, Spacing } from "@/constants/theme";
+import { getAugmentSynergies } from "@/features/augments/hooks/use-synergies";
 import type { Augment, AugmentRarity } from "@/features/augments/types";
+import { useTheme } from "@/hooks/use-theme";
 import { cleanAugmentDescription } from "@/lib/augment-text";
 import { AugmentIcon } from "./augment-icon";
 
@@ -78,6 +81,8 @@ interface Props {
 
 export function DraftCardFrame({ augment, cardWidth }: Props) {
   const rs = RARITY[augment.rarity];
+  const { colors } = useTheme();
+  const synergies = getAugmentSynergies(augment.id);
 
   const cardHeight = Math.round(cardWidth * (14 / 9));
   const framePad = Math.max(3, Math.round(cardWidth * 0.056)); // 카드 태두리 크키 조절
@@ -118,19 +123,38 @@ export function DraftCardFrame({ augment, cardWidth }: Props) {
             />
           </View>
           {/* Name */}
-          <ThemedText
-            numberOfLines={2}
-            style={[
-              styles.name,
-              {
-                color: rs.title,
-                fontSize: nameSize,
-                lineHeight: Math.round(nameSize * 1.18),
-              },
-            ]}
+          <View
+            style={{
+              // flexDirection: "row",
+              alignItems: "center",
+              gap: Spacing.half,
+              position: "relative",
+            }}
           >
-            {augment.name}
-          </ThemedText>
+            <ThemedText
+              numberOfLines={2}
+              style={[
+                styles.name,
+                {
+                  color: rs.title,
+                  fontSize: nameSize,
+                  lineHeight: Math.round(nameSize * 1.18),
+                },
+              ]}
+            >
+              {augment.name}
+            </ThemedText>
+            <View style={{ flexDirection: "row", gap: Spacing.half }}>
+              {synergies.map((s) => (
+                <Image
+                  key={s.id}
+                  source={s.icon}
+                  style={styles.synergyBadgeIcon}
+                  tintColor={colors.accent.default}
+                />
+              ))}
+            </View>
+          </View>
 
           {/* Description */}
           <ThemedText
@@ -167,6 +191,29 @@ const styles = StyleSheet.create({
   frame: {
     overflow: "hidden",
     borderCurve: "continuous",
+  },
+  synergyBadges: {
+    position: "absolute",
+    top: Spacing.double,
+    right: Spacing.double,
+    zIndex: 2,
+    flexDirection: "row",
+    gap: Spacing.half,
+  },
+  synergyBadge: {
+    width: 24,
+    height: 24,
+    borderRadius: Radius.full,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  synergyBadgeIcon: {
+    width: 16,
+    height: 16,
+    // position: "absolute",
+    // right: -18,
+    // bottom: 0,
   },
   body: {
     flex: 1,
