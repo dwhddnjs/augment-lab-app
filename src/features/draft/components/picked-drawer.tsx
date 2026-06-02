@@ -47,7 +47,7 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
   }
 
   const rarityColors = AugmentRarityColors[augment.rarity];
-  const tint = augment.rarity === 'prismatic' ? '#C6A1FF' : rarityColors.border;
+  const tint = rarityColors.border;
 
   return (
     <View style={[styles.cell, { width: size, height: size + 32 }]}>
