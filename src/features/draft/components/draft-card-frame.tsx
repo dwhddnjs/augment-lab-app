@@ -1,217 +1,201 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import { Image } from 'expo-image';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
 
-import { ThemedText } from '@/components/themed/themed-text';
-import { AugmentRarityColors, Radius, Spacing } from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
-import { augmentImageUrl } from '@/lib/ddragon';
-import { cleanAugmentDescription } from '@/lib/augment-text';
-import { useTranslation } from '@/lib/i18n';
-import type { Augment, AugmentRarity } from '@/features/augments/types';
+import { ThemedText } from "@/components/themed/themed-text";
+import { Radius, Spacing } from "@/constants/theme";
+import type { Augment, AugmentRarity } from "@/features/augments/types";
+import { cleanAugmentDescription } from "@/lib/augment-text";
+import { AugmentIcon } from "./augment-icon";
 
-const RARITY_SF: Record<string, string> = {
-  silver: 'sf:shield.fill',
-  gold: 'sf:star.fill',
-  prismatic: 'sf:sparkles',
+// Fallback SF Symbols when an augment has no icon path.
+const RARITY_SF: Record<AugmentRarity, string> = {
+  silver: "sf:shield.fill",
+  gold: "sf:star.fill",
+  prismatic: "sf:sparkles",
 };
 
-// Metallic frame palettes (diagonal sheen) + bright tone for corner brackets.
-const FRAME: Record<AugmentRarity, { gradient: [string, string, ...string[]]; corner: string; tint: string }> = {
-  silver: { gradient: ['#454b54', '#c4cad2', '#777e87', '#eef1f5'], corner: '#f2f5f8', tint: '#9BA3AE' },
-  gold: { gradient: ['#6b5024', '#e7c477', '#a07d2c', '#f4e3a8'], corner: '#f6e8b2', tint: '#E8B339' },
-  prismatic: { gradient: AugmentRarityColors.prismatic.gradient, corner: '#ffffff', tint: '#C6A1FF' },
+interface RarityStyle {
+  // Outer metallic rim — diagonal brushed-metal sheen.
+  frameImage: string;
+  outerGlow: string;
+  // Body
+  bodyColor: string;
+  // Emblem
+  iconTint: string;
+  // Text
+  title: string;
+  desc: string;
+  highlight: string;
+}
+
+// Each rarity is an intrinsic in-game palette (like the existing AugmentRarityColors),
+// so the metallic/holographic hexes live here rather than in the app theme tokens.
+const RARITY: Record<AugmentRarity, RarityStyle> = {
+  silver: {
+    frameImage:
+      "linear-gradient(135deg, #34383f 0%, #5b616a 15%, #818892 31%, #3f444c 50%, #6b7079 66%, #383c43 82%, #5e646d 100%)",
+    outerGlow: "0 6px 22px rgba(0,0,0,0.6), 0 0 12px rgba(120,128,140,0.18)",
+    bodyColor: "#0A0B0D",
+    iconTint: "#E4E9F0",
+    title: "#F4F6F9",
+    desc: "#AEB4BD",
+    highlight: "#E6EAF0",
+  },
+  gold: {
+    frameImage:
+      "linear-gradient(135deg, #5c481c 0%, #c9a64e 16%, #f7e9b8 30%, #98782e 48%, #e7c477 64%, #6a4f1f 82%, #d4ad44 100%)",
+    outerGlow: "0 6px 22px rgba(0,0,0,0.55), 0 0 16px rgba(232,179,57,0.32)",
+    bodyColor: "#0B0A07",
+    iconTint: "#F2D98F",
+    title: "#F4F6F9",
+    desc: "#AEB4BD",
+    highlight: "#F2C766",
+  },
+  prismatic: {
+    frameImage:
+      "linear-gradient(135deg, #ffc2e6 0%, #d9b8ff 19%, #ffffff 35%, #aee4ff 52%, #bafcd9 69%, #ffe0c4 85%, #f3c2ff 100%)",
+    outerGlow: "0 6px 24px rgba(0,0,0,0.5), 0 0 18px rgba(198,161,255,0.45)",
+    bodyColor: "#0B0A07",
+    iconTint: "#f3c2ff",
+    title: "#F4F6F9",
+    desc: "#AEB4BD",
+    highlight: "#7A4FC0",
+  },
 };
 
-const t = {
-  ko: { silver: '실버', gold: '골드', prismatic: '프리즘' },
-  en: { silver: 'Silver', gold: 'Gold', prismatic: 'Prismatic' },
-};
+// Highlight gold/coin amounts inside the description (e.g. "250골드", "250 gold").
+const AMOUNT_RE = /(\d[\d,]*\s*(?:골드|gold|원))/i;
+function splitDescription(text: string): { text: string; hl: boolean }[] {
+  return text
+    .split(/(\d[\d,]*\s*(?:골드|gold|원))/gi)
+    .filter((p) => p.length > 0)
+    .map((p) => ({ text: p, hl: AMOUNT_RE.test(p) }));
+}
 
 interface Props {
   augment: Augment;
   cardWidth: number;
 }
 
-function CornerBracket({ pos, size, color }: { pos: 'tl' | 'tr' | 'bl' | 'br'; size: number; color: string }) {
-  const v = Math.max(1.5, size * 0.16);
-  const corners = {
-    tl: { top: 0, left: 0, borderTopWidth: v, borderLeftWidth: v },
-    tr: { top: 0, right: 0, borderTopWidth: v, borderRightWidth: v },
-    bl: { bottom: 0, left: 0, borderBottomWidth: v, borderLeftWidth: v },
-    br: { bottom: 0, right: 0, borderBottomWidth: v, borderRightWidth: v },
-  }[pos];
-  return <View pointerEvents="none" style={[{ position: 'absolute', width: size, height: size, borderColor: color }, corners]} />;
-}
-
 export function DraftCardFrame({ augment, cardWidth }: Props) {
-  const { colors } = useTheme();
-  const translate = useTranslation(t);
-  const rarityColors = AugmentRarityColors[augment.rarity];
-  const frame = FRAME[augment.rarity];
-  const accent = frame.tint;
+  const rs = RARITY[augment.rarity];
 
-  const cardHeight = cardWidth * (14 / 9);
-  const plateSize = Math.round(cardWidth * 0.44);
-  // Source icons are only 64×64 — never upscale past native size.
-  const iconSize = Math.min(64, Math.round(plateSize * 0.74));
-  const glowSize = Math.round(plateSize * 1.7);
-  const nameSize = Math.max(13, Math.round(cardWidth * 0.105));
-  const bracket = Math.max(14, Math.round(cardWidth * 0.16));
-  const framePad = Math.max(2.5, Math.round(cardWidth * 0.018));
+  const cardHeight = Math.round(cardWidth * (14 / 9));
+  const framePad = Math.max(3, Math.round(cardWidth * 0.056)); // 카드 태두리 크키 조절
 
-  const iconUri = augment.iconPath ? augmentImageUrl(augment.iconPath) : null;
-  const descText = cleanAugmentDescription(augment.description);
+  const iconSize = 72; // 증강 아이콘 사이즈;
+
+  const nameSize = 12;
+  const descSize = 8;
+
+  const segments = splitDescription(
+    cleanAugmentDescription(augment.description),
+  );
 
   return (
-    <LinearGradient
-      colors={frame.gradient}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
+    <View
       style={[
         styles.frame,
         {
           width: cardWidth,
           height: cardHeight,
           padding: framePad,
-          borderRadius: Radius.lg + 2,
-          boxShadow: `0 0 16px ${rarityColors.glow}`,
+          borderRadius: Radius.lg + 3,
+          experimental_backgroundImage: rs.frameImage,
+          boxShadow: rs.outerGlow,
         },
       ]}
     >
-      {/* Dark body */}
-      <View style={[styles.body, { backgroundColor: colors.surface.sunken, borderColor: accent + '33' }]}>
-        {/* Top rarity tint + bottom darkening */}
-        <LinearGradient
-          colors={[accent + '20', 'transparent', '#00000055']}
-          start={{ x: 0.5, y: 0 }}
-          end={{ x: 0.5, y: 1 }}
-          style={StyleSheet.absoluteFill}
-        />
-
+      <View style={[styles.body, { backgroundColor: rs.bodyColor }]}>
         <View style={styles.content}>
-          {/* Icon plate with glow */}
-          <View style={styles.iconArea}>
-            <View
-              style={[
-                styles.glow,
-                { width: glowSize, height: glowSize, borderRadius: Radius.full, backgroundColor: rarityColors.glow },
-              ]}
+          {/* Emblem with soft halo */}
+          <View style={[styles.iconArea, { marginBottom: Spacing.one }]}>
+            <AugmentIcon
+              iconPath={augment.iconPath}
+              size={iconSize}
+              tint={rs.iconTint}
+              fallbackSymbol={RARITY_SF[augment.rarity]}
+              recyclingKey={augment.id}
             />
-            <View
-              style={[
-                styles.plate,
-                {
-                  width: plateSize,
-                  height: plateSize,
-                  borderRadius: Radius.md,
-                  borderColor: accent,
-                  backgroundColor: colors.surface.base + 'CC',
-                  boxShadow: `0 0 10px ${rarityColors.glow}`,
-                },
-              ]}
-            >
-              {iconUri ? (
-                <Image source={{ uri: iconUri }} style={{ width: iconSize, height: iconSize }} contentFit="contain" />
-              ) : (
-                <Image
-                  source={RARITY_SF[augment.rarity] ?? 'sf:sparkles'}
-                  style={{ width: iconSize * 0.7, height: iconSize * 0.7 }}
-                  tintColor={accent}
-                />
-              )}
-            </View>
           </View>
-
           {/* Name */}
           <ThemedText
             numberOfLines={2}
-            style={[styles.name, { color: colors.text.primary, fontSize: nameSize, lineHeight: Math.round(nameSize * 1.2) }]}
+            style={[
+              styles.name,
+              {
+                color: rs.title,
+                fontSize: nameSize,
+                lineHeight: Math.round(nameSize * 1.18),
+              },
+            ]}
           >
             {augment.name}
           </ThemedText>
 
-          {/* Rarity pill */}
-          <View style={[styles.pill, { backgroundColor: 'rgba(255,255,255,0.08)' }]}>
-            <ThemedText style={[styles.pillText, { color: colors.text.secondary }]}>
-              {translate(augment.rarity)}
-            </ThemedText>
-          </View>
-
           {/* Description */}
           <ThemedText
-            type="caption"
-            numberOfLines={4}
-            style={[styles.desc, { color: colors.text.secondary }]}
+            numberOfLines={6}
+            style={[
+              styles.desc,
+              {
+                color: rs.desc,
+                fontSize: descSize,
+                lineHeight: Math.round(descSize * 1.5),
+              },
+            ]}
           >
-            {descText}
+            {segments.map((s, i) =>
+              s.hl ? (
+                <Text
+                  key={i}
+                  style={{ color: rs.highlight, fontWeight: "700" }}
+                >
+                  {s.text}
+                </Text>
+              ) : (
+                s.text
+              ),
+            )}
           </ThemedText>
         </View>
-
-        {/* Ornate corner brackets */}
-        <CornerBracket pos="tl" size={bracket} color={frame.corner} />
-        <CornerBracket pos="tr" size={bracket} color={frame.corner} />
-        <CornerBracket pos="bl" size={bracket} color={frame.corner} />
-        <CornerBracket pos="br" size={bracket} color={frame.corner} />
       </View>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   frame: {
-    overflow: 'hidden',
-    borderCurve: 'continuous',
+    overflow: "hidden",
+    borderCurve: "continuous",
   },
   body: {
     flex: 1,
     borderRadius: Radius.lg,
-    borderWidth: 1,
-    borderCurve: 'continuous',
-    overflow: 'hidden',
+    borderCurve: "continuous",
+    overflow: "hidden",
   },
   content: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingTop: Spacing.three,
-    paddingBottom: Spacing.three,
-    paddingHorizontal: Spacing.two,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingTop: Spacing.two,
+    paddingBottom: Spacing.two,
+    paddingHorizontal: Spacing.one,
     gap: Spacing.two,
   },
   iconArea: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: Spacing.one,
-  },
-  glow: {
-    position: 'absolute',
-    opacity: 0.5,
-  },
-  plate: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1.5,
+    alignItems: "center",
+    justifyContent: "center",
   },
   name: {
-    textAlign: 'center',
-    fontWeight: '700',
+    textAlign: "center",
+    fontWeight: "700",
     marginTop: Spacing.one,
   },
-  pill: {
-    paddingHorizontal: Spacing.two,
-    paddingVertical: 1,
-    borderRadius: Radius.sm,
-  },
-  pillText: {
-    fontSize: 10,
-    fontWeight: '600',
-    letterSpacing: 0.5,
-  },
   desc: {
-    textAlign: 'center',
-    lineHeight: 15,
+    textAlign: "center",
     paddingHorizontal: Spacing.one,
     flexShrink: 1,
+    marginTop: Spacing.half,
   },
 });

@@ -144,23 +144,27 @@ export const Elevation = {
 
 export const AugmentRarityColors = {
   silver: {
-    border: '#9BA3AE',
-    glow: 'rgba(155,163,174,0.35)',
-    badge: '#9BA3AE',
-    badgeText: '#0E0F12',
+    border: "#9BA3AE",
+    glow: "rgba(155,163,174,0.35)",
+    badge: "#9BA3AE",
+    badgeText: "#0E0F12",
   },
   gold: {
-    border: '#E8B339',
-    glow: 'rgba(232,179,57,0.40)',
-    badge: '#E8B339',
-    badgeText: '#1A0F00',
+    border: "#E8B339",
+    glow: "rgba(232,179,57,0.40)",
+    badge: "#E8B339",
+    badgeText: "#1A0F00",
   },
   prismatic: {
-    border: '#C6A1FF',
-    gradient: ['#FF9ECE', '#C6A1FF', '#6EE7FF', '#9FFFC9'] as [string, string, ...string[]],
-    glow: 'rgba(198,161,255,0.45)',
-    badge: '#C6A1FF',
-    badgeText: '#1A0033',
+    border: "#C6A1FF",
+    gradient: ["#FF9ECE", "#C6A1FF", "#6EE7FF", "#9FFFC9"] as [
+      string,
+      string,
+      ...string[],
+    ],
+    glow: "rgba(198,161,255,0.45)",
+    badge: "#C6A1FF",
+    badgeText: "#1A0033",
   },
 } as const;
 
