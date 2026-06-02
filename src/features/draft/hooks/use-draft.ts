@@ -2,6 +2,10 @@ import { useCallback, useMemo, useState } from 'react';
 import { useAugments } from '@/features/augments/hooks/use-augments';
 import type { Augment, AugmentRarity } from '@/features/augments/types';
 
+// "Transmute: Chaos" grants extra random augments when picked.
+const TRANSMUTE_CHAOS_ID = 'transmute-chaos';
+const TRANSMUTE_CHAOS_BONUS = 2;
+
 // Per-round [silver, gold] weights; prismatic = remainder. Higher rounds tilt rarer.
 const RARITY_WEIGHTS: [number, number][] = [
   [0.70, 0.25],
@@ -65,6 +69,8 @@ export function useDraft() {
   const [round, setRound] = useState(0);
   const [currentCards, setCurrentCards] = useState<Augment[]>(initialCards);
   const [picked, setPicked] = useState<Augment[]>([]);
+  // Per-slot reroll usage for the current round; each card may reroll only once.
+  const [rerolled, setRerolled] = useState<boolean[]>([false, false, false]);
 
   const drawNext = useCallback(
     (exclude: Augment[], nextRound: number) => {
@@ -76,23 +82,33 @@ export function useDraft() {
   );
 
   const reroll = useCallback(
-    (idx: number) => {
+    (idx: number): Augment | null => {
+      // Each card may reroll only once per round.
+      if (rerolled[idx]) return null;
+
+      const excludeIds = new Set([
+        ...picked.map((a) => a.id),
+        ...currentCards.filter((_, i) => i !== idx).map((a) => a.id),
+      ]);
+      const pool = allAugments.filter((a) => !excludeIds.has(a.id));
+      if (pool.length === 0) return null;
+      // Keep the same rarity as the card being rerolled so the row stays one color.
+      const [replacement] = drawOfRarity(pool, currentCards[idx].rarity, 1);
+      if (!replacement) return null;
+
       setCurrentCards((prev) => {
-        const excludeIds = new Set([
-          ...picked.map((a) => a.id),
-          ...prev.filter((_, i) => i !== idx).map((a) => a.id),
-        ]);
-        const pool = allAugments.filter((a) => !excludeIds.has(a.id));
-        if (pool.length === 0) return prev;
-        // Keep the same rarity as the card being rerolled so the row stays one color.
-        const [replacement] = drawOfRarity(pool, prev[idx].rarity, 1);
-        if (!replacement) return prev;
         const next = [...prev];
         next[idx] = replacement;
         return next;
       });
+      setRerolled((prev) => {
+        const next = [...prev];
+        next[idx] = true;
+        return next;
+      });
+      return replacement;
     },
-    [allAugments, picked],
+    [allAugments, picked, currentCards, rerolled],
   );
 
   // Returns nextPicked; caller should navigate to /draft-result when round === 4
@@ -100,6 +116,17 @@ export function useDraft() {
     (idx: number): { nextPicked: Augment[]; done: boolean } => {
       const chosen = currentCards[idx];
       const nextPicked = [...picked, chosen];
+
+      // Transmute: Chaos grants 2 extra random augments (any rarity, no dupes).
+      if (chosen.id === TRANSMUTE_CHAOS_ID) {
+        const excludeIds = new Set([
+          ...nextPicked.map((a) => a.id),
+          ...currentCards.map((a) => a.id),
+        ]);
+        const pool = allAugments.filter((a) => !excludeIds.has(a.id));
+        nextPicked.push(...sampleDistinct(pool, TRANSMUTE_CHAOS_BONUS, new Set()));
+      }
+
       const nextRound = round + 1;
       const done = nextRound >= 4;
 
@@ -108,12 +135,13 @@ export function useDraft() {
 
       if (!done) {
         setCurrentCards(drawNext(nextPicked, nextRound));
+        setRerolled([false, false, false]); // fresh reroll budget each round
       }
 
       return { nextPicked, done };
     },
-    [currentCards, drawNext, picked, round],
+    [allAugments, currentCards, drawNext, picked, round],
   );
 
-  return { round, currentCards, picked, reroll, pick };
+  return { round, currentCards, picked, rerolled, reroll, pick };
 }

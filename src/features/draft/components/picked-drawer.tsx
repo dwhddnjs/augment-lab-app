@@ -1,13 +1,12 @@
-import { Image } from 'expo-image';
 import { FlatList, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed/themed-text';
 import { AugmentRarityColors, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import { augmentImageUrl } from '@/lib/ddragon';
 import type { Augment } from '@/features/augments/types';
 import { useTranslation } from '@/lib/i18n';
+import { AugmentIcon } from './augment-icon';
 
 const t = {
   ko: { title: '뽑은 증강', empty: '비어있음' },
@@ -20,7 +19,8 @@ const RARITY_SF: Record<string, string> = {
   prismatic: 'sf:sparkles',
 };
 
-const TOTAL = 4;
+// Base slots (= rounds). "Transmute: Chaos" can push picks past this.
+const BASE_SLOTS = 4;
 
 interface AugmentCellProps {
   augment: Augment | null;
@@ -47,7 +47,7 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
   }
 
   const rarityColors = AugmentRarityColors[augment.rarity];
-  const iconUri = augment.iconPath ? augmentImageUrl(augment.iconPath) : null;
+  const tint = augment.rarity === 'prismatic' ? '#C6A1FF' : rarityColors.border;
 
   return (
     <View style={[styles.cell, { width: size, height: size + 32 }]}>
@@ -66,21 +66,21 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
           },
         ]}
       >
-        {iconUri ? (
-          <Image
-            source={{ uri: iconUri }}
-            style={{ width: size * 0.65, height: size * 0.65 }}
-            contentFit="contain"
-          />
-        ) : (
-          <Image
-            source={RARITY_SF[augment.rarity] ?? 'sf:sparkles'}
-            style={{ width: size * 0.45, height: size * 0.45 }}
-            tintColor={augment.rarity === 'prismatic' ? '#C6A1FF' : rarityColors.border}
-          />
-        )}
+        <AugmentIcon
+          key={augment.id}
+          iconPath={augment.iconPath}
+          size={Math.round(size * 0.66)}
+          tint={tint}
+          fallbackSymbol={RARITY_SF[augment.rarity] ?? 'sf:sparkles'}
+          recyclingKey={augment.id}
+        />
       </View>
-      <ThemedText type="caption" numberOfLines={2} color="secondary" style={{ textAlign: 'center', width: size }}>
+      <ThemedText
+        numberOfLines={2}
+        ellipsizeMode="tail"
+        color="secondary"
+        style={[styles.cellName, { width: size }]}
+      >
         {augment.name}
       </ThemedText>
     </View>
@@ -98,7 +98,9 @@ export function PickedDrawer({ picked }: Props) {
   const drawerW = Math.min(360, width * 0.4);
   const cellSize = (drawerW - Spacing.three * 2 - Spacing.two) / 2;
 
-  const slots: (Augment | null)[] = Array.from({ length: TOTAL }, (_, i) => picked[i] ?? null);
+  // Grid grows past the 4 base slots when Transmute: Chaos adds bonus augments.
+  const total = Math.max(BASE_SLOTS, picked.length);
+  const slots: (Augment | null)[] = Array.from({ length: total }, (_, i) => picked[i] ?? null);
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.surface.base }]} edges={['top', 'bottom', 'right']}>
@@ -106,7 +108,7 @@ export function PickedDrawer({ picked }: Props) {
         {translate('title')}
       </ThemedText>
       <ThemedText type="caption" color="tertiary" style={{ paddingHorizontal: Spacing.three, paddingBottom: Spacing.three }}>
-        {picked.length} / {TOTAL}
+        {picked.length} / {total}
       </ThemedText>
       <FlatList
         data={slots}
@@ -135,6 +137,12 @@ const styles = StyleSheet.create({
   cell: {
     alignItems: 'center',
     gap: Spacing.one,
+  },
+  cellName: {
+    textAlign: 'center',
+    fontSize: 11,
+    lineHeight: 14,
+    fontWeight: '600',
   },
   iconWrapper: {
     borderRadius: Radius.md,

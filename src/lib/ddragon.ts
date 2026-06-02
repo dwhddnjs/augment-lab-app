@@ -17,9 +17,15 @@ export function itemImageUrl(imageKey: string) {
 }
 
 // iconPath from CDragon JSON: "/lol-game-data/assets/ASSETS/..."
-// CDragon serves these under plugins/rcp-be-lol-game-data/global/default/
-export function augmentImageUrl(iconPath: string) {
+// - 'small' (64px) is served under the rcp-be-lol-game-data plugin root.
+// - 'large' (256px) lives under CDragon's `game/` asset root, with the
+//   filename suffix swapped from `_small` to `_large`.
+export function augmentImageUrl(iconPath: string, size: 'small' | 'large' = 'large') {
   const stripped = iconPath.replace(/^\/lol-game-data\/assets/i, '').toLowerCase();
+  if (size === 'large') {
+    const large = stripped.replace(/_small(\.\w+)$/i, '_large$1');
+    return `${CDRAGON_BASE}/game${large}`;
+  }
   return `${CDRAGON_BASE}/plugins/rcp-be-lol-game-data/global/default${stripped}`;
 }
 
