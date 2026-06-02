@@ -171,7 +171,9 @@ export function DraftScreen() {
       drawerPosition="right"
       drawerType="slide"
       drawerStyle={{ width: drawerWidth, backgroundColor: colors.surface.base }}
-      renderDrawerContent={() => <PickedDrawer picked={picked} />}
+      renderDrawerContent={() => (
+        <PickedDrawer picked={picked} width={drawerWidth} championId={championId} />
+      )}
     >
       <ThemedView style={styles.container}>
         <SafeAreaView

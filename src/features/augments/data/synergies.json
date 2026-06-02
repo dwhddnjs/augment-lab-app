@@ -1,0 +1,191 @@
+[
+  {
+    "id": "firecracker",
+    "name": {
+      "ko": "폭죽 세트",
+      "en": "Firecracker Set"
+    },
+    "description": {
+      "ko": "미사일 계열 증강을 모으면 미사일이 주변 적에게 추가로 튕기며 피해를 입힙니다.",
+      "en": "Firecracker missiles bounce to nearby enemies for extra damage."
+    },
+    "augmentIds": [
+      "typhoon",
+      "light-em-up",
+      "twin-fire",
+      "critical-missile",
+      "magic-missile",
+      "fan-the-hammer"
+    ],
+    "minCount": 2,
+    "icon": "sf:fireworks"
+  },
+  {
+    "id": "archmage",
+    "name": {
+      "ko": "대마법사",
+      "en": "Archmage"
+    },
+    "description": {
+      "ko": "스킬을 시전할 때마다 다른 스킬의 쿨다운을 일부 환급합니다.",
+      "en": "Casting a spell refunds a portion of another spell's cooldown."
+    },
+    "augmentIds": [
+      "juiced",
+      "mind-to-matter",
+      "buff-buddies",
+      "ocean-soul",
+      "overflow"
+    ],
+    "minCount": 2,
+    "icon": "sf:wand.and.stars"
+  },
+  {
+    "id": "dive-bomb",
+    "name": {
+      "ko": "급강하 세트",
+      "en": "Dive Bomb Set"
+    },
+    "description": {
+      "ko": "죽음을 활용해 참 피해를 입히고 부활 시간을 단축합니다.",
+      "en": "Leverage your death for true damage and reduced respawn time."
+    },
+    "augmentIds": [
+      "dive-bomber",
+      "self-destruct",
+      "final-city-transit",
+      "clown-college"
+    ],
+    "minCount": 2,
+    "icon": "sf:arrow.down.circle.fill"
+  },
+  {
+    "id": "fully-automated",
+    "name": {
+      "ko": "완전 자동화",
+      "en": "Fully Automated"
+    },
+    "description": {
+      "ko": "자동 시전(Autocast) 스킬의 재사용 대기시간을 감소시킵니다.",
+      "en": "Reduce the cooldown of your Autocast abilities."
+    },
+    "augmentIds": [
+      "firefox",
+      "frost-wraith",
+      "self-destruct",
+      "ok-boomerang",
+      "sonata",
+      "divine-intervention",
+      "quantum-computing",
+      "prom-queen"
+    ],
+    "minCount": 2,
+    "icon": "sf:gearshape.fill"
+  },
+  {
+    "id": "high-roller",
+    "name": {
+      "ko": "도박꾼",
+      "en": "High Roller"
+    },
+    "description": {
+      "ko": "미니언 처치 시 일정 확률로 능력치 모루를 떨어뜨립니다.",
+      "en": "Minions have a chance to drop Stat Anvils on death."
+    },
+    "augmentIds": [
+      "transmute-prismatic",
+      "transmute-chaos",
+      "pandora-s-box",
+      "stats",
+      "stats-on-stats",
+      "stats-on-stats-on-stats"
+    ],
+    "minCount": 2,
+    "icon": "sf:dice.fill"
+  },
+  {
+    "id": "make-it-rain",
+    "name": {
+      "ko": "골드는 비를 타고",
+      "en": "Make it Rain"
+    },
+    "description": {
+      "ko": "적 처치 시 아군이 주울 수 있는 골드 코인을 떨어뜨립니다.",
+      "en": "Takedowns drop gold coins for you and allies to pick up."
+    },
+    "augmentIds": [
+      "upgrade-immolate",
+      "upgrade-collector",
+      "from-beginning-to-end",
+      "donation",
+      "red-envelopes",
+      "goldrend",
+      "heads-up-cupcake"
+    ],
+    "minCount": 2,
+    "icon": "sf:cloud.rain.fill"
+  },
+  {
+    "id": "snowday",
+    "name": {
+      "ko": "눈 오는 날",
+      "en": "Snowday"
+    },
+    "description": {
+      "ko": "눈덩이 계열 증강에 스킬 가속과 추가 피해를 부여합니다.",
+      "en": "Snowball augments gain Ability Haste and bonus damage."
+    },
+    "augmentIds": [
+      "snowball-upgrade",
+      "snowball-roulette",
+      "pinball",
+      "biggest-snowball-ever",
+      "holy-snowball"
+    ],
+    "minCount": 2,
+    "icon": "sf:snowflake"
+  },
+  {
+    "id": "stackosaurus-rex",
+    "name": {
+      "ko": "다단 중첩",
+      "en": "Stackosaurus Rex"
+    },
+    "description": {
+      "ko": "스택을 획득할 때마다 추가 스택을 더 얻습니다.",
+      "en": "Whenever you gain stacks, gain additional stacks."
+    },
+    "augmentIds": [
+      "quest-steel-your-heart",
+      "upgrade-hubris",
+      "soul-eater",
+      "phenomenal-evil",
+      "master-of-duality",
+      "tap-dancer",
+      "infinite-recursion"
+    ],
+    "minCount": 2,
+    "icon": "sf:square.stack.3d.up.fill"
+  },
+  {
+    "id": "wee-woo",
+    "name": {
+      "ko": "삐뽀삐뽀",
+      "en": "Wee Woo Wee Woo"
+    },
+    "description": {
+      "ko": "체력 50% 이하의 아군에게 추가 지원 효과를 제공합니다.",
+      "en": "Gain bonus effects toward allies below 50% health."
+    },
+    "augmentIds": [
+      "first-aid-kit",
+      "all-for-you",
+      "critical-healing",
+      "sonata",
+      "windspeaker-s-blessing",
+      "i-m-a-baby-kitty-where-is-mama"
+    ],
+    "minCount": 2,
+    "icon": "sf:cross.case.fill"
+  }
+]
