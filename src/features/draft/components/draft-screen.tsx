@@ -18,10 +18,10 @@ import { useTheme } from "@/hooks/use-theme";
 import { augmentImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { useDraft } from "../hooks/use-draft";
-import { useLandscapeLock } from "../hooks/use-landscape-lock";
 import { DraftCard, type CardEntryMode, type CardExitMode } from "./draft-card";
 import { PickedDrawer } from "./picked-drawer";
 import { RoundIndicator } from "./round-indicator";
+import { SynergyIcon } from "./synergy-icon";
 
 const t = {
   ko: {
@@ -49,8 +49,6 @@ const IDLE: ExitModes = ["none", "none", "none"];
 const ALL_FLIP: EntryModes = ["flip", "flip", "flip"];
 
 export function DraftScreen() {
-  useLandscapeLock();
-
   const translate = useTranslation(t);
   const { colors } = useTheme();
   const router = useRouter();
@@ -163,6 +161,13 @@ export function DraftScreen() {
     ]);
   }, [router, translate]);
 
+  // The screen mounts in portrait and useLandscapeLock rotates it to landscape.
+  // Hold off rendering the cards until the rotation lands so they never appear
+  // in a portrait layout first and then reflow.
+  // if (!isLandscape) {
+  //   return <ThemedView style={styles.container} />;
+  // }
+
   return (
     <Drawer
       open={drawerOpen}
@@ -172,7 +177,11 @@ export function DraftScreen() {
       drawerType="slide"
       drawerStyle={{ width: drawerWidth, backgroundColor: colors.surface.base }}
       renderDrawerContent={() => (
-        <PickedDrawer picked={picked} width={drawerWidth} championId={championId} />
+        <PickedDrawer
+          picked={picked}
+          width={drawerWidth}
+          championId={championId}
+        />
       )}
     >
       <ThemedView style={styles.container}>
@@ -183,10 +192,10 @@ export function DraftScreen() {
           {/* Header */}
           <View style={[styles.header, { paddingHorizontal: hPad }]}>
             <Pressable onPress={handleExit} style={styles.headerBtn}>
-              <Image
-                source="sf:xmark"
-                style={styles.headerIcon}
-                tintColor={colors.text.secondary}
+              <SynergyIcon
+                name="close"
+                size={18}
+                color={colors.text.secondary}
               />
               <ThemedText type="label" color="secondary">
                 {translate("exit")}
@@ -204,10 +213,10 @@ export function DraftScreen() {
               onPress={() => setDrawerOpen(true)}
               style={styles.headerBtn}
             >
-              <Image
-                source="sf:list.bullet"
-                style={styles.headerIcon}
-                tintColor={colors.accent.default}
+              <SynergyIcon
+                name="format-list-bulleted"
+                size={18}
+                color={colors.accent.default}
               />
               <ThemedText type="label" style={{ color: colors.accent.default }}>
                 {translate("picks")} {picked.length}/4
@@ -267,10 +276,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: Spacing.one,
     padding: Spacing.two,
-  },
-  headerIcon: {
-    width: 18,
-    height: 18,
   },
   headerCenter: {
     alignItems: "center",

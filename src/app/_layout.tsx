@@ -1,6 +1,8 @@
 import 'react-native-url-polyfill/auto';
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
+import { DarkTheme, DefaultTheme, ThemeProvider, usePathname } from 'expo-router';
 import { Stack } from 'expo-router/stack';
+import * as ScreenOrientation from 'expo-screen-orientation';
+import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 
 import { AnimatedSplashOverlay } from '@/components/navigation/animated-icon';
@@ -35,6 +37,23 @@ const lightNavTheme = {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const mode = colorScheme === 'light' ? 'light' : 'dark';
+  const pathname = usePathname();
+
+  // Single source of truth for orientation, keyed to the active route. Locking
+  // per-screen mount/unmount caused landscape↔portrait flicker because the
+  // modal→draft handoff fired competing locks. Reacting to the route instead
+  // locks exactly once per navigation: draft flow is landscape, all else
+  // portrait. (Info.plist allows every orientation — see app.json "default" —
+  // so iOS never fights these runtime locks.)
+  useEffect(() => {
+    const landscape = pathname === '/draft' || pathname === '/draft-result';
+    ScreenOrientation.lockAsync(
+      landscape
+        ? ScreenOrientation.OrientationLock.LANDSCAPE
+        : ScreenOrientation.OrientationLock.PORTRAIT_UP,
+    ).catch(() => {});
+  }, [pathname]);
+
   return (
     <ThemeProvider value={mode === 'dark' ? darkNavTheme : lightNavTheme}>
       <AnimatedSplashOverlay />

@@ -3,7 +3,7 @@
     "name": "aram-augment-lab-app",
     "slug": "aram-augment-lab-app",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "aramaugmentlabapp",
     "userInterfaceStyle": "automatic",
