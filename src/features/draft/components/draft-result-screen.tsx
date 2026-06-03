@@ -11,8 +11,8 @@ import { useTheme } from '@/hooks/use-theme';
 import { championLoadingUrl } from '@/lib/ddragon';
 import { useTranslation } from '@/lib/i18n';
 import type { Augment } from '@/features/augments/types';
-import { useLandscapeLock } from '../hooks/use-landscape-lock';
 import { DraftCardFrame } from './draft-card-frame';
+import { SynergyIcon } from './synergy-icon';
 
 const t = {
   ko: { title: '드래프트 완료', restart: '다시 시작', home: '홈으로' },
@@ -20,7 +20,6 @@ const t = {
 };
 
 export function DraftResultScreen() {
-  useLandscapeLock();
 
   const translate = useTranslation(t);
   const { colors } = useTheme();
@@ -95,14 +94,14 @@ export function DraftResultScreen() {
             onPress={handleRestart}
             style={[styles.btn, { backgroundColor: colors.surface.raised, borderColor: colors.border.default, borderWidth: 1 }]}
           >
-            <Image source="sf:arrow.counterclockwise" style={styles.btnIcon} tintColor={colors.text.primary} />
+            <SynergyIcon name="refresh" size={18} color={colors.text.primary} />
             <ThemedText type="label">{translate('restart')}</ThemedText>
           </Pressable>
           <Pressable
             onPress={handleHome}
             style={[styles.btn, { backgroundColor: colors.accent.default }]}
           >
-            <Image source="sf:house.fill" style={styles.btnIcon} tintColor={colors.accent.onAccent} />
+            <SynergyIcon name="home" size={18} color={colors.accent.onAccent} />
             <ThemedText type="label" style={{ color: colors.accent.onAccent }}>
               {translate('home')}
             </ThemedText>
@@ -141,9 +140,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.four,
     paddingVertical: Spacing.double,
     borderRadius: Radius.xl,
-  },
-  btnIcon: {
-    width: 18,
-    height: 18,
   },
 });

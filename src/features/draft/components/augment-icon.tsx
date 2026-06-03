@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Image } from 'expo-image';
 
 import { augmentImageUrl } from '@/lib/ddragon';
+import { SynergyIcon } from './synergy-icon';
 
-// large(256px, full-color art) → SF symbol fallback. Never shows an empty box.
+// large(256px, full-color art) → vector-icon fallback. Never shows an empty box.
 // The 256px asset is a colored illustration, so it renders untinted; only the
-// SF-symbol fallback (a flat glyph) takes the rarity tint.
+// fallback glyph takes the rarity tint.
 type Step = 0 | 1;
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
   size: number;
   /** Rarity tint applied to the fallback symbol only. */
   tint: string;
-  /** SF symbol shown when no icon resolves (e.g. "sf:sparkles"). */
+  /** MaterialCommunityIcons glyph shown when no icon resolves (e.g. "star"). */
   fallbackSymbol: string;
   /** Stable identity for the underlying image cache. */
   recyclingKey?: string;
@@ -25,12 +26,7 @@ export function AugmentIcon({ iconPath, size, tint, fallbackSymbol, recyclingKey
 
   if (step === 1) {
     return (
-      <Image
-        source={fallbackSymbol}
-        style={{ width: Math.round(size * 0.62), height: Math.round(size * 0.62) }}
-        tintColor={tint}
-        contentFit="contain"
-      />
+      <SynergyIcon name={fallbackSymbol} size={Math.round(size * 0.62)} color={tint} />
     );
   }
 

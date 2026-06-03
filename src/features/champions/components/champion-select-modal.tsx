@@ -60,8 +60,12 @@ export function ChampionSelectModal() {
   };
 
   const handleStart = () => {
+    if (!selectedId) return;
+    // Close the modal and enter the draft in the same frame so nothing behind
+    // the modal is exposed and the transition feels instant. The draft screen
+    // owns the landscape rotation (useLandscapeLock) as it mounts.
     router.dismiss();
-    router.push({ pathname: '/draft', params: { championId: selectedId! } });
+    router.push({ pathname: '/draft', params: { championId: selectedId } });
   };
 
   return (

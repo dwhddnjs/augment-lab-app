@@ -1,4 +1,3 @@
-import { Image } from "expo-image";
 import { StyleSheet, Text, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
@@ -8,12 +7,13 @@ import type { Augment, AugmentRarity } from "@/features/augments/types";
 import { useTheme } from "@/hooks/use-theme";
 import { cleanAugmentDescription } from "@/lib/augment-text";
 import { AugmentIcon } from "./augment-icon";
+import { SynergyIcon } from "./synergy-icon";
 
-// Fallback SF Symbols when an augment has no icon path.
+// Fallback glyphs (MaterialCommunityIcons) when an augment has no icon path.
 const RARITY_SF: Record<AugmentRarity, string> = {
-  silver: "sf:shield.fill",
-  gold: "sf:star.fill",
-  prismatic: "sf:sparkles",
+  silver: "shield",
+  gold: "star",
+  prismatic: "shimmer",
 };
 
 interface RarityStyle {
@@ -146,11 +146,11 @@ export function DraftCardFrame({ augment, cardWidth }: Props) {
             </ThemedText>
             <View style={{ flexDirection: "row", gap: Spacing.half }}>
               {synergies.map((s) => (
-                <Image
+                <SynergyIcon
                   key={s.id}
-                  source={s.icon}
-                  style={styles.synergyBadgeIcon}
-                  tintColor={colors.accent.default}
+                  name={s.icon}
+                  size={16}
+                  color={colors.accent.default}
                 />
               ))}
             </View>
@@ -207,13 +207,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  synergyBadgeIcon: {
-    width: 16,
-    height: 16,
-    // position: "absolute",
-    // right: -18,
-    // bottom: 0,
   },
   body: {
     flex: 1,

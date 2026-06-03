@@ -1,8 +1,8 @@
-import { Image } from "expo-image";
 import { Pressable, StyleSheet } from "react-native";
 
 import { Radius } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
+import { SynergyIcon } from "./synergy-icon";
 
 interface Props {
   onPress: () => void;
@@ -31,10 +31,10 @@ export function RerollButton({ onPress, disabled, used }: Props) {
         { opacity: disabled && !used ? 0.35 : pressed ? 0.65 : 1 },
       ]}
     >
-      <Image
-        source="sf:arrow.counterclockwise"
-        style={styles.icon}
-        tintColor={used ? colors.text.disabled : colors.text.primary}
+      <SynergyIcon
+        name="refresh"
+        size={18}
+        color={used ? colors.text.disabled : colors.text.primary}
       />
     </Pressable>
   );
@@ -48,10 +48,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  icon: {
-    width: 18,
-    height: 18,
-    fontWeight: "700",
   },
 });

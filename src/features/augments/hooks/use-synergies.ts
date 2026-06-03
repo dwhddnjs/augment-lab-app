@@ -27,7 +27,9 @@ export function useSynergies(pickedIds: string[]): SynergyStatus[] {
         (n, id) => (ids.has(id) ? n + 1 : n),
         0,
       );
-      return { synergy, count, active: count >= synergy.minCount };
+      // The first tier's count is the minimum needed to activate the synergy.
+      const minCount = synergy.tiers[0]?.count ?? Infinity;
+      return { synergy, count, active: count >= minCount };
     });
   }, [pickedIds]);
 }
