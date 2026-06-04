@@ -60,12 +60,11 @@ export function ChampionSelectModal() {
     setSelectedTag((curr) => (curr === tag ? null : tag));
   };
 
-  const handleStart = () => {
+  const handleStart = async () => {
     if (!selectedId) return;
-    // navigation 전에 landscape를 먼저 잠근다. useFocusEffect로 draft에서 잠그면
-    // navigation animation이 시작된 뒤에야 rotation이 걸려 animation + rotation 충돌이
-    // 발생한다. 여기서 먼저 잠그면 device가 rotation을 시작한 후 navigation이 시작된다.
-    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE).catch(() => {});
+    // lockAsync를 await해서 기기가 landscape로 전환된 후 navigation을 시작한다.
+    // await 없이 바로 replace하면 portrait 상태로 draft가 mount될 수 있다.
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE).catch(() => {});
     router.replace({ pathname: '/draft', params: { championId: selectedId } });
   };
 

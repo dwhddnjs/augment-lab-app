@@ -7,6 +7,7 @@ import { StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed/themed-text';
 import { GlassSurface } from '@/components/ui/glass-surface';
 import { Radius, Spacing } from '@/constants/theme';
+import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 import { useTranslation } from '@/lib/i18n';
 import {
@@ -31,6 +32,7 @@ interface ItemStatPanelProps {
 export function ItemStatPanel({ baseStats, itemStatsList }: ItemStatPanelProps) {
   const { colors } = useTheme();
   const translate = useTranslation(t);
+  const { locale } = useLocale();
 
   const computed: ComputedStats = computeStats(baseStats, itemStatsList);
 
@@ -56,7 +58,7 @@ export function ItemStatPanel({ baseStats, itemStatsList }: ItemStatPanelProps) 
           return (
             <View key={key} style={styles.row}>
               <ThemedText type="caption" color="secondary" numberOfLines={1}>
-                {label.ko}
+                {label[locale]}
               </ThemedText>
               <ThemedText type="caption" color="primary">
                 {formatted}{unit}

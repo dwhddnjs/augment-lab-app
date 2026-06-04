@@ -85,7 +85,8 @@ export function DraftResultScreen() {
 
   const handleRestart = () => {
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
-    router.replace('/select-champion-modal' as never);
+    router.dismissTo('/');
+    router.push('/select-champion-modal');
   };
 
   const splashUri = championId ? championLoadingUrl(championId) : null;
