@@ -1,5 +1,6 @@
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
+import * as ScreenOrientation from "expo-screen-orientation";
 import { useState } from "react";
 import { FlatList, Pressable, StyleSheet, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -59,13 +60,12 @@ export function ChampionSelectModal() {
     setSelectedTag((curr) => (curr === tag ? null : tag));
   };
 
-  const handleStart = () => {
+  const handleStart = async () => {
     if (!selectedId) return;
-    // Close the modal and enter the draft in the same frame so nothing behind
-    // the modal is exposed and the transition feels instant. The draft screen
-    // owns the landscape rotation (useLandscapeLock) as it mounts.
-    router.dismiss();
-    router.push({ pathname: '/draft', params: { championId: selectedId } });
+    // lockAsync를 await해서 기기가 landscape로 전환된 후 navigation을 시작한다.
+    // await 없이 바로 replace하면 portrait 상태로 draft가 mount될 수 있다.
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE).catch(() => {});
+    router.replace({ pathname: '/draft', params: { championId: selectedId } });
   };
 
   return (
