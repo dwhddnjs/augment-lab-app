@@ -169,6 +169,17 @@ const { mode, colors, typography, radius, elevation } = useTheme();
 - `borderRadius`에 숫자 리터럴 사용 — `Radius.*` 토큰 사용
 - `Spacing.*` 값을 `borderRadius`에 사용
 
+#### 리퀴드글라스 (Liquid Glass)
+
+**패널/오버레이/툴팁/시트 배경은 반드시 `@/components/ui/glass-surface`의 `GlassSurface`를 사용. 직접 `GlassView`/`BlurView` 호출 금지.**
+
+- iOS 26+ → `expo-glass-effect` 네이티브 글라스 (`isLiquidGlassAvailable()` true)
+- 구버전 iOS / 안드로이드 → `expo-blur`의 `BlurView` 폴백
+- 그 외(BlurView 불가) → `colors.surface.overlay` 단색 최종 폴백
+- 색조(tint)는 테마 토큰(`colors.accent.*` / `colors.surface.*`)만 주입, hex 직접 기입 금지
+- **고밀도 리스트 셀(아이템 그리드, 카드 목록 등)에는 글라스 미적용** — 성능 유의
+- `GlassSurface`의 `glassStyle='clear'`는 얇은 레이어, `'regular'`는 표준 패널에 사용
+
 #### 이미지 및 아이콘
 
 - SF Symbols: `expo-image`의 `source="sf:symbol-name"` 사용

@@ -1,5 +1,6 @@
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
+import * as ScreenOrientation from "expo-screen-orientation";
 import { useState } from "react";
 import { FlatList, Pressable, StyleSheet, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -61,11 +62,11 @@ export function ChampionSelectModal() {
 
   const handleStart = () => {
     if (!selectedId) return;
-    // Close the modal and enter the draft in the same frame so nothing behind
-    // the modal is exposed and the transition feels instant. The draft screen
-    // owns the landscape rotation (useLandscapeLock) as it mounts.
-    router.dismiss();
-    router.push({ pathname: '/draft', params: { championId: selectedId } });
+    // navigation 전에 landscape를 먼저 잠근다. useFocusEffect로 draft에서 잠그면
+    // navigation animation이 시작된 뒤에야 rotation이 걸려 animation + rotation 충돌이
+    // 발생한다. 여기서 먼저 잠그면 device가 rotation을 시작한 후 navigation이 시작된다.
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE).catch(() => {});
+    router.replace({ pathname: '/draft', params: { championId: selectedId } });
   };
 
   return (

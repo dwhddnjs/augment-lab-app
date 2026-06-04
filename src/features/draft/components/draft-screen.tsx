@@ -1,5 +1,6 @@
 import { Image } from "expo-image";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useEffect, useState } from "react";
 import {
   Alert,
@@ -57,6 +58,14 @@ export function DraftScreen() {
   const { round, currentCards, picked, rerolled, reroll, pick } = useDraft();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
+  // 이 화면이 포커스를 얻을 때 landscape로 전환한다. cleanup 없이 — portrait 복귀는
+  // handleExit에서 명시적으로 처리해 중간 orientation 변경이 생기지 않도록 한다.
+  useFocusEffect(
+    useCallback(() => {
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE).catch(() => {});
+    }, [])
+  );
+
   const { width, height } = useWindowDimensions();
   const isLandscape = width > height;
   const screenW = isLandscape ? width : height;
@@ -113,7 +122,7 @@ export function DraftScreen() {
             picked: JSON.stringify(nextPicked),
             championId: championId ?? "",
           };
-          router.replace({ pathname: "/draft-result", params });
+          router.replace({ pathname: "/draft-items", params });
         }
       }, 380);
     },
@@ -156,17 +165,21 @@ export function DraftScreen() {
       {
         text: translate("exitOk"),
         style: "destructive",
-        onPress: () => router.dismissTo("/"),
+        onPress: () => {
+          // navigation 전에 portrait를 먼저 걸어 exit 애니메이션이 portrait로 재생된다.
+          ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
+          router.dismissTo("/");
+        },
       },
     ]);
   }, [router, translate]);
 
-  // The screen mounts in portrait and useLandscapeLock rotates it to landscape.
-  // Hold off rendering the cards until the rotation lands so they never appear
-  // in a portrait layout first and then reflow.
-  // if (!isLandscape) {
-  //   return <ThemedView style={styles.container} />;
-  // }
+  // 화면은 portrait로 mount되고 _layout의 pathname lock이 landscape로 회전시킨다.
+  // 회전이 끝날 때까지 카드 렌더를 보류해, 카드가 portrait 레이아웃으로 먼저
+  // 떴다가 reflow되는 일을 막는다.
+  if (!isLandscape) {
+    return <ThemedView style={styles.container} />;
+  }
 
   return (
     <Drawer
