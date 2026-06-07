@@ -63,13 +63,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EscapePlan_small.png"
   },
   {
-    "id": "fetch",
-    "name": "Fetch",
-    "description": "Gain 40% bonus movement speed towards enemies marked by Mark. Additionally, nearby allied champions that use Mark will cause it to drop a snowball on the ground after reaching maximum range or hitting an enemy. You can pick up this snowball to refresh the cooldown of your Mark.<br><br>This augment is currently disabled.|buzzword3",
-    "rarity": "silver",
-    "iconPath": ""
-  },
-  {
     "id": "first-aid-kit",
     "name": "First-Aid Kit",
     "description": "Grants 20% heal and shield power.",
@@ -116,7 +109,7 @@
     "name": "Heavy Hitter",
     "description": "Basic attacks deal bonus physical damage equal to .",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Strawberry/UpgradeSelection/Icons/Blessing_Augment/Heavy_Hitter_Large.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/HeavyHitter_small.png"
   },
   {
     "id": "homeguard",
@@ -718,7 +711,7 @@
     "name": "With Haste",
     "description": "Grants bonus movement speed equal to 70% ability haste.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Strawberry/UpgradeSelection/Icons/Blessing_Augment/WithHaste_Large.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WithHaste_small.png"
   },
   {
     "id": "i-m-a-baby-kitty-where-is-mama",
@@ -959,13 +952,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/QuantumComputing_small.png"
   },
   {
-    "id": "quest-sneakerhead",
-    "name": "Quest: Sneakerhead",
-    "description": "You have now been assigned with a number of quests to complete that each involve performing specific tasks while equipped with a particular [https://wiki.leagueoflegends.com/en-us/Category:Boots_items Boots item], which is granted to you for free during its respective quest. Finish the following quests, which are assigned to you in a random order:<br><ul><li>Quest -  Basic attack 25 times.</li><li>Quest -  Run 300 steps.<!--extremely vague, needs in-game testing--></li><li>Quest -  Cast 20 abilities.</li><li>Quest -  Become afflicted by crowd control 5 times.</li><li>Quest -  Reduce a total of 200 damage with Plating.</li><li>Quest -  Deal a total of 1500 damage with abilities.</li></ul><br>Reward: Upon completing all of the above quests, you receive Jarvan I's.<br><br>You cannot purchase any Boots items while equipped with this augment. If you already have a Boots item, it is replaced by the Boots granted by this effect. Boots items gained from this effect cannot be sold.<br><br>This augment is currently disabled.|buzzword3",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Sneakerhead_small.png"
-  },
-  {
     "id": "quest-steel-your-heart",
     "name": "Quest: Steel Your Heart",
     "description": "Quest: Obtain Heartsteel and accumulate over 300 bonus health from Colossal Consumption.<br><br>Reward: Upon completing your Quest, increase the bonus health gained from Heartsteel Colossal Consumption by 200%.",
@@ -1187,7 +1173,7 @@
     "name": "Final City Transit",
     "description": "Upon death, you summon a train over 1 second that launches towards your killer at full speed, travelling in their direction at a global distance and dealing 150 to 750|physical damage (+ 65% bonus AD) (+ 50% AP) (+ 15% maximum health) physical damage to enemies it passes through.<br><br>The train is summoned a slight distance away from the front of your killer, based on their facing direction at the time of your death, and launches towards the position they were located at the time of your death.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Strawberry/UpgradeSelection/Icons/Weapon/9189_Train.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Nightstalking_small.png"
   },
   {
     "id": "firefox",
