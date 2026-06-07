@@ -28,7 +28,7 @@ import {
 import { useTranslation } from "@/lib/i18n";
 import { useItems } from "../hooks/use-items";
 import type { Item } from "../types";
-import { ItemSlotGrid } from "./item-slot-grid";
+import { ItemSlotGrid, TRAY_HEIGHT } from "./item-slot-grid";
 import { ItemStatPanel } from "./item-stat-panel";
 
 const ARAM_IDS: Set<string> = new Set(require("../data/aram-item-ids.json"));
@@ -246,14 +246,12 @@ const t = {
     title: "아이템 선택",
     skip: "건너뛰기",
     done: "완료",
-    items: "아이템",
     augments: "증강",
   },
   en: {
     title: "Item Select",
     skip: "Skip",
     done: "Done",
-    items: "Items",
     augments: "Augments",
   },
 };
@@ -372,7 +370,7 @@ export function ItemSelectScreen() {
     >
       {isLandscape && (
         <ItemSelectContent
-          translate={(key: string) => translate(key as any)}
+          translate={translate}
           colors={colors}
           router={router}
           pickedAugments={pickedAugments}
@@ -393,7 +391,7 @@ function ItemSelectContent({
   championId,
   pickedJson,
 }: {
-  translate: (key: string) => string;
+  translate: (key: keyof (typeof t)["en"]) => string;
   colors: ReturnType<typeof useTheme>["colors"];
   router: ReturnType<typeof useRouter>;
   pickedAugments: Augment[];
@@ -785,7 +783,6 @@ const styles = StyleSheet.create({
   leftPanel: {
     flex: 7,
     minWidth: 0,
-    // paddingTop: Spacing.two,
     flexDirection: "row",
     position: "relative",
   },
@@ -815,8 +812,12 @@ const styles = StyleSheet.create({
 
   gridArea: { flex: 1, minWidth: 0, paddingLeft: Spacing.two },
 
-  // 하단 트레이(박스 44 + 패딩 16 + 여백)에 가려지지 않도록 충분한 패딩
-  gridContent: { gap: CELL_GAP, paddingBottom: 80, paddingTop: Spacing.two },
+  // 하단 트레이(TRAY_HEIGHT)에 가려지지 않도록 트레이 높이 + 상하 여백만큼 패딩
+  gridContent: {
+    gap: CELL_GAP,
+    paddingBottom: TRAY_HEIGHT + Spacing.two * 2,
+    paddingTop: Spacing.two,
+  },
   gridRow: { flexDirection: "row" },
 
   checkBadge: {
@@ -834,7 +835,6 @@ const styles = StyleSheet.create({
     width: 1,
     alignSelf: "stretch",
     marginHorizontal: Spacing.two,
-    // marginVertical: Spacing.two,
   },
 
   rightPanel: { flex: 3, minWidth: 0 },

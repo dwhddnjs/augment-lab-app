@@ -14,8 +14,11 @@ import { itemImageUrl } from '@/lib/ddragon';
 import type { Item } from '../types';
 
 const SLOT_COUNT = 6;
-// DDragon 아이템 아이콘 원본은 64×64 — 그 이상으로 키우면 흐릿해지므로 상한
+// 트레이 박스(정사각) 한 변 크기 — DDragon 원본(64×64) 이하라 확대 없이 또렷하게 표시
 const BOX = 44;
+// 트레이 전체 높이 = 박스 + 상하 패딩(Spacing.two×2) + 상하 보더(1×2).
+// 그리드가 트레이에 가려지지 않도록 item-select-screen의 paddingBottom 계산에 사용.
+export const TRAY_HEIGHT = BOX + Spacing.two * 2 + 2;
 
 interface ItemSlotGridProps {
   /** 선택된 아이템 (최대 6). 순서대로 슬롯에 채워진다 */
