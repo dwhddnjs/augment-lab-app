@@ -2,12 +2,9 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { Radius, Spacing } from "@/constants/theme";
-import { getAugmentSynergies } from "@/features/augments/hooks/use-synergies";
 import type { Augment, AugmentRarity } from "@/features/augments/types";
-import { useTheme } from "@/hooks/use-theme";
 import { cleanAugmentDescription } from "@/lib/augment-text";
 import { AugmentIcon } from "./augment-icon";
-import { SynergyIcon } from "./synergy-icon";
 
 // Fallback glyphs (MaterialCommunityIcons) when an augment has no icon path.
 const RARITY_SF: Record<AugmentRarity, string> = {
@@ -81,8 +78,6 @@ interface Props {
 
 export function DraftCardFrame({ augment, cardWidth }: Props) {
   const rs = RARITY[augment.rarity];
-  const { colors } = useTheme();
-  const synergies = getAugmentSynergies(augment.id);
 
   const cardHeight = Math.round(cardWidth * (14 / 9));
   const framePad = Math.max(3, Math.round(cardWidth * 0.056)); // 카드 태두리 크키 조절
@@ -144,16 +139,7 @@ export function DraftCardFrame({ augment, cardWidth }: Props) {
             >
               {augment.name}
             </ThemedText>
-            <View style={{ flexDirection: "row", gap: Spacing.half }}>
-              {synergies.map((s) => (
-                <SynergyIcon
-                  key={s.id}
-                  name={s.icon}
-                  size={16}
-                  color={colors.accent.default}
-                />
-              ))}
-            </View>
+
           </View>
 
           {/* Description */}
@@ -191,22 +177,6 @@ const styles = StyleSheet.create({
   frame: {
     overflow: "hidden",
     borderCurve: "continuous",
-  },
-  synergyBadges: {
-    position: "absolute",
-    top: Spacing.double,
-    right: Spacing.double,
-    zIndex: 2,
-    flexDirection: "row",
-    gap: Spacing.half,
-  },
-  synergyBadge: {
-    width: 24,
-    height: 24,
-    borderRadius: Radius.full,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
   body: {
     flex: 1,

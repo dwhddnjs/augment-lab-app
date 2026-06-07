@@ -63,13 +63,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EscapePlan_small.png"
   },
   {
-    "id": "fetch",
-    "name": "Fetch",
-    "description": "Gain 40% bonus movement speed towards enemies marked by Mark. Additionally, nearby allied champions that use Mark will cause it to drop a snowball on the ground after reaching maximum range or hitting an enemy. You can pick up this snowball to refresh the cooldown of your Mark.<br><br>This augment is currently disabled.|buzzword3",
-    "rarity": "silver",
-    "iconPath": ""
-  },
-  {
     "id": "first-aid-kit",
     "name": "응급처치 키트",
     "description": "<healing>체력 회복 및 보호막 효과가 @HealShieldAmp*100@%</healing> 증가합니다.",
@@ -113,10 +106,10 @@
   },
   {
     "id": "heavy-hitter",
-    "name": "왕 귀여운 발사기",
+    "name": "강타자",
     "description": "기본 공격 시 <scaleHealth>최대 체력</scaleHealth>의 @HealthPercent*100@%에 해당하는 추가 <physicalDamage>물리 피해</physicalDamage>를 입힙니다.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Strawberry/UpgradeSelection/Icons/Blessing_Augment/Heavy_Hitter_Large.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/HeavyHitter_small.png"
   },
   {
     "id": "homeguard",
@@ -715,10 +708,10 @@
   },
   {
     "id": "with-haste",
-    "name": "왕 귀여운 발사기",
+    "name": "속행",
     "description": "스킬 가속의 @AbilityHasteToMSConversion*100@%에 해당하는 <speed>이동 속도</speed>를 얻습니다.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Strawberry/UpgradeSelection/Icons/Blessing_Augment/WithHaste_Large.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WithHaste_small.png"
   },
   {
     "id": "i-m-a-baby-kitty-where-is-mama",
@@ -959,13 +952,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/QuantumComputing_small.png"
   },
   {
-    "id": "quest-sneakerhead",
-    "name": "Quest: Sneakerhead",
-    "description": "You have now been assigned with a number of quests to complete that each involve performing specific tasks while equipped with a particular [https://wiki.leagueoflegends.com/en-us/Category:Boots_items Boots item], which is granted to you for free during its respective quest. Finish the following quests, which are assigned to you in a random order:<br><ul><li>Quest -  Basic attack 25 times.</li><li>Quest -  Run 300 steps.<!--extremely vague, needs in-game testing--></li><li>Quest -  Cast 20 abilities.</li><li>Quest -  Become afflicted by crowd control 5 times.</li><li>Quest -  Reduce a total of 200 damage with Plating.</li><li>Quest -  Deal a total of 1500 damage with abilities.</li></ul><br>Reward: Upon completing all of the above quests, you receive Jarvan I's.<br><br>You cannot purchase any Boots items while equipped with this augment. If you already have a Boots item, it is replaced by the Boots granted by this effect. Boots items gained from this effect cannot be sold.<br><br>This augment is currently disabled.|buzzword3",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Sneakerhead_small.png"
-  },
-  {
     "id": "quest-steel-your-heart",
     "name": "퀘스트: 강철 같은 심장",
     "description": "조건: @StackThreshold@중첩 이상 적용된 강철심장을 보유해야 합니다.<br><br>보상: 강철심장 중첩이 @StackMultiplication@배가 됩니다.",
@@ -1187,7 +1173,7 @@
     "name": "최후의 도시 대중교통",
     "description": "사망하면 처치자를 향해 열차를 발사합니다. 열차에 적중당한 적은 <physicalDamage>@Damage@의 물리 피해</physicalDamage>를 입습니다. 열차는 멈추지 않습니다.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Strawberry/UpgradeSelection/Icons/Weapon/9189_Train.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Nightstalking_small.png"
   },
   {
     "id": "firefox",

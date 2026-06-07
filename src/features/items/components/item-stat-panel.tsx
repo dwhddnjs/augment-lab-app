@@ -9,7 +9,6 @@ import { GlassSurface } from '@/components/ui/glass-surface';
 import { Radius, Spacing } from '@/constants/theme';
 import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
-import { useTranslation } from '@/lib/i18n';
 import {
   computeStats,
   STAT_DISPLAY_ORDER,
@@ -19,11 +18,6 @@ import {
 import type { ChampionStats } from '@/features/champions/types';
 import type { ItemStats } from '../types';
 
-const t = {
-  ko: { stats: '스탯' },
-  en: { stats: 'Stats' },
-};
-
 interface ItemStatPanelProps {
   baseStats: ChampionStats;
   itemStatsList: ItemStats[];
@@ -31,16 +25,12 @@ interface ItemStatPanelProps {
 
 export function ItemStatPanel({ baseStats, itemStatsList }: ItemStatPanelProps) {
   const { colors } = useTheme();
-  const translate = useTranslation(t);
   const { locale } = useLocale();
 
   const computed: ComputedStats = computeStats(baseStats, itemStatsList);
 
   return (
     <GlassSurface style={[styles.container, { borderColor: colors.border.subtle, borderWidth: 1 }]}>
-      <ThemedText type="caption" color="secondary" style={styles.heading}>
-        {translate('stats')}
-      </ThemedText>
       <View style={styles.rows}>
         {STAT_DISPLAY_ORDER.map((key) => {
           const label = STAT_LABELS[key];
@@ -76,9 +66,6 @@ const styles = StyleSheet.create({
     borderRadius: Radius.lg,
     padding: Spacing.two,
     gap: Spacing.one,
-  },
-  heading: {
-    marginBottom: Spacing.one,
   },
   rows: {
     gap: 3,

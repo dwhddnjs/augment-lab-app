@@ -4,22 +4,19 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { AugmentRarityColors, Radius, Spacing } from "@/constants/theme";
-import { useSynergies } from "@/features/augments/hooks/use-synergies";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import type { Champion } from "@/features/champions/types";
-import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
 import { championSquareUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { AugmentIcon } from "./augment-icon";
-import { SynergyIcon } from "./synergy-icon";
 
 const t = {
   ko: {
     title: "내 빌드",
     augments: "증강",
-    synergy: "시너지",
+
     hp: "체력",
     ad: "공격력",
     armor: "방어력",
@@ -35,7 +32,7 @@ const t = {
   en: {
     title: "My Build",
     augments: "Augments",
-    synergy: "Synergies",
+
     hp: "HP",
     ad: "AD",
     armor: "Armor",
@@ -203,16 +200,12 @@ interface Props {
 
 export function PickedDrawer({ picked, width, championId }: Props) {
   const translate = useTranslation(t) as Translate;
-  const { locale } = useLocale();
   const { colors } = useTheme();
 
   const champions = useChampions();
   const champion = championId
     ? champions.find((c) => c.id === championId)
     : undefined;
-
-  const synergies = useSynergies(picked.map((a) => a.id));
-  const activeSynergies = synergies.filter((s) => s.active);
 
   // Symmetric content padding — no safe-area inset on the right so the grid
   // fills the drawer edge-to-edge instead of leaving a phantom gap.
@@ -254,76 +247,6 @@ export function PickedDrawer({ picked, width, championId }: Props) {
           <ThemedText type="label" color="secondary">
             {translate("augments")} {picked.length}/{BASE_SLOTS}
           </ThemedText>
-
-          {activeSynergies.length > 0 && (
-            <View style={styles.synergyList}>
-              {activeSynergies.map(({ synergy, count }) => (
-                <View
-                  key={synergy.id}
-                  style={[
-                    styles.synergyCard,
-                    {
-                      backgroundColor: "transparent",
-                      borderColor: colors.border.default,
-                    },
-                  ]}
-                >
-                  <View style={styles.synergyHeader}>
-                    <SynergyIcon
-                      name={synergy.icon}
-                      size={18}
-                      color={colors.accent.default}
-                    />
-                    <ThemedText
-                      type="label"
-                      style={[
-                        styles.synergyName,
-                        { color: colors.accent.default },
-                      ]}
-                    >
-                      {synergy.name[locale] ?? synergy.name.en}
-                    </ThemedText>
-                  </View>
-
-                  {synergy.tiers.map((tier) => {
-                    const reached = count >= tier.count;
-                    return (
-                      <View key={tier.count} style={styles.tierRow}>
-                        <View
-                          style={[
-                            styles.tierBadge,
-                            {
-                              backgroundColor: reached
-                                ? colors.accent.default
-                                : colors.surface.sunken,
-                            },
-                          ]}
-                        >
-                          <ThemedText
-                            type="caption"
-                            style={{
-                              color: reached
-                                ? colors.accent.onAccent
-                                : colors.text.disabled,
-                            }}
-                          >
-                            {tier.count}
-                          </ThemedText>
-                        </View>
-                        <ThemedText
-                          type="caption"
-                          color={reached ? "secondary" : "disabled"}
-                          style={styles.tierText}
-                        >
-                          {tier.description[locale] ?? tier.description.en}
-                        </ThemedText>
-                      </View>
-                    );
-                  })}
-                </View>
-              ))}
-            </View>
-          )}
 
           <View style={styles.grid}>
             {slots.map((item, i) => (
@@ -412,38 +335,5 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.one,
     borderRadius: Radius.md,
     borderWidth: 1,
-  },
-  synergyList: {
-    gap: Spacing.two,
-  },
-  synergyCard: {
-    gap: Spacing.two,
-    padding: Spacing.two,
-    borderRadius: Radius.md,
-    borderWidth: 1,
-  },
-  synergyHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.two,
-  },
-  synergyName: {
-    flex: 1,
-  },
-  tierRow: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: Spacing.two,
-  },
-  tierBadge: {
-    minWidth: 18,
-    height: 18,
-    paddingHorizontal: Spacing.one,
-    borderRadius: Radius.sm,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  tierText: {
-    flex: 1,
   },
 });
