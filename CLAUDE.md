@@ -8,6 +8,19 @@
 
 플랜모드로 작성한 계획 문서는 **매번** `docs/plans/<YYYY-MM-DD>-<주제>.md` 형식으로 저장할 것. 폴더가 없으면 생성.
 
+## 증강 데이터 변경 시 검수 페이지 갱신
+
+`src/features/augments/data/augments.{ko,en}.json`을 **수정·추가·삭제할 때마다** 검수 페이지를 반드시 재생성할 것:
+
+```bash
+node scripts/gen-augment-check.mjs   # → docs/augment-check.html
+```
+
+- 검수 페이지(`docs/augment-check.html`)는 ko/en을 `id`로 병합해 199개 증강을 rarity별로 보여주고, 앱과 동일한 `augmentImageUrl(large)` 규칙으로 CDragon 아이콘을 렌더한다.
+- 같은 아이콘 파일을 공유하는 증강은 카드에 **"공유" 배지**로 표시(오류 아님 — 게임이 의도적으로 공유하는 아이콘 식별용).
+- 아이콘 경로 원칙: **ARAM Mayhem 증강은 `.../UX/Kiwi/Augments/Icons/...` 폴더 사용**. `Cherry`/`Strawberry`(Arena) 폴더 아이콘을 쓰지 말 것 — 같은 이름의 증강이라도 게임 모드가 다르면 아이콘이 다르다. CDragon `cherry-augments.json`에서 rarity(`kSilver`/`kGold`/`kPrismatic`)가 데이터와 일치하는 `Kiwi` 항목을 정답으로 삼는다.
+- 데이터 변경 후 `docs/augment-check.html`도 함께 커밋할 것.
+
 ## UI 작업 시 참고
 
 UI 컴포넌트, 네비게이션, 스타일링, 애니메이션 작업 전에 반드시 `.agents/skills/building-native-ui/SKILL.md`를 읽을 것.

@@ -19,7 +19,7 @@ export function RoundIndicator({ round, total = 4 }: Props) {
           style={[
             styles.dot,
             {
-              backgroundColor: i < round ? colors.accent.default : colors.border.default,
+              backgroundColor: i < round ? colors.accent.default : colors.border.strong,
             },
           ]}
         />
