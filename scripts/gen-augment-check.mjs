@@ -5,7 +5,7 @@
  *   → docs/augment-check.html
  *
  * augments.{ko,en}.json 을 id 로 매칭해 병합하고, 앱의 augmentImageUrl(large)
- * 규칙과 동일하게 CDragon URL 을 만들어 200개 증강을 rarity 별로 보여준다.
+ * 규칙과 동일하게 CDragon URL 을 만들어 199개 증강을 rarity 별로 보여준다.
  * 같은 아이콘을 공유하는 증강은 카드에 "공유" 배지로 표시해 육안 검수를 돕는다.
  */
 import fs from 'node:fs';

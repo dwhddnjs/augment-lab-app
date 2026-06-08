@@ -1,18 +1,18 @@
-import { Platform, Text, type TextProps } from "react-native";
+import { Platform, Text, type TextProps } from 'react-native';
 
-import { Fonts, Typography, type ThemeColors } from "@/constants/theme";
-import { useTheme } from "@/hooks/use-theme";
+import { Fonts, Typography, type ThemeColors } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
 
 export type TextVariant =
-  | "display"
-  | "title"
-  | "heading"
-  | "body"
-  | "label"
-  | "caption"
-  | "code"
-  | "link";
-export type TextColor = keyof ThemeColors["text"] | "accent";
+  | 'display'
+  | 'title'
+  | 'heading'
+  | 'body'
+  | 'label'
+  | 'caption'
+  | 'code'
+  | 'link';
+export type TextColor = keyof ThemeColors['text'] | 'accent';
 
 export type ThemedTextProps = TextProps & {
   type?: TextVariant;
@@ -32,16 +32,16 @@ const VARIANT_STYLES: Record<TextVariant, typeof Typography.body> = {
 
 export function ThemedText({
   style,
-  type = "body",
+  type = 'body',
   color,
   ...rest
 }: ThemedTextProps) {
   const { colors } = useTheme();
 
   const resolvedColor = (() => {
-    if (color === "accent") return colors.accent.default;
+    if (color === 'accent') return colors.accent.default;
     if (color) return colors.text[color];
-    if (type === "link") return colors.accent.default;
+    if (type === 'link') return colors.accent.default;
     return colors.text.primary;
   })();
 
@@ -50,9 +50,9 @@ export function ThemedText({
       style={[
         { color: resolvedColor },
         VARIANT_STYLES[type],
-        type === "code" && {
+        type === 'code' && {
           fontFamily: Fonts.mono,
-          fontWeight: Platform.select({ android: "700" as const }) ?? "500",
+          fontWeight: Platform.select({ android: '700' as const }) ?? '500',
         },
         style,
       ]}

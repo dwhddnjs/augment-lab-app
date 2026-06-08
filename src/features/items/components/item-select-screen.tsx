@@ -755,12 +755,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: Spacing.two,
-    // paddingHorizontal: Spacing.three,
     paddingLeft: Spacing.three,
     paddingRight: Spacing.five,
     paddingTop: Spacing.three,
     paddingBottom: Spacing.two,
-    // paddingVertical: Spacing.two,
   },
   headerSpacer: { flex: 1 },
 
