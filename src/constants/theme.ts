@@ -35,6 +35,13 @@ export const Theme = {
       danger: { default: "#F26D6D", subtle: "rgba(242,109,109,0.16)" },
       info: { default: "#5BA8FF", subtle: "rgba(91,168,255,0.16)" },
     },
+    // 유리 질감용 — 어두운 배경 위 칩/패널의 광택·림 라이트
+    glass: {
+      fill: "rgba(255,255,255,0.06)", // 베이스 반투명 채움
+      sheen: "rgba(255,255,255,0.16)", // 상단 하이라이트 그라디언트 시작
+      rimTop: "rgba(255,255,255,0.32)", // 상단 가장자리(빛 받는 면)
+      rim: "rgba(255,255,255,0.10)", // 좌우/하단 가장자리
+    },
   },
   light: {
     surface: {
@@ -69,6 +76,13 @@ export const Theme = {
       danger: { default: "#D0463F", subtle: "rgba(208,70,63,0.16)" },
       info: { default: "#2E78D6", subtle: "rgba(46,120,214,0.16)" },
     },
+    // 유리 질감용 — 밝은 배경에선 흰 광택을 더 강하게 주어 유리알 느낌
+    glass: {
+      fill: "rgba(255,255,255,0.45)",
+      sheen: "rgba(255,255,255,0.65)",
+      rimTop: "rgba(255,255,255,0.9)",
+      rim: "rgba(255,255,255,0.35)",
+    },
   },
 } as const;
 
@@ -77,7 +91,7 @@ export type ThemeColors = typeof Theme.dark;
 export const Typography = {
   display: { fontSize: 48, lineHeight: 52, fontWeight: "700" as const },
   title: { fontSize: 32, lineHeight: 40, fontWeight: "700" as const },
-  heading: { fontSize: 22, lineHeight: 28, fontWeight: "600" as const },
+  heading: { fontSize: 20, lineHeight: 28, fontWeight: "600" as const },
   body: { fontSize: 16, lineHeight: 24, fontWeight: "500" as const },
   label: { fontSize: 14, lineHeight: 20, fontWeight: "600" as const },
   caption: { fontSize: 12, lineHeight: 16, fontWeight: "500" as const },

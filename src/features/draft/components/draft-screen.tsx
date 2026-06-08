@@ -2,18 +2,13 @@ import { Image } from "expo-image";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useEffect, useState } from "react";
-import {
-  Alert,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { Alert, StyleSheet, useWindowDimensions, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
+import { GlassChip } from "@/components/ui/glass-chip";
 import { Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { augmentImageUrl } from "@/lib/ddragon";
@@ -62,8 +57,10 @@ export function DraftScreen() {
   // handleExit에서 명시적으로 처리해 중간 orientation 변경이 생기지 않도록 한다.
   useFocusEffect(
     useCallback(() => {
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE).catch(() => {});
-    }, [])
+      ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.LANDSCAPE,
+      ).catch(() => {});
+    }, []),
   );
 
   const { width, height } = useWindowDimensions();
@@ -167,7 +164,9 @@ export function DraftScreen() {
         style: "destructive",
         onPress: () => {
           // navigation 전에 portrait를 먼저 걸어 exit 애니메이션이 portrait로 재생된다.
-          ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
+          ScreenOrientation.lockAsync(
+            ScreenOrientation.OrientationLock.PORTRAIT_UP,
+          ).catch(() => {});
           router.dismissTo("/");
         },
       },
@@ -202,9 +201,9 @@ export function DraftScreen() {
           style={styles.safe}
           edges={["top", "bottom", "left", "right"]}
         >
-          {/* Header */}
+          {/* Header — 플로팅 글라스 칩 */}
           <View style={[styles.header, { paddingHorizontal: hPad }]}>
-            <Pressable onPress={handleExit} style={styles.headerBtn}>
+            <GlassChip onPress={handleExit}>
               <SynergyIcon
                 name="close"
                 size={18}
@@ -213,19 +212,15 @@ export function DraftScreen() {
               <ThemedText type="label" color="secondary">
                 {translate("exit")}
               </ThemedText>
-            </Pressable>
-
-            <View style={styles.headerCenter}>
+            </GlassChip>
+            <View style={{ alignItems: "center", gap: Spacing.one }}>
               <ThemedText type="label" color="tertiary">
                 {translate("round")}
               </ThemedText>
               <RoundIndicator round={round} />
             </View>
 
-            <Pressable
-              onPress={() => setDrawerOpen(true)}
-              style={styles.headerBtn}
-            >
+            <GlassChip variant="accent" onPress={() => setDrawerOpen(true)}>
               <SynergyIcon
                 name="format-list-bulleted"
                 size={18}
@@ -234,7 +229,7 @@ export function DraftScreen() {
               <ThemedText type="label" style={{ color: colors.accent.default }}>
                 {translate("picks")} {picked.length}/4
               </ThemedText>
-            </Pressable>
+            </GlassChip>
           </View>
 
           {/* Cards row */}
@@ -282,17 +277,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: Spacing.two,
-  },
-  headerBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.one,
-    padding: Spacing.two,
-  },
-  headerCenter: {
-    alignItems: "center",
-    gap: Spacing.one,
+    paddingVertical: Spacing.three,
   },
   cardsRow: {
     flexDirection: "row",

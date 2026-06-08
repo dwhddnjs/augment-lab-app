@@ -15,6 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
+import { GlassChip } from "@/components/ui/glass-chip";
 import { AugmentRarityColors, Radius, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
@@ -34,7 +35,7 @@ import { ItemStatPanel } from "./item-stat-panel";
 const ARAM_IDS: Set<string> = new Set(require("../data/aram-item-ids.json"));
 
 const MAX_ITEMS = 6;
-const NUM_COLS = 7;
+const NUM_COLS = 8;
 const CELL_GAP = Spacing.one; // 4px
 const SIDE_TAB_WIDTH = 44;
 
@@ -490,41 +491,27 @@ function ItemSelectContent({
 
   return (
     <SafeAreaView style={styles.safe} edges={["top", "left"]}>
-      {/* 헤더 */}
-      <View
-        style={[
-          styles.header,
-          { borderBottomColor: colors.border.subtle, borderBottomWidth: 1 },
-        ]}
-      >
+      {/* 헤더 — 플로팅 글라스 칩 */}
+      <View style={styles.header}>
         <ThemedText type="heading">{translate("title")}</ThemedText>
-        <ThemedText type="caption" color="tertiary">
+        <ThemedText type="label" style={{ color: colors.accent.default }}>
           {selectedIds.length}/{MAX_ITEMS}
         </ThemedText>
+
         <View style={styles.headerSpacer} />
-        <Pressable
-          onPress={() => navigateToResult([])}
-          style={[
-            styles.btn,
-            {
-              backgroundColor: colors.surface.raised,
-              borderColor: colors.border.default,
-              borderWidth: 1,
-            },
-          ]}
-        >
+        <GlassChip onPress={() => navigateToResult([])}>
           <ThemedText type="label" color="secondary">
             {translate("skip")}
           </ThemedText>
-        </Pressable>
-        <Pressable
+        </GlassChip>
+        <GlassChip
+          variant="accent"
           onPress={() => navigateToResult(selectedIds)}
-          style={[styles.btn, { backgroundColor: colors.accent.default }]}
         >
-          <ThemedText type="label" style={{ color: colors.accent.onAccent }}>
+          <ThemedText type="label" style={{ color: colors.accent.default }}>
             {translate("done")}
           </ThemedText>
-        </Pressable>
+        </GlassChip>
       </View>
 
       <View style={styles.body}>
@@ -768,15 +755,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: Spacing.two,
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.two,
+    paddingLeft: Spacing.three,
+    paddingRight: Spacing.five,
+    paddingTop: Spacing.three,
+    paddingBottom: Spacing.two,
   },
   headerSpacer: { flex: 1 },
-  btn: {
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.two,
-    borderRadius: Radius.xl,
-  },
 
   body: { flex: 1, flexDirection: "row" },
 
