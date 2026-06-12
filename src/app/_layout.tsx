@@ -41,7 +41,8 @@ export default function RootLayout() {
       <AnimatedSplashOverlay />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="select-champion-modal" options={{ presentation: 'modal', headerShown: false, gestureEnabled: true }} />
+        {/* 헤더 세부(타이틀·검색바)는 화면 내부 Stack.Screen에서 로케일·상태와 함께 주입 */}
+        <Stack.Screen name="select-champion-modal" options={{ presentation: 'modal', gestureEnabled: true }} />
         <Stack.Screen name="draft" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
         <Stack.Screen name="draft-items" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
         <Stack.Screen name="draft-result" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />

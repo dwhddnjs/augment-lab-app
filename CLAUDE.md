@@ -28,6 +28,17 @@ React Native 컴포넌트(`View`, `Text`, `Pressable`, `FlatList`, `ScrollView`,
 원격 URL 이미지(Data Dragon CDN 등)는 `expo-image`의 `Image`를 사용.
 탭바는 Expo Router의 `NativeTabs`(`expo-router/unstable-native-tabs`) 사용.
 
+### 헤더 정책
+
+화면 헤더는 **Expo Router `Stack.Screen`의 native 헤더를 기본**으로 사용한다. 직접 그린 타이틀/뒤로가기(커스텀 헤더)는 지양:
+
+- 탭 화면도 native 헤더를 쓰기 위해 각 탭을 그룹+자체 `Stack`으로 구성한다 (`(home)`/`(community)`/`(mypage)`). `NativeTabs.Trigger`의 `name`은 그룹명(`(home)` 등)을 가리킨다.
+- 헤더 색상은 루트 `_layout.tsx`의 `ThemeProvider`가 주입하므로, 스택 `screenOptions`로 동작만 제어한다 (`headerLargeTitle` / `headerTransparent` / `headerTintColor` 등). hex 하드코딩 금지.
+- 목록형 화면은 `headerLargeTitle: true` + 첫 자식 스크롤뷰에 `contentInsetAdjustmentBehavior="automatic"`.
+- 배너가 헤더 영역까지 차오르는 몰입형 상세는 `headerTransparent: true`로 두고 본문이 헤더 뒤로 스크롤되게 한다. 스크롤에 따라 헤더 배경/타이틀을 페이드인하려면 `headerBackground`/`headerTitle`에 reanimated `Animated.View`/`Animated.Text`를 주입한다(상세 화면 collapsing 패턴).
+- 모달(`presentation: 'modal'`)도 native 헤더를 쓴다. 검색은 직접 `TextInput`을 그리지 말고 `headerSearchBarOptions`(iOS 네이티브 검색바)를 사용하고, 닫기는 `headerLeft`에 취소 버튼을 둔다. grabber는 native 시트가 제공하므로 직접 그리지 않는다.
+- `headerShown: false`는 **몰입형 풀스크린 플로우(드래프트 진행·드래프트 결과 등, 보통 가로 전환)에서만** 허용. 그 외에는 native 헤더를 쓴다.
+
 ### 플랫폼 파일 원칙
 
 **웹 지원 없음** — `*.web.tsx` / `*.web.ts` 파일을 만들지 말 것. `npm run web`도 사용하지 않음.
