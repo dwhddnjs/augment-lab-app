@@ -12,6 +12,12 @@ export function championLoadingUrl(champId: string) {
   return `${BASE}/cdn/img/champion/loading/${champId}_0.jpg`;
 }
 
+// 와이드 splash 아트(1215×717). 가로 배너/히어로에 cover+center로 넣으면
+// 세로 loading 아트보다 얼굴·상체 구도가 챔피언 간 일관적이다.
+export function championSplashUrl(champId: string) {
+  return `${BASE}/cdn/img/champion/splash/${champId}_0.jpg`;
+}
+
 export function itemImageUrl(imageKey: string) {
   return `${CDN}/img/item/${imageKey}`;
 }

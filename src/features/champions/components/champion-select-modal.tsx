@@ -1,8 +1,8 @@
 import { Image } from "expo-image";
-import { useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useState } from "react";
-import { FlatList, Pressable, StyleSheet, TextInput, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
@@ -20,11 +20,13 @@ const t = {
     title: "챔피언 선택",
     searchPlaceholder: "챔피언 검색 (초성 가능)",
     start: "시작하기",
+    cancel: "취소",
   },
   en: {
     title: "Select Champion",
     searchPlaceholder: "Search champions",
     start: "Start",
+    cancel: "Cancel",
   },
 };
 
@@ -68,149 +70,130 @@ export function ChampionSelectModal() {
     router.replace({ pathname: '/draft', params: { championId: selectedId } });
   };
 
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea} edges={["top"]}>
-        {/* Grabber */}
-        <View style={styles.grabberContainer}>
-          <View
-            style={[styles.grabber, { backgroundColor: colors.border.default }]}
-          />
-        </View>
+  // 역할 필터칩 — large title + native 검색바 아래, 그리드와 함께 스크롤된다.
+  const filterChips = (
+    <View style={styles.filterRow}>
+      <Pressable
+        onPress={() => setSelectedTag(null)}
+        style={[
+          styles.filterChip,
+          {
+            backgroundColor:
+              selectedTag === null ? colors.accent.subtle : "transparent",
+          },
+        ]}
+      >
+        <Image
+          source="sf:square.grid.2x2.fill"
+          style={styles.chipIcon}
+          tintColor={
+            selectedTag === null ? colors.accent.default : colors.text.secondary
+          }
+        />
+      </Pressable>
 
-        <View style={{ paddingTop: 20, gap: 8 }}>
-          <ThemedText type="heading" style={{ fontSize: 26, lineHeight: 32 }}>
-            {translate("title")}
-          </ThemedText>
-
-          {/* Search bar */}
-          <View
+      {TAGS.map((tag) => {
+        const isActive = selectedTag === tag;
+        const iconUrl = championClassIconUrl(tag);
+        return (
+          <Pressable
+            key={tag}
+            onPress={() => handleTagPress(tag)}
             style={[
-              styles.searchBar,
-              { backgroundColor: colors.surface.raised },
+              styles.filterChip,
+              {
+                backgroundColor: isActive
+                  ? colors.accent.subtle
+                  : "transparent",
+              },
             ]}
           >
-            <Image
-              source="sf:magnifyingglass"
-              style={styles.searchIcon}
-              tintColor={colors.text.secondary}
-            />
-            <TextInput
-              value={query}
-              onChangeText={setQuery}
-              placeholder={translate("searchPlaceholder")}
-              placeholderTextColor={colors.text.tertiary}
-              style={[styles.searchInput, { color: colors.text.primary }]}
-              clearButtonMode="while-editing"
-              returnKeyType="search"
-            />
-          </View>
-
-          {/* Role filter chips */}
-          <View style={styles.filterRow}>
-            <Pressable
-              onPress={() => setSelectedTag(null)}
-              style={[
-                styles.filterChip,
-                {
-                  backgroundColor:
-                    selectedTag === null ? colors.accent.subtle : "transparent",
-                },
-              ]}
-            >
+            {iconUrl ? (
               <Image
-                source="sf:square.grid.2x2.fill"
+                source={{ uri: iconUrl }}
                 style={styles.chipIcon}
                 tintColor={
-                  selectedTag === null
-                    ? colors.accent.default
-                    : colors.text.secondary
+                  isActive ? colors.accent.default : colors.text.secondary
                 }
+                contentFit="contain"
               />
+            ) : (
+              <ThemedText type="label" color={isActive ? "accent" : "secondary"}>
+                {tag}
+              </ThemedText>
+            )}
+          </Pressable>
+        );
+      })}
+    </View>
+  );
+
+  return (
+    <ThemedView style={styles.container}>
+      {/* native 모달 헤더 — large title + iOS 네이티브 검색바 + 취소 버튼 */}
+      <Stack.Screen
+        options={{
+          title: translate("title"),
+          headerLargeTitle: true,
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()} hitSlop={8}>
+              <ThemedText type="body" style={{ color: colors.accent.default }}>
+                {translate("cancel")}
+              </ThemedText>
             </Pressable>
+          ),
+          headerSearchBarOptions: {
+            placeholder: translate("searchPlaceholder"),
+            onChangeText: (e) => setQuery(e.nativeEvent.text),
+            hideWhenScrolling: false,
+            textColor: colors.text.primary,
+            tintColor: colors.accent.default,
+          },
+        }}
+      />
 
-            {TAGS.map((tag) => {
-              const isActive = selectedTag === tag;
-              const iconUrl = championClassIconUrl(tag);
-              return (
-                <Pressable
-                  key={tag}
-                  onPress={() => handleTagPress(tag)}
-                  style={[
-                    styles.filterChip,
-                    {
-                      backgroundColor: isActive
-                        ? colors.accent.subtle
-                        : "transparent",
-                    },
-                  ]}
-                >
-                  {iconUrl ? (
-                    <Image
-                      source={{ uri: iconUrl }}
-                      style={styles.chipIcon}
-                      tintColor={
-                        isActive ? colors.accent.default : colors.text.secondary
-                      }
-                      contentFit="contain"
-                    />
-                  ) : (
-                    <ThemedText
-                      type="label"
-                      color={isActive ? "accent" : "secondary"}
-                    >
-                      {tag}
-                    </ThemedText>
-                  )}
-                </Pressable>
-              );
-            })}
-          </View>
-        </View>
-
-        {/* Champion grid */}
-        <FlatList
-          data={filtered}
-          numColumns={4}
-          keyExtractor={(c) => c.id}
-          contentContainerStyle={styles.grid}
-          columnWrapperStyle={styles.gridRow}
-          showsVerticalScrollIndicator={false}
-          contentInsetAdjustmentBehavior="automatic"
-          ListFooterComponent={<View style={{ height: 240 }} />}
-          renderItem={({ item }) => {
-            const isSelected = selectedId === item.id;
-            return (
-              <Pressable
-                onPress={() => handleSelect(item.id)}
-                style={styles.cell}
+      {/* Champion grid */}
+      <FlatList
+        data={filtered}
+        numColumns={4}
+        keyExtractor={(c) => c.id}
+        contentContainerStyle={styles.grid}
+        columnWrapperStyle={styles.gridRow}
+        showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior="automatic"
+        ListHeaderComponent={filterChips}
+        keyboardDismissMode="on-drag"
+        renderItem={({ item }) => {
+          const isSelected = selectedId === item.id;
+          return (
+            <Pressable onPress={() => handleSelect(item.id)} style={styles.cell}>
+              <Image
+                source={{ uri: championSquareUrl(item.imageKey) }}
+                style={[
+                  styles.image,
+                  {
+                    borderWidth: isSelected ? 2.5 : 1.5,
+                    borderColor: isSelected
+                      ? colors.accent.default
+                      : colors.border.default,
+                  },
+                ]}
+                contentFit="cover"
+              />
+              <ThemedText
+                type="label"
+                numberOfLines={1}
+                color={isSelected ? "accent" : "secondary"}
               >
-                <Image
-                  source={{ uri: championSquareUrl(item.imageKey) }}
-                  style={[
-                    styles.image,
-                    {
-                      borderWidth: isSelected ? 2.5 : 1.5,
-                      borderColor: isSelected
-                        ? colors.accent.default
-                        : colors.border.default,
-                    },
-                  ]}
-                  contentFit="cover"
-                />
-                <ThemedText
-                  type="label"
-                  numberOfLines={1}
-                  color={isSelected ? "accent" : "secondary"}
-                >
-                  {item.name}
-                </ThemedText>
-              </Pressable>
-            );
-          }}
-        />
+                {item.name}
+              </ThemedText>
+            </Pressable>
+          );
+        }}
+      />
 
-        {/* Start button */}
+      {/* Start button */}
+      <SafeAreaView edges={["bottom"]} style={styles.footer}>
         <Pressable
           onPress={handleStart}
           disabled={!selectedId}
@@ -238,44 +221,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.three + Spacing.one,
-    paddingTop: Spacing.two,
-    paddingBottom: Spacing.three,
-    gap: Spacing.two,
-  },
-  grabberContainer: {
-    alignItems: "center",
-    paddingBottom: Spacing.one,
-  },
-  grabber: {
-    width: 40,
-    height: 5,
-    borderRadius: Radius.full,
-  },
-  searchBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderRadius: Radius.md,
-    paddingLeft: Spacing.three,
-    paddingRight: Spacing.two,
-    gap: Spacing.three,
-    height: 42,
-  },
-  searchIcon: {
-    width: 18,
-    height: 18,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    height: "100%",
-  },
   filterRow: {
     flexDirection: "row",
     gap: Spacing.two,
-    paddingVertical: Spacing.one,
+    paddingBottom: Spacing.two,
   },
   filterChip: {
     // width: 44,
@@ -291,6 +240,7 @@ const styles = StyleSheet.create({
   },
   grid: {
     gap: Spacing.two,
+    paddingHorizontal: Spacing.three + Spacing.one,
     paddingBottom: Spacing.three,
   },
   gridRow: {
@@ -307,6 +257,10 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     borderRadius: Radius.md,
     overflow: "hidden",
+  },
+  footer: {
+    paddingHorizontal: Spacing.three + Spacing.one,
+    paddingTop: Spacing.two,
   },
   startButton: {
     paddingVertical: Spacing.double,

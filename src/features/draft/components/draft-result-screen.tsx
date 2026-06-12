@@ -1,31 +1,63 @@
+/**
+ * DraftResultScreen — 드래프트 완료 요약 (세로모드)
+ *
+ * 결과 히어로(챔피언 스플래시) / 증강 세로 리스트 행 / 아이템 / 합산 스탯 /
+ * 하단 CTA(확인하러 가기 · 다시 시작). "확인하러 가기"가 빌드를 로컬 저장하고 홈으로 이동.
+ * 몰입형 종착 화면이라 native 헤더 없이 headerShown:false를 유지한다.
+ */
 import { Image } from 'expo-image';
 import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import * as ScreenOrientation from 'expo-screen-orientation';
-import { useCallback, useMemo } from 'react';
-import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { useCallback, useMemo, useState } from 'react';
+import { Alert, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
-import { Radius, Spacing } from '@/constants/theme';
+import { AugmentRarityColors, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import { championLoadingUrl, itemImageUrl } from '@/lib/ddragon';
+import { saveBuild } from '@/lib/build-storage';
+import { cleanAugmentDescription } from '@/lib/augment-text';
+import { championSplashUrl, itemImageUrl } from '@/lib/ddragon';
 import { useTranslation } from '@/lib/i18n';
-import type { Augment } from '@/features/augments/types';
+import type { Augment, AugmentRarity } from '@/features/augments/types';
 import { useChampions } from '@/features/champions/hooks/use-champions';
 import { useItems } from '@/features/items/hooks/use-items';
 import { ItemStatPanel } from '@/features/items/components/item-stat-panel';
-import { DraftCardFrame } from './draft-card-frame';
+import { AugmentIcon } from './augment-icon';
 import { SynergyIcon } from './synergy-icon';
 
-const t = {
-  ko: { title: '드래프트 완료', restart: '다시 시작', home: '홈으로', augments: '증강', items: '아이템' },
-  en: { title: 'Draft Complete', restart: 'Restart', home: 'Home', augments: 'Augments', items: 'Items' },
+const RARITY_GLYPH: Record<AugmentRarity, string> = {
+  silver: 'shield',
+  gold: 'star',
+  prismatic: 'shimmer',
 };
 
-export function DraftResultScreen() {
+const t = {
+  ko: {
+    title: '드래프트 완료',
+    restart: '다시 시작',
+    confirm: '확인하러 가기',
+    augments: '증강',
+    items: '아이템',
+    stats: '합산 스탯',
+    saveError: '빌드 저장에 실패했어요',
+  },
+  en: {
+    title: 'Draft Complete',
+    restart: 'Restart',
+    confirm: 'View Build',
+    augments: 'Augments',
+    items: 'Items',
+    stats: 'Total Stats',
+    saveError: 'Failed to save the build',
+  },
+};
 
+const HERO_HEIGHT = 260;
+
+export function DraftResultScreen() {
   const translate = useTranslation(t);
   const { colors } = useTheme();
   const router = useRouter();
@@ -35,10 +67,10 @@ export function DraftResultScreen() {
     items?: string;
   }>();
 
+  const [saving, setSaving] = useState(false);
+
   const { width, height } = useWindowDimensions();
-  const isLandscape = width > height;
-  const screenW = isLandscape ? width : height;
-  const screenH = isLandscape ? height : width;
+  const isPortrait = height >= width;
 
   const picked: Augment[] = useMemo(
     () => (pickedJson ? JSON.parse(pickedJson) : []),
@@ -69,19 +101,9 @@ export function DraftResultScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE).catch(() => {});
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
     }, [])
   );
-
-  // Width-constrained: 4 columns; height-constrained: same 58% cap as draft screen
-  const cardWidthByW = Math.floor((screenW - Spacing.four * 2 - Spacing.three * 3) / 4);
-  const cardWidthByH = Math.floor(screenH * 0.58 * (9 / 14));
-  const cardWidth = Math.min(cardWidthByW, cardWidthByH);
-
-  const handleHome = () => {
-    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
-    router.dismissTo('/');
-  };
 
   const handleRestart = () => {
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
@@ -89,102 +111,189 @@ export function DraftResultScreen() {
     router.push('/select-champion-modal');
   };
 
-  const splashUri = championId ? championLoadingUrl(championId) : null;
+  const handleConfirm = async () => {
+    if (saving) return;
+    setSaving(true);
+    try {
+      await saveBuild({
+        championId: championId ?? '',
+        augmentIds: picked.map((a) => a.id),
+        itemIds: selectedItemIds,
+      });
+    } catch {
+      Alert.alert(translate('saveError'));
+      setSaving(false);
+      return;
+    }
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
+    router.dismissTo('/');
+  };
+
+  const splashUri = championId ? championSplashUrl(championId) : null;
+
+  // 회전이 끝나기 전(아직 가로)에는 렌더를 보류해 landscape reflow를 막는다.
+  if (!isPortrait) {
+    return <ThemedView style={styles.container} />;
+  }
 
   return (
     <ThemedView style={styles.container}>
-      {/* Background splash */}
-      {splashUri && (
-        <Image
-          source={{ uri: splashUri }}
-          style={StyleSheet.absoluteFill}
-          contentFit="cover"
-          contentPosition={{ top: '15%', left: '50%' }}
-        />
-      )}
-      <LinearGradient
-        colors={[colors.surface.base + 'CC', colors.surface.base + 'F5', colors.surface.base]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
-        style={StyleSheet.absoluteFill}
-      />
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+        {/* 결과 히어로 */}
+        <View style={styles.hero}>
+          {splashUri && (
+            <Image
+              source={{ uri: splashUri }}
+              style={StyleSheet.absoluteFill}
+              contentFit="cover"
+              contentPosition="center"
+            />
+          )}
+          <LinearGradient
+            colors={[colors.surface.base + '33', colors.surface.base + 'AA', colors.surface.base]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={StyleSheet.absoluteFill}
+          />
+          <SafeAreaView edges={['top']} style={styles.heroSafe}>
+            <View style={[styles.badge, { backgroundColor: colors.accent.subtle }]}>
+              <SynergyIcon name="check-decagram" size={16} color={colors.accent.default} />
+              <ThemedText type="label" style={{ color: colors.accent.default }}>
+                {translate('title')}
+              </ThemedText>
+            </View>
 
-      <SafeAreaView style={styles.safe} edges={['top', 'bottom', 'left', 'right']}>
-        <ThemedText type="heading" style={{ textAlign: 'center', paddingTop: Spacing.three }}>
-          {translate('title')}
-        </ThemedText>
-
-        {/* 증강 카드 */}
-        <View>
-          <ThemedText type="caption" color="tertiary" style={{ textAlign: 'center', marginTop: Spacing.one }}>
-            {translate('augments')}
-          </ThemedText>
-          <ScrollView
-            horizontal
-            contentContainerStyle={[styles.cardsRow, { paddingHorizontal: Spacing.four }]}
-            showsHorizontalScrollIndicator={false}
-          >
-            {picked.map((aug, i) => (
-              <View key={aug.id} style={{ gap: Spacing.two, alignItems: 'center' }}>
-                <ThemedText type="caption" color="tertiary">
-                  #{i + 1}
+            {champion && (
+              <View style={styles.heroBottom}>
+                <ThemedText type="title" numberOfLines={1}>
+                  {champion.name}
                 </ThemedText>
-                <DraftCardFrame augment={aug} cardWidth={cardWidth} />
+                <ThemedText type="body" color="tertiary" numberOfLines={1}>
+                  {champion.title}
+                </ThemedText>
               </View>
-            ))}
-          </ScrollView>
+            )}
+          </SafeAreaView>
         </View>
 
-        {/* 아이템 + 스탯 (선택된 경우만) */}
-        {selectedItems.length > 0 && champion && (
-          <View style={styles.itemsSection}>
-            <ThemedText type="caption" color="tertiary" style={{ textAlign: 'center', marginBottom: Spacing.two }}>
-              {translate('items')}
+        <View style={styles.content}>
+          {/* 증강 — 세로 리스트 행 */}
+          <View style={styles.section}>
+            <ThemedText type="label" color="secondary">
+              {translate('augments')} {picked.length}
             </ThemedText>
-            <View style={styles.itemsRow}>
-              {/* 아이템 아이콘 */}
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ gap: Spacing.two, paddingHorizontal: Spacing.four }}
+            {picked.map((aug, i) => (
+              <ThemedView
+                key={`${aug.id}-${i}`}
+                surface="raised"
+                style={[
+                  styles.augmentRow,
+                  { borderLeftColor: AugmentRarityColors[aug.rarity].border },
+                ]}
               >
-                {selectedItems.map((item) => (
-                  <Image
-                    key={item.id}
-                    source={{ uri: itemImageUrl(item.imageKey) }}
-                    style={styles.itemIcon}
-                    contentFit="contain"
+                <View
+                  style={[
+                    styles.augmentTile,
+                    {
+                      backgroundColor: colors.surface.sunken,
+                      borderColor: AugmentRarityColors[aug.rarity].border,
+                    },
+                  ]}
+                >
+                  <AugmentIcon
+                    iconPath={aug.iconPath}
+                    size={40}
+                    tint={AugmentRarityColors[aug.rarity].border}
+                    fallbackSymbol={RARITY_GLYPH[aug.rarity]}
+                    recyclingKey={aug.id}
                   />
-                ))}
-              </ScrollView>
+                </View>
+                <View style={styles.augmentBody}>
+                  <ThemedText type="label">{aug.name}</ThemedText>
+                  <ThemedText type="caption" color="secondary">
+                    {cleanAugmentDescription(aug.description)}
+                  </ThemedText>
+                </View>
+              </ThemedView>
+            ))}
+          </View>
 
-              {/* 합산 스탯 */}
-              <View style={styles.statPanelWrapper}>
-                <ItemStatPanel
-                  baseStats={champion.stats}
-                  itemStatsList={itemStatsList}
-                />
+          {/* 아이템 */}
+          {selectedItems.length > 0 && (
+            <View style={styles.section}>
+              <ThemedText type="label" color="secondary">
+                {translate('items')} {selectedItems.length}
+              </ThemedText>
+              <View style={styles.itemsRow}>
+                {selectedItems.map((item, i) => (
+                  <View
+                    key={`${item.id}-${i}`}
+                    style={[
+                      styles.itemTile,
+                      {
+                        backgroundColor: colors.surface.raised,
+                        borderColor: colors.border.subtle,
+                      },
+                    ]}
+                  >
+                    <Image
+                      source={{ uri: itemImageUrl(item.imageKey) }}
+                      style={styles.itemIcon}
+                      contentFit="contain"
+                    />
+                  </View>
+                ))}
               </View>
             </View>
-          </View>
-        )}
+          )}
 
-        <View style={[styles.buttons, { marginTop: 'auto' }]}>
+          {/* 합산 스탯 */}
+          {champion && (
+            <View style={styles.section}>
+              <ThemedText type="label" color="secondary">
+                {translate('stats')}
+              </ThemedText>
+              <ItemStatPanel baseStats={champion.stats} itemStatsList={itemStatsList} />
+            </View>
+          )}
+        </View>
+      </ScrollView>
+
+      {/* 하단 CTA */}
+      <SafeAreaView edges={['bottom']} style={styles.footer}>
+        <View style={[styles.footerInner, { borderTopColor: colors.border.subtle }]}>
           <Pressable
             onPress={handleRestart}
-            style={[styles.btn, { backgroundColor: colors.surface.raised, borderColor: colors.border.default, borderWidth: 1 }]}
+            style={({ pressed }) => [
+              styles.restartButton,
+              {
+                backgroundColor: colors.surface.raised,
+                borderColor: colors.border.default,
+                opacity: pressed ? 0.8 : 1,
+              },
+            ]}
           >
-            <SynergyIcon name="refresh" size={18} color={colors.text.primary} />
-            <ThemedText type="label">{translate('restart')}</ThemedText>
-          </Pressable>
-          <Pressable
-            onPress={handleHome}
-            style={[styles.btn, { backgroundColor: colors.accent.default }]}
-          >
-            <SynergyIcon name="home" size={18} color={colors.accent.onAccent} />
-            <ThemedText type="label" style={{ color: colors.accent.onAccent }}>
-              {translate('home')}
+            <SynergyIcon name="refresh" size={18} color={colors.text.secondary} />
+            <ThemedText type="label" color="secondary">
+              {translate('restart')}
             </ThemedText>
+          </Pressable>
+
+          <Pressable
+            onPress={handleConfirm}
+            disabled={saving}
+            style={({ pressed }) => [
+              styles.confirmButton,
+              {
+                backgroundColor: pressed ? colors.accent.pressed : colors.accent.default,
+                opacity: saving ? 0.6 : 1,
+              },
+            ]}
+          >
+            <ThemedText type="label" style={{ color: colors.accent.onAccent }}>
+              {translate('confirm')}
+            </ThemedText>
+            <SynergyIcon name="arrow-right-circle" size={18} color={colors.accent.onAccent} />
           </Pressable>
         </View>
       </SafeAreaView>
@@ -196,45 +305,104 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  safe: {
-    flex: 1,
+  scrollContent: {
+    paddingBottom: Spacing.four,
   },
-  cardsRow: {
+  hero: {
+    height: HERO_HEIGHT,
+  },
+  heroSafe: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingHorizontal: Spacing.three,
+    paddingTop: Spacing.two,
+    paddingBottom: Spacing.three,
+  },
+  badge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.one,
+    alignSelf: 'flex-start',
+    paddingHorizontal: Spacing.two,
+    paddingVertical: Spacing.one,
+    borderRadius: Radius.full,
+  },
+  heroBottom: {
+    gap: Spacing.half,
+  },
+  content: {
+    paddingHorizontal: Spacing.three,
+    paddingTop: Spacing.three,
+    gap: Spacing.four,
+  },
+  section: {
+    gap: Spacing.two,
+  },
+  augmentRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
-    paddingVertical: Spacing.two,
+    padding: Spacing.three,
+    borderRadius: Radius.lg,
+    borderLeftWidth: 3,
   },
-  itemsSection: {
-    paddingHorizontal: Spacing.four,
+  augmentTile: {
+    width: 48,
+    height: 48,
+    borderRadius: Radius.md,
+    borderWidth: 1.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  augmentBody: {
+    flex: 1,
+    gap: Spacing.one,
   },
   itemsRow: {
     flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
+    flexWrap: 'wrap',
+    gap: Spacing.two,
   },
-  itemIcon: {
+  itemTile: {
     width: 44,
     height: 44,
     borderRadius: Radius.sm,
-  },
-  statPanelWrapper: {
-    minWidth: 180,
-  },
-  buttons: {
-    flexDirection: 'row',
+    borderWidth: 1,
+    alignItems: 'center',
     justifyContent: 'center',
-    gap: Spacing.three,
-    paddingBottom: Spacing.three,
-    paddingHorizontal: Spacing.four,
-    paddingTop: Spacing.two,
   },
-  btn: {
+  itemIcon: {
+    width: 38,
+    height: 38,
+    borderRadius: Radius.sm,
+  },
+  footer: {
+    // SafeAreaView가 하단 인셋 처리
+  },
+  footerInner: {
+    flexDirection: 'row',
+    gap: Spacing.two,
+    paddingHorizontal: Spacing.three,
+    paddingTop: Spacing.three,
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  restartButton: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     gap: Spacing.two,
     paddingHorizontal: Spacing.four,
     paddingVertical: Spacing.double,
-    borderRadius: Radius.xl,
+    borderRadius: Radius.full,
+    borderWidth: 1,
+  },
+  confirmButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: Spacing.two,
+    paddingVertical: Spacing.double,
+    borderRadius: Radius.full,
   },
 });
