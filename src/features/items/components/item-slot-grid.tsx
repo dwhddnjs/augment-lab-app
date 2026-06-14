@@ -5,9 +5,10 @@
  * 빈 슬롯: 점선 placeholder (항상 6칸 노출)
  */
 import { Image } from 'expo-image';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/themed/themed-text';
+import { GlassSurface } from '@/components/ui/glass-surface';
 import { Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { itemImageUrl } from '@/lib/ddragon';
@@ -32,15 +33,7 @@ export function ItemSlotGrid({ selectedItems, onSlotPress }: ItemSlotGridProps) 
   const slots = Array.from({ length: SLOT_COUNT }, (_, i) => selectedItems[i] ?? null);
 
   return (
-    <View
-      style={[
-        styles.tray,
-        {
-          backgroundColor: colors.surface.overlay,
-          borderColor: colors.border.subtle,
-        },
-      ]}
-    >
+    <GlassSurface style={[styles.tray, { borderColor: colors.border.subtle }]}>
       {slots.map((item, i) => (
         <Pressable
           key={i}
@@ -70,7 +63,7 @@ export function ItemSlotGrid({ selectedItems, onSlotPress }: ItemSlotGridProps) 
           )}
         </Pressable>
       ))}
-    </View>
+    </GlassSurface>
   );
 }
 

@@ -24,9 +24,16 @@ node scripts/gen-augment-check.mjs   # → docs/augment-check.html
 ## UI 작업 시 참고
 
 UI 컴포넌트, 네비게이션, 스타일링, 애니메이션 작업 전에 반드시 `.agents/skills/building-native-ui/SKILL.md`를 읽을 것.
-React Native 컴포넌트(`View`, `Text`, `Pressable`, `FlatList`, `ScrollView`, `TextInput`, `SafeAreaView` 등)를 기본으로 사용.
-원격 URL 이미지(Data Dragon CDN 등)는 `expo-image`의 `Image`를 사용.
-탭바는 Expo Router의 `NativeTabs`(`expo-router/unstable-native-tabs`) 사용.
+`@expo/ui` 작업 전에는 `expo:expo-ui` 스킬도 참조할 것(universal 컴포넌트 vs `@expo/ui/swift-ui`·`@expo/ui/jetpack-compose` 플랫폼 트리 구분).
+
+### 컴포넌트 선택 우선순위 — iOS 네이티브 우선
+
+새 UI를 만들 때는 **항상 더 위 단계부터** 검토하고, 불가능할 때만 아래로 내려간다:
+
+1. **네이티브 셸** — 헤더·탭바·검색바·모달 시트는 Expo Router 네이티브 사용 (아래 [헤더 정책](#헤더-정책) 준수). 탭바는 `NativeTabs`(`expo-router/unstable-native-tabs`).
+2. **네이티브 컴포넌트** — 리스트·설정 폼·토글·메뉴·시트·피커·슬라이더는 **`@expo/ui`**로 구현 (`Host`, `List`, `Section`, `Button`, `Switch`, `ContextMenu`, `BottomSheet`, `Picker`, `Slider` 등). 진짜 iOS 룩앤필 우선.
+3. **RN 컴포넌트** — 위 단계로 표현 불가능한 커스텀 UI에 한해 `View`/`Text`/`Pressable`/`FlatList`/`ScrollView`/`TextInput`/`SafeAreaView` + 테마 토큰.
+4. **이미지·아이콘** — 원격 URL 이미지(Data Dragon CDN 등)는 `expo-image`의 `Image`, 아이콘은 `expo-symbols`/SF Symbols.
 
 ### 헤더 정책
 
@@ -62,7 +69,6 @@ npm install            # 의존성 설치
 npm start              # Expo 개발 서버 시작 (Expo Go용 QR 코드 출력)
 npm run ios            # iOS 시뮬레이터로 시작
 npm run android        # Android 에뮬레이터로 시작
-npm run web            # 웹 브라우저로 시작
 npm run lint           # expo lint로 ESLint 실행
 npm run reset-project  # 스타터 코드를 app-example/로 이동하고 src/app/ 초기화
 ```
@@ -71,7 +77,7 @@ npm run reset-project  # 스타터 코드를 app-example/로 이동하고 src/ap
 
 ## 아키텍처
 
-**Expo SDK 56 / React 19 / React Native 0.85** 기반의 iOS, Android, 웹을 단일 코드베이스로 지원하는 크로스플랫폼 앱.
+**Expo SDK 56 / React 19 / React Native 0.85** 기반의 iOS·Android 크로스플랫폼 앱 (웹 미지원). iOS 네이티브 룩앤필을 hero로 삼는다.
 
 ### 폴더 구조 — 필수 규칙
 
@@ -120,13 +126,16 @@ src/
 
 ### 라우팅
 
-파일 기반 라우팅을 사용하는 Expo Router v56. 라우트 파일은 `src/app/`에 위치:
+파일 기반 라우팅을 사용하는 Expo Router v56. 라우트 파일은 `src/app/`에 위치. 각 탭은 native 헤더를 쓰기 위해 **그룹 + 자체 `Stack`** 구조로 구성한다([헤더 정책](#헤더-정책) 참고):
 
-- `_layout.tsx` — 루트 레이아웃. `AnimatedSplashOverlay`와 `AppTabs`를 렌더링
-- `(tabs)/index.tsx` — Home 탭
-- `(tabs)/community.tsx` — 커뮤니티 탭
-- `(tabs)/mypage.tsx` — 마이페이지 탭
+- `_layout.tsx` — 루트 레이아웃 (`ThemeProvider`로 헤더 색상 주입 + 스플래시/탭 부트스트랩)
+- `(tabs)/_layout.tsx` — `NativeTabs`. `Trigger`의 `name`은 그룹명(`(home)`/`(community)`/`(mypage)`)을 가리킴
+- `(tabs)/(home)/` — Home 탭 그룹 (`_layout.tsx` 자체 Stack + `index.tsx`)
+- `(tabs)/(community)/` — 커뮤니티 탭 그룹
+- `(tabs)/(mypage)/` — 마이페이지 탭 그룹
+- `(tabs)/plus.tsx` — 가운데 추가(+) 탭
 - `select-champion-modal.tsx` — 챔피언 선택 모달 (UI는 `features/champions/components/champion-select-modal.tsx`)
+- `draft.tsx` / `draft-items.tsx` / `draft-result.tsx` — 드래프트 풀스크린 플로우 (몰입형, `headerShown: false` 허용)
 
 `package.json`의 `main` 진입점이 `expo-router/entry`이므로 Expo Router가 앱을 부트스트랩함. `experiments.typedRoutes`로 타입이 있는 라우트 활성화.
 
@@ -144,6 +153,12 @@ src/
 
 **치지직 톤 민트(#1ED7A0 다크 / #10B187 라이트) 액센트. 다크모드가 hero.**
 **모든 색상·간격·반경·그림자 값은 반드시 `src/constants/theme.ts` 토큰을 사용. 하드코딩 금지.**
+
+#### 디자인 철학 — 최상위 3대 원칙
+
+1. **미니멀** — 장식 최소화. 커스텀 그림자(`elevation`) 사용 자제하고 위계는 **구분선·여백·표면 레이어(surface)**로 표현. 화면당 강조색(민트)은 핵심 액션 1~2곳에만. 큰 타이틀은 native large title에 위임.
+2. **iOS 네이티브 우선** — 직접 그리기 전에 항상 "iOS 내장 UI로 되는가?"를 먼저 검토. 헤더·탭·검색바·시트·컨텍스트 메뉴·리스트·폼은 네이티브(`Stack.Screen`/`NativeTabs`/`@expo/ui`)를 기본값으로. 자세한 컴포넌트 선택은 [컴포넌트 선택 우선순위](#컴포넌트-선택-우선순위--ios-네이티브-우선) 참고.
+3. **리퀴드글래스** — 패널·오버레이·시트·툴바 등 떠 있는 표면은 `GlassSurface`로 통일 (아래 [리퀴드글라스](#리퀴드글라스-liquid-glass) 규칙).
 
 #### `useTheme()` 반환값
 
@@ -195,13 +210,14 @@ const { mode, colors, typography, radius, elevation } = useTheme();
 
 #### 리퀴드글라스 (Liquid Glass)
 
-**패널/오버레이/툴팁/시트 배경은 반드시 `@/components/ui/glass-surface`의 `GlassSurface`를 사용. 직접 `GlassView`/`BlurView` 호출 금지.**
+**패널/오버레이/툴팁/시트 배경/툴바/플로팅 컨테이너는 반드시 `@/components/ui/glass-surface`의 `GlassSurface`를 사용. 직접 `GlassView`/`BlurView` 호출 금지.**
 
 - iOS 26+ → `expo-glass-effect` 네이티브 글라스 (`isLiquidGlassAvailable()` true)
 - 구버전 iOS / 안드로이드 → `expo-blur`의 `BlurView` 폴백
 - 그 외(BlurView 불가) → `colors.surface.overlay` 단색 최종 폴백
 - 색조(tint)는 테마 토큰(`colors.accent.*` / `colors.surface.*`)만 주입, hex 직접 기입 금지
-- **고밀도 리스트 셀(아이템 그리드, 카드 목록 등)에는 글라스 미적용** — 성능 유의
+- **미니멀과의 균형** — 글라스는 **떠 있는 표면(모달 시트·오버레이·툴바·플로팅 액션·하단 플로팅 트레이)에만**. 본문 카드·섹션 배경에 글라스를 남발하지 말 것.
+- **고밀도 스크롤 목록에는 글라스 미적용** — 성능 유의. 예: 전체 아이템 **선택 그리드**(스크롤되는 아이템 목록), 빌드/카드 리스트. 단, 화면 위에 떠 있는 **선택 아이템 트레이**(`ItemSlotGrid` — 하단 absolute 6칸)는 고밀도 목록이 아니라 플로팅 표면이므로 `GlassSurface` 허용.
 - `GlassSurface`의 `glassStyle='clear'`는 얇은 레이어, `'regular'`는 표준 패널에 사용
 
 #### 이미지 및 아이콘
@@ -210,6 +226,14 @@ const { mode, colors, typography, radius, elevation } = useTheme();
 - 원격 이미지: `expo-image`의 `Image` 사용
 - CDragon 챔피언 클래스 아이콘: `championClassIconUrl(tag)` (`src/lib/ddragon.ts`)
 - 아이콘 색상: `tintColor={colors.text.secondary}` 등 토큰 사용
+
+#### (예정) 토큰 미니멀화
+
+미니멀 방향으로의 토큰 재조정이 후속 작업으로 예정되어 있다. **확정 전까지는 기존 토큰을 그대로 사용**하되, 방향을 인지하고 작업할 것:
+
+- `src/constants/theme.ts`의 타이포 스케일(특히 `display 48` / `title 32`)과 `elevation` 그림자 토큰을 미니멀하게 재조정.
+- 대형 타이틀은 native large title 헤더에 위임하고, 본문 타이포 대비를 낮춤.
+- 토큰 변경 시 위 [타이포 표](#타이포-typography-또는-themedtext-type)와 elevation 관련 서술도 반드시 함께 갱신할 것.
 
 ### 경로 별칭
 

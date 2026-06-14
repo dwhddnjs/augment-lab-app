@@ -1,9 +1,9 @@
 import { Image } from "expo-image";
 import { Stack, useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { useState } from "react";
-import { FlatList, Pressable, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useRef, useState } from "react";
+import { FlatList, Pressable, StyleSheet } from "react-native";
+import type { SearchBarCommands } from "react-native-screens";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
@@ -48,6 +48,7 @@ export function ChampionSelectModal() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const searchRef = useRef<SearchBarCommands>(null);
 
   const filtered = champions
     .filter((c) => !selectedTag || c.tags.includes(selectedTag))
@@ -70,9 +71,9 @@ export function ChampionSelectModal() {
     router.replace({ pathname: '/draft', params: { championId: selectedId } });
   };
 
-  // 역할 필터칩 — large title + native 검색바 아래, 그리드와 함께 스크롤된다.
+  // 역할 필터칩 — 리스트 헤더로서 리스트와 함께 스크롤된다.
   const filterChips = (
-    <View style={styles.filterRow}>
+    <ThemedView style={styles.filterRow}>
       <Pressable
         onPress={() => setSelectedTag(null)}
         style={[
@@ -125,44 +126,72 @@ export function ChampionSelectModal() {
           </Pressable>
         );
       })}
-    </View>
+    </ThemedView>
   );
 
   return (
-    <ThemedView style={styles.container}>
-      {/* native 모달 헤더 — large title + iOS 네이티브 검색바 + 취소 버튼 */}
+    <>
+      {/* native 헤더 — large title + iOS 네이티브 검색바 + 닫기/시작 버튼 */}
       <Stack.Screen
         options={{
           title: translate("title"),
           headerLargeTitle: true,
+          headerLargeTitleStyle: { fontSize: 28 },
           headerLeft: () => (
-            <Pressable onPress={() => router.back()} hitSlop={8}>
-              <ThemedText type="body" style={{ color: colors.accent.default }}>
-                {translate("cancel")}
-              </ThemedText>
+            <Pressable onPress={() => router.back()} hitSlop={12}>
+              <Image
+                source="sf:xmark"
+                style={styles.headerBtnIcon}
+                tintColor={colors.text.secondary}
+              />
+            </Pressable>
+          ),
+          headerRight: () => (
+            <Pressable
+              onPress={handleStart}
+              disabled={!selectedId}
+              hitSlop={12}
+              style={{ opacity: selectedId ? 1 : 0.4 }}
+            >
+              <Image
+                source="sf:checkmark"
+                style={styles.headerBtnIcon}
+                tintColor={
+                  selectedId ? colors.accent.default : colors.text.disabled
+                }
+              />
             </Pressable>
           ),
           headerSearchBarOptions: {
+            ref: searchRef,
             placeholder: translate("searchPlaceholder"),
             onChangeText: (e) => setQuery(e.nativeEvent.text),
-            hideWhenScrolling: false,
+            hideWhenScrolling: true,
+            // focus 시에도 헤더(취소·선택 버튼)를 유지한다
+            hideNavigationBar: false,
             textColor: colors.text.primary,
             tintColor: colors.accent.default,
           },
         }}
       />
 
-      {/* Champion grid */}
+      {/* Champion grid — 화면 루트 스크롤뷰여야 native large title collapse 가 동작한다.
+          flex View 로 감싸면 헤더 inset 연동이 깨지므로 FlatList 를 직접 루트에 둔다.
+          필터는 리스트 헤더로 함께 스크롤된다(고정 안 함). */}
       <FlatList
         data={filtered}
         numColumns={4}
         keyExtractor={(c) => c.id}
+        style={{ flex: 1, backgroundColor: colors.surface.base }}
         contentContainerStyle={styles.grid}
         columnWrapperStyle={styles.gridRow}
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
         ListHeaderComponent={filterChips}
-        keyboardDismissMode="on-drag"
+        keyboardShouldPersistTaps="handled"
+        // 검색 active(취소버튼) 상태로 스크롤하면 inline 타이틀이 안 뜨므로,
+        // 스크롤 시작 시 검색을 종료해 일반 large title 모드로 되돌린다.
+        onScrollBeginDrag={() => searchRef.current?.cancelSearch()}
         renderItem={({ item }) => {
           const isSelected = selectedId === item.id;
           return (
@@ -191,44 +220,19 @@ export function ChampionSelectModal() {
           );
         }}
       />
-
-      {/* Start button */}
-      <SafeAreaView edges={["bottom"]} style={styles.footer}>
-        <Pressable
-          onPress={handleStart}
-          disabled={!selectedId}
-          style={[
-            styles.startButton,
-            {
-              backgroundColor: colors.accent.default,
-              opacity: selectedId ? 1 : 0.4,
-            },
-          ]}
-        >
-          <ThemedText
-            type="body"
-            style={{ fontWeight: "800", color: colors.accent.onAccent }}
-          >
-            {translate("start")}
-          </ThemedText>
-        </Pressable>
-      </SafeAreaView>
-    </ThemedView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   filterRow: {
     flexDirection: "row",
+    alignItems: "center",
     gap: Spacing.two,
-    paddingBottom: Spacing.two,
+    paddingHorizontal: Spacing.three + Spacing.one,
+    paddingVertical: Spacing.two,
   },
   filterChip: {
-    // width: 44,
-    // height: 44,
     padding: 6,
     borderRadius: Radius.md,
     alignItems: "center",
@@ -240,11 +244,11 @@ const styles = StyleSheet.create({
   },
   grid: {
     gap: Spacing.two,
-    paddingHorizontal: Spacing.three + Spacing.one,
     paddingBottom: Spacing.three,
   },
   gridRow: {
     justifyContent: "flex-start",
+    paddingHorizontal: Spacing.three + Spacing.one,
   },
   cell: {
     width: "25%",
@@ -258,13 +262,8 @@ const styles = StyleSheet.create({
     borderRadius: Radius.md,
     overflow: "hidden",
   },
-  footer: {
-    paddingHorizontal: Spacing.three + Spacing.one,
-    paddingTop: Spacing.two,
-  },
-  startButton: {
-    paddingVertical: Spacing.double,
-    borderRadius: Radius.xl,
-    alignItems: "center",
+  headerBtnIcon: {
+    width: 22,
+    height: 22,
   },
 });

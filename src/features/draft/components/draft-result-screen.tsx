@@ -188,7 +188,10 @@ export function DraftResultScreen() {
                 surface="raised"
                 style={[
                   styles.augmentRow,
-                  { borderLeftColor: AugmentRarityColors[aug.rarity].border },
+                  {
+                    borderColor: colors.border.subtle,
+                    borderLeftColor: AugmentRarityColors[aug.rarity].border,
+                  },
                 ]}
               >
                 <View
@@ -344,6 +347,8 @@ const styles = StyleSheet.create({
     gap: Spacing.three,
     padding: Spacing.three,
     borderRadius: Radius.lg,
+    borderCurve: 'continuous',
+    borderWidth: StyleSheet.hairlineWidth,
     borderLeftWidth: 3,
   },
   augmentTile: {

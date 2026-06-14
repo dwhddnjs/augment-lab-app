@@ -62,7 +62,10 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
       onLongPress={onLongPress}
       style={({ pressed }) => ({ opacity: pressed ? 0.9 : 1 })}
     >
-      <ThemedView surface="raised" elevation={1} style={styles.card}>
+      <ThemedView
+        surface="raised"
+        style={[styles.card, { borderColor: colors.border.subtle }]}
+      >
         {/* 챔피언 미니 배너 */}
         <View style={[styles.banner, { backgroundColor: colors.surface.sunken }]}>
           {champion && (
@@ -144,6 +147,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: Radius.xl,
     borderCurve: 'continuous',
+    borderWidth: StyleSheet.hairlineWidth,
     overflow: 'hidden',
   },
   banner: {
