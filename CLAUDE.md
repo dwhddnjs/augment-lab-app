@@ -216,8 +216,8 @@ const { mode, colors, typography, radius, elevation } = useTheme();
 - 구버전 iOS / 안드로이드 → `expo-blur`의 `BlurView` 폴백
 - 그 외(BlurView 불가) → `colors.surface.overlay` 단색 최종 폴백
 - 색조(tint)는 테마 토큰(`colors.accent.*` / `colors.surface.*`)만 주입, hex 직접 기입 금지
-- **미니멀과의 균형** — 글라스는 **떠 있는 표면(모달 시트·오버레이·툴바·플로팅 액션)에만**. 본문 카드·섹션 배경에 글라스를 남발하지 말 것.
-- **고밀도 리스트 셀(아이템 그리드, 카드 목록 등)에는 글라스 미적용** — 성능 유의
+- **미니멀과의 균형** — 글라스는 **떠 있는 표면(모달 시트·오버레이·툴바·플로팅 액션·하단 플로팅 트레이)에만**. 본문 카드·섹션 배경에 글라스를 남발하지 말 것.
+- **고밀도 스크롤 목록에는 글라스 미적용** — 성능 유의. 예: 전체 아이템 **선택 그리드**(스크롤되는 아이템 목록), 빌드/카드 리스트. 단, 화면 위에 떠 있는 **선택 아이템 트레이**(`ItemSlotGrid` — 하단 absolute 6칸)는 고밀도 목록이 아니라 플로팅 표면이므로 `GlassSurface` 허용.
 - `GlassSurface`의 `glassStyle='clear'`는 얇은 레이어, `'regular'`는 표준 패널에 사용
 
 #### 이미지 및 아이콘
