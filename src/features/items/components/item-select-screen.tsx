@@ -10,7 +10,7 @@ import { Image } from "expo-image";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useMemo, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Alert, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
@@ -26,6 +26,7 @@ import {
   championSquareUrl,
   itemImageUrl,
 } from "@/lib/ddragon";
+import { saveBuild } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 import { useItems } from "../hooks/use-items";
 import type { Item } from "../types";
@@ -248,12 +249,14 @@ const t = {
     skip: "건너뛰기",
     done: "완료",
     augments: "증강",
+    saveError: "빌드 저장에 실패했어요",
   },
   en: {
     title: "Item Select",
     skip: "Skip",
     done: "Done",
     augments: "Augments",
+    saveError: "Failed to save the build",
   },
 };
 
@@ -376,7 +379,6 @@ export function ItemSelectScreen() {
           router={router}
           pickedAugments={pickedAugments}
           championId={championId ?? ""}
-          pickedJson={pickedJson ?? "[]"}
         />
       )}
     </ThemedView>
@@ -390,14 +392,12 @@ function ItemSelectContent({
   router,
   pickedAugments,
   championId,
-  pickedJson,
 }: {
   translate: (key: keyof (typeof t)["en"]) => string;
   colors: ReturnType<typeof useTheme>["colors"];
   router: ReturnType<typeof useRouter>;
   pickedAugments: Augment[];
   championId: string;
-  pickedJson: string;
 }) {
   const allItems = useItems();
   const champions = useChampions();
@@ -408,6 +408,7 @@ function ItemSelectContent({
 
   const [activeFilter, setActiveFilter] = useState<FilterKey>(null);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [saving, setSaving] = useState(false);
   // 그리드 영역 실측 너비 → NUM_COLS 정확히 채우도록 셀 크기 계산
   const [gridWidth, setGridWidth] = useState(0);
   // 증강 카드 그리드(우측) 실측 너비 → 3열 카드 크기 산출
@@ -465,15 +466,26 @@ function ItemSelectContent({
     });
   };
 
-  const navigateToResult = (itemIds: string[]) => {
-    router.replace({
-      pathname: "/draft-result",
-      params: {
-        picked: pickedJson,
-        championId,
-        items: JSON.stringify(itemIds),
-      },
-    });
+  const saveAndOpenBuild = async (itemIds: string[]) => {
+    if (saving) return;
+    setSaving(true);
+    let build;
+    try {
+      build = await saveBuild({
+        championId: championId ?? "",
+        augmentIds: pickedAugments.map((a) => a.id),
+        itemIds,
+      });
+    } catch {
+      Alert.alert(translate("saveError"));
+      setSaving(false);
+      return;
+    }
+    ScreenOrientation.lockAsync(
+      ScreenOrientation.OrientationLock.PORTRAIT_UP,
+    ).catch(() => {});
+    router.dismissTo("/");
+    router.push({ pathname: "/build/[id]", params: { id: build.id } });
   };
 
   const championIconUri = champion
@@ -499,14 +511,14 @@ function ItemSelectContent({
         </ThemedText>
 
         <View style={styles.headerSpacer} />
-        <GlassChip onPress={() => navigateToResult([])}>
+        <GlassChip onPress={() => saveAndOpenBuild([])}>
           <ThemedText type="label" color="secondary">
             {translate("skip")}
           </ThemedText>
         </GlassChip>
         <GlassChip
           variant="accent"
-          onPress={() => navigateToResult(selectedIds)}
+          onPress={() => saveAndOpenBuild(selectedIds)}
         >
           <ThemedText type="label" style={{ color: colors.accent.default }}>
             {translate("done")}
