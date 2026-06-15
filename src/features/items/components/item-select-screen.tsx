@@ -481,7 +481,9 @@ function ItemSelectContent({
       setSaving(false);
       return;
     }
-    ScreenOrientation.lockAsync(
+    // lockAsync를 await해서 기기가 portrait로 전환된 후 navigation을 시작한다.
+    // await 없이 바로 이동하면 landscape 상태로 build 상세가 mount돼 회전 잔상이 보인다.
+    await ScreenOrientation.lockAsync(
       ScreenOrientation.OrientationLock.PORTRAIT_UP,
     ).catch(() => {});
     router.dismissTo("/");

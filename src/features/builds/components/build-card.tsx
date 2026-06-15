@@ -9,8 +9,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed/themed-text';
-import { Elevation, Radius, Spacing } from '@/constants/theme';
+import { AugmentRarityColors, Elevation, Radius, Spacing } from '@/constants/theme';
 import { useAugments } from '@/features/augments/hooks/use-augments';
+import type { AugmentRarity } from '@/features/augments/types';
 import { useChampions } from '@/features/champions/hooks/use-champions';
 import { useItems } from '@/features/items/hooks/use-items';
 import { useLocale } from '@/hooks/use-locale';
@@ -52,6 +53,16 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
     .map((id) => items.find((it) => it.id === id))
     .filter((it): it is NonNullable<typeof it> => it != null);
 
+  // 보유 증강 중 최고 희귀도 색으로 테두리를 물들인다(없으면 기본 테두리).
+  const RARITY_RANK: Record<AugmentRarity, number> = { silver: 0, gold: 1, prismatic: 2 };
+  const topRarity = buildAugments.reduce<AugmentRarity | null>(
+    (top, aug) => (top == null || RARITY_RANK[aug.rarity] > RARITY_RANK[top] ? aug.rarity : top),
+    null
+  );
+  const borderColor = topRarity
+    ? AugmentRarityColors[topRarity].border
+    : colors.border.subtle;
+
   const date = new Date(build.createdAt).toLocaleDateString(
     locale === 'ko' ? 'ko-KR' : 'en-US'
   );
@@ -69,7 +80,7 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
             styles.cardInner,
             {
               backgroundColor: colors.surface.sunken,
-              borderColor: colors.border.subtle,
+              borderColor,
             },
           ]}
         >
