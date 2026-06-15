@@ -41,12 +41,22 @@ export default function RootLayout() {
       <AnimatedSplashOverlay />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        {/* 빌드 상세 — 탭바 위에 떠서 풀스크린으로 덮는다(탭바 숨김).
+            챔피언 배너가 헤더 영역까지 채우는 투명 collapsing 헤더. */}
+        <Stack.Screen
+          name="build/[id]"
+          options={{
+            headerTransparent: true,
+            headerTitle: '',
+            headerBlurEffect: 'none',
+            headerBackButtonDisplayMode: 'minimal',
+          }}
+        />
         {/* 헤더 세부(타이틀·검색바)는 화면 내부 Stack.Screen에서 로케일·상태와 함께 주입 */}
         {/* 모달 시트 — large title collapse/검색바는 화면 내부에서 native 헤더로 처리 */}
         <Stack.Screen name="select-champion-modal" options={{ presentation: 'modal', gestureEnabled: true }} />
         <Stack.Screen name="draft" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
         <Stack.Screen name="draft-items" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
-        <Stack.Screen name="draft-result" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
       </Stack>
     </ThemeProvider>
   );

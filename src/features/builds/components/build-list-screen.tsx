@@ -112,24 +112,25 @@ export function BuildListScreen() {
   }
 
   return (
-    <ThemedView style={styles.container}>
-      <FlatList
-        data={builds ?? []}
-        keyExtractor={(item) => item.id}
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <BuildCard
-            build={item}
-            onPress={() =>
-              router.push({ pathname: '/build/[id]', params: { id: item.id } })
-            }
-            onLongPress={() => handleDelete(item)}
-          />
-        )}
-      />
-    </ThemedView>
+    <FlatList
+      data={builds ?? []}
+      keyExtractor={(item) => item.id}
+      // 헤더 바로 아래 루트 스크롤뷰여야 native large-title이
+      // 스크롤에 맞춰 inline 타이틀로 collapse 된다 (래퍼 View로 감싸지 않음).
+      style={{ flex: 1, backgroundColor: colors.surface.base }}
+      contentInsetAdjustmentBehavior="automatic"
+      contentContainerStyle={styles.listContent}
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item }) => (
+        <BuildCard
+          build={item}
+          onPress={() =>
+            router.push({ pathname: '/build/[id]', params: { id: item.id } })
+          }
+          onLongPress={() => handleDelete(item)}
+        />
+      )}
+    />
   );
 }
 

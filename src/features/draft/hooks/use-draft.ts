@@ -111,7 +111,7 @@ export function useDraft() {
     [allAugments, picked, currentCards, rerolled],
   );
 
-  // Returns nextPicked; caller should navigate to /draft-result when round === 4
+  // Returns nextPicked; caller should navigate to /draft-items when round === 4
   const pick = useCallback(
     (idx: number): { nextPicked: Augment[]; done: boolean } => {
       const chosen = currentCards[idx];

@@ -29,16 +29,6 @@ export default function HomeStackLayout() {
           headerLargeTitleShadowVisible: false,
         }}
       />
-      {/* 상세는 챔피언 배너가 헤더 영역까지 채우는 투명 collapsing 헤더 */}
-      <Stack.Screen
-        name="build/[id]"
-        options={{
-          headerTransparent: true,
-          headerTitle: '',
-          headerBlurEffect: 'none',
-          headerBackButtonDisplayMode: 'minimal',
-        }}
-      />
     </Stack>
   );
 }

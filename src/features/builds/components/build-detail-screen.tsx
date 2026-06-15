@@ -5,69 +5,74 @@
  * 본문 시트가 위로 올라오며 내용을 드러낸다. 헤더는 (home) 스택의 native 투명
  * 헤더(뒤로가기)를 사용한다 — 커스텀 헤더 없음.
  */
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { Image } from 'expo-image';
-import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
-import { Stack } from 'expo-router/stack';
-import * as ScreenOrientation from 'expo-screen-orientation';
-import { LinearGradient } from 'expo-linear-gradient';
-import { useCallback, useEffect, useState } from 'react';
-import { Alert, Pressable, StyleSheet, View } from 'react-native';
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import { Stack } from "expo-router/stack";
+import * as ScreenOrientation from "expo-screen-orientation";
+import { useCallback, useEffect, useState } from "react";
+import { Alert, Pressable, StyleSheet, View } from "react-native";
 import Animated, {
   Extrapolation,
   interpolate,
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-import { ThemedText } from '@/components/themed/themed-text';
-import { ThemedView } from '@/components/themed/themed-view';
-import { AugmentRarityColors, Radius, Spacing } from '@/constants/theme';
-import { useAugments } from '@/features/augments/hooks/use-augments';
-import { useChampions } from '@/features/champions/hooks/use-champions';
-import { ItemStatPanel } from '@/features/items/components/item-stat-panel';
-import { useItems } from '@/features/items/hooks/use-items';
-import { useLocale } from '@/hooks/use-locale';
-import { useTheme } from '@/hooks/use-theme';
-import { cleanAugmentDescription } from '@/lib/augment-text';
-import { getBuild, removeBuild, type SavedBuild } from '@/lib/build-storage';
-import { championSplashUrl, championSquareUrl, itemImageUrl } from '@/lib/ddragon';
-import { useTranslation } from '@/lib/i18n';
-import { AugmentTile } from './augment-tile';
+import { ThemedText } from "@/components/themed/themed-text";
+import { ThemedView } from "@/components/themed/themed-view";
+import { GlassSurface } from "@/components/ui/glass-surface";
+import { AugmentRarityColors, Radius, Spacing } from "@/constants/theme";
+import { useAugments } from "@/features/augments/hooks/use-augments";
+import { useChampions } from "@/features/champions/hooks/use-champions";
+import { ItemStatPanel } from "@/features/items/components/item-stat-panel";
+import { useItems } from "@/features/items/hooks/use-items";
+import { useLocale } from "@/hooks/use-locale";
+import { useTheme } from "@/hooks/use-theme";
+import { cleanAugmentDescription } from "@/lib/augment-text";
+import { getBuild, removeBuild, type SavedBuild } from "@/lib/build-storage";
+import {
+  championSplashUrl,
+  championSquareUrl,
+  itemImageUrl,
+} from "@/lib/ddragon";
+import { useTranslation } from "@/lib/i18n";
+import { AugmentTile } from "./augment-tile";
 
 const t = {
   ko: {
-    augments: '증강',
-    items: '아이템',
-    stats: '합산 스탯',
-    delete: '빌드 삭제',
-    deleteConfirm: '빌드를 삭제할까요?',
-    deleteOk: '삭제',
-    cancel: '취소',
-    notFound: '빌드를 찾을 수 없어요',
-    Fighter: '전사',
-    Mage: '마법사',
-    Assassin: '암살자',
-    Tank: '탱커',
-    Marksman: '원거리',
-    Support: '서포터',
+    augments: "증강",
+    items: "아이템",
+    stats: "합산 스탯",
+    delete: "빌드 삭제",
+    deleteConfirm: "빌드를 삭제할까요?",
+    deleteOk: "삭제",
+    cancel: "취소",
+    notFound: "빌드를 찾을 수 없어요",
+    Fighter: "전사",
+    Mage: "마법사",
+    Assassin: "암살자",
+    Tank: "탱커",
+    Marksman: "원거리",
+    Support: "서포터",
   },
   en: {
-    augments: 'Augments',
-    items: 'Items',
-    stats: 'Total Stats',
-    delete: 'Delete Build',
-    deleteConfirm: 'Delete this build?',
-    deleteOk: 'Delete',
-    cancel: 'Cancel',
-    notFound: 'Build not found',
-    Fighter: 'Fighter',
-    Mage: 'Mage',
-    Assassin: 'Assassin',
-    Tank: 'Tank',
-    Marksman: 'Marksman',
-    Support: 'Support',
+    augments: "Augments",
+    items: "Items",
+    stats: "Total Stats",
+    delete: "Delete Build",
+    deleteConfirm: "Delete this build?",
+    deleteOk: "Delete",
+    cancel: "Cancel",
+    notFound: "Build not found",
+    Fighter: "Fighter",
+    Mage: "Mage",
+    Assassin: "Assassin",
+    Tank: "Tank",
+    Marksman: "Marksman",
+    Support: "Support",
   },
 };
 
@@ -104,7 +109,7 @@ export function BuildDetailScreen() {
       scrollY.value,
       [-PULL_EXTRA, 0, COLLAPSE_DISTANCE],
       [BANNER_HEIGHT + PULL_EXTRA, BANNER_HEIGHT, 0],
-      Extrapolation.CLAMP
+      Extrapolation.CLAMP,
     );
     return { height };
   });
@@ -115,7 +120,7 @@ export function BuildDetailScreen() {
       scrollY.value,
       [COLLAPSE_DISTANCE * 0.45, COLLAPSE_DISTANCE * 0.8],
       [0, 1],
-      Extrapolation.CLAMP
+      Extrapolation.CLAMP,
     ),
   }));
 
@@ -140,8 +145,10 @@ export function BuildDetailScreen() {
   // 홈(portrait)에서만 진입하지만, 드래프트 직후 회전 잔상에 대한 안전망.
   useFocusEffect(
     useCallback(() => {
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
-    }, [])
+      ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT_UP,
+      ).catch(() => {});
+    }, []),
   );
 
   const champions = useChampions();
@@ -161,11 +168,11 @@ export function BuildDetailScreen() {
 
   const handleDelete = () => {
     if (!build) return;
-    Alert.alert(translate('deleteConfirm'), '', [
-      { text: translate('cancel'), style: 'cancel' },
+    Alert.alert(translate("deleteConfirm"), "", [
+      { text: translate("cancel"), style: "cancel" },
       {
-        text: translate('deleteOk'),
-        style: 'destructive',
+        text: translate("deleteOk"),
+        style: "destructive",
         onPress: () => {
           removeBuild(build.id).catch(() => {});
           router.back();
@@ -182,9 +189,13 @@ export function BuildDetailScreen() {
     return (
       <ThemedView style={styles.container}>
         <View style={styles.notFound}>
-          <MaterialCommunityIcons name="cards-outline" size={56} color={colors.text.disabled} />
+          <MaterialCommunityIcons
+            name="cards-outline"
+            size={56}
+            color={colors.text.disabled}
+          />
           <ThemedText type="body" color="secondary">
-            {translate('notFound')}
+            {translate("notFound")}
           </ThemedText>
         </View>
       </ThemedView>
@@ -192,7 +203,7 @@ export function BuildDetailScreen() {
   }
 
   const date = new Date(build.createdAt).toLocaleDateString(
-    locale === 'ko' ? 'ko-KR' : 'en-US'
+    locale === "ko" ? "ko-KR" : "en-US",
   );
 
   return (
@@ -200,28 +211,26 @@ export function BuildDetailScreen() {
       {/* 접히면 헤더 배경 + 챔피언 이름이 페이드인되는 native 투명 헤더 */}
       <Stack.Screen
         options={{
+          headerTintColor: colors.accent.default,
+          // 스크롤로 배너가 접히면 native 블러(리퀴드글라스) 헤더가 페이드인된다.
           headerBackground: () => (
-            <Animated.View
-              style={[
-                StyleSheet.absoluteFill,
-                {
-                  backgroundColor: colors.surface.base,
-                  borderBottomWidth: StyleSheet.hairlineWidth,
-                  borderBottomColor: colors.border.subtle,
-                },
-                headerFadeStyle,
-              ]}
-            />
+            <Animated.View style={[StyleSheet.absoluteFill, headerFadeStyle]}>
+              <GlassSurface glassStyle="regular" style={StyleSheet.absoluteFill} />
+            </Animated.View>
           ),
           headerTitle: () => (
             <Animated.Text
               numberOfLines={1}
               style={[
-                { ...typography.heading, fontSize: 17, color: colors.text.primary },
+                {
+                  ...typography.heading,
+                  fontSize: 17,
+                  color: colors.text.primary,
+                },
                 headerFadeStyle,
               ]}
             >
-              {champion?.name ?? ''}
+              {champion?.name ?? ""}
             </Animated.Text>
           ),
         }}
@@ -238,7 +247,11 @@ export function BuildDetailScreen() {
           />
         )}
         <LinearGradient
-          colors={[colors.surface.base + '00', colors.surface.base + '99', colors.surface.base]}
+          colors={[
+            colors.surface.base + "00",
+            colors.surface.base + "99",
+            colors.surface.base,
+          ]}
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
           style={StyleSheet.absoluteFill}
@@ -254,13 +267,24 @@ export function BuildDetailScreen() {
         {/* 배너가 비치는 투명 스페이서 */}
         <View style={styles.bannerSpacer} pointerEvents="none" />
 
-        <View style={[styles.sheet, { backgroundColor: colors.surface.base }]}>
+        <View
+          style={[
+            styles.sheet,
+            {
+              backgroundColor: colors.surface.base,
+              borderColor: colors.border.subtle,
+            },
+          ]}
+        >
           {/* 챔피언 블록 */}
           {champion && (
             <View style={styles.champHeader}>
               <Image
                 source={{ uri: championSquareUrl(champion.imageKey) }}
-                style={[styles.champIcon, { borderColor: colors.accent.default }]}
+                style={[
+                  styles.champIcon,
+                  { borderColor: colors.accent.default },
+                ]}
                 contentFit="cover"
               />
               <View style={styles.champMeta}>
@@ -274,9 +298,15 @@ export function BuildDetailScreen() {
                   {champion.tags.map((tag) => (
                     <View
                       key={tag}
-                      style={[styles.tagChip, { backgroundColor: colors.accent.subtle }]}
+                      style={[
+                        styles.tagChip,
+                        { backgroundColor: colors.accent.subtle },
+                      ]}
                     >
-                      <ThemedText type="caption" style={{ color: colors.accent.default }}>
+                      <ThemedText
+                        type="caption"
+                        style={{ color: colors.accent.default }}
+                      >
                         {translate(tag)}
                       </ThemedText>
                     </View>
@@ -292,7 +322,7 @@ export function BuildDetailScreen() {
           {/* 증강 */}
           <View style={styles.section}>
             <ThemedText type="label" color="secondary">
-              {translate('augments')} {buildAugments.length}
+              {translate("augments")} {buildAugments.length}
             </ThemedText>
             {buildAugments.map((aug, i) => (
               <ThemedView
@@ -321,7 +351,7 @@ export function BuildDetailScreen() {
           {buildItems.length > 0 && (
             <View style={styles.section}>
               <ThemedText type="label" color="secondary">
-                {translate('items')} {buildItems.length}
+                {translate("items")} {buildItems.length}
               </ThemedText>
               <View style={styles.itemsRow}>
                 {buildItems.map((item, i) => (
@@ -350,9 +380,12 @@ export function BuildDetailScreen() {
           {champion && (
             <View style={styles.section}>
               <ThemedText type="label" color="secondary">
-                {translate('stats')}
+                {translate("stats")}
               </ThemedText>
-              <ItemStatPanel baseStats={champion.stats} itemStatsList={itemStatsList} />
+              <ItemStatPanel
+                baseStats={champion.stats}
+                itemStatsList={itemStatsList}
+              />
             </View>
           )}
 
@@ -372,11 +405,15 @@ export function BuildDetailScreen() {
               size={18}
               color={colors.status.danger.default}
             />
-            <ThemedText type="label" style={{ color: colors.status.danger.default }}>
-              {translate('delete')}
+            <ThemedText
+              type="label"
+              style={{ color: colors.status.danger.default }}
+            >
+              {translate("delete")}
             </ThemedText>
           </Pressable>
         </View>
+        <View style={{ height: 240 }} />
       </Animated.ScrollView>
     </ThemedView>
   );
@@ -387,12 +424,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   banner: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     height: BANNER_HEIGHT,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   scrollContent: {
     paddingBottom: Spacing.five,
@@ -401,22 +438,27 @@ const styles = StyleSheet.create({
     height: BANNER_HEIGHT - SHEET_OVERLAP,
   },
   sheet: {
-    borderTopLeftRadius: Radius.xl,
-    borderTopRightRadius: Radius.xl,
-    borderCurve: 'continuous',
+    borderTopLeftRadius: Radius.xxl,
+    borderTopRightRadius: Radius.xxl,
+    borderCurve: "continuous",
+    // 배너 위로 떠오르는 시트의 상단 모서리를 또렷하게 구분하는 rim 라인.
+    // 배너 끝과 시트 배경이 같은 surface.base라 라인이 없으면 둥근 모서리가 안 보인다.
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderLeftWidth: StyleSheet.hairlineWidth,
+    borderRightWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: Spacing.three,
     paddingTop: Spacing.four,
     gap: Spacing.four,
   },
   notFound: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     gap: Spacing.two,
   },
   champHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: Spacing.three,
   },
   champIcon: {
@@ -430,8 +472,8 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
   },
   tagRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: Spacing.one,
   },
   tagChip: {
@@ -443,11 +485,11 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
   },
   augmentRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: Spacing.three,
     padding: Spacing.three,
     borderRadius: Radius.lg,
-    borderCurve: 'continuous',
+    borderCurve: "continuous",
     borderWidth: StyleSheet.hairlineWidth,
     borderLeftWidth: 3,
   },
@@ -456,8 +498,8 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
   },
   itemsRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: Spacing.two,
   },
   itemTile: {
@@ -465,8 +507,8 @@ const styles = StyleSheet.create({
     height: 44,
     borderRadius: Radius.sm,
     borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   itemIcon: {
     width: 38,
@@ -474,9 +516,9 @@ const styles = StyleSheet.create({
     borderRadius: Radius.sm,
   },
   deleteButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: Spacing.two,
     paddingVertical: Spacing.double,
     borderRadius: Radius.lg,

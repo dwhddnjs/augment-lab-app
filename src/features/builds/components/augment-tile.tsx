@@ -64,7 +64,7 @@ export function AugmentTile({ augment, size }: Props) {
 const styles = StyleSheet.create({
   tile: {
     borderRadius: Radius.md,
-    borderWidth: 1.5,
+    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

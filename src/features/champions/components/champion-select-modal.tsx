@@ -67,8 +67,10 @@ export function ChampionSelectModal() {
     if (!selectedId) return;
     // lockAsync를 await해서 기기가 landscape로 전환된 후 navigation을 시작한다.
     // await 없이 바로 replace하면 portrait 상태로 draft가 mount될 수 있다.
-    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE).catch(() => {});
-    router.replace({ pathname: '/draft', params: { championId: selectedId } });
+    await ScreenOrientation.lockAsync(
+      ScreenOrientation.OrientationLock.LANDSCAPE,
+    ).catch(() => {});
+    router.replace({ pathname: "/draft", params: { championId: selectedId } });
   };
 
   // 역할 필터칩 — 리스트 헤더로서 리스트와 함께 스크롤된다.
@@ -119,7 +121,10 @@ export function ChampionSelectModal() {
                 contentFit="contain"
               />
             ) : (
-              <ThemedText type="label" color={isActive ? "accent" : "secondary"}>
+              <ThemedText
+                type="label"
+                color={isActive ? "accent" : "secondary"}
+              >
                 {tag}
               </ThemedText>
             )}
@@ -195,7 +200,10 @@ export function ChampionSelectModal() {
         renderItem={({ item }) => {
           const isSelected = selectedId === item.id;
           return (
-            <Pressable onPress={() => handleSelect(item.id)} style={styles.cell}>
+            <Pressable
+              onPress={() => handleSelect(item.id)}
+              style={styles.cell}
+            >
               <Image
                 source={{ uri: championSquareUrl(item.imageKey) }}
                 style={[

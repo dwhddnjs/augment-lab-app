@@ -1,16 +1,17 @@
 /**
- * BuildCard — 홈 목록의 저장된 빌드 카드 한 장.
- * 상단 챔피언 미니 배너 + 증강/아이템 타일 행 + 저장 날짜를 요약 표시.
- * 고밀도 리스트 셀이므로 글라스 미적용 (ThemedView raised).
+ * BuildCard — 홈 목록의 저장된 빌드 카드 한 장 (풀블리드 히어로).
+ * 챔피언 splash가 카드 전체를 채우고, 하단 그라데이션 위에 이름·증강·아이템을
+ * 얹는다. 카드 테두리는 보유한 증강 중 '최고 희귀도' 색으로 물들여(예: prismatic
+ * 빌드면 prismatic 색) 한 장 한 장이 특별해 보이게 한다.
  */
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed/themed-text';
-import { ThemedView } from '@/components/themed/themed-view';
-import { Radius, Spacing } from '@/constants/theme';
+import { AugmentRarityColors, Elevation, Radius, Spacing } from '@/constants/theme';
 import { useAugments } from '@/features/augments/hooks/use-augments';
+import type { AugmentRarity } from '@/features/augments/types';
 import { useChampions } from '@/features/champions/hooks/use-champions';
 import { useItems } from '@/features/items/hooks/use-items';
 import { useLocale } from '@/hooks/use-locale';
@@ -25,8 +26,8 @@ const t = {
   en: { unknownChampion: 'Unknown champion' },
 };
 
-const AUGMENT_SIZE = 30;
-const ITEM_SIZE = 28;
+const AUGMENT_SIZE = 32;
+const ITEM_SIZE = 32;
 
 interface Props {
   build: SavedBuild;
@@ -47,10 +48,20 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
   // 데이터 갱신으로 해석 불가한 id는 조용히 건너뛴다 — crash 금지.
   const buildAugments = build.augmentIds
     .map((id) => augments.find((a) => a.id === id))
-    .filter((a) => a != null);
+    .filter((a): a is NonNullable<typeof a> => a != null);
   const buildItems = build.itemIds
     .map((id) => items.find((it) => it.id === id))
-    .filter((it) => it != null);
+    .filter((it): it is NonNullable<typeof it> => it != null);
+
+  // 보유 증강 중 최고 희귀도 색으로 테두리를 물들인다(없으면 기본 테두리).
+  const RARITY_RANK: Record<AugmentRarity, number> = { silver: 0, gold: 1, prismatic: 2 };
+  const topRarity = buildAugments.reduce<AugmentRarity | null>(
+    (top, aug) => (top == null || RARITY_RANK[aug.rarity] > RARITY_RANK[top] ? aug.rarity : top),
+    null
+  );
+  const borderColor = topRarity
+    ? AugmentRarityColors[topRarity].border
+    : colors.border.subtle;
 
   const date = new Date(build.createdAt).toLocaleDateString(
     locale === 'ko' ? 'ko-KR' : 'en-US'
@@ -60,85 +71,99 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
     <Pressable
       onPress={onPress}
       onLongPress={onLongPress}
-      style={({ pressed }) => ({ opacity: pressed ? 0.9 : 1 })}
+      style={({ pressed }) => ({ opacity: pressed ? 0.92 : 1 })}
     >
-      <ThemedView
-        surface="raised"
-        style={[styles.card, { borderColor: colors.border.subtle }]}
-      >
-        {/* 챔피언 미니 배너 */}
-        <View style={[styles.banner, { backgroundColor: colors.surface.sunken }]}>
+      {/* 바깥: 그림자(입체감), 안쪽: 모서리 클립 — overflow가 그림자를 자르지 않게 분리 */}
+      <View style={[styles.card, { backgroundColor: colors.surface.base }]}>
+        <View
+          style={[
+            styles.cardInner,
+            {
+              backgroundColor: colors.surface.sunken,
+              borderColor,
+            },
+          ]}
+        >
+          {/* 챔피언 splash 풀블리드 — 얼굴이 보이도록 상단 정렬 */}
           {champion && (
             <Image
               source={{ uri: championSplashUrl(champion.id) }}
               style={StyleSheet.absoluteFill}
               contentFit="cover"
-              contentPosition="center"
+              contentPosition={{ top: 0, left: '50%' }}
             />
           )}
+
+          {/* 날짜 — 카드 우측 상단 고정 */}
+          <View style={[styles.dateChip, { backgroundColor: colors.surface.overlay }]}>
+            <ThemedText type="caption" color="secondary">
+              {date}
+            </ThemedText>
+          </View>
+
+        {/* 하단 정보 패널 — 텍스트 뒤를 거의 솔리드로 덮어 가독성 확보 */}
+        <View style={styles.content}>
+          {/* 패널 상단만 splash로 페이드, 나머지는 솔리드에 가깝게 */}
           <LinearGradient
-            colors={[colors.surface.raised + '00', colors.surface.raised + 'CC', colors.surface.raised]}
+            colors={[
+              colors.surface.base + '00',
+              colors.surface.base + 'D9',
+              colors.surface.base + 'F2',
+              colors.surface.base,
+            ]}
+            locations={[0, 0.42, 0.7, 1]}
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
             style={StyleSheet.absoluteFill}
           />
-          <View style={styles.bannerContent}>
-            <View style={styles.bannerMeta}>
-              <ThemedText type="body" numberOfLines={1}>
-                {champion ? champion.name : translate('unknownChampion')}
+
+          <View style={styles.titleBlock}>
+            <ThemedText type="heading" numberOfLines={1}>
+              {champion ? champion.name : translate('unknownChampion')}
+            </ThemedText>
+            {champion && (
+              <ThemedText type="caption" color="secondary" numberOfLines={1}>
+                {champion.title}
               </ThemedText>
-              {champion && (
-                <ThemedText type="caption" color="tertiary" numberOfLines={1}>
-                  {champion.title}
-                </ThemedText>
-              )}
-            </View>
-            <View style={[styles.dateChip, { backgroundColor: colors.surface.overlay }]}>
-              <ThemedText type="caption" color="secondary">
-                {date}
-              </ThemedText>
-            </View>
+            )}
+          </View>
+
+          {/* 증강 + 아이템 묶음 — 둘은 가깝게, 헤더와는 떨어지게 */}
+          <View style={styles.tilesGroup}>
+            {buildAugments.length > 0 && (
+              <View style={styles.row}>
+                {buildAugments.map((aug, i) => (
+                  <AugmentTile key={`${aug.id}-${i}`} augment={aug} size={AUGMENT_SIZE} />
+                ))}
+              </View>
+            )}
+
+            {buildItems.length > 0 && (
+              <View style={styles.row}>
+                {buildItems.map((item, i) => (
+                  <View
+                    key={`${item.id}-${i}`}
+                    style={[
+                      styles.itemTile,
+                      {
+                        backgroundColor: colors.surface.sunken,
+                        borderColor: colors.border.subtle,
+                      },
+                    ]}
+                  >
+                    <Image
+                      source={{ uri: itemImageUrl(item.imageKey) }}
+                      style={styles.itemIcon}
+                      contentFit="contain"
+                    />
+                  </View>
+                ))}
+              </View>
+            )}
+          </View>
           </View>
         </View>
-
-        {/* 증강 + 아이템 */}
-        <View style={styles.body}>
-          {buildAugments.length > 0 && (
-            <View style={styles.iconRow}>
-              {buildAugments.map((aug, i) => (
-                <AugmentTile key={`${aug.id}-${i}`} augment={aug} size={AUGMENT_SIZE} />
-              ))}
-            </View>
-          )}
-
-          {buildAugments.length > 0 && buildItems.length > 0 && (
-            <View style={[styles.divider, { backgroundColor: colors.border.subtle }]} />
-          )}
-
-          {buildItems.length > 0 && (
-            <View style={styles.iconRow}>
-              {buildItems.map((item, i) => (
-                <View
-                  key={`${item.id}-${i}`}
-                  style={[
-                    styles.itemTile,
-                    {
-                      backgroundColor: colors.surface.sunken,
-                      borderColor: colors.border.subtle,
-                    },
-                  ]}
-                >
-                  <Image
-                    source={{ uri: itemImageUrl(item.imageKey) }}
-                    style={styles.itemIcon}
-                    contentFit="contain"
-                  />
-                </View>
-              ))}
-            </View>
-          )}
-        </View>
-      </ThemedView>
+      </View>
     </Pressable>
   );
 }
@@ -147,40 +172,40 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: Radius.xl,
     borderCurve: 'continuous',
+    ...Elevation.level2,
+  },
+  cardInner: {
+    height: 188,
+    borderRadius: Radius.xl,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
     overflow: 'hidden',
-  },
-  banner: {
-    height: 76,
     justifyContent: 'flex-end',
   },
-  bannerContent: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'space-between',
+  content: {
+    paddingTop: Spacing.four,
+    paddingHorizontal: Spacing.three,
+    paddingBottom: Spacing.three,
     gap: Spacing.two,
-    padding: Spacing.three,
   },
-  bannerMeta: {
-    flex: 1,
-    gap: Spacing.half,
+  tilesGroup: {
+    gap: Spacing.one,
   },
   dateChip: {
+    position: 'absolute',
+    top: Spacing.three,
+    right: Spacing.three,
     paddingHorizontal: Spacing.two,
     paddingVertical: Spacing.half,
     borderRadius: Radius.full,
   },
-  body: {
-    padding: Spacing.three,
-    gap: Spacing.two,
+  titleBlock: {
+    gap: Spacing.half,
   },
-  iconRow: {
+  row: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    alignItems: 'center',
     gap: Spacing.one,
-  },
-  divider: {
-    height: StyleSheet.hairlineWidth,
   },
   itemTile: {
     width: ITEM_SIZE,
@@ -191,8 +216,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   itemIcon: {
-    width: 24,
-    height: 24,
+    width: 26,
+    height: 26,
     borderRadius: Radius.sm,
   },
 });
