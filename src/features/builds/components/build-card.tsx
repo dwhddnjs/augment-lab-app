@@ -1,17 +1,15 @@
 /**
  * BuildCard — 홈 목록의 저장된 빌드 카드 한 장 (풀블리드 히어로).
  * 챔피언 splash가 카드 전체를 채우고, 하단 그라데이션 위에 이름·증강·아이템을
- * 얹는다. 카드 테두리는 보유한 증강 중 '최고 희귀도' 색으로 물들여(예: prismatic
- * 빌드면 prismatic 색) 한 장 한 장이 특별해 보이게 한다.
+ * 얹는다. 카드 테두리는 입체감만 주도록 표면보다 어두운 subtle 톤으로 절제한다.
  */
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed/themed-text';
-import { AugmentRarityColors, Elevation, Radius, Spacing } from '@/constants/theme';
+import { Elevation, Radius, Spacing } from '@/constants/theme';
 import { useAugments } from '@/features/augments/hooks/use-augments';
-import type { AugmentRarity } from '@/features/augments/types';
 import { useChampions } from '@/features/champions/hooks/use-champions';
 import { useItems } from '@/features/items/hooks/use-items';
 import { useLocale } from '@/hooks/use-locale';
@@ -53,15 +51,8 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
     .map((id) => items.find((it) => it.id === id))
     .filter((it): it is NonNullable<typeof it> => it != null);
 
-  // 보유 증강 중 최고 희귀도 색으로 테두리를 물들인다(없으면 기본 테두리).
-  const RARITY_RANK: Record<AugmentRarity, number> = { silver: 0, gold: 1, prismatic: 2 };
-  const topRarity = buildAugments.reduce<AugmentRarity | null>(
-    (top, aug) => (top == null || RARITY_RANK[aug.rarity] > RARITY_RANK[top] ? aug.rarity : top),
-    null
-  );
-  const borderColor = topRarity
-    ? AugmentRarityColors[topRarity].border
-    : colors.border.subtle;
+  // 테두리는 입체감만 주는 정도로 — 표면보다 어두운 subtle 톤으로 절제.
+  const borderColor = colors.border.subtle;
 
   const date = new Date(build.createdAt).toLocaleDateString(
     locale === 'ko' ? 'ko-KR' : 'en-US'

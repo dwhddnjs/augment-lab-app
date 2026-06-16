@@ -233,6 +233,21 @@ export function BuildDetailScreen() {
               {champion?.name ?? ""}
             </Animated.Text>
           ),
+          headerRight: () => (
+            <Pressable
+              onPress={handleDelete}
+              hitSlop={Spacing.two}
+              style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
+              accessibilityRole="button"
+              accessibilityLabel={translate("delete")}
+            >
+              <MaterialCommunityIcons
+                name="trash-can-outline"
+                size={22}
+                color={colors.status.danger.default}
+              />
+            </Pressable>
+          ),
         }}
       />
 
@@ -388,30 +403,6 @@ export function BuildDetailScreen() {
               />
             </View>
           )}
-
-          {/* 삭제 */}
-          <Pressable
-            onPress={handleDelete}
-            style={({ pressed }) => [
-              styles.deleteButton,
-              {
-                backgroundColor: colors.status.danger.subtle,
-                opacity: pressed ? 0.8 : 1,
-              },
-            ]}
-          >
-            <MaterialCommunityIcons
-              name="trash-can-outline"
-              size={18}
-              color={colors.status.danger.default}
-            />
-            <ThemedText
-              type="label"
-              style={{ color: colors.status.danger.default }}
-            >
-              {translate("delete")}
-            </ThemedText>
-          </Pressable>
         </View>
         <View style={{ height: 240 }} />
       </Animated.ScrollView>
@@ -514,13 +505,5 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: Radius.sm,
-  },
-  deleteButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: Spacing.two,
-    paddingVertical: Spacing.double,
-    borderRadius: Radius.lg,
   },
 });

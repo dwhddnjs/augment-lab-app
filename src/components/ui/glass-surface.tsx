@@ -21,6 +21,10 @@ interface GlassSurfaceProps {
   intensity?: number;
   /** GlassView glassEffectStyle (default 'regular') */
   glassStyle?: 'clear' | 'regular' | 'none';
+  /** 네이티브 글래스 버튼 인터랙션 — iOS 26+ GlassView 전용 (폴백 무시) */
+  isInteractive?: boolean;
+  /** 글래스 틴트 — iOS 26+ GlassView 전용 (폴백 무시) */
+  tintColor?: string;
 }
 
 export function GlassSurface({
@@ -28,6 +32,8 @@ export function GlassSurface({
   style,
   intensity = 20,
   glassStyle = 'regular',
+  isInteractive,
+  tintColor,
 }: GlassSurfaceProps) {
   const { mode } = useTheme();
 
@@ -36,6 +42,8 @@ export function GlassSurface({
       <GlassView
         glassEffectStyle={glassStyle}
         colorScheme={mode === 'dark' ? 'dark' : 'light'}
+        isInteractive={isInteractive}
+        tintColor={tintColor}
         style={[styles.base, style]}
       >
         {children}

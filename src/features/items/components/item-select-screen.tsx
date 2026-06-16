@@ -15,18 +15,18 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
-import { GlassChip } from "@/components/ui/glass-chip";
+import { GlassButton } from "@/components/ui/glass-button";
 import { AugmentRarityColors, Radius, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useTheme } from "@/hooks/use-theme";
+import { saveBuild } from "@/lib/build-storage";
 import {
   augmentImageUrl,
   championClassIconUrl,
   championSquareUrl,
   itemImageUrl,
 } from "@/lib/ddragon";
-import { saveBuild } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 import { useItems } from "../hooks/use-items";
 import type { Item } from "../types";
@@ -246,15 +246,11 @@ type FilterKey = (typeof FILTERS)[number]["key"] | null;
 const t = {
   ko: {
     title: "아이템 선택",
-    skip: "건너뛰기",
-    done: "완료",
     augments: "증강",
     saveError: "빌드 저장에 실패했어요",
   },
   en: {
     title: "Item Select",
-    skip: "Skip",
-    done: "Done",
     augments: "Augments",
     saveError: "Failed to save the build",
   },
@@ -508,24 +504,17 @@ function ItemSelectContent({
       {/* 헤더 — 플로팅 글라스 칩 */}
       <View style={styles.header}>
         <ThemedText type="heading">{translate("title")}</ThemedText>
-        <ThemedText type="label" style={{ color: colors.accent.default }}>
-          {selectedIds.length}/{MAX_ITEMS}
+        <ThemedText type="label" color="secondary">
+          {selectedIds.length} / {MAX_ITEMS}
         </ThemedText>
 
         <View style={styles.headerSpacer} />
-        <GlassChip onPress={() => saveAndOpenBuild([])}>
-          <ThemedText type="label" color="secondary">
-            {translate("skip")}
-          </ThemedText>
-        </GlassChip>
-        <GlassChip
-          variant="accent"
+        <GlassButton
+          systemImage="checkmark"
+          fallbackIcon="check"
+          tint={colors.accent.default}
           onPress={() => saveAndOpenBuild(selectedIds)}
-        >
-          <ThemedText type="label" style={{ color: colors.accent.default }}>
-            {translate("done")}
-          </ThemedText>
-        </GlassChip>
+        />
       </View>
 
       <View style={styles.body}>
@@ -770,8 +759,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: Spacing.two,
     paddingLeft: Spacing.three,
-    paddingRight: Spacing.five,
-    paddingTop: Spacing.three,
+    paddingRight: Spacing.three,
+    paddingTop: Spacing.double,
     paddingBottom: Spacing.two,
   },
   headerSpacer: { flex: 1 },
