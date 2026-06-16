@@ -1,10 +1,13 @@
 import 'react-native-url-polyfill/auto';
 import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
 import { Stack } from 'expo-router/stack';
+import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 
 import { AnimatedSplashOverlay } from '@/components/navigation/animated-icon';
 import { Theme } from '@/constants/theme';
+import { loadLocale } from '@/hooks/use-locale';
+import { loadThemePreference, useThemePreference } from '@/hooks/use-theme-preference';
 
 const darkNavTheme = {
   ...DarkTheme,
@@ -34,7 +37,16 @@ const lightNavTheme = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const mode = colorScheme === 'light' ? 'light' : 'dark';
+  const { preference } = useThemePreference();
+
+  // 앱 시작 시 저장된 테마·로케일 선택을 1회 복원한다.
+  useEffect(() => {
+    loadThemePreference();
+    loadLocale();
+  }, []);
+
+  const system = colorScheme === 'light' ? 'light' : 'dark';
+  const mode = preference === 'system' ? system : preference;
 
   return (
     <ThemeProvider value={mode === 'dark' ? darkNavTheme : lightNavTheme}>

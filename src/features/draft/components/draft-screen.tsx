@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
-import { GlassChip } from "@/components/ui/glass-chip";
+import { GlassButton } from "@/components/ui/glass-button";
 import { Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { augmentImageUrl } from "@/lib/ddragon";
@@ -17,7 +17,6 @@ import { useDraft } from "../hooks/use-draft";
 import { DraftCard, type CardEntryMode, type CardExitMode } from "./draft-card";
 import { PickedDrawer } from "./picked-drawer";
 import { RoundIndicator } from "./round-indicator";
-import { SynergyIcon } from "./synergy-icon";
 
 const t = {
   ko: {
@@ -201,35 +200,30 @@ export function DraftScreen() {
           style={styles.safe}
           edges={["top", "bottom", "left", "right"]}
         >
-          {/* Header — 플로팅 글라스 칩 */}
+          {/* Header — 네이티브 expo-ui glass 버튼 (폴백: GlassChip) */}
           <View style={[styles.header, { paddingHorizontal: hPad }]}>
-            <GlassChip onPress={handleExit}>
-              <SynergyIcon
-                name="close"
-                size={18}
-                color={colors.text.secondary}
-              />
-              <ThemedText type="label" color="secondary">
-                {translate("exit")}
-              </ThemedText>
-            </GlassChip>
+            <GlassButton
+              systemImage="xmark"
+              fallbackIcon="close"
+              role="cancel"
+              onPress={handleExit}
+            />
             <View style={{ alignItems: "center", gap: Spacing.one }}>
-              <ThemedText type="label" color="tertiary">
+              <ThemedText
+                type="label"
+                color="tertiary"
+                style={{ fontWeight: "800" }}
+              >
                 {translate("round")}
               </ThemedText>
               <RoundIndicator round={round} />
             </View>
 
-            <GlassChip variant="accent" onPress={() => setDrawerOpen(true)}>
-              <SynergyIcon
-                name="format-list-bulleted"
-                size={18}
-                color={colors.accent.default}
-              />
-              <ThemedText type="label" style={{ color: colors.accent.default }}>
-                {translate("picks")} {picked.length}/4
-              </ThemedText>
-            </GlassChip>
+            <GlassButton
+              systemImage="list.bullet"
+              fallbackIcon="format-list-bulleted"
+              onPress={() => setDrawerOpen(true)}
+            />
           </View>
 
           {/* Cards row */}
