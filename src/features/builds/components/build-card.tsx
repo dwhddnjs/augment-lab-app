@@ -8,11 +8,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed/themed-text';
-import { Elevation, Radius, Spacing } from '@/constants/theme';
+import { Elevation, HeroOverlay, Radius, Spacing } from '@/constants/theme';
 import { useAugments } from '@/features/augments/hooks/use-augments';
 import { useChampions } from '@/features/champions/hooks/use-champions';
 import { useItems } from '@/features/items/hooks/use-items';
-import { useLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 import type { SavedBuild } from '@/lib/build-storage';
 import { championSplashUrl, itemImageUrl } from '@/lib/ddragon';
@@ -36,7 +35,6 @@ interface Props {
 export function BuildCard({ build, onPress, onLongPress }: Props) {
   const translate = useTranslation(t);
   const { colors } = useTheme();
-  const { locale } = useLocale();
 
   const champions = useChampions();
   const augments = useAugments();
@@ -51,13 +49,6 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
     .map((id) => items.find((it) => it.id === id))
     .filter((it): it is NonNullable<typeof it> => it != null);
 
-  // 테두리는 입체감만 주는 정도로 — 표면보다 어두운 subtle 톤으로 절제.
-  const borderColor = colors.border.subtle;
-
-  const date = new Date(build.createdAt).toLocaleDateString(
-    locale === 'ko' ? 'ko-KR' : 'en-US'
-  );
-
   return (
     <Pressable
       onPress={onPress}
@@ -70,8 +61,9 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
           style={[
             styles.cardInner,
             {
-              backgroundColor: colors.surface.sunken,
-              borderColor,
+              // splash 위는 모드 무관 어두운 톤 — 다크/라이트 공통(이미지·텍스트 가독성).
+              backgroundColor: HeroOverlay.cardBase,
+              borderColor: HeroOverlay.tileBorder,
             },
           ]}
         >
@@ -85,22 +77,15 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
             />
           )}
 
-          {/* 날짜 — 카드 우측 상단 고정 */}
-          <View style={[styles.dateChip, { backgroundColor: colors.surface.overlay }]}>
-            <ThemedText type="caption" color="secondary">
-              {date}
-            </ThemedText>
-          </View>
-
         {/* 하단 정보 패널 — 텍스트 뒤를 거의 솔리드로 덮어 가독성 확보 */}
         <View style={styles.content}>
-          {/* 패널 상단만 splash로 페이드, 나머지는 솔리드에 가깝게 */}
+          {/* 패널 상단만 splash로 페이드, 나머지는 어두운 scrim으로(모드 무관) */}
           <LinearGradient
             colors={[
-              colors.surface.base + '00',
-              colors.surface.base + 'D9',
-              colors.surface.base + 'F2',
-              colors.surface.base,
+              HeroOverlay.scrim0,
+              HeroOverlay.scrim1,
+              HeroOverlay.scrim2,
+              HeroOverlay.scrim3,
             ]}
             locations={[0, 0.42, 0.7, 1]}
             start={{ x: 0, y: 0 }}
@@ -109,11 +94,19 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
           />
 
           <View style={styles.titleBlock}>
-            <ThemedText type="heading" numberOfLines={1}>
+            <ThemedText
+              type="heading"
+              numberOfLines={1}
+              style={{ color: HeroOverlay.textPrimary, fontWeight: '700' }}
+            >
               {champion ? champion.name : translate('unknownChampion')}
             </ThemedText>
             {champion && (
-              <ThemedText type="caption" color="secondary" numberOfLines={1}>
+              <ThemedText
+                type="caption"
+                numberOfLines={1}
+                style={{ color: HeroOverlay.textSecondary }}
+              >
                 {champion.title}
               </ThemedText>
             )}
@@ -137,8 +130,8 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
                     style={[
                       styles.itemTile,
                       {
-                        backgroundColor: colors.surface.sunken,
-                        borderColor: colors.border.subtle,
+                        backgroundColor: HeroOverlay.tileBg,
+                        borderColor: HeroOverlay.tileBorder,
                       },
                     ]}
                   >
@@ -181,14 +174,6 @@ const styles = StyleSheet.create({
   },
   tilesGroup: {
     gap: Spacing.one,
-  },
-  dateChip: {
-    position: 'absolute',
-    top: Spacing.three,
-    right: Spacing.three,
-    paddingHorizontal: Spacing.two,
-    paddingVertical: Spacing.half,
-    borderRadius: Radius.full,
   },
   titleBlock: {
     gap: Spacing.half,

@@ -1,3 +1,3 @@
-import MyPageScreen from '@/features/mypage/components/mypage-screen';
+import MyPageScreen from '@/features/mypage/screens/mypage-screen';
 
 export default MyPageScreen;

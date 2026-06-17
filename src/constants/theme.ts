@@ -44,10 +44,12 @@ export const Theme = {
     },
   },
   light: {
+    // iOS grouped 스타일 — 배경은 회색빛(systemGroupedBackground), 카드는 흰색.
+    // 다크와 동일한 시맨틱: 밝기 raised(카드) > base(배경) > sunken.
     surface: {
-      base: "#FAFBFC",
-      raised: "#F0F2F5",
-      sunken: "#E6E8EC",
+      base: "#F2F2F7",
+      raised: "#FFFFFF",
+      sunken: "#E5E5EA",
       overlay: "rgba(15,17,21,0.45)",
     },
     text: {
@@ -63,11 +65,13 @@ export const Theme = {
       subtle: "#E6E8EC",
       strong: "#B4B8BE",
     },
+    // 라이트 배경(흰/회색) 위 텍스트·아이콘 가독성을 위해 진한 민트로.
+    // default #0A8466 = 흰 배경 대비 ~4.7:1 (WCAG AA 통과).
     accent: {
-      default: "#10B187",
-      hover: "#0E9F79",
-      pressed: "#0A8466",
-      subtle: "rgba(16,177,135,0.12)",
+      default: "#0A8466",
+      hover: "#0C9676",
+      pressed: "#086E54",
+      subtle: "rgba(10,132,102,0.12)",
       onAccent: "#FFFFFF",
     },
     status: {
@@ -181,6 +185,22 @@ export const AugmentRarityColors = {
     badge: "#C6A1FF",
     badgeText: "#1A0033",
   },
+} as const;
+
+// splash 히어로 카드 내부 — 라이트/다크 공통 고정 어두운 톤(이미지 가독성).
+// 카드 위는 컬러풀한 splash라 모드와 무관하게 어두운 scrim/타일이 표준이며,
+// 이 그룹이 카드 내부 색의 유일한 출처다(다른 곳에서 hex 직접 쓰지 말 것).
+export const HeroOverlay = {
+  scrim0: "rgba(8,9,11,0)",
+  scrim1: "rgba(8,9,11,0.55)",
+  scrim2: "rgba(8,9,11,0.85)",
+  scrim3: "rgba(8,9,11,0.96)",
+  cardBase: "#0A0B0D", // splash 로드 전/빈 영역 베이스
+  tileBg: "rgba(0,0,0,0.45)", // 증강·아이템 타일 배경
+  tileBorder: "rgba(255,255,255,0.14)", // 아이템 타일 테두리
+  chipBg: "rgba(0,0,0,0.55)", // 날짜 칩 배경
+  textPrimary: "#F2F4F7",
+  textSecondary: "#B5BAC1",
 } as const;
 
 export const Brand = {

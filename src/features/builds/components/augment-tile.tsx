@@ -7,9 +7,8 @@ import { Image } from 'expo-image';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { AugmentRarityColors, Radius } from '@/constants/theme';
+import { AugmentRarityColors, HeroOverlay, Radius } from '@/constants/theme';
 import type { Augment, AugmentRarity } from '@/features/augments/types';
-import { useTheme } from '@/hooks/use-theme';
 import { augmentImageUrl } from '@/lib/ddragon';
 
 const RARITY_GLYPH: Record<AugmentRarity, string> = {
@@ -24,7 +23,6 @@ interface Props {
 }
 
 export function AugmentTile({ augment, size }: Props) {
-  const { colors } = useTheme();
   const [failed, setFailed] = useState(false);
   const tint = AugmentRarityColors[augment.rarity].border;
   const showFallback = failed || !augment.iconPath;
@@ -36,7 +34,8 @@ export function AugmentTile({ augment, size }: Props) {
         {
           width: size,
           height: size,
-          backgroundColor: colors.surface.sunken,
+          // 카드 위는 splash라 모드 무관 어두운 타일 — 밝은 아이콘/rarity 테두리 대비 확보.
+          backgroundColor: HeroOverlay.tileBg,
           borderColor: tint,
         },
       ]}

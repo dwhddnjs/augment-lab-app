@@ -1,43 +1,105 @@
 /**
  * BuildListScreen — 홈 탭. 저장된 드래프트 빌드 목록.
+ * 같은 날짜끼리 묶어 날짜 태그 헤더 + 그 날짜 카드들을 SectionList로 렌더한다.
  * 탭 포커스마다 재조회해 드래프트 저장/삭제 직후 자동 갱신된다.
  * 화면 타이틀은 (home) 스택의 native large-title 헤더가 제공한다.
  */
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { useFocusEffect, useRouter } from 'expo-router';
-import { useCallback, useState } from 'react';
-import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native';
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useFocusEffect, useRouter } from "expo-router";
+import { useCallback, useState } from "react";
+import { Alert, Pressable, SectionList, StyleSheet, View } from "react-native";
 
-import { ThemedText } from '@/components/themed/themed-text';
-import { ThemedView } from '@/components/themed/themed-view';
-import { BottomTabInset, Radius, Spacing } from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
-import { listBuilds, removeBuild, type SavedBuild } from '@/lib/build-storage';
-import { useTranslation } from '@/lib/i18n';
-import { BuildCard } from './build-card';
+import { ThemedText } from "@/components/themed/themed-text";
+import { ThemedView } from "@/components/themed/themed-view";
+import { BottomTabInset, Radius, Spacing } from "@/constants/theme";
+import { useLocale, type Locale } from "@/hooks/use-locale";
+import { useTheme } from "@/hooks/use-theme";
+import { listBuilds, removeBuild, type SavedBuild } from "@/lib/build-storage";
+import { useTranslation } from "@/lib/i18n";
+import { BuildCard } from "./build-card";
 
 const t = {
   ko: {
-    emptyTitle: '저장된 빌드가 없어요',
-    emptyHint: '드래프트를 완료하면 여기에 쌓여요',
-    startDraft: '드래프트 시작',
-    deleteConfirm: '빌드를 삭제할까요?',
-    deleteOk: '삭제',
-    cancel: '취소',
+    emptyTitle: "저장된 빌드가 없어요",
+    emptyHint: "드래프트를 완료하면 여기에 쌓여요",
+    startDraft: "드래프트 시작",
+    deleteConfirm: "빌드를 삭제할까요?",
+    deleteOk: "삭제",
+    cancel: "취소",
   },
   en: {
-    emptyTitle: 'No saved builds',
-    emptyHint: 'Finish a draft to see it here',
-    startDraft: 'Start Draft',
-    deleteConfirm: 'Delete this build?',
-    deleteOk: 'Delete',
-    cancel: 'Cancel',
+    emptyTitle: "No saved builds",
+    emptyHint: "Finish a draft to see it here",
+    startDraft: "Start Draft",
+    deleteConfirm: "Delete this build?",
+    deleteOk: "Delete",
+    cancel: "Cancel",
   },
 };
+
+interface BuildSection {
+  key: string;
+  title: string;
+  data: SavedBuild[];
+}
+
+/** 로컬 기준 같은 '날(day)'을 식별하는 키. createdAt은 ISO 문자열. */
+function dayKey(iso: string): string {
+  const d = new Date(iso);
+  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+}
+
+/** 최신순으로 정렬한 뒤 같은 날짜끼리 섹션으로 묶는다(ISO는 사전순=시간순). */
+function groupByDate(builds: SavedBuild[], locale: Locale): BuildSection[] {
+  const sorted = [...builds].sort((a, b) =>
+    b.createdAt.localeCompare(a.createdAt),
+  );
+  const sections: BuildSection[] = [];
+  let current: BuildSection | null = null;
+  for (const b of sorted) {
+    const key = dayKey(b.createdAt);
+    if (!current || current.key !== key) {
+      current = {
+        key,
+        title: new Date(b.createdAt).toLocaleDateString(
+          locale === "ko" ? "ko-KR" : "en-US",
+        ),
+        data: [],
+      };
+      sections.push(current);
+    }
+    current.data.push(b);
+  }
+  return sections;
+}
+
+function formatDate(input: string): string {
+  // 2026. 6. 17.
+
+  if (input.includes(".")) {
+    const [year, month, day] = input
+      .split(".")
+      .map((v) => v.trim())
+      .filter(Boolean);
+
+    return `${year}.${Number(month)}.${Number(day)}`;
+  }
+
+  // 6/17/2026 (MM/DD/YYYY)
+
+  if (input.includes("/")) {
+    const [month, day, year] = input.split("/").map((v) => v.trim());
+
+    return `${year}.${Number(month)}.${Number(day)}`;
+  }
+
+  throw new Error("지원하지 않는 날짜 형식입니다.");
+}
 
 export function BuildListScreen() {
   const translate = useTranslation(t);
   const { colors } = useTheme();
+  const { locale } = useLocale();
   const router = useRouter();
   // null = 로딩 중 (깜빡임 없이 빈 상태와 구분)
   const [builds, setBuilds] = useState<SavedBuild[] | null>(null);
@@ -55,15 +117,15 @@ export function BuildListScreen() {
       return () => {
         active = false;
       };
-    }, [])
+    }, []),
   );
 
   const handleDelete = (build: SavedBuild) => {
-    Alert.alert(translate('deleteConfirm'), '', [
-      { text: translate('cancel'), style: 'cancel' },
+    Alert.alert(translate("deleteConfirm"), "", [
+      { text: translate("cancel"), style: "cancel" },
       {
-        text: translate('deleteOk'),
-        style: 'destructive',
+        text: translate("deleteOk"),
+        style: "destructive",
         onPress: () => {
           removeBuild(build.id).catch(() => {});
           setBuilds((prev) => prev?.filter((b) => b.id !== build.id) ?? prev);
@@ -73,7 +135,7 @@ export function BuildListScreen() {
   };
 
   const handleStartDraft = () => {
-    router.push('/select-champion-modal');
+    router.push("/select-champion-modal");
   };
 
   if (builds != null && builds.length === 0) {
@@ -86,10 +148,10 @@ export function BuildListScreen() {
             color={colors.text.disabled}
           />
           <ThemedText type="body" color="secondary">
-            {translate('emptyTitle')}
+            {translate("emptyTitle")}
           </ThemedText>
           <ThemedText type="caption" color="tertiary">
-            {translate('emptyHint')}
+            {translate("emptyHint")}
           </ThemedText>
           <Pressable
             onPress={handleStartDraft}
@@ -103,7 +165,7 @@ export function BuildListScreen() {
             ]}
           >
             <ThemedText type="label" style={{ color: colors.accent.onAccent }}>
-              {translate('startDraft')}
+              {translate("startDraft")}
             </ThemedText>
           </Pressable>
         </View>
@@ -111,9 +173,11 @@ export function BuildListScreen() {
     );
   }
 
+  const sections = groupByDate(builds ?? [], locale);
+
   return (
-    <FlatList
-      data={builds ?? []}
+    <SectionList
+      sections={sections}
       keyExtractor={(item) => item.id}
       // 헤더 바로 아래 루트 스크롤뷰여야 native large-title이
       // 스크롤에 맞춰 inline 타이틀로 collapse 된다 (래퍼 View로 감싸지 않음).
@@ -121,11 +185,30 @@ export function BuildListScreen() {
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={styles.listContent}
       showsVerticalScrollIndicator={false}
+      stickySectionHeadersEnabled={false}
+      ItemSeparatorComponent={ItemGap}
+      renderSectionHeader={({ section }) => (
+        <View style={styles.sectionHeader}>
+          <View
+            style={[
+              styles.dateTag,
+              {
+                backgroundColor: colors.surface.raised,
+                borderColor: colors.border.subtle,
+              },
+            ]}
+          >
+            <ThemedText type="label" color="secondary">
+              {formatDate((section as BuildSection).title)}
+            </ThemedText>
+          </View>
+        </View>
+      )}
       renderItem={({ item }) => (
         <BuildCard
           build={item}
           onPress={() =>
-            router.push({ pathname: '/build/[id]', params: { id: item.id } })
+            router.push({ pathname: "/build/[id]", params: { id: item.id } })
           }
           onLongPress={() => handleDelete(item)}
         />
@@ -134,20 +217,41 @@ export function BuildListScreen() {
   );
 }
 
+/** 같은 날짜 섹션 안 카드 사이 간격. */
+function ItemGap() {
+  return <View style={styles.itemGap} />;
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   listContent: {
     paddingHorizontal: Spacing.three,
-    paddingTop: Spacing.two,
     paddingBottom: BottomTabInset + Spacing.three,
-    gap: Spacing.three,
+  },
+  sectionHeader: {
+    paddingTop: Spacing.four,
+    paddingBottom: Spacing.three,
+    // borderWidth: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  dateTag: {
+    alignSelf: "flex-start",
+    paddingHorizontal: Spacing.double,
+    paddingVertical: Spacing.half,
+    borderRadius: Radius.full,
+    borderCurve: "continuous",
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  itemGap: {
+    height: Spacing.three,
   },
   empty: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     gap: Spacing.two,
     paddingBottom: BottomTabInset,
   },

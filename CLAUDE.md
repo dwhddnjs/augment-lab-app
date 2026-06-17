@@ -16,165 +16,126 @@
 node scripts/gen-augment-check.mjs   # → docs/augment-check.html
 ```
 
-- 검수 페이지(`docs/augment-check.html`)는 ko/en을 `id`로 병합해 199개 증강을 rarity별로 보여주고, 앱과 동일한 `augmentImageUrl(large)` 규칙으로 CDragon 아이콘을 렌더한다.
-- 같은 아이콘 파일을 공유하는 증강은 카드에 **"공유" 배지**로 표시(오류 아님 — 게임이 의도적으로 공유하는 아이콘 식별용).
-- 아이콘 경로 원칙: **ARAM Mayhem 증강은 `.../UX/Kiwi/Augments/Icons/...` 폴더 사용**. `Cherry`/`Strawberry`(Arena) 폴더 아이콘을 쓰지 말 것 — 같은 이름의 증강이라도 게임 모드가 다르면 아이콘이 다르다. CDragon `cherry-augments.json`에서 rarity(`kSilver`/`kGold`/`kPrismatic`)가 데이터와 일치하는 `Kiwi` 항목을 정답으로 삼는다.
+- 검수 페이지는 ko/en을 `id`로 병합해 199개 증강을 rarity별로 보여주고, 앱과 동일한 `augmentImageUrl(large)` 규칙으로 CDragon 아이콘을 렌더한다.
+- 같은 아이콘 파일을 공유하는 증강은 **"공유" 배지**로 표시(오류 아님).
+- 아이콘 경로 원칙: **ARAM Mayhem 증강은 `.../UX/Kiwi/Augments/Icons/...` 폴더 사용**. `Cherry`/`Strawberry`(Arena) 폴더를 쓰지 말 것. CDragon `cherry-augments.json`에서 rarity(`kSilver`/`kGold`/`kPrismatic`)가 데이터와 일치하는 `Kiwi` 항목을 정답으로 삼는다.
 - 데이터 변경 후 `docs/augment-check.html`도 함께 커밋할 것.
 
-## UI 작업 시 참고
+## UI 작업 — @expo/ui 우선
 
-UI 컴포넌트, 네비게이션, 스타일링, 애니메이션 작업 전에 반드시 `.agents/skills/building-native-ui/SKILL.md`를 읽을 것.
-`@expo/ui` 작업 전에는 `expo:expo-ui` 스킬도 참조할 것(universal 컴포넌트 vs `@expo/ui/swift-ui`·`@expo/ui/jetpack-compose` 플랫폼 트리 구분).
+**UI(컴포넌트·리스트·폼·컨트롤·시트·메뉴) 작업 전 반드시 `.agents/skills/expo-ui/SKILL.md`를 읽을 것.**
 
-### 컴포넌트 선택 우선순위 — iOS 네이티브 우선
+진짜 네이티브 룩앤필이 hero다. **iOS·Android 전용**(웹 미지원). React Native로 직접 그리기 전에 항상 위 단계부터 검토하고, 불가능할 때만 내려간다:
 
-새 UI를 만들 때는 **항상 더 위 단계부터** 검토하고, 불가능할 때만 아래로 내려간다:
+1. **네이티브 셸** — 헤더·탭·검색바·모달/시트는 Expo Router 네이티브. 탭바는 `NativeTabs`(`expo-router/unstable-native-tabs`). [헤더 정책](#헤더-정책) 준수.
+2. **universal `@expo/ui`** — 리스트·폼·토글·버튼·피커·시트 등은 `import { Host, List, ListItem, Picker, Switch, Button, Text, Icon } from '@expo/ui'`. **단일 파일**로 iOS=SwiftUI, Android=Compose 렌더. 1순위 기본값.
+3. **플랫폼 트리** — universal로 부족할 때만(섹션 헤더 `Section`, `Form`, `Menu`, `Alert` 등). iOS `@expo/ui/swift-ui`(+`/modifiers`), Android `@expo/ui/jetpack-compose`. 이때만 `name.ios.tsx` / `name.android.tsx`로 분리.
+4. **드롭인 교체** — RN 커뮤니티 라이브러리 마이그레이션은 `@expo/ui/community/*`.
+5. **RN(최후 수단)** — 위로 안 되는 커스텀 UI만 `View`/`Text`/`Pressable`/`FlatList`/`ScrollView` + 테마 토큰. **이때만** `ThemedText`/`ThemedView`/`useTheme` 사용.
+6. **이미지·아이콘** — 원격 이미지는 `expo-image`의 `Image`. 아이콘은 `@expo/ui`의 `Icon` 또는 `expo-image`의 `source="sf:<name>"`(SF Symbols).
 
-1. **네이티브 셸** — 헤더·탭바·검색바·모달 시트는 Expo Router 네이티브 사용 (아래 [헤더 정책](#헤더-정책) 준수). 탭바는 `NativeTabs`(`expo-router/unstable-native-tabs`).
-2. **네이티브 컴포넌트** — 리스트·설정 폼·토글·메뉴·시트·피커·슬라이더는 **`@expo/ui`**로 구현 (`Host`, `List`, `Section`, `Button`, `Switch`, `ContextMenu`, `BottomSheet`, `Picker`, `Slider` 등). 진짜 iOS 룩앤필 우선.
-3. **RN 컴포넌트** — 위 단계로 표현 불가능한 커스텀 UI에 한해 `View`/`Text`/`Pressable`/`FlatList`/`ScrollView`/`TextInput`/`SafeAreaView` + 테마 토큰.
-4. **이미지·아이콘** — 원격 URL 이미지(Data Dragon CDN 등)는 `expo-image`의 `Image`, 아이콘은 `expo-symbols`/SF Symbols.
+모든 트리는 `Host`로 감싼다. 고밀도 대량 스크롤 목록은 `@expo/ui` `List` 대신 RN `FlatList` 유지. 색·tint는 테마 토큰만 주입(hex 금지). 실제 API는 설치된 타입(`node_modules/@expo/ui/build/...index.d.ts`)이 진실의 원천.
+
+마이페이지가 이 정책의 레퍼런스 구현이다: `src/features/mypage/screens/`.
 
 ### 헤더 정책
 
-화면 헤더는 **Expo Router `Stack.Screen`의 native 헤더를 기본**으로 사용한다. 직접 그린 타이틀/뒤로가기(커스텀 헤더)는 지양:
+화면 헤더는 **Expo Router `Stack.Screen`의 native 헤더를 기본**으로 사용한다. 커스텀 헤더(직접 그린 타이틀/뒤로가기) 지양:
 
-- 탭 화면도 native 헤더를 쓰기 위해 각 탭을 그룹+자체 `Stack`으로 구성한다 (`(home)`/`(community)`/`(mypage)`). `NativeTabs.Trigger`의 `name`은 그룹명(`(home)` 등)을 가리킨다.
-- 헤더 색상은 루트 `_layout.tsx`의 `ThemeProvider`가 주입하므로, 스택 `screenOptions`로 동작만 제어한다 (`headerLargeTitle` / `headerTransparent` / `headerTintColor` 등). hex 하드코딩 금지.
-- 목록형 화면은 `headerLargeTitle: true` + 첫 자식 스크롤뷰에 `contentInsetAdjustmentBehavior="automatic"`.
-- 배너가 헤더 영역까지 차오르는 몰입형 상세는 `headerTransparent: true`로 두고 본문이 헤더 뒤로 스크롤되게 한다. 스크롤에 따라 헤더 배경/타이틀을 페이드인하려면 `headerBackground`/`headerTitle`에 reanimated `Animated.View`/`Animated.Text`를 주입한다(상세 화면 collapsing 패턴).
-- 모달(`presentation: 'modal'`)도 native 헤더를 쓴다. 검색은 직접 `TextInput`을 그리지 말고 `headerSearchBarOptions`(iOS 네이티브 검색바)를 사용하고, 닫기는 `headerLeft`에 취소 버튼을 둔다. grabber는 native 시트가 제공하므로 직접 그리지 않는다.
-- `headerShown: false`는 **몰입형 풀스크린 플로우(드래프트 진행·드래프트 결과 등, 보통 가로 전환)에서만** 허용. 그 외에는 native 헤더를 쓴다.
+- 각 탭을 그룹+자체 `Stack`으로 구성한다(`(home)`/`(community)`/`(mypage)`). `NativeTabs.Trigger`의 `name`은 그룹명을 가리킨다.
+- 헤더 색은 루트 `_layout.tsx`의 `ThemeProvider`가 주입. 스택 `screenOptions`로 동작만 제어(`headerLargeTitle`/`headerTransparent`/`headerTintColor`). hex 하드코딩 금지.
+- 목록형 화면은 `headerLargeTitle: true`. RN 스크롤뷰가 첫 자식이면 `contentInsetAdjustmentBehavior="automatic"`.
+- 몰입형 상세는 `headerTransparent: true` + 본문이 헤더 뒤로 스크롤. 스크롤에 따른 헤더 페이드인은 `headerBackground`/`headerTitle`에 reanimated `Animated.View`/`Animated.Text` 주입.
+- 모달(`presentation: 'modal'`)도 native 헤더. 검색은 직접 그리지 말고 `headerSearchBarOptions`, 닫기는 `headerLeft` 취소 버튼. grabber는 native 시트가 제공.
+- `headerShown: false`는 **몰입형 풀스크린 플로우(드래프트 진행/결과 등)에서만** 허용.
 
 ### 플랫폼 파일 원칙
 
-**웹 지원 없음** — `*.web.tsx` / `*.web.ts` 파일을 만들지 말 것. `npm run web`도 사용하지 않음.
-
-플랫폼별 동작이 꼭 필요한 경우에만 `.ios.tsx` / `.android.tsx`로 분리. 대부분은 단일 파일로 구현.
+- **웹 미지원** — `*.web.tsx` / `*.web.ts` 금지. `npm run web` 미사용.
+- **universal 우선, 필요시만 분리** — `@expo/ui` universal 단일 파일이 기본. universal로 부족하거나 플랫폼 고유 UI가 필요할 때만 `name.ios.tsx`(swift-ui) / `name.android.tsx`(jetpack-compose)로 분리. iOS만 분리하고 Android는 universal `.tsx`를 폴백으로 공유해도 된다(예: 마이페이지).
 
 ### i18n / 로케일 원칙
 
-글로벌 서비스이므로 **모든 사용자 노출 텍스트는 로케일 분기**할 것. 텍스트를 하드코딩하지 말고 `src/lib/i18n.ts`의 `useTranslation()` 훅을 사용:
+글로벌 서비스이므로 **모든 사용자 노출 텍스트는 로케일 분기**. 하드코딩 금지:
 
-- 컴포넌트 파일 상단에 `const t = { ko: {...}, en: {...} }` 형태의 dictionary 정의
-- 컴포넌트 안에서 `const translate = useTranslation(t)` → `translate('key')`로 사용
-- 키 누락 시 자동으로 `en` 폴백
-- 데이터(챔피언/아이템/증강 이름 등)는 `useChampions()` 등 훅이 이미 로케일 분기하므로 그대로 사용
-- `src/hooks/use-locale.ts`의 `useLocale()`이 현재 로케일을 반환 (`'ko' | 'en'`)
+- 파일 상단에 `const t = { ko: {...}, en: {...} }` dictionary 정의 → 컴포넌트 안 `const translate = useTranslation(t)` → `translate('key')`. 키 누락 시 `en` 폴백.
+- 데이터(챔피언/아이템/증강 이름)는 `useChampions()` 등 훅이 이미 로케일 분기.
+- `useLocale()`(`src/hooks/use-locale.ts`)이 현재 로케일 반환(`'ko' | 'en'`).
 
 ## 명령어
 
 ```bash
 npm install            # 의존성 설치
-npm start              # Expo 개발 서버 시작 (Expo Go용 QR 코드 출력)
-npm run ios            # iOS 시뮬레이터로 시작
-npm run android        # Android 에뮬레이터로 시작
-npm run lint           # expo lint로 ESLint 실행
-npm run reset-project  # 스타터 코드를 app-example/로 이동하고 src/app/ 초기화
+npm start              # Expo 개발 서버 시작
+npm run ios            # iOS 시뮬레이터
+npm run android        # Android 에뮬레이터
+npm run lint           # ESLint
 ```
 
-테스트 러너는 아직 설정되지 않았음 — Jest 추가는 [Expo 단위 테스트 가이드](https://docs.expo.dev/develop/unit-testing/) 참고.
+테스트 러너 미설정.
 
 ## 아키텍처
 
-**Expo SDK 56 / React 19 / React Native 0.85** 기반의 iOS·Android 크로스플랫폼 앱 (웹 미지원). iOS 네이티브 룩앤필을 hero로 삼는다.
+**Expo SDK 56 / React 19 / React Native 0.85** 기반 iOS·Android 앱(웹 미지원). 파일 기반 라우팅(Expo Router v56), `experiments.typedRoutes` + `reactCompiler` 활성.
 
 ### 폴더 구조 — 필수 규칙
 
 ```
 src/
-├── app/                        # Expo Router 라우트만 (얇게 유지)
+├── app/                        # Expo Router 라우트만 (얇게 — screens에서 import)
 ├── features/                   # 도메인별 응집 모듈
-│   ├── champions/
-│   │   ├── components/         # 이 도메인 전용 UI (ChampionSelectModal 등)
-│   │   ├── hooks/              # use-champions.ts
-│   │   ├── data/               # champions.{ko,en}.json
-│   │   └── types.ts
-│   ├── augments/
-│   ├── items/
-│   └── builds/
-│       └── queries/            # builds.ts, favorites.ts
-├── components/                 # 도메인 무관한 공용 UI만
-│   ├── themed/                 # ThemedText, ThemedView
-│   ├── navigation/             # app-tabs.*, animated-icon
-│   └── ui/                     # hint-row, collapsible, web-badge, external-link
-├── hooks/                      # 여러 feature가 공유하는 글로벌 훅
-│   ├── use-theme.ts
-│   ├── use-color-scheme.ts
-│   └── use-locale.ts
-├── lib/                        # 외부 클라이언트 + 순수 유틸 (React 의존 X)
-│   ├── supabase.ts
-│   ├── ddragon.ts
-│   ├── i18n.ts
-│   └── hangul.ts
-├── constants/
-│   └── theme.ts
-└── styles/
-    └── global.css
+│   └── <도메인>/
+│       ├── screens/            # 라우트가 렌더하는 화면 단위 (*-screen.tsx)
+│       ├── components/         # 화면을 구성하는 작은 조각 (카드/타일/슬롯/메뉴)
+│       ├── hooks/              # 도메인 훅
+│       ├── data/               # *.ko.json / *.en.json
+│       └── types.ts
+├── components/                 # 도메인 무관 공용 UI (themed/, navigation/, ui/)
+├── hooks/                      # 여러 feature 공유 글로벌 훅 (테마/로케일/색상스킴)
+├── lib/                        # 외부 클라이언트 + 순수 유틸 (supabase/ddragon/i18n/hangul)
+├── constants/theme.ts
+└── styles/global.css
 ```
 
-#### 폴더 경계 규칙
-
-1. **`src/app/`** — 라우트 파일만. 실제 UI는 `features/*/components`에서 import.
-2. **`src/features/<도메인>/`** — 해당 도메인에 종속된 모든 것. **다른 feature를 import하지 않는다** (공유가 필요하면 `hooks/` 또는 `lib/`로 끌어올림).
-3. **`src/components/`** — 도메인 무관한 공용 프리미티브만. feature 폴더를 import하지 않는다.
-4. **`src/hooks/`** — 여러 feature가 공유하는 글로벌 훅만 (테마·로케일·색상 스킴).
-5. **`src/lib/`** — 외부 클라이언트 + 순수 유틸. React 훅이 아님 (`i18n.ts`의 `useTranslation` 예외 — 로케일 인프라로 lib 유지).
-6. **새 도메인 코드** — 해당 feature가 있으면 그 안에, 없으면 `features/` 아래 신설.
-7. **공용 UI 후보 판단** — 한 feature에서만 쓰면 feature 안에, 2개 이상이면 `components/ui`로 승격.
-8. **`src/types/` 폴더 만들지 말 것** — 타입은 사용처(feature)와 동거.
+경계 규칙:
+1. `src/app/` — 라우트 파일만. UI는 `features/*/screens`에서 import.
+2. `features/<도메인>/` — **screens(화면)와 components(조각)를 분리**. 다른 feature를 import하지 않는다(공유는 `hooks/`·`lib/`로 승격).
+3. `src/components/` — 도메인 무관 공용 프리미티브만. feature를 import하지 않는다.
+4. `src/hooks/` — 여러 feature 공유 글로벌 훅만.
+5. `src/lib/` — 외부 클라이언트 + 순수 유틸(React 훅 아님. `i18n.ts`의 `useTranslation`만 예외).
+6. 공용 UI는 2개 이상 feature에서 쓰일 때 `components/ui`로 승격.
+7. `src/types/` 폴더 만들지 말 것 — 타입은 사용처(feature)와 동거.
 
 ### 라우팅
 
-파일 기반 라우팅을 사용하는 Expo Router v56. 라우트 파일은 `src/app/`에 위치. 각 탭은 native 헤더를 쓰기 위해 **그룹 + 자체 `Stack`** 구조로 구성한다([헤더 정책](#헤더-정책) 참고):
-
-- `_layout.tsx` — 루트 레이아웃 (`ThemeProvider`로 헤더 색상 주입 + 스플래시/탭 부트스트랩)
-- `(tabs)/_layout.tsx` — `NativeTabs`. `Trigger`의 `name`은 그룹명(`(home)`/`(community)`/`(mypage)`)을 가리킴
-- `(tabs)/(home)/` — Home 탭 그룹 (`_layout.tsx` 자체 Stack + `index.tsx`)
-- `(tabs)/(community)/` — 커뮤니티 탭 그룹
-- `(tabs)/(mypage)/` — 마이페이지 탭 그룹
+- `_layout.tsx` — 루트(`ThemeProvider` 헤더 색 주입 + 스플래시/탭 부트스트랩)
+- `(tabs)/_layout.tsx` — `NativeTabs`. `Trigger`의 `name`은 그룹명
+- `(tabs)/(home|community|mypage)/` — 각 탭 그룹(자체 `Stack` + 화면)
 - `(tabs)/plus.tsx` — 가운데 추가(+) 탭
-- `select-champion-modal.tsx` — 챔피언 선택 모달 (UI는 `features/champions/components/champion-select-modal.tsx`)
-- `draft.tsx` / `draft-items.tsx` / `draft-result.tsx` — 드래프트 풀스크린 플로우 (몰입형, `headerShown: false` 허용)
+- `draft.tsx` 등 — 몰입형 풀스크린 플로우(`headerShown: false` 허용)
 
-`package.json`의 `main` 진입점이 `expo-router/entry`이므로 Expo Router가 앱을 부트스트랩함. `experiments.typedRoutes`로 타입이 있는 라우트 활성화.
-
-### 플랫폼별 파일
-
-컴포넌트는 React Native의 플랫폼 확장 규칙을 사용함:
-
-- `src/components/navigation/app-tabs.tsx` — 네이티브 탭 바 (fallback)
-- `src/components/navigation/app-tabs.ios.tsx` — iOS 탭 바
-- `src/components/navigation/app-tabs.android.tsx` — Android 탭 바
-- `src/components/navigation/animated-icon.tsx` — 애니메이션 스플래시/아이콘
-- `src/hooks/use-color-scheme.ts` — 색상 스킴 훅
-
-### 디자인 시스템 — 필수 규칙
+## 디자인 시스템 — 필수 규칙
 
 **치지직 톤 민트(#1ED7A0 다크 / #10B187 라이트) 액센트. 다크모드가 hero.**
-**모든 색상·간격·반경·그림자 값은 반드시 `src/constants/theme.ts` 토큰을 사용. 하드코딩 금지.**
+**모든 색상·간격·반경·그림자 값은 `src/constants/theme.ts` 토큰만 사용. 하드코딩 금지.**
 
-#### 디자인 철학 — 최상위 3대 원칙
+### 3대 원칙
 
-1. **미니멀** — 장식 최소화. 커스텀 그림자(`elevation`) 사용 자제하고 위계는 **구분선·여백·표면 레이어(surface)**로 표현. 화면당 강조색(민트)은 핵심 액션 1~2곳에만. 큰 타이틀은 native large title에 위임.
-2. **iOS 네이티브 우선** — 직접 그리기 전에 항상 "iOS 내장 UI로 되는가?"를 먼저 검토. 헤더·탭·검색바·시트·컨텍스트 메뉴·리스트·폼은 네이티브(`Stack.Screen`/`NativeTabs`/`@expo/ui`)를 기본값으로. 자세한 컴포넌트 선택은 [컴포넌트 선택 우선순위](#컴포넌트-선택-우선순위--ios-네이티브-우선) 참고.
-3. **리퀴드글래스** — 패널·오버레이·시트·툴바 등 떠 있는 표면은 `GlassSurface`로 통일 (아래 [리퀴드글라스](#리퀴드글라스-liquid-glass) 규칙).
+1. **미니멀** — 장식 최소화. 위계는 구분선·여백·표면 레이어로. 강조색(민트)은 핵심 액션 1~2곳에만. 큰 타이틀은 native large title에 위임.
+2. **네이티브 우선** — "iOS 내장 UI / `@expo/ui`로 되는가?"를 먼저 검토. ([UI 작업](#ui-작업--expoui-우선))
+3. **리퀴드글래스** — 떠 있는 표면(시트·오버레이·툴바·플로팅)은 `@/components/ui/glass-surface`의 `GlassSurface`로 통일.
 
-#### `useTheme()` 반환값
+### `useTheme()` 토큰
 
-```ts
-const { mode, colors, typography, radius, elevation } = useTheme();
-```
+`const { mode, colors, typography, radius, elevation } = useTheme();`
 
-#### 색상 토큰 (`colors.*`)
-
-- `colors.surface.base/raised/sunken/overlay` — 배경 레이어 (어두울수록 더 깊음)
+- `colors.surface.base/raised/sunken/overlay` — 배경 레이어
 - `colors.text.primary/secondary/tertiary/disabled/inverse/onAccent` — 텍스트
 - `colors.border.default/subtle/strong` — 테두리
 - `colors.accent.default/hover/pressed/subtle/onAccent` — 민트 액센트
-- `colors.status.success/warning/danger/info` — 상태 색상 (각 `.default` / `.subtle`)
+- `colors.status.success/warning/danger/info` — 상태색(각 `.default`/`.subtle`)
 
-#### 타이포 (`typography.*` 또는 `ThemedText type=`)
+### 타이포 (`ThemedText type=` / `typography.*`)
 
 | type | size | weight | 용도 |
 |---|---|---|---|
@@ -185,62 +146,42 @@ const { mode, colors, typography, radius, elevation } = useTheme();
 | `label` | 14 | 600 | 버튼·칩·소제목 |
 | `caption` | 12 | 500 | 부가 설명 |
 | `code` | 13 | 500 | 코드·모노 |
-| `link` | 16 | 500 | body + accent 색 |
+| `link` | 16 | 500 | body + accent |
 
-#### 컴포넌트 사용 규칙
+### 컴포넌트 사용 규칙 (RN 단계에서만)
 
-- **텍스트**: `ThemedText` — `type` + `color` prop
-  - `color`: `primary | secondary | tertiary | disabled | inverse | onAccent | accent`
-- **뷰**: `ThemedView` — `surface` + `elevation` prop
-  - `surface`: `base | raised | sunken | overlay`
-  - `elevation`: `0 | 1 | 2 | 3`
-- **색상 직접 접근**: `const { colors } = useTheme()` 후 인라인 스타일
+- 텍스트: `ThemedText` — `type` + `color`(`primary|secondary|tertiary|disabled|inverse|onAccent|accent`)
+- 뷰: `ThemedView` — `surface`(`base|raised|sunken|overlay`) + `elevation`(`0~3`)
+- 색상 직접 접근: `const { colors } = useTheme()` 후 인라인 스타일
 
-#### 간격·반경 토큰
+### 간격·반경·기타
 
-- `Spacing.*` — 여백/패딩 (`half`=2, `one`=4, `two`=8, `three`=16, `four`=24, `five`=32, `six`=64)
-- `Radius.*` — `borderRadius`에 반드시 사용 (`none`=0, `sm`=4, `md`=8, `lg`=12, `xl`=16, `full`=9999)
+- `Spacing.*` — 여백/패딩(`half`=2 … `six`=64)
+- `Radius.*` — `borderRadius`에 **반드시** 토큰(`none`/`sm`/`md`/`lg`/`xl`/`full`). 숫자 리터럴·`Spacing` 값 금지.
+- 둥근 모서리(캡슐 아님)에는 `{ borderCurve: 'continuous' }`.
+- 그림자는 `elevation` 토큰 또는 CSS `boxShadow`. legacy RN shadow/`elevation` 스타일 prop 금지.
+- `SafeAreaView`(RN) 금지 → 헤더/탭/`contentInsetAdjustmentBehavior` 또는 `react-native-safe-area-context`.
 
-#### 절대 금지
+### 절대 금지
 
-- 색상 hex 값 하드코딩
-- `StyleSheet.create` 안에서 동적 색상 직접 작성
-- `borderRadius`에 숫자 리터럴 사용 — `Radius.*` 토큰 사용
-- `Spacing.*` 값을 `borderRadius`에 사용
+- 색상 hex 하드코딩 / `StyleSheet.create` 안 동적 색상
+- `borderRadius`에 숫자 리터럴 또는 `Spacing` 값
 
-#### 리퀴드글라스 (Liquid Glass)
+### 리퀴드글라스 (Liquid Glass)
 
-**패널/오버레이/툴팁/시트 배경/툴바/플로팅 컨테이너는 반드시 `@/components/ui/glass-surface`의 `GlassSurface`를 사용. 직접 `GlassView`/`BlurView` 호출 금지.**
+**떠 있는 표면(시트 배경·오버레이·툴바·플로팅 트레이)은 `GlassSurface` 사용. 직접 `GlassView`/`BlurView` 금지.**
 
-- iOS 26+ → `expo-glass-effect` 네이티브 글라스 (`isLiquidGlassAvailable()` true)
-- 구버전 iOS / 안드로이드 → `expo-blur`의 `BlurView` 폴백
-- 그 외(BlurView 불가) → `colors.surface.overlay` 단색 최종 폴백
-- 색조(tint)는 테마 토큰(`colors.accent.*` / `colors.surface.*`)만 주입, hex 직접 기입 금지
-- **미니멀과의 균형** — 글라스는 **떠 있는 표면(모달 시트·오버레이·툴바·플로팅 액션·하단 플로팅 트레이)에만**. 본문 카드·섹션 배경에 글라스를 남발하지 말 것.
-- **고밀도 스크롤 목록에는 글라스 미적용** — 성능 유의. 예: 전체 아이템 **선택 그리드**(스크롤되는 아이템 목록), 빌드/카드 리스트. 단, 화면 위에 떠 있는 **선택 아이템 트레이**(`ItemSlotGrid` — 하단 absolute 6칸)는 고밀도 목록이 아니라 플로팅 표면이므로 `GlassSurface` 허용.
-- `GlassSurface`의 `glassStyle='clear'`는 얇은 레이어, `'regular'`는 표준 패널에 사용
+- iOS 26+ → `expo-glass-effect` 네이티브 글라스 · 구버전/안드로이드 → `expo-blur` `BlurView` 폴백 · 그 외 → `colors.surface.overlay` 단색
+- tint는 테마 토큰만. **본문 카드·섹션·고밀도 목록에 글라스 남발 금지**(성능). 화면 위에 떠 있는 선택 트레이(`ItemSlotGrid`)는 허용.
+- `glassStyle='clear'`(얇은 레이어) / `'regular'`(표준 패널)
 
-#### 이미지 및 아이콘
+### 이미지·아이콘
 
-- SF Symbols: `expo-image`의 `source="sf:symbol-name"` 사용
-- 원격 이미지: `expo-image`의 `Image` 사용
-- CDragon 챔피언 클래스 아이콘: `championClassIconUrl(tag)` (`src/lib/ddragon.ts`)
-- 아이콘 색상: `tintColor={colors.text.secondary}` 등 토큰 사용
+- 원격 이미지: `expo-image`의 `Image` · SF Symbols: `@expo/ui` `Icon` 또는 `expo-image` `source="sf:name"`
+- CDragon 챔피언 클래스 아이콘: `championClassIconUrl(tag)`(`src/lib/ddragon.ts`)
+- **탭/네이티브 아이콘**(`NativeTabs.Trigger.Icon`)은 플랫폼별로 지정: iOS=SF Symbol(`sf`), Android=Material Symbol(`md`). 한 컴포넌트에 `sf`+`md`를 함께 줄 수 있다(iOS는 `sf`, Android는 `md` 사용). SF Symbol은 **weight 제어 불가** → 굵기는 `*.fill`/형태 variant로. 색은 `selectedColor`(또는 `NativeTabs` `tintColor`)에 테마 토큰 주입.
 
-#### (예정) 토큰 미니멀화
+## 경로 별칭 / React Compiler
 
-미니멀 방향으로의 토큰 재조정이 후속 작업으로 예정되어 있다. **확정 전까지는 기존 토큰을 그대로 사용**하되, 방향을 인지하고 작업할 것:
-
-- `src/constants/theme.ts`의 타이포 스케일(특히 `display 48` / `title 32`)과 `elevation` 그림자 토큰을 미니멀하게 재조정.
-- 대형 타이틀은 native large title 헤더에 위임하고, 본문 타이포 대비를 낮춤.
-- 토큰 변경 시 위 [타이포 표](#타이포-typography-또는-themedtext-type)와 elevation 관련 서술도 반드시 함께 갱신할 것.
-
-### 경로 별칭
-
-`@/`는 `src/`로, `@/assets/`는 `assets/`로 매핑 (`tsconfig.json`에 설정).
-
-### React Compiler
-
-`app.json`에 `experiments.reactCompiler: true`가 설정되어 있어 React Compiler가 자동으로 실행됨. 프로파일링으로 필요가 확인되지 않는 한 `useMemo`/`useCallback`을 수동으로 추가하지 말 것.
-
-**예외**: `useFocusEffect` (Expo Router)는 안정적인 콜백 참조를 요구하므로 `useCallback`을 반드시 함께 사용할 것.
+- `@/`→`src/`, `@/assets/`→`assets/`(`tsconfig.json`)
+- React Compiler 자동 실행 — 프로파일링 없이 `useMemo`/`useCallback` 수동 추가 금지. **예외**: `useFocusEffect`(Expo Router)는 `useCallback` 필수.
