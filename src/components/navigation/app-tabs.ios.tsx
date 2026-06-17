@@ -55,7 +55,12 @@ export default function AppTabs() {
           NativeTabs의 onTabSelectionPrevented가 모달을 띄운다. */}
       <NativeTabs.Trigger name="plus" role="search" disabled>
         <NativeTabs.Trigger.Label>{translate("plus")}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="plus" />
+        {/* iOS=SF Symbol(plus), Android=Material Symbol(add). 색은 accent 강제. */}
+        <NativeTabs.Trigger.Icon
+          sf="plus"
+          md="add"
+          selectedColor={colors.accent.default}
+        />
       </NativeTabs.Trigger>
     </NativeTabs>
   );
