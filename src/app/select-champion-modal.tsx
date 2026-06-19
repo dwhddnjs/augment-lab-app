@@ -1,3 +1,3 @@
-import { ChampionSelectModal } from "@/features/champions/components/champion-select-modal";
+import { ChampionSelectScreen } from "@/features/champions/screens/champion-select-screen";
 
-export default ChampionSelectModal;
+export default ChampionSelectScreen;

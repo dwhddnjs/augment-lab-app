@@ -1,63 +1,28 @@
-import { Image } from "expo-image";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { AugmentRarityColors, Radius, Spacing } from "@/constants/theme";
+import { AugmentImage } from "@/components/ui/augment-image";
+import { AugmentRarityColors, AugmentRarityGlyphs, Radius, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
-import type { Champion } from "@/features/champions/types";
 import { useTheme } from "@/hooks/use-theme";
-import { championSquareUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import { AugmentIcon } from "./augment-icon";
+import { ChampionSummary } from "./champion-summary";
 
 const t = {
   ko: {
     title: "내 빌드",
     augments: "증강",
-
-    hp: "체력",
-    ad: "공격력",
-    armor: "방어력",
-    mr: "마저",
-    ms: "이속",
-    Fighter: "전사",
-    Mage: "마법사",
-    Assassin: "암살자",
-    Tank: "탱커",
-    Marksman: "원거리",
-    Support: "서포터",
   },
   en: {
     title: "My Build",
     augments: "Augments",
-
-    hp: "HP",
-    ad: "AD",
-    armor: "Armor",
-    mr: "MR",
-    ms: "MS",
-    Fighter: "Fighter",
-    Mage: "Mage",
-    Assassin: "Assassin",
-    Tank: "Tank",
-    Marksman: "Marksman",
-    Support: "Support",
   },
-};
-
-// MaterialCommunityIcons glyphs for the augment rarity fallback (cross-platform).
-const RARITY_SF: Record<string, string> = {
-  silver: "shield",
-  gold: "star",
-  prismatic: "shimmer",
 };
 
 // UI shows 5 slots; the draft logic itself still resolves in 4 picks.
 const BASE_SLOTS = 5;
-
-type Translate = (key: string) => string;
 
 interface AugmentCellProps {
   augment: Augment | null;
@@ -98,12 +63,12 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
           },
         ]}
       >
-        <AugmentIcon
+        <AugmentImage
           key={augment.id}
           iconPath={augment.iconPath}
           size={Math.round(size * 0.66)}
           tint={tint}
-          fallbackSymbol={RARITY_SF[augment.rarity] ?? "star-four-points"}
+          fallbackGlyph={AugmentRarityGlyphs[augment.rarity] ?? "star-four-points"}
           recyclingKey={augment.id}
         />
       </View>
@@ -119,78 +84,6 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
   );
 }
 
-interface ChampionSummaryProps {
-  champion: Champion;
-  translate: Translate;
-}
-
-function ChampionSummary({ champion, translate }: ChampionSummaryProps) {
-  const { colors } = useTheme();
-
-  const stats: { key: string; value: number }[] = [
-    { key: "hp", value: Math.round(champion.stats.hp) },
-    { key: "ad", value: Math.round(champion.stats.attackdamage) },
-    { key: "armor", value: Math.round(champion.stats.armor) },
-    { key: "mr", value: Math.round(champion.stats.spellblock) },
-    { key: "ms", value: Math.round(champion.stats.movespeed) },
-  ];
-
-  return (
-    <View style={styles.champBlock}>
-      <View style={styles.champHeader}>
-        <Image
-          source={{ uri: championSquareUrl(champion.imageKey) }}
-          style={[styles.champIcon, { borderColor: colors.accent.default }]}
-          contentFit="cover"
-        />
-        <View style={styles.champMeta}>
-          <ThemedText type="heading" numberOfLines={1}>
-            {champion.name}
-          </ThemedText>
-          <View style={styles.tagRow}>
-            {champion.tags.map((tag) => (
-              <View
-                key={tag}
-                style={[
-                  styles.tagChip,
-                  { backgroundColor: colors.accent.subtle },
-                ]}
-              >
-                <ThemedText
-                  type="caption"
-                  style={{ color: colors.accent.default }}
-                >
-                  {translate(tag)}
-                </ThemedText>
-              </View>
-            ))}
-          </View>
-        </View>
-      </View>
-
-      <View style={styles.statRow}>
-        {stats.map((s) => (
-          <View
-            key={s.key}
-            style={[
-              styles.statChip,
-              {
-                backgroundColor: colors.surface.raised,
-                borderColor: colors.border.subtle,
-              },
-            ]}
-          >
-            <ThemedText type="caption" color="tertiary">
-              {translate(s.key)}
-            </ThemedText>
-            <ThemedText type="label">{s.value}</ThemedText>
-          </View>
-        ))}
-      </View>
-    </View>
-  );
-}
-
 interface Props {
   picked: Augment[];
   /** Actual drawer container width (from the parent <Drawer>). */
@@ -199,7 +92,7 @@ interface Props {
 }
 
 export function PickedDrawer({ picked, width, championId }: Props) {
-  const translate = useTranslation(t) as Translate;
+  const translate = useTranslation(t);
   const { colors } = useTheme();
 
   const champions = useChampions();
@@ -239,9 +132,7 @@ export function PickedDrawer({ picked, width, championId }: Props) {
       >
         <ThemedText type="heading">{translate("title")}</ThemedText>
 
-        {champion && (
-          <ChampionSummary champion={champion} translate={translate} />
-        )}
+        {champion && <ChampionSummary champion={champion} />}
 
         <View style={styles.section}>
           <ThemedText type="label" color="secondary">
@@ -293,47 +184,5 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     alignItems: "center",
     justifyContent: "center",
-  },
-  champBlock: {
-    gap: Spacing.three,
-  },
-  champHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.three,
-  },
-  champIcon: {
-    width: 56,
-    height: 56,
-    borderRadius: Radius.md,
-    borderWidth: 1.5,
-  },
-  champMeta: {
-    flex: 1,
-    gap: Spacing.one,
-  },
-  tagRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: Spacing.one,
-  },
-  tagChip: {
-    paddingHorizontal: Spacing.two,
-    paddingVertical: Spacing.half,
-    borderRadius: Radius.full,
-  },
-  statRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: Spacing.two,
-  },
-  statChip: {
-    minWidth: 56,
-    alignItems: "center",
-    gap: Spacing.half,
-    paddingHorizontal: Spacing.two,
-    paddingVertical: Spacing.one,
-    borderRadius: Radius.md,
-    borderWidth: 1,
   },
 });

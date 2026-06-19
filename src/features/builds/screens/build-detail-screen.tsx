@@ -24,22 +24,19 @@ import Animated, {
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassSurface } from "@/components/ui/glass-surface";
-import { AugmentRarityColors, Radius, Spacing } from "@/constants/theme";
+import { Radius, Spacing } from "@/constants/theme";
 import { useAugments } from "@/features/augments/hooks/use-augments";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { ItemStatPanel } from "@/features/items/components/item-stat-panel";
 import { useItems } from "@/features/items/hooks/use-items";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
-import { cleanAugmentDescription } from "@/lib/augment-text";
 import { getBuild, removeBuild, type SavedBuild } from "@/lib/build-storage";
-import {
-  championSplashUrl,
-  championSquareUrl,
-  itemImageUrl,
-} from "@/lib/ddragon";
+import { championSplashUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import { AugmentTile } from "./augment-tile";
+import { BuildAugmentList } from "../components/build-augment-list";
+import { BuildChampionHeader } from "../components/build-champion-header";
+import { BuildItemRow } from "../components/build-item-row";
 
 const t = {
   ko: {
@@ -51,12 +48,6 @@ const t = {
     deleteOk: "삭제",
     cancel: "취소",
     notFound: "빌드를 찾을 수 없어요",
-    Fighter: "전사",
-    Mage: "마법사",
-    Assassin: "암살자",
-    Tank: "탱커",
-    Marksman: "원거리",
-    Support: "서포터",
   },
   en: {
     augments: "Augments",
@@ -67,16 +58,8 @@ const t = {
     deleteOk: "Delete",
     cancel: "Cancel",
     notFound: "Build not found",
-    Fighter: "Fighter",
-    Mage: "Mage",
-    Assassin: "Assassin",
-    Tank: "Tank",
-    Marksman: "Marksman",
-    Support: "Support",
   },
 };
-
-type Translate = (key: string) => string;
 
 // 배너가 가장 클 때 높이. 스크롤하면 0까지 줄어든다.
 const BANNER_HEIGHT = 300;
@@ -88,7 +71,7 @@ const COLLAPSE_DISTANCE = BANNER_HEIGHT - SHEET_OVERLAP;
 const PULL_EXTRA = 140;
 
 export function BuildDetailScreen() {
-  const translate = useTranslation(t) as Translate;
+  const translate = useTranslation(t);
   const { colors, typography } = useTheme();
   const { locale } = useLocale();
   const router = useRouter();
@@ -160,10 +143,10 @@ export function BuildDetailScreen() {
     : null;
   const buildAugments = (build?.augmentIds ?? [])
     .map((augId) => augments.find((a) => a.id === augId))
-    .filter((a) => a != null);
+    .filter((a): a is NonNullable<typeof a> => a != null);
   const buildItems = (build?.itemIds ?? [])
     .map((itemId) => items.find((it) => it.id === itemId))
-    .filter((it) => it != null);
+    .filter((it): it is NonNullable<typeof it> => it != null);
   const itemStatsList = buildItems.map((it) => it.stats);
 
   const handleDelete = () => {
@@ -215,7 +198,10 @@ export function BuildDetailScreen() {
           // 스크롤로 배너가 접히면 native 블러(리퀴드글라스) 헤더가 페이드인된다.
           headerBackground: () => (
             <Animated.View style={[StyleSheet.absoluteFill, headerFadeStyle]}>
-              <GlassSurface glassStyle="regular" style={StyleSheet.absoluteFill} />
+              <GlassSurface
+                glassStyle="regular"
+                style={StyleSheet.absoluteFill}
+              />
             </Animated.View>
           ),
           headerTitle: () => (
@@ -264,9 +250,16 @@ export function BuildDetailScreen() {
         <LinearGradient
           colors={[
             colors.surface.base + "00",
-            colors.surface.base + "99",
+            colors.surface.base + "00",
+            colors.surface.base + "14",
+            colors.surface.base + "40",
+            colors.surface.base + "A6",
             colors.surface.base,
           ]}
+          // fade를 아래쪽에 몰되 stop을 촘촘히 깔아 부드럽게 수렴시킨다.
+          // splash가 오래 또렷하게 보이고(라이트모드의 밝은 surface.base가 일찍 덮는 것 방지),
+          // 불투명도가 급격히 점프하며 생기던 띠(banding)도 없앤다.
+          locations={[0, 0.5, 0.68, 0.82, 0.93, 1]}
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
           style={StyleSheet.absoluteFill}
@@ -292,103 +285,17 @@ export function BuildDetailScreen() {
           ]}
         >
           {/* 챔피언 블록 */}
-          {champion && (
-            <View style={styles.champHeader}>
-              <Image
-                source={{ uri: championSquareUrl(champion.imageKey) }}
-                style={[
-                  styles.champIcon,
-                  { borderColor: colors.accent.default },
-                ]}
-                contentFit="cover"
-              />
-              <View style={styles.champMeta}>
-                <ThemedText type="heading" numberOfLines={1}>
-                  {champion.name}
-                </ThemedText>
-                <ThemedText type="caption" color="tertiary" numberOfLines={1}>
-                  {champion.title}
-                </ThemedText>
-                <View style={styles.tagRow}>
-                  {champion.tags.map((tag) => (
-                    <View
-                      key={tag}
-                      style={[
-                        styles.tagChip,
-                        { backgroundColor: colors.accent.subtle },
-                      ]}
-                    >
-                      <ThemedText
-                        type="caption"
-                        style={{ color: colors.accent.default }}
-                      >
-                        {translate(tag)}
-                      </ThemedText>
-                    </View>
-                  ))}
-                </View>
-              </View>
-              <ThemedText type="caption" color="tertiary">
-                {date}
-              </ThemedText>
-            </View>
-          )}
+          {champion && <BuildChampionHeader champion={champion} date={date} />}
 
           {/* 증강 */}
-          <View style={styles.section}>
-            <ThemedText type="label" color="secondary">
-              {translate("augments")} {buildAugments.length}
-            </ThemedText>
-            {buildAugments.map((aug, i) => (
-              <ThemedView
-                key={`${aug.id}-${i}`}
-                surface="raised"
-                style={[
-                  styles.augmentRow,
-                  {
-                    borderColor: colors.border.subtle,
-                    borderLeftColor: AugmentRarityColors[aug.rarity].border,
-                  },
-                ]}
-              >
-                <AugmentTile augment={aug} size={48} />
-                <View style={styles.augmentBody}>
-                  <ThemedText type="label">{aug.name}</ThemedText>
-                  <ThemedText type="caption" color="secondary">
-                    {cleanAugmentDescription(aug.description)}
-                  </ThemedText>
-                </View>
-              </ThemedView>
-            ))}
-          </View>
+          <BuildAugmentList
+            augments={buildAugments}
+            label={translate("augments")}
+          />
 
           {/* 아이템 */}
           {buildItems.length > 0 && (
-            <View style={styles.section}>
-              <ThemedText type="label" color="secondary">
-                {translate("items")} {buildItems.length}
-              </ThemedText>
-              <View style={styles.itemsRow}>
-                {buildItems.map((item, i) => (
-                  <View
-                    key={`${item.id}-${i}`}
-                    style={[
-                      styles.itemTile,
-                      {
-                        backgroundColor: colors.surface.raised,
-                        borderColor: colors.border.subtle,
-                      },
-                    ]}
-                  >
-                    <Image
-                      source={{ uri: itemImageUrl(item.imageKey) }}
-                      style={styles.itemIcon}
-                      contentFit="contain"
-                    />
-                  </View>
-                ))}
-              </View>
-            </View>
+            <BuildItemRow items={buildItems} label={translate("items")} />
           )}
 
           {/* 합산 스탯 */}
@@ -447,63 +354,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: Spacing.two,
   },
-  champHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.three,
-  },
-  champIcon: {
-    width: 64,
-    height: 64,
-    borderRadius: Radius.md,
-    borderWidth: 1.5,
-  },
-  champMeta: {
-    flex: 1,
-    gap: Spacing.one,
-  },
-  tagRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: Spacing.one,
-  },
-  tagChip: {
-    paddingHorizontal: Spacing.two,
-    paddingVertical: Spacing.half,
-    borderRadius: Radius.full,
-  },
   section: {
     gap: Spacing.two,
-  },
-  augmentRow: {
-    flexDirection: "row",
-    gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Radius.lg,
-    borderCurve: "continuous",
-    borderWidth: StyleSheet.hairlineWidth,
-    borderLeftWidth: 3,
-  },
-  augmentBody: {
-    flex: 1,
-    gap: Spacing.one,
-  },
-  itemsRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: Spacing.two,
-  },
-  itemTile: {
-    width: 44,
-    height: 44,
-    borderRadius: Radius.sm,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  itemIcon: {
-    width: 38,
-    height: 38,
-    borderRadius: Radius.sm,
   },
 });

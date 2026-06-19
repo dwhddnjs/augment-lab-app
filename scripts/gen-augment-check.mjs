@@ -123,6 +123,12 @@ function iconUrl(p) {
   const s = p.replace(/^\\/lol-game-data\\/assets/i, '').toLowerCase();
   return CDRAGON + '/game' + s.replace(/_small(\\.\\w+)$/i, '_large$1');
 }
+// large 자산이 없는 신규(Kiwi) 아이콘용 small 폴백 — 앱과 동일
+function iconUrlSmall(p) {
+  if (/^https?:\\/\\//i.test(p)) return p;
+  const s = p.replace(/^\\/lol-game-data\\/assets/i, '').toLowerCase();
+  return CDRAGON + '/plugins/rcp-be-lol-game-data/global/default' + s;
+}
 const RNAME = { silver: '실버', gold: '골드', prismatic: '프리즘' };
 function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 let rarity = 'all', sharedOnly = false, query = '';
@@ -161,8 +167,11 @@ function render() {
       img.loading = 'lazy';
       img.src = iconUrl(a.iconPath);
       img.alt = a.ko;
-      img.onerror = () => { img.replaceWith(Object.assign(document.createElement('div'),
-        { className: 'icon err', textContent: 'no img' })); };
+      img.onerror = () => {
+        if (!img.dataset.fb) { img.dataset.fb = '1'; img.src = iconUrlSmall(a.iconPath); return; }
+        img.replaceWith(Object.assign(document.createElement('div'),
+          { className: 'icon err', textContent: 'no img' }));
+      };
       const meta = document.createElement('div');
       meta.className = 'meta';
       meta.innerHTML = '<div class="ko">' + esc(a.ko) + '</div>' +

@@ -1,3 +1,3 @@
-import { BuildDetailScreen } from '@/features/builds/components/build-detail-screen';
+import { BuildDetailScreen } from '@/features/builds/screens/build-detail-screen';
 
 export default BuildDetailScreen;

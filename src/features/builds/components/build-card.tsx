@@ -3,24 +3,24 @@
  * 챔피언 splash가 카드 전체를 채우고, 하단 그라데이션 위에 이름·증강·아이템을
  * 얹는다. 카드 테두리는 입체감만 주도록 표면보다 어두운 subtle 톤으로 절제한다.
  */
-import { Image } from 'expo-image';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
+import { Pressable, StyleSheet, View } from "react-native";
 
-import { ThemedText } from '@/components/themed/themed-text';
-import { Elevation, HeroOverlay, Radius, Spacing } from '@/constants/theme';
-import { useAugments } from '@/features/augments/hooks/use-augments';
-import { useChampions } from '@/features/champions/hooks/use-champions';
-import { useItems } from '@/features/items/hooks/use-items';
-import { useTheme } from '@/hooks/use-theme';
-import type { SavedBuild } from '@/lib/build-storage';
-import { championSplashUrl, itemImageUrl } from '@/lib/ddragon';
-import { useTranslation } from '@/lib/i18n';
-import { AugmentTile } from './augment-tile';
+import { ThemedText } from "@/components/themed/themed-text";
+import { Elevation, HeroOverlay, Radius, Spacing } from "@/constants/theme";
+import { useAugments } from "@/features/augments/hooks/use-augments";
+import { useChampions } from "@/features/champions/hooks/use-champions";
+import { useItems } from "@/features/items/hooks/use-items";
+import { useTheme } from "@/hooks/use-theme";
+import type { SavedBuild } from "@/lib/build-storage";
+import { championSplashUrl, itemImageUrl } from "@/lib/ddragon";
+import { useTranslation } from "@/lib/i18n";
+import { AugmentTile } from "./augment-tile";
 
 const t = {
-  ko: { unknownChampion: '알 수 없는 챔피언' },
-  en: { unknownChampion: 'Unknown champion' },
+  ko: { unknownChampion: "알 수 없는 챔피언" },
+  en: { unknownChampion: "Unknown champion" },
 };
 
 const AUGMENT_SIZE = 32;
@@ -34,7 +34,7 @@ interface Props {
 
 export function BuildCard({ build, onPress, onLongPress }: Props) {
   const translate = useTranslation(t);
-  const { colors } = useTheme();
+  const { colors, mode } = useTheme();
 
   const champions = useChampions();
   const augments = useAugments();
@@ -63,6 +63,10 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
             {
               // splash 위는 모드 무관 어두운 톤 — 다크/라이트 공통(이미지·텍스트 가독성).
               backgroundColor: HeroOverlay.cardBase,
+              // 어두운 splash 가장자리의 테두리: 다크는 은은한 흰 림(현 톤 유지),
+              // 라이트는 밝은 배경과 닿아 검은 윤곽처럼 보이므로 더 밝은 광택 림으로
+              // 올려 입체감을 준다.
+              borderWidth: mode === "light" ? 0 : StyleSheet.hairlineWidth,
               borderColor: HeroOverlay.tileBorder,
             },
           ]}
@@ -73,78 +77,82 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
               source={{ uri: championSplashUrl(champion.id) }}
               style={StyleSheet.absoluteFill}
               contentFit="cover"
-              contentPosition={{ top: 0, left: '50%' }}
+              contentPosition={{ top: 0, left: "50%" }}
             />
           )}
 
-        {/* 하단 정보 패널 — 텍스트 뒤를 거의 솔리드로 덮어 가독성 확보 */}
-        <View style={styles.content}>
-          {/* 패널 상단만 splash로 페이드, 나머지는 어두운 scrim으로(모드 무관) */}
-          <LinearGradient
-            colors={[
-              HeroOverlay.scrim0,
-              HeroOverlay.scrim1,
-              HeroOverlay.scrim2,
-              HeroOverlay.scrim3,
-            ]}
-            locations={[0, 0.42, 0.7, 1]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
-            style={StyleSheet.absoluteFill}
-          />
+          {/* 하단 정보 패널 — 텍스트 뒤를 거의 솔리드로 덮어 가독성 확보 */}
+          <View style={styles.content}>
+            {/* 패널 상단만 splash로 페이드, 나머지는 어두운 scrim으로(모드 무관) */}
+            <LinearGradient
+              colors={[
+                HeroOverlay.scrim0,
+                HeroOverlay.scrim1,
+                HeroOverlay.scrim2,
+                HeroOverlay.scrim3,
+              ]}
+              locations={[0, 0.42, 0.7, 1]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
+              style={StyleSheet.absoluteFill}
+            />
 
-          <View style={styles.titleBlock}>
-            <ThemedText
-              type="heading"
-              numberOfLines={1}
-              style={{ color: HeroOverlay.textPrimary, fontWeight: '700' }}
-            >
-              {champion ? champion.name : translate('unknownChampion')}
-            </ThemedText>
-            {champion && (
+            <View style={styles.titleBlock}>
               <ThemedText
-                type="caption"
+                type="heading"
                 numberOfLines={1}
-                style={{ color: HeroOverlay.textSecondary }}
+                style={{ color: HeroOverlay.textPrimary, fontWeight: "800" }}
               >
-                {champion.title}
+                {champion ? champion.name : translate("unknownChampion")}
               </ThemedText>
-            )}
-          </View>
+              {champion && (
+                <ThemedText
+                  type="caption"
+                  numberOfLines={1}
+                  style={{ color: HeroOverlay.textSecondary }}
+                >
+                  {champion.title}
+                </ThemedText>
+              )}
+            </View>
 
-          {/* 증강 + 아이템 묶음 — 둘은 가깝게, 헤더와는 떨어지게 */}
-          <View style={styles.tilesGroup}>
-            {buildAugments.length > 0 && (
-              <View style={styles.row}>
-                {buildAugments.map((aug, i) => (
-                  <AugmentTile key={`${aug.id}-${i}`} augment={aug} size={AUGMENT_SIZE} />
-                ))}
-              </View>
-            )}
-
-            {buildItems.length > 0 && (
-              <View style={styles.row}>
-                {buildItems.map((item, i) => (
-                  <View
-                    key={`${item.id}-${i}`}
-                    style={[
-                      styles.itemTile,
-                      {
-                        backgroundColor: HeroOverlay.tileBg,
-                        borderColor: HeroOverlay.tileBorder,
-                      },
-                    ]}
-                  >
-                    <Image
-                      source={{ uri: itemImageUrl(item.imageKey) }}
-                      style={styles.itemIcon}
-                      contentFit="contain"
+            {/* 증강 + 아이템 묶음 — 둘은 가깝게, 헤더와는 떨어지게 */}
+            <View style={styles.tilesGroup}>
+              {buildAugments.length > 0 && (
+                <View style={styles.row}>
+                  {buildAugments.map((aug, i) => (
+                    <AugmentTile
+                      key={`${aug.id}-${i}`}
+                      augment={aug}
+                      size={AUGMENT_SIZE}
                     />
-                  </View>
-                ))}
-              </View>
-            )}
-          </View>
+                  ))}
+                </View>
+              )}
+
+              {buildItems.length > 0 && (
+                <View style={styles.row}>
+                  {buildItems.map((item, i) => (
+                    <View
+                      key={`${item.id}-${i}`}
+                      style={[
+                        styles.itemTile,
+                        {
+                          backgroundColor: HeroOverlay.tileBg,
+                          borderColor: HeroOverlay.tileBorder,
+                        },
+                      ]}
+                    >
+                      <Image
+                        source={{ uri: itemImageUrl(item.imageKey) }}
+                        style={styles.itemIcon}
+                        contentFit="contain"
+                      />
+                    </View>
+                  ))}
+                </View>
+              )}
+            </View>
           </View>
         </View>
       </View>
@@ -155,16 +163,16 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
 const styles = StyleSheet.create({
   card: {
     borderRadius: Radius.xl,
-    borderCurve: 'continuous',
+    borderCurve: "continuous",
     ...Elevation.level2,
   },
   cardInner: {
     height: 188,
     borderRadius: Radius.xl,
-    borderCurve: 'continuous',
-    borderWidth: StyleSheet.hairlineWidth,
-    overflow: 'hidden',
-    justifyContent: 'flex-end',
+    borderCurve: "continuous",
+
+    overflow: "hidden",
+    justifyContent: "flex-end",
   },
   content: {
     paddingTop: Spacing.four,
@@ -179,8 +187,8 @@ const styles = StyleSheet.create({
     gap: Spacing.half,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: Spacing.one,
   },
   itemTile: {
@@ -188,8 +196,8 @@ const styles = StyleSheet.create({
     height: ITEM_SIZE,
     borderRadius: Radius.sm,
     borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   itemIcon: {
     width: 26,
