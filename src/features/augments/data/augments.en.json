@@ -1138,7 +1138,7 @@
     "name": "DropBear",
     "description": "On death, a giant Tibbers with all your augments falls from the sky and damages nearby enemies.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Drop_Bear.png"
   },
   {
     "id": "en-passant",
@@ -1467,7 +1467,7 @@
     "name": "Support Main",
     "description": "QUEST: Heal allied champions for health. REWARD: Any healing you provide now also Heals Over Time for% of the initial heal over seconds. Healing Done: /",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestSupportMain_small.png"
   },
   {
     "id": "surge-field",
