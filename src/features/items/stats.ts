@@ -82,7 +82,7 @@ export const STAT_LABELS: Record<StatKey, StatMeta> = {
   lethality: { ko: '물리 관통력', en: 'Lethality' },
   armorpen: { ko: '방어구 관통력', en: 'Armor Pen', unit: '%', decimals: 1 },
   magicpenFlat: { ko: '마법 관통력', en: 'Magic Pen' },
-  magicpenPercent: { ko: '마법 관통력', en: 'Magic Pen', unit: '%', decimals: 1 },
+  magicpenPercent: { ko: '마법 관통력(%)', en: 'Magic Pen (%)', unit: '%', decimals: 1 },
   lifesteal: { ko: '생명력 흡수', en: 'Life Steal', unit: '%', decimals: 1 },
   omnivamp: { ko: '모든 피해 흡혈', en: 'Omnivamp', unit: '%', decimals: 1 },
   tenacity: { ko: '강인함', en: 'Tenacity', unit: '%', decimals: 1 },

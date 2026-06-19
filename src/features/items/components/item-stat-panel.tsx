@@ -42,7 +42,7 @@ export function ItemStatPanel({
       <View style={styles.rows}>
         {STAT_DISPLAY_ORDER.map((key) => {
           const meta = STAT_LABELS[key];
-          const { added, total } = computed[key];
+          const { base, added, total } = computed[key];
           const unit = meta.unit ?? "";
           const decimals = meta.decimals ?? 0;
 
@@ -53,6 +53,12 @@ export function ItemStatPanel({
 
           // 아이템으로 추가된 양이 있으면 "총합 (+추가분)"
           const showAdded = added > 0;
+          // 공격 속도는 총합을 절대값으로 보이되, 추가분은 아이템 % 증가율로 표기
+          // (added = base × Σ% 이므로 added/base = Σ%). 그 외는 동일 단위로.
+          const addedText =
+            key === "attackspeed" && base > 0
+              ? `+${formatNumber((added / base) * 100, 0)}%`
+              : `+${formatNumber(added, decimals)}${unit}`;
 
           return (
             <View key={key} style={styles.row}>
@@ -65,8 +71,7 @@ export function ItemStatPanel({
                 {showAdded && (
                   <ThemedText type="caption" color="accent">
                     {" "}
-                    (+{formatNumber(added, decimals)}
-                    {unit})
+                    ({addedText})
                   </ThemedText>
                 )}
               </ThemedText>
