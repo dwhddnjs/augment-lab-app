@@ -13,7 +13,7 @@ import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
 import { championClassIconUrl, championSquareUrl } from "@/lib/ddragon";
 import { matchChampionName } from "@/lib/hangul";
-import { useTranslation } from "@/lib/i18n";
+import { CHAMPION_TAGS, useTranslation } from "@/lib/i18n";
 
 const t = {
   ko: {
@@ -29,15 +29,6 @@ const t = {
     cancel: "Cancel",
   },
 };
-
-const TAGS = [
-  "Fighter",
-  "Assassin",
-  "Mage",
-  "Tank",
-  "Marksman",
-  "Support",
-] as const;
 
 export function ChampionSelectScreen() {
   const champions = useChampions();
@@ -95,7 +86,7 @@ export function ChampionSelectScreen() {
         />
       </Pressable>
 
-      {TAGS.map((tag) => {
+      {CHAMPION_TAGS.map((tag) => {
         const isActive = selectedTag === tag;
         const iconUrl = championClassIconUrl(tag);
         return (

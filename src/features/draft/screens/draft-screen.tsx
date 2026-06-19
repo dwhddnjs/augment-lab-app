@@ -90,9 +90,13 @@ export function DraftScreen() {
 
   // Warm the image cache for the current cards so emblems appear with the card.
   useEffect(() => {
+    // large가 없는 신규(Kiwi) 아이콘은 small로 폴백하므로 두 사이즈 모두 워밍한다.
     const urls = currentCards
       .filter((a) => a.iconPath)
-      .map((a) => augmentImageUrl(a.iconPath, "large"));
+      .flatMap((a) => [
+        augmentImageUrl(a.iconPath, "large"),
+        augmentImageUrl(a.iconPath, "small"),
+      ]);
     if (urls.length) Image.prefetch(urls, { cachePolicy: "memory-disk" });
   }, [currentCards]);
 
