@@ -1545,5 +1545,12 @@
     "description": "Your chosen ability is greatly empowered, but your other capabilities are weakened.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+  },
+  {
+    "id": "terror",
+    "name": "Terror",
+    "description": "Immobilizing enemy champions grants you permanent Cursed Power. Gain Armor and Magic Resistance based on your Cursed Power.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
   }
 ]

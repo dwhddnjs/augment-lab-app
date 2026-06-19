@@ -1545,5 +1545,12 @@
     "description": "선택한 스킬이 대폭 강화되지만, 그 외 능력은 약해집니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+  },
+  {
+    "id": "terror",
+    "name": "공포",
+    "description": "적 챔피언을 이동 불가 상태로 만들면 영구히 저주받은 힘을 얻습니다. 저주받은 힘에 따라 방어력과 마법 저항력을 얻습니다.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
   }
 ]
