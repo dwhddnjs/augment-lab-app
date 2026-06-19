@@ -12,11 +12,12 @@ import { Alert, Pressable, SectionList, StyleSheet, View } from "react-native";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { BottomTabInset, Radius, Spacing } from "@/constants/theme";
-import { useLocale, type Locale } from "@/hooks/use-locale";
+import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
 import { listBuilds, removeBuild, type SavedBuild } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
-import { BuildCard } from "./build-card";
+import { BuildCard } from "../components/build-card";
+import { formatDate, groupByDate, type BuildSection } from "../utils/date";
 
 const t = {
   ko: {
@@ -36,65 +37,6 @@ const t = {
     cancel: "Cancel",
   },
 };
-
-interface BuildSection {
-  key: string;
-  title: string;
-  data: SavedBuild[];
-}
-
-/** 로컬 기준 같은 '날(day)'을 식별하는 키. createdAt은 ISO 문자열. */
-function dayKey(iso: string): string {
-  const d = new Date(iso);
-  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
-}
-
-/** 최신순으로 정렬한 뒤 같은 날짜끼리 섹션으로 묶는다(ISO는 사전순=시간순). */
-function groupByDate(builds: SavedBuild[], locale: Locale): BuildSection[] {
-  const sorted = [...builds].sort((a, b) =>
-    b.createdAt.localeCompare(a.createdAt),
-  );
-  const sections: BuildSection[] = [];
-  let current: BuildSection | null = null;
-  for (const b of sorted) {
-    const key = dayKey(b.createdAt);
-    if (!current || current.key !== key) {
-      current = {
-        key,
-        title: new Date(b.createdAt).toLocaleDateString(
-          locale === "ko" ? "ko-KR" : "en-US",
-        ),
-        data: [],
-      };
-      sections.push(current);
-    }
-    current.data.push(b);
-  }
-  return sections;
-}
-
-function formatDate(input: string): string {
-  // 2026. 6. 17.
-
-  if (input.includes(".")) {
-    const [year, month, day] = input
-      .split(".")
-      .map((v) => v.trim())
-      .filter(Boolean);
-
-    return `${year}.${Number(month)}.${Number(day)}`;
-  }
-
-  // 6/17/2026 (MM/DD/YYYY)
-
-  if (input.includes("/")) {
-    const [month, day, year] = input.split("/").map((v) => v.trim());
-
-    return `${year}.${Number(month)}.${Number(day)}`;
-  }
-
-  throw new Error("지원하지 않는 날짜 형식입니다.");
-}
 
 export function BuildListScreen() {
   const translate = useTranslation(t);

@@ -25,6 +25,8 @@ license: MIT
 
 위 3단계로도 안 되는 진짜 커스텀 UI만 RN(`View`/`Text`/`Pressable`/`FlatList`) + 테마 토큰으로 그린다.
 
+**헤더·라우팅·플랫폼 파일 분리** 정책은 `./references/headers.md`를 따른다(화면 헤더는 native `Stack.Screen` 기본, 탭 그룹 구조, 탭 아이콘 sf/md, `*.web` 금지 등).
+
 ## 핵심 컴포넌트 (universal)
 
 | 컴포넌트 | 용도 |

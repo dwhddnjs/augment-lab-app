@@ -1,17 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { Radius, Spacing } from "@/constants/theme";
+import { AugmentRarityGlyphs, Radius, Spacing } from "@/constants/theme";
 import type { Augment, AugmentRarity } from "@/features/augments/types";
 import { cleanAugmentDescription } from "@/lib/augment-text";
-import { AugmentIcon } from "./augment-icon";
-
-// Fallback glyphs (MaterialCommunityIcons) when an augment has no icon path.
-const RARITY_SF: Record<AugmentRarity, string> = {
-  silver: "shield",
-  gold: "star",
-  prismatic: "shimmer",
-};
+import { AugmentImage } from "@/components/ui/augment-image";
 
 interface RarityStyle {
   // Outer metallic rim — diagonal brushed-metal sheen.
@@ -109,11 +102,11 @@ export function DraftCardFrame({ augment, cardWidth }: Props) {
         <View style={styles.content}>
           {/* Emblem with soft halo */}
           <View style={[styles.iconArea, { marginBottom: Spacing.one }]}>
-            <AugmentIcon
+            <AugmentImage
               iconPath={augment.iconPath}
               size={iconSize}
               tint={rs.iconTint}
-              fallbackSymbol={RARITY_SF[augment.rarity]}
+              fallbackGlyph={AugmentRarityGlyphs[augment.rarity]}
               recyclingKey={augment.id}
             />
           </View>

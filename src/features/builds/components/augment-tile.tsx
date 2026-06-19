@@ -1,21 +1,12 @@
 /**
  * AugmentTile — 빌드 카드/상세에서 쓰는 증강 아이콘 타일.
- * 희귀도 테두리 + CDragon 아이콘, 로드 실패 시 MCI 글리프 폴백.
+ * 희귀도 테두리 + CDragon 아이콘(AugmentImage가 large→small→글리프 폴백 처리).
  */
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { Image } from 'expo-image';
-import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { AugmentRarityColors, HeroOverlay, Radius } from '@/constants/theme';
-import type { Augment, AugmentRarity } from '@/features/augments/types';
-import { augmentImageUrl } from '@/lib/ddragon';
-
-const RARITY_GLYPH: Record<AugmentRarity, string> = {
-  silver: 'shield',
-  gold: 'star',
-  prismatic: 'shimmer',
-};
+import { AugmentImage } from '@/components/ui/augment-image';
+import { AugmentRarityColors, AugmentRarityGlyphs, HeroOverlay, Radius } from '@/constants/theme';
+import type { Augment } from '@/features/augments/types';
 
 interface Props {
   augment: Augment;
@@ -23,9 +14,7 @@ interface Props {
 }
 
 export function AugmentTile({ augment, size }: Props) {
-  const [failed, setFailed] = useState(false);
   const tint = AugmentRarityColors[augment.rarity].border;
-  const showFallback = failed || !augment.iconPath;
 
   return (
     <View
@@ -40,22 +29,15 @@ export function AugmentTile({ augment, size }: Props) {
         },
       ]}
     >
-      {showFallback ? (
-        <MaterialCommunityIcons
-          name={RARITY_GLYPH[augment.rarity] as React.ComponentProps<typeof MaterialCommunityIcons>['name']}
-          size={Math.round(size * 0.6)}
-          color={tint}
-        />
-      ) : (
-        <Image
-          source={{ uri: augmentImageUrl(augment.iconPath, 'large') }}
-          style={{ width: Math.round(size * 0.75), height: Math.round(size * 0.75) }}
-          contentFit="contain"
-          cachePolicy="memory-disk"
-          recyclingKey={augment.id}
-          onError={() => setFailed(true)}
-        />
-      )}
+      <AugmentImage
+        iconPath={augment.iconPath}
+        size={Math.round(size * 0.75)}
+        tint={tint}
+        fallbackGlyph={AugmentRarityGlyphs[augment.rarity]}
+        // 글리프는 이미지(0.75)의 0.8배 = 기존 size*0.6 유지.
+        fallbackRatio={0.8}
+        recyclingKey={augment.id}
+      />
     </View>
   );
 }

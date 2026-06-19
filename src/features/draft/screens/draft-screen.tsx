@@ -14,9 +14,9 @@ import { useTheme } from "@/hooks/use-theme";
 import { augmentImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { useDraft } from "../hooks/use-draft";
-import { DraftCard, type CardEntryMode, type CardExitMode } from "./draft-card";
-import { PickedDrawer } from "./picked-drawer";
-import { RoundIndicator } from "./round-indicator";
+import { DraftCard, type CardEntryMode, type CardExitMode } from "../components/draft-card";
+import { PickedDrawer } from "../components/picked-drawer";
+import { RoundIndicator } from "../components/round-indicator";
 
 const t = {
   ko: {
@@ -185,7 +185,7 @@ export function DraftScreen() {
       onOpen={() => setDrawerOpen(true)}
       onClose={() => setDrawerOpen(false)}
       drawerPosition="right"
-      drawerType="slide"
+      drawerType="front"
       drawerStyle={{ width: drawerWidth, backgroundColor: colors.surface.base }}
       renderDrawerContent={() => (
         <PickedDrawer

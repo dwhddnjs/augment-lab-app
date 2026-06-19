@@ -1,3 +1,3 @@
-import { BuildListScreen } from '@/features/builds/components/build-list-screen';
+import { BuildListScreen } from '@/features/builds/screens/build-list-screen';
 
 export default BuildListScreen;

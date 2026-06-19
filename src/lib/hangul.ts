@@ -1,6 +1,6 @@
 const CHOSEONG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
 
-export function toChoseong(str: string): string {
+function toChoseong(str: string): string {
   let out = '';
   for (const ch of str) {
     const code = ch.charCodeAt(0);

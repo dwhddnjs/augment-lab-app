@@ -39,7 +39,7 @@ const TAGS = [
   "Support",
 ] as const;
 
-export function ChampionSelectModal() {
+export function ChampionSelectScreen() {
   const champions = useChampions();
   const { colors } = useTheme();
   const translate = useTranslation(t);

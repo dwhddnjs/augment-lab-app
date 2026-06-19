@@ -21,13 +21,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BluntForce_small.png"
   },
   {
-    "id": "buff-buddies",
-    "name": "Buff Buddies",
-    "description": "Permanently gain the Crest of Cinders and Crest of Insight. Your basic attacks slow and burn enemies, and you gain ability haste plus mana/energy regeneration.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BuffBuddies_small.png"
-  },
-  {
     "id": "deft",
     "name": "Deft",
     "description": "Grants bonus attack speed.",
@@ -77,32 +70,11 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Flashbang_small.png"
   },
   {
-    "id": "frost-wraith",
-    "name": "Frost Wraith",
-    "description": "Periodically releases a frost pulse around you, rooting nearby enemies for a short duration.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FrostWraith_small.png"
-  },
-  {
     "id": "goredrink",
     "name": "Goredrink",
     "description": "Grants omnivamp (healing from all damage dealt).",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/GoreDrink_small.png"
-  },
-  {
-    "id": "guilty-pleasure",
-    "name": "Guilty Pleasure",
-    "description": "Immobilizing or grounding an enemy champion heals you.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/GuiltyPleasure_small.png"
-  },
-  {
-    "id": "hat-on-a-hat",
-    "name": "Hat on a Hat",
-    "description": "Gain ability power and bonus magic resistance for each hat or headwear item in your inventory.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/HatonaHat_small.png"
   },
   {
     "id": "heavy-hitter",
@@ -182,32 +154,11 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Poltergeist_small.png"
   },
   {
-    "id": "reenergize",
-    "name": "ReEnergize",
-    "description": "Energized attacks on a new target don’t consume stacks. When fully Energized, your next attack deals bonus magic damage based on the target’s current health.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/MobiusCoil_small.png"
-  },
-  {
-    "id": "repulsor",
-    "name": "Repulsor",
-    "description": "When your health drops low, knock back and slow nearby enemies. (Has a cooldown, resets on death)",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Repulsor_small.png"
-  },
-  {
     "id": "scoped-weapons",
     "name": "Scoped Weapons",
     "description": "Increases your attack range. (Reduced for ranged champions)",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopedWeapons_small.png"
-  },
-  {
-    "id": "self-destruct",
-    "name": "Self Destruct",
-    "description": "Periodically attaches a bomb to you that detonates, dealing true damage based on enemies’ max health and knocking them up.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/Maps/Particles/Kiwi/SelfDestruct_small.MAYHEM_New_Augments.png"
   },
   {
     "id": "shadow-runner",
@@ -243,20 +194,6 @@
     "description": "When hit, you have a chance based on your crit chance to reduce the damage taken. Also grants critical strike chance.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TankItOrLeaveIt_small.png"
-  },
-  {
-    "id": "the-brutalizer",
-    "name": "The Brutalizer",
-    "description": "Grants bonus attack damage, ability haste, and lethality.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TheBrutalizer_small.png"
-  },
-  {
-    "id": "tormentor",
-    "name": "Tormentor",
-    "description": "Immobilizing or grounding an enemy applies an infinitely stacking burn that deals damage over time.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Tormentor_small.png"
   },
   {
     "id": "transmute-gold",
@@ -306,13 +243,6 @@
     "description": "Grants a spell shield that blocks the next enemy ability. (Has a cooldown)",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Poltergeist_small.png"
-  },
-  {
-    "id": "wind-beneath-blade",
-    "name": "Wind Beneath Blade",
-    "description": "Gain bonus movement speed scaling with your lethality and magic penetration.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WindBeneathBlade_small.png"
   },
   {
     "id": "witchful-thinking",
@@ -378,13 +308,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CelestialBody_small.png"
   },
   {
-    "id": "cheating",
-    "name": "Cheating",
-    "description": "Upgrades your Recall to Empowered Recall, enabling the shop on completion; your spawn also restores health and resources.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Cheating_small.png"
-  },
-  {
     "id": "critical-healing",
     "name": "Critical Healing",
     "description": "Your heals and shields can critically strike for increased effectiveness. Also grants critical strike chance.",
@@ -406,13 +329,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DawnbringersResolve_small.png"
   },
   {
-    "id": "demon-s-dance",
-    "name": "Demon's Dance",
-    "description": "Gain both the Fleet Footwork and Grasp of the Undying keystone runes.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DemonsDance_small.png"
-  },
-  {
     "id": "divine-intervention",
     "name": "Divine Intervention",
     "description": "Periodically call down a protective star; on landing, you and nearby allies become invulnerable briefly. (Has a cooldown)",
@@ -425,13 +341,6 @@
     "description": "Your abilities apply on-hit effects. (Has a per-target cooldown)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/EtherealWeapon_small.png"
-  },
-  {
-    "id": "executioner",
-    "name": "Executioner",
-    "description": "Deal increased damage to low-health enemies. Champion takedowns reset all your basic abilities.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpiritualPurification_small.png"
   },
   {
     "id": "firebrand",
@@ -469,13 +378,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GetExcited_small.png"
   },
   {
-    "id": "holy-fire",
-    "name": "Holy Fire",
-    "description": "Your heals and shields burn nearby enemies, dealing magic damage over time based on their max health.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/HolyFire_small.png"
-  },
-  {
     "id": "impassable",
     "name": "Impassable",
     "description": "Gain both the Aftershock and Glacial Augment keystone runes.",
@@ -495,20 +397,6 @@
     "description": "Casting your ultimate marks all enemies; stored damage detonates as true damage when the mark expires. (Has a cooldown)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ItsKillingTime_small.png"
-  },
-  {
-    "id": "keystone-conjurer",
-    "name": "Keystone Conjurer",
-    "description": "Gain both the Summon Aery and Arcane Comet keystone runes.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/KeystoneConjurer_small.png"
-  },
-  {
-    "id": "lightning-strikes",
-    "name": "Lightning Strikes",
-    "description": "Increases bonus attack speed from all sources; above a threshold, your basic attacks deal bonus magic damage.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightningStrikes_small.png"
   },
   {
     "id": "magic-missile",
@@ -581,13 +469,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Recursion_small.png"
   },
   {
-    "id": "restless-restoration",
-    "name": "Restless Restoration",
-    "description": "Continuously heal while moving.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/RestlessRestoration_small.png"
-  },
-  {
     "id": "scopier-weapons",
     "name": "Scopier Weapons",
     "description": "Greatly increases your attack range. (Reduced for ranged champions)",
@@ -614,13 +495,6 @@
     "description": "Hitting a distant enemy with a non-ultimate ability greatly reduces that ability’s cooldown.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SkilledSniper_small.png"
-  },
-  {
-    "id": "slow-and-steady",
-    "name": "Slow and Steady",
-    "description": "Your attack speed is capped, but all bonus attack speed is converted into bonus attack damage.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlowAndSteady_small.png"
   },
   {
     "id": "snowball-upgrade",
@@ -665,20 +539,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TransmutePrismatic_small.png"
   },
   {
-    "id": "twice-thrice",
-    "name": "Twice Thrice",
-    "description": "Every third basic attack applies on-hit effects an additional time at increased effectiveness.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TwiceThrice_small.png"
-  },
-  {
-    "id": "upgrade-hubris",
-    "name": "Upgrade Hubris",
-    "description": "Upgrades Hubris: takedowns heal you and grant movement speed scaling with Eminence stacks. Also gain 250 gold.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeHubris_small.png"
-  },
-  {
     "id": "upgrade-infinity-edge",
     "name": "Upgrade Infinity Edge",
     "description": "Upgrades Infinity Edge: gain crit chance, 500 gold, and a randomly fluctuating bonus to critical damage.",
@@ -712,13 +572,6 @@
     "description": "Grants bonus movement speed based on your ability haste.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WithHaste_small.png"
-  },
-  {
-    "id": "i-m-a-baby-kitty-where-is-mama",
-    "name": "I'm a Baby Kitty Where is Mama",
-    "description": "Bind to the nearest ally as your \"mama\"; gain bonus movement speed and heal/shield power while near or moving toward them.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BabyKitty_small.png"
   },
   {
     "id": "back-to-basics",
@@ -819,13 +672,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FanTheHammer_small.png"
   },
   {
-    "id": "feel-the-burn",
-    "name": "Feel the Burn",
-    "description": "Replaces a summoner spell with Feel the Burn: cast Ignite and Exhaust on all nearby enemy champions at once.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FeelTheBurn_small.png"
-  },
-  {
     "id": "fey-magic",
     "name": "Fey Magic",
     "description": "Damaging enemies with your ultimate polymorphs them into harmless critters briefly. (Per-target cooldown)",
@@ -838,13 +684,6 @@
     "description": "Casting your ultimate grants a shield, omnivamp, and bonus movement speed for a short duration. (Has a cooldown)",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/FinalForm_small.png"
-  },
-  {
-    "id": "gash",
-    "name": "Gash",
-    "description": "Basic attacks deal bonus true damage scaling with your armor. Also grants bonus attack speed.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/DarksteelTalons_small.png"
   },
   {
     "id": "giant-slayer",
@@ -894,13 +733,6 @@
     "description": "On first entering the enemy spawn area, become Kinged: gain a random Prismatic augment and upgrade one Legendary item.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/KingMe_small.png"
-  },
-  {
-    "id": "laser-heal",
-    "name": "Laser Heal",
-    "description": "Replaces a summoner spell with Laser Heal: fire a beam that heals allies and damages and slows enemies.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/LaseHeal_small.png"
   },
   {
     "id": "mad-scientist",
@@ -962,7 +794,7 @@
     "id": "quest-urf-s-champion",
     "name": "Urf's Champion",
     "description": "Quest: score enough champion takedowns. Reward: receive The Golden Spatula.",
-    "rarity": "gold",
+    "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Quest_UrfsChampion_small.png"
   },
   {
@@ -978,20 +810,6 @@
     "description": "Massively increases your attack range. (Reduced for ranged champions)",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopiestWeapons_small.png"
-  },
-  {
-    "id": "slow-cooker",
-    "name": "Slow Cooker",
-    "description": "Surround yourself in flames, applying an infinitely stacking burn each second that deals magic damage based on your max health.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlowCooker_small.png"
-  },
-  {
-    "id": "snowball-roulette",
-    "name": "Snowball Roulette",
-    "description": "Empowers Mark with haste; on hit it casts a random harmful summoner spell on the enemy and a beneficial one on you. (Grants Mark if unequipped)",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SnowballUpgrade_small.png"
   },
   {
     "id": "symphony-of-war",
@@ -1029,25 +847,11 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/UltimateRevolution_small.png"
   },
   {
-    "id": "upgrade-mikael-s-blessing",
-    "name": "Upgrade Mikael's Blessing",
-    "description": "Grants and upgrades Mikael’s Blessing: reduced cooldown, and its active cleanses CC, heals, and grants tenacity to nearby allies.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeMikaelsBlessing_small.png"
-  },
-  {
     "id": "windspeaker-s-blessing",
     "name": "Windspeaker's Blessing",
     "description": "Your heals and shields grant the target bonus armor and magic resistance for a short duration.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WindspeakersBlessing_small.png"
-  },
-  {
-    "id": "cerberus",
-    "name": "Cerberus",
-    "description": "Gain both the Hail of Blades and Press the Attack keystone runes.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Cerberus_Small.png"
   },
   {
     "id": "earthwake",
@@ -1064,25 +868,11 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Pandoras_Box_Small.png"
   },
   {
-    "id": "trueshot-prodigy",
-    "name": "Trueshot Prodigy",
-    "description": "Damaging a distant enemy fires a Trueshot Barrage that deals magic damage to all enemies it passes through. (Has a cooldown)",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TrueshotProdigy_small.png"
-  },
-  {
     "id": "slap-around",
     "name": "Slap Around",
     "description": "Immobilizing or grounding an enemy grants infinitely stacking adaptive force for the round.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlapAround_small.png"
-  },
-  {
-    "id": "",
-    "name": "???",
-    "description": "Enemy Missing pings launch a missile to the pinged location, exploding to deal magic damage to enemies and heal nearby allies.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/MissingPing_small.png"
   },
   {
     "id": "hextech-soul",
@@ -1097,20 +887,6 @@
     "description": "Grants ability haste, increased further with each champion takedown.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/InfiniteRecursion_small.png"
-  },
-  {
-    "id": "bounce-of-the-poro-king",
-    "name": "Bounce of the Poro King",
-    "description": "Replaces a summoner spell with Bounce of the Poro King: become the Poro King, bouncing to damage and knock back nearby enemies.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PoroKing_small.png"
-  },
-  {
-    "id": "crack-open-that-egg",
-    "name": "Crack Open That Egg",
-    "description": "When your shield expires, it explodes, dealing magic damage to nearby enemies based on the shield’s strength.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CrackOpenThatEgg_small.png"
   },
   {
     "id": "crit-n-cast",
@@ -1183,25 +959,11 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Firfox_small.png"
   },
   {
-    "id": "grandma-s-chili-oil",
-    "name": "Grandma's Chili Oil",
-    "description": "Attacks and abilities burn enemies and spawn a Chili Oil pool that heals allies and burns enemies, scaling with your burn sources.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GrandmasChiliOil_small.png"
-  },
-  {
     "id": "growth-spurt",
     "name": "Growth Spurt",
     "description": "Replaces a summoner spell with Growth Spurt: rapidly grow, knocking up nearby enemies and gaining max health.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GrowthSpurt_small.png"
-  },
-  {
-    "id": "heads-up-cupcake",
-    "name": "Heads Up Cupcake!",
-    "description": "Cupcakes periodically fly across the map; collecting one grants gold and heals the champion and nearby allies.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WatchOutGrapefruit_small.png"
   },
   {
     "id": "holy-snowball",
@@ -1246,13 +1008,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PinballSnowball_small.png"
   },
   {
-    "id": "poro-blaster",
-    "name": "Poro Blaster",
-    "description": "Gather Poros over time; damaging an enemy launches them all for true damage based on max health, knocking up at full stacks.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PoroBlast_small.png"
-  },
-  {
     "id": "prom-queen",
     "name": "Prom Queen",
     "description": "Periodically don a tiara to sprint, knocking up and charming enemies you collide with. (Has a cooldown)",
@@ -1274,13 +1029,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Quest_VoidImmolation_small.png"
   },
   {
-    "id": "red-envelopes",
-    "name": "Red Envelopes",
-    "description": "Red envelopes periodically appear nearby; collecting one grants gold, brief movement speed, and a random small stat.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/RedEnvelopes_small.png"
-  },
-  {
     "id": "shrink-engine",
     "name": "Shrink Engine",
     "description": "Each champion takedown shrinks you and grants ability haste and movement speed, stacking infinitely. Lose some on death.",
@@ -1300,13 +1048,6 @@
     "description": "Immobilizing an enemy champion grants infinitely stacking max health.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SoulEater_small.png"
-  },
-  {
-    "id": "speed-demon",
-    "name": "Speed Demon",
-    "description": "Damaging an enemy champion with an ability grants a burst of movement speed that decays.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpeedDemon_small.png"
   },
   {
     "id": "spin-me-right-round",
@@ -1351,27 +1092,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TwinFire_small.png"
   },
   {
-    "id": "upgrade-thornmail",
-    "name": "Upgrade Thornmail",
-    "description": "Upgrades Thornmail/Bramble Vest: out of combat, form a shell that reflects heavy damage to the next enemy basic attack.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeCollector_small.png"
-  },
-  {
-    "id": "void-rift",
-    "name": "Void Rift",
-    "description": "Ability hits leave Void Scars; two nearby scars collapse into a rift that deals magic damage and slows enemies within.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/VoidRift_small.png"
-  },
-  {
-    "id": "weighted-popoffs",
-    "name": "Weighted Popoffs",
-    "description": "Hitting enemy champions with abilities stacks faster basic-ability cooldown recovery, doubled at max stacks.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WeightedPopoffs_small.png"
-  },
-  {
     "id": "zealot",
     "name": "Zealot",
     "description": "Grants critical strike chance and bonus attack speed, scaling with ability power.",
@@ -1396,8 +1116,8 @@
     "id": "archmage",
     "name": "Archmage",
     "description": "Casting a spell refunds another random spell's cost by% of the original spell's Cooldown.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Archmage_small.png"
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Eureka_small.png"
   },
   {
     "id": "from-downtown",
@@ -1418,7 +1138,7 @@
     "name": "DropBear",
     "description": "On death, a giant Tibbers with all your augments falls from the sky and damages nearby enemies.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Drop_Bear_Small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
   },
   {
     "id": "en-passant",
@@ -1451,7 +1171,7 @@
   {
     "id": "multishot",
     "name": "Multishot",
-    "description": "",
+    "description": "QUEST: Hit enemy champions with your chosen ability the required number of times. REWARD: Fire additional missiles per Quest Level.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
   },
@@ -1465,7 +1185,7 @@
   {
     "id": "quickstep",
     "name": "Quickstep",
-    "description": "",
+    "description": "When you use your chosen ability, dash towards your cursor.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
   },
@@ -1505,30 +1225,16 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
   },
   {
-    "id": "terror",
-    "name": "Terror",
-    "description": "Immobilizing enemy champions grants you permanent Cursed Power. Gain Armor and Magic Resistance based on your Cursed Power.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Desecrator_large.png"
-  },
-  {
-    "id": "upgrade-cutlass",
-    "name": "Upgrade Cutlass",
-    "description": "Reduce Spectral Cutlass and Lifeline's Cooldown to seconds. When active, gain% damage amplification. Gain 250 Gold.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeCutlass_small.png"
-  },
-  {
     "id": "wee-woo-wee-woo",
     "name": "Wee Woo Wee Woo",
-    "description": "",
+    "description": "When moving towards allies with low Health, gain Movement Speed. Your Healing and Shielding are greater based on how low your target's Health is.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WeeWooWeeWoo_small.png"
   },
   {
     "id": "yowch-my-coins",
     "name": "Yowch, My Coins!",
-    "description": "",
+    "description": "On takedown, enemy champions drop coins nearby, which you and your allies can collect. Each is worth the required number of gold.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/YouchMyCoins_small.png"
   },
@@ -1551,7 +1257,7 @@
     "name": "BONK!",
     "description": "Attacks and Abilities empowered by deal additional damage to the target and nearby enemies.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Bonk_large.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png"
   },
   {
     "id": "hide-on-bush",
@@ -1703,7 +1409,7 @@
   {
     "id": "pressure-cooker",
     "name": "Pressure Cooker",
-    "description": "",
+    "description": "Every second, apply a stacking Burn to nearby enemy champions, scaling with your max Health. QUEST: Deal Burn damage to enemy Champions. REWARD: Size and damage increase per Quest Level.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestPressureCooker_small.png"
   },
@@ -1738,7 +1444,7 @@
   {
     "id": "snowblast",
     "name": "Snowblast",
-    "description": "",
+    "description": "Recasting Snowball deals increased damage, Knocks Up the target, and Knocks Back nearby enemies.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Snowbomb_small.png"
   },
@@ -1761,7 +1467,7 @@
     "name": "Support Main",
     "description": "QUEST: Heal allied champions for health. REWARD: Any healing you provide now also Heals Over Time for% of the initial heal over seconds. Healing Done: /",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestSupportMain_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
   },
   {
     "id": "surge-field",
@@ -1804,5 +1510,40 @@
     "description": "Gain Omnivamp.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WarlockJuicebox_small.png"
+  },
+  {
+    "id": "pursuit-of-power",
+    "name": "Pursuit of Power",
+    "description": "QUEST: Hit enemy champions with your chosen ability the required number of times. REWARD: Permanently increase your chosen ability's damage.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
+  },
+  {
+    "id": "endless-decimation",
+    "name": "Endless Decimation",
+    "description": "While in combat, autocast a circular axe that deals physical damage. Enemies on the outer edge take additional damage and heal you.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/EndlessDecimate_small.png"
+  },
+  {
+    "id": "terraind",
+    "name": "Terrain'd",
+    "description": "Terrain created by your chosen ability deals damage over time to nearby enemies. Terrain created by ultimate abilities deals more damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightningStrikes_small.png"
+  },
+  {
+    "id": "pin-cushion",
+    "name": "Pin Cushion",
+    "description": "Attacks during your chosen ability apply Marks that explode at the end of its duration, dealing damage and granting Move Speed.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SymphonyOfWar_small.png"
+  },
+  {
+    "id": "one-trick",
+    "name": "One Trick",
+    "description": "Your chosen ability is greatly empowered, but your other capabilities are weakened.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
   }
 ]

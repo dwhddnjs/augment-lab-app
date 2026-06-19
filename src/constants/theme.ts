@@ -187,6 +187,14 @@ export const AugmentRarityColors = {
   },
 } as const;
 
+// 증강 아이콘 미해결 시 표시하는 희귀도 폴백 글리프 (MaterialCommunityIcons).
+// 여러 feature(draft·builds·items)가 공유하므로 여기 단일 정의를 import해 쓴다.
+export const AugmentRarityGlyphs = {
+  silver: "shield",
+  gold: "star",
+  prismatic: "shimmer",
+} as const;
+
 // splash 히어로 카드 내부 — 라이트/다크 공통 고정 어두운 톤(이미지 가독성).
 // 카드 위는 컬러풀한 splash라 모드와 무관하게 어두운 scrim/타일이 표준이며,
 // 이 그룹이 카드 내부 색의 유일한 출처다(다른 곳에서 hex 직접 쓰지 말 것).

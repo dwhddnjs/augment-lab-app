@@ -1,3 +1,3 @@
-import { ItemSelectScreen } from '@/features/items/components/item-select-screen';
+import { ItemSelectScreen } from '@/features/items/screens/item-select-screen';
 
 export default ItemSelectScreen;
