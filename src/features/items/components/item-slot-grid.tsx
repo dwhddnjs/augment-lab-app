@@ -4,11 +4,11 @@
  * 채워진 슬롯: 아이템 아이콘 표시, 프레스 시 onSlotPress(index, item) → 제거
  * 빈 슬롯: 점선 placeholder (항상 6칸 노출)
  */
-import { Image } from 'expo-image';
 import { Pressable, StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/themed/themed-text';
 import { GlassSurface } from '@/components/ui/glass-surface';
+import { RemoteImage } from '@/components/ui/remote-image';
 import { Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { itemImageUrl } from '@/lib/ddragon';
@@ -51,8 +51,9 @@ export function ItemSlotGrid({ selectedItems, onSlotPress }: ItemSlotGridProps) 
           ]}
         >
           {item ? (
-            <Image
-              source={{ uri: itemImageUrl(item.imageKey) }}
+            <RemoteImage
+              uri={itemImageUrl(item.imageKey)}
+              recyclingKey={item.id}
               style={StyleSheet.absoluteFill}
               contentFit="cover"
             />

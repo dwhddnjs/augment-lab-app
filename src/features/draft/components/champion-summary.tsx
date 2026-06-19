@@ -1,7 +1,7 @@
-import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
+import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import type { Champion } from "@/features/champions/types";
 import { useTheme } from "@/hooks/use-theme";
@@ -47,8 +47,9 @@ export function ChampionSummary({ champion }: Props) {
   return (
     <View style={styles.champBlock}>
       <View style={styles.champHeader}>
-        <Image
-          source={{ uri: championSquareUrl(champion.imageKey) }}
+        <RemoteImage
+          uri={championSquareUrl(champion.imageKey)}
+          recyclingKey={champion.id}
           style={[styles.champIcon, { borderColor: colors.accent.default }]}
           contentFit="cover"
         />

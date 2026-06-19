@@ -1,12 +1,13 @@
 import { Image } from "expo-image";
-import { Stack, useRouter } from "expo-router";
+import { Stack, useFocusEffect, useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { FlatList, Pressable, StyleSheet } from "react-native";
 import type { SearchBarCommands } from "react-native-screens";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
+import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useLocale } from "@/hooks/use-locale";
@@ -45,6 +46,20 @@ export function ChampionSelectScreen() {
     .filter((c) => !selectedTag || c.tags.includes(selectedTag))
     .filter((c) => matchChampionName(c.name, query))
     .sort((a, b) => a.name.localeCompare(b.name, locale));
+
+  // 첫 진입 시 챔피언 아이콘·역할 칩을 미리 디스크 캐시에 받아둔다.
+  // (캐시가 비어 검은 박스가 깜빡이던 첫 설치 케이스 대응)
+  useFocusEffect(
+    useCallback(() => {
+      const urls = [
+        ...champions.map((c) => championSquareUrl(c.imageKey)),
+        ...CHAMPION_TAGS.map((tag) => championClassIconUrl(tag)).filter(
+          (u): u is string => u !== null,
+        ),
+      ];
+      if (urls.length) Image.prefetch(urls, { cachePolicy: "memory-disk" });
+    }, [champions]),
+  );
 
   const handleSelect = (id: string) => {
     setSelectedId((curr) => (curr === id ? null : id));
@@ -110,6 +125,7 @@ export function ChampionSelectScreen() {
                   isActive ? colors.accent.default : colors.text.secondary
                 }
                 contentFit="contain"
+                cachePolicy="memory-disk"
               />
             ) : (
               <ThemedText
@@ -195,8 +211,9 @@ export function ChampionSelectScreen() {
               onPress={() => handleSelect(item.id)}
               style={styles.cell}
             >
-              <Image
-                source={{ uri: championSquareUrl(item.imageKey) }}
+              <RemoteImage
+                uri={championSquareUrl(item.imageKey)}
+                recyclingKey={item.id}
                 style={[
                   styles.image,
                   {
