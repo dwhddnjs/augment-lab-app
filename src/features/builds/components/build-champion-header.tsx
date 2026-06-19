@@ -27,7 +27,11 @@ export function BuildChampionHeader({ champion, date }: Props) {
         contentFit="cover"
       />
       <View style={styles.champMeta}>
-        <ThemedText type="heading" numberOfLines={1}>
+        <ThemedText
+          type="heading"
+          numberOfLines={1}
+          style={{ fontWeight: "800" }}
+        >
           {champion.name}
         </ThemedText>
         <ThemedText type="caption" color="tertiary" numberOfLines={1}>
@@ -37,9 +41,15 @@ export function BuildChampionHeader({ champion, date }: Props) {
           {champion.tags.map((tag) => (
             <View
               key={tag}
-              style={[styles.tagChip, { backgroundColor: colors.accent.subtle }]}
+              style={[
+                styles.tagChip,
+                { backgroundColor: colors.accent.subtle },
+              ]}
             >
-              <ThemedText type="caption" style={{ color: colors.accent.default }}>
+              <ThemedText
+                type="caption"
+                style={{ color: colors.accent.default }}
+              >
                 {translateTag(tag)}
               </ThemedText>
             </View>

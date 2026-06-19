@@ -250,9 +250,16 @@ export function BuildDetailScreen() {
         <LinearGradient
           colors={[
             colors.surface.base + "00",
-            colors.surface.base + "99",
+            colors.surface.base + "00",
+            colors.surface.base + "14",
+            colors.surface.base + "40",
+            colors.surface.base + "A6",
             colors.surface.base,
           ]}
+          // fade를 아래쪽에 몰되 stop을 촘촘히 깔아 부드럽게 수렴시킨다.
+          // splash가 오래 또렷하게 보이고(라이트모드의 밝은 surface.base가 일찍 덮는 것 방지),
+          // 불투명도가 급격히 점프하며 생기던 띠(banding)도 없앤다.
+          locations={[0, 0.5, 0.68, 0.82, 0.93, 1]}
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
           style={StyleSheet.absoluteFill}
@@ -281,7 +288,10 @@ export function BuildDetailScreen() {
           {champion && <BuildChampionHeader champion={champion} date={date} />}
 
           {/* 증강 */}
-          <BuildAugmentList augments={buildAugments} label={translate("augments")} />
+          <BuildAugmentList
+            augments={buildAugments}
+            label={translate("augments")}
+          />
 
           {/* 아이템 */}
           {buildItems.length > 0 && (

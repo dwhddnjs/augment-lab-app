@@ -41,31 +41,34 @@ export function ItemStatPanel({
     >
       <View style={styles.rows}>
         {STAT_DISPLAY_ORDER.map((key) => {
-          const label = STAT_LABELS[key];
-          const value = computed[key];
-          const unit = label.unit ?? "";
-          // 표시 포맷: 공격속도는 소수점 3자리
-          const formatted =
-            key === "attackspeed"
-              ? value.toFixed(3)
-              : Math.round(value as number).toString();
-          // mp가 0이면 표시 안 함
-          if (key === "mp" && computed.mp === 0) return null;
-          // 파생 스탯이 0이면 표시 안 함
-          if (
-            (key === "abilitypower" || key === "lifesteal") &&
-            (value as number) === 0
-          )
-            return null;
+          const meta = STAT_LABELS[key];
+          const { added, total } = computed[key];
+          const unit = meta.unit ?? "";
+          const decimals = meta.decimals ?? 0;
+
+          // 마나류는 마나 없는 챔피언에선 숨김
+          if ((key === "mp" || key === "mpregen") && total === 0) return null;
+          // 코어 스탯은 항상 표시, 부가 스탯은 값이 있을 때만 표시
+          if (!meta.core && total === 0 && added === 0) return null;
+
+          // 아이템으로 추가된 양이 있으면 "총합 (+추가분)"
+          const showAdded = added > 0;
 
           return (
             <View key={key} style={styles.row}>
               <ThemedText type="caption" color="secondary" numberOfLines={1}>
-                {label[locale]}
+                {meta[locale]}
               </ThemedText>
               <ThemedText type="caption" color="primary">
-                {formatted}
+                {formatNumber(total, decimals)}
                 {unit}
+                {showAdded && (
+                  <ThemedText type="caption" color="accent">
+                    {" "}
+                    (+{formatNumber(added, decimals)}
+                    {unit})
+                  </ThemedText>
+                )}
               </ThemedText>
             </View>
           );
@@ -73,6 +76,12 @@ export function ItemStatPanel({
       </View>
     </GlassSurface>
   );
+}
+
+/** 소수 자릿수를 적용하되 불필요한 .0은 제거 */
+function formatNumber(value: number, decimals: number): string {
+  if (decimals === 0) return Math.round(value).toString();
+  return parseFloat(value.toFixed(decimals)).toString();
 }
 
 const styles = StyleSheet.create({

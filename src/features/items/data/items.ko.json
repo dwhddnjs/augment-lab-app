@@ -14,7 +14,7 @@
       "Boots"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 25
+      "movespeedFlat": 25
     },
     "imageKey": "1001.png"
   },
@@ -32,7 +32,9 @@
     "tags": [
       "ManaRegen"
     ],
-    "stats": {},
+    "stats": {
+      "mpregen": 0.5
+    },
     "imageKey": "1004.png"
   },
   {
@@ -49,7 +51,9 @@
     "tags": [
       "HealthRegen"
     ],
-    "stats": {},
+    "stats": {
+      "hpregen": 1
+    },
     "imageKey": "1006.png"
   },
   {
@@ -67,7 +71,7 @@
       "Health"
     ],
     "stats": {
-      "FlatHPPoolMod": 350
+      "hp": 350
     },
     "imageKey": "1011.png"
   },
@@ -86,7 +90,7 @@
       "CriticalStrike"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.15
+      "crit": 0.15
     },
     "imageKey": "1018.png"
   },
@@ -105,7 +109,7 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatMagicDamageMod": 45
+      "abilitypower": 45
     },
     "imageKey": "1026.png"
   },
@@ -124,7 +128,7 @@
       "Mana"
     ],
     "stats": {
-      "FlatMPPoolMod": 300
+      "mp": 300
     },
     "imageKey": "1027.png"
   },
@@ -143,7 +147,7 @@
       "Health"
     ],
     "stats": {
-      "FlatHPPoolMod": 150
+      "hp": 150
     },
     "imageKey": "1028.png"
   },
@@ -162,7 +166,7 @@
       "Armor"
     ],
     "stats": {
-      "FlatArmorMod": 15
+      "armor": 15
     },
     "imageKey": "1029.png"
   },
@@ -181,7 +185,7 @@
       "Armor"
     ],
     "stats": {
-      "FlatArmorMod": 40
+      "armor": 40
     },
     "imageKey": "1031.png"
   },
@@ -200,7 +204,7 @@
       "SpellBlock"
     ],
     "stats": {
-      "FlatSpellBlockMod": 20
+      "spellblock": 20
     },
     "imageKey": "1033.png"
   },
@@ -220,7 +224,7 @@
       "Lane"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 10
+      "attackdamage": 10
     },
     "imageKey": "1036.png"
   },
@@ -239,7 +243,7 @@
       "Damage"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 25
+      "attackdamage": 25
     },
     "imageKey": "1037.png"
   },
@@ -258,7 +262,7 @@
       "Damage"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 40
+      "attackdamage": 40
     },
     "imageKey": "1038.png"
   },
@@ -277,7 +281,7 @@
       "AttackSpeed"
     ],
     "stats": {
-      "PercentAttackSpeedMod": 0.1
+      "attackspeed": 0.1
     },
     "imageKey": "1042.png"
   },
@@ -297,7 +301,7 @@
       "OnHit"
     ],
     "stats": {
-      "PercentAttackSpeedMod": 0.15
+      "attackspeed": 0.15
     },
     "imageKey": "1043.png"
   },
@@ -316,7 +320,7 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatMagicDamageMod": 20
+      "abilitypower": 20
     },
     "imageKey": "1052.png"
   },
@@ -336,8 +340,8 @@
       "LifeSteal"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 15,
-      "PercentLifeStealMod": 0.07
+      "attackdamage": 15,
+      "lifesteal": 0.07
     },
     "imageKey": "1053.png"
   },
@@ -358,8 +362,7 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 110,
-      "FlatHPRegenMod": 0.8
+      "hp": 110
     },
     "imageKey": "1054.png"
   },
@@ -382,8 +385,9 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 80,
-      "FlatPhysicalDamageMod": 10
+      "attackdamage": 10,
+      "hp": 80,
+      "omnivamp": 0.025
     },
     "imageKey": "1055.png"
   },
@@ -405,8 +409,8 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatHPPoolMod": 90,
-      "FlatMagicDamageMod": 18
+      "abilitypower": 18,
+      "hp": 90
     },
     "imageKey": "1056.png"
   },
@@ -425,7 +429,7 @@
       "SpellBlock"
     ],
     "stats": {
-      "FlatSpellBlockMod": 45
+      "spellblock": 45
     },
     "imageKey": "1057.png"
   },
@@ -444,7 +448,7 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatMagicDamageMod": 65
+      "abilitypower": 65
     },
     "imageKey": "1058.png"
   },
@@ -465,8 +469,8 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 50,
-      "FlatMagicDamageMod": 15
+      "abilitypower": 15,
+      "hp": 50
     },
     "imageKey": "1082.png"
   },
@@ -487,7 +491,7 @@
       "Lane"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 7
+      "attackdamage": 7
     },
     "imageKey": "1083.png"
   },
@@ -509,8 +513,9 @@
       "Lane"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 8,
-      "PercentAttackSpeedMod": 0.15
+      "attackdamage": 8,
+      "attackspeed": 0.15,
+      "omnivamp": 0.015
     },
     "imageKey": "1086.png"
   },
@@ -634,9 +639,9 @@
       "Lane"
     ],
     "stats": {
-      "FlatSpellBlockMod": 10,
-      "FlatHPPoolMod": 140,
-      "FlatArmorMod": 10
+      "hp": 140,
+      "armor": 10,
+      "spellblock": 10
     },
     "imageKey": "1120.png"
   },
@@ -676,8 +681,8 @@
       "Damage"
     ],
     "stats": {
-      "FlatArmorMod": 30,
-      "FlatPhysicalDamageMod": 15
+      "attackdamage": 15,
+      "armor": 30
     },
     "imageKey": "2019.png"
   },
@@ -698,7 +703,9 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 25
+      "attackdamage": 25,
+      "abilityhaste": 10,
+      "lethality": 5
     },
     "imageKey": "2020.png"
   },
@@ -718,8 +725,8 @@
       "Damage"
     ],
     "stats": {
-      "FlatHPPoolMod": 250,
-      "FlatPhysicalDamageMod": 15
+      "attackdamage": 15,
+      "hp": 250
     },
     "imageKey": "2021.png"
   },
@@ -737,7 +744,9 @@
     "tags": [
       "CooldownReduction"
     ],
-    "stats": {},
+    "stats": {
+      "abilityhaste": 5
+    },
     "imageKey": "2022.png"
   },
   {
@@ -778,8 +787,7 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 150,
-      "FlatHPRegenMod": 4
+      "hp": 150
     },
     "imageKey": "2051.png"
   },
@@ -823,8 +831,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 50,
-      "PercentMovementSpeedMod": 0.04
+      "abilitypower": 50,
+      "abilityhaste": 15,
+      "movespeedPercent": 0.04,
+      "mpregen": 1.25
     },
     "imageKey": "2065.png"
   },
@@ -922,8 +932,8 @@
       "Active"
     ],
     "stats": {
-      "FlatMagicDamageMod": 40,
-      "FlatArmorMod": 25
+      "abilitypower": 40,
+      "armor": 25
     },
     "imageKey": "2420.png"
   },
@@ -940,8 +950,8 @@
     },
     "tags": [],
     "stats": {
-      "FlatMagicDamageMod": 40,
-      "FlatArmorMod": 25
+      "abilitypower": 40,
+      "armor": 25
     },
     "imageKey": "2421.png"
   },
@@ -961,8 +971,8 @@
       "Damage"
     ],
     "stats": {
-      "FlatHPPoolMod": 550,
-      "FlatPhysicalDamageMod": 30
+      "attackdamage": 30,
+      "hp": 550
     },
     "imageKey": "2501.png"
   },
@@ -984,8 +994,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 400,
-      "FlatArmorMod": 50
+      "hp": 400,
+      "armor": 50,
+      "abilityhaste": 15
     },
     "imageKey": "2502.png"
   },
@@ -1007,8 +1018,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 600,
-      "FlatMagicDamageMod": 80
+      "abilitypower": 80,
+      "mp": 600,
+      "abilityhaste": 20
     },
     "imageKey": "2503.png"
   },
@@ -1029,8 +1041,9 @@
       "HealthRegen"
     ],
     "stats": {
-      "FlatSpellBlockMod": 80,
-      "FlatHPPoolMod": 400
+      "hp": 400,
+      "spellblock": 80,
+      "hpregen": 1
     },
     "imageKey": "2504.png"
   },
@@ -1049,7 +1062,7 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatMagicDamageMod": 30
+      "abilitypower": 30
     },
     "imageKey": "2508.png"
   },
@@ -1072,9 +1085,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 300,
-      "FlatMagicDamageMod": 60,
-      "PercentAttackSpeedMod": 0.2
+      "hp": 300,
+      "abilitypower": 60,
+      "abilityhaste": 20,
+      "attackspeed": 0.2
     },
     "imageKey": "2510.png"
   },
@@ -1096,9 +1110,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "PercentAttackSpeedMod": 0.45,
-      "PercentMovementSpeedMod": 0.04
+      "attackspeed": 0.45,
+      "crit": 0.25,
+      "movespeedPercent": 0.04
     },
     "imageKey": "2512.png"
   },
@@ -1121,7 +1135,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 65
+      "attackdamage": 65,
+      "omnivamp": 0.05,
+      "tenacity": 0.2
     },
     "imageKey": "2517.png"
   },
@@ -1142,7 +1158,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 55
+      "attackdamage": 55,
+      "lethality": 22,
+      "abilityhaste": 15
     },
     "imageKey": "2520.png"
   },
@@ -1163,8 +1181,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 300,
-      "FlatMagicDamageMod": 90
+      "abilitypower": 90,
+      "mp": 300,
+      "abilityhaste": 10
     },
     "imageKey": "2522.png"
   },
@@ -1184,8 +1203,8 @@
       "CriticalStrike"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "FlatPhysicalDamageMod": 55
+      "attackdamage": 55,
+      "crit": 0.25
     },
     "imageKey": "2523.png"
   },
@@ -1209,9 +1228,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 20,
-      "FlatHPPoolMod": 200,
-      "FlatArmorMod": 20
+      "hp": 200,
+      "abilityhaste": 15,
+      "armor": 20,
+      "spellblock": 20
     },
     "imageKey": "2524.png"
   },
@@ -1233,7 +1253,8 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 600
+      "hp": 600,
+      "abilityhaste": 20
     },
     "imageKey": "2525.png"
   },
@@ -1254,8 +1275,10 @@
       "ManaRegen"
     ],
     "stats": {
-      "FlatMPPoolMod": 300,
-      "FlatHPPoolMod": 200
+      "hp": 200,
+      "healshield": 0.08,
+      "mpregen": 0.75,
+      "mp": 300
     },
     "imageKey": "2526.png"
   },
@@ -1276,8 +1299,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 600,
-      "FlatMagicDamageMod": 70
+      "abilitypower": 70,
+      "mp": 600,
+      "abilityhaste": 25
     },
     "imageKey": "3003.png"
   },
@@ -1300,8 +1324,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 500,
-      "FlatPhysicalDamageMod": 35
+      "attackdamage": 35,
+      "mp": 500,
+      "abilityhaste": 15
     },
     "imageKey": "3004.png"
   },
@@ -1321,8 +1346,8 @@
       "Boots"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 45,
-      "PercentAttackSpeedMod": 0.25
+      "attackspeed": 0.25,
+      "movespeedFlat": 45
     },
     "imageKey": "3006.png"
   },
@@ -1343,7 +1368,8 @@
       "Boots"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 45
+      "movespeedFlat": 45,
+      "omnivamp": 0.04
     },
     "imageKey": "3008.png"
   },
@@ -1362,7 +1388,7 @@
       "Boots"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 55
+      "movespeedFlat": 55
     },
     "imageKey": "3009.png"
   },
@@ -1382,7 +1408,8 @@
       "MagicPenetration"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 45
+      "magicpenFlat": 12,
+      "movespeedFlat": 45
     },
     "imageKey": "3020.png"
   },
@@ -1404,8 +1431,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 300,
-      "FlatArmorMod": 25
+      "armor": 25,
+      "mp": 300,
+      "abilityhaste": 10
     },
     "imageKey": "3024.png"
   },
@@ -1425,8 +1453,8 @@
       "Damage"
     ],
     "stats": {
-      "FlatArmorMod": 45,
-      "FlatPhysicalDamageMod": 55
+      "attackdamage": 55,
+      "armor": 45
     },
     "imageKey": "3026.png"
   },
@@ -1446,8 +1474,9 @@
       "Damage"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "FlatPhysicalDamageMod": 75
+      "attackdamage": 75,
+      "crit": 0.25,
+      "critdamage": 0.3
     },
     "imageKey": "3031.png"
   },
@@ -1468,8 +1497,9 @@
       "AttackSpeed"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 50,
-      "PercentAttackSpeedMod": 0.4
+      "attackdamage": 50,
+      "attackspeed": 0.4,
+      "crit": 0
     },
     "imageKey": "3032.png"
   },
@@ -1490,8 +1520,9 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "FlatPhysicalDamageMod": 35
+      "attackdamage": 35,
+      "armorpen": 0.3,
+      "crit": 0.25
     },
     "imageKey": "3033.png"
   },
@@ -1511,7 +1542,8 @@
       "Damage"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 20
+      "attackdamage": 20,
+      "armorpen": 0.18
     },
     "imageKey": "3035.png"
   },
@@ -1532,8 +1564,9 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "FlatPhysicalDamageMod": 35
+      "attackdamage": 35,
+      "armorpen": 0.35,
+      "crit": 0.25
     },
     "imageKey": "3036.png"
   },
@@ -1554,8 +1587,8 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatHPPoolMod": 100,
-      "FlatMagicDamageMod": 20
+      "abilitypower": 20,
+      "hp": 100
     },
     "imageKey": "3041.png"
   },
@@ -1576,8 +1609,8 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatHPPoolMod": 200,
-      "FlatPhysicalDamageMod": 15
+      "attackdamage": 15,
+      "hp": 200
     },
     "imageKey": "3044.png"
   },
@@ -1598,9 +1631,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "PercentAttackSpeedMod": 0.65,
-      "PercentMovementSpeedMod": 0.1
+      "attackspeed": 0.65,
+      "crit": 0.25,
+      "movespeedPercent": 0.1
     },
     "imageKey": "3046.png"
   },
@@ -1620,8 +1653,8 @@
       "Boots"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 45,
-      "FlatArmorMod": 25
+      "armor": 25,
+      "movespeedFlat": 45
     },
     "imageKey": "3047.png"
   },
@@ -1643,9 +1676,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 25,
-      "FlatHPPoolMod": 300,
-      "FlatArmorMod": 25
+      "hp": 300,
+      "armor": 25,
+      "spellblock": 25,
+      "abilityhaste": 10
     },
     "imageKey": "3050.png"
   },
@@ -1665,8 +1699,8 @@
       "AttackSpeed"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 20,
-      "PercentAttackSpeedMod": 0.2
+      "attackdamage": 20,
+      "attackspeed": 0.2
     },
     "imageKey": "3051.png"
   },
@@ -1687,7 +1721,8 @@
       "Tenacity"
     ],
     "stats": {
-      "FlatHPPoolMod": 400
+      "hp": 400,
+      "tenacity": 0.2
     },
     "imageKey": "3053.png"
   },
@@ -1706,7 +1741,9 @@
       "OnHit",
       "AbilityHaste"
     ],
-    "stats": {},
+    "stats": {
+      "abilityhaste": 10
+    },
     "imageKey": "3057.png"
   },
   {
@@ -1728,8 +1765,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 50,
-      "FlatHPPoolMod": 400
+      "hp": 400,
+      "spellblock": 50,
+      "abilityhaste": 10,
+      "hpregen": 1
     },
     "imageKey": "3065.png"
   },
@@ -1749,8 +1788,8 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatHPPoolMod": 200,
-      "PercentMovementSpeedMod": 0.04
+      "hp": 200,
+      "movespeedPercent": 0.04
     },
     "imageKey": "3066.png"
   },
@@ -1771,7 +1810,8 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 200
+      "hp": 200,
+      "abilityhaste": 10
     },
     "imageKey": "3067.png"
   },
@@ -1793,8 +1833,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 350,
-      "FlatArmorMod": 50
+      "hp": 350,
+      "armor": 50,
+      "abilityhaste": 10
     },
     "imageKey": "3068.png"
   },
@@ -1814,7 +1855,7 @@
       "ManaRegen"
     ],
     "stats": {
-      "FlatMPPoolMod": 240
+      "mp": 240
     },
     "imageKey": "3070.png"
   },
@@ -1839,8 +1880,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 400,
-      "FlatPhysicalDamageMod": 40
+      "attackdamage": 40,
+      "hp": 400,
+      "abilityhaste": 20
     },
     "imageKey": "3071.png"
   },
@@ -1860,8 +1902,8 @@
       "LifeSteal"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 80,
-      "PercentLifeStealMod": 0.15
+      "attackdamage": 80,
+      "lifesteal": 0.15
     },
     "imageKey": "3072.png"
   },
@@ -1885,9 +1927,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 450,
-      "FlatPhysicalDamageMod": 40,
-      "PercentAttackSpeedMod": 0.2
+      "attackdamage": 40,
+      "attackspeed": 0.2,
+      "hp": 450
     },
     "imageKey": "3073.png"
   },
@@ -1910,8 +1952,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 65,
-      "PercentLifeStealMod": 0.12
+      "attackdamage": 65,
+      "abilityhaste": 15,
+      "lifesteal": 0.12
     },
     "imageKey": "3074.png"
   },
@@ -1931,8 +1974,8 @@
       "Armor"
     ],
     "stats": {
-      "FlatHPPoolMod": 150,
-      "FlatArmorMod": 75
+      "hp": 150,
+      "armor": 75
     },
     "imageKey": "3075.png"
   },
@@ -1951,7 +1994,7 @@
       "Armor"
     ],
     "stats": {
-      "FlatArmorMod": 30
+      "armor": 30
     },
     "imageKey": "3076.png"
   },
@@ -1971,7 +2014,7 @@
       "OnHit"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 20
+      "attackdamage": 20
     },
     "imageKey": "3077.png"
   },
@@ -1996,9 +2039,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 333,
-      "FlatPhysicalDamageMod": 36,
-      "PercentAttackSpeedMod": 0.3
+      "attackdamage": 36,
+      "attackspeed": 0.3,
+      "hp": 333,
+      "abilityhaste": 15
     },
     "imageKey": "3078.png"
   },
@@ -2017,7 +2061,7 @@
       "Armor"
     ],
     "stats": {
-      "FlatArmorMod": 40
+      "armor": 40
     },
     "imageKey": "3082.png"
   },
@@ -2037,7 +2081,8 @@
       "HealthRegen"
     ],
     "stats": {
-      "FlatHPPoolMod": 1000
+      "hp": 1000,
+      "hpregen": 1
     },
     "imageKey": "3083.png"
   },
@@ -2057,7 +2102,8 @@
       "HealthRegen"
     ],
     "stats": {
-      "FlatHPPoolMod": 900
+      "hp": 900,
+      "hpregen": 1
     },
     "imageKey": "3084.png"
   },
@@ -2079,9 +2125,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "PercentAttackSpeedMod": 0.4,
-      "PercentMovementSpeedMod": 0.04
+      "attackspeed": 0.4,
+      "crit": 0.25,
+      "movespeedPercent": 0.04
     },
     "imageKey": "3085.png"
   },
@@ -2102,9 +2148,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.15,
-      "PercentAttackSpeedMod": 0.15,
-      "PercentMovementSpeedMod": 0.04
+      "attackspeed": 0.15,
+      "crit": 0.15,
+      "movespeedPercent": 0.04
     },
     "imageKey": "3086.png"
   },
@@ -2127,10 +2173,10 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatMagicDamageMod": 45,
-      "FlatPhysicalDamageMod": 45,
-      "PercentAttackSpeedMod": 0.3,
-      "PercentMovementSpeedMod": 0.04
+      "attackdamage": 45,
+      "abilitypower": 45,
+      "attackspeed": 0.3,
+      "movespeedPercent": 0.04
     },
     "imageKey": "3087.png"
   },
@@ -2149,7 +2195,7 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatMagicDamageMod": 130
+      "abilitypower": 130
     },
     "imageKey": "3089.png"
   },
@@ -2171,8 +2217,9 @@
       "Tenacity"
     ],
     "stats": {
-      "FlatSpellBlockMod": 45,
-      "PercentAttackSpeedMod": 0.5
+      "attackspeed": 0.5,
+      "spellblock": 45,
+      "tenacity": 0.2
     },
     "imageKey": "3091.png"
   },
@@ -2193,9 +2240,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "PercentAttackSpeedMod": 0.35,
-      "PercentMovementSpeedMod": 0.04
+      "attackspeed": 0.35,
+      "crit": 0.25,
+      "movespeedPercent": 0.04
     },
     "imageKey": "3094.png"
   },
@@ -2217,9 +2264,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "FlatPhysicalDamageMod": 50,
-      "PercentAttackSpeedMod": 0.2
+      "attackdamage": 50,
+      "attackspeed": 0.2,
+      "crit": 0.25
     },
     "imageKey": "3097.png"
   },
@@ -2241,8 +2288,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 100,
-      "PercentMovementSpeedMod": 0.06
+      "abilitypower": 100,
+      "movespeedPercent": 0.06,
+      "abilityhaste": 10
     },
     "imageKey": "3100.png"
   },
@@ -2262,8 +2310,8 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatSpellBlockMod": 40,
-      "FlatMagicDamageMod": 105
+      "abilitypower": 105,
+      "spellblock": 40
     },
     "imageKey": "3102.png"
   },
@@ -2285,7 +2333,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 30
+      "abilitypower": 30,
+      "abilityhaste": 15,
+      "mpregen": 1,
+      "healshield": 0.1
     },
     "imageKey": "3107.png"
   },
@@ -2306,7 +2357,8 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 25
+      "abilitypower": 25,
+      "abilityhaste": 10
     },
     "imageKey": "3108.png"
   },
@@ -2331,8 +2383,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 200,
-      "FlatArmorMod": 40
+      "hp": 200,
+      "armor": 40,
+      "abilityhaste": 10,
+      "hpregen": 1
     },
     "imageKey": "3109.png"
   },
@@ -2355,8 +2409,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 400,
-      "FlatArmorMod": 75
+      "armor": 75,
+      "mp": 400,
+      "abilityhaste": 20
     },
     "imageKey": "3110.png"
   },
@@ -2377,8 +2432,9 @@
       "Tenacity"
     ],
     "stats": {
-      "FlatSpellBlockMod": 20,
-      "FlatMovementSpeedMod": 45
+      "spellblock": 20,
+      "movespeedFlat": 45,
+      "tenacity": 0.3
     },
     "imageKey": "3111.png"
   },
@@ -2400,8 +2456,8 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 150,
-      "FlatMagicDamageMod": 50
+      "abilitypower": 50,
+      "hp": 150
     },
     "imageKey": "3112.png"
   },
@@ -2421,8 +2477,8 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatMagicDamageMod": 30,
-      "PercentMovementSpeedMod": 0.04
+      "abilitypower": 30,
+      "movespeedPercent": 0.04
     },
     "imageKey": "3113.png"
   },
@@ -2440,7 +2496,10 @@
     "tags": [
       "ManaRegen"
     ],
-    "stats": {},
+    "stats": {
+      "mpregen": 0.5,
+      "healshield": 0.08
+    },
     "imageKey": "3114.png"
   },
   {
@@ -2461,8 +2520,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 80,
-      "PercentAttackSpeedMod": 0.5
+      "abilitypower": 80,
+      "attackspeed": 0.5,
+      "abilityhaste": 15
     },
     "imageKey": "3115.png"
   },
@@ -2483,8 +2543,8 @@
       "Slow"
     ],
     "stats": {
-      "FlatHPPoolMod": 400,
-      "FlatMagicDamageMod": 65
+      "abilitypower": 65,
+      "hp": 400
     },
     "imageKey": "3116.png"
   },
@@ -2505,8 +2565,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 600,
-      "FlatMagicDamageMod": 90
+      "abilitypower": 90,
+      "mp": 600,
+      "abilityhaste": 15
     },
     "imageKey": "3118.png"
   },
@@ -2527,8 +2588,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 500,
-      "FlatHPPoolMod": 550
+      "hp": 550,
+      "mp": 500,
+      "abilityhaste": 15
     },
     "imageKey": "3119.png"
   },
@@ -2547,7 +2609,7 @@
       "Damage"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 15
+      "attackdamage": 15
     },
     "imageKey": "3123.png"
   },
@@ -2569,9 +2631,9 @@
       "OnHit"
     ],
     "stats": {
-      "FlatMagicDamageMod": 30,
-      "FlatPhysicalDamageMod": 30,
-      "PercentAttackSpeedMod": 0.25
+      "attackdamage": 30,
+      "abilitypower": 30,
+      "attackspeed": 0.25
     },
     "imageKey": "3124.png"
   },
@@ -2592,7 +2654,8 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 20
+      "attackdamage": 20,
+      "abilityhaste": 10
     },
     "imageKey": "3133.png"
   },
@@ -2612,7 +2675,8 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 20
+      "attackdamage": 20,
+      "lethality": 10
     },
     "imageKey": "3134.png"
   },
@@ -2632,7 +2696,8 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatMagicDamageMod": 95
+      "abilitypower": 95,
+      "magicpenPercent": 0.4
     },
     "imageKey": "3135.png"
   },
@@ -2653,7 +2718,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 75
+      "abilitypower": 75,
+      "magicpenPercent": 0.3,
+      "abilityhaste": 20
     },
     "imageKey": "3137.png"
   },
@@ -2677,9 +2744,9 @@
       "Tenacity"
     ],
     "stats": {
-      "FlatSpellBlockMod": 35,
-      "FlatPhysicalDamageMod": 50,
-      "PercentLifeStealMod": 0.1
+      "attackdamage": 50,
+      "spellblock": 35,
+      "lifesteal": 0.1
     },
     "imageKey": "3139.png"
   },
@@ -2699,7 +2766,7 @@
       "SpellBlock"
     ],
     "stats": {
-      "FlatSpellBlockMod": 30
+      "spellblock": 30
     },
     "imageKey": "3140.png"
   },
@@ -2721,8 +2788,9 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 55,
-      "PercentMovementSpeedMod": 0.04
+      "attackdamage": 55,
+      "lethality": 18,
+      "movespeedPercent": 0.04
     },
     "imageKey": "3142.png"
   },
@@ -2744,8 +2812,8 @@
       "Slow"
     ],
     "stats": {
-      "FlatHPPoolMod": 350,
-      "FlatArmorMod": 75
+      "hp": 350,
+      "armor": 75
     },
     "imageKey": "3143.png"
   },
@@ -2764,7 +2832,7 @@
       "AttackSpeed"
     ],
     "stats": {
-      "PercentAttackSpeedMod": 0.2
+      "attackspeed": 0.2
     },
     "imageKey": "3144.png"
   },
@@ -2783,7 +2851,7 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatMagicDamageMod": 45
+      "abilitypower": 45
     },
     "imageKey": "3145.png"
   },
@@ -2806,8 +2874,9 @@
       "SpellVamp"
     ],
     "stats": {
-      "FlatMagicDamageMod": 80,
-      "FlatPhysicalDamageMod": 40
+      "abilitypower": 80,
+      "attackdamage": 40,
+      "omnivamp": 0.1
     },
     "imageKey": "3146.png"
   },
@@ -2827,8 +2896,8 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatHPPoolMod": 200,
-      "FlatMagicDamageMod": 30
+      "abilitypower": 30,
+      "hp": 200
     },
     "imageKey": "3147.png"
   },
@@ -2852,8 +2921,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 300,
-      "FlatMagicDamageMod": 70
+      "abilitypower": 70,
+      "hp": 300,
+      "abilityhaste": 20
     },
     "imageKey": "3152.png"
   },
@@ -2876,9 +2946,9 @@
       "OnHit"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 40,
-      "PercentAttackSpeedMod": 0.25,
-      "PercentLifeStealMod": 0.1
+      "attackdamage": 40,
+      "attackspeed": 0.25,
+      "lifesteal": 0.1
     },
     "imageKey": "3153.png"
   },
@@ -2898,8 +2968,8 @@
       "SpellBlock"
     ],
     "stats": {
-      "FlatSpellBlockMod": 25,
-      "FlatPhysicalDamageMod": 25
+      "attackdamage": 25,
+      "spellblock": 25
     },
     "imageKey": "3155.png"
   },
@@ -2922,8 +2992,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 40,
-      "FlatPhysicalDamageMod": 60
+      "attackdamage": 60,
+      "abilityhaste": 15,
+      "spellblock": 40
     },
     "imageKey": "3156.png"
   },
@@ -2944,8 +3015,8 @@
       "Active"
     ],
     "stats": {
-      "FlatMagicDamageMod": 105,
-      "FlatArmorMod": 50
+      "abilitypower": 105,
+      "armor": 50
     },
     "imageKey": "3157.png"
   },
@@ -2965,7 +3036,8 @@
       "CooldownReduction"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 45
+      "abilityhaste": 10,
+      "movespeedFlat": 45
     },
     "imageKey": "3158.png"
   },
@@ -2986,8 +3058,8 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 450,
-      "FlatPhysicalDamageMod": 45
+      "attackdamage": 45,
+      "hp": 450
     },
     "imageKey": "3161.png"
   },
@@ -3009,8 +3081,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 350,
-      "FlatMagicDamageMod": 75
+      "abilitypower": 75,
+      "hp": 350,
+      "abilityhaste": 15
     },
     "imageKey": "3165.png"
   },
@@ -3031,7 +3104,8 @@
       "Boots"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 45
+      "movespeedFlat": 45,
+      "omnivamp": 0.04
     },
     "imageKey": "3168.png"
   },
@@ -3050,7 +3124,7 @@
       "Boots"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 65
+      "movespeedFlat": 65
     },
     "imageKey": "3170.png"
   },
@@ -3070,7 +3144,8 @@
       "Boots"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 45
+      "abilityhaste": 20,
+      "movespeedFlat": 45
     },
     "imageKey": "3171.png"
   },
@@ -3091,9 +3166,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 45,
-      "PercentAttackSpeedMod": 0.4,
-      "PercentLifeStealMod": 0.05
+      "attackspeed": 0.4,
+      "movespeedFlat": 45,
+      "lifesteal": 0.05
     },
     "imageKey": "3172.png"
   },
@@ -3115,8 +3190,9 @@
       "MagicResist"
     ],
     "stats": {
-      "FlatSpellBlockMod": 30,
-      "FlatMovementSpeedMod": 45
+      "spellblock": 30,
+      "movespeedFlat": 45,
+      "tenacity": 0.3
     },
     "imageKey": "3173.png"
   },
@@ -3136,8 +3212,8 @@
       "Boots"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 45,
-      "FlatArmorMod": 35
+      "armor": 35,
+      "movespeedFlat": 45
     },
     "imageKey": "3174.png"
   },
@@ -3157,7 +3233,9 @@
       "MagicPenetration"
     ],
     "stats": {
-      "FlatMovementSpeedMod": 45
+      "magicpenFlat": 18,
+      "magicpenPercent": 0.08,
+      "movespeedFlat": 45
     },
     "imageKey": "3175.png"
   },
@@ -3179,8 +3257,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 150,
-      "FlatPhysicalDamageMod": 30
+      "attackdamage": 30,
+      "hp": 150,
+      "abilityhaste": 15
     },
     "imageKey": "3177.png"
   },
@@ -3203,7 +3282,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 60
+      "attackdamage": 60,
+      "lethality": 18,
+      "abilityhaste": 15
     },
     "imageKey": "3179.png"
   },
@@ -3224,9 +3305,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatHPPoolMod": 500,
-      "FlatPhysicalDamageMod": 40,
-      "PercentMovementSpeedMod": 0.04
+      "attackdamage": 40,
+      "hp": 500,
+      "movespeedPercent": 0.04
     },
     "imageKey": "3181.png"
   },
@@ -3248,9 +3329,9 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 150,
-      "FlatPhysicalDamageMod": 25,
-      "PercentLifeStealMod": 0.05
+      "attackdamage": 25,
+      "hp": 150,
+      "lifesteal": 0.05
     },
     "imageKey": "3184.png"
   },
@@ -3275,9 +3356,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 30,
-      "FlatHPPoolMod": 200,
-      "FlatArmorMod": 30
+      "hp": 200,
+      "armor": 30,
+      "spellblock": 30,
+      "abilityhaste": 10
     },
     "imageKey": "3190.png"
   },
@@ -3298,8 +3380,9 @@
       "SpellBlock"
     ],
     "stats": {
-      "FlatSpellBlockMod": 35,
-      "FlatHPPoolMod": 200
+      "hp": 200,
+      "spellblock": 35,
+      "hpregen": 1
     },
     "imageKey": "3211.png"
   },
@@ -3323,7 +3406,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 250
+      "hp": 250,
+      "mpregen": 1,
+      "healshield": 0.12,
+      "abilityhaste": 15
     },
     "imageKey": "3222.png"
   },
@@ -3346,8 +3432,8 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 30,
-      "PercentAttackSpeedMod": 0.35
+      "attackdamage": 30,
+      "attackspeed": 0.35
     },
     "imageKey": "3302.png"
   },
@@ -3449,8 +3535,10 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatMagicDamageMod": 45,
-      "PercentMovementSpeedMod": 0.04
+      "abilitypower": 45,
+      "healshield": 0.1,
+      "mpregen": 1.25,
+      "movespeedPercent": 0.04
     },
     "imageKey": "3504.png"
   },
@@ -3474,8 +3562,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "FlatPhysicalDamageMod": 50
+      "attackdamage": 50,
+      "abilityhaste": 20,
+      "crit": 0.25
     },
     "imageKey": "3508.png"
   },
@@ -3531,9 +3620,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatHPPoolMod": 350,
-      "FlatArmorMod": 55,
-      "PercentMovementSpeedMod": 0.04
+      "hp": 350,
+      "armor": 55,
+      "movespeedPercent": 0.04
     },
     "imageKey": "3742.png"
   },
@@ -3555,8 +3644,8 @@
       "OnHit"
     ],
     "stats": {
-      "FlatHPPoolMod": 600,
-      "FlatPhysicalDamageMod": 40
+      "attackdamage": 40,
+      "hp": 600
     },
     "imageKey": "3748.png"
   },
@@ -3576,7 +3665,8 @@
       "HealthRegen"
     ],
     "stats": {
-      "FlatHPPoolMod": 200
+      "hp": 200,
+      "hpregen": 1
     },
     "imageKey": "3801.png"
   },
@@ -3599,8 +3689,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 300,
-      "FlatMagicDamageMod": 40
+      "abilitypower": 40,
+      "mp": 300,
+      "abilityhaste": 10
     },
     "imageKey": "3802.png"
   },
@@ -3622,8 +3713,8 @@
       "ManaRegen"
     ],
     "stats": {
-      "FlatMPPoolMod": 375,
-      "FlatHPPoolMod": 300
+      "hp": 300,
+      "mp": 375
     },
     "imageKey": "3803.png"
   },
@@ -3644,8 +3735,9 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatHPPoolMod": 250,
-      "FlatPhysicalDamageMod": 50
+      "attackdamage": 50,
+      "lethality": 15,
+      "hp": 250
     },
     "imageKey": "3814.png"
   },
@@ -3667,9 +3759,7 @@
       "GoldPer",
       "Lane"
     ],
-    "stats": {
-      "FlatHPPoolMod": 30
-    },
+    "stats": {},
     "imageKey": "3865.png"
   },
   {
@@ -3692,7 +3782,9 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 200
+      "hp": 200,
+      "hpregen": 0.75,
+      "mpregen": 0.75
     },
     "imageKey": "3869.png"
   },
@@ -3716,7 +3808,9 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 200
+      "hp": 200,
+      "hpregen": 0.75,
+      "mpregen": 0.75
     },
     "imageKey": "3870.png"
   },
@@ -3740,7 +3834,9 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 200
+      "hp": 200,
+      "hpregen": 0.75,
+      "mpregen": 0.75
     },
     "imageKey": "3871.png"
   },
@@ -3764,7 +3860,9 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 200
+      "hp": 200,
+      "hpregen": 0.75,
+      "mpregen": 0.75
     },
     "imageKey": "3876.png"
   },
@@ -3788,7 +3886,9 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 200
+      "hp": 200,
+      "hpregen": 0.75,
+      "mpregen": 0.75
     },
     "imageKey": "3877.png"
   },
@@ -3807,7 +3907,7 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatMagicDamageMod": 25
+      "abilitypower": 25
     },
     "imageKey": "3916.png"
   },
@@ -3829,7 +3929,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 65
+      "abilitypower": 65,
+      "abilityhaste": 15,
+      "mpregen": 1.5
     },
     "imageKey": "4005.png"
   },
@@ -3850,9 +3952,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatSpellBlockMod": 55,
-      "FlatHPPoolMod": 400,
-      "PercentMovementSpeedMod": 0.04
+      "hp": 400,
+      "spellblock": 55,
+      "movespeedPercent": 0.04
     },
     "imageKey": "4401.png"
   },
@@ -3872,7 +3974,8 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 75
+      "abilitypower": 75,
+      "abilityhaste": 25
     },
     "imageKey": "4628.png"
   },
@@ -3894,9 +3997,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 350,
-      "FlatMagicDamageMod": 70,
-      "PercentMovementSpeedMod": 0.04
+      "abilitypower": 70,
+      "hp": 350,
+      "abilityhaste": 25,
+      "movespeedPercent": 0.04
     },
     "imageKey": "4629.png"
   },
@@ -3916,7 +4020,8 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatMagicDamageMod": 25
+      "abilitypower": 25,
+      "magicpenPercent": 0.13
     },
     "imageKey": "4630.png"
   },
@@ -3936,8 +4041,8 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatSpellBlockMod": 25,
-      "FlatMagicDamageMod": 40
+      "abilitypower": 40,
+      "spellblock": 25
     },
     "imageKey": "4632.png"
   },
@@ -3959,8 +4064,9 @@
       "SpellVamp"
     ],
     "stats": {
-      "FlatHPPoolMod": 350,
-      "FlatMagicDamageMod": 70
+      "abilitypower": 70,
+      "hp": 350,
+      "abilityhaste": 15
     },
     "imageKey": "4633.png"
   },
@@ -3982,7 +4088,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 20
+      "abilitypower": 20,
+      "mpregen": 1,
+      "abilityhaste": 10
     },
     "imageKey": "4642.png"
   },
@@ -4002,7 +4110,8 @@
       "MagicPenetration"
     ],
     "stats": {
-      "FlatMagicDamageMod": 110
+      "abilitypower": 110,
+      "magicpenFlat": 15
     },
     "imageKey": "4645.png"
   },
@@ -4024,8 +4133,9 @@
       "MagicPenetration"
     ],
     "stats": {
-      "FlatMagicDamageMod": 90,
-      "PercentMovementSpeedMod": 0.06
+      "abilitypower": 90,
+      "magicpenFlat": 15,
+      "movespeedPercent": 0.06
     },
     "imageKey": "4646.png"
   },
@@ -4046,8 +4156,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatArmorMod": 50,
-      "FlatPhysicalDamageMod": 60
+      "attackdamage": 60,
+      "armor": 50,
+      "abilityhaste": 15
     },
     "imageKey": "6333.png"
   },
@@ -4069,8 +4180,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 450,
-      "FlatPhysicalDamageMod": 45
+      "attackdamage": 45,
+      "hp": 450,
+      "abilityhaste": 15
     },
     "imageKey": "6609.png"
   },
@@ -4092,8 +4204,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 400,
-      "FlatPhysicalDamageMod": 45
+      "attackdamage": 45,
+      "hp": 400,
+      "abilityhaste": 10
     },
     "imageKey": "6610.png"
   },
@@ -4115,7 +4228,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 35
+      "abilitypower": 35,
+      "healshield": 0.1,
+      "mpregen": 1.25,
+      "abilityhaste": 10
     },
     "imageKey": "6616.png"
   },
@@ -4138,8 +4254,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 200,
-      "FlatMagicDamageMod": 25
+      "abilitypower": 25,
+      "hp": 200,
+      "abilityhaste": 20,
+      "mpregen": 1.25
     },
     "imageKey": "6617.png"
   },
@@ -4162,8 +4280,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 200,
-      "FlatMagicDamageMod": 35
+      "abilitypower": 35,
+      "hp": 200,
+      "abilityhaste": 20,
+      "mpregen": 1.25
     },
     "imageKey": "6620.png"
   },
@@ -4183,7 +4303,9 @@
       "ManaRegen"
     ],
     "stats": {
-      "FlatMagicDamageMod": 45
+      "abilitypower": 45,
+      "healshield": 0.16,
+      "mpregen": 1
     },
     "imageKey": "6621.png"
   },
@@ -4205,9 +4327,9 @@
       "Slow"
     ],
     "stats": {
-      "FlatHPPoolMod": 450,
-      "FlatPhysicalDamageMod": 40,
-      "PercentAttackSpeedMod": 0.25
+      "attackdamage": 40,
+      "attackspeed": 0.25,
+      "hp": 450
     },
     "imageKey": "6631.png"
   },
@@ -4227,8 +4349,8 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatHPPoolMod": 300,
-      "FlatMagicDamageMod": 60
+      "abilitypower": 60,
+      "hp": 300
     },
     "imageKey": "6653.png"
   },
@@ -4250,8 +4372,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 600,
-      "FlatMagicDamageMod": 100
+      "abilitypower": 100,
+      "mp": 600,
+      "abilityhaste": 10
     },
     "imageKey": "6655.png"
   },
@@ -4274,9 +4397,9 @@
       "ManaRegen"
     ],
     "stats": {
-      "FlatMPPoolMod": 500,
-      "FlatHPPoolMod": 350,
-      "FlatMagicDamageMod": 45
+      "abilitypower": 45,
+      "hp": 350,
+      "mp": 500
     },
     "imageKey": "6657.png"
   },
@@ -4296,7 +4419,8 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 150
+      "hp": 150,
+      "abilityhaste": 5
     },
     "imageKey": "6660.png"
   },
@@ -4320,8 +4444,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 300,
-      "FlatArmorMod": 50
+      "hp": 300,
+      "armor": 50,
+      "abilityhaste": 15
     },
     "imageKey": "6662.png"
   },
@@ -4345,8 +4470,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 40,
-      "FlatHPPoolMod": 400
+      "hp": 400,
+      "spellblock": 40,
+      "abilityhaste": 10,
+      "hpregen": 1
     },
     "imageKey": "6664.png"
   },
@@ -4368,9 +4495,9 @@
       "MagicResist"
     ],
     "stats": {
-      "FlatSpellBlockMod": 45,
-      "FlatHPPoolMod": 350,
-      "FlatArmorMod": 45
+      "hp": 350,
+      "armor": 45,
+      "spellblock": 45
     },
     "imageKey": "6665.png"
   },
@@ -4390,8 +4517,8 @@
       "CriticalStrike"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.2,
-      "FlatPhysicalDamageMod": 15
+      "attackdamage": 15,
+      "crit": 0.2
     },
     "imageKey": "6670.png"
   },
@@ -4413,9 +4540,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 45,
-      "PercentAttackSpeedMod": 0.4,
-      "PercentMovementSpeedMod": 0.04
+      "attackdamage": 45,
+      "attackspeed": 0.4,
+      "movespeedPercent": 0.04
     },
     "imageKey": "6672.png"
   },
@@ -4435,8 +4562,8 @@
       "CriticalStrike"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "FlatPhysicalDamageMod": 55
+      "attackdamage": 55,
+      "crit": 0.25
     },
     "imageKey": "6673.png"
   },
@@ -4457,9 +4584,9 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "PercentAttackSpeedMod": 0.4,
-      "PercentMovementSpeedMod": 0.04
+      "attackspeed": 0.4,
+      "crit": 0.25,
+      "movespeedPercent": 0.04
     },
     "imageKey": "6675.png"
   },
@@ -4480,8 +4607,9 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "FlatPhysicalDamageMod": 50
+      "attackdamage": 50,
+      "lethality": 10,
+      "crit": 0.25
     },
     "imageKey": "6676.png"
   },
@@ -4501,8 +4629,8 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 15,
-      "PercentMovementSpeedMod": 0.04
+      "attackdamage": 15,
+      "movespeedPercent": 0.04
     },
     "imageKey": "6690.png"
   },
@@ -4523,7 +4651,8 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 60
+      "attackdamage": 60,
+      "abilityhaste": 15
     },
     "imageKey": "6692.png"
   },
@@ -4545,7 +4674,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 45
+      "attackdamage": 45,
+      "armorpen": 0.35,
+      "abilityhaste": 15
     },
     "imageKey": "6694.png"
   },
@@ -4565,7 +4696,8 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 55
+      "attackdamage": 55,
+      "lethality": 15
     },
     "imageKey": "6695.png"
   },
@@ -4586,7 +4718,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 55
+      "attackdamage": 55,
+      "lethality": 18,
+      "abilityhaste": 20
     },
     "imageKey": "6696.png"
   },
@@ -4609,7 +4743,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 55
+      "attackdamage": 55,
+      "lethality": 18,
+      "abilityhaste": 10
     },
     "imageKey": "6697.png"
   },
@@ -4632,7 +4768,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 55
+      "attackdamage": 55,
+      "lethality": 18,
+      "abilityhaste": 10
     },
     "imageKey": "6698.png"
   },
@@ -4655,7 +4793,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatPhysicalDamageMod": 55
+      "attackdamage": 55,
+      "lethality": 10,
+      "abilityhaste": 10
     },
     "imageKey": "6699.png"
   },
@@ -4677,8 +4817,9 @@
       "MagicPenetration"
     ],
     "stats": {
-      "FlatHPPoolMod": 400,
-      "FlatMagicDamageMod": 65
+      "abilitypower": 65,
+      "hp": 400,
+      "abilityhaste": 15
     },
     "imageKey": "8010.png"
   },
@@ -4701,8 +4842,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 45,
-      "FlatHPPoolMod": 350
+      "hp": 350,
+      "spellblock": 45,
+      "abilityhaste": 15
     },
     "imageKey": "8020.png"
   },
@@ -4726,8 +4868,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 65,
-      "PercentMovementSpeedMod": 0.06
+      "abilitypower": 65,
+      "abilityhaste": 15,
+      "movespeedPercent": 0.06,
+      "mpregen": 1.5
     },
     "imageKey": "322065.png"
   },
@@ -4748,8 +4892,10 @@
       "ManaRegen"
     ],
     "stats": {
-      "FlatMPPoolMod": 300,
-      "FlatHPPoolMod": 200
+      "hp": 200,
+      "healshield": 0.08,
+      "mpregen": 0.75,
+      "mp": 300
     },
     "imageKey": "322526.png"
   },
@@ -4770,8 +4916,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 600,
-      "FlatMagicDamageMod": 70
+      "abilitypower": 70,
+      "mp": 600,
+      "abilityhaste": 25
     },
     "imageKey": "323003.png"
   },
@@ -4794,8 +4941,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 500,
-      "FlatPhysicalDamageMod": 35
+      "attackdamage": 35,
+      "mp": 500,
+      "abilityhaste": 15
     },
     "imageKey": "323004.png"
   },
@@ -4817,9 +4965,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 30,
-      "FlatHPPoolMod": 350,
-      "FlatArmorMod": 30
+      "hp": 350,
+      "armor": 30,
+      "spellblock": 30,
+      "abilityhaste": 10
     },
     "imageKey": "323050.png"
   },
@@ -4839,7 +4988,7 @@
       "ManaRegen"
     ],
     "stats": {
-      "FlatMPPoolMod": 240
+      "mp": 240
     },
     "imageKey": "323070.png"
   },
@@ -4859,8 +5008,8 @@
       "Armor"
     ],
     "stats": {
-      "FlatHPPoolMod": 200,
-      "FlatArmorMod": 85
+      "hp": 200,
+      "armor": 85
     },
     "imageKey": "323075.png"
   },
@@ -4882,8 +5031,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 400,
-      "FlatMagicDamageMod": 30
+      "abilitypower": 30,
+      "abilityhaste": 15,
+      "mpregen": 1,
+      "healshield": 0.1
     },
     "imageKey": "323107.png"
   },
@@ -4908,8 +5059,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 300,
-      "FlatArmorMod": 50
+      "hp": 300,
+      "armor": 50,
+      "abilityhaste": 10,
+      "hpregen": 1.5
     },
     "imageKey": "323109.png"
   },
@@ -4932,8 +5085,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 500,
-      "FlatArmorMod": 75
+      "armor": 75,
+      "mp": 500,
+      "abilityhaste": 25
     },
     "imageKey": "323110.png"
   },
@@ -4954,8 +5108,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 500,
-      "FlatHPPoolMod": 550
+      "hp": 550,
+      "mp": 500,
+      "abilityhaste": 15
     },
     "imageKey": "323119.png"
   },
@@ -4980,9 +5135,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 30,
-      "FlatHPPoolMod": 250,
-      "FlatArmorMod": 30
+      "hp": 250,
+      "armor": 30,
+      "spellblock": 30,
+      "abilityhaste": 10
     },
     "imageKey": "323190.png"
   },
@@ -5006,7 +5162,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 400
+      "hp": 400,
+      "mpregen": 1,
+      "healshield": 0.15,
+      "abilityhaste": 15
     },
     "imageKey": "323222.png"
   },
@@ -5028,8 +5187,10 @@
       "NonbootsMovement"
     ],
     "stats": {
-      "FlatMagicDamageMod": 55,
-      "PercentMovementSpeedMod": 0.06
+      "abilitypower": 55,
+      "healshield": 0.1,
+      "mpregen": 1.5,
+      "movespeedPercent": 0.06
     },
     "imageKey": "323504.png"
   },
@@ -5051,7 +5212,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 65
+      "abilitypower": 65,
+      "abilityhaste": 15,
+      "mpregen": 1.5
     },
     "imageKey": "324005.png"
   },
@@ -5073,7 +5236,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMagicDamageMod": 45
+      "abilitypower": 45,
+      "healshield": 0.1,
+      "mpregen": 1.5,
+      "abilityhaste": 10
     },
     "imageKey": "326616.png"
   },
@@ -5096,8 +5262,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 400,
-      "FlatMagicDamageMod": 35
+      "abilitypower": 35,
+      "hp": 400,
+      "abilityhaste": 20,
+      "mpregen": 1.5
     },
     "imageKey": "326617.png"
   },
@@ -5120,8 +5288,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 250,
-      "FlatMagicDamageMod": 35
+      "abilitypower": 35,
+      "hp": 250,
+      "abilityhaste": 20,
+      "mpregen": 1.5
     },
     "imageKey": "326620.png"
   },
@@ -5141,7 +5311,9 @@
       "ManaRegen"
     ],
     "stats": {
-      "FlatMagicDamageMod": 50
+      "abilitypower": 50,
+      "healshield": 0.2,
+      "mpregen": 1.5
     },
     "imageKey": "326621.png"
   },
@@ -5164,9 +5336,9 @@
       "ManaRegen"
     ],
     "stats": {
-      "FlatMPPoolMod": 500,
-      "FlatHPPoolMod": 350,
-      "FlatMagicDamageMod": 45
+      "abilitypower": 45,
+      "hp": 350,
+      "mp": 500
     },
     "imageKey": "326657.png"
   },
@@ -5189,8 +5361,9 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 50,
-      "FlatHPPoolMod": 350
+      "hp": 350,
+      "spellblock": 50,
+      "abilityhaste": 15
     },
     "imageKey": "328020.png"
   },
@@ -5211,8 +5384,8 @@
       "Lane"
     ],
     "stats": {
-      "FlatHPPoolMod": 500,
-      "FlatCritChanceMod": 0.2
+      "hp": 500,
+      "crit": 0.2
     },
     "imageKey": "663039.png"
   },
@@ -5255,8 +5428,8 @@
       "Armor"
     ],
     "stats": {
-      "FlatHPPoolMod": 250,
-      "FlatArmorMod": 80
+      "hp": 250,
+      "armor": 80
     },
     "imageKey": "663058.png"
   },
@@ -5276,8 +5449,8 @@
       "SpellBlock"
     ],
     "stats": {
-      "FlatSpellBlockMod": 60,
-      "FlatHPPoolMod": 250
+      "hp": 250,
+      "spellblock": 60
     },
     "imageKey": "663059.png"
   },
@@ -5298,7 +5471,8 @@
       "SpellDamage"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.5
+      "adaptive": 90,
+      "crit": 0.5
     },
     "imageKey": "663060.png"
   },
@@ -5336,8 +5510,9 @@
       "SpellVamp"
     ],
     "stats": {
-      "FlatMagicDamageMod": 90,
-      "FlatPhysicalDamageMod": 45
+      "abilitypower": 90,
+      "attackdamage": 45,
+      "omnivamp": 0.15
     },
     "imageKey": "663146.png"
   },
@@ -5360,8 +5535,10 @@
       "Tenacity"
     ],
     "stats": {
-      "PercentAttackSpeedMod": 0.4,
-      "PercentMovementSpeedMod": 0.08
+      "attackspeed": 0.4,
+      "movespeedPercent": 0.08,
+      "abilityhaste": 25,
+      "tenacity": 0.2
     },
     "imageKey": "663172.png"
   },
@@ -5384,9 +5561,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatSpellBlockMod": 55,
-      "FlatArmorMod": 55,
-      "PercentMovementSpeedMod": 0.08
+      "armor": 55,
+      "spellblock": 55,
+      "abilityhaste": 10,
+      "movespeedPercent": 0.08
     },
     "imageKey": "663193.png"
   },
@@ -5409,8 +5587,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatHPPoolMod": 150,
-      "FlatMagicDamageMod": 35
+      "abilitypower": 35,
+      "hp": 150,
+      "healshield": 0.1,
+      "abilityhaste": 10
     },
     "imageKey": "664011.png"
   },
@@ -5432,9 +5612,10 @@
       "AbilityHaste"
     ],
     "stats": {
-      "FlatMPPoolMod": 600,
-      "FlatHPPoolMod": 250,
-      "FlatMagicDamageMod": 65
+      "abilitypower": 65,
+      "hp": 250,
+      "mp": 600,
+      "abilityhaste": 15
     },
     "imageKey": "664644.png"
   },
@@ -5457,7 +5638,11 @@
       "AbilityHaste"
     ],
     "stats": {
-      "PercentMovementSpeedMod": 0.15
+      "adaptive": 55,
+      "abilityhaste": 10,
+      "lethality": 15,
+      "magicpenFlat": 15,
+      "movespeedPercent": 0.15
     },
     "imageKey": "667101.png"
   },
@@ -5478,9 +5663,9 @@
       "MagicResist"
     ],
     "stats": {
-      "FlatSpellBlockMod": 25,
-      "FlatMagicDamageMod": 60,
-      "FlatArmorMod": 25
+      "abilitypower": 60,
+      "armor": 25,
+      "spellblock": 25
     },
     "imageKey": "667109.png"
   },
@@ -5502,7 +5687,8 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatHPPoolMod": 500
+      "adaptive": 55,
+      "hp": 500
     },
     "imageKey": "667112.png"
   },
@@ -5523,8 +5709,9 @@
       "ArmorPenetration"
     ],
     "stats": {
-      "FlatCritChanceMod": 0.25,
-      "FlatPhysicalDamageMod": 50
+      "attackdamage": 50,
+      "lethality": 10,
+      "crit": 0.25
     },
     "imageKey": "667666.png"
   }

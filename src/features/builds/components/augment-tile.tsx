@@ -11,9 +11,14 @@ import type { Augment } from '@/features/augments/types';
 interface Props {
   augment: Augment;
   size: number;
+  /**
+   * 타일 배경. 기본은 splash 히어로 카드용 반투명 scrim(어두운 이미지 위 전제).
+   * 밝은 시트(빌드 상세 등) 위에선 불투명 어두운 톤을 넘겨 아이콘 대비를 확보한다.
+   */
+  background?: string;
 }
 
-export function AugmentTile({ augment, size }: Props) {
+export function AugmentTile({ augment, size, background = HeroOverlay.tileBg }: Props) {
   const tint = AugmentRarityColors[augment.rarity].border;
 
   return (
@@ -23,8 +28,8 @@ export function AugmentTile({ augment, size }: Props) {
         {
           width: size,
           height: size,
-          // 카드 위는 splash라 모드 무관 어두운 타일 — 밝은 아이콘/rarity 테두리 대비 확보.
-          backgroundColor: HeroOverlay.tileBg,
+          // 증강 아이콘은 어두운 배경 자산 — 모드 무관 어두운 타일로 아이콘/rarity 테두리 대비 확보.
+          backgroundColor: background,
           borderColor: tint,
         },
       ]}

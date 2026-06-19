@@ -2,7 +2,12 @@ import { StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
-import { AugmentRarityColors, Radius, Spacing } from "@/constants/theme";
+import {
+  AugmentRarityColors,
+  HeroOverlay,
+  Radius,
+  Spacing,
+} from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useTheme } from "@/hooks/use-theme";
 import { cleanAugmentDescription } from "@/lib/augment-text";
@@ -34,9 +39,15 @@ export function BuildAugmentList({ augments, label }: Props) {
             },
           ]}
         >
-          <AugmentTile augment={aug} size={48} />
+          <AugmentTile
+            augment={aug}
+            size={48}
+            background={HeroOverlay.cardBase}
+          />
           <View style={styles.augmentBody}>
-            <ThemedText type="label">{aug.name}</ThemedText>
+            <ThemedText type="label" style={{ fontWeight: "700" }}>
+              {aug.name}
+            </ThemedText>
             <ThemedText type="caption" color="secondary">
               {cleanAugmentDescription(aug.description)}
             </ThemedText>
