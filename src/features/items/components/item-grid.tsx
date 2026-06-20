@@ -1,4 +1,3 @@
-import { Image } from "expo-image";
 import {
   Pressable,
   ScrollView,
@@ -8,6 +7,7 @@ import {
 } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
+import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { itemImageUrl } from "@/lib/ddragon";
@@ -74,8 +74,9 @@ export function ItemGrid({
                     overflow: "hidden" as const,
                   })}
                 >
-                  <Image
-                    source={{ uri: itemImageUrl(item.imageKey) }}
+                  <RemoteImage
+                    uri={itemImageUrl(item.imageKey)}
+                    recyclingKey={item.id}
                     style={{
                       width: cellSize - 4,
                       height: cellSize - 4,

@@ -1,7 +1,7 @@
-import { Image } from "expo-image";
 import { ScrollView, StyleSheet, View, type LayoutChangeEvent } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
+import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import type { Champion } from "@/features/champions/types";
@@ -53,8 +53,9 @@ export function ItemDetailPanel({
             ]}
           >
             {championIconUri && (
-              <Image
-                source={{ uri: championIconUri }}
+              <RemoteImage
+                uri={championIconUri}
+                recyclingKey={champion.id}
                 style={[
                   styles.championIcon,
                   { borderColor: colors.border.default, borderWidth: 1 },
@@ -93,7 +94,6 @@ export function ItemDetailPanel({
                   <AugmentCard
                     key={aug.id}
                     augment={aug}
-                    sunkenBg={colors.surface.sunken}
                     size={augmentCardSize}
                   />
                 ))}

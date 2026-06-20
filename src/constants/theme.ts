@@ -212,7 +212,7 @@ export const HeroOverlay = {
 } as const;
 
 export const Brand = {
-  splashBg: "#208AEF",
+  splashBg: "#0E0F12",
   logoBgFrom: "#3C9FFE",
   logoBgTo: "#0274DF",
 } as const;

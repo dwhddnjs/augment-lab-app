@@ -5,6 +5,7 @@
  *   좌: 카테고리 필터(ItemFilterBar) + ARAM 아이템 그리드(ItemGrid) + 선택 트레이
  *   우: 챔피언 아이콘/이름 + 합산 스탯 + 증강 칩 (ItemDetailPanel)
  */
+import { Image } from "expo-image";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useMemo, useState } from "react";
@@ -19,6 +20,7 @@ import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useTheme } from "@/hooks/use-theme";
 import { saveBuild } from "@/lib/build-storage";
+import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { ItemDetailPanel } from "../components/item-detail-panel";
 import { ItemFilterBar, SIDE_TAB_WIDTH } from "../components/item-filter-bar";
@@ -126,6 +128,15 @@ function ItemSelectContent({
   const aramItems = useMemo(
     () => allItems.filter((item) => ARAM_IDS.has(item.id)),
     [allItems],
+  );
+
+  // 진입 시 ARAM 아이템 아이콘을 미리 디스크 캐시에 받아둔다.
+  // (캐시가 비어 검은 박스가 깜빡이던 첫 설치 케이스 대응)
+  useFocusEffect(
+    useCallback(() => {
+      const urls = aramItems.map((it) => itemImageUrl(it.imageKey));
+      if (urls.length) Image.prefetch(urls, { cachePolicy: "memory-disk" });
+    }, [aramItems]),
   );
 
   const displayItems = useMemo(() => {

@@ -5,7 +5,9 @@ import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 
 import { AnimatedSplashOverlay } from '@/components/navigation/animated-icon';
+import { SetupScreen } from '@/components/navigation/setup-screen';
 import { Theme } from '@/constants/theme';
+import { useImagePrewarm } from '@/hooks/use-image-prewarm';
 import { loadLocale } from '@/hooks/use-locale';
 import { loadThemePreference, useThemePreference } from '@/hooks/use-theme-preference';
 
@@ -38,6 +40,8 @@ const lightNavTheme = {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const { preference } = useThemePreference();
+  // 첫 설치 시 챔피언 아이콘을 받는 동안 설치 화면(진행률)을 보여준다.
+  const { showSetup, progress } = useImagePrewarm();
 
   // 앱 시작 시 저장된 테마·로케일 선택을 1회 복원한다.
   useEffect(() => {
@@ -50,6 +54,7 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={mode === 'dark' ? darkNavTheme : lightNavTheme}>
+      {showSetup && <SetupScreen progress={progress} />}
       <AnimatedSplashOverlay />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

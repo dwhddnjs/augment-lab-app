@@ -9,14 +9,19 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
-import { Spacing } from "@/constants/theme";
+import { GlassSurface } from "@/components/ui/glass-surface";
+import { Radius, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { augmentImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import { useDraft } from "../hooks/use-draft";
-import { DraftCard, type CardEntryMode, type CardExitMode } from "../components/draft-card";
+import {
+  DraftCard,
+  type CardEntryMode,
+  type CardExitMode,
+} from "../components/draft-card";
 import { PickedDrawer } from "../components/picked-drawer";
 import { RoundIndicator } from "../components/round-indicator";
+import { useDraft } from "../hooks/use-draft";
 
 const t = {
   ko: {
@@ -212,16 +217,16 @@ export function DraftScreen() {
               role="cancel"
               onPress={handleExit}
             />
-            <View style={{ alignItems: "center", gap: Spacing.one }}>
+            <GlassSurface glassStyle="regular" style={styles.roundBox}>
               <ThemedText
                 type="label"
-                color="tertiary"
+                color="primary"
                 style={{ fontWeight: "800" }}
               >
                 {translate("round")}
               </ThemedText>
               <RoundIndicator round={round} />
-            </View>
+            </GlassSurface>
 
             <GlassButton
               systemImage="list.bullet"
@@ -279,5 +284,13 @@ const styles = StyleSheet.create({
   },
   cardsRow: {
     flexDirection: "row",
+  },
+  roundBox: {
+    alignItems: "center",
+    gap: Spacing.half,
+    paddingHorizontal: Spacing.four,
+    paddingVertical: Spacing.one,
+    borderRadius: Radius.full,
+    // borderCurve: "continuous",
   },
 });
