@@ -1,17 +1,33 @@
 {
   "expo": {
-    "name": "aram-augment-lab-app",
-    "slug": "aram-augment-lab-app",
+    "name": "Augment Lab",
+    "slug": "augment-lab",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/store/icon-aram-ios-1024.png",
-    "scheme": "aramaugmentlabapp",
+    "scheme": "augmentlab",
     "userInterfaceStyle": "automatic",
+    "locales": {
+      "ko": "./assets/locales/ko.json"
+    },
     "ios": {
       "icon": "./assets/store/icon-aram-ios-1024.png",
-      "bundleIdentifier": "com.aram-augment-lab",
+      "bundleIdentifier": "com.augmentlab",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
+      },
+      "privacyManifests": {
+        "NSPrivacyTracking": false,
+        "NSPrivacyTrackingDomains": [],
+        "NSPrivacyCollectedDataTypes": [],
+        "NSPrivacyAccessedAPITypes": [
+          {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+            "NSPrivacyAccessedAPITypeReasons": [
+              "CA92.1"
+            ]
+          }
+        ]
       }
     },
     "android": {
@@ -22,7 +38,7 @@
         "monochromeImage": "./assets/store/adaptive-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.aramaugmentlab"
+      "package": "com.augmentlab"
     },
     "web": {
       "output": "static",
@@ -42,7 +58,8 @@
             "imageWidth": 220
           }
         }
-      ]
+      ],
+      "expo-image"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -51,7 +68,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "f5d43fab-6563-4f66-9b31-8c2eeb7cee52"
+        "projectId": "bc6939d3-df92-44f8-82b8-703d52156302"
       }
     },
     "owner": "dwhddnjs"

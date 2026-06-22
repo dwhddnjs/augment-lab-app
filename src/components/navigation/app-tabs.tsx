@@ -21,18 +21,7 @@ export default function AppTabs() {
   const router = useRouter();
 
   return (
-    <NativeTabs
-      tintColor={colors.accent.default}
-      unstable_nativeProps={{
-        // plus는 disabled(preventNativeSelection)라 눌러도 탭이 전환되지 않는다
-        // → 현재 탭 선택이 유지되고 빈 plus 화면이 뜨지 않는다. 막힌 선택은
-        // onTabSelectionPrevented로 통지되며, 유일한 disabled 탭이 plus이므로
-        // 이 이벤트 = plus 눌림 → 모달을 띄운다.
-        onTabSelectionPrevented: () => {
-          router.push("/select-champion-modal");
-        },
-      }}
-    >
+    <NativeTabs tintColor={colors.accent.default}>
       <NativeTabs.Trigger name="(home)">
         <NativeTabs.Trigger.Label>{translate("home")}</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="house" />
@@ -53,8 +42,19 @@ export default function AppTabs() {
       </NativeTabs.Trigger>
 
       {/* disabled → 탭 전환을 막아 현재 탭 유지(빈 화면 방지). 누르면
-          NativeTabs의 onTabSelectionPrevented가 모달을 띄운다. */}
-      <NativeTabs.Trigger name="plus" role="search" disabled>
+          disabled 탭이라 tabPress가 isPrevented로 emit되고, 그 listener가
+          모달을 띄운다. (onTabSelectionPrevented는 expo-router 내부에서
+          덮어써져 unstable_nativeProps로 넘겨도 동작하지 않는다.) */}
+      <NativeTabs.Trigger
+        name="plus"
+        role="search"
+        disabled
+        listeners={{
+          tabPress: () => {
+            router.push("/select-champion-modal");
+          },
+        }}
+      >
         <NativeTabs.Trigger.Label>{translate("plus")}</NativeTabs.Trigger.Label>
         {/* iOS=SF Symbol(plus), Android=Material Symbol(add). 색은 accent 강제. */}
         <NativeTabs.Trigger.Icon

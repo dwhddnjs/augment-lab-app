@@ -55,6 +55,8 @@ const t = {
     version: "버전",
     github: "GitHub",
     feedback: "피드백 보내기",
+    disclaimer:
+      "이 앱은 Riot Games가 제작·후원·승인하지 않은 비공식 앱입니다. League of Legends 및 Riot Games는 Riot Games, Inc.의 상표 또는 등록 상표입니다.",
   },
   en: {
     general: "General",
@@ -67,6 +69,8 @@ const t = {
     version: "Version",
     github: "GitHub",
     feedback: "Send feedback",
+    disclaimer:
+      "This app is unofficial and is not endorsed by, sponsored by, or affiliated with Riot Games. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc.",
   },
 };
 
@@ -158,7 +162,10 @@ export default function MyPageScreen() {
           </Picker>
         </Section>
 
-        <Section title={translate("info")}>
+        <Section
+          title={translate("info")}
+          footer={<Text>{translate("disclaimer")}</Text>}
+        >
           <SettingsRow
             label={translate("version")}
             value={version}
