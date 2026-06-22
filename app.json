@@ -2,7 +2,7 @@
   "expo": {
     "name": "Augment Lab",
     "slug": "augment-lab",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "default",
     "icon": "./assets/store/icon-aram-ios-1024.png",
     "scheme": "augmentlab",
@@ -13,6 +13,7 @@
     "ios": {
       "icon": "./assets/store/icon-aram-ios-1024.png",
       "bundleIdentifier": "com.augmentlab",
+      "supportsTablet": false,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
