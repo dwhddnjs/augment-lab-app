@@ -1,0 +1,5718 @@
+[
+  {
+    "id": "1001",
+    "name": "장화",
+    "description": "<mainText><stats>이동 속도 <attention>25</attention></stats><br><br></mainText>",
+    "plaintext": "이동 속도가 약간 증가합니다.",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 300,
+      "sell": 210
+    },
+    "tags": [
+      "Boots"
+    ],
+    "stats": {
+      "movespeedFlat": 25
+    },
+    "imageKey": "1001.png"
+  },
+  {
+    "id": "1004",
+    "name": "요정의 부적",
+    "description": "<mainText><stats>기본 마나 재생 <attention>50%</attention></stats><br><br></mainText>",
+    "plaintext": "마나 재생량이 약간 증가합니다.",
+    "gold": {
+      "base": 200,
+      "purchasable": true,
+      "total": 200,
+      "sell": 140
+    },
+    "tags": [
+      "ManaRegen"
+    ],
+    "stats": {
+      "mpregen": 0.5
+    },
+    "imageKey": "1004.png"
+  },
+  {
+    "id": "1006",
+    "name": "원기 회복의 구슬",
+    "description": "<mainText><stats>기본 체력 재생 <attention>100%</attention></stats><br><br></mainText>",
+    "plaintext": "체력 재생량이 약간 증가합니다.",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 300,
+      "sell": 120
+    },
+    "tags": [
+      "HealthRegen"
+    ],
+    "stats": {
+      "hpregen": 1
+    },
+    "imageKey": "1006.png"
+  },
+  {
+    "id": "1011",
+    "name": "거인의 허리띠",
+    "description": "<mainText><stats>체력 <attention>350</attention></stats><br><br></mainText>",
+    "plaintext": "체력이 대폭 증가합니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "Health"
+    ],
+    "stats": {
+      "hp": 350
+    },
+    "imageKey": "1011.png"
+  },
+  {
+    "id": "1018",
+    "name": "민첩성의 망토",
+    "description": "<mainText><stats>치명타 확률 <attention>15%</attention></stats><br><br></mainText>",
+    "plaintext": "치명타 확률이 증가합니다.",
+    "gold": {
+      "base": 600,
+      "purchasable": true,
+      "total": 600,
+      "sell": 420
+    },
+    "tags": [
+      "CriticalStrike"
+    ],
+    "stats": {
+      "crit": 0.15
+    },
+    "imageKey": "1018.png"
+  },
+  {
+    "id": "1026",
+    "name": "방출의 마법봉",
+    "description": "<mainText><stats>주문력 <attention>45</attention></stats><br><br></mainText>",
+    "plaintext": "주문력이 상당히 상승합니다.",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 850,
+      "sell": 595
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 45
+    },
+    "imageKey": "1026.png"
+  },
+  {
+    "id": "1027",
+    "name": "사파이어 수정",
+    "description": "<mainText><stats>마나 <attention>300</attention></stats><br><br></mainText>",
+    "plaintext": "마나가 증가합니다.",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 300,
+      "sell": 210
+    },
+    "tags": [
+      "Mana"
+    ],
+    "stats": {
+      "mp": 300
+    },
+    "imageKey": "1027.png"
+  },
+  {
+    "id": "1028",
+    "name": "루비 수정",
+    "description": "<mainText><stats>체력 <attention>150</attention></stats><br><br></mainText>",
+    "plaintext": "체력이 증가합니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 280
+    },
+    "tags": [
+      "Health"
+    ],
+    "stats": {
+      "hp": 150
+    },
+    "imageKey": "1028.png"
+  },
+  {
+    "id": "1029",
+    "name": "천 갑옷",
+    "description": "<mainText><stats>방어력 <attention>15</attention></stats><br><br></mainText>",
+    "plaintext": "방어력이 약간 증가합니다.",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 300,
+      "sell": 210
+    },
+    "tags": [
+      "Armor"
+    ],
+    "stats": {
+      "armor": 15
+    },
+    "imageKey": "1029.png"
+  },
+  {
+    "id": "1031",
+    "name": "쇠사슬 조끼",
+    "description": "<mainText><stats>방어력 <attention>40</attention></stats><br><br></mainText>",
+    "plaintext": "방어력이 대폭 증가합니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 800,
+      "sell": 560
+    },
+    "tags": [
+      "Armor"
+    ],
+    "stats": {
+      "armor": 40
+    },
+    "imageKey": "1031.png"
+  },
+  {
+    "id": "1033",
+    "name": "마법무효화의 망토",
+    "description": "<mainText><stats>마법 저항력 <attention>20</attention></stats><br><br></mainText>",
+    "plaintext": "마법 저항력이 약간 증가합니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 280
+    },
+    "tags": [
+      "SpellBlock"
+    ],
+    "stats": {
+      "spellblock": 20
+    },
+    "imageKey": "1033.png"
+  },
+  {
+    "id": "1036",
+    "name": "롱소드",
+    "description": "<mainText><stats>공격력 <attention>10</attention></stats><br><br></mainText>",
+    "plaintext": "공격력이 약간 증가합니다.",
+    "gold": {
+      "base": 350,
+      "purchasable": true,
+      "total": 350,
+      "sell": 245
+    },
+    "tags": [
+      "Damage",
+      "Lane"
+    ],
+    "stats": {
+      "attackdamage": 10
+    },
+    "imageKey": "1036.png"
+  },
+  {
+    "id": "1037",
+    "name": "곡괭이",
+    "description": "<mainText><stats>공격력 <attention>25</attention></stats><br><br></mainText>",
+    "plaintext": "공격력이 상당히 증가합니다.",
+    "gold": {
+      "base": 875,
+      "purchasable": true,
+      "total": 875,
+      "sell": 613
+    },
+    "tags": [
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 25
+    },
+    "imageKey": "1037.png"
+  },
+  {
+    "id": "1038",
+    "name": "B.F. 대검",
+    "description": "<mainText><stats>공격력 <attention>40</attention></stats><br><br></mainText>",
+    "plaintext": "공격력이 대폭 증가합니다.",
+    "gold": {
+      "base": 1300,
+      "purchasable": true,
+      "total": 1300,
+      "sell": 910
+    },
+    "tags": [
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 40
+    },
+    "imageKey": "1038.png"
+  },
+  {
+    "id": "1042",
+    "name": "단검",
+    "description": "<mainText><stats>공격 속도 <attention>10%</attention></stats><br><br></mainText>",
+    "plaintext": "공격 속도가 약간 증가합니다.",
+    "gold": {
+      "base": 250,
+      "purchasable": true,
+      "total": 250,
+      "sell": 175
+    },
+    "tags": [
+      "AttackSpeed"
+    ],
+    "stats": {
+      "attackspeed": 0.1
+    },
+    "imageKey": "1042.png"
+  },
+  {
+    "id": "1043",
+    "name": "곡궁",
+    "description": "<mainText><stats>공격 속도 <attention>15%</attention></stats><br><br><passive>독침</passive><br>기본 공격 <OnHit>적중 시</OnHit> <physicalDamage>15의 추가 물리 피해</physicalDamage>를 입힙니다.</mainText>",
+    "plaintext": "공격 속도가 대폭 증가합니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 700,
+      "sell": 490
+    },
+    "tags": [
+      "AttackSpeed",
+      "OnHit"
+    ],
+    "stats": {
+      "attackspeed": 0.15
+    },
+    "imageKey": "1043.png"
+  },
+  {
+    "id": "1052",
+    "name": "증폭의 고서",
+    "description": "<mainText><stats>주문력 <attention>20</attention></stats><br><br></mainText>",
+    "plaintext": "주문력이 약간 상승합니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 280
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 20
+    },
+    "imageKey": "1052.png"
+  },
+  {
+    "id": "1053",
+    "name": "흡혈의 낫",
+    "description": "<mainText><stats>공격력 <attention>15</attention><br>생명력 흡수 <attention>7%</attention></stats><br><br></mainText>",
+    "plaintext": "기본 공격 시 체력을 회복합니다.",
+    "gold": {
+      "base": 550,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "Damage",
+      "LifeSteal"
+    ],
+    "stats": {
+      "attackdamage": 15,
+      "lifesteal": 0.07
+    },
+    "imageKey": "1053.png"
+  },
+  {
+    "id": "1054",
+    "name": "도란의 방패",
+    "description": "<mainText><stats>체력 <attention>110</attention></stats><br><br><passive>인내의 집중력</passive><br>5초마다 <healing>체력을 4</healing> 회복합니다. <br>챔피언에게 피해를 입으면 8초 동안 <healing>체력</healing>을 회복합니다.<br><br><passive>도움의 손길</passive><br>미니언에게 기본 공격 시 <physicalDamage>5의 추가 물리 피해</physicalDamage>를 입힙니다.</mainText>",
+    "plaintext": "방어에 특화된 시작 아이템입니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 450,
+      "sell": 180
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "Lane"
+    ],
+    "stats": {
+      "hp": 110
+    },
+    "imageKey": "1054.png"
+  },
+  {
+    "id": "1055",
+    "name": "도란의 검",
+    "description": "<mainText><stats>공격력 <attention>10</attention><br>체력 <attention>80</attention><br>모든 피해 흡혈 <attention>2.5%</attention></stats><br><br></mainText>",
+    "plaintext": "공격에 특화된 시작 아이템입니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 450,
+      "sell": 180
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "LifeSteal",
+      "SpellVamp",
+      "Lane"
+    ],
+    "stats": {
+      "attackdamage": 10,
+      "hp": 80,
+      "omnivamp": 0.025
+    },
+    "imageKey": "1055.png"
+  },
+  {
+    "id": "1056",
+    "name": "도란의 반지",
+    "description": "<mainText><stats>주문력 <attention>18</attention><br>체력 <attention>90</attention></stats><br><br><passive>흡수</passive><br>매초 <scaleMana>1의 마나</scaleMana>를 회복합니다. 이 수치는 적 챔피언에게 피해를 입힌 후 5초 동안 매초 <scaleMana>2의 마나</scaleMana>까지 증가합니다. 마나를 회복할 수 없을 때는 대신 이 수치의 <healing>45%만큼 체력을 회복합니다</healing>.<br><br><passive>도움의 손길</passive><br>기본 공격 시 미니언에게 <physicalDamage>5의 추가 물리 피해</physicalDamage>를 입힙니다.</mainText>",
+    "plaintext": "스킬 사용에 특화된 시작 아이템입니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 160
+    },
+    "tags": [
+      "Health",
+      "Lane",
+      "ManaRegen",
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 18,
+      "hp": 90
+    },
+    "imageKey": "1056.png"
+  },
+  {
+    "id": "1057",
+    "name": "음전자 망토",
+    "description": "<mainText><stats>마법 저항력 <attention>45</attention></stats><br><br></mainText>",
+    "plaintext": "마법 저항력이 상당히 증가합니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 850,
+      "sell": 595
+    },
+    "tags": [
+      "SpellBlock"
+    ],
+    "stats": {
+      "spellblock": 45
+    },
+    "imageKey": "1057.png"
+  },
+  {
+    "id": "1058",
+    "name": "쓸데없이 큰 지팡이",
+    "description": "<mainText><stats>주문력 <attention>65</attention></stats><br><br></mainText>",
+    "plaintext": "주문력이 대폭 상승합니다.",
+    "gold": {
+      "base": 1200,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 65
+    },
+    "imageKey": "1058.png"
+  },
+  {
+    "id": "1082",
+    "name": "암흑의 인장",
+    "description": "<mainText><stats>주문력 <attention>15</attention><br>체력 <attention>50</attention></stats><br><br><passive>영광</passive><br><keyword>처치 관여</keyword> 시 <passive>영광</passive>을 최대 10 중첩까지 얻습니다. 사망 시 <passive>영광</passive> 5 중첩을 잃습니다.<br><passive>영광</passive>당 <scaleAP>4의 주문력</scaleAP>을 얻습니다.</mainText>",
+    "plaintext": "주문력과 마나가 상승하며 적을 처치할 때마다 더욱 강력해집니다.",
+    "gold": {
+      "base": 350,
+      "purchasable": true,
+      "total": 350,
+      "sell": 140
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "Lane"
+    ],
+    "stats": {
+      "abilitypower": 15,
+      "hp": 50
+    },
+    "imageKey": "1082.png"
+  },
+  {
+    "id": "1083",
+    "name": "수확의 낫",
+    "description": "<mainText><stats>공격력 <attention>7</attention></stats><br><br><passive>수확</passive><br><OnHit>적중 시</OnHit> <healing>체력을 3</healing> 회복합니다.<br>미니언 처치 시 <gold>1</gold>골드를 얻습니다. (최대 <gold>100</gold>골드) 한도에 도달하면 <gold>350골드</gold>를 더 얻습니다.<br></mainText>",
+    "plaintext": "피해를 입히고 적중 시 생명력을 흡수합니다. 미니언 처치 시 추가 골드를 얻습니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 450,
+      "sell": 180
+    },
+    "tags": [
+      "Damage",
+      "OnHit",
+      "Lane"
+    ],
+    "stats": {
+      "attackdamage": 7
+    },
+    "imageKey": "1083.png"
+  },
+  {
+    "id": "1086",
+    "name": "도란의 활",
+    "description": "<mainText><stats>공격력 <attention>8</attention><br>공격 속도 <attention>15%</attention><br>모든 피해 흡혈 <attention>1.5%</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 160
+    },
+    "tags": [
+      "Damage",
+      "AttackSpeed",
+      "SpellVamp",
+      "Lane"
+    ],
+    "stats": {
+      "attackdamage": 8,
+      "attackspeed": 0.15,
+      "omnivamp": 0.015
+    },
+    "imageKey": "1086.png"
+  },
+  {
+    "id": "1101",
+    "name": "새끼 화염발톱",
+    "description": "<mainText><stats></stats><br><br><passive>정글 동료</passive><br>몬스터를 상대할 때 도와주는 <font color='#DD2E2E'>화염발톱</font>을 소환합니다.<br><br>몬스터를 사냥할수록 동료가 성장하며 <spellName>강타</spellName>를 강화합니다. 완전히 성장하면 정글 퀘스트가 완료되며 주기적으로 다음 기본 공격 또는 스킬을 강화해 적을 불태우고 <status>둔화</status>시킵니다. 대형 몬스터 처치 시 이 효과가 즉시 준비됩니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 450,
+      "sell": 0
+    },
+    "tags": [
+      "Jungle"
+    ],
+    "stats": {},
+    "imageKey": "1101.png"
+  },
+  {
+    "id": "1102",
+    "name": "새끼 바람돌이",
+    "description": "<mainText><stats></stats><br><br><passive>정글 동료</passive><br>몬스터를 상대할 때 도와주는 <font color='#38A8E8'>바람돌이</font>를 소환합니다.<br><br>몬스터를 사냥할수록 동료가 성장하며 <spellName>강타</spellName>를 강화합니다. 완전히 성장하면 정글 퀘스트가 완료되며 수풀에 들어갔을 때 <speed>이동 속도</speed>를 높여주며 대형 몬스터를 처치하면 더 높여줍니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 450,
+      "sell": 0
+    },
+    "tags": [
+      "Jungle"
+    ],
+    "stats": {},
+    "imageKey": "1102.png"
+  },
+  {
+    "id": "1103",
+    "name": "새끼 이끼쿵쿵이",
+    "description": "<mainText><stats></stats><br><br><passive>정글 동료</passive><br>몬스터를 상대할 때 도와주는 <font color='#1CA935'>이끼쿵쿵이</font>를 소환합니다.<br><br>몬스터를 사냥할수록 동료가 성장하며 <spellName>강타</spellName>를 강화합니다. 완전히 성장하면 정글 퀘스트가 완료되며 전투에서 벗어나 있을 때 및 대형 몬스터 처치 후 보호막을 부여합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 450,
+      "sell": 0
+    },
+    "tags": [
+      "Jungle"
+    ],
+    "stats": {},
+    "imageKey": "1103.png"
+  },
+  {
+    "id": "1105",
+    "name": "새끼 이끼쿵쿵이",
+    "description": "<mainText><stats></stats><br><br><passive>정글 동료</passive><br>몬스터를 상대할 때 도와주는 <font color='#1CA935'>이끼쿵쿵이</font>를 소환합니다.<br><br>몬스터를 사냥할수록 동료가 성장하며 <spellName>강타</spellName>를 강화합니다. 완전히 성장하면 정글 퀘스트가 완료되며 전투에서 벗어나 있을 때 및 대형 몬스터 처치 후 보호막을 부여합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 450,
+      "sell": 180
+    },
+    "tags": [
+      "Jungle"
+    ],
+    "stats": {},
+    "imageKey": "1105.png"
+  },
+  {
+    "id": "1106",
+    "name": "새끼 바람돌이",
+    "description": "<mainText><stats></stats><br><br><passive>정글 동료</passive><br>몬스터를 상대할 때 도와주는 <font color='#38A8E8'>바람돌이</font>를 소환합니다.<br><br>몬스터를 사냥할수록 동료가 성장하며 <spellName>강타</spellName>를 강화합니다. 완전히 성장하면 정글 퀘스트가 완료되며 수풀에 들어갔을 때 <speed>이동 속도</speed>를 높여주며 대형 몬스터를 처치하면 더 높여줍니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 450,
+      "sell": 180
+    },
+    "tags": [
+      "Jungle"
+    ],
+    "stats": {},
+    "imageKey": "1106.png"
+  },
+  {
+    "id": "1107",
+    "name": "새끼 화염발톱",
+    "description": "<mainText><stats></stats><br><br><passive>정글 동료</passive><br>몬스터를 상대할 때 도와주는 <font color='#DD2E2E'>화염발톱</font>을 소환합니다.<br><br>몬스터를 사냥할수록 동료가 성장하며 <spellName>강타</spellName>를 강화합니다. 완전히 성장하면 정글 퀘스트가 완료되며 주기적으로 다음 기본 공격 또는 스킬을 강화해 적을 불태우고 <status>둔화</status>시킵니다. 대형 몬스터 처치 시 이 효과가 즉시 준비됩니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 450,
+      "sell": 180
+    },
+    "tags": [
+      "Jungle"
+    ],
+    "stats": {},
+    "imageKey": "1107.png"
+  },
+  {
+    "id": "1120",
+    "name": "도란의 투구",
+    "description": "<mainText><stats>체력 <attention>140</attention><br>방어력 <attention>10</attention><br>마법 저항력 <attention>10</attention></stats><br><br><passive>도움의 손길</passive><br>기본 공격 시 미니언에게 <physicalDamage>5의 추가 물리 피해</physicalDamage>를 입힙니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 450,
+      "sell": 180
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "Armor",
+      "Lane"
+    ],
+    "stats": {
+      "hp": 140,
+      "armor": 10,
+      "spellblock": 10
+    },
+    "imageKey": "1120.png"
+  },
+  {
+    "id": "2003",
+    "name": "체력 물약",
+    "description": "<mainText><stats></stats><br><br><active>사용</active><br>15초에 걸쳐 <healing>120의 체력</healing>을 회복합니다.</mainText>",
+    "plaintext": "사용하면 일정 시간 동안 체력이 회복됩니다.",
+    "gold": {
+      "base": 50,
+      "purchasable": true,
+      "total": 50,
+      "sell": 20
+    },
+    "tags": [
+      "HealthRegen",
+      "Consumable",
+      "Lane",
+      "Jungle"
+    ],
+    "stats": {},
+    "imageKey": "2003.png"
+  },
+  {
+    "id": "2019",
+    "name": "강철 인장",
+    "description": "<mainText><stats>공격력 <attention>15</attention><br>방어력 <attention>30</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 150,
+      "purchasable": true,
+      "total": 1100,
+      "sell": 770
+    },
+    "tags": [
+      "Armor",
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 15,
+      "armor": 30
+    },
+    "imageKey": "2019.png"
+  },
+  {
+    "id": "2020",
+    "name": "야수화",
+    "description": "<mainText><stats>공격력 <attention>25</attention><br>스킬 가속 <attention>10</attention><br>물리 관통력 <attention>5</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 212,
+      "purchasable": true,
+      "total": 1337,
+      "sell": 936
+    },
+    "tags": [
+      "Damage",
+      "CooldownReduction",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 25,
+      "abilityhaste": 10,
+      "lethality": 5
+    },
+    "imageKey": "2020.png"
+  },
+  {
+    "id": "2021",
+    "name": "땅굴 채굴기",
+    "description": "<mainText><stats>공격력 <attention>15</attention><br>체력 <attention>250</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 1150,
+      "sell": 805
+    },
+    "tags": [
+      "Health",
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 15,
+      "hp": 250
+    },
+    "imageKey": "2021.png"
+  },
+  {
+    "id": "2022",
+    "name": "빛나는 티끌",
+    "description": "<mainText><stats>스킬 가속 <attention>5</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 250,
+      "purchasable": true,
+      "total": 250,
+      "sell": 175
+    },
+    "tags": [
+      "CooldownReduction"
+    ],
+    "stats": {
+      "abilityhaste": 5
+    },
+    "imageKey": "2022.png"
+  },
+  {
+    "id": "2031",
+    "name": "충전형 물약",
+    "description": "<mainText><stats></stats><br><br><active>사용 시</active> (충전량 2회)<br>12초에 걸쳐 <healing>100의 체력</healing>을 회복합니다. <br>상점을 이용할 때마다 새로 생성됩니다.</mainText>",
+    "plaintext": "점차 체력이 회복되며, 상점에 가면 다시 충전됩니다.",
+    "gold": {
+      "base": 150,
+      "purchasable": true,
+      "total": 150,
+      "sell": 60
+    },
+    "tags": [
+      "HealthRegen",
+      "Consumable",
+      "Active",
+      "Lane",
+      "Jungle"
+    ],
+    "stats": {},
+    "imageKey": "2031.png"
+  },
+  {
+    "id": "2051",
+    "name": "수호자의 뿔피리",
+    "description": "<mainText><stats>체력 <attention>150</attention></stats><br><br><br><li><passive>회복:</passive> 5초마다 <healing>체력을 20</healing> 회복합니다.<li><passive>불굴의 의지:</passive> 적 챔피언의 기본 공격과 스킬 공격 피해량을 15만큼 막아줍니다. (지속 피해 스킬의 경우 25%의 효과)<br></mainText>",
+    "plaintext": "탱커에게 특화된 시작 아이템입니다.",
+    "gold": {
+      "base": 950,
+      "purchasable": true,
+      "total": 950,
+      "sell": 665
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "Lane"
+    ],
+    "stats": {
+      "hp": 150
+    },
+    "imageKey": "2051.png"
+  },
+  {
+    "id": "2055",
+    "name": "제어 와드",
+    "description": "<mainText><stats></stats><br><br><active>사용</active><br>시야를 밝히고 적 투명 와드, 함정, <keywordStealth>위장</keywordStealth>한 적을 드러내는 제어 와드를 설치합니다.</mainText>",
+    "plaintext": "일정 지역 안의 와드와 투명 덫을 무력화시킵니다.",
+    "gold": {
+      "base": 75,
+      "purchasable": true,
+      "total": 75,
+      "sell": 30
+    },
+    "tags": [
+      "Consumable",
+      "Lane",
+      "Stealth",
+      "Vision"
+    ],
+    "stats": {},
+    "imageKey": "2055.png"
+  },
+  {
+    "id": "2065",
+    "name": "슈렐리아의 군가",
+    "description": "<mainText><stats>주문력 <attention>50</attention><br>스킬 가속 <attention>15</attention><br>이동 속도 <attention>4%</attention><br>기본 마나 재생 <attention>125%</attention></stats><br><br><active>고무적인 연설</active><br>4초 동안 주변 아군의 <speed>이동 속도를 30%</speed> 상승시킵니다.</mainText>",
+    "plaintext": "사용하면 주변 아군의 속도가 빨라집니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 2200,
+      "sell": 1540
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "Active",
+      "CooldownReduction",
+      "NonbootsMovement",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 50,
+      "abilityhaste": 15,
+      "movespeedPercent": 0.04,
+      "mpregen": 1.25
+    },
+    "imageKey": "2065.png"
+  },
+  {
+    "id": "2138",
+    "name": "강철의 영약",
+    "description": "<mainText><stats></stats><br><br><active>사용</active><br>3분 동안 <scaleHealth>체력이 300</scaleHealth>, 강인함이 25% 증가하고, 크기가 거대해집니다. 이 효과가 활성화된 동안 길을 남기며 그 위의 아군 챔피언들은 <speed>이동 속도가 15%</speed> 상승합니다.</mainText>",
+    "plaintext": "일시적으로 방어 관련 능력치를 높여줍니다. 아군이 뒤따라올 수 있는 자취를 남깁니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 500,
+      "sell": 200
+    },
+    "tags": [
+      "Health",
+      "Consumable",
+      "NonbootsMovement",
+      "Tenacity"
+    ],
+    "stats": {},
+    "imageKey": "2138.png"
+  },
+  {
+    "id": "2139",
+    "name": "마법의 영약",
+    "description": "<mainText><stats></stats><br><br><active>사용</active><br>3분 동안 <scaleAP>주문력이 50</scaleAP>, <scaleMana>마나 재생력이 15%</scaleMana> 증가합니다. 활성화된 동안 챔피언이나 포탑에 피해를 입히면 <trueDamage>25의 추가 고정 피해</trueDamage>를 입힙니다. (챔피언이 대상일 경우 5초)</mainText>",
+    "plaintext": "일시적으로 주문력을 올려주며, 챔피언과 포탑에 대한 추가 피해량이 적용됩니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 500,
+      "sell": 200
+    },
+    "tags": [
+      "Consumable",
+      "ManaRegen",
+      "SpellDamage"
+    ],
+    "stats": {},
+    "imageKey": "2139.png"
+  },
+  {
+    "id": "2140",
+    "name": "분노의 영약",
+    "description": "<mainText><stats></stats><br><br><active>사용</active><br>3분 동안 <scaleAD>공격력이 30</scaleAD>, 챔피언 대상 <lifeSteal>물리 피해 흡혈이 12%</lifeSteal> 증가합니다.</mainText>",
+    "plaintext": "일시적으로 공격력을 올려주며, 챔피언에게 물리 피해를 입히면 체력이 회복됩니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 500,
+      "sell": 200
+    },
+    "tags": [
+      "Consumable",
+      "Damage",
+      "LifeSteal",
+      "SpellVamp"
+    ],
+    "stats": {},
+    "imageKey": "2140.png"
+  },
+  {
+    "id": "2141",
+    "name": "카파 주스",
+    "description": "<mainText><stats></stats><br><br><rules>머리에 무언가를 쓸 수 있습니다.</rules><active>사용 시 - 소모:</active> 이 주스에는 아무 효과가 없습니다.<br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 300,
+      "sell": 300
+    },
+    "tags": [
+      "Damage",
+      "Consumable"
+    ],
+    "stats": {},
+    "imageKey": "2141.png"
+  },
+  {
+    "id": "2420",
+    "name": "추적자의 팔목 보호대",
+    "description": "<mainText><stats>주문력 <attention>40</attention><br>방어력 <attention>25</attention></stats><br><br><active>시간 정지</active> (한 번만 사용가능)<br>2.5초 동안 <keyword>경직</keyword> 상태가 됩니다.</mainText>",
+    "plaintext": "사용하면 아무런 행동도 취할 수 없는 대신 공격도 받지 않는 무적 상태가 됩니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 1600,
+      "sell": 640
+    },
+    "tags": [
+      "Armor",
+      "SpellDamage",
+      "Active"
+    ],
+    "stats": {
+      "abilitypower": 40,
+      "armor": 25
+    },
+    "imageKey": "2420.png"
+  },
+  {
+    "id": "2421",
+    "name": "부서진 팔목 보호대",
+    "description": "<mainText><stats>주문력 <attention>40</attention><br>방어력 <attention>25</attention></stats><br><br><passive>조각난 시간</passive><br>팔목 보호대는 망가졌지만 업그레이드는 가능합니다.<br><br><rules>팔목 보호대를 하나 망가뜨린 후에는 상점에서 <rarityGeneric>부서진 팔목 보호대</rarityGeneric>만 살 수 있습니다.</rules><br><br></mainText>",
+    "plaintext": "초시계로 업그레이드할 수 있습니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 1600,
+      "sell": 640
+    },
+    "tags": [],
+    "stats": {
+      "abilitypower": 40,
+      "armor": 25
+    },
+    "imageKey": "2421.png"
+  },
+  {
+    "id": "2501",
+    "name": "지배자의 피갑옷",
+    "description": "<mainText><stats>공격력 <attention>30</attention><br>체력 <attention>550</attention></stats><br><br><passive>폭정</passive><br><healing>추가 체력</healing>의 2.5%에 해당하는 <scaleAD>공격력</scaleAD>을 얻습니다. <br><br><passive>응징</passive><br>잃은 체력에 비례해 <scaleAD>공격력</scaleAD>이 12%까지 증가합니다. </mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1000,
+      "purchasable": true,
+      "total": 3300,
+      "sell": 2310
+    },
+    "tags": [
+      "Health",
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 30,
+      "hp": 550
+    },
+    "imageKey": "2501.png"
+  },
+  {
+    "id": "2502",
+    "name": "끝없는 절망",
+    "description": "<mainText><stats>체력 <attention>400</attention><br>방어력 <attention>50</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>고뇌</passive><br>챔피언과 전투 중일 때 4초마다 주변 적 챔피언에게 <magicDamage>마법 피해</magicDamage>를 입히고 피해량의 <healing>250%만큼 체력을 회복</healing>합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "Health",
+      "Armor",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 400,
+      "armor": 50,
+      "abilityhaste": 15
+    },
+    "imageKey": "2502.png"
+  },
+  {
+    "id": "2503",
+    "name": "어둠불꽃 횃불",
+    "description": "<mainText><stats>주문력 <attention>80</attention><br>마나 <attention>600</attention><br>스킬 가속 <attention>20</attention></stats><br><br><passive>악의의 불길</passive><br>스킬로 적에게 피해를 입히면 3초 동안 <magicDamage>추가 마법 피해</magicDamage>를 입힙니다.<br><br><passive>어둠불꽃</passive><br><passive>악의의 불길</passive>에 영향을 받는 적 챔피언, 에픽 몬스터, 대형 몬스터 하나당 <scaleAP>주문력이 4%</scaleAP> 증가합니다. </mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "SpellDamage",
+      "Mana",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 80,
+      "mp": 600,
+      "abilityhaste": 20
+    },
+    "imageKey": "2503.png"
+  },
+  {
+    "id": "2504",
+    "name": "케이닉 루컨",
+    "description": "<mainText><stats>체력 <attention>400</attention><br>마법 저항력 <attention>80</attention><br>기본 체력 재생 <attention>100%</attention></stats><br><br><passive>마법사의 파멸</passive><br>15초 동안 마법 피해를 받지 않으면 <shield>마법 보호막</shield>을 얻습니다. </mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "HealthRegen"
+    ],
+    "stats": {
+      "hp": 400,
+      "spellblock": 80,
+      "hpregen": 1
+    },
+    "imageKey": "2504.png"
+  },
+  {
+    "id": "2508",
+    "name": "운명의 재",
+    "description": "<mainText><stats>주문력 <attention>30</attention></stats><br><br><passive>발화</passive><br>스킬 공격이 3초 동안 <magicDamage>15의 추가 마법 피해</magicDamage>를 입힙니다.<br>몬스터에게는 <magicDamage>45의 마법 피해</magicDamage>를 추가로 입힙니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 30
+    },
+    "imageKey": "2508.png"
+  },
+  {
+    "id": "2510",
+    "name": "황혼과 새벽",
+    "description": "<mainText><stats>체력 <attention>300</attention><br>주문력 <attention>60</attention><br>스킬 가속 <attention>20</attention><br>공격 속도 <attention>20%</attention></stats><br><br><passive>주문 검</passive> (0초)<br>스킬을 사용하고 나면 다음 기본 공격 시 <magicDamage>0의 추가 마법 피해</magicDamage>를 입히고 <healing>0의 체력을 회복</healing>하며(<OnHit>적중 시</OnHit> ) <OnHit>적중 시</OnHit> 효과를 추가로 1회 적용합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 3100,
+      "sell": 2170
+    },
+    "tags": [
+      "Health",
+      "AttackSpeed",
+      "SpellDamage",
+      "OnHit",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 300,
+      "abilitypower": 60,
+      "abilityhaste": 20,
+      "attackspeed": 0.2
+    },
+    "imageKey": "2510.png"
+  },
+  {
+    "id": "2512",
+    "name": "악마사냥꾼의 화살",
+    "description": "<mainText><stats>공격 속도 <attention>45%</attention><br>치명타 확률 <attention>25%</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>한밤 경계</passive><br>궁극기 가속이 30 증가합니다.<br><br><passive>폭격 개시</passive><br>궁극기를 사용하고 나면 8초 동안 다음 3회의 기본 공격 시 <attackSpeed>공격 속도가 50%</attackSpeed> 증가하고 치명타가 적용되어 일반적인 치명타 피해량의 80%만큼 피해를 입힙니다. 기본 공격에 이미 치명타가 적용된 경우, 대신 <trueDamage>15%의 추가 고정 피해</trueDamage>를 입힙니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 2650,
+      "sell": 1855
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed",
+      "NonbootsMovement",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackspeed": 0.45,
+      "crit": 0.25,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "2512.png"
+  },
+  {
+    "id": "2517",
+    "name": "끝없는 갈망",
+    "description": "<mainText><stats>공격력 <attention>65</attention><br>모든 피해 흡혈 <attention>5%</attention><br>강인함 <attention>20%</attention></stats><br><br><passive>기근</passive><br>추가 공격력에 따라 스킬 가속이 증가합니다.<br><br><passive>만찬</passive><br>최근 피해를 입힌 챔피언이 죽으면 잠시 모든 피해 흡혈을 얻습니다. </mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 825,
+      "purchasable": true,
+      "total": 3100,
+      "sell": 2170
+    },
+    "tags": [
+      "Damage",
+      "LifeSteal",
+      "SpellVamp",
+      "Tenacity",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 65,
+      "omnivamp": 0.05,
+      "tenacity": 0.2
+    },
+    "imageKey": "2517.png"
+  },
+  {
+    "id": "2520",
+    "name": "요새파괴자",
+    "description": "<mainText><stats>공격력 <attention>55</attention><br>물리 관통력 <attention>22</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>성형작약</passive> (0초)<br>챔피언 또는 에픽 몬스터에게 스킬 피해를 입히면 추가로 <trueDamage>0의 고정 피해</trueDamage>를 입힙니다.<br><br><passive>파괴 공작</passive><br>피해를 입힌 후 3초 안에 챔피언 처치에 관여하면 90초 동안 파괴 공작을 얻습니다. 파괴 공작을 보유한 상태에서 에픽 몬스터 또는 포탑을 상대로 다음 기본 공격 시 3초 동안 <trueDamage>0의 고정 피해</trueDamage>를 입힙니다. </mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 863,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 2240
+    },
+    "tags": [
+      "Damage",
+      "ArmorPenetration",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 55,
+      "lethality": 22,
+      "abilityhaste": 15
+    },
+    "imageKey": "2520.png"
+  },
+  {
+    "id": "2522",
+    "name": "실체화 장비",
+    "description": "<mainText><stats>주문력 <attention>90</attention><br>마나 <attention>300</attention><br>스킬 가속 <attention>10</attention></stats><br><br><active>마나 실현</active> (0초)<br>8초 동안 마나가 강화됩니다. 강화된 동안 스킬이 마나를 100% 더 소모하지만 스킬 피해량, 보호막 흡수량, 체력 회복량이 0 증가하고 기본 스킬 재사용 대기시간이 30% 더 빠르게 흐릅니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "SpellDamage",
+      "Mana",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 90,
+      "mp": 300,
+      "abilityhaste": 10
+    },
+    "imageKey": "2522.png"
+  },
+  {
+    "id": "2523",
+    "name": "마법광학 장치 C44",
+    "description": "<mainText><stats>공격력 <attention>55</attention><br>치명타 확률 <attention>25%</attention></stats><br><br><passive>확대</passive><br>기본 공격 시 적과의 거리에 따라 최대 10% 증가한 피해를 입힙니다. (500 거리일 때 최대 피해)<br><br><passive>비전 조준</passive><br>피해를 입힌 챔피언이 3초 안에 사망하면 8초 동안 추가로 공격 사거리가 100 증가합니다. </mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 275,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike"
+    ],
+    "stats": {
+      "attackdamage": 55,
+      "crit": 0.25
+    },
+    "imageKey": "2523.png"
+  },
+  {
+    "id": "2524",
+    "name": "밴들파이프",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>스킬 가속 <attention>15</attention><br>방어력 <attention>20</attention><br>마법 저항력 <attention>20</attention></stats><br><br><passive>팡파르</passive><br>적 챔피언을 <keyword>둔화</keyword>시키거나 <keyword>이동 불가</keyword> 상태로 만들면 0초 동안 팡파르가 활성화됩니다. 팡파르는 <speed>이동 속도를 20</speed> 증가시킵니다. 팡파르가 활성화된 동안 자신을 포함한 주변 아군의 <attackSpeed>공격 속도가 0</attackSpeed> 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2300,
+      "sell": 1610
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "Armor",
+      "AttackSpeed",
+      "NonbootsMovement",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 200,
+      "abilityhaste": 15,
+      "armor": 20,
+      "spellblock": 20
+    },
+    "imageKey": "2524.png"
+  },
+  {
+    "id": "2525",
+    "name": "원형질 안전벨트",
+    "description": "<mainText><stats>체력 <attention>600</attention><br>스킬 가속 <attention>20</attention></stats><br><br><passive>생명선</passive> (0초)<br>체력이 30% 아래로 떨어질 만큼 피해를 받으면 5초 동안 <health>최대 체력을 0</health> 얻고 지속시간 동안 <health>체력을 0</health> 회복합니다. 체력을 회복하는 동안 크기가 15% 커지고 이동 속도가 10% 증가하며 강인함을 25% 얻습니다. </mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1750
+    },
+    "tags": [
+      "Health",
+      "NonbootsMovement",
+      "Tenacity",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 600,
+      "abilityhaste": 20
+    },
+    "imageKey": "2525.png"
+  },
+  {
+    "id": "2526",
+    "name": "속삭이는 머리띠",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>체력 회복 및 보호막 <attention>8%</attention><br>기본 마나 재생 <attention>75%</attention><br>마나 <attention>300</attention></stats><br><br><passive>조화</passive><br>체력 회복 및 보호막 효과가 0% 증가합니다.<br><br><passive>마나순환</passive> (8초, 최대 5회 충전)<br>스킬 적중 시 <scaleMana>최대 마나를 4</scaleMana> 얻습니다. 챔피언 대상으로는 두 배로 적용됩니다.<br><scaleMana>최대 마나가 360</scaleMana>에 도달하면 <rarityLegendary>악곡의 왕관</rarityLegendary>으로 변합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 2250,
+      "sell": 1575
+    },
+    "tags": [
+      "Health",
+      "Mana",
+      "ManaRegen"
+    ],
+    "stats": {
+      "hp": 200,
+      "healshield": 0.08,
+      "mpregen": 0.75,
+      "mp": 300
+    },
+    "imageKey": "2526.png"
+  },
+  {
+    "id": "3003",
+    "name": "대천사의 지팡이",
+    "description": "<mainText><stats>주문력 <attention>70</attention><br>마나 <attention>600</attention><br>스킬 가속 <attention>25</attention></stats><br><br><passive>경탄</passive><br><scaleMana>추가 마나의 1%</scaleMana>만큼 주문력을 얻습니다.<br><br><passive>마나순환</passive> (8초, 최대 충전량 5회)<br>스킬 적중 시 <scaleMana>5의 최대 마나</scaleMana>(챔피언 상대 시 두 배)를 얻습니다.<br><scaleMana>360의 최대 마나</scaleMana>에 도달하면 <rarityLegendary>대천사의 포옹</rarityLegendary>으로 변합니다.</mainText>",
+    "plaintext": "최대 마나량에 따라 주문력이 대폭 상승합니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "SpellDamage",
+      "Mana",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 70,
+      "mp": 600,
+      "abilityhaste": 25
+    },
+    "imageKey": "3003.png"
+  },
+  {
+    "id": "3004",
+    "name": "마나무네",
+    "description": "<mainText><stats>공격력 <attention>35</attention><br>마나 <attention>500</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>경탄</passive><br><scaleAD>0의 추가 공격력</scaleAD>을 얻습니다.<br><br><passive>마나순환</passive> (8초, 최대 충전량 4회)<br>기본 공격과 스킬 적중 시 <scaleMana>3의 최대 마나</scaleMana>(챔피언 상대 시 두 배)를 얻습니다.<br><scaleMana>360의 최대 마나</scaleMana>에 도달하면 <rarityLegendary>무라마나</rarityLegendary>로 변합니다.</mainText>",
+    "plaintext": "최대 마나량에 따라 공격력이 상승합니다.",
+    "gold": {
+      "base": 1100,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Damage",
+      "Mana",
+      "CooldownReduction",
+      "OnHit",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 35,
+      "mp": 500,
+      "abilityhaste": 15
+    },
+    "imageKey": "3004.png"
+  },
+  {
+    "id": "3006",
+    "name": "광전사의 군화",
+    "description": "<mainText><stats>공격 속도 <attention>25%</attention><br>이동 속도 <attention>45</attention></stats><br><br></mainText>",
+    "plaintext": "이동 속도와 공격 속도가 상승합니다.",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 1100,
+      "sell": 770
+    },
+    "tags": [
+      "AttackSpeed",
+      "Boots"
+    ],
+    "stats": {
+      "attackspeed": 0.25,
+      "movespeedFlat": 45
+    },
+    "imageKey": "3006.png"
+  },
+  {
+    "id": "3008",
+    "name": "탐욕의 군화",
+    "description": "<mainText><stats>이동 속도 <attention>45</attention><br>모든 피해 흡혈 <attention>4%</attention></stats><br><br><passive>학살</passive><br>챔피언 처치 관여 시 모든 피해 흡혈이 0.6% 증가합니다. (최대 10회 중첩)</mainText>",
+    "plaintext": "최대 마나량에 따라 공격력이 상승합니다.",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "LifeSteal",
+      "SpellVamp",
+      "Boots"
+    ],
+    "stats": {
+      "movespeedFlat": 45,
+      "omnivamp": 0.04
+    },
+    "imageKey": "3008.png"
+  },
+  {
+    "id": "3009",
+    "name": "신속의 장화",
+    "description": "<mainText><stats>이동 속도 <attention>55</attention></stats><br><br><passive>날쌘 발걸음</passive><br><keyword>둔화</keyword> 효과가 25% 감소합니다.</mainText>",
+    "plaintext": "이동 속도가 증가하고, 둔화 효과를 감소시킵니다.",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "Boots"
+    ],
+    "stats": {
+      "movespeedFlat": 55
+    },
+    "imageKey": "3009.png"
+  },
+  {
+    "id": "3020",
+    "name": "마법사의 신발",
+    "description": "<mainText><stats>마법 관통력 <attention>12</attention><br>이동 속도 <attention>45</attention></stats><br><br></mainText>",
+    "plaintext": "이동 속도와 마법 피해량이 증가합니다.",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 1100,
+      "sell": 770
+    },
+    "tags": [
+      "Boots",
+      "MagicPenetration"
+    ],
+    "stats": {
+      "magicpenFlat": 12,
+      "movespeedFlat": 45
+    },
+    "imageKey": "3020.png"
+  },
+  {
+    "id": "3024",
+    "name": "얼음 방패",
+    "description": "<mainText><stats>방어력 <attention>25</attention><br>마나 <attention>300</attention><br>스킬 가속 <attention>10</attention></stats><br><br></mainText>",
+    "plaintext": "방어력과 재사용 대기시간 감소율이 증가합니다.",
+    "gold": {
+      "base": 50,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "Armor",
+      "Mana",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "armor": 25,
+      "mp": 300,
+      "abilityhaste": 10
+    },
+    "imageKey": "3024.png"
+  },
+  {
+    "id": "3026",
+    "name": "수호 천사",
+    "description": "<mainText><stats>공격력 <attention>55</attention><br>방어력 <attention>45</attention></stats><br><br><passive>환생</passive><br>치명적인 피해를 입으면 4초 동안 <keyword>경직</keyword>에 걸린 다음 <healing>기본 체력의 50%</healing>, <scaleMana>최대 마나의 100%</scaleMana>를 회복합니다.</mainText>",
+    "plaintext": "주기적으로 챔피언 사망 시 부활시켜 줍니다.",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 1280
+    },
+    "tags": [
+      "Armor",
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 55,
+      "armor": 45
+    },
+    "imageKey": "3026.png"
+  },
+  {
+    "id": "3031",
+    "name": "무한의 대검",
+    "description": "<mainText><stats>공격력 <attention>75</attention><br>치명타 확률 <attention>25%</attention><br>치명타 피해량 <attention>30%</attention></stats><br><br></mainText>",
+    "plaintext": "치명타 확률이 대폭 증가합니다.",
+    "gold": {
+      "base": 725,
+      "purchasable": true,
+      "total": 3500,
+      "sell": 2450
+    },
+    "tags": [
+      "CriticalStrike",
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 75,
+      "crit": 0.25,
+      "critdamage": 0.3
+    },
+    "imageKey": "3031.png"
+  },
+  {
+    "id": "3032",
+    "name": "윤 탈 야생화살",
+    "description": "<mainText><stats>공격력 <attention>50</attention><br>공격 속도 <attention>40%</attention><br>치명타 확률 <attention>0%</attention></stats><br><br><passive>연습이 치명타를 낳는다</passive><br>공격 시 치명타 확률이 영구적으로 최대 25%까지 증가합니다.<br><br><passive>광풍</passive><br>적 챔피언 공격 시 6초 동안 공격 속도가 30% 증가합니다. (재사용 대기시간 30초) <br>기본 공격 시 이 스킬의 재사용 대기시간이 1초 감소합니다. 치명타 적중 시 2초 감소합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 3100,
+      "sell": 2170
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike",
+      "AttackSpeed"
+    ],
+    "stats": {
+      "attackdamage": 50,
+      "attackspeed": 0.4,
+      "crit": 0
+    },
+    "imageKey": "3032.png"
+  },
+  {
+    "id": "3033",
+    "name": "필멸자의 운명",
+    "description": "<mainText><stats>공격력 <attention>35</attention><br>방어구 관통력 <attention>30%</attention><br>치명타 확률 <attention>25%</attention></stats><br><br><passive>고통스러운 상처</passive><br>적 챔피언에게 물리 피해를 입히면 3초 동안 <keyword>40%의 상처</keyword>를 남깁니다.</mainText>",
+    "plaintext": "체력 회복력과 방어력이 뛰어난 적에게 효과적입니다.",
+    "gold": {
+      "base": 150,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 35,
+      "armorpen": 0.3,
+      "crit": 0.25
+    },
+    "imageKey": "3033.png"
+  },
+  {
+    "id": "3035",
+    "name": "최후의 속삭임",
+    "description": "<mainText><stats>공격력 <attention>20</attention><br>방어구 관통력 <attention>18%</attention></stats><br><br></mainText>",
+    "plaintext": "방어력이 뛰어난 적에게 효과적입니다.",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 1450,
+      "sell": 1015
+    },
+    "tags": [
+      "ArmorPenetration",
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 20,
+      "armorpen": 0.18
+    },
+    "imageKey": "3035.png"
+  },
+  {
+    "id": "3036",
+    "name": "도미닉 경의 인사",
+    "description": "<mainText><stats>공격력 <attention>35</attention><br>방어구 관통력 <attention>35%</attention><br>치명타 확률 <attention>25%</attention></stats><br><br><passive>거인 학살자</passive><br>대상의 추가 체력에 비례해 챔피언에게 최대 15%의 추가 피해를 입힙니다. 추가 피해량은 추가 체력이 1500일 때 최대가 됩니다.</mainText>",
+    "plaintext": "체력과 방어력이 뛰어난 적에게 효과적입니다.",
+    "gold": {
+      "base": 550,
+      "purchasable": true,
+      "total": 3300,
+      "sell": 2310
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 35,
+      "armorpen": 0.35,
+      "crit": 0.25
+    },
+    "imageKey": "3036.png"
+  },
+  {
+    "id": "3041",
+    "name": "메자이의 영혼약탈자",
+    "description": "<mainText><stats>주문력 <attention>20</attention><br>체력 <attention>100</attention></stats><br><br><passive>영광</passive><br><keyword>처치 관여</keyword> 시 <passive>영광</passive>을 최대 25 중첩까지 얻습니다. 사망 시 <passive>영광</passive> 10중첩을 잃습니다.<br><passive>영광</passive> 하나당 <scaleAP>5의 주문력</scaleAP>을 얻으며, <passive>영광</passive>이 10중첩 이상이면 <speed>이동 속도가 10%</speed>를 증가합니다.</mainText>",
+    "plaintext": "챔피언을 처치하거나 어시스트를 올릴 경우, 주문력이 오릅니다.",
+    "gold": {
+      "base": 1150,
+      "purchasable": true,
+      "total": 1500,
+      "sell": 1050
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "abilitypower": 20,
+      "hp": 100
+    },
+    "imageKey": "3041.png"
+  },
+  {
+    "id": "3044",
+    "name": "탐식의 망치",
+    "description": "<mainText><stats>공격력 <attention>15</attention><br>체력 <attention>200</attention></stats><br><br><passive>분노</passive><br>기본 공격을 가하면 2초 동안 <speed>이동 속도</speed>가 상승합니다.</mainText>",
+    "plaintext": "적을 공격하거나 처치하면 이동 속도가 잠시 상승합니다.",
+    "gold": {
+      "base": 350,
+      "purchasable": true,
+      "total": 1100,
+      "sell": 770
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackdamage": 15,
+      "hp": 200
+    },
+    "imageKey": "3044.png"
+  },
+  {
+    "id": "3046",
+    "name": "유령 무희",
+    "description": "<mainText><stats>공격 속도 <attention>65%</attention><br>치명타 확률 <attention>25%</attention><br>이동 속도 <attention>10%</attention></stats><br><br><passive>망령의 왈츠</passive><br><keyword>유체화</keyword> 상태가 됩니다.</mainText>",
+    "plaintext": "적을 공격할 때 더 빠르게 움직이며 체력이 낮으면 보호막이 생성됩니다.",
+    "gold": {
+      "base": 950,
+      "purchasable": true,
+      "total": 2650,
+      "sell": 1855
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackspeed": 0.65,
+      "crit": 0.25,
+      "movespeedPercent": 0.1
+    },
+    "imageKey": "3046.png"
+  },
+  {
+    "id": "3047",
+    "name": "판금 장화",
+    "description": "<mainText><stats>방어력 <attention>25</attention><br>이동 속도 <attention>45</attention></stats><br><br><passive>장갑판</passive><br>기본 공격으로 받는 피해량이 10% 감소합니다.</mainText>",
+    "plaintext": "이동 속도가 증가하고, 적에게 받는 기본 공격의 피해가 줄어듭니다.",
+    "gold": {
+      "base": 600,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "Armor",
+      "Boots"
+    ],
+    "stats": {
+      "armor": 25,
+      "movespeedFlat": 45
+    },
+    "imageKey": "3047.png"
+  },
+  {
+    "id": "3050",
+    "name": "지크의 융합",
+    "description": "<mainText><stats>체력 <attention>300</attention><br>방어력 <attention>25</attention><br>마법 저항력 <attention>25</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>서리불꽃 폭풍</passive><br>궁극기 사용 시 주변에 5초 동안 폭풍을 소환합니다. 폭풍은 적 챔피언에게 매초 <magicDamage>30의 마법 피해</magicDamage>를 입히고 30% <keyword>둔화</keyword>시킵니다.</mainText>",
+    "plaintext": "궁극기 사용 시 아군 한 명과 함께 추가 효과를 받습니다.",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 2200,
+      "sell": 1540
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "Armor",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 300,
+      "armor": 25,
+      "spellblock": 25,
+      "abilityhaste": 10
+    },
+    "imageKey": "3050.png"
+  },
+  {
+    "id": "3051",
+    "name": "온기가 필요한 자의 도끼",
+    "description": "<mainText><stats>공격력 <attention>20</attention><br>공격 속도 <attention>20%</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 250,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "Damage",
+      "AttackSpeed"
+    ],
+    "stats": {
+      "attackdamage": 20,
+      "attackspeed": 0.2
+    },
+    "imageKey": "3051.png"
+  },
+  {
+    "id": "3053",
+    "name": "스테락의 도전",
+    "description": "<mainText><stats>체력 <attention>400</attention><br>강인함 <attention>20%</attention></stats><br><br><passive>잡아채는 발톱</passive><br><scaleAD>추가 공격력</scaleAD>을 얻습니다.<br><br><passive>생명선</passive><br>체력이 30% 밑으로 떨어질 만큼 피해를 입으면 4.5초 동안 <shield>피해를 흡수하며 점차 사라지는 보호막</shield>을 얻습니다.</mainText>",
+    "plaintext": "대량의 피해를 보호막으로 막아줍니다.",
+    "gold": {
+      "base": 775,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 2240
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "Tenacity"
+    ],
+    "stats": {
+      "hp": 400,
+      "tenacity": 0.2
+    },
+    "imageKey": "3053.png"
+  },
+  {
+    "id": "3057",
+    "name": "광휘의 검",
+    "description": "<mainText><stats>스킬 가속 <attention>10</attention></stats><br><br><passive>주문 검</passive><br>스킬을 사용하고 나면 다음 기본 공격 시 <physicalDamage>추가 물리 피해</physicalDamage>(<OnHit>적중 시</OnHit> )를 입힙니다.<br></mainText>",
+    "plaintext": "스킬 공격 다음 공격에 추가 피해가 적용됩니다.",
+    "gold": {
+      "base": 650,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "OnHit",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilityhaste": 10
+    },
+    "imageKey": "3057.png"
+  },
+  {
+    "id": "3065",
+    "name": "정령의 형상",
+    "description": "<mainText><stats>체력 <attention>400</attention><br>마법 저항력 <attention>50</attention><br>스킬 가속 <attention>10</attention><br>기본 체력 재생 <attention>100%</attention></stats><br><br><passive>무한한 활력</passive><br>자신이 받는 회복 효과와 보호막 효과가 25% 증가합니다.</mainText>",
+    "plaintext": "체력이 오르며 치유 효과가 커집니다.",
+    "gold": {
+      "base": 650,
+      "purchasable": true,
+      "total": 2700,
+      "sell": 1890
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "HealthRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 400,
+      "spellblock": 50,
+      "abilityhaste": 10,
+      "hpregen": 1
+    },
+    "imageKey": "3065.png"
+  },
+  {
+    "id": "3066",
+    "name": "비상의 월갑",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>이동 속도 <attention>4%</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 800,
+      "sell": 560
+    },
+    "tags": [
+      "Health",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "hp": 200,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "3066.png"
+  },
+  {
+    "id": "3067",
+    "name": "점화석",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>스킬 가속 <attention>10</attention></stats><br><br></mainText>",
+    "plaintext": "체력과 재사용 대기시간 감소량이 증가합니다.",
+    "gold": {
+      "base": 150,
+      "purchasable": true,
+      "total": 800,
+      "sell": 560
+    },
+    "tags": [
+      "Health",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 200,
+      "abilityhaste": 10
+    },
+    "imageKey": "3067.png"
+  },
+  {
+    "id": "3068",
+    "name": "태양불꽃 방패",
+    "description": "<mainText><stats>체력 <attention>350</attention><br>방어력 <attention>50</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>불사르기</passive><br>피해를 받거나 입히면 주변 적들에게 3초 동안 매초 <magicDamage>마법 피해</magicDamage>를 입힙니다. </mainText>",
+    "plaintext": "방어력이 높고 주변 적에게 지속적으로 피해를 입힙니다. 적을 이동 불가 상태로 만들면 화염을 방출해 피해를 입힙니다.",
+    "gold": {
+      "base": 600,
+      "purchasable": true,
+      "total": 2700,
+      "sell": 1890
+    },
+    "tags": [
+      "Health",
+      "Armor",
+      "Aura",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 350,
+      "armor": 50,
+      "abilityhaste": 10
+    },
+    "imageKey": "3068.png"
+  },
+  {
+    "id": "3070",
+    "name": "여신의 눈물",
+    "description": "<mainText><stats>마나 <attention>240</attention></stats><br><br><passive>마나순환</passive> (8초, 최대 충전량 4회)<br>스킬 적중 시 <scaleMana>3의 최대 마나</scaleMana>(챔피언 상대 시 두 배, 최대 <scaleMana>360</scaleMana>)를 얻습니다.<br><br><passive>도움의 손길</passive><br>미니언에게 기본 공격 시 <physicalDamage>5의 물리 피해</physicalDamage>를 추가로 입힙니다.</mainText>",
+    "plaintext": "마나를 소모하면 최대 마나량이 증가합니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 280
+    },
+    "tags": [
+      "Mana",
+      "ManaRegen"
+    ],
+    "stats": {
+      "mp": 240
+    },
+    "imageKey": "3070.png"
+  },
+  {
+    "id": "3071",
+    "name": "칠흑의 양날 도끼",
+    "description": "<mainText><stats>공격력 <attention>40</attention><br>체력 <attention>400</attention><br>스킬 가속 <attention>20</attention></stats><br><br><passive>깎아내기</passive><br>챔피언에게 <physicalDamage>물리 피해</physicalDamage>를 입히면 6초 동안 대상의 <scaleArmor>방어력을 6%</scaleArmor> 감소시킵니다. (5회 중첩)<br><br><passive>열정</passive><br><physicalDamage>물리 피해</physicalDamage>를 입히면 2초 동안 <speed>이동 속도가 20</speed> 증가합니다.</mainText>",
+    "plaintext": "적 챔피언에게 물리 피해를 입히면 적의 방어력이 감소합니다.",
+    "gold": {
+      "base": 225,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "CooldownReduction",
+      "OnHit",
+      "NonbootsMovement",
+      "ArmorPenetration",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 40,
+      "hp": 400,
+      "abilityhaste": 20
+    },
+    "imageKey": "3071.png"
+  },
+  {
+    "id": "3072",
+    "name": "피바라기",
+    "description": "<mainText><stats>공격력 <attention>80</attention><br>생명력 흡수 <attention>15%</attention></stats><br><br><passive>영액의 보호막</passive><br>생명력 흡수 효과로 체력 회복 시 초과분을 <shield>보호막</shield>으로 전환합니다.</mainText>",
+    "plaintext": "공격력 및 생명력 흡수가 증가하며, 생명력 흡수가 최대 체력 이상으로 가능해집니다.",
+    "gold": {
+      "base": 325,
+      "purchasable": true,
+      "total": 3400,
+      "sell": 2380
+    },
+    "tags": [
+      "Damage",
+      "LifeSteal"
+    ],
+    "stats": {
+      "attackdamage": 80,
+      "lifesteal": 0.15
+    },
+    "imageKey": "3072.png"
+  },
+  {
+    "id": "3073",
+    "name": "실험적 마공학판",
+    "description": "<mainText><stats>공격력 <attention>40</attention><br>공격 속도 <attention>20%</attention><br>체력 <attention>450</attention></stats><br><br><passive>마공학 충전</passive><br>궁극기 가속이 30 증가합니다.<br><br><passive>폭주</passive><br>궁극기를 사용한 후 8초 동안 <attackSpeed>공격 속도가 0%</attackSpeed>, <speed>이동 속도가 0%</speed> 증가합니다. </mainText>",
+    "plaintext": "마나를 소모하면 최대 마나량이 증가합니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "AttackSpeed",
+      "CooldownReduction",
+      "NonbootsMovement",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 40,
+      "attackspeed": 0.2,
+      "hp": 450
+    },
+    "imageKey": "3073.png"
+  },
+  {
+    "id": "3074",
+    "name": "굶주린 히드라",
+    "description": "<mainText><stats>공격력 <attention>65</attention><br>스킬 가속 <attention>15</attention><br>생명력 흡수 <attention>12%</attention></stats><br><br><passive>쪼개기</passive><br>기본 공격 시 주변 적들에게 <physicalDamage>물리 피해</physicalDamage>를 입힙니다.<br><br><active>굶주린 초승달</active><br>주변 적에게 <physicalDamage>물리 피해</physicalDamage>를 입힙니다. <br>이 피해에는 생명력 흡수가 적용됩니다.</mainText>",
+    "plaintext": "근접 공격으로 주변의 적에게 피해를 주면 체력이 회복됩니다. ",
+    "gold": {
+      "base": 150,
+      "purchasable": true,
+      "total": 3300,
+      "sell": 2310
+    },
+    "tags": [
+      "Damage",
+      "LifeSteal",
+      "CooldownReduction",
+      "OnHit",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 65,
+      "abilityhaste": 15,
+      "lifesteal": 0.12
+    },
+    "imageKey": "3074.png"
+  },
+  {
+    "id": "3075",
+    "name": "가시 갑옷",
+    "description": "<mainText><stats>체력 <attention>150</attention><br>방어력 <attention>75</attention></stats><br><br><passive>가시</passive><br>기본 공격에 맞으면 공격한 적에게 <magicDamage>마법 피해</magicDamage>를 입히고, 대상이 챔피언일 경우 3초 동안 40%의 <keyword>상처</keyword>를 남깁니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 2450,
+      "sell": 1715
+    },
+    "tags": [
+      "Health",
+      "Armor"
+    ],
+    "stats": {
+      "hp": 150,
+      "armor": 75
+    },
+    "imageKey": "3075.png"
+  },
+  {
+    "id": "3076",
+    "name": "덤불 조끼",
+    "description": "<mainText><stats>방어력 <attention>30</attention></stats><br><br><passive>가시</passive><br>기본 공격에 맞으면 공격한 적에게 <magicDamage>0의 마법 피해</magicDamage>를 입히고, 대상이 챔피언일 경우 3초 동안 <keyword>40%의 상처</keyword>를 남깁니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 200,
+      "purchasable": true,
+      "total": 800,
+      "sell": 560
+    },
+    "tags": [
+      "Armor"
+    ],
+    "stats": {
+      "armor": 30
+    },
+    "imageKey": "3076.png"
+  },
+  {
+    "id": "3077",
+    "name": "티아맷",
+    "description": "<mainText><stats>공격력 <attention>20</attention></stats><br><br><passive>쪼개기</passive><br>기본 공격 시 주변 적들에게 <physicalDamage>물리 피해</physicalDamage>를 입힙니다.<br><active>초승달</active><br>주변 적에게 <physicalDamage>물리 피해</physicalDamage>를 입힙니다.</mainText>",
+    "plaintext": "주변 적에게 근접 피해를 입힙니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "Damage",
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 20
+    },
+    "imageKey": "3077.png"
+  },
+  {
+    "id": "3078",
+    "name": "삼위일체",
+    "description": "<mainText><stats>공격력 <attention>36</attention><br>공격 속도 <attention>30%</attention><br>체력 <attention>333</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>주문 검</passive><br>스킬을 사용하고 나면 다음 기본 공격 시 <physicalDamage>추가 물리 피해</physicalDamage>(<OnHit>적중 시</OnHit> )를 입힙니다.<br> <br><passive>가속</passive><br>기본 공격을 가하면 2초 동안 <speed>이동 속도가 20</speed> 상승합니다.</mainText>",
+    "plaintext": "취급주의: 이 아이템만 갖추면 '엄청난 피해'를 줄 수 있죠...",
+    "gold": {
+      "base": 133,
+      "purchasable": true,
+      "total": 3333,
+      "sell": 2333
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "AttackSpeed",
+      "CooldownReduction",
+      "OnHit",
+      "NonbootsMovement",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 36,
+      "attackspeed": 0.3,
+      "hp": 333,
+      "abilityhaste": 15
+    },
+    "imageKey": "3078.png"
+  },
+  {
+    "id": "3082",
+    "name": "파수꾼의 갑옷",
+    "description": "<mainText><stats>방어력 <attention>40</attention></stats><br><br><passive>견고</passive><br>기본 공격으로 받는 피해량이 감소합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "Armor"
+    ],
+    "stats": {
+      "armor": 40
+    },
+    "imageKey": "3082.png"
+  },
+  {
+    "id": "3083",
+    "name": "워모그의 갑옷",
+    "description": "<mainText><stats>체력 <attention>1000</attention><br>기본 체력 재생 <attention>100%</attention></stats><br><br><passive>워모그의 심장</passive> <br>추가 체력이 2000일 때 8초 동안 피해를 입지 않으면 초당 <healing>0</healing>의 체력을 회복합니다.<br><br><passive>워모그의 활력</passive><br>아이템 체력(<healing>0</healing>)의 12%에 해당하는 추가 체력을 얻습니다.</mainText>",
+    "plaintext": "체력과 체력 재생량이 대폭 상승합니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 3100,
+      "sell": 2170
+    },
+    "tags": [
+      "Health",
+      "HealthRegen"
+    ],
+    "stats": {
+      "hp": 1000,
+      "hpregen": 1
+    },
+    "imageKey": "3083.png"
+  },
+  {
+    "id": "3084",
+    "name": "강철심장",
+    "description": "<mainText><stats>체력 <attention>900</attention><br>기본 체력 재생 <attention>100%</attention></stats><br><br><passive>거인의 흡수</passive> 대상별 (0초)<br>적 챔피언이 몇 초 동안 근처에 있으면 해당 대상에게 다음 기본 공격 시 <physicalDamage>70+최대 체력의 6%</physicalDamage>에 해당하는 <physicalDamage>추가 물리 피해</physicalDamage>를 입히고 피해의 <scaleHealth>10%</scaleHealth>만큼 <scaleHealth>최대 체력</scaleHealth>이 증가합니다.<br><br><passive>거인</passive><br><scaleHealth>최대 체력 1000</scaleHealth>당 크기가 3% 증가합니다. (최대 30%)</mainText>",
+    "plaintext": "적을 처치하거나 어시스트를 올리면 체력이 회복됩니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "HealthRegen"
+    ],
+    "stats": {
+      "hp": 900,
+      "hpregen": 1
+    },
+    "imageKey": "3084.png"
+  },
+  {
+    "id": "3085",
+    "name": "루난의 허리케인",
+    "description": "<mainText><stats>공격 속도 <attention>40%</attention><br>치명타 확률 <attention>25%</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>바람의 분노</passive><br>기본 공격 시 대상 근처에 있는 적 2명에게 추가로 탄환을 발사합니다.<br>각 탄환은 <physicalDamage>물리 피해</physicalDamage>를 입히고 <OnHit>적중 시</OnHit> 효과를 적용합니다.</mainText>",
+    "plaintext": "원거리 공격 시 주변의 적들에게 두 발의 탄환을 발사합니다.",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 2650,
+      "sell": 1855
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed",
+      "OnHit",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackspeed": 0.4,
+      "crit": 0.25,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "3085.png"
+  },
+  {
+    "id": "3086",
+    "name": "열정의 검",
+    "description": "<mainText><stats>공격 속도 <attention>15%</attention><br>치명타 확률 <attention>15%</attention><br>이동 속도 <attention>4%</attention></stats><br><br></mainText>",
+    "plaintext": "치명타 확률, 이동 속도와 공격 속도가 약간 상승합니다.",
+    "gold": {
+      "base": 350,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackspeed": 0.15,
+      "crit": 0.15,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "3086.png"
+  },
+  {
+    "id": "3087",
+    "name": "스태틱의 단검",
+    "description": "<mainText><stats>공격력 <attention>45</attention><br>주문력 <attention>45</attention><br>공격 속도 <attention>30%</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>전기불꽃</passive><br><keyword>충전 상태로 공격</keyword> 시 연쇄 번개를 발사해 주변 대상에게 <OnHit>적중 시 효과</OnHit>를 적용하고 <magicDamage>마법 피해</magicDamage>를 입힙니다.<br><br><passive>전기충격</passive> <br>기본 공격 시 추가 <keyword>충전 상태</keyword> 중첩을 얻습니다.</mainText>",
+    "plaintext": "이동 시 점차 충전되어, 기본 공격 시 연쇄 번개를 발사합니다.",
+    "gold": {
+      "base": 625,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "AttackSpeed",
+      "SpellDamage",
+      "OnHit",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackdamage": 45,
+      "abilitypower": 45,
+      "attackspeed": 0.3,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "3087.png"
+  },
+  {
+    "id": "3089",
+    "name": "라바돈의 죽음모자",
+    "description": "<mainText><stats>주문력 <attention>130</attention></stats><br><br><passive>신비한 작품</passive><br>총 <scaleAP>주문력이 30%</scaleAP> 증가합니다.</mainText>",
+    "plaintext": "주문력이 대폭 상승합니다.",
+    "gold": {
+      "base": 1100,
+      "purchasable": true,
+      "total": 3500,
+      "sell": 2450
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 130
+    },
+    "imageKey": "3089.png"
+  },
+  {
+    "id": "3091",
+    "name": "마법사의 최후",
+    "description": "<mainText><stats>공격 속도 <attention>50%</attention><br>마법 저항력 <attention>45</attention><br>강인함 <attention>20%</attention></stats><br><br><passive>난투</passive><br>기본 공격이 <magicDamage>추가 마법 피해</magicDamage>(<OnHit>적중 시</OnHit> )를 입힙니다.</mainText>",
+    "plaintext": "마법 피해를 견디고 체력을 회복합니다.",
+    "gold": {
+      "base": 550,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "SpellBlock",
+      "AttackSpeed",
+      "OnHit",
+      "Tenacity"
+    ],
+    "stats": {
+      "attackspeed": 0.5,
+      "spellblock": 45,
+      "tenacity": 0.2
+    },
+    "imageKey": "3091.png"
+  },
+  {
+    "id": "3094",
+    "name": "고속 연사포",
+    "description": "<mainText><stats>공격 속도 <attention>35%</attention><br>치명타 확률 <attention>25%</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>저격수</passive><br><keyword>충전 상태로 기본 공격</keyword> 시 <magicDamage>40의 추가 마법 피해</magicDamage>를 입히고 공격 사거리가 35% 증가합니다.</mainText>",
+    "plaintext": "이동하며 완전히 충전하면 강력한 일격을 발사합니다.",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 2650,
+      "sell": 1855
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackspeed": 0.35,
+      "crit": 0.25,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "3094.png"
+  },
+  {
+    "id": "3097",
+    "name": "폭풍갈퀴",
+    "description": "<mainText><stats>공격력 <attention>50</attention><br>공격 속도 <attention>20%</attention><br>치명타 확률 <attention>25%</attention></stats><br><br><passive>충전 상태</passive><br>이동하거나 공격하면 <keyword>충전 상태로 공격</keyword>할 수 있습니다.<br><br><passive>번개</passive><br><keyword>충전 상태로 공격</keyword> 시 <magicDamage>0의 추가 마법 피해</magicDamage>를 입히고 1.5초 동안 <speed>이동 속도가 45%</speed> 증가합니다.<br></mainText>",
+    "plaintext": "주기적으로 적 미니언을 처치하여 근처 아군을 치유하고 골드를 부여합니다.",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 2240
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike",
+      "AttackSpeed",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackdamage": 50,
+      "attackspeed": 0.2,
+      "crit": 0.25
+    },
+    "imageKey": "3097.png"
+  },
+  {
+    "id": "3100",
+    "name": "리치베인",
+    "description": "<mainText><stats>주문력 <attention>100</attention><br>이동 속도 <attention>6%</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>주문 검</passive><br>스킬을 사용하고 나면 다음 기본 공격 시 <magicDamage>추가 마법 피해</magicDamage>(<OnHit>적중 시</OnHit> )를 입힙니다.</mainText>",
+    "plaintext": "스킬 공격 다음 공격에 추가 피해가 적용됩니다.",
+    "gold": {
+      "base": 250,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "SpellDamage",
+      "OnHit",
+      "NonbootsMovement",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 100,
+      "movespeedPercent": 0.06,
+      "abilityhaste": 10
+    },
+    "imageKey": "3100.png"
+  },
+  {
+    "id": "3102",
+    "name": "밴시의 장막",
+    "description": "<mainText><stats>주문력 <attention>105</attention><br>마법 저항력 <attention>40</attention></stats><br><br><passive>무효화</passive><br>적의 다음 스킬을 막아 주는 주문 방어막을 생성합니다.</mainText>",
+    "plaintext": "주기적으로 적 스킬 공격을 막아줍니다.",
+    "gold": {
+      "base": 200,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "SpellBlock",
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 105,
+      "spellblock": 40
+    },
+    "imageKey": "3102.png"
+  },
+  {
+    "id": "3107",
+    "name": "구원",
+    "description": "<mainText><stats>주문력 <attention>30</attention><br>스킬 가속 <attention>15</attention><br>기본 마나 재생 <attention>100%</attention><br>체력 회복 및 보호막 <attention>10%</attention></stats><br><br><active>중재</active><br>2.5초 후 아군 유닛의 <healing>체력을 150~350</healing>만큼 회복시키고 적 챔피언에게 <trueDamage>최대 체력의 10%에 해당하는 고정 피해</trueDamage>를 입힙니다.</mainText>",
+    "plaintext": "활성화하면 주변 지역의 아군을 회복시키고 적에게는 피해를 입힙니다.",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 2300,
+      "sell": 1610
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 30,
+      "abilityhaste": 15,
+      "mpregen": 1,
+      "healshield": 0.1
+    },
+    "imageKey": "3107.png"
+  },
+  {
+    "id": "3108",
+    "name": "악마의 마법서",
+    "description": "<mainText><stats>주문력 <attention>25</attention><br>스킬 가속 <attention>10</attention></stats><br><br></mainText>",
+    "plaintext": "주문력과 재사용 대기시간 감소율이 증가합니다.",
+    "gold": {
+      "base": 200,
+      "purchasable": true,
+      "total": 850,
+      "sell": 595
+    },
+    "tags": [
+      "SpellDamage",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 25,
+      "abilityhaste": 10
+    },
+    "imageKey": "3108.png"
+  },
+  {
+    "id": "3109",
+    "name": "기사의 맹세",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>방어력 <attention>40</attention><br>스킬 가속 <attention>10</attention><br>기본 체력 재생 <attention>100%</attention></stats><br><br><passive>희생</passive><br><attention>보호</attention> 중인 아군 근처에 있으면 해당 아군이 입는 피해량의 14%를 대신 입고 해당 아군이 챔피언에게 입히는 피해량의 <healing>12%만큼 체력을 회복</healing>합니다.<active>맹세</active> (0초)<br><attention>보호</attention>할 아군을 대상으로 지정합니다.</mainText>",
+    "plaintext": "동료를 지정해 서로를 보호합니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 2300,
+      "sell": 1610
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "Armor",
+      "Aura",
+      "Active",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 200,
+      "armor": 40,
+      "abilityhaste": 10,
+      "hpregen": 1
+    },
+    "imageKey": "3109.png"
+  },
+  {
+    "id": "3110",
+    "name": "얼어붙은 심장",
+    "description": "<mainText><stats>방어력 <attention>75</attention><br>마나 <attention>400</attention><br>스킬 가속 <attention>20</attention></stats><br><br><passive>혹한의 포옹</passive><br>주변 챔피언의 <attackSpeed>공격 속도</attackSpeed>를 <attackSpeed>20%</attackSpeed>만큼 감소시킵니다.</mainText>",
+    "plaintext": "방어력이 대폭 증가하고, 적의 기본 공격이 느려집니다.",
+    "gold": {
+      "base": 600,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1750
+    },
+    "tags": [
+      "Armor",
+      "Mana",
+      "Aura",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "armor": 75,
+      "mp": 400,
+      "abilityhaste": 20
+    },
+    "imageKey": "3110.png"
+  },
+  {
+    "id": "3111",
+    "name": "헤르메스의 발걸음",
+    "description": "<mainText><stats>마법 저항력 <attention>20</attention><br>이동 속도 <attention>45</attention><br>강인함 <attention>30%</attention></stats><br><br></mainText>",
+    "plaintext": "이동 속도가 증가하고, 방해 효과의 지속시간이 줄어듭니다.",
+    "gold": {
+      "base": 550,
+      "purchasable": true,
+      "total": 1250,
+      "sell": 875
+    },
+    "tags": [
+      "Boots",
+      "SpellBlock",
+      "Tenacity"
+    ],
+    "stats": {
+      "spellblock": 20,
+      "movespeedFlat": 45,
+      "tenacity": 0.3
+    },
+    "imageKey": "3111.png"
+  },
+  {
+    "id": "3112",
+    "name": "수호자의 보주",
+    "description": "<mainText><stats>주문력 <attention>50</attention><br>체력 <attention>150</attention></stats><br><br><br><li><passive>회복:</passive> 5초마다 <scaleMana>10의 마나</scaleMana>를 회복합니다. 마나를 획득할 수 없으면 <healing>15의 체력</healing>을 회복합니다.<br></mainText>",
+    "plaintext": "마법사에게 특화된 시작 아이템입니다.",
+    "gold": {
+      "base": 950,
+      "purchasable": true,
+      "total": 950,
+      "sell": 665
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "ManaRegen",
+      "Lane"
+    ],
+    "stats": {
+      "abilitypower": 50,
+      "hp": 150
+    },
+    "imageKey": "3112.png"
+  },
+  {
+    "id": "3113",
+    "name": "에테르 환영",
+    "description": "<mainText><stats>주문력 <attention>30</attention><br>이동 속도 <attention>4%</attention></stats><br><br></mainText>",
+    "plaintext": "주문력과 이동 속도를 높여줍니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "NonbootsMovement",
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 30,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "3113.png"
+  },
+  {
+    "id": "3114",
+    "name": "금지된 우상",
+    "description": "<mainText><stats>기본 마나 재생 <attention>50%</attention><br>체력 회복 및 보호막 <attention>8%</attention></stats><br><br></mainText>",
+    "plaintext": "회복 및 보호막 효과, 마나 재생량, 재사용 대기시간 감소량이 증가합니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 600,
+      "sell": 420
+    },
+    "tags": [
+      "ManaRegen"
+    ],
+    "stats": {
+      "mpregen": 0.5,
+      "healshield": 0.08
+    },
+    "imageKey": "3114.png"
+  },
+  {
+    "id": "3115",
+    "name": "내셔의 이빨",
+    "description": "<mainText><stats>주문력 <attention>80</attention><br>공격 속도 <attention>50%</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>이케시아의 이빨</passive><br>기본 공격이 <magicDamage>추가 마법 피해</magicDamage>(<OnHit>적중 시</OnHit> )를 입힙니다.</mainText>",
+    "plaintext": "공격 속도, 주문력, 재사용 대기시간 감소율이 증가합니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "AttackSpeed",
+      "SpellDamage",
+      "OnHit",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 80,
+      "attackspeed": 0.5,
+      "abilityhaste": 15
+    },
+    "imageKey": "3115.png"
+  },
+  {
+    "id": "3116",
+    "name": "라일라이의 수정홀",
+    "description": "<mainText><stats>주문력 <attention>65</attention><br>체력 <attention>400</attention></stats><br><br><passive>서리</passive><br>스킬로 적에게 피해를 입히면 1초 동안 30% <keyword>둔화</keyword>시킵니다.</mainText>",
+    "plaintext": "스킬 및 마법 피해를 입히면 적이 둔화에 걸립니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 2600,
+      "sell": 1820
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "Slow"
+    ],
+    "stats": {
+      "abilitypower": 65,
+      "hp": 400
+    },
+    "imageKey": "3116.png"
+  },
+  {
+    "id": "3118",
+    "name": "악의",
+    "description": "<mainText><stats>주문력 <attention>90</attention><br>마나 <attention>600</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>경멸</passive><br>궁극기 가속이 20 증가합니다.<br><br><passive>증오안개</passive><br>궁극기로 챔피언에게 피해를 입히면 3초 동안 대상 발밑의 지면을 불태워 매초 <magicDamage>마법 피해</magicDamage>를 입히고 <scaleMR>마법 저항력</scaleMR>을 감소시킵니다. <br></mainText>",
+    "plaintext": "동료를 지정해 서로를 보호합니다.",
+    "gold": {
+      "base": 650,
+      "purchasable": true,
+      "total": 2700,
+      "sell": 1890
+    },
+    "tags": [
+      "SpellDamage",
+      "Mana",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 90,
+      "mp": 600,
+      "abilityhaste": 15
+    },
+    "imageKey": "3118.png"
+  },
+  {
+    "id": "3119",
+    "name": "혹한의 손길",
+    "description": "<mainText><stats>체력 <attention>550</attention><br>마나 <attention>500</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>경탄</passive><br><scaleHealth>0의 체력</scaleHealth>을 얻습니다.<br><br><passive>마나순환</passive> (8초, 최대 충전량 4회)<br>기본 공격과 스킬 적중 시 <scaleMana>3의 최대 마나</scaleMana>(챔피언 상대 시 두 배)를 얻습니다.<br><scaleMana>360의 최대 마나</scaleMana>에 도달하면 <rarityLegendary>종말의 겨울</rarityLegendary>로 변합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 2400,
+      "sell": 1680
+    },
+    "tags": [
+      "Health",
+      "Mana",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 550,
+      "mp": 500,
+      "abilityhaste": 15
+    },
+    "imageKey": "3119.png"
+  },
+  {
+    "id": "3123",
+    "name": "처형인의 대검",
+    "description": "<mainText><stats>공격력 <attention>15</attention></stats><br><br><passive>고통스러운 상처</passive><br>챔피언에게 물리 피해를 입히면 3초 동안 <keyword>40%의 상처</keyword>를 남깁니다.</mainText>",
+    "plaintext": "회복력이 뛰어난 적에게 효과적입니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 800,
+      "sell": 560
+    },
+    "tags": [
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 15
+    },
+    "imageKey": "3123.png"
+  },
+  {
+    "id": "3124",
+    "name": "구인수의 격노검",
+    "description": "<mainText><stats>공격력 <attention>30</attention><br>주문력 <attention>30</attention><br>공격 속도 <attention>25%</attention></stats><br><br><passive>분노</passive><br>공격 시 <magicDamage>30의 추가 마법 피해(<OnHit>적중 시</OnHit> )</magicDamage>를 입힙니다.<br><br><passive>들끓는 일격</passive><br>기본 공격 시 3초 동안 <attackSpeed>공격 속도가 8%</attackSpeed> 증가합니다. (4회 중첩) <br>최대 중첩 시 세 번째 기본 공격을 가할 때마다 <OnHit>적중 시</OnHit> 효과를 두 번씩 적용합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1025,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "AttackSpeed",
+      "SpellDamage",
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 30,
+      "abilitypower": 30,
+      "attackspeed": 0.25
+    },
+    "imageKey": "3124.png"
+  },
+  {
+    "id": "3133",
+    "name": "콜필드의 전투 망치",
+    "description": "<mainText><stats>공격력 <attention>20</attention><br>스킬 가속 <attention>10</attention></stats><br><br></mainText>",
+    "plaintext": "공격력과 재사용 대기시간 감소율이 증가합니다.",
+    "gold": {
+      "base": 100,
+      "purchasable": true,
+      "total": 1050,
+      "sell": 735
+    },
+    "tags": [
+      "Damage",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 20,
+      "abilityhaste": 10
+    },
+    "imageKey": "3133.png"
+  },
+  {
+    "id": "3134",
+    "name": "톱날 단검",
+    "description": "<mainText><stats>공격력 <attention>20</attention><br>물리 관통력 <attention>10</attention></stats><br><br></mainText>",
+    "plaintext": "공격력과 물리 관통력이 증가합니다.",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "Damage",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 20,
+      "lethality": 10
+    },
+    "imageKey": "3134.png"
+  },
+  {
+    "id": "3135",
+    "name": "공허의 지팡이",
+    "description": "<mainText><stats>주문력 <attention>95</attention><br>마법 관통력 <attention>40%</attention></stats><br><br></mainText>",
+    "plaintext": "마법 피해량이 증가합니다.",
+    "gold": {
+      "base": 1050,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "MagicPenetration",
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 95,
+      "magicpenPercent": 0.4
+    },
+    "imageKey": "3135.png"
+  },
+  {
+    "id": "3137",
+    "name": "무덤꽃",
+    "description": "<mainText><stats>주문력 <attention>75</attention><br>마법 관통력 <attention>30%</attention><br>스킬 가속 <attention>20</attention></stats><br><br><passive>죽음에서 피어난 생명</passive><br>자신이 피해를 입힌 챔피언이 3초 안에 죽으면 시체에서 치유의 힘이 퍼져 <healing>체력을 회복</healing>시킵니다.</mainText>",
+    "plaintext": "사용하면 모든 해로운 효과가 제거되며, 이동 속도가 대폭 증가합니다.",
+    "gold": {
+      "base": 200,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "SpellDamage",
+      "MagicPenetration",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 75,
+      "magicpenPercent": 0.3,
+      "abilityhaste": 20
+    },
+    "imageKey": "3137.png"
+  },
+  {
+    "id": "3139",
+    "name": "헤르메스의 시미터",
+    "description": "<mainText><stats>공격력 <attention>50</attention><br>마법 저항력 <attention>35</attention><br>생명력 흡수 <attention>10%</attention></stats><br><br><br><br><active>활성화</active><br><active>수은</active><br>모든 군중 제어 효과(<keyword>공중에 뜸</keyword> 제외)를 제거하고 이동 속도가 증가합니다.</mainText>",
+    "plaintext": "사용하면 모든 군중 제어 효과가 제거되며, 이동 속도가 대폭 증가합니다.",
+    "gold": {
+      "base": 125,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 2240
+    },
+    "tags": [
+      "SpellBlock",
+      "Damage",
+      "LifeSteal",
+      "Active",
+      "NonbootsMovement",
+      "Tenacity"
+    ],
+    "stats": {
+      "attackdamage": 50,
+      "spellblock": 35,
+      "lifesteal": 0.1
+    },
+    "imageKey": "3139.png"
+  },
+  {
+    "id": "3140",
+    "name": "수은 장식띠",
+    "description": "<mainText><stats>마법 저항력 <attention>30</attention></stats><br><br><active>수은</active><br>모든 군중 제어 효과(<keyword>공중에 뜸</keyword> 제외)를 제거합니다.</mainText>",
+    "plaintext": "사용하면 모든 군중 제어 효과가 제거됩니다.",
+    "gold": {
+      "base": 900,
+      "purchasable": true,
+      "total": 1300,
+      "sell": 910
+    },
+    "tags": [
+      "Active",
+      "SpellBlock"
+    ],
+    "stats": {
+      "spellblock": 30
+    },
+    "imageKey": "3140.png"
+  },
+  {
+    "id": "3142",
+    "name": "요우무의 유령검",
+    "description": "<mainText><stats>공격력 <attention>55</attention><br>물리 관통력 <attention>18</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>출몰</passive> <br>전투에서 벗어나 있으면 <speed>이동 속도가 0</speed> 상승합니다.<br><br><active>망령의 발걸음</active><br>0초 동안 <speed>이동 속도</speed>가 상승하고 <keyword>유체화</keyword> 효과를 얻습니다.</mainText>",
+    "plaintext": "사용하면 이동 속도가 대폭 상승합니다.",
+    "gold": {
+      "base": 675,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "Damage",
+      "Active",
+      "NonbootsMovement",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 55,
+      "lethality": 18,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "3142.png"
+  },
+  {
+    "id": "3143",
+    "name": "란두인의 예언",
+    "description": "<mainText><stats>체력 <attention>350</attention><br>방어력 <attention>75</attention></stats><br><br><passive>저항</passive><br>치명타로 받는 피해량이 30% 감소합니다.<br><active>억제</active><br>주변 적을 2초 동안 70% <keyword>둔화</keyword>시킵니다.</mainText>",
+    "plaintext": "방어력이 대폭 강화됩니다. 사용하면 주변 적들이 둔화에 걸립니다.",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2700,
+      "sell": 1890
+    },
+    "tags": [
+      "Health",
+      "Armor",
+      "Active",
+      "Slow"
+    ],
+    "stats": {
+      "hp": 350,
+      "armor": 75
+    },
+    "imageKey": "3143.png"
+  },
+  {
+    "id": "3144",
+    "name": "정찰병의 새총",
+    "description": "<mainText><stats>공격 속도 <attention>20%</attention></stats><br><br><passive>명중</passive><br>챔피언에게 피해를 입히면 <magicDamage>추가 마법 피해</magicDamage>를 입힙니다. <br>기본 공격 시 재사용 대기시간이 1초 감소합니다.</mainText>",
+    "plaintext": "사용하면 마법 피해를 가하고 적 챔피언을 둔화시킵니다.",
+    "gold": {
+      "base": 100,
+      "purchasable": true,
+      "total": 600,
+      "sell": 420
+    },
+    "tags": [
+      "AttackSpeed"
+    ],
+    "stats": {
+      "attackspeed": 0.2
+    },
+    "imageKey": "3144.png"
+  },
+  {
+    "id": "3145",
+    "name": "마법공학 교류 발전기",
+    "description": "<mainText><stats>주문력 <attention>45</attention></stats><br><br><passive>자극</passive><br>챔피언에게 피해를 입히면 <magicDamage>추가 마법 피해</magicDamage>를 입힙니다.</mainText>",
+    "plaintext": "주문력이 상승합니다. 공격 시 주기적으로 추가 마법 피해를 입힙니다.",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 1100,
+      "sell": 770
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 45
+    },
+    "imageKey": "3145.png"
+  },
+  {
+    "id": "3146",
+    "name": "마법공학 총검",
+    "description": "<mainText><stats>주문력 <attention>80</attention><br>공격력 <attention>40</attention><br>모든 피해 흡혈 <attention>10%</attention></stats><br><br><br><br><active>활성화</active> (0초)<br><active>번개 화살</active><br>적 챔피언에게 충격을 줘 0의 마법 피해를 입히고 1.5초 동안 25% 둔화시킵니다.</mainText>",
+    "plaintext": "공격력과 주문력이 증가합니다. 사용하면 대상이 둔화에 걸립니다.",
+    "gold": {
+      "base": 600,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "LifeSteal",
+      "SpellDamage",
+      "Active",
+      "SpellVamp"
+    ],
+    "stats": {
+      "abilitypower": 80,
+      "attackdamage": 40,
+      "omnivamp": 0.1
+    },
+    "imageKey": "3146.png"
+  },
+  {
+    "id": "3147",
+    "name": "기괴한 가면",
+    "description": "<mainText><stats>주문력 <attention>30</attention><br>체력 <attention>200</attention></stats><br><br><passive>광기</passive><br>적 챔피언과 전투 중 매초 2%의 추가 피해를 입힙니다. (최대 6%) </mainText>",
+    "plaintext": "적에게 기습 공격 시 추가 물리 피해를 입힙니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 1300,
+      "sell": 910
+    },
+    "tags": [
+      "Health",
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 30,
+      "hp": 200
+    },
+    "imageKey": "3147.png"
+  },
+  {
+    "id": "3152",
+    "name": "마법공학 로켓 벨트",
+    "description": "<mainText><stats>주문력 <attention>70</attention><br>체력 <attention>300</attention><br>스킬 가속 <attention>20</attention></stats><br><br><active>초음속</active><br>지정 방향으로 돌진하며 <magicDamage>마법 피해</magicDamage>를 입히는 탄환을 발사합니다.</mainText>",
+    "plaintext": "사용시 앞으로 돌진하며 강력한 폭발을 일으키는 탄환을 발사합니다.",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 2650,
+      "sell": 1855
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "Active",
+      "CooldownReduction",
+      "NonbootsMovement",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 70,
+      "hp": 300,
+      "abilityhaste": 20
+    },
+    "imageKey": "3152.png"
+  },
+  {
+    "id": "3153",
+    "name": "몰락한 왕의 검",
+    "description": "<mainText><stats>공격력 <attention>40</attention><br>공격 속도 <attention>25%</attention><br>생명력 흡수 <attention>10%</attention></stats><br><br><passive>안개의 검</passive><br>기본 공격 시 적의 현재 체력의 <physicalDamage>일정 비율</physicalDamage>만큼 <physicalDamage>추가 물리 피해</physicalDamage>(<OnHit>적중 시</OnHit> )를 입힙니다.<br><br><passive>할퀴는 그림자</passive><br>챔피언에게 3회 기본 공격을 가하면 1초 동안 30% <status>둔화</status>시킵니다.</mainText>",
+    "plaintext": "상대의 체력에 비례하여 피해를 입히고, 상대의 이동 속도를 훔칠 수 있습니다.",
+    "gold": {
+      "base": 725,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 2240
+    },
+    "tags": [
+      "Damage",
+      "AttackSpeed",
+      "LifeSteal",
+      "Slow",
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 40,
+      "attackspeed": 0.25,
+      "lifesteal": 0.1
+    },
+    "imageKey": "3153.png"
+  },
+  {
+    "id": "3155",
+    "name": "주문포식자",
+    "description": "<mainText><stats>공격력 <attention>25</attention><br>마법 저항력 <attention>25</attention></stats><br><br><passive>생명선</passive><br>체력이 30% 밑으로 떨어질 만큼 마법 피해를 입으면 2.5초 동안 <shield>마법 피해를 흡수하는 보호막</shield>을 얻습니다.</mainText>",
+    "plaintext": "공격력과 마법 저항력이 증가합니다.",
+    "gold": {
+      "base": 200,
+      "purchasable": true,
+      "total": 1300,
+      "sell": 910
+    },
+    "tags": [
+      "Damage",
+      "SpellBlock"
+    ],
+    "stats": {
+      "attackdamage": 25,
+      "spellblock": 25
+    },
+    "imageKey": "3155.png"
+  },
+  {
+    "id": "3156",
+    "name": "맬모셔스의 아귀",
+    "description": "<mainText><stats>공격력 <attention>60</attention><br>스킬 가속 <attention>15</attention><br>마법 저항력 <attention>40</attention></stats><br><br><passive>생명선</passive><br>체력이 30% 밑으로 떨어질 만큼 마법 피해를 입으면 3초 동안 <shield>마법 피해를 흡수하는 보호막</shield>을 얻고 전투가 끝날 때까지 <lifeSteal>10%의 모든 피해 흡혈</lifeSteal>을 얻습니다.</mainText>",
+    "plaintext": "체력이 낮아지면 추가 공격력이 부여됩니다.",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 3100,
+      "sell": 2170
+    },
+    "tags": [
+      "SpellBlock",
+      "Damage",
+      "LifeSteal",
+      "SpellVamp",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 60,
+      "abilityhaste": 15,
+      "spellblock": 40
+    },
+    "imageKey": "3156.png"
+  },
+  {
+    "id": "3157",
+    "name": "존야의 모래시계",
+    "description": "<mainText><stats>주문력 <attention>105</attention><br>방어력 <attention>50</attention></stats><br><br><br><br><active>시간 정지</active><br>2.5초 동안 <keyword>경직</keyword> 상태가 됩니다.</mainText>",
+    "plaintext": "사용하면 아무런 행동도 취할 수 없는 대신 공격도 받지 않는 무적 상태가 됩니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 3250,
+      "sell": 2275
+    },
+    "tags": [
+      "Armor",
+      "SpellDamage",
+      "Active"
+    ],
+    "stats": {
+      "abilitypower": 105,
+      "armor": 50
+    },
+    "imageKey": "3157.png"
+  },
+  {
+    "id": "3158",
+    "name": "명석함의 아이오니아 장화",
+    "description": "<mainText><stats>스킬 가속 <attention>10</attention><br>이동 속도 <attention>45</attention></stats><br><br><passive>아이오니아의 통찰</passive><br>소환사 주문 가속이 10 증가합니다.<br><br></mainText>",
+    "plaintext": "이동 속도와 재사용 대기시간 감소율이 증가합니다.",
+    "gold": {
+      "base": 350,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "Boots",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "abilityhaste": 10,
+      "movespeedFlat": 45
+    },
+    "imageKey": "3158.png"
+  },
+  {
+    "id": "3161",
+    "name": "쇼진의 창",
+    "description": "<mainText><stats>공격력 <attention>45</attention><br>체력 <attention>450</attention></stats><br><br><passive>드래곤의 힘</passive> <br>기본 스킬 가속이 25 증가합니다.<br><br><passive>집중된 의지</passive> <br>스킬로 피해를 입히면 챔피언 스킬과 기본 지속 효과 피해량이 6초 동안 3% 증가합니다. (4회 중첩)</mainText>",
+    "plaintext": "챔피언에게 받는 피해량이 고정된 수치만큼 감소합니다. 근처에 적 챔피언이 많을 때 공격하면 잠시 동안 이 수치가 증가합니다.",
+    "gold": {
+      "base": 675,
+      "purchasable": true,
+      "total": 3100,
+      "sell": 2170
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 45,
+      "hp": 450
+    },
+    "imageKey": "3161.png"
+  },
+  {
+    "id": "3165",
+    "name": "모렐로노미콘",
+    "description": "<mainText><stats>주문력 <attention>75</attention><br>체력 <attention>350</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>고통스러운 상처</passive><br>챔피언에게 <magicDamage>마법 피해</magicDamage>를 입히면 3초 동안 <keyword>40%의 상처</keyword>를 남깁니다.</mainText>",
+    "plaintext": "마법 피해량이 증가합니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 2850,
+      "sell": 1995
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 75,
+      "hp": 350,
+      "abilityhaste": 15
+    },
+    "imageKey": "3165.png"
+  },
+  {
+    "id": "3168",
+    "name": "불멸의 길",
+    "description": "<mainText><stats>이동 속도 <attention>45</attention><br>모든 피해 흡혈 <attention>4%</attention></stats><br><br><passive>학살</passive><br>챔피언 처치 관여 시 모든 피해 흡혈을 0.6% 획득합니다. (최대 10회 중첩)<br><br><passive>지금부터 영원까지</passive><br>체력이 절반 이상일 때 입히는 피해량이 5% 증가합니다. <br><br>체력이 절반 아래일 때 체력 회복, 보호막, 체력 재생 효과가 15% 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "LifeSteal",
+      "SpellVamp",
+      "Boots"
+    ],
+    "stats": {
+      "movespeedFlat": 45,
+      "omnivamp": 0.04
+    },
+    "imageKey": "3168.png"
+  },
+  {
+    "id": "3170",
+    "name": "신속행진",
+    "description": "<mainText><stats>이동 속도 <attention>65</attention></stats><br><br><passive>날쌘 발걸음</passive><br><keyword>둔화</keyword> 효과가 40% 감소합니다.<br><br><passive>녹서스의 열광</passive><br><speed>이동 속도</speed>의 5%만큼 적응형 능력치가 증가합니다.</mainText>",
+    "plaintext": "방어력이 증가하고, 방해 효과의 지속시간이 줄어듭니다.",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "Boots"
+    ],
+    "stats": {
+      "movespeedFlat": 65
+    },
+    "imageKey": "3170.png"
+  },
+  {
+    "id": "3171",
+    "name": "핏빛 명석함",
+    "description": "<mainText><stats>스킬 가속 <attention>20</attention><br>이동 속도 <attention>45</attention></stats><br><br><passive>아이오니아의 통찰</passive><br>소환사 주문 가속이 20 증가합니다.<br><br><passive>녹서스의 가속</passive><br>아군에게 스킬로 강화 효과 또는 보호막을 적용하거나, 적 챔피언에게 스킬로 피해를 입히거나, 소환사 주문을 사용하면 4초 동안 <speed>이동 속도가 0</speed> 증가합니다.<br><br><rules>녹서스의 가속은 스킬을 사용할 때마다 한 번만 발동할 수 있습니다.</rules></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "CooldownReduction",
+      "Boots"
+    ],
+    "stats": {
+      "abilityhaste": 20,
+      "movespeedFlat": 45
+    },
+    "imageKey": "3171.png"
+  },
+  {
+    "id": "3172",
+    "name": "건메탈 군화",
+    "description": "<mainText><stats>공격 속도 <attention>40%</attention><br>이동 속도 <attention>45</attention><br>생명력 흡수 <attention>5%</attention></stats><br><br><passive>녹서스의 걸음</passive><br>챔피언에게 기본 공격 시 <speed>이동 속도</speed>(<OnHit>적중 시</OnHit> )가 증가했다가 2초에 걸쳐 원래대로 돌아옵니다.</mainText>",
+    "plaintext": "이동 속도가 증가하고 강인함 효과를 받습니다.",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 1100,
+      "sell": 770
+    },
+    "tags": [
+      "AttackSpeed",
+      "LifeSteal",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackspeed": 0.4,
+      "movespeedFlat": 45,
+      "lifesteal": 0.05
+    },
+    "imageKey": "3172.png"
+  },
+  {
+    "id": "3173",
+    "name": "사슬끈 분쇄자",
+    "description": "<mainText><stats>마법 저항력 <attention>30</attention><br>이동 속도 <attention>45</attention><br>강인함 <attention>30%</attention></stats><br><br><passive>녹서스의 끈기</passive> (0초)<br>챔피언에게 마법 피해를 입은 후 5초 동안 <shield>0</shield>의 <magicDamage>마법</magicDamage> 피해를 흡수하는 <shield>보호막</shield>을 얻습니다.</mainText>",
+    "plaintext": "이동 속도와 재사용 대기시간 감소율이 증가합니다.",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 1250,
+      "sell": 875
+    },
+    "tags": [
+      "SpellBlock",
+      "Boots",
+      "Tenacity",
+      "MagicResist"
+    ],
+    "stats": {
+      "spellblock": 30,
+      "movespeedFlat": 45,
+      "tenacity": 0.3
+    },
+    "imageKey": "3173.png"
+  },
+  {
+    "id": "3174",
+    "name": "무장 진격",
+    "description": "<mainText><stats>방어력 <attention>35</attention><br>이동 속도 <attention>45</attention></stats><br><br><passive>장갑판</passive><br>기본 공격으로 받는 피해량이 10% 감소합니다.<br><br><passive>녹서스의 인내</passive> (0초)<br>챔피언에게 물리 피해를 입은 후 5초 동안 <shield>0</shield>의 <physicalDamage>물리</physicalDamage> 피해를 흡수하는 <shield>보호막</shield>을 얻습니다.</mainText>",
+    "plaintext": "적에게 피해를 입혀 회복과 보호막을 강화합니다.",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "Armor",
+      "Boots"
+    ],
+    "stats": {
+      "armor": 35,
+      "movespeedFlat": 45
+    },
+    "imageKey": "3174.png"
+  },
+  {
+    "id": "3175",
+    "name": "주문투척자의 신발",
+    "description": "<mainText><stats>마법 관통력 <attention>18</attention><br>마법 관통력 <attention>8%</attention><br>이동 속도 <attention>45</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 1100,
+      "sell": 770
+    },
+    "tags": [
+      "Boots",
+      "MagicPenetration"
+    ],
+    "stats": {
+      "magicpenFlat": 18,
+      "magicpenPercent": 0.08,
+      "movespeedFlat": 45
+    },
+    "imageKey": "3175.png"
+  },
+  {
+    "id": "3177",
+    "name": "수호자의 검",
+    "description": "<mainText><stats>공격력 <attention>30</attention><br>체력 <attention>150</attention><br>스킬 가속 <attention>15</attention></stats><br><br></mainText>",
+    "plaintext": "공격에 특화된 시작 아이템입니다.",
+    "gold": {
+      "base": 950,
+      "purchasable": true,
+      "total": 950,
+      "sell": 665
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "Lane",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 30,
+      "hp": 150,
+      "abilityhaste": 15
+    },
+    "imageKey": "3177.png"
+  },
+  {
+    "id": "3179",
+    "name": "그림자 검",
+    "description": "<mainText><stats>공격력 <attention>60</attention><br>물리 관통력 <attention>18</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>밤의 추적자</passive><br>잠시 적에게 보이지 않으면 챔피언 대상 다음 기본 공격 시 추가 <trueDamage>고정 피해</trueDamage>를 입힙니다.<br><br><passive>암전</passive><br>주변에 있는 적 투명 와드와 함정을 잠시 드러냅니다. 지속시간 동안 와드를 기본 공격하면 추가 피해를 입힙니다.</mainText>",
+    "plaintext": "주기적으로 덫 및 와드를 감지할 수 있습니다.",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "Damage",
+      "Vision",
+      "CooldownReduction",
+      "ArmorPenetration",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 60,
+      "lethality": 18,
+      "abilityhaste": 15
+    },
+    "imageKey": "3179.png"
+  },
+  {
+    "id": "3181",
+    "name": "선체파괴자",
+    "description": "<mainText><stats>공격력 <attention>40</attention><br>체력 <attention>500</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>선장</passive><br>챔피언과 에픽 몬스터에게 다섯 번째 기본 공격을 가할 때마다 <physicalDamage>추가 물리 피해</physicalDamage>를 입힙니다. 대상이 구조물일 경우 피해량이 증가합니다.<br><br><passive>승선 부대</passive><br>주변 공성 미니언과 슈퍼 미니언이 <scaleArmor>방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 얻습니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 175,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackdamage": 40,
+      "hp": 500,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "3181.png"
+  },
+  {
+    "id": "3184",
+    "name": "수호자의 망치",
+    "description": "<mainText><stats>공격력 <attention>25</attention><br>체력 <attention>150</attention><br>생명력 흡수 <attention>5%</attention></stats><br><br></mainText>",
+    "plaintext": "공격에 특화된 시작 아이템입니다.",
+    "gold": {
+      "base": 950,
+      "purchasable": true,
+      "total": 950,
+      "sell": 665
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "LifeSteal",
+      "Lane"
+    ],
+    "stats": {
+      "attackdamage": 25,
+      "hp": 150,
+      "lifesteal": 0.05
+    },
+    "imageKey": "3184.png"
+  },
+  {
+    "id": "3190",
+    "name": "강철의 솔라리 펜던트",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>방어력 <attention>30</attention><br>마법 저항력 <attention>30</attention><br>스킬 가속 <attention>10</attention></stats><br><br><active>헌신</active><br>주변 아군들에게 <shield>290~360의 피해를 흡수하는 보호막</shield>을 부여합니다. 보호막 피해 흡수량은 2.5초에 걸쳐 점차 감소합니다.</mainText>",
+    "plaintext": "사용하면 주변 아군을 적의 공격에서 방어해 줍니다.",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 2200,
+      "sell": 1540
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "Armor",
+      "Aura",
+      "Active",
+      "MagicResist",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 200,
+      "armor": 30,
+      "spellblock": 30,
+      "abilityhaste": 10
+    },
+    "imageKey": "3190.png"
+  },
+  {
+    "id": "3211",
+    "name": "망령의 두건",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>마법 저항력 <attention>35</attention><br>기본 체력 재생 <attention>100%</attention></stats><br><br></mainText>",
+    "plaintext": "방어력이 증가하고, 피해를 입으면 체력이 재생됩니다.",
+    "gold": {
+      "base": 150,
+      "purchasable": true,
+      "total": 1250,
+      "sell": 875
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "SpellBlock"
+    ],
+    "stats": {
+      "hp": 200,
+      "spellblock": 35,
+      "hpregen": 1
+    },
+    "imageKey": "3211.png"
+  },
+  {
+    "id": "3222",
+    "name": "미카엘의 축복",
+    "description": "<mainText><stats>체력 <attention>250</attention><br>기본 마나 재생 <attention>100%</attention><br>체력 회복 및 보호막 <attention>12%</attention><br>스킬 가속 <attention>15</attention></stats><br><br><active>정화</active><br>아군 챔피언에게 걸린 모든 군중 제어 효과(<keyword>공중에 뜸</keyword> 및 <keyword>제압</keyword> 제외)를 제거하고 <healing>체력을 100~250</healing> 회복합니다.</mainText>",
+    "plaintext": "사용하면 아군 챔피언 하나에게 걸린 방해 효과를 모두 제거해 줍니다.",
+    "gold": {
+      "base": 900,
+      "purchasable": true,
+      "total": 2300,
+      "sell": 1610
+    },
+    "tags": [
+      "Health",
+      "ManaRegen",
+      "Active",
+      "CooldownReduction",
+      "Tenacity",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 250,
+      "mpregen": 1,
+      "healshield": 0.12,
+      "abilityhaste": 15
+    },
+    "imageKey": "3222.png"
+  },
+  {
+    "id": "3302",
+    "name": "경계",
+    "description": "<mainText><stats>공격력 <attention>30</attention><br>공격 속도 <attention>35%</attention></stats><br><br><passive>그림자</passive><br>기본 공격 시 <magicDamage>30의 추가 마법 피해</magicDamage>(<OnHit>적중 시</OnHit> )를 입힙니다.<br><br><passive>빛과 어둠</passive><br>챔피언에게 기본 공격 시 <keywordMajor>빛</keywordMajor>과 <keywordMajor>어둠</keywordMajor> 기본 공격을 번갈아 가며 적용합니다. <li><keywordMajor>빛</keywordMajor> 기본 공격 시 5초 동안 <scaleArmor>방어력</scaleArmor>과 <scaleMR>마법 저항력</scaleMR>이 증가합니다. <li><keywordMajor>어둠</keywordMajor> 기본 공격 시 5초 동안 <scaleArmor>방어구 관통력</scaleArmor>과 <scaleMR>마법 관통력</scaleMR>이 10% 증가합니다. </mainText>",
+    "plaintext": "주기적으로 미니언을 처치하여 근처 아군을 치유하고 골드를 부여합니다.",
+    "gold": {
+      "base": 1100,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "AttackSpeed",
+      "OnHit",
+      "MagicPenetration",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 30,
+      "attackspeed": 0.35
+    },
+    "imageKey": "3302.png"
+  },
+  {
+    "id": "3330",
+    "name": "허수아비",
+    "description": "<mainText><stats></stats><br><br>팔 수 없음<br><br><active>사용 시 - 장신구:</active> 적에게 피들스틱과 똑같아 보이는 허수아비를 설치합니다. 허수아비는 0초 동안 유지됩니다. 0초마다 1회 충전되며, 최대 2회까지 충전됩니다.<br><br>적 챔피언이 가까이 다가가면 허수아비가 작동되어, 무작위 행동을 취한 후 파괴됩니다.</mainText>",
+    "plaintext": "주기적으로 투명 와드를 설치합니다.",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 0,
+      "sell": 0
+    },
+    "tags": [
+      "Active",
+      "Jungle",
+      "Lane",
+      "Trinket",
+      "Vision"
+    ],
+    "stats": {},
+    "imageKey": "3330.png"
+  },
+  {
+    "id": "3340",
+    "name": "투명 와드",
+    "description": "<mainText><stats></stats><br><br><active>활성</active> (<scaleLevel>210~90</scaleLevel>초, 최대 충전량 2회)<br><scaleLevel>90~120</scaleLevel>초 동안 시야를 밝혀 주는 <keyword>보이지 않는</keyword> 투명 와드를 설치합니다.</mainText>",
+    "plaintext": "주기적으로 투명 와드를 설치합니다.",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 0,
+      "sell": 0
+    },
+    "tags": [
+      "Active",
+      "Jungle",
+      "Lane",
+      "Trinket",
+      "Vision"
+    ],
+    "stats": {},
+    "imageKey": "3340.png"
+  },
+  {
+    "id": "3363",
+    "name": "망원형 개조",
+    "description": "<mainText><stats></stats><br><br><active>사용 시</active> (<scaleLevel>198~99</scaleLevel>초)<br>2초 동안 멀리 떨어진 영역을 드러내고 적 챔피언을 발견하면 파괴되는 와드를 설치합니다.</mainText>",
+    "plaintext": "설치 범위가 증가하며 대상 지역을 드러내 줍니다.",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 0,
+      "sell": 0
+    },
+    "tags": [
+      "Active",
+      "Trinket",
+      "Vision"
+    ],
+    "stats": {},
+    "imageKey": "3363.png"
+  },
+  {
+    "id": "3364",
+    "name": "예언자의 렌즈",
+    "description": "<mainText><stats></stats><br><br><active>사용 시</active> (<scaleLevel>160~100</scaleLevel>초, 최대 충전량 2회)<br>주변에 있는 적의 투명 와드와 함정의 위치를 8초 동안 드러냅니다.</mainText>",
+    "plaintext": "근처의 투명한 와드와 덫을 일정 시간 동안 차단합니다.",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 0,
+      "sell": 0
+    },
+    "tags": [
+      "Active",
+      "Trinket",
+      "Vision"
+    ],
+    "stats": {},
+    "imageKey": "3364.png"
+  },
+  {
+    "id": "3504",
+    "name": "불타는 향로",
+    "description": "<mainText><stats>주문력 <attention>45</attention><br>체력 회복 및 보호막 <attention>10%</attention><br>기본 마나 재생 <attention>125%</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>축성</passive><br>아군을 치유하거나 보호막을 씌워주면 6초 동안 자신과 대상 아군의 <attackSpeed>공격 속도가 25%</attackSpeed> 상승하고 공격 시 <magicDamage>20의 마법 피해</magicDamage>(<OnHit>적중 시</OnHit> )를 입힙니다.</mainText>",
+    "plaintext": "다른 유닛에게 보호막과 치유 효과를 쓰면 잠깐 동안 대상과 자신의 공격 속도가 상승합니다. 또한 이 상태에서 기본 공격이 적중하면 추가 마법 피해를 입힙니다.",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 2200,
+      "sell": 1540
+    },
+    "tags": [
+      "AttackSpeed",
+      "SpellDamage",
+      "ManaRegen",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "abilitypower": 45,
+      "healshield": 0.1,
+      "mpregen": 1.25,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "3504.png"
+  },
+  {
+    "id": "3508",
+    "name": "정수 약탈자",
+    "description": "<mainText><stats>공격력 <attention>50</attention><br>스킬 가속 <attention>20</attention><br>치명타 확률 <attention>25%</attention></stats><br><br><passive>주문 검</passive><br>스킬을 사용하고 나면 다음 기본 공격 시 <physicalDamage>추가 물리 피해</physicalDamage>를 입히고 <scaleMana>마나</scaleMana>를 얻습니다. (<OnHit>적중 시</OnHit> )</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 3050,
+      "sell": 2135
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike",
+      "ManaRegen",
+      "CooldownReduction",
+      "OnHit",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 50,
+      "abilityhaste": 20,
+      "crit": 0.25
+    },
+    "imageKey": "3508.png"
+  },
+  {
+    "id": "3599",
+    "name": "칼리스타의 칠흑의 창",
+    "description": "<mainText><stats></stats><br><br><active>사용 시 - 소모:</active> 아군에게 이 게임 동안 결속되는 계약을 제의합니다. 계약이 수락되면 해당 아군과 가까이 있을 때 둘 모두가 강화됩니다.</mainText>",
+    "plaintext": "아군 계약자에게 결속시키는 칼리스타의 창입니다.",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 0,
+      "sell": 0
+    },
+    "tags": [
+      "Consumable"
+    ],
+    "stats": {},
+    "imageKey": "3599.png"
+  },
+  {
+    "id": "3600",
+    "name": "칼리스타의 칠흑의 창",
+    "description": "<mainText><stats></stats><br><br><active>사용 시 - 소모:</active> 아군에게 이 게임 동안 결속되는 계약을 제의합니다. 계약이 수락되면 해당 아군과 가까이 있을 때 둘 모두가 강화됩니다.<br><br><rules><attention>칼리스타</attention>가 궁극기를 사용할 때 필요합니다.</rules></mainText>",
+    "plaintext": "아군 계약자에게 결속시키는 칼리스타의 창입니다.",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 0,
+      "sell": 0
+    },
+    "tags": [
+      "Consumable"
+    ],
+    "stats": {},
+    "imageKey": "3600.png"
+  },
+  {
+    "id": "3742",
+    "name": "망자의 갑옷",
+    "description": "<mainText><stats>체력 <attention>350</attention><br>방어력 <attention>55</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>침몰시키는 자</passive><br>이동 시 최대 <speed>20의 추가 이동 속도</speed>를 얻습니다. 다음 기본 공격 시 <physicalDamage>추가 물리 피해</physicalDamage>를 입히고 추가 이동 속도를 잃습니다.<br><br><passive>굴하지 않는 자</passive><br><keyword>둔화</keyword> 효과가 15% 감소합니다.</mainText>",
+    "plaintext": "이동 시 추진력이 올라 적들을 강하게 타격합니다.",
+    "gold": {
+      "base": 900,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Health",
+      "Armor",
+      "Slow",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "hp": 350,
+      "armor": 55,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "3742.png"
+  },
+  {
+    "id": "3748",
+    "name": "거대한 히드라",
+    "description": "<mainText><stats>공격력 <attention>40</attention><br>체력 <attention>600</attention></stats><br><br><passive>쪼개기</passive><br>기본 공격 적중 시 대상 뒤의 적들에게 <physicalDamage>물리 피해</physicalDamage>를 입힙니다.<br><active>거대한 초승달</active><br>다음 <passive>쪼개기</passive>를 강화하여 <physicalDamage>추가 물리 피해</physicalDamage>(<OnHit>적중 시</OnHit> )를 입히고 대상 뒤의 적들에게 <physicalDamage>추가 물리 피해</physicalDamage>를 입힙니다.</mainText>",
+    "plaintext": "본인 체력에 비례하여 광역 피해를 입힙니다.",
+    "gold": {
+      "base": 50,
+      "purchasable": true,
+      "total": 3300,
+      "sell": 2310
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "Damage",
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 40,
+      "hp": 600
+    },
+    "imageKey": "3748.png"
+  },
+  {
+    "id": "3801",
+    "name": "수정 팔 보호구",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>기본 체력 재생 <attention>100%</attention></stats><br><br></mainText>",
+    "plaintext": "체력과 체력 재생량이 상승합니다.",
+    "gold": {
+      "base": 100,
+      "purchasable": true,
+      "total": 800,
+      "sell": 560
+    },
+    "tags": [
+      "Health",
+      "HealthRegen"
+    ],
+    "stats": {
+      "hp": 200,
+      "hpregen": 1
+    },
+    "imageKey": "3801.png"
+  },
+  {
+    "id": "3802",
+    "name": "사라진 양피지",
+    "description": "<mainText><stats>주문력 <attention>40</attention><br>마나 <attention>300</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>깨우치기</passive><br>레벨 업하면 3초 동안 <scaleMana>최대 마나의 20%</scaleMana>를 회복합니다.</mainText>",
+    "plaintext": "레벨이 오를 때마다 마나를 회복합니다.",
+    "gold": {
+      "base": 250,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "SpellDamage",
+      "Mana",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 40,
+      "mp": 300,
+      "abilityhaste": 10
+    },
+    "imageKey": "3802.png"
+  },
+  {
+    "id": "3803",
+    "name": "억겁의 카탈리스트",
+    "description": "<mainText><stats>체력 <attention>300</attention><br>마나 <attention>375</attention></stats><br><br><passive>영원</passive><br>챔피언에게 <scaleMana>입은 피해의 10%</scaleMana>를 <scaleMana>마나</scaleMana>로 회복합니다. <br>스킬 사용 시 사용한 <healing>마나의 25%만큼 체력을 회복</healing>합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 200,
+      "purchasable": true,
+      "total": 1300,
+      "sell": 910
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "Mana",
+      "ManaRegen"
+    ],
+    "stats": {
+      "hp": 300,
+      "mp": 375
+    },
+    "imageKey": "3803.png"
+  },
+  {
+    "id": "3814",
+    "name": "밤의 끝자락",
+    "description": "<mainText><stats>공격력 <attention>50</attention><br>물리 관통력 <attention>15</attention><br>체력 <attention>250</attention></stats><br><br><passive>무효화</passive><br>적의 다음 스킬을 막아 주는 주문 방어막을 생성합니다.</mainText>",
+    "plaintext": "주기적으로 적 스킬 공격을 막아줍니다.",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 50,
+      "lethality": 15,
+      "hp": 250
+    },
+    "imageKey": "3814.png"
+  },
+  {
+    "id": "3865",
+    "name": "세계 지도집",
+    "description": "",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 160
+    },
+    "tags": [
+      "Health",
+      "ManaRegen",
+      "Vision",
+      "GoldPer",
+      "Lane"
+    ],
+    "stats": {},
+    "imageKey": "3865.png"
+  },
+  {
+    "id": "3869",
+    "name": "천상의 이의",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>기본 체력 재생 <attention>75%</attention><br>기본 마나 재생 <attention>75%</attention><br>10초당 골드 <attention>9</attention></stats><br><br><passive>산의 축복</passive><br>챔피언에게 피해를 받은 후 2초 동안 챔피언으로부터 받는 피해가 감소합니다. 효과가 끝나면 1.5초 동안 주변 적을 50% 둔화시킵니다.<br><active>사용 시</active> (충전량 4회)<br>시야를 밝혀 주는 <keyword>보이지 않는</keyword> 투명 와드를 설치합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 400,
+      "sell": 160
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "ManaRegen",
+      "Vision",
+      "GoldPer",
+      "Lane"
+    ],
+    "stats": {
+      "hp": 200,
+      "hpregen": 0.75,
+      "mpregen": 0.75
+    },
+    "imageKey": "3869.png"
+  },
+  {
+    "id": "3870",
+    "name": "꿈 생성기",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>기본 체력 재생 <attention>75%</attention><br>기본 마나 재생 <attention>75%</attention><br>10초당 골드 <attention>9</attention></stats><br><br><passive>꿈 생성기</passive><br>다른 아군에게 체력을 회복시키거나 보호막을 씌우면 대상에게 3초 동안 꿈방울을 붑니다. 해당 아군이 다음 기본 공격 시 <magicDamage>추가 마법 피해</magicDamage>(<OnHit>적중 시</OnHit> )를 입히며, 다음에 받는 피해는 감소합니다.<active>사용 시</active> (충전량 4회)<br>시야를 밝혀 주는 <keyword>보이지 않는</keyword> 투명 와드를 설치합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 400,
+      "sell": 160
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "ManaRegen",
+      "Vision",
+      "GoldPer",
+      "Lane"
+    ],
+    "stats": {
+      "hp": 200,
+      "hpregen": 0.75,
+      "mpregen": 0.75
+    },
+    "imageKey": "3870.png"
+  },
+  {
+    "id": "3871",
+    "name": "자자크의 세계가시",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>기본 체력 재생 <attention>75%</attention><br>기본 마나 재생 <attention>75%</attention><br>10초당 골드 <attention>9</attention></stats><br><br><passive>공허 폭발</passive><br>챔피언에게 스킬로 피해를 입히면 폭발이 일어나 <magicDamage>마법 피해</magicDamage>를 입힙니다.<br><br><active>사용 시</active> (충전량 4회)<br>시야를 밝혀 주는 <keyword>보이지 않는</keyword> 투명 와드를 설치합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 400,
+      "sell": 160
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "ManaRegen",
+      "Vision",
+      "GoldPer",
+      "Lane"
+    ],
+    "stats": {
+      "hp": 200,
+      "hpregen": 0.75,
+      "mpregen": 0.75
+    },
+    "imageKey": "3871.png"
+  },
+  {
+    "id": "3876",
+    "name": "태양의 썰매",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>기본 체력 재생 <attention>75%</attention><br>기본 마나 재생 <attention>75%</attention><br>10초당 골드 <attention>9</attention></stats><br><br><passive>썰매 질주</passive><br>아군 주변의 적 챔피언을 <keyword>둔화</keyword> 또는 <keyword>이동 불가</keyword> 상태로 만들면 <healing>체력</healing>을 회복하고 2.5초 동안 자신과 주변 아군의 <speed>이동 속도가 20% 증가했다가 점차 감소</speed>합니다. <active>사용 시</active> (충전량 4회)<br>시야를 밝혀 주는 <keyword>보이지 않는</keyword> 투명 와드를 설치합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 400,
+      "sell": 160
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "ManaRegen",
+      "Vision",
+      "GoldPer",
+      "Lane"
+    ],
+    "stats": {
+      "hp": 200,
+      "hpregen": 0.75,
+      "mpregen": 0.75
+    },
+    "imageKey": "3876.png"
+  },
+  {
+    "id": "3877",
+    "name": "피의 노래",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>기본 체력 재생 <attention>75%</attention><br>기본 마나 재생 <attention>75%</attention><br>10초당 골드 <attention>9</attention></stats><br><br><passive>주문 검</passive><br>스킬을 사용하고 나면 다음 기본 공격 시 <physicalDamage>추가 물리 피해</physicalDamage>(<OnHit>적중 시</OnHit> )를 입힙니다. 대상이 챔피언일 경우 4초 동안 입히는 피해량이 증가합니다.<active>사용 시</active> (충전량 4회)<br>시야를 밝혀 주는 <keyword>보이지 않는</keyword> 투명 와드를 설치합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 400,
+      "sell": 160
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "ManaRegen",
+      "Vision",
+      "GoldPer",
+      "Lane"
+    ],
+    "stats": {
+      "hp": 200,
+      "hpregen": 0.75,
+      "mpregen": 0.75
+    },
+    "imageKey": "3877.png"
+  },
+  {
+    "id": "3916",
+    "name": "망각의 구",
+    "description": "<mainText><stats>주문력 <attention>25</attention></stats><br><br><passive>고통스러운 상처</passive><br>챔피언에게 <magicDamage>마법 피해</magicDamage>를 입히면 3초 동안 <keyword>40%의 상처</keyword>를 남깁니다.</mainText>",
+    "plaintext": "마법 피해량이 증가합니다.",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 800,
+      "sell": 560
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 25
+    },
+    "imageKey": "3916.png"
+  },
+  {
+    "id": "4005",
+    "name": "제국의 명령",
+    "description": "<mainText><stats>주문력 <attention>65</attention><br>스킬 가속 <attention>15</attention><br>기본 마나 재생 <attention>150%</attention></stats><br><br><passive>통제</passive><br><keyword>이동 불가</keyword> 효과를 지닌 스킬의 스킬 가속이 15 증가합니다.<br><br><passive>명령</passive><br>적 챔피언에게 <keyword>이동 불가</keyword> 효과를 적용하면 4초 동안 해당 챔피언에게 6% <Keyword>취약</Keyword> 표식을 남깁니다.<br></mainText>",
+    "plaintext": "피해량의 일부를 나중에 받습니다.",
+    "gold": {
+      "base": 650,
+      "purchasable": true,
+      "total": 2400,
+      "sell": 1680
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 65,
+      "abilityhaste": 15,
+      "mpregen": 1.5
+    },
+    "imageKey": "4005.png"
+  },
+  {
+    "id": "4401",
+    "name": "대자연의 힘",
+    "description": "<mainText><stats>체력 <attention>400</attention><br>마법 저항력 <attention>55</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>굳건함</passive><br>챔피언에게 마법 피해를 8회 받으면 <scaleMR>70의 마법 저항력</scaleMR> 및 <speed>6%의 추가 이동 속도</speed>를 얻습니다.</mainText>",
+    "plaintext": "이동 속도와 마법 저항력이 증가하고 최대 체력에 비례해 체력을 재생합니다.",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "hp": 400,
+      "spellblock": 55,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "4401.png"
+  },
+  {
+    "id": "4628",
+    "name": "지평선의 초점",
+    "description": "<mainText><stats>주문력 <attention>75</attention><br>스킬 가속 <attention>25</attention></stats><br><br><passive>초강력 사격</passive><br>600 거리 이상에서 스킬로 챔피언에게 피해를 입히면 6초 동안 대상의 <keywordStealth>위치를 드러냅니다</keywordStealth>.<br><br><passive>집중</passive><br><passive>초강력 사격</passive> 발동 시 3초 동안 대상으로부터 1400의 사거리 내에 있는 다른 모든 적 챔피언의 <keywordStealth>위치를 드러냅니다</keywordStealth>.</mainText>",
+    "plaintext": "챔피언을 이동 불가 상태로 만들면 벼락이 떨어집니다.",
+    "gold": {
+      "base": 600,
+      "purchasable": true,
+      "total": 2700,
+      "sell": 1890
+    },
+    "tags": [
+      "SpellDamage",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 75,
+      "abilityhaste": 25
+    },
+    "imageKey": "4628.png"
+  },
+  {
+    "id": "4629",
+    "name": "우주의 추진력",
+    "description": "<mainText><stats>주문력 <attention>70</attention><br>체력 <attention>350</attention><br>스킬 가속 <attention>25</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>마법의 춤</passive><br>챔피언에게 <magicDamage>마법 피해</magicDamage> 또는 <trueDamage>고정 피해</trueDamage>를 입히면 4초 동안 <speed>이동 속도</speed>가 증가합니다. </mainText>",
+    "plaintext": "재사용 대기시간이 대폭 감소합니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "NonbootsMovement",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 70,
+      "hp": 350,
+      "abilityhaste": 25,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "4629.png"
+  },
+  {
+    "id": "4630",
+    "name": "역병의 보석",
+    "description": "<mainText><stats>주문력 <attention>25</attention><br>마법 관통력 <attention>13%</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 1100,
+      "sell": 770
+    },
+    "tags": [
+      "MagicPenetration",
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 25,
+      "magicpenPercent": 0.13
+    },
+    "imageKey": "4630.png"
+  },
+  {
+    "id": "4632",
+    "name": "신록의 장벽",
+    "description": "<mainText><stats>주문력 <attention>40</attention><br>마법 저항력 <attention>25</attention></stats><br><br><passive>무효화</passive><br>적의 다음 스킬을 막아 주는 주문 방어막을 생성합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 1600,
+      "sell": 1120
+    },
+    "tags": [
+      "SpellBlock",
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 40,
+      "spellblock": 25
+    },
+    "imageKey": "4632.png"
+  },
+  {
+    "id": "4633",
+    "name": "균열 생성기",
+    "description": "<mainText><stats>주문력 <attention>70</attention><br>체력 <attention>350</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>공허의 부패</passive><br>적 챔피언과 전투 중 매초 2%의 추가 피해(최대 8%)를 입힙니다. 피해량이 최대가 되면 <omnivamp>모든 피해 흡혈</omnivamp>을 얻습니다.<br><br><passive>공허의 마력</passive><br><scaleHealth>추가 체력</scaleHealth>의 2%만큼 <scaleAP>주문력</scaleAP>이 상승합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 950,
+      "purchasable": true,
+      "total": 3100,
+      "sell": 2170
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "CooldownReduction",
+      "SpellVamp"
+    ],
+    "stats": {
+      "abilitypower": 70,
+      "hp": 350,
+      "abilityhaste": 15
+    },
+    "imageKey": "4633.png"
+  },
+  {
+    "id": "4642",
+    "name": "밴들유리 거울",
+    "description": "<mainText><stats>주문력 <attention>20</attention><br>기본 마나 재생 <attention>100%</attention><br>스킬 가속 <attention>10</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 50,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 20,
+      "mpregen": 1,
+      "abilityhaste": 10
+    },
+    "imageKey": "4642.png"
+  },
+  {
+    "id": "4645",
+    "name": "그림자불꽃",
+    "description": "<mainText><stats>주문력 <attention>110</attention><br>마법 관통력 <attention>15</attention></stats><br><br><passive>잿덩이꽃</passive><br>체력이 40% 이하인 적에게 <magicDamage>마법</magicDamage>과 <trueDamage>고정 피해</trueDamage>가 <attention>치명타</attention>로 적용되어 20%의 추가 피해를 입힙니다. </mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 900,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 2240
+    },
+    "tags": [
+      "SpellDamage",
+      "MagicPenetration"
+    ],
+    "stats": {
+      "abilitypower": 110,
+      "magicpenFlat": 15
+    },
+    "imageKey": "4645.png"
+  },
+  {
+    "id": "4646",
+    "name": "폭풍 쇄도",
+    "description": "<mainText><stats>주문력 <attention>90</attention><br>마법 관통력 <attention>15</attention><br>이동 속도 <attention>6%</attention></stats><br><br><passive>폭풍 약탈자</passive><br>2.5초 내로 챔피언 최대 체력의 25%에 해당하는 피해를 입히면 <passive>질풍</passive>을 적용합니다.<br><br><passive>질풍</passive><br>2초 후에 <magicDamage>마법 피해</magicDamage>를 입힙니다. <passive>질풍</passive>이 발동하기 전에 대상이 사망할 경우 주변 적에게 피해를 입힙니다. </mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "SpellDamage",
+      "GoldPer",
+      "NonbootsMovement",
+      "MagicPenetration"
+    ],
+    "stats": {
+      "abilitypower": 90,
+      "magicpenFlat": 15,
+      "movespeedPercent": 0.06
+    },
+    "imageKey": "4646.png"
+  },
+  {
+    "id": "6333",
+    "name": "죽음의 무도",
+    "description": "<mainText><stats>공격력 <attention>60</attention><br>방어력 <attention>50</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>고통 무시</passive><br>자신이 받은 피해의 일정 비율만큼을 3초에 걸쳐서 입습니다.<br><br><passive>반항</passive><br>자신이 피해를 입힌 챔피언이 3초 안에 죽으면 <passive>고통 무시</passive>의 지속 피해 효과가 사라지고 2초에 걸쳐 <healing>체력</healing>을 회복합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 275,
+      "purchasable": true,
+      "total": 3300,
+      "sell": 2310
+    },
+    "tags": [
+      "Armor",
+      "Damage",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 60,
+      "armor": 50,
+      "abilityhaste": 15
+    },
+    "imageKey": "6333.png"
+  },
+  {
+    "id": "6609",
+    "name": "화공 펑크 사슬검",
+    "description": "<mainText><stats>공격력 <attention>45</attention><br>체력 <attention>450</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>광란의 뿔</passive><br>적 챔피언에게 물리 피해를 입히면 3초 동안 <keyword>40%의 상처</keyword>를 남깁니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 250,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 45,
+      "hp": 450,
+      "abilityhaste": 15
+    },
+    "imageKey": "6609.png"
+  },
+  {
+    "id": "6610",
+    "name": "갈라진 하늘",
+    "description": "<mainText><stats>공격력 <attention>45</attention><br>체력 <attention>400</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>라이트실드 타격</passive><br>챔피언에게 처음 기본 공격을 가할 때 <attention>치명타</attention>로 적용되고 <healing>체력을 회복</healing>합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 3100,
+      "sell": 2170
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 45,
+      "hp": 400,
+      "abilityhaste": 10
+    },
+    "imageKey": "6610.png"
+  },
+  {
+    "id": "6616",
+    "name": "흐르는 물의 지팡이",
+    "description": "<mainText><stats>주문력 <attention>35</attention><br>체력 회복 및 보호막 <attention>10%</attention><br>기본 마나 재생 <attention>125%</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>급류</passive><br>아군의 체력을 회복시키거나 보호막을 씌우면 6초 동안 자신과 아군의<magicDamage>주문력이 40</magicDamage>, <attention>스킬 가속이 15</attention> 증가합니다.</mainText>",
+    "plaintext": "체력 회복 및 보호막 스킬이 군중 제어 효과의 지속시간을 줄이고 이동 속도를 상승시킵니다.",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2250,
+      "sell": 1575
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 35,
+      "healshield": 0.1,
+      "mpregen": 1.25,
+      "abilityhaste": 10
+    },
+    "imageKey": "6616.png"
+  },
+  {
+    "id": "6617",
+    "name": "월석 재생기",
+    "description": "<mainText><stats>주문력 <attention>25</attention><br>체력 <attention>200</attention><br>스킬 가속 <attention>20</attention><br>기본 마나 재생 <attention>125%</attention></stats><br><br><passive>별빛 은총</passive><br>아군을 상대로 체력을 회복시키거나 보호막을 씌우면 (자신을 제외하고) 다른 아군에게 연쇄 효과가 적용되며 기존 수치의 <healing>30%만큼 체력을 회복</healing>시키거나 <shield>35%만큼 피해를 흡수하는 보호막</shield>을 부여합니다.</mainText>",
+    "plaintext": "체력 회복 및 보호막 스킬의 재사용 대기시간이 감소하고 체력이 낮은 아군에게 더 큰 효과를 냅니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 2200,
+      "sell": 1540
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 25,
+      "hp": 200,
+      "abilityhaste": 20,
+      "mpregen": 1.25
+    },
+    "imageKey": "6617.png"
+  },
+  {
+    "id": "6620",
+    "name": "헬리아의 메아리",
+    "description": "<mainText><stats>주문력 <attention>35</attention><br>체력 <attention>200</attention><br>스킬 가속 <attention>20</attention><br>기본 마나 재생 <attention>125%</attention></stats><br><br><passive>영혼 흡수</passive><br>챔피언에게 입힌 감소 전 피해량의 30%만큼 영혼 충전을 얻습니다. 아군을 상대로 체력을 회복시키거나 보호막을 씌우면 모든 <passive>영혼 충전</passive>을 소모해 <healing>체력</healing>을 회복합니다.</mainText>",
+    "plaintext": "체력이 낮은 적에게 피해를 입히면 저주를 내려 폭발을 일으킵니다. 폭발에 닿은 주변 적들은 피해를 입고 둔화됩니다.",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 2200,
+      "sell": 1540
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 35,
+      "hp": 200,
+      "abilityhaste": 20,
+      "mpregen": 1.25
+    },
+    "imageKey": "6620.png"
+  },
+  {
+    "id": "6621",
+    "name": "새벽심장",
+    "description": "<mainText><stats>주문력 <attention>45</attention><br>체력 회복 및 보호막 <attention>16%</attention><br>기본 마나 재생 <attention>100%</attention></stats><br><br><passive>태초의 빛</passive><br>기본 마나 재생 100%당 <healing>체력 회복 및 보호막 효과가 2%</healing>, <scaleAP>주문력이 10</scaleAP> 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1750
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen"
+    ],
+    "stats": {
+      "abilitypower": 45,
+      "healshield": 0.16,
+      "mpregen": 1
+    },
+    "imageKey": "6621.png"
+  },
+  {
+    "id": "6631",
+    "name": "발걸음 분쇄기",
+    "description": "<mainText><stats>공격력 <attention>40</attention><br>공격 속도 <attention>25%</attention><br>체력 <attention>450</attention></stats><br><br><passive>쪼개기</passive><br>기본 공격 시 주변 적들에게 <physicalDamage>물리 피해</physicalDamage>를 입힙니다.<br><active>파괴의 충격파</active><br><physicalDamage>물리 피해</physicalDamage>를 입히고 주변 적을 35% <status>둔화</status>시킵니다.<br>적중한 챔피언 하나당 3초 동안 <speed>이동 속도가 35% 증가했다가 점차 감소</speed>합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 3300,
+      "sell": 2310
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "AttackSpeed",
+      "Slow"
+    ],
+    "stats": {
+      "attackdamage": 40,
+      "attackspeed": 0.25,
+      "hp": 450
+    },
+    "imageKey": "6631.png"
+  },
+  {
+    "id": "6653",
+    "name": "리안드리의 고통",
+    "description": "<mainText><stats>주문력 <attention>60</attention><br>체력 <attention>300</attention></stats><br><br><passive>고통</passive><br>스킬 공격이 적을 불태워 3초 동안 매초 <magicDamage>최대 체력의 2%에 해당하는 마법 피해</magicDamage>를 입힙니다.<br><br><passive>고난</passive><br>적 챔피언과 전투 중 매초 2%의 추가 피해를 입힙니다. (최대 6%)</mainText>",
+    "plaintext": "전투 중 충전하여 큰 지속 피해를 입힙니다. 유지력이 강한 적에게 효과적입니다.",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 60,
+      "hp": 300
+    },
+    "imageKey": "6653.png"
+  },
+  {
+    "id": "6655",
+    "name": "루덴의 메아리",
+    "description": "<mainText><stats>주문력 <attention>100</attention><br>마나 <attention>600</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>메아리</passive><br>스킬로 적에게 피해를 입히면 메아리를 6개 발사하여 대상과 주변 적에게 <magicDamage>추가 마법 피해</magicDamage>를 입힙니다. 남은 메아리는 주 대상에게 발사하여 20%의 피해를 입힙니다.<br></mainText>",
+    "plaintext": "폭발적인 피해를 입힙니다. 유지력이 약한 적에게 효과적입니다.",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 2750,
+      "sell": 1925
+    },
+    "tags": [
+      "SpellDamage",
+      "Mana",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 100,
+      "mp": 600,
+      "abilityhaste": 10
+    },
+    "imageKey": "6655.png"
+  },
+  {
+    "id": "6657",
+    "name": "영겁의 지팡이",
+    "description": "<mainText><stats>주문력 <attention>45</attention><br>체력 <attention>350</attention><br>마나 <attention>500</attention></stats><br><br><passive>불멸의 시간</passive><br>60초마다 <scaleHealth>체력 10</scaleHealth>, <scaleMana>마나 30</scaleMana>, <scaleAP>주문력 3</scaleAP>씩 상승합니다. 최대 10회까지 중첩됩니다. 최대 중첩에 도달하면 레벨이 오릅니다.<br><br><passive>영원</passive><br>챔피언에게 피해를 입으면 피해량의 <scaleMana>10%</scaleMana>를 <scaleMana>마나</scaleMana>로 회복합니다. <br>스킬 사용 시 사용한 마나의 <healing>25%만큼 체력을 회복</healing>합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 2600,
+      "sell": 1820
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "SpellDamage",
+      "Mana",
+      "ManaRegen"
+    ],
+    "stats": {
+      "abilitypower": 45,
+      "hp": 350,
+      "mp": 500
+    },
+    "imageKey": "6657.png"
+  },
+  {
+    "id": "6660",
+    "name": "바미의 불씨",
+    "description": "<mainText><stats>체력 <attention>150</attention><br>스킬 가속 <attention>5</attention></stats><br><br><passive>불사르기</passive><br>피해를 받거나 입으면 주변 적들에게 3초 동안 <magicDamage>마법 피해</magicDamage>를 입힙니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 250,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "Health",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 150,
+      "abilityhaste": 5
+    },
+    "imageKey": "6660.png"
+  },
+  {
+    "id": "6662",
+    "name": "얼어붙은 건틀릿",
+    "description": "<mainText><stats>체력 <attention>300</attention><br>방어력 <attention>50</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>주문 검</passive><br>스킬을 사용하고 나면 다음 기본 공격 시 <physicalDamage>추가 물리 피해</physicalDamage>(<OnHit>적중 시</OnHit> )를 입힙니다. 또한 <status>둔화</status>시키는 서리 영역을 2초 동안 생성합니다.</mainText>",
+    "plaintext": "마법 저항력이 크게 증가하며, 기본 지속 효과로 주변 적들을 둔화시킵니다. 주변에서 스킬이 사용되면 에너지 파동을 발산해 적들에게 피해를 입히고 둔화시킵니다.",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Health",
+      "Armor",
+      "CooldownReduction",
+      "Slow",
+      "OnHit",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 300,
+      "armor": 50,
+      "abilityhaste": 15
+    },
+    "imageKey": "6662.png"
+  },
+  {
+    "id": "6664",
+    "name": "공허한 광휘",
+    "description": "<mainText><stats>체력 <attention>400</attention><br>마법 저항력 <attention>40</attention><br>스킬 가속 <attention>10</attention><br>기본 체력 재생 <attention>100%</attention></stats><br><br><passive>불사르기</passive><br>피해를 받거나 입히면 주변 적들에게 3초 동안 매초 <magicDamage>마법 피해</magicDamage>를 입힙니다. <br><br><passive>황폐</passive><br>적을 처치하면 주변에 <magicDamage>마법 피해</magicDamage>를 입힙니다.</mainText>",
+    "plaintext": "적을 이동 불가 상태로 만들면 보호막을 얻습니다. 사용 시 적에게 접근할 때 이동 속도가 상승합니다.",
+    "gold": {
+      "base": 650,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "HealthRegen",
+      "Aura",
+      "MagicResist",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 400,
+      "spellblock": 40,
+      "abilityhaste": 10,
+      "hpregen": 1
+    },
+    "imageKey": "6664.png"
+  },
+  {
+    "id": "6665",
+    "name": "해신 작쇼",
+    "description": "<mainText><stats>체력 <attention>350</attention><br>방어력 <attention>45</attention><br>마법 저항력 <attention>45</attention></stats><br><br><passive>공허 태생의 저항력</passive><br>챔피언과 5초 이상 전투를 벌이면 전투가 끝날 때까지 추가 <scaleArmor>방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>이 30% 증가합니다.<br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 650,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 2240
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "Armor",
+      "MagicResist"
+    ],
+    "stats": {
+      "hp": 350,
+      "armor": 45,
+      "spellblock": 45
+    },
+    "imageKey": "6665.png"
+  },
+  {
+    "id": "6670",
+    "name": "절정의 화살",
+    "description": "<mainText><stats>공격력 <attention>15</attention><br>치명타 확률 <attention>20%</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 350,
+      "purchasable": true,
+      "total": 1300,
+      "sell": 910
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike"
+    ],
+    "stats": {
+      "attackdamage": 15,
+      "crit": 0.2
+    },
+    "imageKey": "6670.png"
+  },
+  {
+    "id": "6672",
+    "name": "크라켄 학살자",
+    "description": "<mainText><stats>공격력 <attention>45</attention><br>공격 속도 <attention>40%</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>벼락</passive><br>세 번째 기본 공격마다 <physicalDamage>추가 물리 피해</physicalDamage>(<OnHit>적중 시</OnHit> )를 입힙니다. 잃은 체력에 따라 피해량이 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 325,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "AttackSpeed",
+      "OnHit",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackdamage": 45,
+      "attackspeed": 0.4,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "6672.png"
+  },
+  {
+    "id": "6673",
+    "name": "불멸의 철갑궁",
+    "description": "<mainText><stats>공격력 <attention>55</attention><br>치명타 확률 <attention>25%</attention></stats><br><br><passive>생명선</passive><br>체력이 30% 밑으로 떨어질 만큼 피해를 입으면 3초 동안 <shield>보호막</shield>을 얻습니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 825,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike"
+    ],
+    "stats": {
+      "attackdamage": 55,
+      "crit": 0.25
+    },
+    "imageKey": "6673.png"
+  },
+  {
+    "id": "6675",
+    "name": "나보리 명멸검",
+    "description": "<mainText><stats>공격 속도 <attention>40%</attention><br>치명타 확률 <attention>25%</attention><br>이동 속도 <attention>4%</attention></stats><br><br><passive>깨달음</passive><br>기본 공격 시 기본 스킬의 남은 재사용 대기시간이 <attention>15%</attention> 감소합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 950,
+      "purchasable": true,
+      "total": 2650,
+      "sell": 1855
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackspeed": 0.4,
+      "crit": 0.25,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "6675.png"
+  },
+  {
+    "id": "6676",
+    "name": "징수의 총",
+    "description": "<mainText><stats>공격력 <attention>50</attention><br>물리 관통력 <attention>10</attention><br>치명타 확률 <attention>25%</attention></stats><br><br><passive>죽음</passive><br>체력이 5% 미만인 챔피언에게 피해를 입힐 경우 처형합니다.<br><br><passive>세금</passive><br>챔피언 처치 시 <gold>추가로 25골드</gold>를 획득합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 525,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 50,
+      "lethality": 10,
+      "crit": 0.25
+    },
+    "imageKey": "6676.png"
+  },
+  {
+    "id": "6690",
+    "name": "꽁지깃",
+    "description": "<mainText><stats>공격력 <attention>15</attention><br>이동 속도 <attention>4%</attention></stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 425,
+      "purchasable": true,
+      "total": 775,
+      "sell": 543
+    },
+    "tags": [
+      "Damage",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackdamage": 15,
+      "movespeedPercent": 0.04
+    },
+    "imageKey": "6690.png"
+  },
+  {
+    "id": "6692",
+    "name": "월식",
+    "description": "<mainText><stats>공격력 <attention>60</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>늘 떠오르는 달</passive><br>2초 내에 한 챔피언에게 별개의 기본 공격이나 스킬로 2회 공격하면 2초 동안 <shield>일정 피해를 흡수하는 보호막</shield>을 얻습니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 625,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Damage",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 60,
+      "abilityhaste": 15
+    },
+    "imageKey": "6692.png"
+  },
+  {
+    "id": "6694",
+    "name": "세릴다의 원한",
+    "description": "<mainText><stats>공격력 <attention>45</attention><br>방어구 관통력 <attention>35%</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>매서운 추위</passive><br>스킬로 체력이 50% 아래인 적에게 피해를 입히면 1초 동안 30% <status>둔화</status>시킵니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "CooldownReduction",
+      "ArmorPenetration",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 45,
+      "armorpen": 0.35,
+      "abilityhaste": 15
+    },
+    "imageKey": "6694.png"
+  },
+  {
+    "id": "6695",
+    "name": "독사의 송곳니",
+    "description": "<mainText><stats>공격력 <attention>55</attention><br>물리 관통력 <attention>15</attention></stats><br><br><passive>보호막 파괴자</passive><br>적 챔피언에게 피해를 입히면 3초 동안 대상이 받는 보호막의 효과를 0% 감소시킵니다. <br><passive>보호막 파괴자</passive>에 영향을 받지 않은 대상에게 피해를 입히면 보호막의 효과를 0% 감소시킵니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 625,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1750
+    },
+    "tags": [
+      "Damage",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 55,
+      "lethality": 15
+    },
+    "imageKey": "6695.png"
+  },
+  {
+    "id": "6696",
+    "name": "원칙의 원형낫",
+    "description": "<mainText><stats>공격력 <attention>55</attention><br>물리 관통력 <attention>18</attention><br>스킬 가속 <attention>20</attention></stats><br><br><passive>전이 표식</passive><br>자신이 피해를 입힌 챔피언이 3초 안에 죽으면 궁극기 총 재사용 대기시간의 일부를 돌려받습니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 363,
+      "purchasable": true,
+      "total": 2750,
+      "sell": 1925
+    },
+    "tags": [
+      "Damage",
+      "ArmorPenetration",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 55,
+      "lethality": 18,
+      "abilityhaste": 20
+    },
+    "imageKey": "6696.png"
+  },
+  {
+    "id": "6697",
+    "name": "오만",
+    "description": "<mainText><stats>공격력 <attention>55</attention><br>물리 관통력 <attention>18</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>명성</passive><br>자신이 피해를 입힌 챔피언이 3초 안에 죽으면 90초 동안 <physicalDamage>12+처치한 챔피언 하나당 3의 공격력</physicalDamage>이 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "Damage",
+      "Active",
+      "CooldownReduction",
+      "ArmorPenetration",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 55,
+      "lethality": 18,
+      "abilityhaste": 10
+    },
+    "imageKey": "6697.png"
+  },
+  {
+    "id": "6698",
+    "name": "불경한 히드라",
+    "description": "<mainText><stats>공격력 <attention>55</attention><br>물리 관통력 <attention>18</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>쪼개기</passive><br>기본 공격 시 주변 적들에게 <physicalDamage>물리 피해</physicalDamage>를 입힙니다.<br><active>이단의 가르기</active><br>주변에 <physicalDamage>물리 피해</physicalDamage>를 입힙니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 313,
+      "purchasable": true,
+      "total": 2850,
+      "sell": 1995
+    },
+    "tags": [
+      "Damage",
+      "Active",
+      "CooldownReduction",
+      "ArmorPenetration",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 55,
+      "lethality": 18,
+      "abilityhaste": 10
+    },
+    "imageKey": "6698.png"
+  },
+  {
+    "id": "6699",
+    "name": "벼락폭풍검",
+    "description": "<mainText><stats>공격력 <attention>55</attention><br>물리 관통력 <attention>10</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>전류 자극</passive><br>적 챔피언에게 스킬로 피해를 입히면 준비된 <keyword>충전 상태</keyword>가 발동합니다.<br><br><passive>창공</passive><br><keyword>충전 상태로 공격</keyword> 시 <physicalDamage>대상 현재 체력에 비례하는 추가 물리 피해</physicalDamage>를 입히고 4초 동안 <scaleLethality>추가 물리 관통력</scaleLethality>을 획득합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 963,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "Active",
+      "CooldownReduction",
+      "ArmorPenetration",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 55,
+      "lethality": 10,
+      "abilityhaste": 10
+    },
+    "imageKey": "6699.png"
+  },
+  {
+    "id": "8010",
+    "name": "핏빛 저주",
+    "description": "<mainText><stats>주문력 <attention>65</attention><br>체력 <attention>400</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>썩은 부식</passive><br>챔피언에게 스킬 또는 기본 지속 효과로 <magicDamage>마법 피해</magicDamage>를 입히면 6초 동안 대상의 <scaleMR>마법 저항력이 7.5%</scaleMR> 감소합니다. (4회 중첩)</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "CooldownReduction",
+      "MagicPenetration"
+    ],
+    "stats": {
+      "abilitypower": 65,
+      "hp": 400,
+      "abilityhaste": 15
+    },
+    "imageKey": "8010.png"
+  },
+  {
+    "id": "8020",
+    "name": "심연의 가면",
+    "description": "<mainText><stats>체력 <attention>350</attention><br>마법 저항력 <attention>45</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>파괴</passive><br>주변 적 챔피언이 입는 <magicDamage>마법 피해</magicDamage>가 12% 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1000,
+      "purchasable": true,
+      "total": 2650,
+      "sell": 1855
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "CooldownReduction",
+      "MagicResist",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 350,
+      "spellblock": 45,
+      "abilityhaste": 15
+    },
+    "imageKey": "8020.png"
+  },
+  {
+    "id": "322065",
+    "name": "슈렐리아의 군가",
+    "description": "<mainText><stats>주문력 <attention>65</attention><br>스킬 가속 <attention>15</attention><br>이동 속도 <attention>6%</attention><br>기본 마나 재생 <attention>150%</attention></stats><br><br><active>고무적인 연설</active><br>4초 동안 주변 아군의 <speed>이동 속도를 30%</speed> 상승시킵니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2600,
+      "sell": 1820
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "Active",
+      "CooldownReduction",
+      "NonbootsMovement",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 65,
+      "abilityhaste": 15,
+      "movespeedPercent": 0.06,
+      "mpregen": 1.5
+    },
+    "imageKey": "322065.png"
+  },
+  {
+    "id": "322526",
+    "name": "속삭이는 머리띠",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>체력 회복 및 보호막 <attention>8%</attention><br>기본 마나 재생 <attention>75%</attention><br>마나 <attention>300</attention></stats><br><br><passive>조화</passive><br>체력 회복 및 보호막 효과가 0% 증가합니다.<br><br><passive>마나순환</passive> (8초, 최대 5회 충전)<br>스킬 적중 시 <scaleMana>최대 마나를 4</scaleMana> 얻습니다. 챔피언 대상으로는 두 배로 적용됩니다.<br><scaleMana>최대 마나가 360</scaleMana>에 도달하면 <rarityLegendary>악곡의 왕관</rarityLegendary>으로 변합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 2250,
+      "sell": 1575
+    },
+    "tags": [
+      "Health",
+      "Mana",
+      "ManaRegen"
+    ],
+    "stats": {
+      "hp": 200,
+      "healshield": 0.08,
+      "mpregen": 0.75,
+      "mp": 300
+    },
+    "imageKey": "322526.png"
+  },
+  {
+    "id": "323003",
+    "name": "대천사의 지팡이",
+    "description": "<mainText><stats>주문력 <attention>70</attention><br>마나 <attention>600</attention><br>스킬 가속 <attention>25</attention></stats><br><br><passive>경탄</passive><br><scaleMana>추가 마나의 1%</scaleMana>만큼 주문력을 얻습니다.<br><br><passive>마나순환</passive> (8초, 최대 충전량 5회)<br>스킬 적중 시 <scaleMana>9.5의 최대 마나</scaleMana>(챔피언 상대 시 두 배)를 얻습니다.<br><scaleMana>360의 최대 마나</scaleMana>에 도달하면 <rarityLegendary>대천사의 포옹</rarityLegendary>으로 변합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "SpellDamage",
+      "Mana",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 70,
+      "mp": 600,
+      "abilityhaste": 25
+    },
+    "imageKey": "323003.png"
+  },
+  {
+    "id": "323004",
+    "name": "마나무네",
+    "description": "<mainText><stats>공격력 <attention>35</attention><br>마나 <attention>500</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>경탄</passive><br><scaleAD>0의 추가 공격력</scaleAD>을 얻습니다.<br><br><passive>마나순환</passive> (8초, 최대 충전량 4회)<br>기본 공격과 스킬 적중 시 <scaleMana>6.5의 최대 마나</scaleMana>(챔피언 상대 시 두 배)를 얻습니다.<br><scaleMana>360의 최대 마나</scaleMana>에 도달하면 <rarityLegendary>무라마나</rarityLegendary>로 변합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1100,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Damage",
+      "Mana",
+      "CooldownReduction",
+      "OnHit",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "attackdamage": 35,
+      "mp": 500,
+      "abilityhaste": 15
+    },
+    "imageKey": "323004.png"
+  },
+  {
+    "id": "323050",
+    "name": "지크의 융합",
+    "description": "<mainText><stats>체력 <attention>350</attention><br>방어력 <attention>30</attention><br>마법 저항력 <attention>30</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>서리불꽃 폭풍</passive><br>궁극기 사용 시 주변에 5초 동안 폭풍을 소환합니다. 폭풍은 적 챔피언에게 매초 <magicDamage>30의 마법 피해</magicDamage>를 입히고 30% <keyword>둔화</keyword>시킵니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2300,
+      "sell": 1610
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "Armor",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 350,
+      "armor": 30,
+      "spellblock": 30,
+      "abilityhaste": 10
+    },
+    "imageKey": "323050.png"
+  },
+  {
+    "id": "323070",
+    "name": "여신의 눈물",
+    "description": "<mainText><stats>마나 <attention>240</attention></stats><br><br><passive>마나순환</passive> (8초, 최대 충전량 4회)<br>스킬 적중 시 <scaleMana>6.5의 최대 마나</scaleMana>(챔피언 상대 시 두 배, 최대 <scaleMana>360</scaleMana>)를 얻습니다.<br><br><passive>도움의 손길</passive><br>미니언에게 기본 공격 시 <physicalDamage>5의 물리 피해</physicalDamage>를 추가로 입힙니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 280
+    },
+    "tags": [
+      "Mana",
+      "ManaRegen"
+    ],
+    "stats": {
+      "mp": 240
+    },
+    "imageKey": "323070.png"
+  },
+  {
+    "id": "323075",
+    "name": "가시 갑옷",
+    "description": "<mainText><stats>체력 <attention>200</attention><br>방어력 <attention>85</attention></stats><br><br><passive>가시</passive><br>기본 공격에 맞으면 공격한 적에게 <magicDamage>마법 피해</magicDamage>를 입히고, 대상이 챔피언일 경우 3초 동안 40%의 <keyword>상처</keyword>를 남깁니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 650,
+      "purchasable": true,
+      "total": 2650,
+      "sell": 1855
+    },
+    "tags": [
+      "Health",
+      "Armor"
+    ],
+    "stats": {
+      "hp": 200,
+      "armor": 85
+    },
+    "imageKey": "323075.png"
+  },
+  {
+    "id": "323107",
+    "name": "구원",
+    "description": "<mainText><stats>주문력 <attention>30</attention><br>스킬 가속 <attention>15</attention><br>기본 마나 재생 <attention>100%</attention><br>체력 회복 및 보호막 <attention>10%</attention></stats><br><br><active>중재</active><br>2.5초 후 아군 유닛의 <healing>체력을 150~350</healing>만큼 회복시키고 적 챔피언에게 <trueDamage>최대 체력의 10%에 해당하는 고정 피해</trueDamage>를 입힙니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1000,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 30,
+      "abilityhaste": 15,
+      "mpregen": 1,
+      "healshield": 0.1
+    },
+    "imageKey": "323107.png"
+  },
+  {
+    "id": "323109",
+    "name": "기사의 맹세",
+    "description": "<mainText><stats>체력 <attention>300</attention><br>방어력 <attention>50</attention><br>스킬 가속 <attention>10</attention><br>기본 체력 재생 <attention>150%</attention></stats><br><br><passive>희생</passive><br><attention>보호</attention> 중인 아군 근처에 있으면 해당 아군이 입는 피해량의 14%를 대신 입고 해당 아군이 챔피언에게 입히는 피해량의 <healing>12%만큼 체력을 회복</healing>합니다.<active>맹세</active> (0초)<br><attention>보호</attention>할 아군을 대상으로 지정합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1000,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "Armor",
+      "Aura",
+      "Active",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 300,
+      "armor": 50,
+      "abilityhaste": 10,
+      "hpregen": 1.5
+    },
+    "imageKey": "323109.png"
+  },
+  {
+    "id": "323110",
+    "name": "얼어붙은 심장",
+    "description": "<mainText><stats>방어력 <attention>75</attention><br>마나 <attention>500</attention><br>스킬 가속 <attention>25</attention></stats><br><br><passive>혹한의 포옹</passive><br>주변 챔피언의 <attackSpeed>공격 속도</attackSpeed>를 <attackSpeed>20%</attackSpeed>만큼 감소시킵니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2700,
+      "sell": 1890
+    },
+    "tags": [
+      "Armor",
+      "Mana",
+      "Aura",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "armor": 75,
+      "mp": 500,
+      "abilityhaste": 25
+    },
+    "imageKey": "323110.png"
+  },
+  {
+    "id": "323119",
+    "name": "혹한의 손길",
+    "description": "<mainText><stats>체력 <attention>550</attention><br>마나 <attention>500</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>경탄</passive><br><scaleHealth>0의 체력</scaleHealth>을 얻습니다.<br><br><passive>마나순환</passive> (8초, 최대 충전량 4회)<br>기본 공격과 스킬 적중 시 <scaleMana>6.5의 최대 마나</scaleMana>(챔피언 상대 시 두 배)를 얻습니다.<br><scaleMana>360의 최대 마나</scaleMana>에 도달하면 <rarityLegendary>종말의 겨울</rarityLegendary>로 변합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 2400,
+      "sell": 1680
+    },
+    "tags": [
+      "Health",
+      "Mana",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 550,
+      "mp": 500,
+      "abilityhaste": 15
+    },
+    "imageKey": "323119.png"
+  },
+  {
+    "id": "323190",
+    "name": "강철의 솔라리 펜던트",
+    "description": "<mainText><stats>체력 <attention>250</attention><br>방어력 <attention>30</attention><br>마법 저항력 <attention>30</attention><br>스킬 가속 <attention>10</attention></stats><br><br><active>헌신</active><br>주변 아군들에게 <shield>290~360의 피해를 흡수하는 보호막</shield>을 부여합니다. 보호막 피해 흡수량은 2.5초에 걸쳐 점차 감소합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1100,
+      "purchasable": true,
+      "total": 2600,
+      "sell": 1820
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "Armor",
+      "Aura",
+      "Active",
+      "MagicResist",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 250,
+      "armor": 30,
+      "spellblock": 30,
+      "abilityhaste": 10
+    },
+    "imageKey": "323190.png"
+  },
+  {
+    "id": "323222",
+    "name": "미카엘의 축복",
+    "description": "<mainText><stats>체력 <attention>400</attention><br>기본 마나 재생 <attention>100%</attention><br>체력 회복 및 보호막 <attention>15%</attention><br>스킬 가속 <attention>15</attention></stats><br><br><active>정화</active><br>아군 챔피언에게 걸린 모든 군중 제어 효과(<keyword>공중에 뜸</keyword> 및 <keyword>제압</keyword> 제외)를 제거하고 <healing>체력을 100~250</healing> 회복합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1000,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "Health",
+      "ManaRegen",
+      "Active",
+      "CooldownReduction",
+      "Tenacity",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 400,
+      "mpregen": 1,
+      "healshield": 0.15,
+      "abilityhaste": 15
+    },
+    "imageKey": "323222.png"
+  },
+  {
+    "id": "323504",
+    "name": "불타는 향로",
+    "description": "<mainText><stats>주문력 <attention>55</attention><br>체력 회복 및 보호막 <attention>10%</attention><br>기본 마나 재생 <attention>150%</attention><br>이동 속도 <attention>6%</attention></stats><br><br><passive>축성</passive><br>아군을 치유하거나 보호막을 씌워주면 6초 동안 자신과 대상 아군의 <attackSpeed>공격 속도가 25%</attackSpeed> 상승하고 공격 시 <magicDamage>20의 마법 피해</magicDamage>(<OnHit>적중 시</OnHit> )를 입힙니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 2600,
+      "sell": 1820
+    },
+    "tags": [
+      "AttackSpeed",
+      "SpellDamage",
+      "ManaRegen",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "abilitypower": 55,
+      "healshield": 0.1,
+      "mpregen": 1.5,
+      "movespeedPercent": 0.06
+    },
+    "imageKey": "323504.png"
+  },
+  {
+    "id": "324005",
+    "name": "제국의 명령",
+    "description": "<mainText><stats>주문력 <attention>65</attention><br>스킬 가속 <attention>15</attention><br>기본 마나 재생 <attention>150%</attention></stats><br><br><passive>통제</passive><br><keyword>이동 불가</keyword> 효과를 지닌 스킬의 스킬 가속이 15 증가합니다.<br><br><passive>명령</passive><br>적 챔피언에게 <keyword>이동 불가</keyword> 효과를 적용하면 4초 동안 해당 챔피언에게 6% <Keyword>취약</Keyword> 표식을 남깁니다.<br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 650,
+      "purchasable": true,
+      "total": 2400,
+      "sell": 1680
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 65,
+      "abilityhaste": 15,
+      "mpregen": 1.5
+    },
+    "imageKey": "324005.png"
+  },
+  {
+    "id": "326616",
+    "name": "흐르는 물의 지팡이",
+    "description": "<mainText><stats>주문력 <attention>45</attention><br>체력 회복 및 보호막 <attention>10%</attention><br>기본 마나 재생 <attention>150%</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>급류</passive><br>아군의 체력을 회복시키거나 보호막을 씌우면 6초 동안 자신과 아군의<magicDamage>주문력이 40</magicDamage>, <attention>스킬 가속이 15</attention> 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 2600,
+      "sell": 1820
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 45,
+      "healshield": 0.1,
+      "mpregen": 1.5,
+      "abilityhaste": 10
+    },
+    "imageKey": "326616.png"
+  },
+  {
+    "id": "326617",
+    "name": "월석 재생기",
+    "description": "<mainText><stats>주문력 <attention>35</attention><br>체력 <attention>400</attention><br>스킬 가속 <attention>20</attention><br>기본 마나 재생 <attention>150%</attention></stats><br><br><passive>별빛 은총</passive><br>아군을 상대로 체력을 회복시키거나 보호막을 씌우면 (자신을 제외하고) 다른 아군에게 연쇄 효과가 적용되며 기존 수치의 <healing>30%만큼 체력을 회복</healing>시키거나 <shield>35%만큼 피해를 흡수하는 보호막</shield>을 부여합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 35,
+      "hp": 400,
+      "abilityhaste": 20,
+      "mpregen": 1.5
+    },
+    "imageKey": "326617.png"
+  },
+  {
+    "id": "326620",
+    "name": "헬리아의 메아리",
+    "description": "<mainText><stats>주문력 <attention>35</attention><br>체력 <attention>250</attention><br>스킬 가속 <attention>20</attention><br>기본 마나 재생 <attention>150%</attention></stats><br><br><passive>영혼 흡수</passive><br>챔피언에게 입힌 감소 전 피해량의 30%만큼 영혼 충전을 얻습니다. 아군을 상대로 체력을 회복시키거나 보호막을 씌우면 모든 <passive>영혼 충전</passive>을 소모해 <healing>체력</healing>을 회복합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 900,
+      "purchasable": true,
+      "total": 2600,
+      "sell": 1820
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 35,
+      "hp": 250,
+      "abilityhaste": 20,
+      "mpregen": 1.5
+    },
+    "imageKey": "326620.png"
+  },
+  {
+    "id": "326621",
+    "name": "새벽심장",
+    "description": "<mainText><stats>주문력 <attention>50</attention><br>체력 회복 및 보호막 <attention>20%</attention><br>기본 마나 재생 <attention>150%</attention></stats><br><br><passive>태초의 빛</passive><br>기본 마나 재생 100%당 <healing>체력 회복 및 보호막 효과가 2%</healing>, <scaleAP>주문력이 10</scaleAP> 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen"
+    ],
+    "stats": {
+      "abilitypower": 50,
+      "healshield": 0.2,
+      "mpregen": 1.5
+    },
+    "imageKey": "326621.png"
+  },
+  {
+    "id": "326657",
+    "name": "영겁의 지팡이",
+    "description": "<mainText><stats>주문력 <attention>45</attention><br>체력 <attention>350</attention><br>마나 <attention>500</attention></stats><br><br><passive>불멸의 시간</passive><br>60초마다 <scaleHealth>체력 10</scaleHealth>, <scaleMana>마나 30</scaleMana>, <scaleAP>주문력 3</scaleAP>씩 상승합니다. 최대 10회까지 중첩됩니다. 최대 중첩에 도달하면 레벨이 오릅니다.<br><br><passive>영원</passive><br>챔피언에게 피해를 입으면 피해량의 <scaleMana>10%</scaleMana>를 <scaleMana>마나</scaleMana>로 회복합니다. <br>스킬 사용 시 사용한 마나의 <healing>25%만큼 체력을 회복</healing>합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 2600,
+      "sell": 1820
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "SpellDamage",
+      "Mana",
+      "ManaRegen"
+    ],
+    "stats": {
+      "abilitypower": 45,
+      "hp": 350,
+      "mp": 500
+    },
+    "imageKey": "326657.png"
+  },
+  {
+    "id": "328020",
+    "name": "심연의 가면",
+    "description": "<mainText><stats>체력 <attention>350</attention><br>마법 저항력 <attention>50</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>파괴</passive><br>주변 적 챔피언이 입는 <magicDamage>마법 피해</magicDamage>가 12% 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1200,
+      "purchasable": true,
+      "total": 2850,
+      "sell": 1995
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "CooldownReduction",
+      "MagicResist",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "hp": 350,
+      "spellblock": 50,
+      "abilityhaste": 15
+    },
+    "imageKey": "328020.png"
+  },
+  {
+    "id": "663039",
+    "name": "아트마의 심판",
+    "description": "<mainText><stats>체력 <attention>500</attention><br>치명타 확률 <attention>20%</attention></stats><br><br><passive>큰손</passive><br><scaleHealth>추가 체력</scaleHealth>에 비례해 치명타 확률이 0~30% 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1250
+    },
+    "tags": [
+      "Health",
+      "CriticalStrike",
+      "Lane"
+    ],
+    "stats": {
+      "hp": 500,
+      "crit": 0.2
+    },
+    "imageKey": "663039.png"
+  },
+  {
+    "id": "663056",
+    "name": "불사대마왕의 왕관",
+    "description": "<mainText><stats></stats><br><br><passive>패권</passive><br>체력, 방어력, 마법 저항력, 공격력, 주문력, 공격 속도, 스킬 가속이 20% 증가합니다. 증가 비율은 이 아이템을 획득한 후 처치 관여마다 0%, 사망당 -3%씩 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1000
+    },
+    "tags": [
+      "Health",
+      "Armor",
+      "Damage",
+      "AttackSpeed",
+      "SpellDamage",
+      "MagicResist",
+      "AbilityHaste"
+    ],
+    "stats": {},
+    "imageKey": "663056.png"
+  },
+  {
+    "id": "663058",
+    "name": "용암의 방패",
+    "description": "<mainText><stats>체력 <attention>250</attention><br>방어력 <attention>80</attention></stats><br><br><passive>대지 같은 굳건함</passive><br>방어력이 20% 증가하고 방어력에 비례해 방어 확률이 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1000
+    },
+    "tags": [
+      "Health",
+      "Armor"
+    ],
+    "stats": {
+      "hp": 250,
+      "armor": 80
+    },
+    "imageKey": "663058.png"
+  },
+  {
+    "id": "663059",
+    "name": "별빛밤 망토",
+    "description": "<mainText><stats>체력 <attention>250</attention><br>마법 저항력 <attention>60</attention></stats><br><br><passive>별과 같은 무한함</passive><br><scaleMR>마법 저항력</scaleMR>이 10% 증가합니다. 기본 공격이 아닌 공격으로 받는 피해가 모두 <scaleMR>마법 저항력</scaleMR>에 비례해 최대 25%까지 일정 비율 감소합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1000
+    },
+    "tags": [
+      "Health",
+      "SpellBlock"
+    ],
+    "stats": {
+      "hp": 250,
+      "spellblock": 60
+    },
+    "imageKey": "663059.png"
+  },
+  {
+    "id": "663060",
+    "name": "신성의 검",
+    "description": "<mainText><stats>적응형 능력치 <attention>90</attention><br>치명타 확률 <attention>50%</attention></stats><br><br><passive>찰과상</passive><br>각 치명타가 치명타 확률에 비례해 (최대 50%까지) 무작위 <keyword>추가 치명타 피해</keyword>를 입힙니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1000
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike",
+      "SpellDamage"
+    ],
+    "stats": {
+      "adaptive": 90,
+      "crit": 0.5
+    },
+    "imageKey": "663060.png"
+  },
+  {
+    "id": "663064",
+    "name": "베이가의 승천의 부적",
+    "description": "<mainText><stats></stats><br><br>경험치 100% 추가 획득<br><br>아무런 능력치도 없으며, 판매할 수 없습니다...<br><br>...하지만 30레벨에 도달하면 그 가치가 드러납니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 900,
+      "purchasable": true,
+      "total": 900,
+      "sell": 0
+    },
+    "tags": [],
+    "stats": {},
+    "imageKey": "663064.png"
+  },
+  {
+    "id": "663146",
+    "name": "마법공학 총검",
+    "description": "<mainText><stats>주문력 <attention>90</attention><br>공격력 <attention>45</attention><br>모든 피해 흡혈 <attention>15%</attention></stats><br><br><br><br><active>활성화</active> (0초)<br><active>번개 화살</active><br>대상 적 챔피언에게 충격을 줘 <magicDamage>0의 마법 피해</magicDamage>를 입히고 2초 동안 40% <status>둔화</status>시킵니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1250
+    },
+    "tags": [
+      "Damage",
+      "LifeSteal",
+      "SpellDamage",
+      "Active",
+      "SpellVamp"
+    ],
+    "stats": {
+      "abilitypower": 90,
+      "attackdamage": 45,
+      "omnivamp": 0.15
+    },
+    "imageKey": "663146.png"
+  },
+  {
+    "id": "663172",
+    "name": "서풍",
+    "description": "<mainText><stats>공격 속도 <attention>40%</attention><br>이동 속도 <attention>8%</attention><br>스킬 가속 <attention>25</attention><br>강인함 <attention>20%</attention></stats><br><br><passive>바람처럼</passive><br>6초 동안 이동 속도(<OnHit>적중 시</OnHit> )가 5% 증가해 최대 25%까지 증가합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1250
+    },
+    "tags": [
+      "AttackSpeed",
+      "CooldownReduction",
+      "OnHit",
+      "NonbootsMovement",
+      "Tenacity"
+    ],
+    "stats": {
+      "attackspeed": 0.4,
+      "movespeedPercent": 0.08,
+      "abilityhaste": 25,
+      "tenacity": 0.2
+    },
+    "imageKey": "663172.png"
+  },
+  {
+    "id": "663193",
+    "name": "가고일 돌갑옷",
+    "description": "<mainText><stats>방어력 <attention>55</attention><br>마법 저항력 <attention>55</attention><br>스킬 가속 <attention>10</attention><br>이동 속도 <attention>8%</attention></stats><br><br><active>사용 시 -</active> <active>불굴:</active> 크기가 커지며 피해를 흡수하는 보호막을 얻습니다. 보호막은 점차 사라집니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1000
+    },
+    "tags": [
+      "SpellBlock",
+      "Armor",
+      "Active",
+      "CooldownReduction",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "armor": 55,
+      "spellblock": 55,
+      "abilityhaste": 10,
+      "movespeedPercent": 0.08
+    },
+    "imageKey": "663193.png"
+  },
+  {
+    "id": "664011",
+    "name": "꽃피는 새벽의 검",
+    "description": "<mainText><stats>주문력 <attention>35</attention><br>체력 <attention>150</attention><br>체력 회복 및 보호막 <attention>10%</attention><br>스킬 가속 <attention>10</attention></stats><br><br><passive>활기</passive><br><healing>체력 회복 및 보호막 효과 1%</healing>당 <attackSpeed>공격 속도가 1%</attackSpeed>증가합니다. <br><br><passive>페퍼민트</passive><br><OnHit>적중 시</OnHit> , 주변에서 <healing>체력이 가장 낮은 아군 챔피언의 체력을 0 회복</healing>시킵니다. 체력이 낮은 아군을 우선으로 합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1250
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "CooldownReduction",
+      "OnHit",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 35,
+      "hp": 150,
+      "healshield": 0.1,
+      "abilityhaste": 10
+    },
+    "imageKey": "664011.png"
+  },
+  {
+    "id": "664644",
+    "name": "부서진 여왕의 왕관",
+    "description": "<mainText><stats>주문력 <attention>65</attention><br>체력 <attention>250</attention><br>마나 <attention>600</attention><br>스킬 가속 <attention>15</attention></stats><br><br><passive>방호</passive><br><keywordMajor>보호</keywordMajor>를 받아 챔피언으로부터 받는 피해가 40% 감소합니다. <keywordMajor>보호</keywordMajor> 효과는 챔피언에게 피해를 받은 후 3초 동안 지속됩니다. (0초) <br><br><rules>챔피언에게 피해를 입으면 아이템 재사용 대기시간이 초기화됩니다.</rules></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1000
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "Mana",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 65,
+      "hp": 250,
+      "mp": 600,
+      "abilityhaste": 15
+    },
+    "imageKey": "664644.png"
+  },
+  {
+    "id": "667101",
+    "name": "도박꾼의 칼날",
+    "description": "<mainText><stats>적응형 능력치 <attention>55</attention><br>스킬 가속 <attention>10</attention><br>물리 관통력 <attention>15</attention><br>마법 관통력 <attention>15</attention><br>이동 속도 <attention>15%</attention></stats><br><br><passive>시간 벌기</passive><br>도박꾼의 칼날을 이용해 챔피언 처치 관여 시 초토화보스 베이가의 등장이 추가로 10초 지연됩니다. 도박꾼의 칼날을 장착한 상태로 사망하면 등장이 10초 빨라집니다. (게임 시작 후 14분 30초부터는 등장 시간이 줄어들지 않습니다.)<br><br><passive>묻고 두 배로</passive><br>챔피언 처치 관여 시 중첩을 1회 획득합니다. 중첩마다 처치 시<gold> 추가 10골드</gold>를 획득하지만, 받는 피해량이 5% 증가합니다. 사망 시 모든 중첩을 잃습니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 0
+    },
+    "tags": [
+      "Damage",
+      "NonbootsMovement",
+      "MagicPenetration",
+      "ArmorPenetration",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "adaptive": 55,
+      "abilityhaste": 10,
+      "lethality": 15,
+      "magicpenFlat": 15,
+      "movespeedPercent": 0.15
+    },
+    "imageKey": "667101.png"
+  },
+  {
+    "id": "667109",
+    "name": "잔혹 행위",
+    "description": "<mainText><stats>주문력 <attention>60</attention><br>방어력 <attention>25</attention><br>마법 저항력 <attention>25</attention></stats><br><br><passive>추락을 목도하라</passive><br>적 챔피언에게 <status>이동 불가</status> 또는 <status>속박</status> 효과를 적용하면 대상 위로 혜성을 소환합니다. 혜성은 1초 후 떨어지며 해당 지역에 <magicDamage>0의 마법 피해</magicDamage>를 추가로 입힙니다. 이 효과는 스킬 사용 1회당 대상별 재사용 대기시간이 6초입니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1000
+    },
+    "tags": [
+      "Armor",
+      "SpellDamage",
+      "MagicResist"
+    ],
+    "stats": {
+      "abilitypower": 60,
+      "armor": 25,
+      "spellblock": 25
+    },
+    "imageKey": "667109.png"
+  },
+  {
+    "id": "667112",
+    "name": "살점포식자",
+    "description": "<mainText><stats>적응형 능력치 <attention>55</attention><br>체력 <attention>500</attention></stats><br><br><passive>난도질</passive><br>피해를 입히면 5초 동안 <scaleArmor>방어력</scaleArmor>과 <scaleMR>마법 저항력</scaleMR>을 3 감소시킵니다. 이 효과는 10회까지 중첩됩니다. 중첩 적용 시 스킬당 1초의 재사용 대기시간이 적용됩니다.<br><br><passive>포식</passive><br>챔피언 처치 관여 시 남은 라운드 동안 대상의 능력치와 크기를 10% 훔칩니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2500,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1000
+    },
+    "tags": [
+      "Damage",
+      "SpellDamage",
+      "MagicPenetration",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "adaptive": 55,
+      "hp": 500
+    },
+    "imageKey": "667112.png"
+  },
+  {
+    "id": "667666",
+    "name": "징수의 총",
+    "description": "<mainText><stats>공격력 <attention>50</attention><br>물리 관통력 <attention>10</attention><br>치명타 확률 <attention>25%</attention></stats><br><br><passive>죽음</passive><br>체력이 5% 미만인 챔피언에게 피해를 입힐 경우 처형합니다.<br><br><passive>세금</passive><br>챔피언 처치 시 <gold>추가로 25골드</gold>를 획득합니다.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 525,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 50,
+      "lethality": 10,
+      "crit": 0.25
+    },
+    "imageKey": "667666.png"
+  }
+]

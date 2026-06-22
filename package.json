@@ -4,14 +4,23 @@
   "version": "1.0.0",
   "dependencies": {
     "@expo/ui": "~56.0.14",
+    "@expo/vector-icons": "^15.0.2",
+    "@react-native-async-storage/async-storage": "^2.2.0",
+    "@react-navigation/drawer": "^7.10.3",
+    "@supabase/supabase-js": "^2.49.8",
     "expo": "~56.0.5",
+    "expo-blur": "~56.0.3",
     "expo-constants": "~56.0.16",
+    "expo-dev-client": "~56.0.16",
     "expo-device": "~56.0.4",
     "expo-font": "~56.0.5",
     "expo-glass-effect": "~56.0.4",
     "expo-image": "~56.0.9",
+    "expo-linear-gradient": "~56.0.4",
     "expo-linking": "~56.0.12",
+    "expo-modules-core": "^56.0.14",
     "expo-router": "~56.2.7",
+    "expo-screen-orientation": "~56.0.5",
     "expo-splash-screen": "~56.0.10",
     "expo-status-bar": "~56.0.4",
     "expo-symbols": "~56.0.5",
@@ -24,20 +33,27 @@
     "react-native-reanimated": "4.3.1",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "4.25.2",
+    "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.21.0",
     "react-native-worklets": "0.8.3"
   },
   "devDependencies": {
+    "@types/node": "^25.9.1",
     "@types/react": "~19.2.2",
+    "eslint": "^9.0.0",
+    "eslint-config-expo": "~56.0.4",
+    "tsx": "^4.19.4",
     "typescript": "~6.0.3"
   },
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "data:refresh": "npx tsx scripts/fetch-data/index.ts",
+    "data:item-stats": "node scripts/parse-item-stats.mjs"
   },
   "private": true
 }
