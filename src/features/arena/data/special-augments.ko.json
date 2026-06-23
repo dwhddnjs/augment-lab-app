@@ -1,0 +1,152 @@
+[
+  {
+    "id": "go-hchemtech-putrifier",
+    "name": "화학공학 부패기",
+    "description": "입히는 모든 피해에 고통스러운 상처가 적용됩니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/chemtechpurifier_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hlamb",
+    "name": "양의 안식처",
+    "description": "2회 추가로 부활할 수 있으며, 부활에 필요한 시간이 절반으로 줄어듭니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/lamb_small.arena_2026_s2.png"
+  },
+  {
+    "id": "crafting-pris-stat-anvil",
+    "name": "프리즘 능력치 모루 획득",
+    "description": "%i:StatAnvil% 프리즘 능력치 모루를 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/crafting_prisstatanvil_small.png"
+  },
+  {
+    "id": "go-hfrozen-mallet",
+    "name": "얼어붙은 망치",
+    "description": "피해를 입히면 적을 둔화시킵니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/frozenmallet_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "crafting-sell-augment",
+    "name": "증강 강화",
+    "description": "%i:Augment% 증강 1개를 제거합니다.\n\n무작위 %i:AugmentLevel% 증강 레벨을 2개 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/crafting_sellaug_small.png"
+  },
+  {
+    "id": "go-hcraving-for-power",
+    "name": "힘 갈망",
+    "description": "탐 켄치에게 최대 체력의 10%를 바칩니다.\n\n바친 양이 -최대 체력의 %로 증가합니다.\n\n골드 능력치 모루 1개를 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/power_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-hbloodrazor",
+    "name": "피갈퀴손",
+    "description": "피해를 입히면 최대 체력의 1.5%에 해당하는 물리 피해를 추가로 입힙니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bloodrazor_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hvote-ally-hunter",
+    "name": "사냥꾼과 동맹",
+    "description": "아군이 악마 사냥꾼과 동맹을 맺도록 투표합니다.\n\n악마 사냥꾼과 동맹을 맺으면 악마 팀을 처치할 때 +%i:goldCoins%500의 추가 골드를 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/yonehunter_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hremnant-of-the-watchers",
+    "name": "수호자의 유물",
+    "description": "주변 챔피언의 공격 속도를 감소시킵니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/remnantofthewatchers_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hdematerializer",
+    "name": "해체분석기",
+    "description": "체력이 10% 아래인 챔피언에게 피해를 입힐 경우 처형합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dematerializer_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hcompulsion-for-power",
+    "name": "힘 집착",
+    "description": "탐 켄치에게 최대 체력의 15%를 바칩니다.\n\n바친 양이 -최대 체력의 %로 증가합니다.\n\n1 프리즘 능력치 모루를 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/power_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-hvote-ally-demon",
+    "name": "악마와 동맹",
+    "description": "아군이 악마와 동맹을 맺도록 투표합니다.\n\n악마와 동맹을 맺으면 사냥꾼 팀이 탈락할 때 %i:AugmentLevel% 증강 레벨이 오릅니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/yonedemon_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hcraving-for-wealth",
+    "name": "재물 갈망",
+    "description": "탐 켄치에게 최대 체력의 10%를 바칩니다.\n\n바친 양이 -최대 체력의 %로 증가합니다.\n\n+%i:goldCoins% 1500골드를 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wealth_large.arena_2026_s2.png"
+  },
+  {
+    "id": "go-hcompulsion-for-risk",
+    "name": "위험 집착",
+    "description": "탐 켄치에게 최대 체력의 15%를 바칩니다.\n\n바친 양이 -최대 체력의 %로 증가합니다.\n\n%i:Augment% 프리즘 증강을 얻습니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/risk_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-henchanted-flask",
+    "name": "마법 플라스크",
+    "description": "10초 마다 주문 방어막을 얻습니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/crystallineflask_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "replace-augment",
+    "name": "증강 교체",
+    "description": "%i:Augment% 증강 중 하나를 1등급 %i:AugmentLevel% 높은 증강으로 교체합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/replace_augment_small.png"
+  },
+  {
+    "id": "go-hswindlers-orb",
+    "name": "사기꾼의 보주",
+    "description": "적 챔피언에게 피해를 입히면 대상의 보호막 효과를 감소시킵니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/swindlers_orb_item_small.png"
+  },
+  {
+    "id": "crafting-augment-slot",
+    "name": "증강 슬롯 획득",
+    "description": "5번째 %i:Augment% 증강 슬롯을 잠금 해제합니다.\n\n4라운드 후 %i:Augment% 실버 증강을 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/crafting_slot_small.png"
+  },
+  {
+    "id": "go-habstain-from-risk",
+    "name": "위험 거부",
+    "description": "탐 켄치에게 바친 체력의 10%를 회복합니다.\n\n즉시 %i:Augment% 실버 증강을 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/risk_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-habstain-from-wealth",
+    "name": "재물 거부",
+    "description": "탐 켄치에게 바친 체력의 10%를 회복합니다.\n\n+%i:goldCoins% 500골드를 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wealth_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-hcraving-for-risk",
+    "name": "위험 갈망",
+    "description": "탐 켄치에게 최대 체력의 10%를 바칩니다.\n\n바친 양이 -최대 체력의 %로 증가합니다.\n\n%i:Augment% 골드 증강을 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/risk_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-hcompulsion-for-wealth",
+    "name": "재물 집착",
+    "description": "탐 켄치에게 최대 체력의 15%를 바칩니다.\n\n바친 양이 -최대 체력의 %로 증가합니다.\n\n+%i:goldCoins% 2500골드를 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wealth_small.arena_2026_s2.png"
+  },
+  {
+    "id": "gain-stat-anvil",
+    "name": "능력치 모루 획득",
+    "description": "무작위 %i:StatAnvil% 능력치 모루를 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gain_stat_anvil_small.png"
+  },
+  {
+    "id": "go-hwolf",
+    "name": "늑대의 광기",
+    "description": "기본 부활 효과를 잃습니다.\n\n체력이 15% 증가합니다.\n\n챔피언에게 피해를 입혀 체력이 최대 체력의 10% 아래가 되면 처형합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wolf_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-habstain-from-power",
+    "name": "힘 거부",
+    "description": "탐 켄치에게 바친 체력의 10%를 회복합니다.\n\n실버 능력치 모루 1개를 획득합니다.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/power_small.arena_2026_s2.png"
+  }
+]

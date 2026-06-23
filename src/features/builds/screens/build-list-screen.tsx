@@ -14,7 +14,12 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { BottomTabInset, Radius, Spacing } from "@/constants/theme";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
-import { listBuilds, removeBuild, type SavedBuild } from "@/lib/build-storage";
+import {
+  listBuilds,
+  removeBuild,
+  type GameMode,
+  type SavedBuild,
+} from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 import { BuildCard } from "../components/build-card";
 import { formatDate, groupByDate, type BuildSection } from "../utils/date";
@@ -27,6 +32,8 @@ const t = {
     deleteConfirm: "빌드를 삭제할까요?",
     deleteOk: "삭제",
     cancel: "취소",
+    aram: "칼바람",
+    arena: "아레나",
   },
   en: {
     emptyTitle: "No saved builds",
@@ -35,21 +42,26 @@ const t = {
     deleteConfirm: "Delete this build?",
     deleteOk: "Delete",
     cancel: "Cancel",
+    aram: "ARAM",
+    arena: "Arena",
   },
 };
+
+const MODES: GameMode[] = ["aram", "arena"];
 
 export function BuildListScreen() {
   const translate = useTranslation(t);
   const { colors } = useTheme();
   const { locale } = useLocale();
   const router = useRouter();
+  const [mode, setMode] = useState<GameMode>("aram");
   // null = 로딩 중 (깜빡임 없이 빈 상태와 구분)
   const [builds, setBuilds] = useState<SavedBuild[] | null>(null);
 
   useFocusEffect(
     useCallback(() => {
       let active = true;
-      listBuilds()
+      listBuilds(mode)
         .then((b) => {
           if (active) setBuilds(b);
         })
@@ -59,7 +71,46 @@ export function BuildListScreen() {
       return () => {
         active = false;
       };
-    }, []),
+    }, [mode]),
+  );
+
+  const modeTabs = (
+    <View style={styles.modeTabs}>
+      {MODES.map((m) => {
+        const active = mode === m;
+        return (
+          <Pressable
+            key={m}
+            onPress={() => {
+              if (m !== mode) {
+                setBuilds(null);
+                setMode(m);
+              }
+            }}
+            style={[
+              styles.modeTab,
+              {
+                backgroundColor: active
+                  ? colors.accent.subtle
+                  : colors.surface.raised,
+                borderColor: active
+                  ? colors.accent.default
+                  : colors.border.subtle,
+              },
+            ]}
+          >
+            <ThemedText
+              type="label"
+              style={{
+                color: active ? colors.accent.default : colors.text.secondary,
+              }}
+            >
+              {translate(m)}
+            </ThemedText>
+          </Pressable>
+        );
+      })}
+    </View>
   );
 
   const handleDelete = (build: SavedBuild) => {
@@ -77,12 +128,16 @@ export function BuildListScreen() {
   };
 
   const handleStartDraft = () => {
-    router.push("/select-champion-modal");
+    router.push({
+      pathname: "/select-champion-modal",
+      params: { mode },
+    });
   };
 
   if (builds != null && builds.length === 0) {
     return (
       <ThemedView style={styles.container}>
+        {modeTabs}
         <View style={styles.empty}>
           <MaterialCommunityIcons
             name="cards-outline"
@@ -128,6 +183,7 @@ export function BuildListScreen() {
       contentContainerStyle={styles.listContent}
       showsVerticalScrollIndicator={false}
       stickySectionHeadersEnabled={false}
+      ListHeaderComponent={modeTabs}
       ItemSeparatorComponent={ItemGap}
       renderSectionHeader={({ section }) => (
         <View style={styles.sectionHeader}>
@@ -167,6 +223,19 @@ function ItemGap() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  modeTabs: {
+    flexDirection: "row",
+    gap: Spacing.two,
+    paddingTop: Spacing.three,
+    paddingBottom: Spacing.one,
+  },
+  modeTab: {
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.one,
+    borderRadius: Radius.full,
+    borderCurve: "continuous",
+    borderWidth: StyleSheet.hairlineWidth,
   },
   listContent: {
     paddingHorizontal: Spacing.three,

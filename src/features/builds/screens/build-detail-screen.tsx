@@ -34,6 +34,9 @@ import { useTheme } from "@/hooks/use-theme";
 import { getBuild, removeBuild, type SavedBuild } from "@/lib/build-storage";
 import { championSplashUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
+import { ArenaBuildSummary } from "@/features/arena/components/arena-build-summary";
+import { useStatShards } from "@/features/arena/hooks/use-arena-items";
+import type { ItemStats } from "@/features/items/types";
 import { BuildAugmentList } from "../components/build-augment-list";
 import { BuildChampionHeader } from "../components/build-champion-header";
 import { BuildItemRow } from "../components/build-item-row";
@@ -137,6 +140,7 @@ export function BuildDetailScreen() {
   const champions = useChampions();
   const augments = useAugments();
   const items = useItems();
+  const statShards = useStatShards();
 
   const champion = build
     ? (champions.find((c) => c.id === build.championId) ?? null)
@@ -147,7 +151,18 @@ export function BuildDetailScreen() {
   const buildItems = (build?.itemIds ?? [])
     .map((itemId) => items.find((it) => it.id === itemId))
     .filter((it): it is NonNullable<typeof it> => it != null);
-  const itemStatsList = buildItems.map((it) => it.stats);
+  // 아레나 빌드는 능력치 모루도 합산 스탯에 반영한다(각 모루를 단일 스탯으로 변환).
+  const shardStatsList: ItemStats[] =
+    build?.mode === "arena"
+      ? (build.shardIds ?? [])
+          .map((id) => statShards.find((s) => s.id === id))
+          .filter((s): s is NonNullable<typeof s> => s != null)
+          .map((s) => ({ [s.stat]: s.value }) as ItemStats)
+      : [];
+  const itemStatsList = [
+    ...buildItems.map((it) => it.stats),
+    ...shardStatsList,
+  ];
 
   const handleDelete = () => {
     if (!build) return;
@@ -287,15 +302,22 @@ export function BuildDetailScreen() {
           {/* 챔피언 블록 */}
           {champion && <BuildChampionHeader champion={champion} date={date} />}
 
-          {/* 증강 */}
-          <BuildAugmentList
-            augments={buildAugments}
-            label={translate("augments")}
-          />
+          {build.mode === "arena" ? (
+            // 아레나 빌드 — 증강(레벨)·프리즘·전설·모루를 전용 본문으로 렌더.
+            <ArenaBuildSummary build={build} />
+          ) : (
+            <>
+              {/* 증강 */}
+              <BuildAugmentList
+                augments={buildAugments}
+                label={translate("augments")}
+              />
 
-          {/* 아이템 */}
-          {buildItems.length > 0 && (
-            <BuildItemRow items={buildItems} label={translate("items")} />
+              {/* 아이템 */}
+              {buildItems.length > 0 && (
+                <BuildItemRow items={buildItems} label={translate("items")} />
+              )}
+            </>
           )}
 
           {/* 합산 스탯 */}

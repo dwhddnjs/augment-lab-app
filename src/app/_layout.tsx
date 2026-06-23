@@ -72,8 +72,11 @@ export default function RootLayout() {
         {/* 헤더 세부(타이틀·검색바)는 화면 내부 Stack.Screen에서 로케일·상태와 함께 주입 */}
         {/* 모달 시트 — large title collapse/검색바는 화면 내부에서 native 헤더로 처리 */}
         <Stack.Screen name="select-champion-modal" options={{ presentation: 'modal', gestureEnabled: true }} />
+        {/* 모드 선택 — + 버튼이 띄우는 투명 오버레이(딤 + 원형 버튼) */}
+        <Stack.Screen name="mode-select" options={{ presentation: 'transparentModal', animation: 'fade', headerShown: false, gestureEnabled: true }} />
         <Stack.Screen name="draft" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
         <Stack.Screen name="draft-items" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
+        <Stack.Screen name="arena" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
       </Stack>
     </ThemeProvider>
   );

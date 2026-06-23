@@ -50,7 +50,7 @@ export default function AppTabs() {
         disabled
         listeners={{
           tabPress: () => {
-            router.push("/select-champion-modal");
+            router.push("/mode-select");
           },
         }}
       >
