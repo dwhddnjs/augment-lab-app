@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
+import { AugmentImage } from "@/components/ui/augment-image";
 import { AugmentRarityGlyphs, Radius, Spacing } from "@/constants/theme";
 import type { Augment, AugmentRarity } from "@/features/augments/types";
 import { cleanAugmentDescription } from "@/lib/augment-text";
-import { AugmentImage } from "@/components/ui/augment-image";
 
-interface RarityStyle {
+export interface RarityStyle {
   // Outer metallic rim — diagonal brushed-metal sheen.
   frameImage: string;
   outerGlow: string;
@@ -22,7 +22,8 @@ interface RarityStyle {
 
 // Each rarity is an intrinsic in-game palette (like the existing AugmentRarityColors),
 // so the metallic/holographic hexes live here rather than in the app theme tokens.
-const RARITY: Record<AugmentRarity, RarityStyle> = {
+// 칼바람·아레나 두 feature가 공유하는 순수 시각 컴포넌트라 components/ui로 승격했다.
+export const RARITY: Record<AugmentRarity, RarityStyle> = {
   silver: {
     frameImage:
       "linear-gradient(135deg, #34383f 0%, #5b616a 15%, #818892 31%, #3f444c 50%, #6b7079 66%, #383c43 82%, #5e646d 100%)",
@@ -69,7 +70,7 @@ interface Props {
   cardWidth: number;
 }
 
-export function DraftCardFrame({ augment, cardWidth }: Props) {
+export function RarityCardFrame({ augment, cardWidth }: Props) {
   const rs = RARITY[augment.rarity];
 
   const cardHeight = Math.round(cardWidth * (14 / 9));
@@ -113,7 +114,6 @@ export function DraftCardFrame({ augment, cardWidth }: Props) {
           {/* Name */}
           <View
             style={{
-              // flexDirection: "row",
               alignItems: "center",
               gap: Spacing.half,
               position: "relative",
@@ -132,7 +132,6 @@ export function DraftCardFrame({ augment, cardWidth }: Props) {
             >
               {augment.name}
             </ThemedText>
-
           </View>
 
           {/* Description */}

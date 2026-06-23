@@ -196,6 +196,7 @@ function ItemSelectContent({
     let build;
     try {
       build = await saveBuild({
+        mode: "aram",
         championId: championId ?? "",
         augmentIds: pickedAugments.map((a) => a.id),
         itemIds,

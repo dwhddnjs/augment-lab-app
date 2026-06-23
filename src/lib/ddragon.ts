@@ -31,6 +31,13 @@ export function augmentImageUrl(iconPath: string, size: 'small' | 'large' = 'lar
   return `${CDRAGON_BASE}/plugins/rcp-be-lol-game-data/global/default${stripped}`;
 }
 
+// 아레나 프리즘 아이템(id 447xxx)은 ddragon에 없고 CDragon에만 존재한다.
+// iconPath: "/lol-game-data/assets/ASSETS/Items/Icons2D/7100_MirageBlade.png"
+export function cdragonItemIconUrl(iconPath: string) {
+  const stripped = iconPath.replace(/^\/lol-game-data\/assets/i, '').toLowerCase();
+  return `${CDRAGON_BASE}/plugins/rcp-be-lol-game-data/global/default${stripped}`;
+}
+
 const CLASS_ICON_KEYS: Record<string, string> = {
   Fighter: 'fighter',
   Mage: 'mage',

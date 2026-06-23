@@ -1,0 +1,16 @@
+[
+  { "id": "shard-ad", "name": "Attack Damage", "description": "+18 Attack Damage", "stat": "attackdamage", "value": 18 },
+  { "id": "shard-ap", "name": "Ability Power", "description": "+30 Ability Power", "stat": "abilitypower", "value": 30 },
+  { "id": "shard-lethality", "name": "Lethality", "description": "+10 Lethality", "stat": "lethality", "value": 10 },
+  { "id": "shard-magicpen", "name": "Magic Penetration", "description": "+7 Magic Penetration", "stat": "magicpenFlat", "value": 7 },
+  { "id": "shard-ah", "name": "Ability Haste", "description": "+15 Ability Haste", "stat": "abilityhaste", "value": 15 },
+  { "id": "shard-as", "name": "Attack Speed", "description": "+20% Attack Speed", "stat": "attackspeed", "value": 0.2 },
+  { "id": "shard-crit", "name": "Critical Strike", "description": "+20% Critical Strike Chance", "stat": "crit", "value": 0.2 },
+  { "id": "shard-ms", "name": "Move Speed", "description": "+25 Move Speed", "stat": "movespeedFlat", "value": 25 },
+  { "id": "shard-hp", "name": "Health", "description": "+125 Health", "stat": "hp", "value": 125 },
+  { "id": "shard-armor", "name": "Armor", "description": "+25 Armor", "stat": "armor", "value": 25 },
+  { "id": "shard-mr", "name": "Magic Resist", "description": "+25 Magic Resist", "stat": "spellblock", "value": 25 },
+  { "id": "shard-lifesteal", "name": "Life Steal", "description": "+10% Life Steal", "stat": "lifesteal", "value": 0.1 },
+  { "id": "shard-omnivamp", "name": "Omnivamp", "description": "+8% Omnivamp", "stat": "omnivamp", "value": 0.08 },
+  { "id": "shard-tenacity", "name": "Tenacity", "description": "+20% Tenacity", "stat": "tenacity", "value": 0.2 }
+]

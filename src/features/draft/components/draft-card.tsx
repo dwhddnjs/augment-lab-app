@@ -11,7 +11,7 @@ import Animated, {
 
 import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
-import { DraftCardFrame } from "./draft-card-frame";
+import { RarityCardFrame } from "@/components/ui/rarity-card-frame";
 import { RerollButton } from "./reroll-button";
 
 export type CardExitMode = "none" | "picked" | "unchosen" | "reroll";
@@ -95,7 +95,7 @@ export function DraftCard({
     <View style={styles.wrapper}>
       <Animated.View style={[styles.cardFlip, containerStyle]}>
         <Pressable onPress={disabled ? undefined : onPick} disabled={disabled}>
-          <DraftCardFrame augment={augment} cardWidth={cardWidth} />
+          <RarityCardFrame augment={augment} cardWidth={cardWidth} />
         </Pressable>
       </Animated.View>
 

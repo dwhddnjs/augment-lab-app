@@ -1,0 +1,322 @@
+/**
+ * ArenaScreen — 아레나 게임 화면(가로). 12라운드를 평탄화한 step 흐름을 진행한다.
+ * 칼바람 draft-screen 패턴(orientation lock, GlassButton 헤더, 우측 drawer)을 따르되,
+ * step.kind에 따라 증강/프리즘/상점/재련 본문을 분기 렌더한다.
+ */
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import * as ScreenOrientation from "expo-screen-orientation";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Alert, StyleSheet, useWindowDimensions, View } from "react-native";
+import { Drawer } from "react-native-drawer-layout";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import { ThemedText } from "@/components/themed/themed-text";
+import { ThemedView } from "@/components/themed/themed-view";
+import { GlassButton } from "@/components/ui/glass-button";
+import { GlassSurface } from "@/components/ui/glass-surface";
+import { Radius, Spacing } from "@/constants/theme";
+import { useChampions } from "@/features/champions/hooks/use-champions";
+import { useTheme } from "@/hooks/use-theme";
+import { saveBuild } from "@/lib/build-storage";
+import { useTranslation } from "@/lib/i18n";
+import { MAX_AUGMENT_LEVEL, type ArenaAugment } from "@/features/arena/types";
+import { ArenaAugmentCard } from "../components/arena-augment-card";
+import { ArenaDrawer } from "../components/arena-drawer";
+import { ArenaPrismaticCard } from "../components/arena-prismatic-card";
+import { ArenaReforgeCard } from "../components/arena-reforge-card";
+import { ArenaShop } from "../components/arena-shop";
+import { usePrismaticItems } from "../hooks/use-arena-items";
+import { useArena } from "../hooks/use-arena";
+
+const t = {
+  ko: {
+    round: "라운드",
+    exitConfirm: "아레나를 종료할까요?",
+    exitOk: "종료",
+    exitCancel: "계속",
+    saveError: "빌드 저장에 실패했어요",
+  },
+  en: {
+    round: "Round",
+    exitConfirm: "Exit the arena?",
+    exitOk: "Exit",
+    exitCancel: "Continue",
+    saveError: "Failed to save the build",
+  },
+};
+
+export function ArenaScreen() {
+  const translate = useTranslation(t);
+  const { colors } = useTheme();
+  const router = useRouter();
+  const { championId } = useLocalSearchParams<{ championId?: string }>();
+  const champions = useChampions();
+  const champion = champions.find((c) => c.id === championId);
+  const allPrismatics = usePrismaticItems();
+
+  const arena = useArena();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  // 저장은 1회만 — effect 내 setState 없이 ref로 가드한다(cascading render 방지).
+  const savingRef = useRef(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.LANDSCAPE,
+      ).catch(() => {});
+    }, []),
+  );
+
+  const { width, height } = useWindowDimensions();
+  const isLandscape = width > height;
+  const screenW = isLandscape ? width : height;
+  const screenH = isLandscape ? height : width;
+
+  const hPad = Spacing.four;
+  const cardGap = Spacing.three;
+  const cardWidthByW = Math.floor((screenW - hPad * 2 - cardGap * 2) / 3);
+  const cardWidthByH = Math.floor(screenH * 0.62 * (9 / 14));
+  const cardWidth = Math.min(cardWidthByW, cardWidthByH);
+  const drawerWidth = Math.min(360, screenW * 0.42);
+
+  // 선택 시 도달할 강화 레벨(신규=1, 보유 중이면 현재+1, 최대치 clamp).
+  const nextLevel = useCallback(
+    (aug: ArenaAugment) => {
+      const cur = arena.pickedAugments.find((p) => p.augment.id === aug.id);
+      const max = MAX_AUGMENT_LEVEL[aug.rarity];
+      return cur ? Math.min(cur.level + 1, max) : 1;
+    },
+    [arena.pickedAugments],
+  );
+
+  // 12라운드 종료 → 빌드 저장 후 세로 복귀 + 결과 상세로 이동.
+  useEffect(() => {
+    if (!arena.done || savingRef.current) return;
+    savingRef.current = true;
+    (async () => {
+      const augmentLevels: Record<string, number> = {};
+      arena.pickedAugments.forEach((p) => {
+        augmentLevels[p.augment.id] = p.level;
+      });
+      let build;
+      try {
+        build = await saveBuild({
+          mode: "arena",
+          championId: championId ?? "",
+          augmentIds: arena.pickedAugments.map((p) => p.augment.id),
+          itemIds: arena.itemIds,
+          augmentLevels,
+          prismaticIds: arena.prismaticIds,
+          shardIds: arena.shardIds,
+        });
+      } catch {
+        savingRef.current = false;
+        Alert.alert(translate("saveError"));
+        return;
+      }
+      await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT_UP,
+      ).catch(() => {});
+      router.dismissTo("/");
+      router.push({ pathname: "/build/[id]", params: { id: build.id } });
+    })();
+  }, [arena, championId, router, translate]);
+
+  const handleExit = useCallback(() => {
+    Alert.alert(translate("exitConfirm"), "", [
+      { text: translate("exitCancel"), style: "cancel" },
+      {
+        text: translate("exitOk"),
+        style: "destructive",
+        onPress: () => {
+          ScreenOrientation.lockAsync(
+            ScreenOrientation.OrientationLock.PORTRAIT_UP,
+          ).catch(() => {});
+          router.dismissTo("/");
+        },
+      },
+    ]);
+  }, [router, translate]);
+
+  // 회전이 끝날 때까지 본문 렌더 보류(portrait→landscape reflow 방지).
+  if (!isLandscape) {
+    return <ThemedView style={styles.container} />;
+  }
+
+  const isShop = arena.step.kind === "shop" || arena.step.kind === "boots";
+
+  return (
+    <Drawer
+      open={drawerOpen}
+      onOpen={() => setDrawerOpen(true)}
+      onClose={() => setDrawerOpen(false)}
+      drawerPosition="right"
+      drawerType="front"
+      drawerStyle={{ width: drawerWidth, backgroundColor: colors.surface.base }}
+      renderDrawerContent={() => (
+        <ArenaDrawer
+          width={drawerWidth}
+          champion={champion}
+          pickedAugments={arena.pickedAugments}
+          itemIds={arena.itemIds}
+          prismaticIds={arena.prismaticIds}
+          shardIds={arena.shardIds}
+          gold={arena.gold}
+        />
+      )}
+    >
+      <ThemedView style={styles.container}>
+        <SafeAreaView
+          style={styles.safe}
+          edges={["top", "bottom", "left", "right"]}
+        >
+          {/* 공통 헤더 */}
+          <View style={[styles.header, { paddingHorizontal: hPad }]}>
+            <GlassButton
+              systemImage="xmark"
+              fallbackIcon="close"
+              role="cancel"
+              onPress={handleExit}
+            />
+
+            <GlassSurface glassStyle="regular" style={styles.roundBox}>
+              <ThemedText
+                type="label"
+                color="primary"
+                style={{ fontWeight: "800" }}
+              >
+                {translate("round")} {arena.round}/{arena.totalRounds}
+              </ThemedText>
+              <View style={styles.goldRow}>
+                <MaterialCommunityIcons
+                  name="circle-multiple"
+                  size={14}
+                  color="#F2C766"
+                />
+                <ThemedText
+                  type="label"
+                  style={{ color: "#F2C766", fontWeight: "800" }}
+                >
+                  {arena.gold.toLocaleString()}
+                </ThemedText>
+              </View>
+            </GlassSurface>
+
+            <View style={styles.headerRight}>
+              {isShop && (
+                <GlassButton
+                  systemImage="checkmark"
+                  fallbackIcon="check"
+                  tint={colors.accent.default}
+                  onPress={arena.endShop}
+                />
+              )}
+              <GlassButton
+                systemImage="list.bullet"
+                fallbackIcon="format-list-bulleted"
+                onPress={() => setDrawerOpen(true)}
+              />
+            </View>
+          </View>
+
+          {/* 본문 — step.kind 분기 */}
+          {arena.step.kind === "augment" && (
+            <View style={[styles.cardsRow, { paddingHorizontal: hPad, gap: cardGap }]}>
+              {arena.augmentCards.map((aug, i) => (
+                <ArenaAugmentCard
+                  key={`${arena.stepIndex}-${aug.id}`}
+                  augment={aug}
+                  level={nextLevel(aug)}
+                  maxLevel={MAX_AUGMENT_LEVEL[aug.rarity]}
+                  cardWidth={cardWidth}
+                  disabled={false}
+                  rerolled={arena.rerolled[i]}
+                  onPick={() => arena.pickAugment(aug)}
+                  onReroll={() => arena.rerollAugment(i)}
+                />
+              ))}
+            </View>
+          )}
+
+          {arena.step.kind === "prismatic" && (
+            <View style={[styles.cardsRow, { paddingHorizontal: hPad, gap: cardGap }]}>
+              {arena.prismaticCards.map((item, i) => (
+                <ArenaPrismaticCard
+                  key={`${arena.stepIndex}-${item.id}`}
+                  item={item}
+                  cardWidth={cardWidth}
+                  rerolled={arena.rerolled[i]}
+                  onPick={() => arena.pickPrismatic(item)}
+                  onReroll={() => arena.rerollPrismatic(i)}
+                />
+              ))}
+            </View>
+          )}
+
+          {arena.step.kind === "reforge" && (
+            <View style={[styles.cardsRow, { paddingHorizontal: hPad, gap: cardGap }]}>
+              {arena.reforgeCards.map((special) => (
+                <ArenaReforgeCard
+                  key={`${arena.stepIndex}-${special.id}`}
+                  special={special}
+                  cardWidth={cardWidth}
+                  onPick={() => arena.pickReforge(special)}
+                />
+              ))}
+            </View>
+          )}
+
+          {isShop && (
+            <ArenaShop
+              mode={arena.step.kind === "boots" ? "boots" : "shop"}
+              gold={arena.gold}
+              champion={champion}
+              prismaticOptions={allPrismatics}
+              ownedItemIds={arena.itemIds}
+              ownedPrismaticIds={arena.prismaticIds}
+              onBuyItem={arena.buyItem}
+              onBuyShard={arena.buyShard}
+              onBuyPrismatic={arena.buyPrismaticItem}
+            />
+          )}
+        </SafeAreaView>
+      </ThemedView>
+    </Drawer>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+  safe: { flex: 1 },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: Spacing.three,
+  },
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.two,
+  },
+  cardsRow: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  roundBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.two,
+    paddingHorizontal: Spacing.four,
+    paddingVertical: Spacing.one,
+    borderRadius: Radius.full,
+  },
+  goldRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.half,
+  },
+});

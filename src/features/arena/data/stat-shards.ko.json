@@ -1,0 +1,16 @@
+[
+  { "id": "shard-ad", "name": "공격력", "description": "공격력 +18", "stat": "attackdamage", "value": 18 },
+  { "id": "shard-ap", "name": "주문력", "description": "주문력 +30", "stat": "abilitypower", "value": 30 },
+  { "id": "shard-lethality", "name": "물리 관통력", "description": "물리 관통력 +10", "stat": "lethality", "value": 10 },
+  { "id": "shard-magicpen", "name": "마법 관통력", "description": "마법 관통력 +7", "stat": "magicpenFlat", "value": 7 },
+  { "id": "shard-ah", "name": "스킬 가속", "description": "스킬 가속 +15", "stat": "abilityhaste", "value": 15 },
+  { "id": "shard-as", "name": "공격 속도", "description": "공격 속도 +20%", "stat": "attackspeed", "value": 0.2 },
+  { "id": "shard-crit", "name": "치명타 확률", "description": "치명타 확률 +20%", "stat": "crit", "value": 0.2 },
+  { "id": "shard-ms", "name": "이동 속도", "description": "이동 속도 +25", "stat": "movespeedFlat", "value": 25 },
+  { "id": "shard-hp", "name": "체력", "description": "체력 +125", "stat": "hp", "value": 125 },
+  { "id": "shard-armor", "name": "방어구", "description": "방어구 +25", "stat": "armor", "value": 25 },
+  { "id": "shard-mr", "name": "마법 저항력", "description": "마법 저항력 +25", "stat": "spellblock", "value": 25 },
+  { "id": "shard-lifesteal", "name": "생명력 흡수", "description": "생명력 흡수 +10%", "stat": "lifesteal", "value": 0.1 },
+  { "id": "shard-omnivamp", "name": "옴니뱀프", "description": "모든 피해 흡혈 +8%", "stat": "omnivamp", "value": 0.08 },
+  { "id": "shard-tenacity", "name": "강인함", "description": "강인함 +20%", "stat": "tenacity", "value": 0.2 }
+]
