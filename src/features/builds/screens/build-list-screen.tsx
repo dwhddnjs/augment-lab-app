@@ -8,10 +8,16 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import { Alert, Pressable, SectionList, StyleSheet, View } from "react-native";
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
-import { BottomTabInset, Radius, Spacing } from "@/constants/theme";
+import { BottomTabInset, Elevation, Radius, Spacing } from "@/constants/theme";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
 import {
@@ -58,6 +64,25 @@ export function BuildListScreen() {
   // null = 로딩 중 (깜빡임 없이 빈 상태와 구분)
   const [builds, setBuilds] = useState<SavedBuild[] | null>(null);
 
+  // 세그먼트 스위치의 슬라이딩 thumb — 측정한 트랙 너비를 절반으로 나눠
+  // 선택 인덱스로 translateX 한다(spring).
+  const trackWidth = useSharedValue(0);
+  const activeIndex = MODES.indexOf(mode);
+  const thumbStyle = useAnimatedStyle(() => {
+    const seg = trackWidth.value / MODES.length;
+    return {
+      width: seg,
+      transform: [
+        {
+          translateX: withTiming(activeIndex * seg, {
+            duration: 200,
+            easing: Easing.out(Easing.cubic),
+          }),
+        },
+      ],
+    };
+  });
+
   useFocusEffect(
     useCallback(() => {
       let active = true;
@@ -75,41 +100,57 @@ export function BuildListScreen() {
   );
 
   const modeTabs = (
-    <View style={styles.modeTabs}>
-      {MODES.map((m) => {
-        const active = mode === m;
-        return (
-          <Pressable
-            key={m}
-            onPress={() => {
-              if (m !== mode) {
-                setBuilds(null);
-                setMode(m);
-              }
-            }}
+    <View style={styles.switchWrap}>
+      <View
+        style={[
+          styles.switchTrack,
+          {
+            backgroundColor: colors.surface.sunken,
+            borderColor: colors.border.subtle,
+          },
+        ]}
+      >
+        <View
+          style={styles.switchInner}
+          onLayout={(e) => {
+            trackWidth.value = e.nativeEvent.layout.width;
+          }}
+        >
+          <Animated.View
+            pointerEvents="none"
             style={[
-              styles.modeTab,
-              {
-                backgroundColor: active
-                  ? colors.accent.subtle
-                  : colors.surface.raised,
-                borderColor: active
-                  ? colors.accent.default
-                  : colors.border.subtle,
-              },
+              styles.thumb,
+              { backgroundColor: colors.surface.raised },
+              thumbStyle,
             ]}
-          >
-            <ThemedText
-              type="label"
-              style={{
-                color: active ? colors.accent.default : colors.text.secondary,
-              }}
-            >
-              {translate(m)}
-            </ThemedText>
-          </Pressable>
-        );
-      })}
+          />
+          {MODES.map((m) => {
+            const active = mode === m;
+            return (
+              <Pressable
+                key={m}
+                onPress={() => {
+                  if (m !== mode) {
+                    setBuilds(null);
+                    setMode(m);
+                  }
+                }}
+                style={styles.switchSegment}
+              >
+                <ThemedText
+                  type="label"
+                  style={{
+                    color: active ? colors.text.primary : colors.text.secondary,
+                    fontWeight: active ? "700" : "500",
+                  }}
+                >
+                  {translate(m)}
+                </ThemedText>
+              </Pressable>
+            );
+          })}
+        </View>
+      </View>
     </View>
   );
 
@@ -223,19 +264,39 @@ function ItemGap() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: Spacing.three,
   },
-  modeTabs: {
-    flexDirection: "row",
-    gap: Spacing.two,
+  switchWrap: {
     paddingTop: Spacing.three,
     paddingBottom: Spacing.one,
   },
-  modeTab: {
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.one,
+  switchTrack: {
+    width: "100%",
+    padding: Spacing.half,
     borderRadius: Radius.full,
     borderCurve: "continuous",
     borderWidth: StyleSheet.hairlineWidth,
+  },
+  switchInner: {
+    flexDirection: "row",
+    position: "relative",
+  },
+  // 슬라이딩 thumb — switchInner 안에서 절대배치, 높이 꽉 채움.
+  // iOS 세그먼트 컨트롤처럼 흰(raised) pill + 부드러운 그림자.
+  thumb: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    borderRadius: Radius.full,
+    borderCurve: "continuous",
+    ...Elevation.level2,
+  },
+  switchSegment: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: Spacing.two,
   },
   listContent: {
     paddingHorizontal: Spacing.three,

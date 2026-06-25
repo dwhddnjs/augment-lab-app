@@ -4,12 +4,16 @@
  */
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Pressable, StyleSheet, View } from "react-native";
-import Animated, { FadeIn } from "react-native-reanimated";
 
 import { RARITY, RarityCardFrame } from "@/components/ui/rarity-card-frame";
 import { Radius, Spacing } from "@/constants/theme";
 import type { ArenaAugment } from "@/features/arena/types";
 import { useTheme } from "@/hooks/use-theme";
+import {
+  ArenaPickCard,
+  type ArenaCardEntryMode,
+  type ArenaCardExitMode,
+} from "./arena-pick-card";
 
 interface Props {
   augment: ArenaAugment;
@@ -17,6 +21,9 @@ interface Props {
   level: number;
   maxLevel: number;
   cardWidth: number;
+  index: number;
+  exitMode: ArenaCardExitMode;
+  entryMode: ArenaCardEntryMode;
   disabled: boolean;
   rerolled: boolean;
   onPick: () => void;
@@ -51,6 +58,9 @@ export function ArenaAugmentCard({
   level,
   maxLevel,
   cardWidth,
+  index,
+  exitMode,
+  entryMode,
   disabled,
   rerolled,
   onPick,
@@ -61,18 +71,20 @@ export function ArenaAugmentCard({
 
   return (
     <View style={styles.wrapper}>
-      <Animated.View
-        key={augment.id}
-        entering={FadeIn.duration(220)}
-        style={styles.cardArea}
+      <ArenaPickCard
+        index={index}
+        exitMode={exitMode}
+        entryMode={entryMode}
+        disabled={disabled}
+        onPress={onPick}
       >
-        <Pressable onPress={disabled ? undefined : onPick} disabled={disabled}>
+        <View style={styles.cardArea}>
           <RarityCardFrame augment={augment} cardWidth={cardWidth} />
           <View style={styles.starsOverlay} pointerEvents="none">
             <LevelStars level={level} maxLevel={maxLevel} color={starColor} />
           </View>
-        </Pressable>
-      </Animated.View>
+        </View>
+      </ArenaPickCard>
 
       <Pressable
         onPress={rerolled || disabled ? undefined : onReroll}
