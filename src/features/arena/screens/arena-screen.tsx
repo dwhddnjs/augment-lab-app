@@ -3,9 +3,9 @@
  * 칼바람 draft-screen 패턴(orientation lock, GlassButton 헤더, 우측 drawer)을 따르되,
  * step.kind에 따라 증강/프리즘/상점/재련 본문을 분기 렌더한다.
  */
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Alert, StyleSheet, useWindowDimensions, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
@@ -16,18 +16,22 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
 import { GlassSurface } from "@/components/ui/glass-surface";
 import { Radius, Spacing } from "@/constants/theme";
+import { MAX_AUGMENT_LEVEL, type ArenaAugment } from "@/features/arena/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useTheme } from "@/hooks/use-theme";
 import { saveBuild } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
-import { MAX_AUGMENT_LEVEL, type ArenaAugment } from "@/features/arena/types";
 import { ArenaAugmentCard } from "../components/arena-augment-card";
 import { ArenaDrawer } from "../components/arena-drawer";
+import type {
+  ArenaCardEntryMode,
+  ArenaCardExitMode,
+} from "../components/arena-pick-card";
 import { ArenaPrismaticCard } from "../components/arena-prismatic-card";
 import { ArenaReforgeCard } from "../components/arena-reforge-card";
 import { ArenaShop } from "../components/arena-shop";
-import { usePrismaticItems } from "../hooks/use-arena-items";
 import { useArena } from "../hooks/use-arena";
+import { usePrismaticItems } from "../hooks/use-arena-items";
 
 const t = {
   ko: {
@@ -59,6 +63,56 @@ export function ArenaScreen() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   // 저장은 1회만 — effect 내 setState 없이 ref로 가드한다(cascading render 방지).
   const savingRef = useRef(false);
+
+  // 카드 선택 애니메이션 상태(칼바람 draft 패턴). exit/entry는 카드 3장 기준 길이 3.
+  const [exitModes, setExitModes] = useState<ArenaCardExitMode[]>([
+    "none",
+    "none",
+    "none",
+  ]);
+  const [entryModes, setEntryModes] = useState<ArenaCardEntryMode[]>([
+    "flip",
+    "flip",
+    "flip",
+  ]);
+  const [animating, setAnimating] = useState(false);
+  // step 전환 시 카드 재마운트(flip 등장)를 강제하는 키.
+  const [roundKey, setRoundKey] = useState(0);
+
+  // 선택: 고른 카드 바운스 + 나머지 fade-out → 380ms 후 실제 진행(commit) + 다음 step flip.
+  const handlePick = (idx: number, commit: () => void) => {
+    if (animating) return;
+    setAnimating(true);
+    const modes: ArenaCardExitMode[] = ["unchosen", "unchosen", "unchosen"];
+    modes[idx] = "picked";
+    setExitModes(modes);
+    setTimeout(() => {
+      commit();
+      setExitModes(["none", "none", "none"]);
+      setEntryModes(["flip", "flip", "flip"]);
+      setRoundKey((k) => k + 1);
+      setAnimating(false);
+    }, 380);
+  };
+
+  // 리롤: 대상 카드 fade-out → 220ms 후 교체(해당 슬롯은 fade로 재등장).
+  const handleReroll = (idx: number, rerollFn: () => void) => {
+    if (animating) return;
+    setAnimating(true);
+    const modes: ArenaCardExitMode[] = ["none", "none", "none"];
+    modes[idx] = "reroll";
+    setExitModes(modes);
+    setTimeout(() => {
+      setEntryModes((prev) => {
+        const next = [...prev];
+        next[idx] = "fade";
+        return next;
+      });
+      rerollFn();
+      setExitModes(["none", "none", "none"]);
+      setAnimating(false);
+    }, 220);
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -144,7 +198,7 @@ export function ArenaScreen() {
     return <ThemedView style={styles.container} />;
   }
 
-  const isShop = arena.step.kind === "shop" || arena.step.kind === "boots";
+  const isShop = arena.step.kind === "shop";
 
   return (
     <Drawer
@@ -222,46 +276,74 @@ export function ArenaScreen() {
 
           {/* 본문 — step.kind 분기 */}
           {arena.step.kind === "augment" && (
-            <View style={[styles.cardsRow, { paddingHorizontal: hPad, gap: cardGap }]}>
+            <View
+              style={[
+                styles.cardsRow,
+                { paddingHorizontal: hPad, gap: cardGap },
+              ]}
+            >
               {arena.augmentCards.map((aug, i) => (
                 <ArenaAugmentCard
-                  key={`${arena.stepIndex}-${aug.id}`}
+                  key={`${roundKey}-${arena.stepIndex}-${aug.id}`}
                   augment={aug}
                   level={nextLevel(aug)}
                   maxLevel={MAX_AUGMENT_LEVEL[aug.rarity]}
                   cardWidth={cardWidth}
-                  disabled={false}
+                  index={i}
+                  exitMode={exitModes[i]}
+                  entryMode={entryModes[i]}
+                  disabled={animating}
                   rerolled={arena.rerolled[i]}
-                  onPick={() => arena.pickAugment(aug)}
-                  onReroll={() => arena.rerollAugment(i)}
+                  onPick={() => handlePick(i, () => arena.pickAugment(aug))}
+                  onReroll={() => handleReroll(i, () => arena.rerollAugment(i))}
                 />
               ))}
             </View>
           )}
 
           {arena.step.kind === "prismatic" && (
-            <View style={[styles.cardsRow, { paddingHorizontal: hPad, gap: cardGap }]}>
+            <View
+              style={[
+                styles.cardsRow,
+                { paddingHorizontal: hPad, gap: cardGap },
+              ]}
+            >
               {arena.prismaticCards.map((item, i) => (
                 <ArenaPrismaticCard
-                  key={`${arena.stepIndex}-${item.id}`}
+                  key={`${roundKey}-${arena.stepIndex}-${item.id}`}
                   item={item}
                   cardWidth={cardWidth}
+                  index={i}
+                  exitMode={exitModes[i]}
+                  entryMode={entryModes[i]}
+                  disabled={animating}
                   rerolled={arena.rerolled[i]}
-                  onPick={() => arena.pickPrismatic(item)}
-                  onReroll={() => arena.rerollPrismatic(i)}
+                  onPick={() => handlePick(i, () => arena.pickPrismatic(item))}
+                  onReroll={() =>
+                    handleReroll(i, () => arena.rerollPrismatic(i))
+                  }
                 />
               ))}
             </View>
           )}
 
           {arena.step.kind === "reforge" && (
-            <View style={[styles.cardsRow, { paddingHorizontal: hPad, gap: cardGap }]}>
-              {arena.reforgeCards.map((special) => (
+            <View
+              style={[
+                styles.cardsRow,
+                { paddingHorizontal: hPad, gap: cardGap },
+              ]}
+            >
+              {arena.reforgeCards.map((special, i) => (
                 <ArenaReforgeCard
-                  key={`${arena.stepIndex}-${special.id}`}
+                  key={`${roundKey}-${arena.stepIndex}-${special.id}`}
                   special={special}
                   cardWidth={cardWidth}
-                  onPick={() => arena.pickReforge(special)}
+                  index={i}
+                  exitMode={exitModes[i]}
+                  entryMode={entryModes[i]}
+                  disabled={animating}
+                  onPick={() => handlePick(i, () => arena.pickReforge(special))}
                 />
               ))}
             </View>
@@ -269,15 +351,12 @@ export function ArenaScreen() {
 
           {isShop && (
             <ArenaShop
-              mode={arena.step.kind === "boots" ? "boots" : "shop"}
               gold={arena.gold}
               champion={champion}
               prismaticOptions={allPrismatics}
               ownedItemIds={arena.itemIds}
-              ownedPrismaticIds={arena.prismaticIds}
               onBuyItem={arena.buyItem}
-              onBuyShard={arena.buyShard}
-              onBuyPrismatic={arena.buyPrismaticItem}
+              onSellItem={arena.sellItem}
             />
           )}
         </SafeAreaView>
@@ -293,7 +372,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: Spacing.three,
+    paddingVertical: Spacing.two,
   },
   headerRight: {
     flexDirection: "row",
@@ -307,11 +386,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   roundBox: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
-    gap: Spacing.two,
+    // gap: Spacing.half,
     paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.one,
+    // paddingVertical: Spacing.one,
+    paddingTop: Spacing.one,
+    paddingBottom: Spacing.half,
     borderRadius: Radius.full,
   },
   goldRow: {

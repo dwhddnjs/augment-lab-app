@@ -14,6 +14,11 @@ import type { PrismaticItem } from "@/features/arena/types";
 import { cleanItemDescription } from "@/features/items/item-text";
 import { useTheme } from "@/hooks/use-theme";
 import { cdragonItemIconUrl } from "@/lib/ddragon";
+import {
+  ArenaPickCard,
+  type ArenaCardEntryMode,
+  type ArenaCardExitMode,
+} from "./arena-pick-card";
 
 const PRISM = RARITY.prismatic;
 
@@ -28,6 +33,13 @@ interface Props {
   /** 리롤 버튼 표시 여부(프리즘 라운드). */
   rerolled?: boolean;
   onReroll?: () => void;
+  /**
+   * 프리즘 라운드(선택)에서만 전달되는 선택 애니메이션 props.
+   * 미전달 시(상점 프리즘 모루) 정적 FadeIn으로 렌더한다.
+   */
+  index?: number;
+  exitMode?: ArenaCardExitMode;
+  entryMode?: ArenaCardEntryMode;
 }
 
 export function ArenaPrismaticCard({
@@ -39,6 +51,9 @@ export function ArenaPrismaticCard({
   onPick,
   rerolled,
   onReroll,
+  index,
+  exitMode,
+  entryMode,
 }: Props) {
   const { colors } = useTheme();
   const cardHeight = Math.round(cardWidth * (14 / 9));
@@ -46,66 +61,84 @@ export function ArenaPrismaticCard({
   const summary = cleanItemDescription(item.description);
   const dimmed = disabled || !affordable;
 
+  const frame = (
+    <View
+      style={[
+        styles.frame,
+        {
+          width: cardWidth,
+          height: cardHeight,
+          padding: framePad,
+          experimental_backgroundImage: PRISM.frameImage,
+          boxShadow: PRISM.outerGlow,
+        },
+      ]}
+    >
+      <View style={[styles.body, { backgroundColor: PRISM.bodyColor }]}>
+        <RemoteImage
+          uri={cdragonItemIconUrl(item.iconPath)}
+          recyclingKey={item.id}
+          style={styles.icon}
+          contentFit="contain"
+        />
+        <ThemedText
+          numberOfLines={2}
+          style={[styles.name, { color: PRISM.title }]}
+        >
+          {item.name}
+        </ThemedText>
+        <ThemedText
+          numberOfLines={5}
+          style={[styles.desc, { color: PRISM.desc }]}
+        >
+          {summary}
+        </ThemedText>
+        {price != null && (
+          <View style={styles.priceRow}>
+            <MaterialCommunityIcons
+              name="circle-multiple"
+              size={12}
+              color="#F2C766"
+            />
+            <ThemedText
+              style={[
+                styles.price,
+                { color: affordable ? "#F2C766" : colors.text.disabled },
+              ]}
+            >
+              {price.toLocaleString()}
+            </ThemedText>
+          </View>
+        )}
+      </View>
+    </View>
+  );
+
   return (
     <View style={styles.wrapper}>
-      <Animated.View key={item.id} entering={FadeIn.duration(220)}>
-        <Pressable
-          onPress={dimmed ? undefined : onPick}
+      {exitMode != null && entryMode != null ? (
+        // 프리즘 라운드: 칼바람 카드 선택 애니메이션으로 통일.
+        <ArenaPickCard
+          index={index ?? 0}
+          exitMode={exitMode}
+          entryMode={entryMode}
           disabled={dimmed}
-          style={{ opacity: dimmed ? 0.5 : 1 }}
+          onPress={onPick}
         >
-          <View
-            style={[
-              styles.frame,
-              {
-                width: cardWidth,
-                height: cardHeight,
-                padding: framePad,
-                experimental_backgroundImage: PRISM.frameImage,
-                boxShadow: PRISM.outerGlow,
-              },
-            ]}
+          {frame}
+        </ArenaPickCard>
+      ) : (
+        // 상점 프리즘 모루: 정적 FadeIn + 구매 Pressable.
+        <Animated.View key={item.id} entering={FadeIn.duration(220)}>
+          <Pressable
+            onPress={dimmed ? undefined : onPick}
+            disabled={dimmed}
+            style={{ opacity: dimmed ? 0.5 : 1 }}
           >
-            <View style={[styles.body, { backgroundColor: PRISM.bodyColor }]}>
-              <RemoteImage
-                uri={cdragonItemIconUrl(item.iconPath)}
-                recyclingKey={item.id}
-                style={styles.icon}
-                contentFit="contain"
-              />
-              <ThemedText
-                numberOfLines={2}
-                style={[styles.name, { color: PRISM.title }]}
-              >
-                {item.name}
-              </ThemedText>
-              <ThemedText
-                numberOfLines={5}
-                style={[styles.desc, { color: PRISM.desc }]}
-              >
-                {summary}
-              </ThemedText>
-              {price != null && (
-                <View style={styles.priceRow}>
-                  <MaterialCommunityIcons
-                    name="circle-multiple"
-                    size={12}
-                    color="#F2C766"
-                  />
-                  <ThemedText
-                    style={[
-                      styles.price,
-                      { color: affordable ? "#F2C766" : colors.text.disabled },
-                    ]}
-                  >
-                    {price.toLocaleString()}
-                  </ThemedText>
-                </View>
-              )}
-            </View>
-          </View>
-        </Pressable>
-      </Animated.View>
+            {frame}
+          </Pressable>
+        </Animated.View>
+      )}
 
       {onReroll && (
         <Pressable

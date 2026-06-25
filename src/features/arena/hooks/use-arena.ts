@@ -5,9 +5,9 @@
  * 칼바람 useDraft 패턴(현재 카드 state + advance 시 다음 카드 생성)을 따르되,
  * 골드 경제·증강 레벨업·프리즘/모루/재련 누적 상태를 추가로 관리한다.
  */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from "react";
 
-import type { AugmentRarity } from '@/features/augments/types';
+import type { AugmentRarity } from "@/features/augments/types";
 import {
   MAX_AUGMENT_LEVEL,
   type ArenaAugment,
@@ -15,25 +15,26 @@ import {
   type ArenaSpecialAugment,
   type ArenaStep,
   type PrismaticItem,
-} from '@/features/arena/types';
-import { useArenaAugments } from './use-arena-augments';
-import { usePrismaticItems, useSpecialAugments } from './use-arena-items';
+} from "@/features/arena/types";
+import { useArenaAugments } from "./use-arena-augments";
+import { usePrismaticItems, useSpecialAugments } from "./use-arena-items";
 
 // 12라운드를 평탄화한 step 흐름. round는 표시용(1~12).
+// R1 골드(500)는 진입 시 즉시 보유하므로 step.gold로 지급하지 않는다(초기 gold=500).
 export const ARENA_STEPS: ArenaStep[] = [
-  { round: 1, kind: 'augment' },
-  { round: 1, kind: 'boots', gold: 500 },
-  { round: 2, kind: 'prismatic' },
-  { round: 3, kind: 'augment' },
-  { round: 4, kind: 'shop', gold: 2500 },
-  { round: 5, kind: 'augment' },
-  { round: 6, kind: 'shop', gold: 2500 },
-  { round: 7, kind: 'augment' },
-  { round: 8, kind: 'reforge' },
-  { round: 9, kind: 'shop', gold: 2500 },
-  { round: 10, kind: 'augment' },
-  { round: 11, kind: 'shop', gold: 2500 },
-  { round: 12, kind: 'augment' },
+  { round: 1, kind: "augment" },
+  { round: 1, kind: "shop" },
+  { round: 2, kind: "prismatic" },
+  { round: 3, kind: "augment" },
+  { round: 4, kind: "shop", gold: 2500 },
+  { round: 5, kind: "augment" },
+  { round: 6, kind: "shop", gold: 2500 },
+  { round: 7, kind: "augment" },
+  { round: 8, kind: "reforge" },
+  { round: 9, kind: "shop", gold: 2500 },
+  { round: 10, kind: "augment" },
+  { round: 11, kind: "shop", gold: 2500 },
+  { round: 12, kind: "augment" },
 ];
 
 export const ARENA_TOTAL_ROUNDS = 12;
@@ -59,9 +60,9 @@ function rollRarity(round: number): AugmentRarity {
   }
   const wPrismatic = 1 - wSilver - wGold;
   const r = Math.random();
-  if (r < wPrismatic) return 'prismatic';
-  if (r < wPrismatic + wGold) return 'gold';
-  return 'silver';
+  if (r < wPrismatic) return "prismatic";
+  if (r < wPrismatic + wGold) return "gold";
+  return "silver";
 }
 
 function sampleDistinct<T extends { id: string }>(
@@ -135,11 +136,13 @@ export interface ArenaState {
   pickPrismatic: (item: PrismaticItem) => void;
   rerollPrismatic: (idx: number) => void;
   pickReforge: (special: ArenaSpecialAugment) => void;
-  /** shop/boots: 골드가 충분하면 차감 후 누적, 성공 시 true. */
+  /** shop: 골드가 충분하면 차감 후 누적(구매가 기록), 성공 시 true. */
   buyItem: (itemId: string, price: number) => boolean;
+  /** 구매한 아이템 환불 — 구매가만큼 골드 환원 후 보유에서 제거. */
+  sellItem: (itemId: string) => void;
   buyShard: (shardId: string, price: number) => boolean;
   buyPrismaticItem: (item: PrismaticItem, price: number) => boolean;
-  /** shop/boots 종료(구매 없이 스킵 포함) → 다음 step. */
+  /** shop 종료(구매 없이 스킵 포함) → 다음 step. */
   endShop: () => void;
 }
 
@@ -149,11 +152,14 @@ export function useArena(): ArenaState {
   const allSpecials = useSpecialAugments();
 
   const [stepIndex, setStepIndex] = useState(0);
-  const [gold, setGold] = useState(0);
+  // R1 시작과 동시에 500골드 보유(증강 선택 화면부터 표시). 이후 shop step은 step.gold로 추가 지급.
+  const [gold, setGold] = useState(500);
   const [pickedAugments, setPickedAugments] = useState<ArenaPickedAugment[]>(
     [],
   );
   const [itemIds, setItemIds] = useState<string[]>([]);
+  // 환불을 위해 아이템별 구매가를 기록한다(카테고리마다 가격이 달라 itemId만으론 복원 불가).
+  const [itemPrices, setItemPrices] = useState<Record<string, number>>({});
   const [prismaticIds, setPrismaticIds] = useState<string[]>([]);
   const [shardIds, setShardIds] = useState<string[]>([]);
   const [reforgeIds, setReforgeIds] = useState<string[]>([]);
@@ -171,10 +177,7 @@ export function useArena(): ArenaState {
 
   // 다음 step으로 진행하며 해당 step의 골드 지급 + 선택지 생성.
   const advance = useCallback(
-    (
-      nextPicked: ArenaPickedAugment[],
-      nextPrismaticIds: string[],
-    ) => {
+    (nextPicked: ArenaPickedAugment[], nextPrismaticIds: string[]) => {
       const nextIndex = stepIndex + 1;
       if (nextIndex >= ARENA_STEPS.length) {
         setDone(true);
@@ -185,13 +188,15 @@ export function useArena(): ArenaState {
       if (next.gold) setGold((g) => g + next.gold!);
       setRerolled([false, false, false]);
 
-      if (next.kind === 'augment') {
+      if (next.kind === "augment") {
         const used = maxedIds(nextPicked);
-        setAugmentCards(drawAugments(allAugments, rollRarity(next.round), 3, used));
-      } else if (next.kind === 'prismatic') {
+        setAugmentCards(
+          drawAugments(allAugments, rollRarity(next.round), 3, used),
+        );
+      } else if (next.kind === "prismatic") {
         const used = new Set(nextPrismaticIds);
         setPrismaticCards(sampleDistinct(allPrismatics, 3, used));
-      } else if (next.kind === 'reforge') {
+      } else if (next.kind === "reforge") {
         setReforgeCards(sampleDistinct(allSpecials, 3, new Set()));
       }
       setStepIndex(nextIndex);
@@ -230,11 +235,7 @@ export function useArena(): ArenaState {
         ...augmentCards.filter((_, i) => i !== idx).map((a) => a.id),
       ]);
       const pool = allAugments.filter((a) => !excludeIds.has(a.id));
-      const [replacement] = drawAugments(
-        pool,
-        augmentCards[idx].rarity,
-        1,
-      );
+      const [replacement] = drawAugments(pool, augmentCards[idx].rarity, 1);
       if (!replacement) return;
       setAugmentCards((prev) => {
         const nextCards = [...prev];
@@ -298,9 +299,25 @@ export function useArena(): ArenaState {
       if (gold < price || itemIds.includes(itemId)) return false;
       setGold((g) => g - price);
       setItemIds((prev) => [...prev, itemId]);
+      setItemPrices((prev) => ({ ...prev, [itemId]: price }));
       return true;
     },
     [gold, itemIds],
+  );
+
+  const sellItem = useCallback(
+    (itemId: string) => {
+      if (!itemIds.includes(itemId)) return;
+      const refund = itemPrices[itemId] ?? 0;
+      setGold((g) => g + refund);
+      setItemIds((prev) => prev.filter((id) => id !== itemId));
+      setItemPrices((prev) => {
+        const next = { ...prev };
+        delete next[itemId];
+        return next;
+      });
+    },
+    [itemIds, itemPrices],
   );
 
   const buyShard = useCallback(
@@ -350,6 +367,7 @@ export function useArena(): ArenaState {
       rerollPrismatic,
       pickReforge,
       buyItem,
+      sellItem,
       buyShard,
       buyPrismaticItem,
       endShop,
@@ -374,6 +392,7 @@ export function useArena(): ArenaState {
       rerollPrismatic,
       pickReforge,
       buyItem,
+      sellItem,
       buyShard,
       buyPrismaticItem,
       endShop,

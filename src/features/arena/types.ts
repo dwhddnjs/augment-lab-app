@@ -61,25 +61,20 @@ export interface PrismaticItem {
 
 /**
  * 아레나 진행 단위(step). 12라운드를 평탄화한 흐름으로, 한 라운드가 둘 이상의
- * 선택 페이즈로 나뉠 수 있다(R1 = 증강 + 신발 상점).
+ * 선택 페이즈로 나뉠 수 있다(R1 = 증강 + 상점).
  *   - augment  : 증강 3장 중 1장(기존 증강 재등장 시 레벨업)
- *   - boots    : 신발 전용 상점(R1, 500골드, 스킵 가능)
  *   - prismatic: 프리즘 아이템 3장 중 1장
- *   - shop     : 골드 상점(전설/능력치모루/프리즘모루/전설모루, 스킵 가능)
+ *   - shop     : 골드 상점(신발/전설/능력치모루/프리즘모루/전설모루, 스킵 가능).
+ *                R1은 500골드로 시작해 사실상 신발만 구매 가능하다.
  *   - reforge  : 재련(증강 강화 / 증강 슬롯 획득 / 프리즘 능력치 모루 3선택)
  */
-export type ArenaStepKind =
-  | 'augment'
-  | 'boots'
-  | 'prismatic'
-  | 'shop'
-  | 'reforge';
+export type ArenaStepKind = 'augment' | 'prismatic' | 'shop' | 'reforge';
 
 export interface ArenaStep {
   /** 표시용 라운드 번호(1~12). 같은 라운드의 여러 step은 같은 번호를 공유한다. */
   round: number;
   kind: ArenaStepKind;
-  /** boots/shop step에서 이번에 지급되는 골드. */
+  /** shop step 진입 시 이번에 지급되는 골드. */
   gold?: number;
 }
 
