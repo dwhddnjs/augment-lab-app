@@ -68,9 +68,11 @@ function splitDescription(text: string): { text: string; hl: boolean }[] {
 interface Props {
   augment: Augment;
   cardWidth: number;
+  /** 본문 상단 추가 여백(px). 아레나 증강 카드의 상단 별 오버레이 공간 확보용(기본 0). */
+  topInset?: number;
 }
 
-export function RarityCardFrame({ augment, cardWidth }: Props) {
+export function RarityCardFrame({ augment, cardWidth, topInset = 0 }: Props) {
   const rs = RARITY[augment.rarity];
 
   const cardHeight = Math.round(cardWidth * (14 / 9));
@@ -100,7 +102,7 @@ export function RarityCardFrame({ augment, cardWidth }: Props) {
       ]}
     >
       <View style={[styles.body, { backgroundColor: rs.bodyColor }]}>
-        <View style={styles.content}>
+        <View style={[styles.content, { paddingTop: Spacing.two + topInset }]}>
           {/* Emblem with soft halo */}
           <View style={[styles.iconArea, { marginBottom: Spacing.one }]}>
             <AugmentImage
