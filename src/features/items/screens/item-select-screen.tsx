@@ -251,10 +251,13 @@ function ItemSelectContent({
           {/* 선택된 아이템 트레이 (하단 absolute, 항상 6칸) */}
           <View style={styles.tray} pointerEvents="box-none">
             <ItemSlotGrid
-              selectedItems={selectedItems}
-              onSlotPress={(_i, item) => {
-                if (item)
-                  setSelectedIds((prev) => prev.filter((id) => id !== item.id));
+              selectedItems={selectedItems.map((it) => ({
+                id: it.id,
+                iconUri: itemImageUrl(it.imageKey),
+              }))}
+              onSlotPress={(_i, slot) => {
+                if (slot)
+                  setSelectedIds((prev) => prev.filter((id) => id !== slot.id));
               }}
             />
           </View>

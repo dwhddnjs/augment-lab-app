@@ -16,13 +16,18 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
 import { GlassSurface } from "@/components/ui/glass-surface";
 import { Radius, Spacing } from "@/constants/theme";
-import { MAX_AUGMENT_LEVEL, type ArenaAugment } from "@/features/arena/types";
+import {
+  MAX_AUGMENT_LEVEL,
+  type ArenaAugment,
+  type ArenaPickedAugment,
+} from "@/features/arena/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useTheme } from "@/hooks/use-theme";
 import { saveBuild } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 import { ArenaAugmentCard } from "../components/arena-augment-card";
 import { ArenaDrawer } from "../components/arena-drawer";
+import { ArenaEnhancePicker } from "../components/arena-enhance-picker";
 import type {
   ArenaCardEntryMode,
   ArenaCardExitMode,
@@ -30,7 +35,7 @@ import type {
 import { ArenaPrismaticCard } from "../components/arena-prismatic-card";
 import { ArenaReforgeCard } from "../components/arena-reforge-card";
 import { ArenaShop } from "../components/arena-shop";
-import { useArena } from "../hooks/use-arena";
+import { ENHANCE_AUGMENT_ID, useArena } from "../hooks/use-arena";
 import { usePrismaticItems } from "../hooks/use-arena-items";
 
 const t = {
@@ -79,6 +84,16 @@ export function ArenaScreen() {
   // step 전환 시 카드 재마운트(flip 등장)를 강제하는 키.
   const [roundKey, setRoundKey] = useState(0);
 
+  // 증강 강화(재련) 보유 증강 선택 오버레이 — null이면 닫힘.
+  const [enhanceCards, setEnhanceCards] = useState<ArenaPickedAugment[] | null>(
+    null,
+  );
+  const [enhanceRerolled, setEnhanceRerolled] = useState<boolean[]>([
+    false,
+    false,
+    false,
+  ]);
+
   // 선택: 고른 카드 바운스 + 나머지 fade-out → 380ms 후 실제 진행(commit) + 다음 step flip.
   const handlePick = (idx: number, commit: () => void) => {
     if (animating) return;
@@ -112,6 +127,42 @@ export function ArenaScreen() {
       setExitModes(["none", "none", "none"]);
       setAnimating(false);
     }, 220);
+  };
+
+  // 증강 강화: 보유 증강 셔플 후 앞 3장으로 오버레이 오픈.
+  const openEnhance = () => {
+    const shuffled = [...arena.pickedAugments].sort(() => Math.random() - 0.5);
+    setEnhanceCards(shuffled.slice(0, 3));
+    setEnhanceRerolled([false, false, false]);
+  };
+
+  // 리롤: 현재 카드에 없는 보유 증강 중 랜덤 1장으로 교체(후보 없으면 무효).
+  const handleEnhanceReroll = (idx: number) => {
+    const shown = new Set((enhanceCards ?? []).map((c) => c.augment.id));
+    const candidates = arena.pickedAugments.filter(
+      (p) => !shown.has(p.augment.id),
+    );
+    if (candidates.length === 0) return;
+    const replacement =
+      candidates[Math.floor(Math.random() * candidates.length)];
+    setEnhanceCards((prev) => {
+      if (!prev) return prev;
+      const next = [...prev];
+      next[idx] = replacement;
+      return next;
+    });
+    setEnhanceRerolled((prev) => {
+      const next = [...prev];
+      next[idx] = true;
+      return next;
+    });
+  };
+
+  // 선택: 고른 증강 제거 + 레벨 분배(use-arena가 advance까지 처리) 후 오버레이 닫기.
+  const handleEnhancePick = (idx: number) => {
+    const card = enhanceCards?.[idx];
+    if (card) arena.enhanceAugment(card.augment.id);
+    setEnhanceCards(null);
   };
 
   useFocusEffect(
@@ -216,6 +267,7 @@ export function ArenaScreen() {
           itemIds={arena.itemIds}
           prismaticIds={arena.prismaticIds}
           shardIds={arena.shardIds}
+          reforgeIds={arena.reforgeIds}
           gold={arena.gold}
         />
       )}
@@ -327,7 +379,7 @@ export function ArenaScreen() {
             </View>
           )}
 
-          {arena.step.kind === "reforge" && (
+          {arena.step.kind === "reforge" && enhanceCards == null && (
             <View
               style={[
                 styles.cardsRow,
@@ -343,7 +395,14 @@ export function ArenaScreen() {
                   exitMode={exitModes[i]}
                   entryMode={entryModes[i]}
                   disabled={animating}
-                  onPick={() => handlePick(i, () => arena.pickReforge(special))}
+                  onPick={() =>
+                    handlePick(
+                      i,
+                      special.id === ENHANCE_AUGMENT_ID
+                        ? openEnhance
+                        : () => arena.pickReforge(special),
+                    )
+                  }
                 />
               ))}
             </View>
@@ -355,8 +414,23 @@ export function ArenaScreen() {
               champion={champion}
               prismaticOptions={allPrismatics}
               ownedItemIds={arena.itemIds}
+              ownedPrismaticIds={arena.prismaticIds}
               onBuyItem={arena.buyItem}
+              onUndoItem={arena.undoItem}
               onSellItem={arena.sellItem}
+              onBuyPrismatic={arena.buyPrismaticItem}
+              onSellPrismatic={arena.sellPrismatic}
+            />
+          )}
+
+          {/* 증강 강화: 보유 증강 3장 선택 오버레이 */}
+          {enhanceCards != null && (
+            <ArenaEnhancePicker
+              cards={enhanceCards}
+              rerolled={enhanceRerolled}
+              onPick={handleEnhancePick}
+              onReroll={handleEnhanceReroll}
+              onClose={() => setEnhanceCards(null)}
             />
           )}
         </SafeAreaView>

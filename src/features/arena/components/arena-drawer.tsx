@@ -16,6 +16,7 @@ import {
   Spacing,
 } from "@/constants/theme";
 import {
+  useSpecialAugments,
   useStatShards,
   usePrismaticItems,
 } from "@/features/arena/hooks/use-arena-items";
@@ -37,6 +38,7 @@ const t = {
     prismatics: "프리즘 아이템",
     items: "아이템",
     shards: "능력치 모루",
+    reforge: "재련",
   },
   en: {
     title: "My Build",
@@ -44,6 +46,7 @@ const t = {
     prismatics: "Prismatic Items",
     items: "Items",
     shards: "Stat Anvils",
+    reforge: "Reforge",
   },
 };
 
@@ -54,6 +57,7 @@ interface Props {
   itemIds: string[];
   prismaticIds: string[];
   shardIds: string[];
+  reforgeIds: string[];
   gold: number;
 }
 
@@ -64,6 +68,7 @@ export function ArenaDrawer({
   itemIds,
   prismaticIds,
   shardIds,
+  reforgeIds,
   gold,
 }: Props) {
   const translate = useTranslation(t);
@@ -71,6 +76,7 @@ export function ArenaDrawer({
   const allItems = useItems();
   const allPrismatics = usePrismaticItems();
   const allShards = useStatShards();
+  const allSpecials = useSpecialAugments();
 
   const items = itemIds
     .map((id) => allItems.find((it) => it.id === id))
@@ -80,6 +86,9 @@ export function ArenaDrawer({
     .filter((p): p is NonNullable<typeof p> => p != null);
   const shards = shardIds
     .map((id) => allShards.find((s) => s.id === id))
+    .filter((s): s is NonNullable<typeof s> => s != null);
+  const reforges = reforgeIds
+    .map((id) => allSpecials.find((s) => s.id === id))
     .filter((s): s is NonNullable<typeof s> => s != null);
 
   return (
@@ -194,6 +203,43 @@ export function ArenaDrawer({
             </View>
           </Section>
         )}
+
+        {/* 재련 (프리즘 능력치 모루·증강 슬롯 등) */}
+        {reforges.length > 0 && (
+          <Section label={translate("reforge")}>
+            <View style={styles.grid}>
+              {reforges.map((r, i) => (
+                <View key={`${r.id}-${i}`} style={styles.reforgeCell}>
+                  <View
+                    style={[
+                      styles.iconWrap,
+                      {
+                        borderColor: colors.border.subtle,
+                        backgroundColor: colors.surface.sunken,
+                      },
+                    ]}
+                  >
+                    <AugmentImage
+                      iconPath={r.iconPath}
+                      size={34}
+                      tint={colors.text.secondary}
+                      fallbackGlyph="anvil"
+                      recyclingKey={r.id}
+                    />
+                  </View>
+                  <ThemedText
+                    type="caption"
+                    color="secondary"
+                    numberOfLines={2}
+                    style={styles.reforgeName}
+                  >
+                    {r.name}
+                  </ThemedText>
+                </View>
+              ))}
+            </View>
+          </Section>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -273,5 +319,13 @@ const styles = StyleSheet.create({
     height: 44,
     borderRadius: Radius.md,
     borderWidth: 1.5,
+  },
+  reforgeCell: {
+    alignItems: "center",
+    gap: 2,
+    width: 60,
+  },
+  reforgeName: {
+    textAlign: "center",
   },
 });

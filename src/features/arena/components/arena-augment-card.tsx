@@ -34,13 +34,15 @@ function LevelStars({
   level,
   maxLevel,
   color,
+  bg,
 }: {
   level: number;
   maxLevel: number;
   color: string;
+  bg: string;
 }) {
   return (
-    <View style={styles.stars}>
+    <View style={[styles.stars, { backgroundColor: bg }]}>
       {Array.from({ length: maxLevel }).map((_, i) => (
         <MaterialCommunityIcons
           key={i}
@@ -68,6 +70,7 @@ export function ArenaAugmentCard({
 }: Props) {
   const { colors } = useTheme();
   const starColor = RARITY[augment.rarity].highlight;
+  const cardBg = RARITY[augment.rarity].bodyColor;
 
   return (
     <View style={styles.wrapper}>
@@ -79,9 +82,18 @@ export function ArenaAugmentCard({
         onPress={onPick}
       >
         <View style={styles.cardArea}>
-          <RarityCardFrame augment={augment} cardWidth={cardWidth} />
+          <RarityCardFrame
+            augment={augment}
+            cardWidth={cardWidth}
+            topInset={Spacing.double}
+          />
           <View style={styles.starsOverlay} pointerEvents="none">
-            <LevelStars level={level} maxLevel={maxLevel} color={starColor} />
+            <LevelStars
+              level={level}
+              maxLevel={maxLevel}
+              color={starColor}
+              bg={cardBg}
+            />
           </View>
         </View>
       </ArenaPickCard>
@@ -131,7 +143,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.one,
     paddingVertical: 1,
     borderRadius: Radius.full,
-    backgroundColor: "rgba(0,0,0,0.45)",
+    // 배경색은 카드 내부 bg(RARITY.bodyColor)와 동일하게 inline 주입 — 라인 비침 제거.
   },
   reroll: {
     width: 36,

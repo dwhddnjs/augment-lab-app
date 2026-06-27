@@ -16,7 +16,6 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { ThemedView } from "@/components/themed/themed-view";
 import { BottomTabInset, Elevation, Radius, Spacing } from "@/constants/theme";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
@@ -61,8 +60,11 @@ export function BuildListScreen() {
   const { locale } = useLocale();
   const router = useRouter();
   const [mode, setMode] = useState<GameMode>("aram");
-  // null = 로딩 중 (깜빡임 없이 빈 상태와 구분)
-  const [builds, setBuilds] = useState<SavedBuild[] | null>(null);
+  // null = 로딩 중 (깜빡임 없이 빈 상태와 구분). 두 모드 전체를 한 번에 받아
+  // 탭 전환은 재조회 없이 클라이언트 필터로 처리한다.
+  const [allBuilds, setAllBuilds] = useState<SavedBuild[] | null>(null);
+  const builds =
+    allBuilds == null ? null : allBuilds.filter((b) => b.mode === mode);
 
   // 세그먼트 스위치의 슬라이딩 thumb — 측정한 트랙 너비를 절반으로 나눠
   // 선택 인덱스로 translateX 한다(spring).
@@ -86,17 +88,17 @@ export function BuildListScreen() {
   useFocusEffect(
     useCallback(() => {
       let active = true;
-      listBuilds(mode)
+      listBuilds()
         .then((b) => {
-          if (active) setBuilds(b);
+          if (active) setAllBuilds(b);
         })
         .catch(() => {
-          if (active) setBuilds([]);
+          if (active) setAllBuilds([]);
         });
       return () => {
         active = false;
       };
-    }, [mode]),
+    }, []),
   );
 
   const modeTabs = (
@@ -130,10 +132,7 @@ export function BuildListScreen() {
               <Pressable
                 key={m}
                 onPress={() => {
-                  if (m !== mode) {
-                    setBuilds(null);
-                    setMode(m);
-                  }
+                  if (m !== mode) setMode(m);
                 }}
                 style={styles.switchSegment}
               >
@@ -162,7 +161,7 @@ export function BuildListScreen() {
         style: "destructive",
         onPress: () => {
           removeBuild(build.id).catch(() => {});
-          setBuilds((prev) => prev?.filter((b) => b.id !== build.id) ?? prev);
+          setAllBuilds((prev) => prev?.filter((b) => b.id !== build.id) ?? prev);
         },
       },
     ]);
@@ -175,41 +174,38 @@ export function BuildListScreen() {
     });
   };
 
-  if (builds != null && builds.length === 0) {
-    return (
-      <ThemedView style={styles.container}>
-        {modeTabs}
-        <View style={styles.empty}>
-          <MaterialCommunityIcons
-            name="cards-outline"
-            size={56}
-            color={colors.text.disabled}
-          />
-          <ThemedText type="body" color="secondary">
-            {translate("emptyTitle")}
-          </ThemedText>
-          <ThemedText type="caption" color="tertiary">
-            {translate("emptyHint")}
-          </ThemedText>
-          <Pressable
-            onPress={handleStartDraft}
-            style={({ pressed }) => [
-              styles.startButton,
-              {
-                backgroundColor: pressed
-                  ? colors.accent.pressed
-                  : colors.accent.default,
-              },
-            ]}
-          >
-            <ThemedText type="label" style={{ color: colors.accent.onAccent }}>
-              {translate("startDraft")}
-            </ThemedText>
-          </Pressable>
-        </View>
-      </ThemedView>
-    );
-  }
+  // 빈 상태도 SectionList 안(헤더 탭 아래)에 렌더해 탭을 상시 노출하고
+  // native large-title 아래에 위치하도록 한다. 로딩 중(null)에는 깜빡임 방지로 숨김.
+  const emptyState = (
+    <View style={styles.empty}>
+      <MaterialCommunityIcons
+        name="cards-outline"
+        size={56}
+        color={colors.text.disabled}
+      />
+      <ThemedText type="body" color="secondary">
+        {translate("emptyTitle")}
+      </ThemedText>
+      <ThemedText type="caption" color="tertiary">
+        {translate("emptyHint")}
+      </ThemedText>
+      <Pressable
+        onPress={handleStartDraft}
+        style={({ pressed }) => [
+          styles.startButton,
+          {
+            backgroundColor: pressed
+              ? colors.accent.pressed
+              : colors.accent.default,
+          },
+        ]}
+      >
+        <ThemedText type="label" style={{ color: colors.accent.onAccent }}>
+          {translate("startDraft")}
+        </ThemedText>
+      </Pressable>
+    </View>
+  );
 
   const sections = groupByDate(builds ?? [], locale);
 
@@ -225,6 +221,7 @@ export function BuildListScreen() {
       showsVerticalScrollIndicator={false}
       stickySectionHeadersEnabled={false}
       ListHeaderComponent={modeTabs}
+      ListEmptyComponent={builds == null ? null : emptyState}
       ItemSeparatorComponent={ItemGap}
       renderSectionHeader={({ section }) => (
         <View style={styles.sectionHeader}>
@@ -262,10 +259,6 @@ function ItemGap() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: Spacing.three,
-  },
   switchWrap: {
     paddingTop: Spacing.three,
     paddingBottom: Spacing.one,
@@ -299,6 +292,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.two,
   },
   listContent: {
+    flexGrow: 1,
     paddingHorizontal: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.three,
   },

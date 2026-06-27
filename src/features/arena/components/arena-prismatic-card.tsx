@@ -188,10 +188,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.one,
     gap: Spacing.two,
   },
+  // 아이템 아이콘 소스가 64px라 표시를 작게 둘수록 업스케일이 줄어 선명하다.
   icon: {
-    width: 64,
-    height: 64,
-    borderRadius: Radius.md,
+    width: 48,
+    height: 48,
   },
   name: {
     textAlign: "center",

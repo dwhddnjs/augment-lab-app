@@ -39,6 +39,24 @@ export const ARENA_STEPS: ArenaStep[] = [
 
 export const ARENA_TOTAL_ROUNDS = 12;
 
+// 8라운드 재련(reforge)에 등장하는 제작 증강 id. 나머지 special-augments는
+// 카메오(go-h*) 계열이거나 효과 미구현이라 이 3종으로 제한한다.
+const REFORGE_IDS: Set<string> = new Set([
+  "crafting-pris-stat-anvil", // 프리즘 능력치 모루 획득
+  "crafting-augment-slot", // 증강 슬롯 획득(12라운드 보너스 실버 증강)
+  "crafting-sell-augment", // 증강 강화(증강 1개 제거 + 레벨 2개)
+]);
+
+// 증강 강화 재련 카드 id — 선택 시 advance 대신 보유 증강 선택 오버레이를 띄운다.
+export const ENHANCE_AUGMENT_ID = "crafting-sell-augment";
+// 증강 슬롯 획득 재련 카드 id — 12라운드 진입 시 보너스 실버 증강 1장을 부여한다.
+const AUGMENT_SLOT_ID = "crafting-augment-slot";
+// 증강 강화로 분배하는 총 레벨 수.
+const ENHANCE_LEVELS = 2;
+
+// 프리즘 아이템 판매가(고정) — 상점 구매분·라운드 무료 픽 모두 동일하게 적용한다.
+export const PRISMATIC_SELL_PRICE = 2000;
+
 // ─── 카드 추첨 유틸 ───────────────────────────────────────────────────────────
 
 // round(1~12)가 오를수록 희귀 등급 확률이 높아진다.
@@ -65,7 +83,7 @@ function rollRarity(round: number): AugmentRarity {
   return "silver";
 }
 
-function sampleDistinct<T extends { id: string }>(
+export function sampleDistinct<T extends { id: string }>(
   pool: T[],
   count: number,
   used: Set<string>,
@@ -136,12 +154,25 @@ export interface ArenaState {
   pickPrismatic: (item: PrismaticItem) => void;
   rerollPrismatic: (idx: number) => void;
   pickReforge: (special: ArenaSpecialAugment) => void;
-  /** shop: 골드가 충분하면 차감 후 누적(구매가 기록), 성공 시 true. */
-  buyItem: (itemId: string, price: number) => boolean;
-  /** 구매한 아이템 환불 — 구매가만큼 골드 환원 후 보유에서 제거. */
+  /** 증강 강화 — removeId 증강 제거 + 남은 증강에 총 2레벨 랜덤 분배 후 다음 step. */
+  enhanceAugment: (removeId: string) => void;
+  /**
+   * shop: 골드가 충분하면 cost 차감 후 누적, 성공 시 true.
+   * sellValue 미지정 시 cost와 동일(일반 구매). 모루는 cost≠sellValue(예: 2250 구매/1500 판매).
+   */
+  buyItem: (itemId: string, cost: number, sellValue?: number) => boolean;
+  /** 되돌리기 — 구매가 전액 환원 후 보유에서 제거(상점 그리드에서 보유 아이템 재탭). */
+  undoItem: (itemId: string) => void;
+  /** 판매 — 기록된 판매가만큼만 골드 환원 후 보유에서 제거(하단 트레이 탭). */
   sellItem: (itemId: string) => void;
   buyShard: (shardId: string, price: number) => boolean;
-  buyPrismaticItem: (item: PrismaticItem, price: number) => boolean;
+  buyPrismaticItem: (
+    item: PrismaticItem,
+    cost: number,
+    sellValue?: number,
+  ) => boolean;
+  /** 프리즘 판매 — 기록된 판매가만큼 골드 환원 후 보유에서 제거(하단 트레이 탭). */
+  sellPrismatic: (id: string) => void;
   /** shop 종료(구매 없이 스킵 포함) → 다음 step. */
   endShop: () => void;
 }
@@ -158,11 +189,19 @@ export function useArena(): ArenaState {
     [],
   );
   const [itemIds, setItemIds] = useState<string[]>([]);
-  // 환불을 위해 아이템별 구매가를 기록한다(카테고리마다 가격이 달라 itemId만으론 복원 불가).
-  const [itemPrices, setItemPrices] = useState<Record<string, number>>({});
+  // 아이템별 구매가(buy)·판매가(sell)를 기록한다. 되돌리기는 구매가 전액, 판매는 판매가만 환원.
+  const [itemPrices, setItemPrices] = useState<
+    Record<string, { buy: number; sell: number }>
+  >({});
   const [prismaticIds, setPrismaticIds] = useState<string[]>([]);
+  // 상점 프리즘 모루로 산 프리즘 아이템의 구매가/판매가. 라운드 무료 픽은 기록하지 않는다.
+  const [prismaticPrices, setPrismaticPrices] = useState<
+    Record<string, { buy: number; sell: number }>
+  >({});
   const [shardIds, setShardIds] = useState<string[]>([]);
   const [reforgeIds, setReforgeIds] = useState<string[]>([]);
+  // 증강 슬롯 획득 재련을 골랐는지 — 12라운드 진입 시 보너스 실버 증강을 1장 부여한다.
+  const [augmentSlotGranted, setAugmentSlotGranted] = useState(false);
 
   const [augmentCards, setAugmentCards] = useState<ArenaAugment[]>(() =>
     drawAugments(allAugments, rollRarity(1), 3),
@@ -190,6 +229,15 @@ export function useArena(): ArenaState {
 
       if (next.kind === "augment") {
         const used = maxedIds(nextPicked);
+        // 증강 슬롯 보너스: 12라운드 진입 시 랜덤 실버 증강 1장을 보유에 자동 추가.
+        // (12라운드 직전은 항상 11라운드 shop의 endShop 경로라 setPickedAugments 중첩 없음.)
+        if (next.round === 12 && augmentSlotGranted) {
+          const bonusUsed = new Set(nextPicked.map((p) => p.augment.id));
+          const [bonus] = drawAugments(allAugments, "silver", 1, bonusUsed);
+          if (bonus) {
+            setPickedAugments((prev) => [...prev, { augment: bonus, level: 1 }]);
+          }
+        }
         setAugmentCards(
           drawAugments(allAugments, rollRarity(next.round), 3, used),
         );
@@ -197,11 +245,12 @@ export function useArena(): ArenaState {
         const used = new Set(nextPrismaticIds);
         setPrismaticCards(sampleDistinct(allPrismatics, 3, used));
       } else if (next.kind === "reforge") {
-        setReforgeCards(sampleDistinct(allSpecials, 3, new Set()));
+        const reforgePool = allSpecials.filter((s) => REFORGE_IDS.has(s.id));
+        setReforgeCards(sampleDistinct(reforgePool, 3, new Set()));
       }
       setStepIndex(nextIndex);
     },
-    [stepIndex, allAugments, allPrismatics, allSpecials],
+    [stepIndex, allAugments, allPrismatics, allSpecials, augmentSlotGranted],
   );
 
   const pickAugment = useCallback(
@@ -258,6 +307,11 @@ export function useArena(): ArenaState {
         advance(pickedAugments, next);
         return next;
       });
+      // 라운드 무료 픽도 판매 가능하도록 판매가를 기록(구매가는 0).
+      setPrismaticPrices((prev) => ({
+        ...prev,
+        [item.id]: { buy: 0, sell: PRISMATIC_SELL_PRICE },
+      }));
     },
     [advance, pickedAugments],
   );
@@ -289,26 +343,68 @@ export function useArena(): ArenaState {
   const pickReforge = useCallback(
     (special: ArenaSpecialAugment) => {
       setReforgeIds((prev) => [...prev, special.id]);
+      if (special.id === AUGMENT_SLOT_ID) setAugmentSlotGranted(true);
       advance(pickedAugments, prismaticIds);
     },
     [advance, pickedAugments, prismaticIds],
   );
 
+  // 증강 강화 — removeId 증강을 제거하고, 남은 증강 중 레벨업 여지가 있는 것들에
+  // 총 ENHANCE_LEVELS(2)만큼 1레벨씩 랜덤 분배한다(각 증강 최대 레벨 한도 내).
+  const enhanceAugment = useCallback(
+    (removeId: string) => {
+      // 증강 강화도 재련 기록에 남겨 drawer '재련' 섹션에 표시한다.
+      setReforgeIds((prev) =>
+        prev.includes(ENHANCE_AUGMENT_ID)
+          ? prev
+          : [...prev, ENHANCE_AUGMENT_ID],
+      );
+      setPickedAugments((prev) => {
+        const remaining = prev.filter((p) => p.augment.id !== removeId);
+        // 분배 대상: 현재 레벨 < 최대 레벨인 증강(여유 capacity 보유).
+        const caps = remaining.map(
+          (p) => MAX_AUGMENT_LEVEL[p.augment.rarity] - p.level,
+        );
+        const totalCap = caps.reduce((s, c) => s + c, 0);
+        let toDistribute = Math.min(ENHANCE_LEVELS, totalCap);
+        const levels = remaining.map((p) => p.level);
+        while (toDistribute > 0) {
+          const eligible = caps
+            .map((_, i) => i)
+            .filter((i) => caps[i] > 0);
+          if (eligible.length === 0) break;
+          const i = eligible[Math.floor(Math.random() * eligible.length)];
+          levels[i] += 1;
+          caps[i] -= 1;
+          toDistribute -= 1;
+        }
+        const next = remaining.map((p, i) => ({ ...p, level: levels[i] }));
+        advance(next, prismaticIds);
+        return next;
+      });
+    },
+    [advance, prismaticIds],
+  );
+
   const buyItem = useCallback(
-    (itemId: string, price: number) => {
-      if (gold < price || itemIds.includes(itemId)) return false;
-      setGold((g) => g - price);
+    (itemId: string, cost: number, sellValue?: number) => {
+      if (gold < cost || itemIds.includes(itemId)) return false;
+      setGold((g) => g - cost);
       setItemIds((prev) => [...prev, itemId]);
-      setItemPrices((prev) => ({ ...prev, [itemId]: price }));
+      setItemPrices((prev) => ({
+        ...prev,
+        [itemId]: { buy: cost, sell: sellValue ?? cost },
+      }));
       return true;
     },
     [gold, itemIds],
   );
 
-  const sellItem = useCallback(
-    (itemId: string) => {
+  // 보유 아이템 제거 공통 — refundKind에 따라 구매가(되돌리기)/판매가(판매)를 환원.
+  const removeItem = useCallback(
+    (itemId: string, refundKind: "buy" | "sell") => {
       if (!itemIds.includes(itemId)) return;
-      const refund = itemPrices[itemId] ?? 0;
+      const refund = itemPrices[itemId]?.[refundKind] ?? 0;
       setGold((g) => g + refund);
       setItemIds((prev) => prev.filter((id) => id !== itemId));
       setItemPrices((prev) => {
@@ -318,6 +414,15 @@ export function useArena(): ArenaState {
       });
     },
     [itemIds, itemPrices],
+  );
+
+  const undoItem = useCallback(
+    (itemId: string) => removeItem(itemId, "buy"),
+    [removeItem],
+  );
+  const sellItem = useCallback(
+    (itemId: string) => removeItem(itemId, "sell"),
+    [removeItem],
   );
 
   const buyShard = useCallback(
@@ -331,13 +436,32 @@ export function useArena(): ArenaState {
   );
 
   const buyPrismaticItem = useCallback(
-    (item: PrismaticItem, price: number) => {
-      if (gold < price || prismaticIds.includes(item.id)) return false;
-      setGold((g) => g - price);
+    (item: PrismaticItem, cost: number, sellValue?: number) => {
+      if (gold < cost || prismaticIds.includes(item.id)) return false;
+      setGold((g) => g - cost);
       setPrismaticIds((prev) => [...prev, item.id]);
+      setPrismaticPrices((prev) => ({
+        ...prev,
+        [item.id]: { buy: cost, sell: sellValue ?? cost },
+      }));
       return true;
     },
     [gold, prismaticIds],
+  );
+
+  const sellPrismatic = useCallback(
+    (id: string) => {
+      if (!prismaticIds.includes(id)) return;
+      const refund = prismaticPrices[id]?.sell ?? 0;
+      setGold((g) => g + refund);
+      setPrismaticIds((prev) => prev.filter((pid) => pid !== id));
+      setPrismaticPrices((prev) => {
+        const next = { ...prev };
+        delete next[id];
+        return next;
+      });
+    },
+    [prismaticIds, prismaticPrices],
   );
 
   const endShop = useCallback(() => {
@@ -366,10 +490,13 @@ export function useArena(): ArenaState {
       pickPrismatic,
       rerollPrismatic,
       pickReforge,
+      enhanceAugment,
       buyItem,
+      undoItem,
       sellItem,
       buyShard,
       buyPrismaticItem,
+      sellPrismatic,
       endShop,
     }),
     [
@@ -391,10 +518,13 @@ export function useArena(): ArenaState {
       pickPrismatic,
       rerollPrismatic,
       pickReforge,
+      enhanceAugment,
       buyItem,
+      undoItem,
       sellItem,
       buyShard,
       buyPrismaticItem,
+      sellPrismatic,
       endShop,
     ],
   );
