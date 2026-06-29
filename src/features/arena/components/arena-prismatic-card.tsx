@@ -11,7 +11,10 @@ import { RARITY } from "@/components/ui/rarity-card-frame";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import type { PrismaticItem } from "@/features/arena/types";
-import { cleanItemDescription } from "@/features/items/item-text";
+import {
+  prismaticEffectSummary,
+  prismaticStatSummary,
+} from "@/features/items/item-text";
 import { useTheme } from "@/hooks/use-theme";
 import { cdragonItemIconUrl } from "@/lib/ddragon";
 import {
@@ -58,7 +61,8 @@ export function ArenaPrismaticCard({
   const { colors } = useTheme();
   const cardHeight = Math.round(cardWidth * (14 / 9));
   const framePad = Math.max(3, Math.round(cardWidth * 0.056));
-  const summary = cleanItemDescription(item.description);
+  const stats = prismaticStatSummary(item.description).replace(/\n/g, " · ");
+  const summary = prismaticEffectSummary(item.description);
   const dimmed = disabled || !affordable;
 
   const frame = (
@@ -78,7 +82,7 @@ export function ArenaPrismaticCard({
         <RemoteImage
           uri={cdragonItemIconUrl(item.iconPath)}
           recyclingKey={item.id}
-          style={styles.icon}
+          style={[styles.icon, { borderColor: colors.border.default }]}
           contentFit="contain"
         />
         <ThemedText
@@ -87,8 +91,16 @@ export function ArenaPrismaticCard({
         >
           {item.name}
         </ThemedText>
+        {!!stats && (
+          <ThemedText
+            numberOfLines={2}
+            style={[styles.stats, { color: PRISM.title }]}
+          >
+            {stats}
+          </ThemedText>
+        )}
         <ThemedText
-          numberOfLines={5}
+          numberOfLines={7}
           style={[styles.desc, { color: PRISM.desc }]}
         >
           {summary}
@@ -192,6 +204,8 @@ const styles = StyleSheet.create({
   icon: {
     width: 48,
     height: 48,
+    borderRadius: Radius.sm,
+    borderWidth: 1,
   },
   name: {
     textAlign: "center",
@@ -199,6 +213,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 14,
     marginTop: Spacing.one,
+  },
+  stats: {
+    textAlign: "center",
+    fontSize: 8,
+    lineHeight: 11,
+    fontWeight: "600",
+    paddingHorizontal: Spacing.one,
+    opacity: 0.85,
   },
   desc: {
     textAlign: "center",

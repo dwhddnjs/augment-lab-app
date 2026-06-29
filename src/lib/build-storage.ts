@@ -26,6 +26,8 @@ export interface SavedBuild {
   prismaticIds?: string[];
   /** (아레나) 보유 능력치 모루 id. */
   shardIds?: string[];
+  /** (아레나) 선택한 재련(특수 증강) id. */
+  reforgeIds?: string[];
   /** ISO 8601 */
   createdAt: string;
 }

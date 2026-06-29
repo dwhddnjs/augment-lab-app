@@ -24,6 +24,11 @@ interface Props {
   fallbackRatio?: number;
   /** 이미지 캐시 식별자. 미지정 시 iconPath 사용. */
   recyclingKey?: string;
+  /**
+   * 이미지 자체에 입힐 단색 틴트. 흐릿한 단색 라인아트 아이콘(재련 crafting_* 등)을
+   * 선명한 솔리드 색으로 강제할 때 사용한다. 미지정 시 원본 색을 그대로 쓴다.
+   */
+  imageTint?: string;
 }
 
 export function AugmentImage({
@@ -33,6 +38,7 @@ export function AugmentImage({
   fallbackGlyph,
   fallbackRatio = 0.62,
   recyclingKey,
+  imageTint,
 }: Props) {
   const [step, setStep] = useState<Step>(iconPath ? 0 : 2);
 
@@ -51,6 +57,7 @@ export function AugmentImage({
       source={{ uri: augmentImageUrl(iconPath, step === 0 ? 'large' : 'small') }}
       style={{ width: size, height: size }}
       contentFit="contain"
+      tintColor={imageTint}
       cachePolicy="memory-disk"
       transition={0}
       recyclingKey={`${recyclingKey ?? iconPath}-${step}`}

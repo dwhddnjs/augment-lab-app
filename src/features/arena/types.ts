@@ -1,21 +1,18 @@
-import type { Augment, AugmentRarity } from '@/features/augments/types';
+import type { Augment } from '@/features/augments/types';
 
 /**
- * 아레나 증강. id/name/description/rarity/iconPath 구조는 칼바람(Augment)과 같지만
- * 데이터셋(CDragon cherry)과 레벨업 규칙이 달라 별칭 타입으로 분리한다.
+ * 아레나 증강. id/name/description/rarity/iconPath 구조는 칼바람(Augment)과 같되,
+ * 시즌2 증강 레벨업 시스템을 위해 maxLevel을 추가로 갖는다.
+ * maxLevel은 증강마다 다르며(CDragon dataValues.MaxLevel) rarity와 독립적이다.
  * 아이콘은 칼바람과 동일하게 augmentImageUrl()로 렌더한다.
  */
-export type ArenaAugment = Augment;
-
-/**
- * 증강 등급별 최대 레벨. 실버·골드는 2렙, 프리즘은 3렙까지 강화된다.
- * 같은 증강을 다시 뽑으면 레벨이 1 오른다(최대치 도달 시 풀에서 제외).
- */
-export const MAX_AUGMENT_LEVEL: Record<AugmentRarity, number> = {
-  silver: 2,
-  gold: 2,
-  prismatic: 3,
-};
+export interface ArenaAugment extends Augment {
+  /**
+   * 이 증강의 최대 강화 레벨. 1이면 레벨업 불가(픽 즉시 최대치).
+   * 같은 증강을 다시 뽑으면 maxLevel에 도달할 때까지 레벨이 1씩 오른다.
+   */
+  maxLevel: number;
+}
 
 /** drawer/결과에 누적되는 픽한 증강 + 현재 강화 레벨. */
 export interface ArenaPickedAugment {

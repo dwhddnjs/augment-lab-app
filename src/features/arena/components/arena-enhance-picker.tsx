@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Pressable, StyleSheet, useWindowDimensions, View } from "react-native";
 
 import { Spacing } from "@/constants/theme";
-import { MAX_AUGMENT_LEVEL, type ArenaPickedAugment } from "@/features/arena/types";
+import { type ArenaPickedAugment } from "@/features/arena/types";
 import { useTheme } from "@/hooks/use-theme";
 import { ArenaAugmentCard } from "./arena-augment-card";
 import {
@@ -100,7 +100,7 @@ export function ArenaEnhancePicker({
             key={`${i}-${card.augment.id}`}
             augment={card.augment}
             level={card.level}
-            maxLevel={MAX_AUGMENT_LEVEL[card.augment.rarity]}
+            maxLevel={card.augment.maxLevel}
             cardWidth={cardWidth}
             index={i}
             exitMode={exitModes[i]}

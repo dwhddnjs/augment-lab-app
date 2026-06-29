@@ -18,6 +18,7 @@ import {
 import { useArenaAugments } from "@/features/arena/hooks/use-arena-augments";
 import {
   usePrismaticItems,
+  useSpecialAugments,
   useStatShards,
 } from "@/features/arena/hooks/use-arena-items";
 import { useItems } from "@/features/items/hooks/use-items";
@@ -32,12 +33,14 @@ const t = {
     prismatics: "프리즘 아이템",
     items: "아이템",
     shards: "능력치 모루",
+    reforge: "재련",
   },
   en: {
     augments: "Augments",
     prismatics: "Prismatic Items",
     items: "Items",
     shards: "Stat Anvils",
+    reforge: "Reforge",
   },
 };
 
@@ -52,6 +55,7 @@ export function ArenaBuildSummary({ build }: Props) {
   const allItems = useItems();
   const allPrismatics = usePrismaticItems();
   const allShards = useStatShards();
+  const allSpecials = useSpecialAugments();
 
   const augments = build.augmentIds
     .map((id) => arenaAugments.find((a) => a.id === id))
@@ -64,6 +68,9 @@ export function ArenaBuildSummary({ build }: Props) {
     .filter((p): p is NonNullable<typeof p> => p != null);
   const shards = (build.shardIds ?? [])
     .map((id) => allShards.find((s) => s.id === id))
+    .filter((s): s is NonNullable<typeof s> => s != null);
+  const reforges = (build.reforgeIds ?? [])
+    .map((id) => allSpecials.find((s) => s.id === id))
     .filter((s): s is NonNullable<typeof s> => s != null);
 
   return (
@@ -93,16 +100,18 @@ export function ArenaBuildSummary({ build }: Props) {
                     recyclingKey={aug.id}
                   />
                 </View>
-                <View style={styles.lvlRow}>
-                  {Array.from({ length: level }).map((_, i) => (
-                    <MaterialCommunityIcons
-                      key={i}
-                      name="star"
-                      size={10}
-                      color={tint}
-                    />
-                  ))}
-                </View>
+                {aug.maxLevel > 1 && (
+                  <View style={styles.lvlRow}>
+                    {Array.from({ length: level }).map((_, i) => (
+                      <MaterialCommunityIcons
+                        key={i}
+                        name="star"
+                        size={10}
+                        color={tint}
+                      />
+                    ))}
+                  </View>
+                )}
                 <ThemedText
                   type="caption"
                   color="secondary"
@@ -117,11 +126,11 @@ export function ArenaBuildSummary({ build }: Props) {
         </View>
       </View>
 
-      {/* 프리즘 아이템 */}
-      {prismatics.length > 0 && (
+      {/* 아이템 (프리즘 + 전설을 아이콘으로 함께 표시) */}
+      {(prismatics.length > 0 || items.length > 0) && (
         <View style={styles.section}>
           <ThemedText type="label" color="secondary">
-            {translate("prismatics")}
+            {translate("items")}
           </ThemedText>
           <View style={styles.itemRow}>
             {prismatics.map((p) => (
@@ -133,17 +142,6 @@ export function ArenaBuildSummary({ build }: Props) {
                 contentFit="contain"
               />
             ))}
-          </View>
-        </View>
-      )}
-
-      {/* 전설 아이템 */}
-      {items.length > 0 && (
-        <View style={styles.section}>
-          <ThemedText type="label" color="secondary">
-            {translate("items")}
-          </ThemedText>
-          <View style={styles.itemRow}>
             {items.map((it) => (
               <RemoteImage
                 key={it.id}
@@ -167,6 +165,47 @@ export function ArenaBuildSummary({ build }: Props) {
               <ThemedText key={`${s.id}-${i}`} type="body" color="secondary">
                 • {s.description}
               </ThemedText>
+            ))}
+          </View>
+        </View>
+      )}
+
+      {/* 재련 */}
+      {reforges.length > 0 && (
+        <View style={styles.section}>
+          <ThemedText type="label" color="secondary">
+            {translate("reforge")}
+          </ThemedText>
+          <View style={styles.augGrid}>
+            {reforges.map((r, i) => (
+              <View key={`${r.id}-${i}`} style={styles.reforgeCell}>
+                <View
+                  style={[
+                    styles.augIconWrap,
+                    {
+                      borderColor: AugmentRarityColors.gold.border,
+                      backgroundColor: colors.surface.sunken,
+                    },
+                  ]}
+                >
+                  <AugmentImage
+                    iconPath={r.iconPath}
+                    size={44}
+                    tint={AugmentRarityColors.gold.border}
+                    imageTint={AugmentRarityColors.gold.border}
+                    fallbackGlyph="anvil"
+                    recyclingKey={r.id}
+                  />
+                </View>
+                <ThemedText
+                  type="caption"
+                  color="secondary"
+                  numberOfLines={2}
+                  style={styles.augName}
+                >
+                  {r.name}
+                </ThemedText>
+              </View>
             ))}
           </View>
         </View>
@@ -204,6 +243,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 10,
     lineHeight: 12,
+  },
+  reforgeCell: {
+    width: 64,
+    alignItems: "center",
+    gap: 2,
   },
   itemRow: {
     flexDirection: "row",

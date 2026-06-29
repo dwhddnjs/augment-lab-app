@@ -142,16 +142,18 @@ export function ArenaDrawer({
                       recyclingKey={p.augment.id}
                     />
                   </View>
-                  <View style={styles.lvlRow}>
-                    {Array.from({ length: p.level }).map((_, i) => (
-                      <MaterialCommunityIcons
-                        key={i}
-                        name="star"
-                        size={9}
-                        color={tint}
-                      />
-                    ))}
-                  </View>
+                  {p.augment.maxLevel > 1 && (
+                    <View style={styles.lvlRow}>
+                      {Array.from({ length: p.level }).map((_, i) => (
+                        <MaterialCommunityIcons
+                          key={i}
+                          name="star"
+                          size={9}
+                          color={tint}
+                        />
+                      ))}
+                    </View>
+                  )}
                 </View>
               );
             })}
@@ -222,7 +224,8 @@ export function ArenaDrawer({
                     <AugmentImage
                       iconPath={r.iconPath}
                       size={34}
-                      tint={colors.text.secondary}
+                      tint={AugmentRarityColors.gold.border}
+                      imageTint={AugmentRarityColors.gold.border}
                       fallbackGlyph="anvil"
                       recyclingKey={r.id}
                     />
