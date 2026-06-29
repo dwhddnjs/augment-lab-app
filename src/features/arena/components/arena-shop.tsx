@@ -28,7 +28,7 @@ import type { Item } from "@/features/items/types";
 import { useTheme } from "@/hooks/use-theme";
 import { cdragonItemIconUrl, itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import { PRISMATIC_SELL_PRICE, sampleDistinct } from "../hooks/use-arena";
+import { MAX_ITEMS, PRISMATIC_SELL_PRICE, sampleDistinct } from "../hooks/use-arena";
 import { ArenaAnvilPicker } from "./arena-anvil-picker";
 
 // 카테고리별 고정 구매가.
@@ -290,7 +290,9 @@ export function ArenaShop({
   const renderItemCell = (item: Item, price: number, sellValue: number) => {
     const owned = ownedItemIds.includes(item.id);
     const canBuy = gold >= price;
-    const dim = !owned && !canBuy;
+    // 아이템 6칸이 꽉 차면 미보유 아이템은 더 못 산다(보유분은 되돌리기 가능).
+    const atCap = !owned && ownedItemIds.length >= MAX_ITEMS;
+    const dim = !owned && (!canBuy || atCap);
     return (
       <Pressable
         key={item.id}
@@ -327,7 +329,10 @@ export function ArenaShop({
 
   // ─── 모루 셀(전설/프리즘) — 아이템 셀과 동일 톤 ───
   const renderAnvilCell = (kind: AnvilKind, iconUri: string, price: number) => {
-    const affordable = gold >= price;
+    // 전설 모루도 전설 아이템 1칸을 차지하므로 6칸이 꽉 차면 비활성화한다.
+    const atItemCap =
+      kind === "legendary" && ownedItemIds.length >= MAX_ITEMS;
+    const affordable = gold >= price && !atItemCap;
     return (
       <Pressable
         key={kind}

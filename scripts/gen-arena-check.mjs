@@ -18,6 +18,16 @@ const dataDir = path.join(root, 'src/features/arena/data');
 
 const read = (f) => JSON.parse(fs.readFileSync(path.join(dataDir, f), 'utf8'));
 
+// 아이템 description HTML → 평문(앱 cleanItemDescription과 동일 규칙).
+const cleanItemDesc = (raw) =>
+  String(raw ?? '')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/ *\n */g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
 // --- 증강 (rarity 0/1/2) ---
 const augKo = read('augments.ko.json');
 const augEn = new Map(read('augments.en.json').map((a) => [a.id, a]));
@@ -26,6 +36,7 @@ const augments = augKo.map((a) => ({
   ko: a.name,
   en: augEn.get(a.id)?.name ?? a.name,
   rarity: a.rarity,
+  maxLevel: a.maxLevel ?? 1,
   iconPath: a.iconPath,
   descKo: a.description ?? '',
   descEn: augEn.get(a.id)?.description ?? '',
@@ -51,13 +62,15 @@ const prismatic = piKo.map((i) => ({
   en: piEn.get(i.id)?.name ?? i.name,
   iconPath: i.iconPath,
   price: i.price,
-  descKo: i.description ?? '',
+  descKo: cleanItemDesc(i.description),
 }));
 
 const rarityCounts = augments.reduce(
   (acc, a) => ((acc[a.rarity] = (acc[a.rarity] ?? 0) + 1), acc),
   {},
 );
+const levelableCount = augments.filter((a) => a.maxLevel > 1).length;
+const fixedCount = augments.length - levelableCount;
 
 const html = `<!doctype html>
 <html lang="ko">
@@ -103,6 +116,9 @@ const html = `<!doctype html>
   .rb.silver { background: rgba(185,196,204,.15); color: var(--silver); }
   .rb.gold { background: rgba(232,196,95,.15); color: var(--gold); }
   .rb.prismatic { background: rgba(201,139,255,.15); color: var(--prism); }
+  .lvl { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px;
+    background: rgba(30,215,160,.14); color: var(--mint); letter-spacing: -.5px; }
+  .lvl.nolvl { background: rgba(108,127,120,.18); color: var(--text3); letter-spacing: 0; }
   .price { font-size: 12px; color: var(--gold); font-weight: 700; }
   .empty { color: var(--text3); padding: 40px; text-align: center; }
   .iconpath { font-size: 10px; color: var(--text3); margin-top: 4px; white-space: nowrap;
@@ -118,6 +134,8 @@ const html = `<!doctype html>
     <span style="color:var(--gold)">골드 ${rarityCounts.gold ?? 0}</span> ·
     <span style="color:var(--prism)">프리즘 ${rarityCounts.prismatic ?? 0}</span> ·
     프리즘 아이템 <b>${prismatic.length}</b>개 · 특수 증강 <b>${special.length}</b>개
+    <br /><span style="color:var(--mint)">레벨업 가능 ${levelableCount}</span> ·
+    <span style="color:var(--text3)">레벨업 불가 ${fixedCount}</span>
   </div>
   <div class="controls">
     <input id="q" type="search" placeholder="한글·영문 이름 검색…" autocomplete="off" />
@@ -175,9 +193,15 @@ function augCard(a, isItem) {
   };
   const meta = document.createElement('div');
   meta.className = 'meta';
-  const badge = a.rarity
-    ? '<span class="rb ' + a.rarity + '">' + RNAME[a.rarity] + '</span>'
-    : (a.price != null ? '<span class="price">' + a.price + 'G</span>' : '');
+  let badge = '';
+  if (a.rarity) {
+    badge = '<span class="rb ' + a.rarity + '">' + RNAME[a.rarity] + '</span>';
+    badge += a.maxLevel > 1
+      ? '<span class="lvl">' + '★'.repeat(a.maxLevel) + ' 최대 ' + a.maxLevel + '레벨</span>'
+      : '<span class="lvl nolvl">레벨업 불가</span>';
+  } else if (a.price != null) {
+    badge = '<span class="price">' + a.price + 'G</span>';
+  }
   meta.innerHTML = '<div class="ko">' + esc(a.ko) + '</div>' +
     '<div class="en">' + esc(a.en || '') + '</div>' +
     '<div class="badges">' + badge + '</div>' +

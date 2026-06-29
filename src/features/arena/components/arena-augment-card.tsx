@@ -87,14 +87,16 @@ export function ArenaAugmentCard({
             cardWidth={cardWidth}
             topInset={Spacing.double}
           />
-          <View style={styles.starsOverlay} pointerEvents="none">
-            <LevelStars
-              level={level}
-              maxLevel={maxLevel}
-              color={starColor}
-              bg={cardBg}
-            />
-          </View>
+          {maxLevel > 1 && (
+            <View style={styles.starsOverlay} pointerEvents="none">
+              <LevelStars
+                level={level}
+                maxLevel={maxLevel}
+                color={starColor}
+                bg={cardBg}
+              />
+            </View>
+          )}
         </View>
       </ArenaPickCard>
 

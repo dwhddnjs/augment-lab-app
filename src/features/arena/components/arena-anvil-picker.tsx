@@ -7,7 +7,13 @@
  *   - 헤더(제목·닫기 X) 없이 카드 3장만 깔끔하게 노출, 닫기는 카드 바깥 탭으로 처리.
  */
 import { useState } from "react";
-import { Pressable, StyleSheet, useWindowDimensions, View } from "react-native";
+import {
+  Modal,
+  Pressable,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
 
 import { Spacing } from "@/constants/theme";
 import type { PrismaticItem } from "@/features/arena/types";
@@ -92,45 +98,57 @@ export function ArenaAnvilPicker({
   };
 
   return (
-    <View style={[styles.overlay, { backgroundColor: colors.surface.overlay }]}>
-      {/* 빈 영역 탭 → 닫기(환불) */}
-      <Pressable
-        style={StyleSheet.absoluteFill}
-        onPress={animating ? undefined : onClose}
-      />
+    // Modal로 띄워 헤더를 포함한 화면 전체를 덮는다(상점 컨테이너 내부 absolute로는
+    // 헤더가 가려지지 않기 때문). 가로 고정이므로 supportedOrientations도 가로로 둔다.
+    <Modal
+      visible
+      transparent
+      animationType="fade"
+      supportedOrientations={["landscape", "landscape-left", "landscape-right"]}
+      onRequestClose={animating ? undefined : onClose}
+    >
+      <View style={[styles.overlay, { backgroundColor: colors.surface.overlay }]}>
+        {/* 빈 영역 탭 → 닫기(환불) */}
+        <Pressable
+          style={StyleSheet.absoluteFill}
+          onPress={animating ? undefined : onClose}
+        />
 
-      <View style={[styles.cardsRow, { paddingHorizontal: hPad, gap: cardGap }]}>
-        {cards.map((card, i) =>
-          kind === "prismatic" ? (
-            <ArenaPrismaticCard
-              key={`${i}-${card.id}`}
-              item={card as PrismaticItem}
-              cardWidth={cardWidth}
-              index={i}
-              exitMode={exitModes[i]}
-              entryMode={entryModes[i]}
-              disabled={animating}
-              rerolled={rerolled[i]}
-              onPick={() => handlePick(i)}
-              onReroll={() => handleReroll(i)}
-            />
-          ) : (
-            <ArenaItemPickCard
-              key={`${i}-${card.id}`}
-              item={card as Item}
-              cardWidth={cardWidth}
-              index={i}
-              exitMode={exitModes[i]}
-              entryMode={entryModes[i]}
-              disabled={animating}
-              rerolled={rerolled[i]}
-              onPick={() => handlePick(i)}
-              onReroll={() => handleReroll(i)}
-            />
-          ),
-        )}
+        <View
+          style={[styles.cardsRow, { paddingHorizontal: hPad, gap: cardGap }]}
+        >
+          {cards.map((card, i) =>
+            kind === "prismatic" ? (
+              <ArenaPrismaticCard
+                key={`${i}-${card.id}`}
+                item={card as PrismaticItem}
+                cardWidth={cardWidth}
+                index={i}
+                exitMode={exitModes[i]}
+                entryMode={entryModes[i]}
+                disabled={animating}
+                rerolled={rerolled[i]}
+                onPick={() => handlePick(i)}
+                onReroll={() => handleReroll(i)}
+              />
+            ) : (
+              <ArenaItemPickCard
+                key={`${i}-${card.id}`}
+                item={card as Item}
+                cardWidth={cardWidth}
+                index={i}
+                exitMode={exitModes[i]}
+                entryMode={entryModes[i]}
+                disabled={animating}
+                rerolled={rerolled[i]}
+                onPick={() => handlePick(i)}
+                onReroll={() => handleReroll(i)}
+              />
+            ),
+          )}
+        </View>
       </View>
-    </View>
+    </Modal>
   );
 }
 

@@ -9,7 +9,6 @@ import { useCallback, useMemo, useState } from "react";
 
 import type { AugmentRarity } from "@/features/augments/types";
 import {
-  MAX_AUGMENT_LEVEL,
   type ArenaAugment,
   type ArenaPickedAugment,
   type ArenaSpecialAugment,
@@ -53,6 +52,13 @@ export const ENHANCE_AUGMENT_ID = "crafting-sell-augment";
 const AUGMENT_SLOT_ID = "crafting-augment-slot";
 // 증강 강화로 분배하는 총 레벨 수.
 const ENHANCE_LEVELS = 2;
+
+// 증강 슬롯 한도 — 기본 4개, 재련(증강 슬롯 획득)을 고르면 5개까지.
+const BASE_AUGMENT_SLOTS = 4;
+const REFORGED_AUGMENT_SLOTS = 5;
+
+// 전설/신발 아이템 보유 한도(상점). 프리즘 아이템은 별도로 센다.
+export const MAX_ITEMS = 6;
 
 // 프리즘 아이템 판매가(고정) — 상점 구매분·라운드 무료 픽 모두 동일하게 적용한다.
 export const PRISMATIC_SELL_PRICE = 2000;
@@ -121,9 +127,46 @@ function drawAugments(
 function maxedIds(picked: ArenaPickedAugment[]): Set<string> {
   return new Set(
     picked
-      .filter((p) => p.level >= MAX_AUGMENT_LEVEL[p.augment.rarity])
+      .filter((p) => p.level >= p.augment.maxLevel)
       .map((p) => p.augment.id),
   );
+}
+
+function shuffle<T>(arr: T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// 증강 step 카드 3장 구성.
+//  - 슬롯이 꽉 찼으면: 레벨업 여지가 있는 보유 증강만 노출해 레벨업을 유도한다
+//    (여유 증강이 없으면 만렙 보유 증강이라도 노출해 빈 화면을 막는다).
+//  - 슬롯에 여유가 있으면: 신규 증강 위주이되, 레벨업 가능한 보유 증강이 1개 이상
+//    있으면 그중 랜덤 1장을 반드시 끼워 매 증강턴에 레벨업 기회를 보장한다.
+function buildAugmentCards(
+  pool: ArenaAugment[],
+  picked: ArenaPickedAugment[],
+  round: number,
+  maxSlots: number,
+): ArenaAugment[] {
+  const levelable = picked.filter(
+    (p) => p.level < p.augment.maxLevel,
+  );
+
+  if (picked.length >= maxSlots) {
+    const source = levelable.length > 0 ? levelable : picked;
+    return shuffle(source)
+      .slice(0, 3)
+      .map((p) => p.augment);
+  }
+
+  const used = maxedIds(picked);
+  const cards: ArenaAugment[] = [];
+  if (levelable.length > 0) {
+    const forced = levelable[Math.floor(Math.random() * levelable.length)];
+    cards.push(forced.augment);
+    used.add(forced.augment.id);
+  }
+  cards.push(...drawAugments(pool, rollRarity(round), 3 - cards.length, used));
+  return shuffle(cards);
 }
 
 export interface ArenaState {
@@ -228,7 +271,9 @@ export function useArena(): ArenaState {
       setRerolled([false, false, false]);
 
       if (next.kind === "augment") {
-        const used = maxedIds(nextPicked);
+        const maxSlots = augmentSlotGranted
+          ? REFORGED_AUGMENT_SLOTS
+          : BASE_AUGMENT_SLOTS;
         // 증강 슬롯 보너스: 12라운드 진입 시 랜덤 실버 증강 1장을 보유에 자동 추가.
         // (12라운드 직전은 항상 11라운드 shop의 endShop 경로라 setPickedAugments 중첩 없음.)
         if (next.round === 12 && augmentSlotGranted) {
@@ -239,7 +284,7 @@ export function useArena(): ArenaState {
           }
         }
         setAugmentCards(
-          drawAugments(allAugments, rollRarity(next.round), 3, used),
+          buildAugmentCards(allAugments, nextPicked, next.round, maxSlots),
         );
       } else if (next.kind === "prismatic") {
         const used = new Set(nextPrismaticIds);
@@ -259,7 +304,7 @@ export function useArena(): ArenaState {
         const existing = prev.find((p) => p.augment.id === augment.id);
         let next: ArenaPickedAugment[];
         if (existing) {
-          const max = MAX_AUGMENT_LEVEL[augment.rarity];
+          const max = augment.maxLevel;
           next = prev.map((p) =>
             p.augment.id === augment.id
               ? { ...p, level: Math.min(p.level + 1, max) }
@@ -278,17 +323,38 @@ export function useArena(): ArenaState {
   const rerollAugment = useCallback(
     (idx: number) => {
       if (rerolled[idx]) return;
-      const used = maxedIds(pickedAugments);
-      const excludeIds = new Set([
-        ...used,
-        ...augmentCards.filter((_, i) => i !== idx).map((a) => a.id),
-      ]);
-      const pool = allAugments.filter((a) => !excludeIds.has(a.id));
-      const [replacement] = drawAugments(pool, augmentCards[idx].rarity, 1);
+      const maxSlots = augmentSlotGranted
+        ? REFORGED_AUGMENT_SLOTS
+        : BASE_AUGMENT_SLOTS;
+      const shownExcept = new Set(
+        augmentCards.filter((_, i) => i !== idx).map((a) => a.id),
+      );
+
+      let replacement: ArenaAugment | undefined;
+      if (pickedAugments.length >= maxSlots) {
+        // 슬롯이 꽉 찬 상태 — 화면에 없는, 레벨업 가능한 보유 증강으로만 교체한다.
+        const candidates = pickedAugments
+          .filter(
+            (p) =>
+              p.level < p.augment.maxLevel &&
+              !shownExcept.has(p.augment.id),
+          )
+          .map((p) => p.augment);
+        if (candidates.length === 0) return;
+        replacement = candidates[Math.floor(Math.random() * candidates.length)];
+      } else {
+        const excludeIds = new Set([
+          ...maxedIds(pickedAugments),
+          ...shownExcept,
+        ]);
+        const pool = allAugments.filter((a) => !excludeIds.has(a.id));
+        [replacement] = drawAugments(pool, augmentCards[idx].rarity, 1);
+      }
       if (!replacement) return;
+      const chosen = replacement;
       setAugmentCards((prev) => {
         const nextCards = [...prev];
-        nextCards[idx] = replacement;
+        nextCards[idx] = chosen;
         return nextCards;
       });
       setRerolled((prev) => {
@@ -297,7 +363,7 @@ export function useArena(): ArenaState {
         return nextR;
       });
     },
-    [rerolled, pickedAugments, augmentCards, allAugments],
+    [rerolled, pickedAugments, augmentCards, allAugments, augmentSlotGranted],
   );
 
   const pickPrismatic = useCallback(
@@ -363,7 +429,7 @@ export function useArena(): ArenaState {
         const remaining = prev.filter((p) => p.augment.id !== removeId);
         // 분배 대상: 현재 레벨 < 최대 레벨인 증강(여유 capacity 보유).
         const caps = remaining.map(
-          (p) => MAX_AUGMENT_LEVEL[p.augment.rarity] - p.level,
+          (p) => p.augment.maxLevel - p.level,
         );
         const totalCap = caps.reduce((s, c) => s + c, 0);
         let toDistribute = Math.min(ENHANCE_LEVELS, totalCap);
@@ -388,7 +454,8 @@ export function useArena(): ArenaState {
 
   const buyItem = useCallback(
     (itemId: string, cost: number, sellValue?: number) => {
-      if (gold < cost || itemIds.includes(itemId)) return false;
+      if (gold < cost || itemIds.includes(itemId) || itemIds.length >= MAX_ITEMS)
+        return false;
       setGold((g) => g - cost);
       setItemIds((prev) => [...prev, itemId]);
       setItemPrices((prev) => ({

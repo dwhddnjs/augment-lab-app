@@ -17,7 +17,6 @@ import { GlassButton } from "@/components/ui/glass-button";
 import { GlassSurface } from "@/components/ui/glass-surface";
 import { Radius, Spacing } from "@/constants/theme";
 import {
-  MAX_AUGMENT_LEVEL,
   type ArenaAugment,
   type ArenaPickedAugment,
 } from "@/features/arena/types";
@@ -189,8 +188,7 @@ export function ArenaScreen() {
   const nextLevel = useCallback(
     (aug: ArenaAugment) => {
       const cur = arena.pickedAugments.find((p) => p.augment.id === aug.id);
-      const max = MAX_AUGMENT_LEVEL[aug.rarity];
-      return cur ? Math.min(cur.level + 1, max) : 1;
+      return cur ? Math.min(cur.level + 1, aug.maxLevel) : 1;
     },
     [arena.pickedAugments],
   );
@@ -214,6 +212,7 @@ export function ArenaScreen() {
           augmentLevels,
           prismaticIds: arena.prismaticIds,
           shardIds: arena.shardIds,
+          reforgeIds: arena.reforgeIds,
         });
       } catch {
         savingRef.current = false;
@@ -339,7 +338,7 @@ export function ArenaScreen() {
                   key={`${roundKey}-${arena.stepIndex}-${aug.id}`}
                   augment={aug}
                   level={nextLevel(aug)}
-                  maxLevel={MAX_AUGMENT_LEVEL[aug.rarity]}
+                  maxLevel={aug.maxLevel}
                   cardWidth={cardWidth}
                   index={i}
                   exitMode={exitModes[i]}
