@@ -163,6 +163,11 @@ function augUrlSmall(p) {
   const s = p.replace(/^\\/lol-game-data\\/assets/i, '').toLowerCase();
   return CDRAGON + '/plugins/rcp-be-lol-game-data/global/default' + s;
 }
+// 라이엇 컬러 원본은 접미사 없는 베이스 파일(silver_spoon.png 등)에 있다.
+function augUrlBase(p) {
+  const s = p.replace(/^\\/lol-game-data\\/assets/i, '').toLowerCase();
+  return CDRAGON + '/game' + s.replace(/_small(\\.\\w+)$/i, '$1');
+}
 // 앱의 cdragonItemIconUrl(iconPath)
 function itemUrl(p) {
   const s = p.replace(/^\\/lol-game-data\\/assets/i, '').toLowerCase();
@@ -187,7 +192,11 @@ function augCard(a, isItem) {
   img.src = isItem ? itemUrl(a.iconPath) : augUrl(a.iconPath);
   img.alt = a.ko;
   img.onerror = () => {
-    if (!isItem && !img.dataset.fb) { img.dataset.fb = '1'; img.src = augUrlSmall(a.iconPath); return; }
+    if (!isItem) {
+      const st = img.dataset.step || '0';
+      if (st === '0') { img.dataset.step = '1'; img.src = augUrlBase(a.iconPath); return; }
+      if (st === '1') { img.dataset.step = '2'; img.src = augUrlSmall(a.iconPath); return; }
+    }
     img.replaceWith(Object.assign(document.createElement('div'),
       { className: 'icon err', textContent: 'no img' }));
   };

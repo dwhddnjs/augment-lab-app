@@ -1200,14 +1200,6 @@
     "maxLevel": 2
   },
   {
-    "id": "null-augment",
-    "name": "증강 없음",
-    "description": "없음",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/canttouchthis_small.png",
-    "maxLevel": 1
-  },
-  {
     "id": "hat-trick",
     "name": "해트트릭",
     "description": "즉시 모자 3개를 얻으며, 카파 주스의 가격이 350 감소합니다.\n\n체력이 30% 아래로 떨어지면 이동 속도와 보호막을 얻지만, 모자를 하나 잃습니다.",
@@ -1420,7 +1412,7 @@
     "name": "희생: 골드",
     "description": "현재 체력의 25%를 희생합니다.\n\n4라운드 후 추가 골드 증강을 얻고 체력을 회복합니다.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificeforgold_small.png",
     "maxLevel": 1
   },
   {
@@ -1572,7 +1564,7 @@
     "name": "희생: 프리즘",
     "description": "현재 체력의 50%를 희생합니다.\n\n7라운드 후 추가 프리즘 증강을 얻고 체력을 회복합니다.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificeforprismatic_small.png",
     "maxLevel": 1
   },
   {

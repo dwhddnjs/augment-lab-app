@@ -123,7 +123,13 @@ function iconUrl(p) {
   const s = p.replace(/^\\/lol-game-data\\/assets/i, '').toLowerCase();
   return CDRAGON + '/game' + s.replace(/_small(\\.\\w+)$/i, '_large$1');
 }
-// large 자산이 없는 신규(Kiwi) 아이콘용 small 폴백 — 앱과 동일
+// 라이엇 컬러 원본은 접미사 없는 베이스 파일에 있다 — 앱과 동일
+function iconUrlBase(p) {
+  if (/^https?:\\/\\//i.test(p)) return p;
+  const s = p.replace(/^\\/lol-game-data\\/assets/i, '').toLowerCase();
+  return CDRAGON + '/game' + s.replace(/_small(\\.\\w+)$/i, '$1');
+}
+// large·base 자산이 없는 신규(Kiwi) 아이콘용 small 폴백 — 앱과 동일
 function iconUrlSmall(p) {
   if (/^https?:\\/\\//i.test(p)) return p;
   const s = p.replace(/^\\/lol-game-data\\/assets/i, '').toLowerCase();
@@ -168,7 +174,9 @@ function render() {
       img.src = iconUrl(a.iconPath);
       img.alt = a.ko;
       img.onerror = () => {
-        if (!img.dataset.fb) { img.dataset.fb = '1'; img.src = iconUrlSmall(a.iconPath); return; }
+        const st = img.dataset.step || '0';
+        if (st === '0') { img.dataset.step = '1'; img.src = iconUrlBase(a.iconPath); return; }
+        if (st === '1') { img.dataset.step = '2'; img.src = iconUrlSmall(a.iconPath); return; }
         img.replaceWith(Object.assign(document.createElement('div'),
           { className: 'icon err', textContent: 'no img' }));
       };
