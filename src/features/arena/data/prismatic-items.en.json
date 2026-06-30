@@ -2,161 +2,161 @@
   {
     "id": "447100",
     "name": "Mirage Blade",
-    "description": "<mainText><stats><attention> 65</attention> Adaptive Force<br><attention> 60%</attention> Attack Speed<br><attention> 6%</attention> Move Speed</stats><br><br><passive>Blur</passive><br> <OnHit>On-Hit</OnHit> reduce the remaining cooldowns of your Dash and Blink Abilities by 20% (reduced to 5% for Ultimates).</mainText>",
+    "description": "65 Adaptive Force\n60% Attack Speed\n6% Move Speed\n\nBlur\nOn-hit, reduce Dash and Blink ability cooldowns by 20% (5% for ultimates).",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7100_MirageBlade.png",
     "price": 2750
   },
   {
     "id": "447101",
     "name": "Gambler's Blade",
-    "description": "<mainText><stats><attention> 70%</attention> Attack Speed<br><attention> 40</attention> Ability Haste<br><attention> 8%</attention> Move Speed</stats><br><br><passive>Money In The Bank</passive><br>Your Attacks and Abilities have a 12% chance to bank between <gold>30 and 245 Gold</gold> when they hit an enemy. On Round Win, cash out. On Round Lose, lose 25% of your bank.</mainText>",
+    "description": "70% Attack Speed\n40 Ability Haste\n8% Move Speed\n\nMoney In The Bank\nAttacks and abilities have a 12% chance to bank 30-245 gold on hit. Cash out on round win; lose 25% on round loss.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7101_Gamblers_Blade.png",
     "price": 2750
   },
   {
     "id": "447102",
     "name": "Reality Fracture",
-    "description": "80 Ability Power\n40% Attack Speed\n300 Health\n\nZZ'Rot\nOn attack or when damaging an enemy with an ability, summon 8 Voidgrubs to attack the target. Voidgrubs deal 6 (+4% AD) (+8% AP) magic damage and live for up to 3 seconds. 12s cooldown. When you die, spawn 6.",
+    "description": "80 Ability Power\n40% Attack Speed\n300 Health\n\nZZ'Rot\nDamaging an enemy summons 8 Voidgrubs to deal bonus magic damage. (12s cooldown)",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7102_RealityFracture.png",
     "price": 2750
   },
   {
     "id": "447103",
     "name": "Hemomancer's Helm",
-    "description": "<mainText><stats><attention> 70</attention> Attack Damage<br><attention> 30</attention> Ability Haste<br><attention> 15%</attention> Omnivamp</stats><br><br><passive>Scarlet Allegiance</passive><br>Threshold <lifeSteal>30% Lifesteal/Omnivamp</lifeSteal>: Gain <scaleHealth>500 Max Health</scaleHealth>. Drain 10% of all damage nearby enemies take.</mainText>",
+    "description": "70 Attack Damage\n30 Ability Haste\n15% Omnivamp\n\nScarlet Allegiance\nAt 30% lifesteal/omnivamp, gain 500 max health. Drain 10% of damage nearby enemies take.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7103_HemomancersHelm.png",
     "price": 2750
   },
   {
     "id": "447104",
     "name": "Innervating Locket",
-    "description": "70 Ability Power\n20 Ability Haste\n200 Health\n\nFill the Soul\nAny ability cast within 800 range grants a charge. At 30 charges, gain a 400-750 shield, 100-250 ability power, and 15-25% move speed for the rest of the round (based on level).",
+    "description": "70 Ability Power\n20 Ability Haste\n200 Health\n\nFill the Soul\nAbilities cast nearby grant charges; at 30, gain a shield, ability power, and move speed for the round.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/3032_Innervating_Locket.png",
     "price": 2750
   },
   {
     "id": "447105",
     "name": "Empyrean Promise",
-    "description": "70 Ability Power\n18% Heal and Shield Power\n30 Ability Haste\n125% Base Mana Regen\n\nVigilance (Active)\nTeleport to your ally and grant a 100-250 (+100% AP) (+10% bonus health) shield for 5s when landing. Can be used when an ally is downed. 20s cooldown.",
+    "description": "70 Ability Power\n18% Heal and Shield Power\n30 Ability Haste\n125% Base Mana Regen\n\nVigilance (Active)\nTeleport to an ally and grant a shield. Usable when an ally is downed. (20s cooldown)",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7105_AngelicPromise.png",
     "price": 2750
   },
   {
     "id": "447106",
     "name": "Dragonheart",
-    "description": "Inner Flame\nIncreases your health, armor, magic resist, attack damage, ability power, attack speed, and ability haste by 4% per Dragon Soul you possess (up to 24% with 6 souls). Every 2 rounds, gain a Dragon Soul. If you already have every elemental soul and would gain another, an ancient power awakens within... When purchased past round 5, immediately gain 1 soul, plus 1 for every 2 rounds beyond round 5.",
+    "description": "Inner Flame\nGain a Dragon Soul every 2 rounds. Each soul boosts your core stats by 4% (up to 24% with 6 souls).",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7106_DragonHeart.png",
     "price": 2750
   },
   {
     "id": "447107",
     "name": "Decapitator",
-    "description": "80 Adaptive Force\n50% Attack Speed\n8% Move Speed\n\nAnticipation\nBasic attacks (1 stack) and non-ultimate ability casts (2 stacks) grant Anticipation for the rest of the round (up to 40 stacks). Per stack, gain 3% ultimate damage and 2 ultimate haste (up to 120% ultimate damage and 80 ultimate haste).",
+    "description": "80 Adaptive Force\n50% Attack Speed\n8% Move Speed\n\nAnticipation\nAttacks and abilities build stacks (up to 40). Each grants 3% ultimate damage and 2 ultimate haste.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7107_Decapitator.png",
     "price": 2750
   },
   {
     "id": "447108",
     "name": "Runecarver",
-    "description": "80 Ability Power\n20 Ability Haste\n4% Move Speed\n\nHelix / Spiral Out\nMoving, attacking, and dealing damage with abilities build Energized stacks and trigger Energized Action when ready. On Energized Action, gain a Rune stack for the rest of the round, then fire a missile per Rune stack dealing 20-45 (+11% bonus AD) (+8% AP) (+0.3 per 100 bonus health) magic damage.",
+    "description": "80 Ability Power\n20 Ability Haste\n4% Move Speed\n\nHelix / Spiral Out\nMoving, attacking, and dealing ability damage charge an Energized Action that fires missiles for magic damage per Rune stack.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7108_Runecarver.png",
     "price": 2750
   },
   {
     "id": "447109",
     "name": "Cruelty",
-    "description": "80 Ability Power\n30 Armor\n30 Magic Resist\n\nWatch Them Fall\nOn immobilizing or grounding an enemy champion, summon a comet above them. The comet lands after 1 second, dealing 50-150 (+40% AP) (+4% max health) magic damage in the area. 6s cooldown per target per spell cast.",
+    "description": "80 Ability Power\n30 Armor\n30 Magic Resist\n\nWatch Them Fall\nImmobilizing or grounding an enemy drops a comet for bonus magic damage. (6s per target)",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/6035_Fighter_T3_SilvermereDawn.png",
     "price": 2750
   },
   {
     "id": "447110",
     "name": "Moonflair Spellblade",
-    "description": "<mainText><stats><attention> 85</attention> Ability Power<br><attention> 400</attention> Health<br><attention> 30%</attention> Tenacity</stats><br><br><passive>Relentless</passive><br>When you use an Ability, reset your auto attack timer and gain <attackSpeed>90% Attack Speed</attackSpeed> for your next 2 Attacks.<br><br>When you Attack, reduce your non-Dash and Blink Abilities Ability Cooldowns by 0.5 seconds.</mainText>",
+    "description": "85 Ability Power\n400 Health\n30% Tenacity\n\nRelentless\nCasting an ability resets your attack timer and grants 90% attack speed for 2 attacks. Attacking cuts ability cooldowns by 0.5s.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7110_MoonflairSpellblade.png",
     "price": 2750
   },
   {
     "id": "447111",
     "name": "Overlord's Bloodmail",
-    "description": "40 Attack Damage\n400 Health\n\nTyranny / Retribution\nTyranny: gain attack damage equal to 3% of your bonus health.\nRetribution: gain up to 17.5% increased attack damage based on percent missing health.",
+    "description": "40 Attack Damage\n400 Health\n\nTyranny / Retribution\nTyranny: gain attack damage equal to 3% of bonus health.\nRetribution: gain up to 17.5% attack damage based on missing health.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7111_OverlordsBloodmail.png",
     "price": 2500
   },
   {
     "id": "447112",
     "name": "Flesheater",
-    "description": "<mainText><stats><attention> 70</attention> Adaptive Force<br><attention> 500</attention> Health<br><attention> 20</attention> Ability Haste</stats><br><br><passive>Hack the Meat</passive><br>Dealing damage shreds 3 <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for 5 seconds, stacking up to 10 times. Applying stacks has a 1 second cooldown per Ability.<br><br><passive>Cannibalize</passive><br>On Champion Takedown, steal 10% of their stats and size for the rest of the round.</mainText>",
+    "description": "70 Adaptive Force\n500 Health\n20 Ability Haste\n\nHack the Meat\nDealing damage shreds armor and magic resist (up to 10 stacks).\nCannibalize: on takedown, steal 10% of the target’s stats and size.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7112_Flesheater.png",
     "price": 2750
   },
   {
     "id": "447113",
     "name": "Detonation Orb",
-    "description": "<mainText><stats><attention> 90</attention> Ability Power<br><attention> 12</attention> Magic Penetration<br><attention> 600</attention> Mana<br><attention> 20</attention> Ability Haste</stats><br><br><passive>The Bomb</passive><br>Ability damage marks the target, storing 20% of the damage dealt (increased to 25% against <keyword>Immobilized</keyword> enemies). <br><br>3 seconds after you last damage the target with an ability, detonate the stored damage on them. If at any point the damage is enough to kill the target, detonate immediately.</mainText>",
+    "description": "90 Ability Power\n12 Magic Penetration\n600 Mana\n20 Ability Haste\n\nThe Bomb\nStore 20% of ability damage (25% vs immobilized), then detonate after 3s—or instantly if it would kill.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7113_DetonationOrb.png",
     "price": 2750
   },
   {
     "id": "447114",
     "name": "Reverberation",
-    "description": "35 Armor\n35 Magic Resist\n40% Attack Speed\n\nReverberate / Resonate / Rumble\nReverberate: at combat start gain 50 max health per 10% bonus attack speed.\nResonate: basic attacks deal 10 (+2% bonus health) on-hit magic damage.\nRumble: immobilizing or grounding an enemy champion applies on-hit effects 3 times.",
+    "description": "35 Armor\n35 Magic Resist\n40% Attack Speed\n\nReverberate / Resonate / Rumble\nReverberate: gain 50 max health per 10% bonus attack speed at combat start.\nResonate: basic attacks deal bonus on-hit magic damage.\nRumble: immobilizing an enemy applies on-hit effects 3 times.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447114_Reverberation.png",
     "price": 2750
   },
   {
     "id": "447115",
     "name": "Regicide",
-    "description": "<mainText><stats><attention> 60</attention> Attack Damage<br><attention> 15</attention> Lethality<br><attention> 8%</attention> Move Speed</stats><br><br><passive>End the Line</passive><br>At the start of each round, declare the lowest health enemy the <keywordMajor>Regent</keywordMajor>. Getting a takedown on the <keywordMajor>Regent</keywordMajor> grants you a permanent <physicalDamage>15 Attack Damage</physicalDamage> and refreshes your Ultimate's Cooldown.</mainText>",
+    "description": "60 Attack Damage\n15 Lethality\n8% Move Speed\n\nEnd the Line\nEach round, the lowest-health enemy becomes the Regent. A takedown grants permanent 15 attack damage and resets your ultimate.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447115_Regicide.png",
     "price": 2750
   },
   {
     "id": "447116",
     "name": "Kinkou Jitte",
-    "description": "85 Adaptive Force\n400 Health\n30 Ability Haste\n\nBetween the Ribs\nYou can see weakpoints in nearby enemy champions. Dealing damage through a weakpoint deals an additional 3% (+3% per 100 AD) (+2% per 100 AP) max health true damage and grants 50-75% move speed for 1.5 seconds.",
+    "description": "85 Adaptive Force\n400 Health\n30 Ability Haste\n\nBetween the Ribs\nYou see weakpoints on nearby enemies. Hitting one deals bonus max-health true damage and grants move speed.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447116_KinkouJitte.png",
     "price": 2750
   },
   {
     "id": "447118",
     "name": "Pyromancer's Cloak",
-    "description": "85 Adaptive Force\n400 Health\n15 Ability Haste\n\nSpark / Cleansing Flame\nSpark (5s cooldown): attack or ability hits Burn an enemy champion for 100-350 magic damage over 3 seconds.\nCleansing Flame: applying a Burn creates a nearby Blaze for 5 seconds. While in a Blaze you gain 20% move speed and restore 60-150 health per second, while enemies take 100 magic damage per second. Each Blaze scales with the number of unique Burn sources you have.",
+    "description": "85 Adaptive Force\n400 Health\n15 Ability Haste\n\nSpark / Cleansing Flame\nSpark: attacks and abilities Burn enemies for magic damage (5s cooldown).\nCleansing Flame: a Burn creates a Blaze that heals and speeds allies while damaging enemies.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447118_PyromancersCloak.png",
     "price": 2750
   },
   {
     "id": "447119",
     "name": "Lightning Rod",
-    "description": "500 Health\n30 Armor\n30 Magic Resist\n20 Ability Haste\n\nCall Lightning / Fully Automated\nEvery 16 seconds, autocast a stormcloud that fires a lightning bolt dealing 135-230 (+30% bonus AD) (+50% AP) (+10% max health) magic damage and slowing by 30% for 2 seconds. If struck by the lightning, gain a shield equal to 14% max health (+75% AP) for 2 seconds.\nFully Automated: autocast spells benefit from your ability haste. Minimum cooldown 5 seconds.",
+    "description": "500 Health\n30 Armor\n30 Magic Resist\n20 Ability Haste\n\nCall Lightning / Fully Automated\nEvery 16s, a lightning bolt deals magic damage and slows. Being struck grants a shield.\nFully Automated: autocast spells benefit from ability haste.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447119_LightningRod.png",
     "price": 2750
   },
   {
     "id": "447120",
     "name": "Diamond-Tipped Spear",
-    "description": "<mainText><stats><attention> 75</attention> Adaptive Force<br><attention> 40%</attention> Attack Speed</stats><br><br><passive>Reach Weapon</passive><br>Increase your attack range by 75.<br><br><passive>Sweet Spot</passive><br>Deal up to 30% increased damage with Attacks and 50% with Abilities based on how far your target is from you. Damage caps at 700 units. </mainText>",
+    "description": "75 Adaptive Force\n40% Attack Speed\n\nReach Weapon / Sweet Spot\nReach Weapon: attack range increased by 75.\nSweet Spot: deal up to 30% more attack and 50% more ability damage based on distance to target.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447120_DiamondTippedSpear.png",
     "price": 2750
   },
   {
     "id": "447121",
     "name": "Twilight's Edge",
-    "description": "70 Attack Damage\n100 Ability Power\n\nThe Path Between\nAt 100 bonus AD and 140 AP, throwing weapons orbit you and continuously damage enemies they hit.\nMaterial World: increase attack damage by 25% and gain 50-150% attack speed.\nSpirit World: increase ability power by 25% and gain 30-120 ability haste.",
+    "description": "70 Attack Damage\n100 Ability Power\n\nThe Path Between\nMaterial World: +25% AD and attack speed. Spirit World: +25% AP and ability haste.\nAt the threshold, orbiting weapons continuously damage enemies they hit.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447121_TwilightsEdge.png",
     "price": 2750
   },
   {
     "id": "447122",
     "name": "Black Hole Gauntlet",
-    "description": "900 Health\n25 Ability Haste\n\nAccretion / Dark Star (Active)\nAccretion: on-hit gain 1 stack, or 5 for immobilizing an enemy champion (up to 50 for the rest of the round). Each stack increases your size by 2%.\nDark Star (Active): summon a black hole scaling with your size, slowing nearby enemies by 30% while those in the center are pulled in and take 30-100 (+5% max health) magic damage each second, granting 1 Accretion stack. Lasts 2 seconds.",
+    "description": "900 Health\n25 Ability Haste\n\nAccretion / Dark Star (Active)\nAccretion: on-hit and immobilizing stacks grow your size (up to 50).\nDark Star: summon a black hole that pulls in nearby enemies and deals magic damage.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447122_BlackHoleGauntlet.png",
     "price": 2750
   },
   {
     "id": "447123",
     "name": "Puppeteer",
-    "description": "30% Attack Speed\n15% Heal and Shield Power\n40 Ability Haste\n150% Base Mana Regen\n\nPull Their Strings\nAttacking a champion adds a stack for 15 seconds. At 4 stacks, Berserk them for 2 seconds. Berserked enemies gain 50% attack speed and 40% move speed. Healing, shielding, or buffing yourself or an ally with an ability reduces the cooldown by 5 seconds. If only one enemy is alive, Fear them instead for the same duration.",
+    "description": "30% Attack Speed\n15% Heal and Shield Power\n40 Ability Haste\n150% Base Mana Regen\n\nPull Their Strings\nAttacking a champion 4 times Berserks them for 2s. Healing, shielding, or buffing an ally reduces the cooldown.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447123_Puppeteer.png",
     "price": 2750
   }

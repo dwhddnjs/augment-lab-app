@@ -1200,14 +1200,6 @@
     "maxLevel": 2
   },
   {
-    "id": "null-augment",
-    "name": "Null Augment",
-    "description": "Null",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/canttouchthis_small.png",
-    "maxLevel": 1
-  },
-  {
     "id": "hat-trick",
     "name": "Hat Trick",
     "description": "Instantly gain 3 hats, and reduce the price of Cappa Juice by 350.\n\nWhen your health drops below 30% gain Move Speed and a shield, but lose one hat.",
@@ -1420,7 +1412,7 @@
     "name": "Sacrifice: For Gold",
     "description": "Sacrifice 25% of your current health.\n\nAfter 4 rounds, gain a bonus Gold Augment and restore your health.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificeforgold_small.png",
     "maxLevel": 1
   },
   {
@@ -1572,7 +1564,7 @@
     "name": "Sacrifice: For Prismatic",
     "description": "Sacrifice 50% of your current health.\n\nAfter 7 rounds, gain a bonus Prismatic Augment and restore your health.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificeforprismatic_small.png",
     "maxLevel": 1
   },
   {

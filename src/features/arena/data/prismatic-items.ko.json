@@ -2,161 +2,161 @@
   {
     "id": "447100",
     "name": "신기루 검",
-    "description": "<mainText><stats>적응형 능력치 <attention> 65</attention><br>공격 속도 <attention> 60%</attention><br>이동 속도 <attention> 6%</attention></stats><br><br><passive>흐릿한 형체</passive><br><OnHit>적중 시</OnHit>  돌진과 순간이동 스킬의 남은 재사용 대기시간이 20% 감소합니다. (궁극기는 5%까지 감소)</mainText>",
+    "description": "적응형 능력치 65\n공격 속도 60%\n이동 속도 6%\n\n흐릿한 형체\n적중 시 돌진·점멸 스킬의 재사용 대기시간이 20% 감소합니다(궁극기 5%).",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7100_MirageBlade.png",
     "price": 2750
   },
   {
     "id": "447101",
     "name": "도박꾼의 칼날",
-    "description": "<mainText><stats>공격 속도 <attention> 70%</attention><br>스킬 가속 <attention> 40</attention><br>이동 속도 <attention> 8%</attention></stats><br><br><passive>예금</passive><br>기본 공격과 스킬이 적에게 적중하면 12% 확률로 <gold>30~245골드</gold>를 비축합니다. 라운드 승리 시 비축한 골드를 획득합니다. 라운드 패배 시 비축한 골드의 25%를 잃습니다.</mainText>",
+    "description": "공격 속도 70%\n스킬 가속 40\n이동 속도 8%\n\n예금\n공격·스킬 적중 시 12% 확률로 30~245골드를 비축합니다. 라운드 승리 시 획득, 패배 시 25%를 잃습니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7101_Gamblers_Blade.png",
     "price": 2750
   },
   {
     "id": "447102",
     "name": "현실 균열",
-    "description": "주문력 80\n공격 속도 40%\n체력 300\n\n즈롯\n기본 공격 시 또는 스킬로 적에게 피해를 입히면 공허 유충을 8마리 소환해 대상을 공격합니다. 공허 유충은 6(+공격력의 4%)(+주문력의 8%)의 마법 피해를 입히고 최대 3초까지 생존합니다. 재사용 대기시간은 12초입니다. 사망하면 6마리를 소환합니다.",
+    "description": "주문력 80\n공격 속도 40%\n체력 300\n\n즈롯\n공격·스킬로 피해를 입히면 공허 유충 8마리를 소환해 추가 마법 피해를 입힙니다. (재사용 12초)",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7102_RealityFracture.png",
     "price": 2750
   },
   {
     "id": "447103",
     "name": "혈마법사의 투구",
-    "description": "<mainText><stats>공격력 <attention> 70</attention><br>스킬 가속 <attention> 30</attention><br>모든 피해 흡혈 <attention> 15%</attention></stats><br><br><passive>붉은 연대</passive><br><lifeSteal>생명력 흡수/모든 피해 흡혈 기준 30%</lifeSteal>: <scaleHealth>최대 체력이 500</scaleHealth> 증가합니다. 주변 적이 입는 모든 피해의 10%를 흡수합니다.</mainText>",
+    "description": "공격력 70\n스킬 가속 30\n모든 피해 흡혈 15%\n\n붉은 연대\n흡혈 30% 도달 시 최대 체력이 500 증가합니다. 주변 적이 받는 피해의 10%를 흡수합니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7103_HemomancersHelm.png",
     "price": 2750
   },
   {
     "id": "447104",
     "name": "활력증진의 펜던트",
-    "description": "주문력 70\n스킬 가속 20\n체력 200\n\n영혼 채우기\n800 사거리 내에서 사용되는 스킬이 1회 중첩을 부여합니다. 30회 충전 시 라운드가 끝날 때까지 400~750의 피해를 흡수하는 보호막, 100~250의 주문력, 15~25%의 이동 속도를 얻습니다(레벨에 비례).",
+    "description": "주문력 70\n스킬 가속 20\n체력 200\n\n영혼 채우기\n주변에서 사용된 스킬을 30회 충전하면 보호막·주문력·이동 속도를 라운드 내내 얻습니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/3032_Innervating_Locket.png",
     "price": 2750
   },
   {
     "id": "447105",
     "name": "창공의 서약",
-    "description": "주문력 70\n체력 회복 및 보호막 18%\n스킬 가속 30\n기본 마나 재생 125%\n\n경계 (활성화)\n아군에게 순간이동하고 착지 시 5초 동안 100~250(+주문력의 100%)(+추가 체력의 10%)의 피해를 흡수하는 보호막을 부여합니다. 아군이 쓰러졌을 때 사용할 수 있습니다. 재사용 대기시간 20초.",
+    "description": "주문력 70\n체력 회복 및 보호막 18%\n스킬 가속 30\n기본 마나 재생 125%\n\n경계 (활성화)\n아군에게 순간이동해 보호막을 부여합니다. 아군이 쓰러졌을 때 사용할 수 있습니다. (재사용 20초)",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7105_AngelicPromise.png",
     "price": 2750
   },
   {
     "id": "447106",
     "name": "용의 심장",
-    "description": "내면의 열정\n보유한 용 영혼 하나당 체력, 방어력, 마법 저항력, 공격력, 주문력, 공격 속도, 스킬 가속이 4%씩 증가합니다(영혼 6개 기준 최대 24%). 2라운드마다 용 영혼을 얻습니다. 이미 모든 원소의 영혼을 가진 상태에서 또 다른 영혼을 얻으면 내면에서 고대의 힘이 깨어납니다. (5라운드 이후 구매 시 바로 영혼 1개를 받고, 이후 2라운드마다 1개를 추가로 받습니다.)",
+    "description": "내면의 열정\n2라운드마다 용 영혼을 얻습니다. 영혼 하나당 주요 능력치가 4%씩 증가합니다(영혼 6개 기준 최대 24%).",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7106_DragonHeart.png",
     "price": 2750
   },
   {
     "id": "447107",
     "name": "참수자",
-    "description": "적응형 능력치 80\n공격 속도 50%\n이동 속도 8%\n\n예측\n기본 공격(1중첩)과 궁극기 외 스킬(2중첩)이 남은 라운드 동안 중첩을 부여합니다(최대 40중첩). 중첩당 궁극기 피해량이 3%, 궁극기 스킬 가속이 2 증가합니다(최대 궁극기 피해 120%, 궁극기 가속 80).",
+    "description": "적응형 능력치 80\n공격 속도 50%\n이동 속도 8%\n\n예측\n공격·스킬로 중첩을 쌓습니다(최대 40). 중첩당 궁극기 피해 3%·궁극기 가속 2가 증가합니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7107_Decapitator.png",
     "price": 2750
   },
   {
     "id": "447108",
     "name": "룬 조각기",
-    "description": "주문력 80\n스킬 가속 20\n이동 속도 4%\n\n나선 / 소용돌이\n이동, 기본 공격 및 스킬로 피해를 입히면 충전 상태 중첩이 쌓이고, 준비가 끝나면 충전 상태로 행동이 발동합니다. 충전 상태로 행동 시 라운드가 끝날 때까지 룬 중첩을 얻고, 룬 중첩 하나당 발사체를 날려 20~45(+추가 공격력의 11%)(+주문력의 8%)(+추가 체력 100당 0.3)의 마법 피해를 입힙니다.",
+    "description": "주문력 80\n스킬 가속 20\n이동 속도 4%\n\n나선 / 소용돌이\n이동·공격·스킬 피해로 충전 후 발동하여 룬 중첩을 얻고, 중첩마다 발사체로 마법 피해를 입힙니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7108_Runecarver.png",
     "price": 2750
   },
   {
     "id": "447109",
     "name": "잔혹 행위",
-    "description": "주문력 80\n방어력 30\n마법 저항력 30\n\n추락을 목도하라\n적 챔피언에게 이동 불가 또는 속박 효과를 적용하면 대상 위로 혜성을 소환합니다. 혜성은 1초 후 떨어지며 해당 지역에 50~150(+주문력의 40%)(+최대 체력의 4%)의 마법 피해를 추가로 입힙니다. 대상별 재사용 대기시간은 스킬 사용 1회당 6초입니다.",
+    "description": "주문력 80\n방어력 30\n마법 저항력 30\n\n추락을 목도하라\n적 챔피언을 이동 불가·속박 상태로 만들면 혜성을 떨어뜨려 추가 마법 피해를 입힙니다. (대상별 6초)",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/6035_Fighter_T3_SilvermereDawn.png",
     "price": 2750
   },
   {
     "id": "447110",
     "name": "달빛 마법검",
-    "description": "<mainText><stats>주문력 <attention> 85</attention><br>체력 <attention> 400</attention><br>강인함 <attention> 30%</attention></stats><br><br><passive>무자비</passive><br>스킬 사용 시 기본 공격 대기시간을 초기화하고 다음 2회의 기본 공격 시 <attackSpeed>공격 속도가 90%</attackSpeed> 증가합니다.<br><br>기본 공격 시 돌진 제외 및 순간이동 스킬 재사용 대기시간이 0.5초 감소합니다.</mainText>",
+    "description": "주문력 85\n체력 400\n강인함 30%\n\n무자비\n스킬 사용 시 기본 공격 대기시간을 초기화하고 다음 2회 공격의 공격 속도가 90% 증가합니다. 기본 공격 시 스킬 재사용 대기시간이 0.5초 감소합니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7110_MoonflairSpellblade.png",
     "price": 2750
   },
   {
     "id": "447111",
     "name": "지배자의 피갑옷",
-    "description": "공격력 40\n체력 400\n\n폭정 / 응징\n폭정: 추가 체력의 3%만큼 공격력이 증가합니다.\n응징: 잃은 체력에 비례해 공격력이 최대 17.5%까지 증가합니다.",
+    "description": "공격력 40\n체력 400\n\n폭정 / 응징\n폭정: 추가 체력의 3%만큼 공격력이 증가합니다.\n응징: 잃은 체력에 비례해 공격력이 최대 17.5% 증가합니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7111_OverlordsBloodmail.png",
     "price": 2500
   },
   {
     "id": "447112",
     "name": "살점포식자",
-    "description": "<mainText><stats>적응형 능력치 <attention> 70</attention><br>체력 <attention> 500</attention><br>스킬 가속 <attention> 20</attention></stats><br><br><passive>난도질</passive><br>피해를 입히면 5초 동안 <scaleArmor>방어력</scaleArmor>과 <scaleMR>마법 저항력</scaleMR>을 3 감소시킵니다. 이 효과는 10회까지 중첩됩니다. 중첩 적용 시 스킬당 1초의 재사용 대기시간이 적용됩니다.<br><br><passive>포식</passive><br>챔피언 처치 관여 시 남은 라운드 동안 대상의 능력치와 크기를 10% 훔칩니다.</mainText>",
+    "description": "적응형 능력치 70\n체력 500\n스킬 가속 20\n\n난도질\n피해를 입히면 방어력·마법 저항력을 깎습니다(최대 10중첩).\n포식: 챔피언 처치 관여 시 대상의 능력치와 크기를 10% 훔칩니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7112_Flesheater.png",
     "price": 2750
   },
   {
     "id": "447113",
     "name": "폭발의 구",
-    "description": "<mainText><stats>주문력 <attention> 90</attention><br>마법 관통력 <attention> 12</attention><br>마나 <attention> 600</attention><br>스킬 가속 <attention> 20</attention></stats><br><br><passive>폭탄</passive><br>스킬 피해가 대상에게 표식을 남겨 입힌 피해의 20%를 비축합니다. (<keyword>이동 불가</keyword> 상태인 적의 경우 25%로 증가) <br><br>대상에게 마지막 스킬 피해를 입힌 후 3초가 지나면 비축한 피해량을 대상에게 터뜨립니다. 대상을 처치할 만큼 피해량을 비축하면 그 즉시 터뜨립니다.</mainText>",
+    "description": "주문력 90\n마법 관통력 12\n마나 600\n스킬 가속 20\n\n폭탄\n스킬 피해의 20%를 비축했다가 3초 뒤 터뜨립니다(이동 불가 적 25%). 처치 가능할 만큼 쌓이면 즉시 터집니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7113_DetonationOrb.png",
     "price": 2750
   },
   {
     "id": "447114",
     "name": "반향",
-    "description": "방어력 35\n마법 저항력 35\n공격 속도 40%\n\n반향 유발 / 공명 / 굉음\n반향 유발: 전투 시작 시 추가 공격 속도 10%당 50의 최대 체력을 얻습니다.\n공명: 기본 공격 적중 시 대상에게 10(+추가 체력의 2%)의 마법 피해를 입힙니다.\n굉음: 적 챔피언을 이동 불가 상태로 만들거나 이동 스킬을 사용할 수 없게 하면 적중 시 효과를 3회 적용합니다.",
+    "description": "방어력 35\n마법 저항력 35\n공격 속도 40%\n\n반향 유발 / 공명 / 굉음\n반향 유발: 전투 시작 시 추가 공격 속도 10%당 최대 체력 50을 얻습니다.\n공명: 기본 공격에 추가 마법 피해가 붙습니다.\n굉음: 이동을 방해하면 적중 효과를 3회 적용합니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447114_Reverberation.png",
     "price": 2750
   },
   {
     "id": "447115",
     "name": "섭정 시해",
-    "description": "<mainText><stats>공격력 <attention> 60</attention><br>물리 관통력 <attention> 15</attention><br>이동 속도 <attention> 8%</attention></stats><br><br><passive>혈통 끊기</passive><br>라운드가 시작할 때마다 가장 체력이 낮은 적을 <keywordMajor>섭정</keywordMajor>으로 선언합니다. <keywordMajor>섭정</keywordMajor>을 처치하는 데 관여하면 영구적으로 <physicalDamage>공격력이 15</physicalDamage> 증가하고 궁극기 재사용 대기시간이 초기화됩니다.</mainText>",
+    "description": "공격력 60\n물리 관통력 15\n이동 속도 8%\n\n혈통 끊기\n라운드마다 체력이 가장 낮은 적을 섭정으로 지정합니다. 처치에 관여하면 공격력이 영구히 15 증가하고 궁극기가 초기화됩니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447115_Regicide.png",
     "price": 2750
   },
   {
     "id": "447116",
     "name": "킨코우 십수",
-    "description": "적응형 능력치 85\n체력 400\n스킬 가속 30\n\n늑골 사이\n주변 적 챔피언의 약점이 보입니다. 약점을 통해 피해를 입히면 최대 체력의 3%(+공격력 100당 3%)(+주문력 100당 2%)에 해당하는 고정 피해를 추가로 입히고 1.5초 동안 이동 속도가 50~75% 증가합니다.",
+    "description": "적응형 능력치 85\n체력 400\n스킬 가속 30\n\n늑골 사이\n주변 적의 약점이 보입니다. 약점으로 피해를 입히면 최대 체력 비례 고정 피해를 추가하고 이동 속도가 증가합니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447116_KinkouJitte.png",
     "price": 2750
   },
   {
     "id": "447118",
     "name": "화염술사의 망토",
-    "description": "적응형 능력치 85\n체력 400\n스킬 가속 15\n\n불꽃 / 정화의 화염\n불꽃(재사용 대기시간 5초): 적 챔피언에게 기본 공격 또는 스킬이 적중하면 3초에 걸쳐 100~350의 마법 피해를 입히며 불태웁니다.\n정화의 화염: 적 챔피언에게 화상을 적용하면 5초 동안 주변에 불길을 생성합니다. 불길 안에서는 이동 속도가 20% 증가하고 매초 60~150의 체력을 회복하며, 안에 있는 적은 매초 100의 마법 피해를 입습니다. 각 불길의 크기와 세기는 화상 근원의 개수에 비례합니다.",
+    "description": "적응형 능력치 85\n체력 400\n스킬 가속 15\n\n불꽃 / 정화의 화염\n불꽃: 공격·스킬 적중 시 화상으로 마법 피해를 입힙니다(재사용 5초).\n정화의 화염: 화상을 적용하면 불길을 만들어 아군을 회복·가속하고 적에게 피해를 입힙니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447118_PyromancersCloak.png",
     "price": 2750
   },
   {
     "id": "447119",
     "name": "번개 막대",
-    "description": "체력 500\n방어력 30\n마법 저항력 30\n스킬 가속 20\n\n번개 소환 / 완전 자동화\n16초마다 자동 사용으로 먹구름을 소환합니다. 먹구름은 잠시 후 번개를 내리쳐 135~230(+추가 공격력의 30%)(+주문력의 50%)(+최대 체력의 10%)의 마법 피해를 입히고 2초 동안 30% 둔화시킵니다. 번개에 맞으면 2초 동안 최대 체력의 14%(+주문력의 75%)에 해당하는 보호막을 얻습니다.\n완전 자동화: 자동 사용 주문이 스킬 가속의 혜택을 받습니다. (번개 소환의 최소 재사용 대기시간은 5초입니다.)",
+    "description": "체력 500\n방어력 30\n마법 저항력 30\n스킬 가속 20\n\n번개 소환 / 완전 자동화\n16초마다 번개를 내리쳐 마법 피해를 입히고 둔화시킵니다. 번개에 맞으면 보호막을 얻습니다.\n완전 자동화: 자동 시전 스킬이 스킬 가속의 효과를 받습니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447119_LightningRod.png",
     "price": 2750
   },
   {
     "id": "447120",
     "name": "다이아몬드 창",
-    "description": "<mainText><stats>적응형 능력치 <attention> 75</attention><br>공격 속도 <attention> 40%</attention></stats><br><br><passive>무기 뻗기</passive><br>공격 사거리가 75 증가합니다.<br><br><passive>최고의 공격점</passive><br>대상과 떨어진 거리에 비례해 기본 공격의 피해가 30%, 스킬 피해가 50%까지 증가합니다. 피해량은 700유닛 거리에서 최대가 됩니다. </mainText>",
+    "description": "적응형 능력치 75\n공격 속도 40%\n\n무기 뻗기 / 최고의 공격점\n무기 뻗기: 공격 사거리가 75 증가합니다.\n최고의 공격점: 대상과의 거리에 비례해 기본 공격 피해 30%, 스킬 피해 50%까지 증가합니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447120_DiamondTippedSpear.png",
     "price": 2750
   },
   {
     "id": "447121",
     "name": "황혼의 끝자락",
-    "description": "공격력 70\n주문력 100\n\n사이의 길\n기준 추가 공격력 100, 주문력 140에 도달하면 투척 무기가 주위를 빙빙 돌며 적중한 적에게 계속해서 피해를 입힙니다.\n물질 세계: 공격력이 25% 증가하고 공격 속도가 50~150% 증가합니다.\n영혼 세계: 주문력이 25% 증가하고 스킬 가속이 30~120 증가합니다.",
+    "description": "공격력 70\n주문력 100\n\n사이의 길\n물질 세계: 공격력 25%·공격 속도가 증가합니다. 영혼 세계: 주문력 25%·스킬 가속이 증가합니다.\n기준치 도달 시 투척 무기가 주위를 돌며 적중한 적에게 계속 피해를 입힙니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447121_TwilightsEdge.png",
     "price": 2750
   },
   {
     "id": "447122",
     "name": "블랙홀 건틀릿",
-    "description": "체력 900\n스킬 가속 25\n\n응축 / 암흑의 별 (활성화)\n응축: 적중 시 응축 중첩을 1회, 적 챔피언을 이동 불가 상태로 만들면 5회 얻습니다. 중첩은 남은 라운드 동안 최대 50회까지 유지되며, 중첩 하나당 크기가 2% 증가합니다.\n암흑의 별(활성화): 크기에 비례하는 블랙홀을 소환해 주변 적을 30% 둔화시키고 중심의 적을 끌어당기며 매초 30~100(+최대 체력의 5%)의 마법 피해를 입히고 응축 중첩을 1회 부여합니다. 블랙홀은 2초간 유지됩니다.",
+    "description": "체력 900\n스킬 가속 25\n\n응축 / 암흑의 별 (활성화)\n응축: 적중·이동 방해로 중첩을 쌓아 크기가 커집니다(최대 50).\n암흑의 별: 블랙홀을 소환해 주변 적을 끌어당기며 마법 피해를 입힙니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447122_BlackHoleGauntlet.png",
     "price": 2750
   },
   {
     "id": "447123",
     "name": "조종의 손아귀",
-    "description": "공격 속도 30%\n체력 회복 및 보호막 15%\n스킬 가속 40\n기본 마나 재생 150%\n\n배후 조종\n챔피언에게 기본 공격을 가하면 15초 동안 중첩이 쌓입니다. 중첩이 4회 쌓이면 대상을 2초 동안 광란 상태로 만듭니다. 광란 상태가 된 적은 공격 속도가 50%, 이동 속도가 40% 증가합니다. 자신이나 아군에게 스킬로 체력 회복이나 보호막, 이로운 효과를 적용하면 재사용 대기시간이 5초 감소합니다. (살아 있는 적이 하나뿐이면 같은 시간 동안 공포에 질리게 합니다.)",
+    "description": "공격 속도 30%\n체력 회복 및 보호막 15%\n스킬 가속 40\n기본 마나 재생 150%\n\n배후 조종\n챔피언을 기본 공격해 4중첩 시 2초간 광란시킵니다. 아군에게 회복·보호막·이로운 효과를 주면 재사용 대기시간이 감소합니다.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447123_Puppeteer.png",
     "price": 2750
   }
