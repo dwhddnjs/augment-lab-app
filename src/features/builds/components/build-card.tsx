@@ -19,7 +19,7 @@ import { useTheme } from "@/hooks/use-theme";
 import type { SavedBuild } from "@/lib/build-storage";
 import { cdragonItemIconUrl, championSplashUrl, itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import { AugmentTile } from "./augment-tile";
+import { AugmentTile } from "@/components/ui/augment-tile";
 
 const t = {
   ko: { unknownChampion: "알 수 없는 챔피언" },
@@ -137,7 +137,9 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
                   {buildAugments.map((aug, i) => (
                     <AugmentTile
                       key={`${aug.id}-${i}`}
-                      augment={aug}
+                      iconPath={aug.iconPath}
+                      rarity={aug.rarity}
+                      recyclingKey={aug.id}
                       size={AUGMENT_SIZE}
                     />
                   ))}

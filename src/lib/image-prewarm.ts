@@ -2,10 +2,11 @@
  * image-prewarm — 첫 설치 1회, CDN 아이콘을 디스크 캐시에 미리 적재한다.
  *
  * 실시간 CDN 의존이라 첫 설치엔 수십 초가 걸린다(expo-image prefetch 동시성
- * 한계). 그래서 첫 실행에 한해 "설치 화면"으로 진행률을 보여주며 core(챔피언)를
- * 받고, 끝나면 메인으로 보낸 뒤 나머지(증강·아이템)는 백그라운드로 받는다.
- * `Image.prefetch`는 멱등 + memory-disk라 한 번 받으면 재설치 전까지 캐시에
- * 남으므로, 완료 플래그를 찍어 두 번째 부팅부터는 이 과정을 통째로 건너뛴다.
+ * 한계). 그래서 첫 실행에 한해 "설치 화면"으로 진행률을 보여주며 아레나·칼바람
+ * 증강, 챔피언, 아이템 아이콘을 전부 받아 두고, 100% 완료돼야만 메인으로 보낸다.
+ * 이렇게 미리 다 받아 두면 메인 진입 후 CDN 지연으로 아이콘이 깜빡이는 현상이
+ * 사라진다. `Image.prefetch`는 멱등 + memory-disk라 한 번 받으면 재설치 전까지
+ * 캐시에 남으므로, 완료 플래그를 찍어 두 번째 부팅부터는 이 과정을 통째로 건너뛴다.
  */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Image } from 'expo-image';
@@ -16,7 +17,10 @@ import versionData from '@/lib/version.json';
 const doneFlagKey = () => `prewarm:done:${versionData.ddragonVersion}`;
 
 /** 동시에 띄우는 prefetch 수 — 너무 낮으면 느리고, 너무 높으면 일부 타임아웃. */
-const CONCURRENCY = 10;
+const CONCURRENCY = 12;
+
+/** 한 장이 응답 없이 매달려 전체 진행률을 멈추지 않도록 개별 prefetch 상한(ms). */
+const PREFETCH_TIMEOUT = 15000;
 
 /** 첫 설치 prewarm을 이미 끝냈는지 — true면 설치 화면 없이 바로 메인. */
 export async function hasPrewarmed(): Promise<boolean> {
@@ -27,8 +31,21 @@ export async function hasPrewarmed(): Promise<boolean> {
   }
 }
 
+/** 한 장을 받되 PREFETCH_TIMEOUT을 넘기면 실패로 간주하고 넘어간다. */
+async function prefetchOne(url: string): Promise<void> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<void>((resolve) => {
+    timer = setTimeout(resolve, PREFETCH_TIMEOUT);
+  });
+  await Promise.race([
+    Image.prefetch(url, { cachePolicy: 'memory-disk' }).then(() => {}),
+    timeout,
+  ]).catch(() => {});
+  if (timer) clearTimeout(timer);
+}
+
 /**
- * URL 목록을 동시성 제한 풀로 받는다. 각 항목 완료(성공·실패 무관)마다
+ * URL 목록을 동시성 제한 풀로 받는다. 각 항목 완료(성공·실패·타임아웃 무관)마다
  * onProgress(0~1)를 호출해 진행률을 리포트한다.
  */
 async function prefetchPool(urls: string[], onProgress?: (p: number) => void): Promise<void> {
@@ -41,7 +58,7 @@ async function prefetchPool(urls: string[], onProgress?: (p: number) => void): P
   const worker = async () => {
     while (cursor < urls.length) {
       const i = cursor++;
-      await Image.prefetch(urls[i], { cachePolicy: 'memory-disk' }).catch(() => {});
+      await prefetchOne(urls[i]);
       done += 1;
       onProgress?.(done / urls.length);
     }
@@ -50,27 +67,19 @@ async function prefetchPool(urls: string[], onProgress?: (p: number) => void): P
 }
 
 interface FirstPrewarmArgs {
-  /** 첫 도달 화면(챔피언 선택) 아이콘 — 설치 화면에서 진행률과 함께 받는다. */
-  coreUrls: string[];
-  /** 증강·아이템 — core 완료(메인 진입) 후 백그라운드로 받는다. */
-  restUrls: string[];
-  /** core 적재 진행률(0~1). 설치 화면 프로그레스 바에 연결한다. */
-  onCoreProgress: (p: number) => void;
+  /** 프리워밍할 전체 아이콘 URL(중복 제거된 상태). 전부 받아야 메인으로 진입한다. */
+  urls: string[];
+  /** 적재 진행률(0~1). 설치 화면 프로그레스 바에 연결한다. */
+  onProgress: (p: number) => void;
 }
 
 /**
- * 첫 설치 1회 실행. core를 진행률과 함께 받아 끝나면(resolve) 메인으로 보낼 수
- * 있게 하고, 완료 플래그를 찍은 뒤 rest를 백그라운드로 이어 받는다.
+ * 첫 설치 1회 실행. 전체 아이콘을 진행률과 함께 받고, 다 받으면 완료 플래그를
+ * 찍는다(다음 부팅엔 설치 화면 스킵). 실패·타임아웃한 장은 진행률에 카운트되어
+ * 넘어가므로 오프라인이어도 결국 100%에 도달해 앱이 잠기지 않는다(못 받은 건
+ * 화면별 focus prefetch가 백업으로 받는다).
  */
-export async function runFirstPrewarm({
-  coreUrls,
-  restUrls,
-  onCoreProgress,
-}: FirstPrewarmArgs): Promise<void> {
-  await prefetchPool(coreUrls, onCoreProgress);
-  // core 완료 = 첫 화면 보장. 여기서 플래그를 찍어 다음 부팅엔 설치 화면을
-  // 다시 띄우지 않는다. rest는 best-effort 백그라운드(못 받은 건 화면별
-  // focus prefetch가 백업으로 받는다).
+export async function runFirstPrewarm({ urls, onProgress }: FirstPrewarmArgs): Promise<void> {
+  await prefetchPool(urls, onProgress);
   AsyncStorage.setItem(doneFlagKey(), '1').catch(() => {});
-  prefetchPool(restUrls).catch(() => {});
 }

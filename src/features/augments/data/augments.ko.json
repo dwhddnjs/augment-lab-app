@@ -16,7 +16,7 @@
   {
     "id": "blunt-force",
     "name": "육중한 힘",
-    "description": "공격력이 10% 증가합니다.",
+    "description": "공격력이 20% 증가합니다.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BluntForce_small.png"
   },
@@ -86,14 +86,14 @@
   {
     "id": "homeguard",
     "name": "민병대",
-    "description": "이동 속도가 70% 증가합니다. 피해를 입은 후 3초 동안은 효과가 멈춥니다.",
+    "description": "이동 속도가 100% 증가합니다. 피해를 입은 후 6초 동안은 효과가 멈춥니다.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Homeguard_small.png"
   },
   {
     "id": "ice-cold",
     "name": "차가운 냉기",
-    "description": "둔화 효과가 이동 속도를 추가로 0 감소시킵니다.",
+    "description": "둔화 효과가 이동 속도를 추가로 75 감소시킵니다.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/IceCold_small.png"
   },
@@ -107,7 +107,7 @@
   {
     "id": "leg-day",
     "name": "하체 운동의 날",
-    "description": "10의 이동 속도와 15%의 둔화 저항을 얻습니다.",
+    "description": "50의 이동 속도와 40%의 둔화 저항을 얻습니다.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LegDay_small.png"
   },
@@ -163,7 +163,7 @@
   {
     "id": "shadow-runner",
     "name": "그림자 질주",
-    "description": "돌진, 도약, 점멸, 순간이동 스킬을 사용하거나 투명 상태에서 벗어난 후 2초 동안 이동 속도가 200 증가합니다.",
+    "description": "돌진, 도약, 점멸, 순간이동 스킬을 사용하거나 투명 상태에서 벗어난 후 2초 동안 이동 속도가 300 증가합니다.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ShadowRunner_small.png"
   },
@@ -177,7 +177,7 @@
   {
     "id": "spin-to-win",
     "name": "승리를 위한 회전",
-    "description": "회전 스킬의 피해량이 15%, 스킬 가속이 15 증가합니다!",
+    "description": "회전 스킬의 피해량이 30%, 스킬 가속이 30 증가합니다!",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SpinToWin_small.png"
   },
@@ -212,7 +212,7 @@
   {
     "id": "ultimate-unstoppable",
     "name": "궁극의 저지 불가",
-    "description": "궁극기 사용 시 2초 동안 군중 제어 효과에 면역이 됩니다. (재사용 대기시간 8초)",
+    "description": "궁극기 사용 시 3초 동안 군중 제어 효과에 면역이 됩니다. (재사용 대기시간 8초)",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/UltimateUnstoppable_small.png"
   },
@@ -275,7 +275,7 @@
   {
     "id": "big-brain",
     "name": "전술적 대비",
-    "description": "각 라운드 시작 시 주문력 1당 1의 피해를 흡수하는 보호막을 얻습니다.",
+    "description": "주문력의 300%에 해당하는 피해를 흡수하는 보호막을 얻습니다. 보호막은 사망하거나 70초마다 재생성됩니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BigBrain_small.png"
   },
@@ -303,7 +303,7 @@
   {
     "id": "celestial-body",
     "name": "천상의 신체",
-    "description": "1000의 체력을 얻지만, 피해량이 10% 감소합니다.",
+    "description": "1500의 체력을 얻지만, 피해량이 10% 감소합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CelestialBody_small.png"
   },
@@ -324,7 +324,7 @@
   {
     "id": "dawnbringer-s-resolve",
     "name": "빛의 인도자 결의",
-    "description": "체력이 60% 아래로 떨어지면 3초 동안 만큼 체력을 회복합니다.",
+    "description": "체력이 50% 아래로 떨어지면 3초에 걸쳐 최대 체력의 30%만큼 회복합니다. (재사용 대기시간 45초)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DawnbringersResolve_small.png"
   },
@@ -415,7 +415,7 @@
   {
     "id": "minionmancer",
     "name": "소환술사",
-    "description": "소환물의 크기, 체력, 피해량이 35% 증가합니다.",
+    "description": "소환물의 크기, 체력, 피해량이 40% 증가합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Minionmancer_small.png"
   },
@@ -464,7 +464,7 @@
   {
     "id": "recursion",
     "name": "되풀이",
-    "description": "스킬 가속이 40 증가합니다.",
+    "description": "스킬 가속이 60 증가합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Recursion_small.png"
   },
@@ -485,7 +485,7 @@
   {
     "id": "shrink-ray",
     "name": "감쇠 광선",
-    "description": "기본 공격 시 대상의 입히는 피해량과 크기를 10% 감소시킵니다. (적중 시)",
+    "description": "기본 공격 시 3초 동안 대상이 입히는 피해량을 15% 감소시키고 크기를 줄입니다. (적중 시)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ShrinkRay_small.png"
   },
@@ -506,7 +506,7 @@
   {
     "id": "soul-siphon",
     "name": "영혼 흡수",
-    "description": "치명타로 입힌 피해량의 10%만큼 체력을 회복합니다.\n\n치명타 확률이 25% 증가합니다.",
+    "description": "치명타로 입힌 피해량의 12%만큼 체력을 회복합니다.\n\n치명타 확률이 25% 증가합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SoulSiphon_small.png"
   },
@@ -527,7 +527,7 @@
   {
     "id": "thread-the-needle",
     "name": "바늘에 실 끼우기",
-    "description": "방어구 관통력 및 마법 관통력 15%를 얻습니다.",
+    "description": "방어구 관통력 및 마법 관통력 18%를 얻습니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ThreadTheNeedle_small.png"
   },
@@ -569,7 +569,7 @@
   {
     "id": "with-haste",
     "name": "속행",
-    "description": "스킬 가속의 120%에 해당하는 이동 속도를 얻습니다.",
+    "description": "스킬 가속의 70%에 해당하는 이동 속도를 얻습니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WithHaste_small.png"
   },
@@ -632,7 +632,7 @@
   {
     "id": "dashing",
     "name": "돌진",
-    "description": "돌진, 도약, 점멸, 순간이동 스킬의 스킬 가속이 75만큼 증가합니다.",
+    "description": "돌진, 도약, 점멸, 순간이동 스킬의 스킬 가속이 175만큼 증가합니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Dashing_small.png"
   },
@@ -646,7 +646,7 @@
   {
     "id": "dual-wield",
     "name": "양손잡이",
-    "description": "기본 공격 시 40%의 피해를 입히고 적중 시 효과를 40%만큼 적용하는 투사체를 발사합니다.\n\n총 공격 속도가 15% 증가합니다.",
+    "description": "기본 공격 시 40%의 피해를 입히고 적중 시 효과를 40%만큼 적용하는 투사체를 발사합니다.\n\n총 공격 속도가 10% 증가합니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DualWield_small.png"
   },
@@ -660,7 +660,7 @@
   {
     "id": "eureka",
     "name": "유레카",
-    "description": "주문력의 20%에 해당하는 스킬 가속을 얻습니다.",
+    "description": "주문력의 30%에 해당하는 스킬 가속을 얻습니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Eureka_small.png"
   },
@@ -709,7 +709,7 @@
   {
     "id": "goliath",
     "name": "거인",
-    "description": "크기가 커져 체력이 15% 증가하고 적응형 능력치가 10% 증가합니다.",
+    "description": "크기가 커져 체력이 35% 증가하고 적응형 능력치가 15% 증가합니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Goliath_small.png"
   },
@@ -765,7 +765,7 @@
   {
     "id": "omni-soul",
     "name": "전능의 영혼",
-    "description": "무작위 드래곤 영혼 2개를 획득합니다.",
+    "description": "무작위 드래곤 영혼 3개를 획득합니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OmniSoul_small.png"
   },
@@ -821,7 +821,7 @@
   {
     "id": "tap-dancer",
     "name": "탭 댄서",
-    "description": "기본 공격 시 6의 이동 속도를 얻습니다. (적중 시).\n\n이동 속도의 10%에 해당하는 공격 속도를 얻습니다.",
+    "description": "기본 공격 시 10의 이동 속도를 얻습니다. (적중 시).\n\n이동 속도의 10%에 해당하는 공격 속도를 얻습니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TapDancer_small.png"
   },
@@ -870,7 +870,7 @@
   {
     "id": "slap-around",
     "name": "우당탕탕",
-    "description": "적을 이동 불가 상태로 만들거나 이동 스킬을 사용할 수 없게 하면 해당 라운드에 15의 적응형 능력치를 얻습니다.",
+    "description": "적을 이동 불가 상태로 만들거나 이동 스킬을 사용할 수 없게 하면 해당 라운드에 10의 적응형 능력치를 얻습니다.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlapAround_small.png"
   },
@@ -975,7 +975,7 @@
   {
     "id": "triggered-inferno",
     "name": "지옥불 난사 발동",
-    "description": "라운드마다 크기가 커져 적응형 능력치 및 체력이 증가하거나 크기가 작아져 스킬 가속 및 이동 속도가 증가합니다.",
+    "description": "적 챔피언에게 피해를 입힐 때마다 스타일이 쌓여 이동 속도가 증가합니다. 스타일이 최고 등급에 도달하면 지옥불 난사를 자동 사용해 주변 적에게 물리 피해를 입힙니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MadScientist_small.png"
   },
@@ -1115,7 +1115,7 @@
   {
     "id": "archmage",
     "name": "대마법사",
-    "description": "주문력의 20%에 해당하는 스킬 가속을 얻습니다.",
+    "description": "스킬을 사용하면 사용한 스킬 재사용 대기시간의 30%만큼 다른 무작위 스킬의 재사용 대기시간을 반환합니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Eureka_small.png"
   },
@@ -1143,7 +1143,7 @@
   {
     "id": "en-passant",
     "name": "앙파상",
-    "description": "돌진, 도약, 점멸, 순간이동 스킬의 스킬 가속이 75만큼 증가합니다.",
+    "description": "주기적으로 적 챔피언의 급소를 파악합니다. 급소를 기본 공격 또는 스킬로 타격하면 최대 체력 비례 고정 피해를 입히고, 체력을 회복하며, 이동 속도가 증가합니다. 이 효과는 중첩될 수 있습니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Dashing_small.png"
   },
@@ -1213,7 +1213,7 @@
   {
     "id": "stackosaurus-rex",
     "name": "다단 중첩",
-    "description": "스킬, 증강 또는 아이템 중첩을 영구적으로 획득할 때마다 75% 더 획득합니다!",
+    "description": "스킬, 증강 또는 아이템 중첩을 영구적으로 획득할 때마다 100% 더 획득합니다!",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/StackosaurusRex_small.png"
   },
@@ -1528,7 +1528,7 @@
   {
     "id": "terraind",
     "name": "지형 생성됨",
-    "description": "총 공격 속도가 20% 증가합니다.\n\n초당 공격 횟수 3.5회에서 추가 마법 피해(적중 시)를 입힙니다.",
+    "description": "지형을 생성하는 스킬이 주변 적에게 매초 마법 피해를 입힙니다. 궁극기 스킬일 경우 피해량이 증가합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightningStrikes_small.png"
   },

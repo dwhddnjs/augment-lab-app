@@ -32,18 +32,49 @@ export interface SavedBuild {
   createdAt: string;
 }
 
+// 인메모리 캐시 + 구독 — 저장/삭제가 즉시 구독자(목록 화면)에 반영되도록 한다.
+// null = 아직 디스크에서 로드 전. 캐시는 항상 최신순(desc) 정렬 상태를 유지한다.
+let cache: SavedBuild[] | null = null;
+const listeners = new Set<() => void>();
+
+function emit(): void {
+  listeners.forEach((l) => l());
+}
+
+function sortDesc(builds: SavedBuild[]): SavedBuild[] {
+  return [...builds].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+/** 빌드 목록 변경 구독. 반환값 호출로 해제. useSyncExternalStore용. */
+export function subscribeBuilds(listener: () => void): () => void {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+}
+
+/** 현재 캐시 스냅샷(동기). 로드 전이면 null. 참조는 변경 시에만 바뀐다. */
+export function getBuildsSnapshot(): SavedBuild[] | null {
+  return cache;
+}
+
 async function readAll(): Promise<SavedBuild[]> {
+  if (cache) return cache;
   try {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
+    const parsed = raw ? JSON.parse(raw) : [];
     // mode 필드 도입 전 데이터는 칼바람(aram)으로 간주한다.
-    return parsed.map((b) => ({ ...b, mode: b.mode ?? 'aram' }));
+    const list = Array.isArray(parsed)
+      ? parsed.map((b) => ({ ...b, mode: b.mode ?? 'aram' }))
+      : [];
+    cache = sortDesc(list);
   } catch {
     // 손상된 데이터는 빈 목록으로 폴백 — 다음 저장에서 덮어쓴다.
-    return [];
+    cache = [];
   }
+  // 최초 로드 완료를 구독자에게 알린다(스냅샷 null→배열).
+  emit();
+  return cache;
 }
 
 async function writeAll(builds: SavedBuild[]): Promise<void> {
@@ -57,8 +88,7 @@ function generateId(): string {
 
 export async function listBuilds(mode?: GameMode): Promise<SavedBuild[]> {
   const builds = await readAll();
-  const filtered = mode ? builds.filter((b) => b.mode === mode) : builds;
-  return filtered.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  return mode ? builds.filter((b) => b.mode === mode) : builds;
 }
 
 export async function getBuild(id: string): Promise<SavedBuild | null> {
@@ -75,11 +105,16 @@ export async function saveBuild(
     createdAt: new Date().toISOString(),
   };
   const builds = await readAll();
-  await writeAll([build, ...builds]);
+  // 캐시를 먼저 갱신하고 알린 뒤 디스크에 기록 — 목록이 즉시 반영된다.
+  cache = sortDesc([build, ...builds]);
+  emit();
+  await writeAll(cache);
   return build;
 }
 
 export async function removeBuild(id: string): Promise<void> {
   const builds = await readAll();
-  await writeAll(builds.filter((b) => b.id !== id));
+  cache = builds.filter((b) => b.id !== id);
+  emit();
+  await writeAll(cache);
 }

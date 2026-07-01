@@ -16,7 +16,7 @@
   {
     "id": "blunt-force",
     "name": "Blunt Force",
-    "description": "Gain 10% Attack Damage.",
+    "description": "Gain 20% Attack Damage.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BluntForce_small.png"
   },
@@ -86,14 +86,14 @@
   {
     "id": "homeguard",
     "name": "Homeguard",
-    "description": "Gain 70% Move Speed, disabled for 3 seconds after taking damage.",
+    "description": "Gain 100% Move Speed, disabled for 6 seconds after taking damage.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Homeguard_small.png"
   },
   {
     "id": "ice-cold",
     "name": "Ice Cold",
-    "description": "Your Slowing effects reduce Move Speed by an extra 0.",
+    "description": "Your Slowing effects reduce Move Speed by an extra 75.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/IceCold_small.png"
   },
@@ -107,7 +107,7 @@
   {
     "id": "leg-day",
     "name": "Leg Day",
-    "description": "Gain 10 Movement Speed and 15% Slow Resist.",
+    "description": "Gain 50 Movement Speed and 40% Slow Resist.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LegDay_small.png"
   },
@@ -163,7 +163,7 @@
   {
     "id": "shadow-runner",
     "name": "Shadow Runner",
-    "description": "After using a dash, leap, blink, or teleport Ability or exiting Stealth, gain 200 Move Speed for 2 seconds.",
+    "description": "After using a dash, leap, blink, or teleport Ability or exiting Stealth, gain 300 Move Speed for 2 seconds.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ShadowRunner_small.png"
   },
@@ -177,7 +177,7 @@
   {
     "id": "spin-to-win",
     "name": "Spin To Win",
-    "description": "Your spin Abilities gain 15 Ability Haste and deal 15% more damage!",
+    "description": "Your spin Abilities gain 30 Ability Haste and deal 30% more damage!",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SpinToWin_small.png"
   },
@@ -212,7 +212,7 @@
   {
     "id": "ultimate-unstoppable",
     "name": "Ultimate Unstoppable",
-    "description": "After using your Ultimate, you become immune to crowd control for 2 seconds. (8 second Cooldown).",
+    "description": "After using your Ultimate, you become immune to crowd control for 3 seconds. (8 second Cooldown).",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/UltimateUnstoppable_small.png"
   },
@@ -275,7 +275,7 @@
   {
     "id": "big-brain",
     "name": "Big Brain",
-    "description": "At the start of each round, gain 1 Shield for every 1 Ability Power.",
+    "description": "Gain a shield that absorbs damage equal to 300% of your Ability Power, replenished on respawn and every 70 seconds.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BigBrain_small.png"
   },
@@ -303,7 +303,7 @@
   {
     "id": "celestial-body",
     "name": "Celestial Body",
-    "description": "Gain 1000 Health, but you deal 10% less damage.",
+    "description": "Gain 1500 Health, but you deal 10% less damage.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CelestialBody_small.png"
   },
@@ -324,7 +324,7 @@
   {
     "id": "dawnbringer-s-resolve",
     "name": "Dawnbringer's Resolve",
-    "description": "Upon dropping below 60% Health, heal for over 3 seconds.",
+    "description": "Upon dropping below 50% Health, heal for 30% of your max Health over 3 seconds. (45 second Cooldown).",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DawnbringersResolve_small.png"
   },
@@ -415,7 +415,7 @@
   {
     "id": "minionmancer",
     "name": "Minionmancer",
-    "description": "Your summons gain 35% increased size, health, and damage.",
+    "description": "Your summons gain 40% increased size, health, and damage.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Minionmancer_small.png"
   },
@@ -464,7 +464,7 @@
   {
     "id": "recursion",
     "name": "Recursion",
-    "description": "Gain 40 Ability Haste.",
+    "description": "Gain 60 Ability Haste.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Recursion_small.png"
   },
@@ -485,7 +485,7 @@
   {
     "id": "shrink-ray",
     "name": "Shrink Ray",
-    "description": "Your Attacks reduce the target's damage and size by 10% On-Hit.",
+    "description": "Your Attacks reduce the target's damage by 15% for 3 seconds and shrink them On-Hit.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ShrinkRay_small.png"
   },
@@ -506,7 +506,7 @@
   {
     "id": "soul-siphon",
     "name": "Soul Siphon",
-    "description": "Heal for 10% of damage done by Critical Strikes.\n\nGain 25% Crit chance.",
+    "description": "Heal for 12% of damage done by Critical Strikes.\n\nGain 25% Crit chance.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SoulSiphon_small.png"
   },
@@ -527,7 +527,7 @@
   {
     "id": "thread-the-needle",
     "name": "Thread the Needle",
-    "description": "Gain 15% Armor Penetration and Magic Penetration.",
+    "description": "Gain 18% Armor Penetration and Magic Penetration.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ThreadTheNeedle_small.png"
   },
@@ -569,7 +569,7 @@
   {
     "id": "with-haste",
     "name": "With Haste",
-    "description": "Gain Move Speed equal to 120% of your Ability Haste.",
+    "description": "Gain Move Speed equal to 70% of your Ability Haste.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WithHaste_small.png"
   },
@@ -632,7 +632,7 @@
   {
     "id": "dashing",
     "name": "Dashing",
-    "description": "Your dash, leap, blink, or teleport Abilities gain 75 Ability Haste.",
+    "description": "Your dash, leap, blink, or teleport Abilities gain 175 Ability Haste.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Dashing_small.png"
   },
@@ -646,7 +646,7 @@
   {
     "id": "dual-wield",
     "name": "Dual Wield",
-    "description": "When you Attack, fire a bolt that deals 40% damage and applies your On-Hit effects at 40% effectiveness.\n\nGain 15% total Attack Speed.",
+    "description": "When you Attack, fire a bolt that deals 40% damage and applies your On-Hit effects at 40% effectiveness.\n\nGain 10% total Attack Speed.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DualWield_small.png"
   },
@@ -660,7 +660,7 @@
   {
     "id": "eureka",
     "name": "Eureka",
-    "description": "Gain Ability Haste equal to 20% Ability Power.",
+    "description": "Gain Ability Haste equal to 30% Ability Power.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Eureka_small.png"
   },
@@ -709,7 +709,7 @@
   {
     "id": "goliath",
     "name": "Goliath",
-    "description": "Become large, gaining 15% Health and 10% Adaptive Force.",
+    "description": "Become large, gaining 35% Health and 15% Adaptive Force.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Goliath_small.png"
   },
@@ -765,7 +765,7 @@
   {
     "id": "omni-soul",
     "name": "Omni Soul",
-    "description": "Gain 2 random Dragon Souls.",
+    "description": "Gain 3 random Dragon Souls.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OmniSoul_small.png"
   },
@@ -821,7 +821,7 @@
   {
     "id": "tap-dancer",
     "name": "Tap Dancer",
-    "description": "Your Attacks grant you 6 Move Speed On-Hit.\n\nGain Attack Speed equal to 10% of your Move Speed.",
+    "description": "Your Attacks grant you 10 Move Speed On-Hit.\n\nGain Attack Speed equal to 10% of your Move Speed.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TapDancer_small.png"
   },
@@ -870,7 +870,7 @@
   {
     "id": "slap-around",
     "name": "Slap Around",
-    "description": "Each time you Immobilize or Ground an enemy, gain 15 Adaptive Force for the round.",
+    "description": "Each time you Immobilize or Ground an enemy, gain 10 Adaptive Force for the round.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlapAround_small.png"
   },
@@ -975,7 +975,7 @@
   {
     "id": "triggered-inferno",
     "name": "Triggered Inferno",
-    "description": "Each Round you'll either grow large (Adaptive Force and Health) or tiny (Ability Haste and Move Speed).",
+    "description": "Damaging enemy champions builds Style, granting Move Speed per stack. At max Style, auto-cast a barrage dealing physical damage to nearby enemies.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MadScientist_small.png"
   },
@@ -1115,7 +1115,7 @@
   {
     "id": "archmage",
     "name": "Archmage",
-    "description": "Gain Ability Haste equal to 20% Ability Power.",
+    "description": "Whenever you cast an Ability, refund 30% of its cooldown to a random other Ability.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Eureka_small.png"
   },
@@ -1143,7 +1143,7 @@
   {
     "id": "en-passant",
     "name": "En Passant",
-    "description": "Your dash, leap, blink, or teleport Abilities gain 75 Ability Haste.",
+    "description": "Periodically identify enemy champions' Vitals. Striking a Vital with an Attack or Ability deals max Health true damage, heals you, and grants Move Speed. This effect stacks.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Dashing_small.png"
   },
@@ -1213,7 +1213,7 @@
   {
     "id": "stackosaurus-rex",
     "name": "Stackosaurus Rex",
-    "description": "When you gain permanent Stacks of an Ability, Augment, or Item gain 75% more!",
+    "description": "When you gain permanent Stacks of an Ability, Augment, or Item gain 100% more!",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/StackosaurusRex_small.png"
   },
@@ -1528,7 +1528,7 @@
   {
     "id": "terraind",
     "name": "Terrain'd",
-    "description": "Gain 20% total Attack Speed.\n\nAt 3.5 Attacks per second, deal additional magic damage On-Hit.",
+    "description": "Upgrades an Ability that spawns terrain, dealing magic damage each second to nearby enemies. Increased if the Ability is an Ultimate.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightningStrikes_small.png"
   },
