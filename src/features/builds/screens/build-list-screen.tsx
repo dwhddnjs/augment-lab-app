@@ -1,7 +1,7 @@
 /**
  * BuildListScreen — 홈 탭. 저장된 드래프트 빌드 목록.
  * 같은 날짜끼리 묶어 날짜 태그 헤더 + 그 날짜 카드들을 SectionList로 렌더한다.
- * 탭 포커스마다 재조회해 드래프트 저장/삭제 직후 자동 갱신된다.
+ * 반응형 스토어(useBuilds)를 구독해 드래프트 저장/삭제 직후 자동 갱신된다.
  * 화면 타이틀은 (home) 스택의 native large-title 헤더가 제공한다.
  */
 import Feather from "@expo/vector-icons/Feather";

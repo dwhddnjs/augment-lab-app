@@ -523,13 +523,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     paddingHorizontal: Spacing.three,
-    // gap: Spacing.three,
   },
   catTabs: {
     width: 96,
     gap: Spacing.two,
-    borderColor: "green",
-    // borderWidth: 1,
   },
   catTab: {
     alignItems: "center",
