@@ -1,11 +1,10 @@
-import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { Radius, Spacing } from "@/constants/theme";
-import { useTheme } from "@/hooks/use-theme";
-import { itemImageUrl } from "@/lib/ddragon";
+import { IconNameCell } from "@/components/ui/icon-name-cell";
+import { Spacing } from "@/constants/theme";
 import type { Item } from "@/features/items/types";
+import { itemImageUrl } from "@/lib/ddragon";
 
 interface Props {
   items: Item[];
@@ -13,9 +12,8 @@ interface Props {
   label: string;
 }
 
-/** 빌드 상세 — 아이템 아이콘 행. */
+/** 빌드 상세 — 아이템 아이콘 + 이름 셀. */
 export function BuildItemRow({ items, label }: Props) {
-  const { colors } = useTheme();
   return (
     <View style={styles.section}>
       <ThemedText type="label" color="secondary">
@@ -23,22 +21,12 @@ export function BuildItemRow({ items, label }: Props) {
       </ThemedText>
       <View style={styles.itemsRow}>
         {items.map((item, i) => (
-          <View
+          <IconNameCell
             key={`${item.id}-${i}`}
-            style={[
-              styles.itemTile,
-              {
-                backgroundColor: colors.surface.raised,
-                borderColor: colors.border.subtle,
-              },
-            ]}
-          >
-            <Image
-              source={{ uri: itemImageUrl(item.imageKey) }}
-              style={styles.itemIcon}
-              contentFit="contain"
-            />
-          </View>
+            uri={itemImageUrl(item.imageKey)}
+            recyclingKey={item.id}
+            name={item.name}
+          />
         ))}
       </View>
     </View>
@@ -50,19 +38,6 @@ const styles = StyleSheet.create({
   itemsRow: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: Spacing.two,
-  },
-  itemTile: {
-    width: 44,
-    height: 44,
-    borderRadius: Radius.sm,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  itemIcon: {
-    width: 38,
-    height: 38,
-    borderRadius: Radius.sm,
+    gap: Spacing.three,
   },
 });

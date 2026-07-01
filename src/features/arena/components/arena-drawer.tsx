@@ -211,33 +211,23 @@ export function ArenaDrawer({
           <Section label={translate("reforge")}>
             <View style={styles.grid}>
               {reforges.map((r, i) => (
-                <View key={`${r.id}-${i}`} style={styles.reforgeCell}>
-                  <View
-                    style={[
-                      styles.iconWrap,
-                      {
-                        borderColor: colors.border.subtle,
-                        backgroundColor: colors.surface.sunken,
-                      },
-                    ]}
-                  >
-                    <AugmentImage
-                      iconPath={r.iconPath}
-                      size={34}
-                      tint={AugmentRarityColors.gold.border}
-                      imageTint={AugmentRarityColors.gold.border}
-                      fallbackGlyph="anvil"
-                      recyclingKey={r.id}
-                    />
-                  </View>
-                  <ThemedText
-                    type="caption"
-                    color="secondary"
-                    numberOfLines={2}
-                    style={styles.reforgeName}
-                  >
-                    {r.name}
-                  </ThemedText>
+                <View
+                  key={`${r.id}-${i}`}
+                  style={[
+                    styles.iconWrap,
+                    {
+                      borderColor: colors.border.subtle,
+                      backgroundColor: colors.surface.sunken,
+                    },
+                  ]}
+                >
+                  <AugmentImage
+                    iconPath={r.iconPath}
+                    size={34}
+                    tint={AugmentRarityColors.gold.border}
+                    fallbackGlyph="anvil"
+                    recyclingKey={r.id}
+                  />
                 </View>
               ))}
             </View>
@@ -283,6 +273,7 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
     paddingHorizontal: Spacing.double,
     paddingVertical: Spacing.half,
+    marginRight: Spacing.two,
     borderRadius: Radius.full,
   },
   champRow: {
@@ -322,13 +313,5 @@ const styles = StyleSheet.create({
     height: 44,
     borderRadius: Radius.md,
     borderWidth: 1.5,
-  },
-  reforgeCell: {
-    alignItems: "center",
-    gap: 2,
-    width: 60,
-  },
-  reforgeName: {
-    textAlign: "center",
   },
 });

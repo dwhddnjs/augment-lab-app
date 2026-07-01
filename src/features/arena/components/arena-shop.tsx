@@ -28,7 +28,11 @@ import type { Item } from "@/features/items/types";
 import { useTheme } from "@/hooks/use-theme";
 import { cdragonItemIconUrl, itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import { MAX_ITEMS, PRISMATIC_SELL_PRICE, sampleDistinct } from "../hooks/use-arena";
+import {
+  MAX_ITEMS,
+  PRISMATIC_SELL_PRICE,
+  sampleDistinct,
+} from "../hooks/use-arena";
 import { ArenaAnvilPicker } from "./arena-anvil-picker";
 
 // 카테고리별 고정 구매가.
@@ -330,8 +334,7 @@ export function ArenaShop({
   // ─── 모루 셀(전설/프리즘) — 아이템 셀과 동일 톤 ───
   const renderAnvilCell = (kind: AnvilKind, iconUri: string, price: number) => {
     // 전설 모루도 전설 아이템 1칸을 차지하므로 6칸이 꽉 차면 비활성화한다.
-    const atItemCap =
-      kind === "legendary" && ownedItemIds.length >= MAX_ITEMS;
+    const atItemCap = kind === "legendary" && ownedItemIds.length >= MAX_ITEMS;
     const affordable = gold >= price && !atItemCap;
     return (
       <Pressable
@@ -411,17 +414,16 @@ export function ArenaShop({
             );
           })}
         </View>
+        {cat === "boots" && (
+          <ScrollView contentContainerStyle={styles.grid}>
+            {bootsPool.map((it) =>
+              renderItemCell(it, SHOP_PRICE.boots, SELL_PRICE.boots),
+            )}
+          </ScrollView>
+        )}
 
         {/* 우측 콘텐츠 */}
         <View style={styles.content}>
-          {cat === "boots" && (
-            <ScrollView contentContainerStyle={styles.grid}>
-              {bootsPool.map((it) =>
-                renderItemCell(it, SHOP_PRICE.boots, SELL_PRICE.boots),
-              )}
-            </ScrollView>
-          )}
-
           {cat === "legendary" && (
             <View style={styles.legendaryBody}>
               {/* 좌측 세로 클래스 아이콘 필터 */}
@@ -461,7 +463,11 @@ export function ArenaShop({
                 contentContainerStyle={styles.grid}
               >
                 {displayLegendary.map((it) =>
-                  renderItemCell(it, SHOP_PRICE.legendary, SELL_PRICE.legendary),
+                  renderItemCell(
+                    it,
+                    SHOP_PRICE.legendary,
+                    SELL_PRICE.legendary,
+                  ),
                 )}
               </ScrollView>
             </View>
@@ -517,11 +523,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     paddingHorizontal: Spacing.three,
-    gap: Spacing.three,
+    // gap: Spacing.three,
   },
   catTabs: {
     width: 96,
     gap: Spacing.two,
+    borderColor: "green",
+    // borderWidth: 1,
   },
   catTab: {
     alignItems: "center",
@@ -530,6 +538,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.one,
     borderRadius: Radius.md,
     borderWidth: StyleSheet.hairlineWidth,
+    marginRight: Spacing.two,
   },
   content: { flex: 1 },
   legendaryBody: {
@@ -546,17 +555,19 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
     alignItems: "center",
   },
-  legendaryGrid: { flex: 1 },
+  // itemCell(44)이 아이콘(40)보다 넓어 생기는 왼쪽 2px 여백을 상쇄해
+  // 필터열↔그리드 갭을 catTabs↔필터열 갭과 동일하게 맞춘다.
+  legendaryGrid: { flex: 1, marginLeft: -Spacing.half },
   filterIconTab: {
-    width: 36,
-    height: 36,
+    width: 40,
+    height: 40,
     alignItems: "center",
     justifyContent: "center",
   },
   grid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: Spacing.two,
+    gap: Spacing.double,
     // 하단 absolute 트레이에 마지막 줄이 가리지 않도록 트레이 높이만큼 띄운다.
     paddingBottom: TRAY_HEIGHT + Spacing.three,
   },

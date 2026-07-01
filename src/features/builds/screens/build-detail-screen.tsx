@@ -25,18 +25,18 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassSurface } from "@/components/ui/glass-surface";
 import { Radius, Spacing } from "@/constants/theme";
+import { ArenaBuildSummary } from "@/features/arena/components/arena-build-summary";
+import { useStatShards } from "@/features/arena/hooks/use-arena-items";
 import { useAugments } from "@/features/augments/hooks/use-augments";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { ItemStatPanel } from "@/features/items/components/item-stat-panel";
 import { useItems } from "@/features/items/hooks/use-items";
+import type { ItemStats } from "@/features/items/types";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
 import { getBuild, removeBuild, type SavedBuild } from "@/lib/build-storage";
 import { championSplashUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import { ArenaBuildSummary } from "@/features/arena/components/arena-build-summary";
-import { useStatShards } from "@/features/arena/hooks/use-arena-items";
-import type { ItemStats } from "@/features/items/types";
 import { BuildAugmentList } from "../components/build-augment-list";
 import { BuildChampionHeader } from "../components/build-champion-header";
 import { BuildItemRow } from "../components/build-item-row";
@@ -171,8 +171,10 @@ export function BuildDetailScreen() {
       {
         text: translate("deleteOk"),
         style: "destructive",
-        onPress: () => {
-          removeBuild(build.id).catch(() => {});
+        // 삭제(캐시 갱신+emit)를 마친 뒤 뒤로가기 — 목록이 스토어 구독으로
+        // 즉시 반영된다. await 없이 back하면 목록이 삭제 전 데이터를 읽던 경합 제거.
+        onPress: async () => {
+          await removeBuild(build.id).catch(() => {});
           router.back();
         },
       },
@@ -368,7 +370,7 @@ const styles = StyleSheet.create({
     borderRightWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: Spacing.three,
     paddingTop: Spacing.four,
-    gap: Spacing.four,
+    gap: Spacing.five,
   },
   notFound: {
     flex: 1,

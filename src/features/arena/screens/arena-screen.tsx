@@ -277,7 +277,7 @@ export function ArenaScreen() {
           edges={["top", "bottom", "left", "right"]}
         >
           {/* 공통 헤더 */}
-          <View style={[styles.header, { paddingHorizontal: hPad }]}>
+          <View style={[styles.header, { paddingLeft: Spacing.three }]}>
             <GlassButton
               systemImage="xmark"
               fallbackIcon="close"

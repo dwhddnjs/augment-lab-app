@@ -12,6 +12,7 @@ import type { SearchBarCommands } from "react-native-screens";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
+import { GlassSurface } from "@/components/ui/glass-surface";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import { useChampions } from "@/features/champions/hooks/use-champions";
@@ -29,20 +30,20 @@ const t = {
     searchPlaceholder: "챔피언 검색 (초성 가능)",
     start: "시작하기",
     cancel: "취소",
-    random: "랜덤",
+    bravery: "용기",
   },
   en: {
     title: "Select Champion",
     searchPlaceholder: "Search champions",
     start: "Start",
     cancel: "Cancel",
-    random: "Random",
+    bravery: "Bravery",
   },
 };
 
-// 아레나에서 그리드 맨 앞에 끼우는 무작위 챔피언 선택 항목.
-const RANDOM_ID = "__random__";
-type GridItem = Champion | { id: typeof RANDOM_ID };
+// 아레나 "용기" — 그리드 맨 앞에 끼우는 무작위 챔피언 선택 항목.
+const BRAVERY_ID = "__bravery__";
+type GridItem = Champion | { id: typeof BRAVERY_ID };
 
 export function ChampionSelectScreen() {
   const champions = useChampions();
@@ -62,10 +63,10 @@ export function ChampionSelectScreen() {
     .filter((c) => matchChampionName(c.name, query))
     .sort((a, b) => a.name.localeCompare(b.name, locale));
 
-  // 아레나는 첫 칸에 물음표(랜덤) 박스를 둔다 — 검색/필터 중에는 숨긴다.
-  const showRandom = mode === "arena" && !query && !selectedTag;
-  const listData: GridItem[] = showRandom
-    ? [{ id: RANDOM_ID }, ...filtered]
+  // 아레나는 첫 칸에 물음표(용기) 박스를 둔다 — 검색/필터 중에는 숨긴다.
+  const showBravery = mode === "arena" && !query && !selectedTag;
+  const listData: GridItem[] = showBravery
+    ? [{ id: BRAVERY_ID }, ...filtered]
     : filtered;
 
   // 첫 진입 시 챔피언 아이콘·역할 칩을 미리 디스크 캐시에 받아둔다.
@@ -92,9 +93,9 @@ export function ChampionSelectScreen() {
 
   const handleStart = async () => {
     if (!selectedId) return;
-    // 물음표(랜덤) 선택 시 전체 챔피언 중 한 명을 무작위 확정한다.
+    // 물음표(용기) 선택 시 전체 챔피언 중 한 명을 무작위 확정한다.
     const championId =
-      selectedId === RANDOM_ID
+      selectedId === BRAVERY_ID
         ? champions[Math.floor(Math.random() * champions.length)]?.id
         : selectedId;
     if (!championId) return;
@@ -236,39 +237,43 @@ export function ChampionSelectScreen() {
         onScrollBeginDrag={() => searchRef.current?.cancelSearch()}
         renderItem={({ item }) => {
           const isSelected = selectedId === item.id;
-          // 아레나 랜덤 박스 — 챔피언 대신 물음표 정사각 박스.
-          if (item.id === RANDOM_ID) {
+          // 아레나 "용기" 박스 — 검정 정사각 위에 원형 글래스 + 민트 발광 물음표.
+          if (item.id === BRAVERY_ID) {
             return (
               <Pressable
-                onPress={() => handleSelect(RANDOM_ID)}
+                onPress={() => handleSelect(BRAVERY_ID)}
                 style={styles.cell}
               >
                 <View
                   style={[
                     styles.image,
-                    styles.randomBox,
+                    styles.braveryBox,
                     {
                       borderWidth: isSelected ? 2.5 : 1.5,
                       borderColor: isSelected
                         ? colors.accent.default
                         : colors.border.default,
-                      backgroundColor: colors.surface.raised,
+                      backgroundColor: colors.surface.sunken,
                     },
                   ]}
                 >
-                  <ThemedText
-                    type="title"
-                    color={isSelected ? "accent" : "secondary"}
-                  >
-                    ?
-                  </ThemedText>
+                  <GlassSurface
+                    glassStyle="regular"
+                    style={styles.braveryOrb}
+                  />
+                  <Image
+                    source="sf:questionmark"
+                    style={styles.braveryMark}
+                    tintColor={colors.accent.pressed}
+                    contentFit="contain"
+                  />
                 </View>
                 <ThemedText
                   type="label"
                   numberOfLines={1}
                   color={isSelected ? "accent" : "secondary"}
                 >
-                  {translate("random")}
+                  {translate("bravery")}
                 </ThemedText>
               </Pressable>
             );
@@ -346,9 +351,25 @@ const styles = StyleSheet.create({
     borderRadius: Radius.md,
     overflow: "hidden",
   },
-  randomBox: {
+  braveryBox: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  // 검정 박스에 꽉 차는 글래스 원 — 배경으로 깔고, 물음표는 박스 flex center로 그 위 중앙.
+  braveryOrb: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderRadius: Radius.full,
+  },
+  // 원 안 큰 물음표 아이콘 (accent 색) — SF Symbol이라 정확히 중앙 정렬.
+  // fontWeight로 SF Symbol stroke 두께를 굵게.
+  braveryMark: {
+    width: 52,
+    height: 52,
+    fontWeight: "700",
   },
   headerBtnIcon: {
     width: 22,
