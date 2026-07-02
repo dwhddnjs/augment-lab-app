@@ -1,15 +1,18 @@
 /**
- * use-image-prewarm — 첫 설치 시 챔피언 아이콘(core)을 설치 화면 진행률과 함께
- * 받고, 증강·아이템(rest)은 메인 진입 후 백그라운드로 받는다. 두 번째 부팅부터는
- * 완료 플래그를 보고 설치 과정을 통째로 건너뛴다.
+ * use-image-prewarm — 첫 설치 시 아레나·칼바람 증강, 챔피언, 아이템 아이콘을
+ * 전부 설치 화면 진행률과 함께 받고, 100% 완료돼야만 메인으로 진입한다. 두 번째
+ * 부팅부터는 완료 플래그를 보고 설치 과정을 통째로 건너뛴다.
  */
 import { useEffect, useState } from 'react';
 
+import { useArenaAugments } from '@/features/arena/hooks/use-arena-augments';
+import { usePrismaticItems, useSpecialAugments } from '@/features/arena/hooks/use-arena-items';
 import { useAugments } from '@/features/augments/hooks/use-augments';
 import { useChampions } from '@/features/champions/hooks/use-champions';
 import { useItems } from '@/features/items/hooks/use-items';
 import {
   augmentImageUrl,
+  cdragonItemIconUrl,
   championClassIconUrl,
   championSquareUrl,
   itemImageUrl,
@@ -17,11 +20,12 @@ import {
 import { hasPrewarmed, runFirstPrewarm } from '@/lib/image-prewarm';
 import { CHAMPION_TAGS } from '@/lib/i18n';
 
-const ARAM_IDS = new Set<string>(require('@/features/items/data/aram-item-ids.json'));
-
 export function useImagePrewarm(): { showSetup: boolean; progress: number } {
   const champions = useChampions();
   const augments = useAugments();
+  const arenaAugments = useArenaAugments();
+  const specialAugments = useSpecialAugments();
+  const prismaticItems = usePrismaticItems();
   const items = useItems();
 
   // null = 플래그 확인 중(아주 짧음), false = 스킵, true = 설치 화면 표시.
@@ -31,16 +35,21 @@ export function useImagePrewarm(): { showSetup: boolean; progress: number } {
   useEffect(() => {
     let cancelled = false;
 
-    const coreUrls = [
-      ...champions.map((c) => championSquareUrl(c.imageKey)),
-      ...CHAMPION_TAGS.map((tag) => championClassIconUrl(tag)).filter(
-        (u): u is string => u != null,
-      ),
-    ];
-    const restUrls = [
-      ...augments.map((a) => augmentImageUrl(a.iconPath, 'large')),
-      ...items.filter((it) => ARAM_IDS.has(it.id)).map((it) => itemImageUrl(it.imageKey)),
-    ];
+    // 아레나·칼바람 증강 + 챔피언 사각/역할 아이콘 + 프리즘·전체 아이템 아이콘을
+    // 전부 받는다. 겹치는 아이콘은 Set으로 제거해 진행률·개수 이중 계산을 막는다.
+    const allUrls = Array.from(
+      new Set([
+        ...champions.map((c) => championSquareUrl(c.imageKey)),
+        ...CHAMPION_TAGS.map((tag) => championClassIconUrl(tag)).filter(
+          (u): u is string => u != null,
+        ),
+        ...augments.map((a) => augmentImageUrl(a.iconPath, 'large')),
+        ...arenaAugments.map((a) => augmentImageUrl(a.iconPath, 'large')),
+        ...specialAugments.map((a) => augmentImageUrl(a.iconPath, 'large')),
+        ...prismaticItems.map((p) => cdragonItemIconUrl(p.iconPath)),
+        ...items.map((it) => itemImageUrl(it.imageKey)),
+      ]),
+    );
 
     hasPrewarmed().then((done) => {
       if (cancelled) return;
@@ -50,9 +59,8 @@ export function useImagePrewarm(): { showSetup: boolean; progress: number } {
       }
       setNeedsSetup(true);
       runFirstPrewarm({
-        coreUrls,
-        restUrls,
-        onCoreProgress: (p) => {
+        urls: allUrls,
+        onProgress: (p) => {
           if (!cancelled) setProgress(p);
         },
       }).finally(() => {

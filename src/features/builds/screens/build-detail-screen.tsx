@@ -25,10 +25,13 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassSurface } from "@/components/ui/glass-surface";
 import { Radius, Spacing } from "@/constants/theme";
+import { ArenaBuildSummary } from "@/features/arena/components/arena-build-summary";
+import { useStatShards } from "@/features/arena/hooks/use-arena-items";
 import { useAugments } from "@/features/augments/hooks/use-augments";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { ItemStatPanel } from "@/features/items/components/item-stat-panel";
 import { useItems } from "@/features/items/hooks/use-items";
+import type { ItemStats } from "@/features/items/types";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
 import { getBuild, removeBuild, type SavedBuild } from "@/lib/build-storage";
@@ -137,6 +140,7 @@ export function BuildDetailScreen() {
   const champions = useChampions();
   const augments = useAugments();
   const items = useItems();
+  const statShards = useStatShards();
 
   const champion = build
     ? (champions.find((c) => c.id === build.championId) ?? null)
@@ -147,7 +151,18 @@ export function BuildDetailScreen() {
   const buildItems = (build?.itemIds ?? [])
     .map((itemId) => items.find((it) => it.id === itemId))
     .filter((it): it is NonNullable<typeof it> => it != null);
-  const itemStatsList = buildItems.map((it) => it.stats);
+  // 아레나 빌드는 능력치 모루도 합산 스탯에 반영한다(각 모루를 단일 스탯으로 변환).
+  const shardStatsList: ItemStats[] =
+    build?.mode === "arena"
+      ? (build.shardIds ?? [])
+          .map((id) => statShards.find((s) => s.id === id))
+          .filter((s): s is NonNullable<typeof s> => s != null)
+          .map((s) => ({ [s.stat]: s.value }) as ItemStats)
+      : [];
+  const itemStatsList = [
+    ...buildItems.map((it) => it.stats),
+    ...shardStatsList,
+  ];
 
   const handleDelete = () => {
     if (!build) return;
@@ -156,8 +171,10 @@ export function BuildDetailScreen() {
       {
         text: translate("deleteOk"),
         style: "destructive",
-        onPress: () => {
-          removeBuild(build.id).catch(() => {});
+        // 삭제(캐시 갱신+emit)를 마친 뒤 뒤로가기 — 목록이 스토어 구독으로
+        // 즉시 반영된다. await 없이 back하면 목록이 삭제 전 데이터를 읽던 경합 제거.
+        onPress: async () => {
+          await removeBuild(build.id).catch(() => {});
           router.back();
         },
       },
@@ -287,15 +304,22 @@ export function BuildDetailScreen() {
           {/* 챔피언 블록 */}
           {champion && <BuildChampionHeader champion={champion} date={date} />}
 
-          {/* 증강 */}
-          <BuildAugmentList
-            augments={buildAugments}
-            label={translate("augments")}
-          />
+          {build.mode === "arena" ? (
+            // 아레나 빌드 — 증강(레벨)·프리즘·전설·모루를 전용 본문으로 렌더.
+            <ArenaBuildSummary build={build} />
+          ) : (
+            <>
+              {/* 증강 */}
+              <BuildAugmentList
+                augments={buildAugments}
+                label={translate("augments")}
+              />
 
-          {/* 아이템 */}
-          {buildItems.length > 0 && (
-            <BuildItemRow items={buildItems} label={translate("items")} />
+              {/* 아이템 */}
+              {buildItems.length > 0 && (
+                <BuildItemRow items={buildItems} label={translate("items")} />
+              )}
+            </>
           )}
 
           {/* 합산 스탯 */}
@@ -346,7 +370,7 @@ const styles = StyleSheet.create({
     borderRightWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: Spacing.three,
     paddingTop: Spacing.four,
-    gap: Spacing.four,
+    gap: Spacing.five,
   },
   notFound: {
     flex: 1,

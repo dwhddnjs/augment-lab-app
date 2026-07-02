@@ -1,0 +1,1602 @@
+[
+  {
+    "id": "warmup-routine",
+    "name": "Warmup Routine",
+    "description": "Gain the Warmup Routine Summoner Spell.\n\nChannel your inner dancer to increase your damage by 2% per second, up to 20% max.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/warmuproutine_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "vanish",
+    "name": "Vanish",
+    "description": "Gain the Vanish Summoner Spell.\n\nVanish turns you Invisible.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/vanish_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "cerberus",
+    "name": "Cerberus",
+    "description": "Gain the Hail of Blades and Press the Attack Keystone Runes.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/cerberus_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "typhoon",
+    "name": "Typhoon",
+    "description": "Your Attacks fire a bolt at an additional target dealing reduced damage and applying On-Hit effects.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/typhoon_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "self-destruct",
+    "name": "Self Destruct",
+    "description": "Every 13 seconds Autocast, attach a bomb to yourself, it explodes, dealing massive true damage and Knocking Up nearby enemies.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/selfdestruct_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "serve-beyond-death",
+    "name": "Serve Beyond Death",
+    "description": "The first time you would die each round, instead return to full Health, decaying over time.\n\nTaking down an enemy champion while your Health is decaying stops the decay.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/servebeyonddeath_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "undying-guard",
+    "name": "Undying Guard",
+    "description": "Upon reviving with Cultivation of War, Zaahen deals damage to nearby enemies based on their current Health and knocks all targets back, becoming impervious to damage dealt by champions outside of the circle created and gains a brief burst of movement speed.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "quantum-computing",
+    "name": "Quantum Computing",
+    "description": "Periodically Autocast a massive slash around you, dealing physical damage.\n\nEnemies hit by the outer edge are Slowed, take additional damage, and heal you.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quantumcomputing_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "demons-dance",
+    "name": "Demon's Dance",
+    "description": "Gain the Fleet Footwork and Grasp of the Undying Keystone Runes.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/demonsdance_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "defensive-maneuvers",
+    "name": "Defensive Maneuvers",
+    "description": "Gain the Defensive Maneuvers Summoner Spell.\n\nDefensive Maneuvers Casts both Summoner Barrier and Heal on your team.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/defensivemaneuvers_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "transmute-chaos",
+    "name": "Transmute: Chaos",
+    "description": "Gain 2 random %i:Augment%Augments.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/transmutechaos_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "chauffeur",
+    "name": "Chauffeur",
+    "description": "You are attached to your ally and can't move on your own.\n\nYour bonus Move Speed is also granted to your ally, and you gain Ability Haste and Attack Speed.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/chauffeur_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "marksmage",
+    "name": "Marksmage",
+    "description": "Your Attacks deal additional physical damage equal to 75% Ability Power.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/marksmage_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "light-warden",
+    "name": "Light Warden",
+    "description": "Every few seconds, Autocast a warding light, Shielding yourself and allies it passes through before returning, repeating the effect.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/lightwarden_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "quest-mad-hatter",
+    "name": "Quest: Mad Hatter",
+    "description": "Requirement: Wear 10 hats at the end of combat.\n\nReward: Gain Adaptive Force, Armor, Magic Resist, Tenacity, and Movement Speed per hat.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/mad_hatter_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "blade-waltz",
+    "name": "Blade Waltz",
+    "description": "Gain the Blade Waltz Summoner Spell.\n\nBlade Waltz makes you untargetable while you dash at and damage enemies 6 times.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bladewaltz_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "willing-sacrifice",
+    "name": "Willing Sacrifice",
+    "description": "When an allied champion drops below 30% Health, trade some of your health to Shield them.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/willingsacrifice_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "firefox",
+    "name": "Firefox",
+    "description": "Autocast\nGain Movement Speed and conjure three flames that orbit you, targetting the closest visible enemy in range and dealing magic damage.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/firfox_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "summoner-revolution",
+    "name": "Summoner Revolution",
+    "description": "Your Summoner Spells gain 1 additional charge(s).\n\nFlash resets every round.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "ice-cold",
+    "name": "Ice Cold",
+    "description": "Your Slowing effects reduce Move Speed by an extra 0.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/icecold_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "spin-to-win",
+    "name": "Spin To Win",
+    "description": "Your spin Abilities gain 15 Ability Haste and deal 15% more damage!",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/spintowin_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "bannerof-command",
+    "name": "Banner of Command",
+    "description": "Gain the Banner of Command Summoner Spell.\n\nBanner of Command empowers your ally for a brief duration.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bannerofcommand_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "tank-it-or-leave-it",
+    "name": "Tank It Or Leave It",
+    "description": "You can Critically Defend using your Crit Chance (max 50% chance), giving you a chance to reduce damage.\n\nGain %i:scaleCrit% 25% Crit Chance.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/tankitorleaveit_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "witchful-thinking",
+    "name": "Witchful Thinking",
+    "description": "Gain %i:scaleAP% 60 Ability Power.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/witchfulthinking_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "quest-urfs-champion",
+    "name": "Quest: Urf's Champion",
+    "description": "Requirement: Score 10 takedowns.\n\nReward: Golden Spatula",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_urfschampion_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "vengeance",
+    "name": "Vengeance",
+    "description": "After your partner dies, gain massively increased damage and Omnivamp for the rest of the round.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/vengeance_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "erosion",
+    "name": "Erosion",
+    "description": "Damaging enemies adds a stacking Armor and Magic Resist shred for 4s.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/erosion_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "stats",
+    "name": "Stats!",
+    "description": "Gain 2 %i:StatAnvil% Stat Anvils!",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/stats_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "masterof-duality",
+    "name": "Master of Duality",
+    "description": "Your Attacks grant you Ability Power On-Hit and your Abilities grant you Attack Damage, until the end of the round.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/masterofduality_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "lightem-up",
+    "name": "Light 'em Up!",
+    "description": "Every 4th Attack deals additional magic damage On-Hit.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/lightemup_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "searing-dawn",
+    "name": "Searing Dawn",
+    "description": "Your Abilities mark enemies, causing them to take additional magic damage from your ally's next Attack or Ability.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/searingdawn_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "slap-around",
+    "name": "Slap Around",
+    "description": "Each time you Immobilize or Ground an enemy, gain %i:miniAdaptiveForce% 15 Adaptive Force for the round.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/slaparound_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "magic-missile",
+    "name": "Magic Missile",
+    "description": "Dealing damage with an Ability fires 3 magic missiles, each dealing percent max Health true damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/magicmissile_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "spellwake",
+    "name": "Spellwake",
+    "description": "Hitting enemies with Abilities creates a blast that deals magic damage from you to the location you hit them.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/spellwake_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "center-of-the-universe",
+    "name": "Center of the Universe",
+    "description": "Stars orbit you, dealing magic damage to enemies they pass through.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/centeroftheuniverse_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "phenomenal-evil",
+    "name": "Phenomenal Evil",
+    "description": "Permanently gain 1 Ability Power when you hit an enemy with an Ability.\n\nIf taken after round 4, gain 40 Ability Power.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/phenomenalevil_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "big-brain",
+    "name": "Big Brain",
+    "description": "At the start of each round, gain 1 Shield for every %i:scaleAP% 1 Ability Power.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bigbrain_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "vulnerability",
+    "name": "Vulnerability",
+    "description": "Your Item and damage over time effects can Critically Strike.\n\nGain %i:scaleCrit% 25% Crit chance.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/vulnerability_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "cannon-fodder",
+    "name": "Cannon Fodder",
+    "description": "You enter combat launching from a cannon.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/cannonfodder_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "ultimate-roulette",
+    "name": "Ultimate Roulette",
+    "description": "Replace Flee with a random Ultimate.\n\nAfter casting the Ultimate, replace it with new random Ultimate.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "clown-college",
+    "name": "Clown College",
+    "description": "Gain Deceive Summoner Spell.\n\nDeceive: You teleport and become Invisible. Your next Attack while Invisible deals an additional physical damage.\n\nWhen you die, spawn an exploding box that deals a large amount of magic damage and Fear nearby enemies.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/clowncollege_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "numb-to-pain",
+    "name": "Numb to Pain",
+    "description": "25% of damage you take instead happens over 6 seconds (10% for ranged champions).",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/numbtopain_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "augmented-power",
+    "name": "Augmented Power",
+    "description": "Increase the damage done by your augments and items by .",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/augmented_power_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "mad-scientist",
+    "name": "Mad Scientist",
+    "description": "Each Round you'll either grow large (Adaptive Force and Health) or tiny (Ability Haste and Move Speed).",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/madscientist_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "mountain-soul",
+    "name": "Mountain Soul",
+    "description": "You gain the Mountain Soul, gaining a Shield after being out of combat for a short time.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/mountainsoul_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "ultimate-revolution",
+    "name": "Ultimate Revolution",
+    "description": "Once per round, refresh your Ultimate after casting it.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "trickster-demon",
+    "name": "Trickster Demon",
+    "description": "When you exit stealth explode for Magic Damage, your clones and traps will do the same on death.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/tricksterdemon_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "dematerialize",
+    "name": "Dematerialize",
+    "description": "Gain %i:miniAdaptiveForce% 10 Adaptive Force on takedown, once per champion per round.\n\nGaining this augment after round 4, gain %i:miniAdaptiveForce% 30 Adaptive Force.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dematerialize_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "slow-and-steady",
+    "name": "Slow and Steady",
+    "description": "Your Attack Speed can not go above 0.65. All Bonus Attack Speed is converted to Attack Damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/slowandsteady_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "frost-wraith",
+    "name": "Frost Wraith",
+    "description": "Autocast Root nearby enemies for 1.25 seconds every 6.5 seconds.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/frostwraith_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "symphonyof-war",
+    "name": "Symphony of War",
+    "description": "Gain the Lethal Tempo and Conqueror Keystone Runes.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/symphonyofwar_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "trueshot-prodigy",
+    "name": "Trueshot Prodigy",
+    "description": "When you damage a champion from far away, fire a Trueshot Barrage at them.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "eureka",
+    "name": "Eureka",
+    "description": "Gain Ability Haste equal to 20% Ability Power.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/eureka_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "ocean-soul",
+    "name": "Ocean Soul",
+    "description": "Gain the Ocean Soul, granting high Health and Mana regen after damaging enemies.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/oceansoul_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "bodyguard",
+    "name": "Bodyguard",
+    "description": "Using a dash, blink, or teleport grants yourself, and any allied champions you pass through, a shield.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bodyguard_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "circleof-death",
+    "name": "Circle of Death",
+    "description": "Healing and Health Regen you do deals a portion of the value as magic damage to the nearest enemy champion.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/circleofdeath_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "quest-wooglets-witchcap",
+    "name": "Quest: Wooglet's Witchcap",
+    "description": "Immediate: Gain Needlessly Large Rod.\n\nRequirement: Possess Rabadon's Deathcap and Zhonya's Hourglass.\n\nReward: Gain Wooglet's Witchcap.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "earthwake",
+    "name": "Earthwake",
+    "description": "Your dash, blink, or teleport Abilities leave behind a trail that detonates after 1 second.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/earthwake_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "bread-and-butter",
+    "name": "Bread And Butter",
+    "description": "Your gains 100 Ability Haste.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/breadandbutter_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "the-brutalizer",
+    "name": "The Brutalizer",
+    "description": "Gain 20 Attack Damage, 10 Ability Haste, and 10 Lethality.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/thebrutalizer_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "sonic-boom",
+    "name": "Sonic Boom",
+    "description": "Buffing, Healing, or Shielding your ally deals damage and Slows enemies surrounding them.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/sonicboom_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "twice-thrice",
+    "name": "Twice Thrice",
+    "description": "Every 3 attacks, your On-Hit effects trigger a second time.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/twicethrice_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "symbiotic-mutation",
+    "name": "Symbiotic Mutation",
+    "description": "Every round this mutates into one of your ally's augments.\n\nOnly mutates into augments you could roll.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/symbioticmutation_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "celestial-body",
+    "name": "Celestial Body",
+    "description": "Gain 1000 Health, but you deal 10% less damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/celestialbody_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "bravestofthe-brave",
+    "name": "Bravest of the Brave",
+    "description": "Increase future augment offerings by 1 tier. If the augments were already Prismatic tier, gain a bonus 750 gold.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "bread-and-jam",
+    "name": "Bread And Jam",
+    "description": "Your gains 100 Ability Haste.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/breadandjam_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "with-haste",
+    "name": "With Haste",
+    "description": "Gain Move Speed equal to 120% of your Ability Haste.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/withhaste_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "fallen-aegis",
+    "name": "Fallen Aegis",
+    "description": "Start combat with a Black Shield for 8s.\n\nBlack Shield blocks Magic Damage and Immobilizing effects.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/fallenaegis_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "holy-fire",
+    "name": "Holy Fire",
+    "description": "Healing or Shielding applies an infinitely stacking Burn to a nearby enemy, dealing percent max Health magic damage over a few seconds.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/holyfire_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "overflow",
+    "name": "Overflow",
+    "description": "Your Mana costs are doubled.\n\nYour Ability Heals, Shields, and damage are increased based on your max Mana.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/overflow_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "feelthe-burn",
+    "name": "Feel the Burn",
+    "description": "Gain the Feel the Burn Summoner Spell.\n\nFeel the Burn casts Ignite and Exhaust on all nearby enemy champions.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/feeltheburn_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "guilty-pleasure",
+    "name": "Guilty Pleasure",
+    "description": "Immobilizing or Grounding enemy champions heals you.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/guiltypleasure_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "buff-buddies",
+    "name": "Buff Buddies",
+    "description": "You gain Crest of Cinders and Crest of Insight.\n\nGranting yourself Ability Haste and resource regeneration and causing your Attacks to Burn and Slow enemy champions.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/buffbuddies_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "raid-boss",
+    "name": "Raid Boss",
+    "description": "You start each round imprisoned. While imprisoned, you have massive damage reduction and accumulate size, and power over time.\n\nWhen you escape, Knock Back enemies and gaining Shield.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/raidboss_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "outlaws-grit",
+    "name": "Outlaw's Grit",
+    "description": "After using a Dash, Blink, or Teleport Ability you gain Armor and Magic Resist.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/outlawsgrit_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "dont-blink",
+    "name": "Don't Blink",
+    "description": "Gain 1% bonus damage per 10 Move Speed you have more than the target.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dontblink_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "shadow-runner",
+    "name": "Shadow Runner",
+    "description": "After using a dash, leap, blink, or teleport Ability or exiting Stealth, gain 200 Move Speed for 2 seconds.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/shadowrunner_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "grievous-venom",
+    "name": "Grievous Venom",
+    "description": "Dealing damage to an enemy champion reduces any shields they gain, and applies Grievous Wounds, reducing any healing they receive.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/grevious_venmon_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "infernal-conduit",
+    "name": "Infernal Conduit",
+    "description": "Your Abilities apply an infinitely stacking Burn, dealing magic damage over time.\n\nYour Burn effects reduce your basic Ability Cooldowns.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/infernalconduit_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "adapt",
+    "name": "ADAPt",
+    "description": "Convert Bonus Attack Damage to Ability Power. Gain 15% Ability Power.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/adapt_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "backto-basics",
+    "name": "Back To Basics",
+    "description": "Gain increased Ability Damage, Healing, Shielding, and Ability Haste, but you cannot use your Ultimate Ability.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/backtobasics_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "prismatic-egg",
+    "name": "Prismatic Egg",
+    "description": "Gain 1 stack on takedown, once per champion per round.\n\nAfter 5 stacks, this hatches into a Prismatic Item Anvil, %i:Augment% Prismatic Augment, and a %i:StatAnvil% Prismatic Stat Anvil.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "clothesline",
+    "name": "Clothesline",
+    "description": "There is a tether connecting your team, deals constant magic damage to enemies it touches.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/clothesline_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "dont-chase",
+    "name": "Don't Chase",
+    "description": "You become Ghosted and leave a trail of poisonous gas behind you, dealing magic damage to enemies inside.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dontchase_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "soul-siphon",
+    "name": "Soul Siphon",
+    "description": "Heal for 10% of damage done by Critical Strikes.\n\nGain %i:scaleCrit% 25% Crit chance.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/soulsiphon_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "gamba-anvil",
+    "name": "Gamba Anvil",
+    "description": "Gain +%i:goldCoins%1000 gold and reduce the price of all anvils.\n\nPrismatic Anvils: -%i:goldCoins%1500 gold\nLegendary Anvils: -%i:goldCoins%750 gold\nStat Anvils: -%i:goldCoins%250 gold\n\nItems acquired from anvils resell for -%i:goldCoins%500 gold less.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/thiefsgloves_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "divine-intervention",
+    "name": "Divine Intervention",
+    "description": "Shortly after combat starts, call a protective star. Upon its landing, you and nearby allies become Invulnerable for a few seconds.\n\nThen Autocast this every 25 seconds.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/slowactingpainkillers_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "threadthe-needle",
+    "name": "Thread the Needle",
+    "description": "Gain 15% %i:scaleAPen% Armor Penetration and %i:scaleMPen% Magic Penetration.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/threadtheneedle_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "bread-and-cheese",
+    "name": "Bread And Cheese",
+    "description": "Your gains 100 Ability Haste.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/breadandcheese_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "impassable",
+    "name": "Impassable",
+    "description": "Gain the Aftershock and Glacial Augment Keystone Runes.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/impassable_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "pandoras-box",
+    "name": "Pandora's Box",
+    "description": "Transmute all of your augments into random Prismatic%i:Augment% Augments.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/pandoras_box_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "extendo-arm",
+    "name": "Extendo-Arm",
+    "description": "Autocast fire a Blitzcrank hook every 12 seconds at a nearby enemy champion.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/extendoarm_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "slow-cooker",
+    "name": "Slow Cooker",
+    "description": "Every second, apply an infinitely stacking Burn to nearby enemy champions, scaling with your max Health.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/slowcooker_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "die-another-day",
+    "name": "Die Another Day",
+    "description": "Gain the Die Another Day Summoner Spell.\n\nDie Another Day creates a zone where no unit can die for 4 seconds.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dieanotherday_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "augment404",
+    "name": "404 Augment Not Found",
+    "description": "How did you find this?!?!?\n\nGain 3 hats.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/augment404_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "dual-wield",
+    "name": "Dual Wield",
+    "description": "When you Attack, fire a bolt that deals 40% damage and applies your On-Hit effects at 40% effectiveness.\n\nGain 15% total Attack Speed.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dualwield_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "augment405",
+    "name": "Augment 405",
+    "description": "Gain 5% damage per hat you're wearing.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/augment405_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "spirit-link",
+    "name": "Spirit Link",
+    "description": "Link spirits with your ally. Redirect 40% of the damage they take to you, and gain 40% of the healing they receive.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/spiritlink_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "deathtouch",
+    "name": "Deathtouch",
+    "description": "Attacking enemy champions grants permanent Cursed Power and deal additional magic damage based on your Cursed Power.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/deathtouch_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "quest-angelof-retribution",
+    "name": "Quest: Angel of Retribution",
+    "description": "Requirement: Heal or prevent 2500 damage to allies.\n\nReward: Gain 100% Attack Speed, and your Attacks deal additional magic damage equal to 350% Heal/Shield Power.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_angelofretribution_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "contract-killer",
+    "name": "Contract Killer",
+    "description": "Each round, mark an opposing champion.\n\nThat champion takes 15% extra damage and grants an +%i:goldCoins%150 gold when killed.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/contractkiller_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "goredrink",
+    "name": "Goredrink",
+    "description": "Gain 15% Omnivamp.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/goredrink_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "despoil",
+    "name": "Despoil",
+    "description": "Dashing or Teleporting grants you Cursed Power if there is an enemy nearby. Gain Move Speed scaling with your Cursed Power.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/desecrator_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "well-be-right-back",
+    "name": "We'll Be Right Back",
+    "description": "Gain Time Stop Summoner Spell.\n\nTime Stop: ALL nearby champions are put in Stasis. The Stasis is shorter on you, and during it you Heal based on missing Health.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wellberightback_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "quest-rite-of-the-forge-god",
+    "name": "Quest: Rite Of The Forge God",
+    "description": "Requirement: Purchase 2 Item Anvils.\n\nReward: All of your items become Masterwork, increasing their stats by 40%.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_rite_of_the_forge_god_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "first-aid-kit",
+    "name": "First-Aid Kit",
+    "description": "Gain 20% Heal and Shield Power.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/firstaidkit_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "ok-boomerang",
+    "name": "OK Boomerang",
+    "description": "Autocast throw a boomerang at a nearby enemy every 7s.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/okboomerang_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "hybrid",
+    "name": "Hybrid",
+    "description": "When you deal damage with an Attack, your next Ability deals 10% increased damage.\n\nWhen you deal damage with an Ability, your next Attack deals 10% increased damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/hybrid_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "hive-mind",
+    "name": "Hive Mind",
+    "description": "Start each round with 0 Bee, gain additonal Bees by harvesting flowers. Damaging an enemy champion sends a Bee dealing magic damage over 2 seconds on arrival, before returning to you.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/hive_mind_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "quest-three-sacred-treasures",
+    "name": "Quest: Three Sacred Treasures",
+    "description": "Requirement: Possess Infinity Edge, Perplexity, and Hextech Gunblade.\n\nReward: Yunara's Attacks are replaced with lasers that deal mixed damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/threesacredtreasures_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "juice-box",
+    "name": "Juice Box",
+    "description": "Each round, everyone on your team gains 1 Juice.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/juicebox_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "scopiest-weapons",
+    "name": "Scopiest Weapons",
+    "description": "Gain Attack Range.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/scopiestweapons_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "slime-time",
+    "name": "Slime Time",
+    "description": "Every few seconds Autocast a burst slime from your body, dealing magic damage to nearby enemies.\n\nIf you hit a champion, secrete a blob that heals you when walked over.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/slimetime_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "dreadbringer",
+    "name": "Dreadbringer",
+    "description": "Gain an aura that continuously harvests permanent Cursed Power per enemy champion inside. Gain max Health based on your Cursed Power.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/plaguebearer_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "stackosaurus-rex",
+    "name": "Stackosaurus Rex",
+    "description": "When you gain permanent Stacks of an Ability, Augment, or Item gain 75% more!",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/stackosaurusrex_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "esc-apade",
+    "name": "escAPADe",
+    "description": "Convert Ability Power to Bonus Attack Damage. Gain 15% Attack Damage.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/escapade_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "fey-magic",
+    "name": "Fey Magic",
+    "description": "Damaging with your Ultimate Polymorphs enemies for a few seconds.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/feymagic_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "firebrand",
+    "name": "Firebrand",
+    "description": "Your Attacks apply an infinitely stacking Burn On-Hit, dealing damage over time.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/firebrand_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "doomsayer",
+    "name": "Doomsayer",
+    "description": "Hitting an enemy champion with an ability hits grant you permanent Cursed Power. Gain Adaptive Force based on your Cursed Power.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/doomsayer_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "flashy",
+    "name": "Flashy",
+    "description": "Your Flash has 1 Ammo and a 2 second Cooldown.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/flashy_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "nesting-doll",
+    "name": "Nesting Doll",
+    "description": "Gain 1 additional Revives, and begin reviving yourself after you die.\n\nWhen you Revive Knockback enemies around you, and come back smaller with reduced max Health.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/nesting_doll_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "tap-dancer",
+    "name": "Tap Dancer",
+    "description": "Your Attacks grant you 6 Move Speed On-Hit.\n\nGain Attack Speed equal to 10% of your Move Speed.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/tapdancer_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "fan-the-hammer",
+    "name": "Fan the Hammer",
+    "description": "When you Attack, fire 5 bolts that each deal physical damage and applies your On-Hit.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/fanthehammer_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "tormentor",
+    "name": "Tormentor",
+    "description": "Immobilizing or Grounding enemy champions applies a Burn that deals damage over time, stacking infinitely.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/tormentor_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "minionmancer",
+    "name": "Minionmancer",
+    "description": "Your summons gain 35% increased size, health, and damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/minionmancer_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "tank-engine",
+    "name": "Tank Engine",
+    "description": "Gain increased size and percent bonus Health per takedown.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/tank_engine_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "ethereal-weapon",
+    "name": "Ethereal Weapon",
+    "description": "Your Abilities apply On-Hit effects.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/etherealweapon_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "omni-soul",
+    "name": "Omni Soul",
+    "description": "Gain 2 random Dragon Souls.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/omnisoul_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "dawnbringers-resolve",
+    "name": "Dawnbringer's Resolve",
+    "description": "Upon dropping below 60% Health, heal for over 3 seconds.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "silver-spoon",
+    "name": "Silver Spoon",
+    "description": "Deal increased damage per %i:Augment% Silver Augment you have.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/silver_spoon_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "hold-very-still",
+    "name": "Hold Very Still",
+    "description": "Gain Guerrilla Warfare.\n\nNot moving causes you to turn Invisibile until you move. Exiting this Invisibility, causes your next attack to deal bonus magic damage.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/holdverystill_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "from-beginning-to-end",
+    "name": "From Beginning to End",
+    "description": "Gain the First Strike and Dark Harvest Keystone Runes.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/frombeginningtoend_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "panic-room",
+    "name": "Panic Room",
+    "description": "Once per combat, when you would die, instead turn into a wisp, set yourself to 20% Health, and travel to a random spot in the arena.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/panic_room_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "parasitic-mutation",
+    "name": "Parasitic Mutation",
+    "description": "Every round this mutates into one of your opponent's augments.\n\nOnly mutates into augments you could roll.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/parasiticmutation_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "cant-touch-this",
+    "name": "Can't Touch This",
+    "description": "Casting your Ultimate makes you Invulnerable for a short duration.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/canttouchthis_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "its-critical",
+    "name": "It's Critical",
+    "description": "Gain %i:scaleCrit% 50% Crit chance.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/itscritical_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "blood-brother",
+    "name": "Blood Brother",
+    "description": "Gain Darius's Passive Hemorrhage.\n\nAttacks and damaging Abilities cause the target to Hemorrhage, dealing physical damage over 5 seconds, stacking up to 5 times.\n\nDraven gains Attack Damage at 5 Hemorrhage stacks.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bloodbrother_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "ultimate-unstoppable",
+    "name": "Ultimate Unstoppable",
+    "description": "After using your Ultimate, you become immune to crowd control for 2 seconds. (8 second Cooldown).",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/ultimateunstoppable_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "recursion",
+    "name": "Recursion",
+    "description": "Gain 40 Ability Haste.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/recursion_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "stats-on-stats-on-stats",
+    "name": "Stats on Stats on Stats!",
+    "description": "Gain 4 %i:StatAnvil% Stat Anvils!",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "deft",
+    "name": "Deft",
+    "description": "Gain %i:scaleAS% 60% Attack Speed.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/deft_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "goliath",
+    "name": "Goliath",
+    "description": "Become large, gaining 15% Health and 10% Adaptive Force.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/goliath_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "leg-day",
+    "name": "Leg Day",
+    "description": "Gain 10 Movement Speed and 15% Slow Resist.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/legday_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "trailblazer",
+    "name": "Trailblazer",
+    "description": "Dashing or Blinking applies a Burn to a nearby enemy that deals damage over time, stacking infinitely.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/trailblazer_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "accelerating-sorcery",
+    "name": "Accelerating Sorcery",
+    "description": "Using Abilities grant you stacking Ability Haste.\n\nThis resets each round.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/acceleratingsorcery_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "righteous-fury",
+    "name": "Righteous Fury",
+    "description": "Healing or Shielding increases your Ability damage by 2%, stacking infinitely for the round.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/righteous_fury_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "orbital-laser",
+    "name": "Orbital Laser",
+    "description": "Replace Summoner Flee with Orbital Laser.\n\nAfter a delay, call down an orbital laser that deals 30% max Health true damage plus magic damage over 3 seconds.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/orbitallaser_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "energetic",
+    "name": "Energetic",
+    "description": "Gain Energized 200% quicker. Triggering Energized fires a Magic Missile, dealing up to 0.3% max Health true damage based on distance traveled.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/energetic_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "mystic-punch",
+    "name": "Mystic Punch",
+    "description": "On-Hit reduce the cooldown of your abilities by 1.25 seconds %i:scaleCooldown%.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/mysticpunch_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "homeguard",
+    "name": "Homeguard",
+    "description": "Gain 70% Move Speed, disabled for 3 seconds after taking damage.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/homeguard_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "hat-trick",
+    "name": "Hat Trick",
+    "description": "Instantly gain 3 hats, and reduce the price of Cappa Juice by 350.\n\nWhen your health drops below 30% gain Move Speed and a shield, but lose one hat.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/hattrick_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "heavy-hitter",
+    "name": "Heavy Hitter",
+    "description": "Your Attacks deal additional physical damage equal to 3.5% of your max Health.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/heavyhitter_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "rabble-rousing",
+    "name": "Rabble Rousing",
+    "description": "Using an Ability restores Health.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/rabblerousing_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "giant-slayer",
+    "name": "Giant Slayer",
+    "description": "Become tiny, gain Move Speed, and bonus damage to champions based on how much larger they are than you.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/giantslayer_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "transmute-prismatic",
+    "name": "Transmute: Prismatic",
+    "description": "Gain a random %i:Augment% Prismatic Augment.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/transmuteprismatic_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "critical-healing",
+    "name": "Critical Healing",
+    "description": "Your Heals and Shields can Critically Strike for an addtional .\n\nGain %i:scaleCrit% 25% Crit Chance.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/criticalhealing_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "transmute-gold",
+    "name": "Transmute: Gold",
+    "description": "Gain a random %i:Augment% Gold Augment.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/transmutegold_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "apex-inventor",
+    "name": "Apex Inventor",
+    "description": "Gain 100 Item Haste (equivalent to 50% Item CDR).\n\nItem Haste reduces the cooldown %i:cooldown% of all Item Abilities.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/apexinventor_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "mirror-image",
+    "name": "Mirror Image",
+    "description": "When you drop below 30% Health, briefly become Invisible and create 4 clones of yourself.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/mirrorimage_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "magical-girl",
+    "name": "Magical Girl",
+    "description": "Each round a star falls, picking it up transforms you into a powerful Magical Girl.\n\nAs a Magical Girl, stars rain down around you and your enemies, dealing magic damage.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/magic_girl_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "desecrator",
+    "name": "Desecrator",
+    "description": "Immobilizing enemy champions grants you permanent Cursed Power. Gain Armor and Magic Resistance based on your Cursed Power.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/desecrator_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "all-for-you",
+    "name": "All For You",
+    "description": "Your Heals and Shields are stronger when used on an ally.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/allforyou_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "keystone-conjurer",
+    "name": "Keystone Conjurer",
+    "description": "Gain the Summon Aery and Arcane Comet Keystone Runes.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/keystoneconjurer_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "laser-eyes",
+    "name": "Laser Eyes",
+    "description": "There is a laser in the direction you are facing that deals continuous magic damage.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/lasereyes_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "stats-on-stats",
+    "name": "Stats on Stats!",
+    "description": "Gain 3 %i:StatAnvil% Stat Anvils!",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/statsonstats_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "dashing",
+    "name": "Dashing",
+    "description": "Your dash, leap, blink, or teleport Abilities gain 75 Ability Haste.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dashing_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "fire-sale",
+    "name": "Fire Sale",
+    "description": "Instantly sell all your non-quest items for 100% of their direct buy price.\n\nGreat for all those discounted anvils.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/firesale_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "lightning-strikes",
+    "name": "Lightning Strikes",
+    "description": "Gain 20% total Attack Speed.\n\nAt 3.5 Attacks per second, deal additional magic damage On-Hit.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/lightningstrikes_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "unshackled",
+    "name": "Unshackled",
+    "description": "You can now Hijack your ally's ultimate.\n\nOn takedown, reduce Hijack's lockout and cooldown by 20%.\n\nGain 60 Ultimate Haste.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/unshackled_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "repulsor",
+    "name": "Repulsor",
+    "description": "On dropping below 60% or 30% Health, nearby enemies are Knocked Back.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/repulsor_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "skilled-sniper",
+    "name": "Skilled Sniper",
+    "description": "Hitting an enemy with a non-Ultimate Ability at far range drastically reduces its Cooldown.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/skilledsniper_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "parasitic-relationship",
+    "name": "Parasitic Relationship",
+    "description": "Heal for 15% of the damage dealt by your ally.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/parasiticrelationship_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "restart",
+    "name": "Restart",
+    "description": "Your non-Ultimate Abilities Automatically refresh every 12 seconds.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/restart_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "draw-your-sword",
+    "name": "Draw Your Sword",
+    "description": "You are now melee.\n\nGain Attack Damage, Health, Attack Speed, Lifesteal, and Move Speed based on how much Attack Range you lost.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/drawyoursword_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "restless-restoration",
+    "name": "Restless Restoration",
+    "description": "You constantly heal while moving.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/restlessrestoration_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "dive-bomber",
+    "name": "Dive Bomber",
+    "description": "Your team's first death each round explodes, dealing massive damage true damage.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/divebomber_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "go-hsacrifice-for-gold",
+    "name": "Sacrifice: For Gold",
+    "description": "Sacrifice 25% of your current health.\n\nAfter 4 rounds, gain a bonus Gold Augment and restore your health.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificeforgold_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "blunt-force",
+    "name": "Blunt Force",
+    "description": "Gain %i:scaleAD% 10% Attack Damage.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bluntforce_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "bread-sandwich",
+    "name": "Bread Sandwich",
+    "description": "Gain 200 Ability Haste.\n\nCasting an ability gants 40% for 2 seconds.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bread_sandwhich_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "oathsworn",
+    "name": "Oathsworn",
+    "description": "Replace Flee with Fate's Call.\n\nFate's Call making your ally Untargetable for up to 4 seconds. your ally can launch themself out, Knocking Back enemies.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/oathsworn_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "aim-for-the-head",
+    "name": "Aim for the Head",
+    "description": "Your Critical Strike Chance is capped at 50%. Convert 40% of Critical Strike Chance above 50% into Critical Strike Damage.\n\nGain 25% Critical Strike Chance and 25% Critical Strike Damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/aim_for_the_head_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "summoners-roulette",
+    "name": "Summoner's Roulette",
+    "description": "Replace your Summoner Spells with random ones.\n\nWhen you use a Summoner Spell, replace it with another random one on a 6 second Cooldown.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/summonersroulette_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "go-hsacrifice-for-silver",
+    "name": "Sacrifice: For Silver",
+    "description": "After 2 rounds, gain a bonus Silver Augment.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "shrink-ray",
+    "name": "Shrink Ray",
+    "description": "Your Attacks reduce the target's damage and size by 10% On-Hit.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/shrinkray_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "castle",
+    "name": "Castle",
+    "description": "Gain the Castle Summoner Spell.\n\nCastle: Swap places with your ally, gaining Move Speed and a Shield.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/castle_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "quest-steel-your-heart",
+    "name": "Quest: Steel Your Heart",
+    "description": "Requirement: Possess Heartsteel with 400+ stacks.\n\nReward: Multiply your Heartsteel stacks by 3. Increase your Health Regeneration by 12.5% of your Heartsteel stacks.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_steelyourheart_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "executioner",
+    "name": "Executioner",
+    "description": "Deal 10% more damage to enemies below 40% health. Reset your basic abilities on takedown.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/executioner_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "courageofthe-colossus",
+    "name": "Courage of the Colossus",
+    "description": "Gain Shield after Immobilizing or Grounding an enemy champion.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/courageofthecolossus_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "fruits-of-your-labor",
+    "name": "Fruits of Your Labor",
+    "description": "Power Flowers are 20% more effective on you and are shared with your ally.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/fruitarian_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "infernal-soul",
+    "name": "Infernal Soul",
+    "description": "You gain the Infernal Dragon Soul, dealing bonus damage when you hit enemies with Abilities or Attacks.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/infernalsoul_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "combo-master",
+    "name": "Combo Master",
+    "description": "Gain the Electrocute and Phase Rush Keystone Runes.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/combomaster_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "dark-blessing",
+    "name": "Dark Blessing",
+    "description": "Healing or Shielding an ally grants you permanent Cursed Power. Gain Ability Haste based on your Cursed Power.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/darkblessing_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "mindto-matter",
+    "name": "Mind to Matter",
+    "description": "Increase max Health by half of your Mana.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/mindtomatter_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "its-killing-time",
+    "name": "It's Killing Time",
+    "description": "After casting your Ultimate, mark all enemy champions for death.\n\nWhile marked, store damage dealt to them, and detonate the damage when the mark ends.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/itskillingtime_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "wisdomof-ages",
+    "name": "Wisdom of Ages",
+    "description": "Gain 1 level now, and 1 bonus level every other round.\n\nYour level cap is removed.\n\nIf taken after round 4, gain 2 additional levels.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wisdomofages_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "go-hsacrifice-for-prismatic",
+    "name": "Sacrifice: For Prismatic",
+    "description": "Sacrifice 50% of your current health.\n\nAfter 7 rounds, gain a bonus Prismatic Augment and restore your health.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gohsacrificeforprismatic_small.png",
+    "maxLevel": 1
+  },
+  {
+    "id": "now-you-see-me",
+    "name": "Now You See Me",
+    "description": "Gain the Now You See Me Summoner Spell.\n\nNow You See Me teleports you back to the starting position of your last Movement Ability.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/nowyouseeme_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "perseverance",
+    "name": "Perseverance",
+    "description": "Gain hugely increased Health Regen, further increased at low Health.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/perseverance_small.png",
+    "maxLevel": 2
+  },
+  {
+    "id": "jeweled-gauntlet",
+    "name": "Jeweled Gauntlet",
+    "description": "Your Abilities can Critically Strike.\n\nGain %i:scaleCrit% % Crit Chance.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/jeweledgauntlet_small.png",
+    "maxLevel": 3
+  },
+  {
+    "id": "and-my-axe",
+    "name": "And My Axe!",
+    "description": "Autocast:\nPeriodically throws an axe at the nearest opponent, dealing physical damage, slowing, and shredding their armor and magic resist. Picking up the axe reduces its Cooldown.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/andmyaxe_small.png",
+    "maxLevel": 2
+  }
+]

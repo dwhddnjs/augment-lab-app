@@ -1,0 +1,152 @@
+[
+  {
+    "id": "go-hchemtech-putrifier",
+    "name": "Chemtech Putrifier",
+    "description": "All damage you do applies Grevious Wounds.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/chemtechpurifier_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hlamb",
+    "name": "Lamb's Respite",
+    "description": "Gain 1 additional revive, and cuts the time needed to revive in half.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/lamb_small.arena_2026_s2.png"
+  },
+  {
+    "id": "crafting-pris-stat-anvil",
+    "name": "Gain a Prismatic Stat Anvil",
+    "description": "Gain a %i:StatAnvil% Prismatic Stat Anvil.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/crafting_prisstatanvil_small.png"
+  },
+  {
+    "id": "go-hfrozen-mallet",
+    "name": "Frozen Mallet",
+    "description": "Dealing damage Slows enemies.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/frozenmallet_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "crafting-sell-augment",
+    "name": "Level Augments",
+    "description": "Remove an %i:Augment% Augment.\n\nGain 2 random %i:AugmentLevel% Augment Levels.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/crafting_sellaug_small.png"
+  },
+  {
+    "id": "go-hcraving-for-power",
+    "name": "Craving For Power",
+    "description": "Sacrifice 10% of your max health to Tahm Kench.\n\nYour total sacrifice will increase to -% max health.\n\nGain 1 Gold Stat Anvil.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/power_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-hbloodrazor",
+    "name": "Bloodrazor",
+    "description": "Dealing damage deals an additional 1.5% max health physical damage.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bloodrazor_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hvote-ally-hunter",
+    "name": "Ally Hunter",
+    "description": "Vote for your team to ally with the Demon Hunters.\n\nAllying with Demon Hunters grants you +%i:goldCoins%500 bonus gold when you beat a Demon team.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/yonehunter_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hremnant-of-the-watchers",
+    "name": "Remnant of the Watchers",
+    "description": "Reduce the Attack Speed of nearby champions.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/remnantofthewatchers_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hdematerializer",
+    "name": "Dematerializer",
+    "description": "Your damage executes champions that are below 10% Health.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dematerializer_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hcompulsion-for-power",
+    "name": "Compulsion For Power",
+    "description": "Sacrifice 15% of your max health to Tahm Kench.\n\nYour total sacrifice will increase to -% max health.\n\nGain 1 Prismatic Stat Anvils.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/power_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-hvote-ally-demon",
+    "name": "Ally Demon",
+    "description": "Vote for your team to ally with the Demons.\n\nAllying with Demons grants an %i:AugmentLevel% Augment Level when a Hunter team is eliminated.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/yonedemon_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "go-hcraving-for-wealth",
+    "name": "Craving For Wealth",
+    "description": "Sacrifice 10% of your max health to Tahm Kench.\n\nYour total sacrifice will increase to -% max health.\n\nGain +%i:goldCoins% 1500 gold.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wealth_large.arena_2026_s2.png"
+  },
+  {
+    "id": "go-hcompulsion-for-risk",
+    "name": "Compulsion For Risk",
+    "description": "Sacrifice 15% of your max health to Tahm Kench.\n\nYour total sacrifice will increase to -% max health.\n\nGain a %i:Augment% Prismatic Augment.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/risk_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-henchanted-flask",
+    "name": "Enchanted Flask",
+    "description": "Gain a Spell Shield every 10 seconds.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/crystallineflask_small.arena_2026_s2_a2.png"
+  },
+  {
+    "id": "replace-augment",
+    "name": "Replace Augment",
+    "description": "Replace one of your %i:Augment% Augments with an Augment 1%i:AugmentLevel% tier higher.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/replace_augment_small.png"
+  },
+  {
+    "id": "go-hswindlers-orb",
+    "name": "Swindler's Orb",
+    "description": "Dealing damage to an enemy champion reduces their shields.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/swindlers_orb_item_small.png"
+  },
+  {
+    "id": "crafting-augment-slot",
+    "name": "Gain an Augment slot",
+    "description": "Unlock your 5th %i:Augment% Augment Slot.\n\nIn 4 rounds gain a %i:Augment% Silver Augment.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/crafting_slot_small.png"
+  },
+  {
+    "id": "go-habstain-from-risk",
+    "name": "Abstain From Risk",
+    "description": "Restore 10% of of the health you've sacrificed to Tahm Kench.\n\nInstantly gain a %i:Augment% Silver Augment.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/risk_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-habstain-from-wealth",
+    "name": "Abstain From Wealth",
+    "description": "Restore 10% of of the health you've sacrificed to Tahm Kench.\n\nGain +%i:goldCoins% 500 gold.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wealth_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-hcraving-for-risk",
+    "name": "Craving For Risk",
+    "description": "Sacrifice 10% of your max health to Tahm Kench.\n\nYour total sacrifice will increase to -% max health.\n\nGain a %i:Augment% Gold Augment.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/risk_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-hcompulsion-for-wealth",
+    "name": "Compulsion For Wealth",
+    "description": "Sacrifice 15% of your max health to Tahm Kench.\n\nYour total sacrifice will increase to -% max health.\n\nGain +%i:goldCoins% 2500 gold.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wealth_small.arena_2026_s2.png"
+  },
+  {
+    "id": "gain-stat-anvil",
+    "name": "Gain Stat Anvil",
+    "description": "Gain a random %i:StatAnvil% Stat Anvil.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/gain_stat_anvil_small.png"
+  },
+  {
+    "id": "go-hwolf",
+    "name": "Wolf's Frenzy",
+    "description": "Lose your innate revive.\n\nIncrease your Health by 15%.\n\nIf you deal damage that would leave a champion below below 10% maximum health, execute them.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wolf_small.arena_2026_s2.png"
+  },
+  {
+    "id": "go-habstain-from-power",
+    "name": "Abstain From Power",
+    "description": "Restore 10% of of the health you've sacrificed to Tahm Kench.\n\nGain 1 Silver Stat Anvil.",
+    "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/power_small.arena_2026_s2.png"
+  }
+]

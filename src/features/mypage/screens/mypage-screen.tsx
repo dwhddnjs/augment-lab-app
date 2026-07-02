@@ -4,7 +4,7 @@
  * universal에는 섹션 헤더(Section)가 없으므로 평면 리스트로 구성한다.
  * 화면 타이틀은 (mypage) 스택의 native 헤더가 제공한다.
  */
-import { Host, List, ListItem, Picker, Text } from '@expo/ui';
+import { Host, Icon, List, ListItem, Picker, Text } from '@expo/ui';
 import Constants from 'expo-constants';
 import { openBrowserAsync } from 'expo-web-browser';
 import { Linking } from 'react-native';
@@ -16,6 +16,28 @@ import { useTranslation } from '@/lib/i18n';
 
 const GITHUB_URL = 'https://github.com/dwhddnjs/aram-augment-lab-app';
 const FEEDBACK_EMAIL = 'syd1215no@gmail.com';
+
+/** 행 앞 아이콘 — iOS SF Symbol / Android Material Symbols(XML vector drawable). */
+const THEME_ICON = Icon.select({
+  ios: 'circle.lefthalf.filled',
+  android: import('@expo/material-symbols/contrast.xml'),
+});
+const LANGUAGE_ICON = Icon.select({
+  ios: 'globe',
+  android: import('@expo/material-symbols/language.xml'),
+});
+const VERSION_ICON = Icon.select({
+  ios: 'info.circle',
+  android: import('@expo/material-symbols/info.xml'),
+});
+const GITHUB_ICON = Icon.select({
+  ios: 'chevron.left.forwardslash.chevron.right',
+  android: import('@expo/material-symbols/code.xml'),
+});
+const FEEDBACK_ICON = Icon.select({
+  ios: 'envelope',
+  android: import('@expo/material-symbols/feedback.xml'),
+});
 
 const t = {
   ko: {
@@ -56,6 +78,7 @@ export default function MyPageScreen() {
     <Host style={{ flex: 1 }}>
       <List>
         <ListItem
+          leading={<Icon name={THEME_ICON} size={22} color={colors.text.primary} />}
           trailing={
             <Picker
               selectedValue={preference}
@@ -71,6 +94,7 @@ export default function MyPageScreen() {
           {translate('theme')}
         </ListItem>
         <ListItem
+          leading={<Icon name={LANGUAGE_ICON} size={22} color={colors.text.primary} />}
           trailing={
             <Picker
               selectedValue={locale}
@@ -84,9 +108,22 @@ export default function MyPageScreen() {
         >
           {translate('language')}
         </ListItem>
-        <ListItem trailing={<Text>{version}</Text>}>{translate('version')}</ListItem>
-        <ListItem onPress={() => openBrowserAsync(GITHUB_URL)}>{translate('github')}</ListItem>
-        <ListItem onPress={() => Linking.openURL(`mailto:${FEEDBACK_EMAIL}`)}>
+        <ListItem
+          leading={<Icon name={VERSION_ICON} size={22} color={colors.text.primary} />}
+          trailing={<Text>{version}</Text>}
+        >
+          {translate('version')}
+        </ListItem>
+        <ListItem
+          leading={<Icon name={GITHUB_ICON} size={22} color={colors.text.primary} />}
+          onPress={() => openBrowserAsync(GITHUB_URL)}
+        >
+          {translate('github')}
+        </ListItem>
+        <ListItem
+          leading={<Icon name={FEEDBACK_ICON} size={22} color={colors.text.primary} />}
+          onPress={() => Linking.openURL(`mailto:${FEEDBACK_EMAIL}`)}
+        >
           {translate('feedback')}
         </ListItem>
         <ListItem>

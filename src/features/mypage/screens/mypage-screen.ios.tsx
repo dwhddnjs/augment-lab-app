@@ -21,6 +21,7 @@ import {
   buttonStyle,
   contentShape,
   foregroundStyle,
+  frame,
   listRowBackground,
   listStyle,
   scrollContentBackground,
@@ -31,6 +32,7 @@ import {
 import Constants from "expo-constants";
 import { openBrowserAsync } from "expo-web-browser";
 import { Linking } from "react-native";
+import type { SFSymbol } from "sf-symbols-typescript";
 
 import { useLocale, type Locale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
@@ -74,15 +76,44 @@ const t = {
   },
 };
 
-/** 좌측 라벨 + 우측 값/disclosure chevron 행. onPress 없으면 비활성(정적 값). */
+/** 아이콘 + 라벨 행 헤드. Picker `label` 슬롯에 넣어 leading 아이콘 색을 tint와 무관하게 고정한다. */
+function RowLabel({
+  icon,
+  label,
+  iconColor,
+}: {
+  icon: SFSymbol;
+  label: string;
+  iconColor: string;
+}) {
+  return (
+    <HStack spacing={12}>
+      <Image
+        systemName={icon}
+        size={17}
+        modifiers={[
+          foregroundStyle({ type: "color", color: iconColor }),
+          frame({ width: 26 }),
+        ]}
+      />
+      <Text>{label}</Text>
+    </HStack>
+  );
+}
+
+/** 좌측 아이콘 + 라벨 + 우측 값/disclosure chevron 행. onPress 없으면 비활성(정적 값). */
 function SettingsRow({
   label,
   value,
+  icon,
+  iconColor,
   onPress,
   rowBackgroundColor,
 }: {
   label: string;
   value?: string;
+  icon: SFSymbol;
+  iconColor: string;
   onPress?: () => void;
   rowBackgroundColor: string;
 }) {
@@ -91,7 +122,15 @@ function SettingsRow({
       onPress={onPress}
       modifiers={[buttonStyle("plain"), listRowBackground(rowBackgroundColor)]}
     >
-      <HStack spacing={8} modifiers={[contentShape(shapes.rectangle())]}>
+      <HStack spacing={12} modifiers={[contentShape(shapes.rectangle())]}>
+        <Image
+          systemName={icon}
+          size={17}
+          modifiers={[
+            foregroundStyle({ type: "color", color: iconColor }),
+            frame({ width: 26 }),
+          ]}
+        />
         <Text>{label}</Text>
         <Spacer />
         {value ? (
@@ -142,7 +181,13 @@ export default function MyPageScreen() {
       >
         <Section title={translate("general")}>
           <Picker
-            label={translate("theme")}
+            label={
+              <RowLabel
+                icon="circle.lefthalf.filled"
+                label={translate("theme")}
+                iconColor={colors.text.primary}
+              />
+            }
             selection={preference}
             onSelectionChange={(next) => setPreference(next as ThemePreference)}
             modifiers={pickerModifiers}
@@ -152,7 +197,13 @@ export default function MyPageScreen() {
             <Text modifiers={[tag("dark")]}>{translate("dark")}</Text>
           </Picker>
           <Picker
-            label={translate("language")}
+            label={
+              <RowLabel
+                icon="globe"
+                label={translate("language")}
+                iconColor={colors.text.primary}
+              />
+            }
             selection={locale}
             onSelectionChange={(next) => setLocale(next as Locale)}
             modifiers={pickerModifiers}
@@ -169,15 +220,21 @@ export default function MyPageScreen() {
           <SettingsRow
             label={translate("version")}
             value={version}
+            icon="info.circle"
+            iconColor={colors.text.primary}
             rowBackgroundColor={rowBg}
           />
           <SettingsRow
             label={translate("github")}
+            icon="chevron.left.forwardslash.chevron.right"
+            iconColor={colors.text.primary}
             onPress={() => openBrowserAsync(GITHUB_URL)}
             rowBackgroundColor={rowBg}
           />
           <SettingsRow
             label={translate("feedback")}
+            icon="envelope"
+            iconColor={colors.text.primary}
             onPress={() => Linking.openURL(`mailto:${FEEDBACK_EMAIL}`)}
             rowBackgroundColor={rowBg}
           />
