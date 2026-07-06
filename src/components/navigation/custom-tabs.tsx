@@ -11,8 +11,7 @@
  */
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { TabList, TabSlot, TabTrigger } from "expo-router/ui";
-import { Tabs } from "expo-router/ui";
+import { TabList, TabSlot, Tabs, TabTrigger } from "expo-router/ui";
 import { forwardRef } from "react";
 import {
   type GestureResponderEvent,

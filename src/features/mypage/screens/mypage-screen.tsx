@@ -54,6 +54,51 @@ const ICONS = {
   feedback: require("@expo/material-symbols/feedback.xml"),
 };
 
+/** 좌측 아이콘 + 라벨. */
+function RowLabel({
+  icon,
+  label,
+  color,
+}: {
+  icon: number;
+  label: string;
+  color: string;
+}) {
+  return (
+    <Row
+      verticalAlignment="center"
+      horizontalArrangement={{ spacedBy: Spacing.double }}
+    >
+      <Icon source={icon} tint={color} size={22} />
+      <Text color={color} style={{ fontSize: 16 }}>
+        {label}
+      </Text>
+    </Row>
+  );
+}
+
+function SectionHeader({
+  label,
+  color,
+  topSpacing = 0,
+}: {
+  label: string;
+  color: string;
+  topSpacing?: number;
+}) {
+  return (
+    <Text
+      color={color}
+      style={{ typography: "labelMedium" }}
+      modifiers={[
+        padding(Spacing.two, Spacing.two + topSpacing, Spacing.two, Spacing.two),
+      ]}
+    >
+      {label}
+    </Text>
+  );
+}
+
 const t = {
   ko: {
     general: "일반",
@@ -111,37 +156,6 @@ export default function MyPageScreen() {
     inactiveBorderColor: colors.border.default,
   };
 
-  /** 좌측 아이콘 + 라벨. */
-  const RowLabel = ({ icon, label }: { icon: number; label: string }) => (
-    <Row
-      verticalAlignment="center"
-      horizontalArrangement={{ spacedBy: Spacing.double }}
-    >
-      <Icon source={icon} tint={colors.text.primary} size={22} />
-      <Text color={colors.text.primary} style={{ fontSize: 16 }}>
-        {label}
-      </Text>
-    </Row>
-  );
-
-  const SectionHeader = ({
-    label,
-    topSpacing = 0,
-  }: {
-    label: string;
-    topSpacing?: number;
-  }) => (
-    <Text
-      color={colors.text.tertiary}
-      style={{ typography: "labelMedium" }}
-      modifiers={[
-        padding(Spacing.two, Spacing.two + topSpacing, Spacing.two, Spacing.two),
-      ]}
-    >
-      {label}
-    </Text>
-  );
-
   return (
     <Host style={{ flex: 1 }} colorScheme={mode}>
       <Column
@@ -153,14 +167,18 @@ export default function MyPageScreen() {
         ]}
       >
         {/* 일반 */}
-        <SectionHeader label={translate("general")} />
+        <SectionHeader label={translate("general")} color={colors.text.tertiary} />
         <Surface color={colors.surface.raised} shape={cardShape}>
           <Column
             modifiers={[fillMaxWidth(), paddingAll(Spacing.double)]}
             verticalArrangement={{ spacedBy: Spacing.double }}
           >
             {/* 테마 */}
-            <RowLabel icon={ICONS.theme} label={translate("theme")} />
+            <RowLabel
+              icon={ICONS.theme}
+              label={translate("theme")}
+              color={colors.text.primary}
+            />
             <SingleChoiceSegmentedButtonRow modifiers={[fillMaxWidth()]}>
               {(["system", "light", "dark"] as ThemePreference[]).map((opt) => {
                 const selected = preference === opt;
@@ -189,7 +207,11 @@ export default function MyPageScreen() {
             <HorizontalDivider color={colors.border.subtle} />
 
             {/* 언어 */}
-            <RowLabel icon={ICONS.language} label={translate("language")} />
+            <RowLabel
+              icon={ICONS.language}
+              label={translate("language")}
+              color={colors.text.primary}
+            />
             <SingleChoiceSegmentedButtonRow modifiers={[fillMaxWidth()]}>
               {(
                 [
@@ -223,7 +245,11 @@ export default function MyPageScreen() {
         </Surface>
 
         {/* 정보 — 일반 섹션과 시각적으로 분리되도록 상단 여백 추가 */}
-        <SectionHeader label={translate("info")} topSpacing={Spacing.four} />
+        <SectionHeader
+          label={translate("info")}
+          color={colors.text.tertiary}
+          topSpacing={Spacing.four}
+        />
         <Surface color={colors.surface.raised} shape={cardShape}>
           <Column modifiers={[fillMaxWidth()]}>
             {/* 버전 */}
@@ -232,7 +258,11 @@ export default function MyPageScreen() {
               horizontalArrangement="spaceBetween"
               modifiers={[fillMaxWidth(), paddingAll(Spacing.double)]}
             >
-              <RowLabel icon={ICONS.version} label={translate("version")} />
+              <RowLabel
+                icon={ICONS.version}
+                label={translate("version")}
+                color={colors.text.primary}
+              />
               <Text color={colors.text.secondary} style={{ fontSize: 16 }}>
                 {version}
               </Text>
@@ -253,7 +283,11 @@ export default function MyPageScreen() {
                 paddingAll(Spacing.double),
               ]}
             >
-              <RowLabel icon={ICONS.github} label={translate("github")} />
+              <RowLabel
+                icon={ICONS.github}
+                label={translate("github")}
+                color={colors.text.primary}
+              />
             </Row>
 
             <HorizontalDivider
@@ -270,7 +304,11 @@ export default function MyPageScreen() {
                 paddingAll(Spacing.double),
               ]}
             >
-              <RowLabel icon={ICONS.feedback} label={translate("feedback")} />
+              <RowLabel
+                icon={ICONS.feedback}
+                label={translate("feedback")}
+                color={colors.text.primary}
+              />
             </Row>
           </Column>
         </Surface>
