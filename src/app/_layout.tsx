@@ -2,7 +2,7 @@ import 'react-native-url-polyfill/auto';
 import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
 import { Stack } from 'expo-router/stack';
 import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { Platform, useColorScheme } from 'react-native';
 
 import { AnimatedSplashOverlay } from '@/components/navigation/animated-icon';
 import { SetupScreen } from '@/components/navigation/setup-screen';
@@ -71,7 +71,16 @@ export default function RootLayout() {
         />
         {/* 헤더 세부(타이틀·검색바)는 화면 내부 Stack.Screen에서 로케일·상태와 함께 주입 */}
         {/* 모달 시트 — large title collapse/검색바는 화면 내부에서 native 헤더로 처리 */}
-        <Stack.Screen name="select-champion-modal" options={{ presentation: 'modal', gestureEnabled: true }} />
+        <Stack.Screen
+          name="select-champion-modal"
+          options={{
+            presentation: 'modal',
+            gestureEnabled: true,
+            // Android는 modal 프레젠테이션이 일반 push처럼 보이므로
+            // 아래에서 올라오는 전환으로 모달임을 드러낸다.
+            animation: Platform.OS === 'android' ? 'slide_from_bottom' : undefined,
+          }}
+        />
         {/* 모드 선택 — + 버튼이 띄우는 투명 오버레이(딤 + 원형 버튼) */}
         <Stack.Screen name="mode-select" options={{ presentation: 'transparentModal', animation: 'fade', headerShown: false, gestureEnabled: true }} />
         <Stack.Screen name="draft" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
