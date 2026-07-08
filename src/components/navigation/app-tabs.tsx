@@ -24,7 +24,7 @@ export default function AppTabs() {
     <NativeTabs tintColor={colors.accent.default}>
       <NativeTabs.Trigger name="(home)">
         <NativeTabs.Trigger.Label>{translate("home")}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="house" />
+        <NativeTabs.Trigger.Icon sf="house" md="home" />
       </NativeTabs.Trigger>
 
       {/* <NativeTabs.Trigger name="(community)">
@@ -38,7 +38,7 @@ export default function AppTabs() {
         <NativeTabs.Trigger.Label>
           {translate("mypage")}
         </NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="person.crop.circle" />
+        <NativeTabs.Trigger.Icon sf="person.crop.circle" md="account_circle" />
       </NativeTabs.Trigger>
 
       {/* disabled → 탭 전환을 막아 현재 탭 유지(빈 화면 방지). 누르면

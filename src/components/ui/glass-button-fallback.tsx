@@ -1,26 +1,33 @@
 /**
- * GlassButtonFallback — GlassButton의 폴백 구현.
+ * GlassButtonFallback — GlassButton의 폴백 구현 (Android / iOS 26 미만 / Expo Go).
  *
- * `@expo/ui/swift-ui`의 네이티브 glass 버튼을 쓸 수 없는 환경
- * (iOS 26 미만 / Android / Expo Go)에서 기존 GlassChip(블러 글래스)으로 렌더한다.
- * iOS 파일(glass-button.ios.tsx)과 기본 파일(glass-button.tsx)이 공유한다.
+ * Android에서 블러 글래스는 배경이 단색(어두운 게임 화면 / 밝은 splash)이라
+ * 유리 질감이 드러나지 않고 뿌연 회색 덩어리로 튀었다. 그래서 폴백은 유리 흉내를
+ * 버리고 불투명 solid 원형 아이콘 버튼으로 간다(Material 관례 + design-system 미니멀).
+ * iOS 파일(glass-button.ios.tsx)의 네이티브 리퀴드글래스와 역할만 맞춘다.
+ *
+ *   - 아이콘 전용     : 44×44 정원형 (iOS 네이티브 글래스 버튼과 크기 통일)
+ *   - label 포함      : 캡슐(pill)
+ *   - tint(주요 액션) : 채워진 accent 원 + onAccent 아이콘으로 위계 부여
+ *   - role=destructive: danger 색 아이콘
  */
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Pressable, StyleSheet } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { GlassChip } from "@/components/ui/glass-chip";
+import { Elevation, Radius, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 
 export interface GlassButtonProps {
-  /** 버튼 라벨. 생략하면 아이콘 전용 버튼이 된다. */
+  /** 버튼 라벨. 생략하면 아이콘 전용(원형) 버튼이 된다. */
   label?: string;
   /** iOS SF Symbol 이름 (네이티브 expo-ui Button systemImage 전용) */
   systemImage?: string;
-  /** 폴백 GlassChip용 MaterialCommunityIcons 아이콘 이름 */
+  /** 폴백용 MaterialCommunityIcons 아이콘 이름 */
   fallbackIcon?: string;
-  /** 강조 틴트(민트 등). 지정 시 accent 스타일. */
+  /** 강조 틴트(민트 등). 지정 시 채워진 accent 버튼(주요 액션). */
   tint?: string;
-  /** 버튼 시맨틱 역할 (네이티브 전용) */
+  /** 버튼 시맨틱 역할. 폴백은 destructive를 danger 색으로 반영한다. */
   role?: "default" | "cancel" | "destructive";
   onPress: () => void;
 }
@@ -29,13 +36,35 @@ export function GlassButtonFallback({
   label,
   fallbackIcon,
   tint,
+  role,
   onPress,
 }: GlassButtonProps) {
   const { colors } = useTheme();
-  const isAccent = !!tint;
+  const isProminent = !!tint; // 완료 등 주요 액션 — 채워진 민트 원
+  const isDestructive = role === "destructive";
+  const iconOnly = !label;
+
+  const backgroundColor = isProminent
+    ? colors.accent.default
+    : colors.surface.raised;
+  const iconColor = isProminent
+    ? colors.accent.onAccent
+    : isDestructive
+      ? colors.status.danger.default
+      : colors.text.secondary;
+  const borderColor = isProminent ? "transparent" : colors.border.subtle;
 
   return (
-    <GlassChip variant={isAccent ? "accent" : "glass"} onPress={onPress}>
+    <Pressable
+      onPress={onPress}
+      hitSlop={8}
+      style={({ pressed }) => [
+        styles.base,
+        iconOnly ? styles.circle : styles.pill,
+        { backgroundColor, borderColor, opacity: pressed ? 0.7 : 1 },
+        Elevation.level1,
+      ]}
+    >
       {fallbackIcon ? (
         <MaterialCommunityIcons
           name={
@@ -43,15 +72,35 @@ export function GlassButtonFallback({
               typeof MaterialCommunityIcons
             >["name"]
           }
-          size={18}
-          color={isAccent ? colors.accent.default : colors.text.secondary}
+          size={22}
+          color={iconColor}
         />
       ) : null}
       {label ? (
-        <ThemedText type="label" color={isAccent ? "accent" : "secondary"}>
+        <ThemedText type="label" style={{ color: iconColor }}>
           {label}
         </ThemedText>
       ) : null}
-    </GlassChip>
+    </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  base: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: StyleSheet.hairlineWidth,
+    gap: Spacing.two,
+  },
+  circle: {
+    width: 44,
+    height: 44,
+    borderRadius: Radius.full,
+  },
+  pill: {
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.three,
+    borderRadius: Radius.full,
+  },
+});

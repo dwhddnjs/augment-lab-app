@@ -7,7 +7,13 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Alert, StyleSheet, useWindowDimensions, View } from "react-native";
+import {
+  Alert,
+  Platform,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { Drawer } from "react-native-drawer-layout";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -21,6 +27,7 @@ import {
   type ArenaPickedAugment,
 } from "@/features/arena/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
+import { useHardwareBack } from "@/hooks/use-hardware-back";
 import { useTheme } from "@/hooks/use-theme";
 import { saveBuild } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
@@ -36,6 +43,9 @@ import { ArenaReforgeCard } from "../components/arena-reforge-card";
 import { ArenaShop } from "../components/arena-shop";
 import { ENHANCE_AUGMENT_ID, useArena } from "../hooks/use-arena";
 import { usePrismaticItems } from "../hooks/use-arena-items";
+
+// landscape에서 오른쪽 필터 버튼이 화면 끝(제스처 영역)에 붙어 Android만 여백을 준다.
+const isAndroid = Platform.OS === "android";
 
 const t = {
   ko: {
@@ -180,7 +190,8 @@ export function ArenaScreen() {
   const hPad = Spacing.four;
   const cardGap = Spacing.three;
   const cardWidthByW = Math.floor((screenW - hPad * 2 - cardGap * 2) / 3);
-  const cardWidthByH = Math.floor(screenH * 0.62 * (9 / 14));
+  // draft-screen과 동일 — 카드가 세로를 꽉 채우지 않게 56%로 잡아 헤더/하단 여백 확보.
+  const cardWidthByH = Math.floor(screenH * 0.56 * (9 / 14));
   const cardWidth = Math.min(cardWidthByW, cardWidthByH);
   const drawerWidth = Math.min(360, screenW * 0.42);
 
@@ -243,6 +254,13 @@ export function ArenaScreen() {
     ]);
   }, [router, translate]);
 
+  // Android 하드웨어 back — 기본 pop 대신 exit 확인 다이얼로그를 띄운다.
+  const handleHardwareBack = useCallback(() => {
+    handleExit();
+    return true;
+  }, [handleExit]);
+  useHardwareBack(handleHardwareBack);
+
   // 회전이 끝날 때까지 본문 렌더 보류(portrait→landscape reflow 방지).
   if (!isLandscape) {
     return <ThemedView style={styles.container} />;
@@ -277,7 +295,15 @@ export function ArenaScreen() {
           edges={["top", "bottom", "left", "right"]}
         >
           {/* 공통 헤더 */}
-          <View style={[styles.header, { paddingLeft: Spacing.three }]}>
+          <View
+            style={[
+              styles.header,
+              {
+                paddingLeft: Spacing.three,
+                paddingRight: isAndroid ? Spacing.three : 0,
+              },
+            ]}
+          >
             <GlassButton
               systemImage="xmark"
               fallbackIcon="close"
@@ -445,7 +471,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: Spacing.two,
+    // draft-screen과 동일 — safe-area top inset 위에 얹히므로 상단 패딩은 작게.
+    paddingTop: Spacing.one,
+    paddingBottom: Spacing.two,
   },
   headerRight: {
     flexDirection: "row",

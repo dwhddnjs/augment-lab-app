@@ -11,6 +11,7 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
 import { GlassSurface } from "@/components/ui/glass-surface";
 import { Radius, Spacing } from "@/constants/theme";
+import { useHardwareBack } from "@/hooks/use-hardware-back";
 import { useTheme } from "@/hooks/use-theme";
 import { augmentImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
@@ -77,9 +78,10 @@ export function DraftScreen() {
 
   // Width-constrained: fill 3 columns across
   const cardWidthByW = Math.floor((screenW - hPad * 2 - cardGap * 2) / 3);
-  // Height-constrained: card should occupy at most 62% of screen height,
-  // leaving room for safe-area insets, header, and reroll button.
-  const cardWidthByH = Math.floor(screenH * 0.62 * (9 / 14));
+  // Height-constrained: card should occupy at most 56% of screen height,
+  // leaving room for safe-area insets, header, and the reroll button below —
+  // so the reroll row doesn't crowd the bottom safe area.
+  const cardWidthByH = Math.floor(screenH * 0.56 * (9 / 14));
   const cardWidth = Math.min(cardWidthByW, cardWidthByH);
 
   // Drawer width in landscape
@@ -181,6 +183,13 @@ export function DraftScreen() {
     ]);
   }, [router, translate]);
 
+  // Android 하드웨어 back — 기본 pop 대신 exit 확인 다이얼로그를 띄운다.
+  const handleHardwareBack = useCallback(() => {
+    handleExit();
+    return true;
+  }, [handleExit]);
+  useHardwareBack(handleHardwareBack);
+
   // 화면은 portrait로 mount되고 _layout의 pathname lock이 landscape로 회전시킨다.
   // 회전이 끝날 때까지 카드 렌더를 보류해, 카드가 portrait 레이아웃으로 먼저
   // 떴다가 reflow되는 일을 막는다.
@@ -280,7 +289,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: Spacing.three,
+    // safe-area top inset 위에 얹히므로 상단 패딩은 작게 — 헤더가 너무 내려오지 않도록.
+    paddingTop: Spacing.one,
+    paddingBottom: Spacing.two,
   },
   cardsRow: {
     flexDirection: "row",
