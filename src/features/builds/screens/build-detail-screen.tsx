@@ -12,7 +12,7 @@ import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { Stack } from "expo-router/stack";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useEffect, useState } from "react";
-import { Alert, Pressable, StyleSheet, View } from "react-native";
+import { Alert, Platform, Pressable, StyleSheet, View } from "react-native";
 import Animated, {
   Extrapolation,
   interpolate,
@@ -24,7 +24,7 @@ import Animated, {
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassSurface } from "@/components/ui/glass-surface";
-import { Radius, Spacing } from "@/constants/theme";
+import { HeroOverlay, Radius, Spacing } from "@/constants/theme";
 import { ArenaBuildSummary } from "@/features/arena/components/arena-build-summary";
 import { useStatShards } from "@/features/arena/hooks/use-arena-items";
 import { useAugments } from "@/features/augments/hooks/use-augments";
@@ -63,6 +63,36 @@ const t = {
     notFound: "Build not found",
   },
 };
+
+// Android는 투명 헤더 위 back/삭제 아이콘이 밝은 splash에 묻히므로 원형 버튼으로 감싼다.
+// (iOS는 네이티브 리퀴드글래스 헤더 버튼이라 그대로 잘 보인다)
+const isAndroid = Platform.OS === "android";
+
+// splash 배너 위 헤더 버튼 — 불투명 solid 원은 밝은 splash에서 검게 튀므로,
+// splash가 살짝 비치는 반투명 scrim(HeroOverlay.chipBg)으로 은은하게 얹는다.
+function SplashHeaderButton({
+  icon,
+  color,
+  onPress,
+  label,
+}: {
+  icon: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
+  color: string;
+  onPress: () => void;
+  label?: string;
+}) {
+  return (
+    <Pressable
+      onPress={onPress}
+      hitSlop={Spacing.two}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      style={({ pressed }) => [styles.splashBtn, { opacity: pressed ? 0.7 : 1 }]}
+    >
+      <MaterialCommunityIcons name={icon} size={22} color={color} />
+    </Pressable>
+  );
+}
 
 // 배너가 가장 클 때 높이. 스크롤하면 0까지 줄어든다.
 const BANNER_HEIGHT = 300;
@@ -229,6 +259,8 @@ export function BuildDetailScreen() {
                   ...typography.heading,
                   fontSize: 17,
                   color: colors.text.primary,
+                  // Android는 타이틀이 back 버튼 바로 옆에 붙으므로 좌측 여백을 준다.
+                  marginLeft: isAndroid ? Spacing.three : 0,
                 },
                 headerFadeStyle,
               ]}
@@ -236,21 +268,39 @@ export function BuildDetailScreen() {
               {champion?.name ?? ""}
             </Animated.Text>
           ),
-          headerRight: () => (
-            <Pressable
-              onPress={handleDelete}
-              hitSlop={Spacing.two}
-              style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
-              accessibilityRole="button"
-              accessibilityLabel={translate("delete")}
-            >
-              <MaterialCommunityIcons
-                name="trash-can-outline"
-                size={22}
+          // Android는 back/삭제를 splash 위 원형 scrim 버튼으로 얹는다.
+          headerLeft: isAndroid
+            ? () => (
+                <SplashHeaderButton
+                  icon="arrow-left"
+                  color={HeroOverlay.textPrimary}
+                  onPress={() => router.back()}
+                />
+              )
+            : undefined,
+          headerRight: () =>
+            isAndroid ? (
+              <SplashHeaderButton
+                icon="trash-can-outline"
                 color={colors.status.danger.default}
+                onPress={handleDelete}
+                label={translate("delete")}
               />
-            </Pressable>
-          ),
+            ) : (
+              <Pressable
+                onPress={handleDelete}
+                hitSlop={Spacing.two}
+                style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
+                accessibilityRole="button"
+                accessibilityLabel={translate("delete")}
+              >
+                <MaterialCommunityIcons
+                  name="trash-can-outline"
+                  size={22}
+                  color={colors.status.danger.default}
+                />
+              </Pressable>
+            ),
         }}
       />
 
@@ -344,6 +394,14 @@ export function BuildDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  splashBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: Radius.full,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: HeroOverlay.chipBg,
   },
   banner: {
     position: "absolute",

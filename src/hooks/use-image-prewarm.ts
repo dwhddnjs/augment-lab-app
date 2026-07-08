@@ -45,7 +45,13 @@ export function useImagePrewarm(): { showSetup: boolean; progress: number } {
         ),
         ...augments.map((a) => augmentImageUrl(a.iconPath, 'large')),
         ...arenaAugments.map((a) => augmentImageUrl(a.iconPath, 'large')),
-        ...specialAugments.map((a) => augmentImageUrl(a.iconPath, 'large')),
+        // 재련(special) 아이콘은 CDragon에 _large 자산이 없어(404) AugmentImage가
+        // base(컬러 원본)→small로 폴백한다. large만 프리웜하면 404라 캐시에 남지 않아
+        // 첫 진입 때 네트워크로 받게 되므로, 실제로 뜨는 base·small을 받아둔다.
+        ...specialAugments.flatMap((a) => [
+          augmentImageUrl(a.iconPath, 'base'),
+          augmentImageUrl(a.iconPath, 'small'),
+        ]),
         ...prismaticItems.map((p) => cdragonItemIconUrl(p.iconPath)),
         ...items.map((it) => itemImageUrl(it.imageKey)),
       ]),

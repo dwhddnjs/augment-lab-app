@@ -18,6 +18,7 @@ import { GlassButton } from "@/components/ui/glass-button";
 import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
+import { useHardwareBack } from "@/hooks/use-hardware-back";
 import { useTheme } from "@/hooks/use-theme";
 import { saveBuild } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
@@ -41,11 +42,17 @@ const t = {
     title: "아이템 선택",
     augments: "증강",
     saveError: "빌드 저장에 실패했어요",
+    exitConfirm: "저장하지 않고 나갈까요?",
+    exitOk: "나가기",
+    exitCancel: "계속",
   },
   en: {
     title: "Item Select",
     augments: "Augments",
     saveError: "Failed to save the build",
+    exitConfirm: "Leave without saving?",
+    exitOk: "Leave",
+    exitCancel: "Continue",
   },
 };
 
@@ -71,6 +78,26 @@ export function ItemSelectScreen() {
       ).catch(() => {});
     }, []),
   );
+
+  // Android 하드웨어 back — 그냥 pop되면 landscape가 잠긴 채 홈으로 튕기므로,
+  // 확인 다이얼로그 후 portrait 복귀 + 홈으로 나간다(저장 안 함).
+  const handleHardwareBack = useCallback(() => {
+    Alert.alert(translate("exitConfirm"), "", [
+      { text: translate("exitCancel"), style: "cancel" },
+      {
+        text: translate("exitOk"),
+        style: "destructive",
+        onPress: () => {
+          ScreenOrientation.lockAsync(
+            ScreenOrientation.OrientationLock.PORTRAIT_UP,
+          ).catch(() => {});
+          router.dismissTo("/");
+        },
+      },
+    ]);
+    return true;
+  }, [router, translate]);
+  useHardwareBack(handleHardwareBack);
 
   const [dims, setDims] = useState({ w: 0, h: 0 });
   const isLandscape = dims.w > dims.h && dims.w > 0;
