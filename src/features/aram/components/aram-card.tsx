@@ -30,7 +30,7 @@ interface Props {
   onReroll: () => void;
 }
 
-export function DraftCard({
+export function AramCard({
   augment,
   index,
   cardWidth,

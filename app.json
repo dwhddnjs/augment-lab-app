@@ -31,16 +31,6 @@
         ]
       }
     },
-    "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#0E0F12",
-        "foregroundImage": "./assets/store/adaptive-foreground.png",
-        "backgroundImage": "./assets/store/adaptive-background.png",
-        "monochromeImage": "./assets/store/adaptive-monochrome.png"
-      },
-      "predictiveBackGestureEnabled": false,
-      "package": "com.augmentlab"
-    },
     "web": {
       "output": "static",
       "favicon": "./assets/images/favicon.png"
@@ -53,11 +43,7 @@
         {
           "backgroundColor": "#0E0F12",
           "image": "./assets/store/adaptive-foreground.png",
-          "imageWidth": 220,
-          "android": {
-            "image": "./assets/store/adaptive-foreground.png",
-            "imageWidth": 220
-          }
+          "imageWidth": 220
         }
       ],
       "expo-image"

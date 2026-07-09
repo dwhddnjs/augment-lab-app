@@ -11,8 +11,8 @@ import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { itemImageUrl } from "@/lib/ddragon";
-import { TRAY_HEIGHT } from "./item-slot-grid";
 import type { Item } from "../types";
+import { TRAY_HEIGHT } from "./item-slot-grid";
 
 const CELL_GAP = Spacing.one; // 4px
 
@@ -34,7 +34,17 @@ export function ItemGrid({
 }: Props) {
   const { colors } = useTheme();
   return (
-    <View style={[styles.gridArea, { borderColor: colors.border.subtle, borderWidth: 1 }]}>
+    <View
+      style={[
+        styles.gridArea,
+        {
+          borderColor: colors.border.subtle,
+          borderRightWidth: 1,
+          borderTopWidth: 1,
+          borderLeftWidth: 1,
+        },
+      ]}
+    >
       <ScrollView
         style={{ flex: 1 }}
         showsVerticalScrollIndicator={false}

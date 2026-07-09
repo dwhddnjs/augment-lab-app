@@ -61,7 +61,7 @@ function pickWeighted(pool: Augment[], round: number, count: number): Augment[] 
   return drawOfRarity(pool, rollRarity(round), count);
 }
 
-export function useDraft() {
+export function useAram() {
   const allAugments = useAugments();
 
   const initialCards = useMemo(() => pickWeighted(allAugments, 0, 3), [allAugments]);
@@ -111,7 +111,7 @@ export function useDraft() {
     [allAugments, picked, currentCards, rerolled],
   );
 
-  // Returns nextPicked; caller should navigate to /draft-items when round === 4
+  // Returns nextPicked; caller should navigate to /aram-items when round === 4
   const pick = useCallback(
     (idx: number): { nextPicked: Augment[]; done: boolean } => {
       const chosen = currentCards[idx];

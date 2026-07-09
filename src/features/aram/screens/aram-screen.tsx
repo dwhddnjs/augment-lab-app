@@ -11,25 +11,24 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
 import { GlassSurface } from "@/components/ui/glass-surface";
 import { Radius, Spacing } from "@/constants/theme";
-import { useHardwareBack } from "@/hooks/use-hardware-back";
 import { useTheme } from "@/hooks/use-theme";
 import { augmentImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import {
-  DraftCard,
+  AramCard,
   type CardEntryMode,
   type CardExitMode,
-} from "../components/draft-card";
+} from "../components/aram-card";
 import { PickedDrawer } from "../components/picked-drawer";
 import { RoundIndicator } from "../components/round-indicator";
-import { useDraft } from "../hooks/use-draft";
+import { useAram } from "../hooks/use-aram";
 
 const t = {
   ko: {
     round: "라운드",
     picks: "픽 현황",
     exit: "나가기",
-    exitConfirm: "드래프트를 종료할까요?",
+    exitConfirm: "칼바람을 종료할까요?",
     exitOk: "종료",
     exitCancel: "계속",
   },
@@ -37,7 +36,7 @@ const t = {
     round: "Round",
     picks: "Picks",
     exit: "Exit",
-    exitConfirm: "Exit the draft?",
+    exitConfirm: "Exit ARAM?",
     exitOk: "Exit",
     exitCancel: "Continue",
   },
@@ -49,13 +48,16 @@ type EntryModes = [CardEntryMode, CardEntryMode, CardEntryMode];
 const IDLE: ExitModes = ["none", "none", "none"];
 const ALL_FLIP: EntryModes = ["flip", "flip", "flip"];
 
-export function DraftScreen() {
+// 헤더 버튼 좌우 여백 — 카드 영역(hPad)보다 넓게 잡아 버튼이 기기 끝에 붙지 않게 한다.
+const HEADER_PAD = Spacing.five; // 32
+
+export function AramScreen() {
   const translate = useTranslation(t);
   const { colors } = useTheme();
   const router = useRouter();
   const { championId } = useLocalSearchParams<{ championId: string }>();
 
-  const { round, currentCards, picked, rerolled, reroll, pick } = useDraft();
+  const { round, currentCards, picked, rerolled, reroll, pick } = useAram();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   // 이 화면이 포커스를 얻을 때 landscape로 전환한다. cleanup 없이 — portrait 복귀는
@@ -74,7 +76,7 @@ export function DraftScreen() {
   const screenH = isLandscape ? height : width;
 
   const hPad = Spacing.four; // 24
-  const cardGap = Spacing.three; // 16
+  const cardGap = Spacing.four; // 24
 
   // Width-constrained: fill 3 columns across
   const cardWidthByW = Math.floor((screenW - hPad * 2 - cardGap * 2) / 3);
@@ -129,7 +131,7 @@ export function DraftScreen() {
             picked: JSON.stringify(nextPicked),
             championId: championId ?? "",
           };
-          router.replace({ pathname: "/draft-items", params });
+          router.replace({ pathname: "/aram-items", params });
         }
       }, 380);
     },
@@ -183,13 +185,6 @@ export function DraftScreen() {
     ]);
   }, [router, translate]);
 
-  // Android 하드웨어 back — 기본 pop 대신 exit 확인 다이얼로그를 띄운다.
-  const handleHardwareBack = useCallback(() => {
-    handleExit();
-    return true;
-  }, [handleExit]);
-  useHardwareBack(handleHardwareBack);
-
   // 화면은 portrait로 mount되고 _layout의 pathname lock이 landscape로 회전시킨다.
   // 회전이 끝날 때까지 카드 렌더를 보류해, 카드가 portrait 레이아웃으로 먼저
   // 떴다가 reflow되는 일을 막는다.
@@ -219,7 +214,7 @@ export function DraftScreen() {
           edges={["top", "bottom", "left", "right"]}
         >
           {/* Header — 네이티브 expo-ui glass 버튼 (폴백: GlassChip) */}
-          <View style={[styles.header, { paddingHorizontal: hPad }]}>
+          <View style={[styles.header, { paddingHorizontal: HEADER_PAD }]}>
             <GlassButton
               systemImage="xmark"
               fallbackIcon="close"
@@ -258,7 +253,7 @@ export function DraftScreen() {
             ]}
           >
             {currentCards.map((aug, i) => (
-              <DraftCard
+              <AramCard
                 key={`${roundKey}-${aug.id}`}
                 augment={aug}
                 index={i}
@@ -290,7 +285,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     // safe-area top inset 위에 얹히므로 상단 패딩은 작게 — 헤더가 너무 내려오지 않도록.
-    paddingTop: Spacing.one,
+    paddingTop: Spacing.double,
     paddingBottom: Spacing.two,
   },
   cardsRow: {

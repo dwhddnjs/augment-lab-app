@@ -6,7 +6,7 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
-import Animated, { FadeIn, FadeInDown } from "react-native-reanimated";
+import Animated, { Easing, FadeIn, FadeInDown } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
@@ -64,10 +64,12 @@ export function ModeSelectOverlay() {
         {MODES.map((m, i) => (
           <Animated.View
             key={m.mode}
-            entering={FadeInDown.delay(i * 60)
-              .springify()
-              .damping(20)
-              .stiffness(180)}
+            // + 버튼에서 가까운 아래쪽(칼바람)부터 위로 한 장씩 올라온다.
+            // spring은 오버슈트로 낭창거려 timing + ease-out으로 딱 떨어지게 한다.
+            entering={FadeInDown.delay((MODES.length - 1 - i) * STAGGER)
+              .duration(220)
+              .easing(Easing.out(Easing.cubic))
+              .withInitialValues({ transform: [{ translateY: RISE }] })}
           >
             <Pressable
               onPress={() => choose(m.mode)}
@@ -92,6 +94,9 @@ export function ModeSelectOverlay() {
 }
 
 const CIRCLE = 60;
+// 등장 간격/거리 — 짧은 stagger + 짧은 이동거리라야 "순서대로 톡톡" 튀어나온다.
+const STAGGER = 70;
+const RISE = 20;
 
 const styles = StyleSheet.create({
   backdrop: {

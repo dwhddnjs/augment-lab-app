@@ -1,8 +1,7 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-// Cross-platform synergy / draft glyph (renders on both iOS and Android, unlike
-// the previous expo-image "sf:" SF Symbols which were iOS-only). The `name` is a
-// MaterialCommunityIcons glyph name — see data/synergies.json `icon` fields.
+// 시너지 글리프. `name`은 MaterialCommunityIcons 글리프 이름이다
+// — data/synergies.json 의 `icon` 필드 참고.
 interface Props {
   name: string;
   size: number;

@@ -1,6 +1,6 @@
 # 드롭인 교체 `@expo/ui/community/*`
 
-RN 커뮤니티 라이브러리를 **import 경로만 바꿔** 네이티브(SwiftUI/Compose) 구현으로 교체한다. 기존 코드를 마이그레이션할 때 사용.
+RN 커뮤니티 라이브러리를 **import 경로만 바꿔** 네이티브(SwiftUI) 구현으로 교체한다. 기존 코드를 마이그레이션할 때 사용.
 
 실제 제공 목록은 `node_modules/@expo/ui/package.json`의 `exports`에서 `./community/*` 확인.
 

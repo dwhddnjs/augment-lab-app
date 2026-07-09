@@ -15,7 +15,7 @@ const id = (n) => {
 // Official ARAM: Mayhem "Augment Sets" (patch 26.x) — source: League of Legends Wiki
 // (https://wiki.leagueoflegends.com/en-us/ARAM:_Mayhem/Augment_Sets).
 // `tiers` lists only the breakpoints that grant a *new* effect (unchanged tiers omitted).
-// `icon` is a MaterialCommunityIcons glyph name (cross-platform; iOS + Android).
+// `icon` is a MaterialCommunityIcons glyph name.
 const defs = [
   {
     id: "firecracker",

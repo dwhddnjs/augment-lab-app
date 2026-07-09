@@ -1,4 +1,4 @@
-import { Platform, Text, type TextProps } from 'react-native';
+import { Text, type TextProps, type TextStyle } from 'react-native';
 
 import { Fonts, Typography, type ThemeColors } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -19,7 +19,7 @@ export type ThemedTextProps = TextProps & {
   color?: TextColor;
 };
 
-const VARIANT_STYLES: Record<TextVariant, typeof Typography.body> = {
+const VARIANT_STYLES: Record<TextVariant, TextStyle> = {
   display: Typography.display,
   title: Typography.title,
   heading: Typography.heading,
@@ -50,10 +50,7 @@ export function ThemedText({
       style={[
         { color: resolvedColor },
         VARIANT_STYLES[type],
-        type === 'code' && {
-          fontFamily: Fonts.mono,
-          fontWeight: Platform.select({ android: '700' as const }) ?? '500',
-        },
+        type === 'code' && { fontFamily: Fonts.mono, fontWeight: '500' },
         style,
       ]}
       {...rest}
