@@ -22,10 +22,10 @@ export const Theme = {
       strong: "#3A3F47",
     },
     accent: {
-      default: "#1ED7A0",
-      hover: "#2FE3AE",
-      pressed: "#17B689",
-      subtle: "rgba(30,215,160,0.14)",
+      default: "#00E994",
+      hover: "#2BEEA6",
+      pressed: "#00C87E",
+      subtle: "rgba(0,233,148,0.14)",
       onAccent: "#04231A",
     },
     status: {
@@ -64,14 +64,14 @@ export const Theme = {
       subtle: "#E6E8EC",
       strong: "#B4B8BE",
     },
-    // 라이트 배경(흰/회색) 위 텍스트·아이콘 가독성을 위해 진한 민트로.
-    // default #0A8466 = 흰 배경 대비 ~4.7:1 (WCAG AA 통과).
+    // 라이트 accent — 흰/회색 배경 위 가독을 위해 다크(#00E994)보다 진한 민트.
+    // #18A368 = 흰 배경 3.24:1(UI/큰 텍스트 AA). onAccent는 흰색보다 대비 높은 어두운 톤.
     accent: {
-      default: "#0A8466",
-      hover: "#0C9676",
-      pressed: "#086E54",
-      subtle: "rgba(10,132,102,0.12)",
-      onAccent: "#FFFFFF",
+      default: "#18A368",
+      hover: "#1DB775",
+      pressed: "#148A57",
+      subtle: "rgba(24,163,104,0.12)",
+      onAccent: "#04231A",
     },
     status: {
       success: { default: "#0E9F79", subtle: "rgba(14,159,121,0.12)" },

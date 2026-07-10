@@ -158,7 +158,7 @@ function SettingsRow({
 
 export default function MyPageScreen() {
   const translate = useTranslation(t);
-  const { colors } = useTheme();
+  const { colors, mode } = useTheme();
   const { locale, setLocale } = useLocale();
   const { preference, setPreference } = useThemePreference();
 
@@ -171,7 +171,9 @@ export default function MyPageScreen() {
   ];
 
   return (
-    <Host style={{ flex: 1 }}>
+    // key={mode} — expo-ui가 SwiftUI Picker의 tint modifier를 런타임 테마 변경 시
+    // 갱신하지 않아(다른 모드의 accent가 남음), 모드가 바뀌면 Host를 remount해 강제 반영.
+    <Host key={mode} style={{ flex: 1 }} colorScheme={mode}>
       <List
         modifiers={[
           listStyle("insetGrouped"),

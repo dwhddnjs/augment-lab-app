@@ -130,7 +130,7 @@ export function BuildListScreen() {
     >
       <GlassSurface
         glassStyle="regular"
-        style={[styles.switchTrack, { borderColor: colors.border.subtle }]}
+        style={[styles.switchTrack, { borderColor: colors.border.default }]}
       >
         <View
           style={styles.switchInner}
@@ -146,7 +146,7 @@ export function BuildListScreen() {
               glassStyle="clear"
               style={[
                 styles.thumbGlass,
-                { backgroundColor: colors.glass.fill },
+                { backgroundColor: colors.accent.subtle },
               ]}
             />
           </Animated.View>
