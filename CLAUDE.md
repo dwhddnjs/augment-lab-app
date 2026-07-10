@@ -14,6 +14,10 @@
 
 플랜모드로 작성한 계획 문서는 **매번** `docs/plans/<YYYY-MM-DD>-<주제>.md` 형식으로 저장할 것. 폴더가 없으면 생성.
 
+## 검증 기록
+
+런타임 동작이 바뀌는 변경(화면·라우팅·플랫폼 분기·네이티브 모듈)은 iOS 시뮬레이터에서 직접 굴려 확인하고, 결과를 `docs/verification/<YYYY-MM-DD>-<주제>.md`에 남길 것. 절차·규칙은 `.agents/skills/verify/SKILL.md`와 `docs/verification/README.md` 참고(`/verify` 로도 실행). 타입체크·lint 통과는 검증이 아니다 — 앱을 띄워 관찰한 것만 기록한다. 스크린샷은 커밋하지 않는다(글로 적고, 보여줄 땐 Artifact).
+
 ## i18n / 로케일 원칙
 
 글로벌 서비스이므로 **모든 사용자 노출 텍스트는 로케일 분기**. 하드코딩 금지:
@@ -28,7 +32,6 @@
 npm install            # 의존성 설치
 npm start              # Expo 개발 서버 시작
 npm run ios            # iOS 시뮬레이터
-npm run android        # Android 에뮬레이터
 npm run lint           # ESLint
 ```
 
@@ -36,7 +39,9 @@ npm run lint           # ESLint
 
 ## 아키텍처
 
-**Expo SDK 56 / React 19 / React Native 0.85** 기반 iOS·Android 앱(웹 미지원). 파일 기반 라우팅(Expo Router v56), `experiments.typedRoutes` + `reactCompiler` 활성.
+**Expo SDK 56 / React 19 / React Native 0.85** 기반 **iOS 전용** 앱(Android·웹 미지원). 파일 기반 라우팅(Expo Router v56), `experiments.typedRoutes` + `reactCompiler` 활성.
+
+Android 지원 코드는 제거했다. `.android.tsx` 파일이나 `Platform.OS === 'android'` 분기를 새로 만들지 말 것. 남아 있는 플랫폼 폴백(`custom-tabs.tsx`, `glass-button-fallback.tsx`)은 Android가 아니라 **iOS 26 미만** 대응이다.
 
 ### 폴더 구조 — 필수 규칙
 

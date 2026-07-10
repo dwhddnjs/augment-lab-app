@@ -1,19 +1,13 @@
 /**
  * ArenaScreen — 아레나 게임 화면(가로). 12라운드를 평탄화한 step 흐름을 진행한다.
- * 칼바람 draft-screen 패턴(orientation lock, GlassButton 헤더, 우측 drawer)을 따르되,
+ * 칼바람 aram-screen 패턴(orientation lock, GlassButton 헤더, 우측 drawer)을 따르되,
  * step.kind에 따라 증강/프리즘/상점/재련 본문을 분기 렌더한다.
  */
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  Alert,
-  Platform,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { Alert, StyleSheet, useWindowDimensions, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -27,7 +21,6 @@ import {
   type ArenaPickedAugment,
 } from "@/features/arena/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
-import { useHardwareBack } from "@/hooks/use-hardware-back";
 import { useTheme } from "@/hooks/use-theme";
 import { saveBuild } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
@@ -43,9 +36,6 @@ import { ArenaReforgeCard } from "../components/arena-reforge-card";
 import { ArenaShop } from "../components/arena-shop";
 import { ENHANCE_AUGMENT_ID, useArena } from "../hooks/use-arena";
 import { usePrismaticItems } from "../hooks/use-arena-items";
-
-// landscape에서 오른쪽 필터 버튼이 화면 끝(제스처 영역)에 붙어 Android만 여백을 준다.
-const isAndroid = Platform.OS === "android";
 
 const t = {
   ko: {
@@ -64,6 +54,9 @@ const t = {
   },
 };
 
+// 헤더 버튼 좌우 여백 — 카드 영역(hPad)보다 넓게 잡아 버튼이 기기 끝에 붙지 않게 한다.
+const HEADER_PAD = Spacing.five; // 32
+
 export function ArenaScreen() {
   const translate = useTranslation(t);
   const { colors } = useTheme();
@@ -78,7 +71,7 @@ export function ArenaScreen() {
   // 저장은 1회만 — effect 내 setState 없이 ref로 가드한다(cascading render 방지).
   const savingRef = useRef(false);
 
-  // 카드 선택 애니메이션 상태(칼바람 draft 패턴). exit/entry는 카드 3장 기준 길이 3.
+  // 카드 선택 애니메이션 상태(칼바람 aram 패턴). exit/entry는 카드 3장 기준 길이 3.
   const [exitModes, setExitModes] = useState<ArenaCardExitMode[]>([
     "none",
     "none",
@@ -188,9 +181,9 @@ export function ArenaScreen() {
   const screenH = isLandscape ? height : width;
 
   const hPad = Spacing.four;
-  const cardGap = Spacing.three;
+  const cardGap = Spacing.four;
   const cardWidthByW = Math.floor((screenW - hPad * 2 - cardGap * 2) / 3);
-  // draft-screen과 동일 — 카드가 세로를 꽉 채우지 않게 56%로 잡아 헤더/하단 여백 확보.
+  // aram-screen과 동일 — 카드가 세로를 꽉 채우지 않게 56%로 잡아 헤더/하단 여백 확보.
   const cardWidthByH = Math.floor(screenH * 0.56 * (9 / 14));
   const cardWidth = Math.min(cardWidthByW, cardWidthByH);
   const drawerWidth = Math.min(360, screenW * 0.42);
@@ -254,13 +247,6 @@ export function ArenaScreen() {
     ]);
   }, [router, translate]);
 
-  // Android 하드웨어 back — 기본 pop 대신 exit 확인 다이얼로그를 띄운다.
-  const handleHardwareBack = useCallback(() => {
-    handleExit();
-    return true;
-  }, [handleExit]);
-  useHardwareBack(handleHardwareBack);
-
   // 회전이 끝날 때까지 본문 렌더 보류(portrait→landscape reflow 방지).
   if (!isLandscape) {
     return <ThemedView style={styles.container} />;
@@ -295,15 +281,7 @@ export function ArenaScreen() {
           edges={["top", "bottom", "left", "right"]}
         >
           {/* 공통 헤더 */}
-          <View
-            style={[
-              styles.header,
-              {
-                paddingLeft: Spacing.three,
-                paddingRight: isAndroid ? Spacing.three : 0,
-              },
-            ]}
-          >
+          <View style={[styles.header, { paddingHorizontal: HEADER_PAD }]}>
             <GlassButton
               systemImage="xmark"
               fallbackIcon="close"
@@ -471,8 +449,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    // draft-screen과 동일 — safe-area top inset 위에 얹히므로 상단 패딩은 작게.
-    paddingTop: Spacing.one,
+    // aram-screen과 동일 — safe-area top inset 위에 얹히므로 상단 패딩은 작게.
+    paddingTop: Spacing.double,
     paddingBottom: Spacing.two,
   },
   headerRight: {

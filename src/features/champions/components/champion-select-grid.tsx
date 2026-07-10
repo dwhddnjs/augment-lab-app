@@ -1,7 +1,6 @@
 /**
  * ChampionSelectGrid — 챔피언 선택 화면의 공용 본문.
  * 역할 필터칩(리스트 헤더) + 챔피언 그리드 + 아레나 "용기" 셀.
- * 아이콘은 champion-select-icons.{ios,android}.tsx 로 플랫폼 자동 분기.
  */
 import { Image } from "expo-image";
 import { FlatList, Pressable, StyleSheet, View } from "react-native";

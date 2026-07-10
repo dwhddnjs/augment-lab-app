@@ -7,7 +7,7 @@
 import Feather from "@expo/vector-icons/Feather";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Stack, useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Alert,
   Pressable,
@@ -42,8 +42,8 @@ import { formatDate, groupByDate, type BuildSection } from "../utils/date";
 const t = {
   ko: {
     emptyTitle: "저장된 빌드가 없어요",
-    emptyHint: "드래프트를 완료하면 여기에 쌓여요",
-    startDraft: "드래프트 시작",
+    emptyHint: "빌드를 완료하면 여기에 쌓여요",
+    startBuild: "빌드 시작",
     deleteConfirm: "빌드를 삭제할까요?",
     deleteOk: "삭제",
     cancel: "취소",
@@ -52,8 +52,8 @@ const t = {
   },
   en: {
     emptyTitle: "No saved builds",
-    emptyHint: "Finish a draft to see it here",
-    startDraft: "Start Draft",
+    emptyHint: "Finish a build to see it here",
+    startBuild: "Start Build",
     deleteConfirm: "Delete this build?",
     deleteOk: "Delete",
     cancel: "Cancel",
@@ -63,6 +63,10 @@ const t = {
 };
 
 const MODES: GameMode[] = ["aram", "arena"];
+
+// 가로 화면에서 돌아오면 (home) 스택이 재생성되며 이 화면도 remount된다((home)/_layout).
+// 보고 있던 목록 필터가 칼바람으로 튀지 않도록 모듈 스코프에 담아둔다.
+let lastMode: GameMode = "aram";
 
 // 헤더 컴팩트 토글용 모드 아이콘 — 칼바람=눈송이, 아레나=교차검.
 const MODE_ICONS: Record<
@@ -78,7 +82,10 @@ export function BuildListScreen() {
   const { colors } = useTheme();
   const { locale } = useLocale();
   const router = useRouter();
-  const [mode, setMode] = useState<GameMode>("aram");
+  const [mode, setMode] = useState<GameMode>(lastMode);
+  useEffect(() => {
+    lastMode = mode;
+  }, [mode]);
   // null = 로딩 중 (깜빡임 없이 빈 상태와 구분). 반응형 스토어를 구독하므로
   // 다른 화면의 저장/삭제가 즉시 반영된다. 탭 전환은 클라이언트 필터로 처리.
   const allBuilds = useBuilds();
@@ -123,7 +130,7 @@ export function BuildListScreen() {
     >
       <GlassSurface
         glassStyle="regular"
-        style={[styles.switchTrack, { borderColor: colors.border.subtle }]}
+        style={[styles.switchTrack, { borderColor: colors.border.default }]}
       >
         <View
           style={styles.switchInner}
@@ -139,7 +146,7 @@ export function BuildListScreen() {
               glassStyle="clear"
               style={[
                 styles.thumbGlass,
-                { backgroundColor: colors.glass.fill },
+                { backgroundColor: colors.accent.subtle },
               ]}
             />
           </Animated.View>
@@ -186,7 +193,7 @@ export function BuildListScreen() {
     ]);
   };
 
-  const handleStartDraft = () => {
+  const handleStartBuild = () => {
     router.push({
       pathname: "/select-champion-modal",
       params: { mode },
@@ -198,7 +205,7 @@ export function BuildListScreen() {
   const emptyState = (
     <View style={styles.empty}>
       <Pressable
-        onPress={handleStartDraft}
+        onPress={handleStartBuild}
         style={({ pressed }) => [
           styles.emptyCard,
           {
@@ -209,7 +216,7 @@ export function BuildListScreen() {
       >
         <Feather name="plus-circle" size={32} color={colors.text.tertiary} />
         <ThemedText type="label" color="tertiary">
-          {translate("startDraft")}
+          {translate("startBuild")}
         </ThemedText>
       </Pressable>
       <ThemedText type="caption" color="tertiary" style={styles.emptyHint}>

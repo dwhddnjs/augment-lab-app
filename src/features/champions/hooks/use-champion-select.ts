@@ -1,8 +1,7 @@
 /**
  * useChampionSelect — 챔피언 선택 화면의 공용 상태/로직.
  *
- * 화면은 champion-select-screen.{ios,android}.tsx 로 플랫폼별 분리되어 있고,
- * 검색/필터/선택/시작 로직은 전부 여기에 모은다.
+ * 화면(champion-select-screen.tsx)과 분리해 검색/필터/선택/시작 로직을 여기에 모은다.
  */
 import { Image } from "expo-image";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
@@ -97,7 +96,7 @@ export function useChampionSelect() {
       ScreenOrientation.OrientationLock.LANDSCAPE,
     ).catch(() => {});
     router.replace({
-      pathname: mode === "arena" ? "/arena" : "/draft",
+      pathname: mode === "arena" ? "/arena" : "/aram",
       params: { championId },
     });
   };

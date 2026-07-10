@@ -1,10 +1,10 @@
 /**
- * GlassButtonFallback — GlassButton의 폴백 구현 (Android / iOS 26 미만 / Expo Go).
+ * GlassButtonFallback — GlassButton의 폴백 구현 (iOS 26 미만 / Expo Go).
  *
- * Android에서 블러 글래스는 배경이 단색(어두운 게임 화면 / 밝은 splash)이라
- * 유리 질감이 드러나지 않고 뿌연 회색 덩어리로 튀었다. 그래서 폴백은 유리 흉내를
- * 버리고 불투명 solid 원형 아이콘 버튼으로 간다(Material 관례 + design-system 미니멀).
- * iOS 파일(glass-button.ios.tsx)의 네이티브 리퀴드글래스와 역할만 맞춘다.
+ * 리퀴드글래스가 없는 환경에서 블러 글래스는 배경이 단색(어두운 게임 화면 / 밝은 splash)이라
+ * 유리 질감이 드러나지 않고 뿌연 회색 덩어리로 튄다. 그래서 폴백은 유리 흉내를
+ * 버리고 불투명 solid 원형 아이콘 버튼으로 간다(design-system 미니멀).
+ * `glass-button.tsx`의 네이티브 리퀴드글래스와 역할만 맞춘다.
  *
  *   - 아이콘 전용     : 44×44 정원형 (iOS 네이티브 글래스 버튼과 크기 통일)
  *   - label 포함      : 캡슐(pill)

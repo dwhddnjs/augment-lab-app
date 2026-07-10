@@ -2,7 +2,7 @@
   "expo": {
     "name": "Augment Lab",
     "slug": "augment-lab",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "orientation": "default",
     "icon": "./assets/store/icon-aram-ios-1024.png",
     "scheme": "augmentlab",
@@ -31,16 +31,6 @@
         ]
       }
     },
-    "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#0E0F12",
-        "foregroundImage": "./assets/store/adaptive-foreground.png",
-        "backgroundImage": "./assets/store/adaptive-background.png",
-        "monochromeImage": "./assets/store/adaptive-monochrome.png"
-      },
-      "predictiveBackGestureEnabled": false,
-      "package": "com.augmentlab"
-    },
     "web": {
       "output": "static",
       "favicon": "./assets/images/favicon.png"
@@ -53,11 +43,7 @@
         {
           "backgroundColor": "#0E0F12",
           "image": "./assets/store/adaptive-foreground.png",
-          "imageWidth": 220,
-          "android": {
-            "image": "./assets/store/adaptive-foreground.png",
-            "imageWidth": 220
-          }
+          "imageWidth": 220
         }
       ],
       "expo-image"
@@ -72,6 +58,9 @@
         "projectId": "bc6939d3-df92-44f8-82b8-703d52156302"
       }
     },
-    "owner": "dwhddnjs"
+    "owner": "dwhddnjs",
+    "android": {
+      "package": "com.augmentlab"
+    }
   }
 }

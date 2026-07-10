@@ -1,39 +1,39 @@
 /**
- * MyPageScreen (Android·fallback) — Jetpack Compose(@expo/ui/jetpack-compose) 리스트.
+ * MyPageScreen — 진짜 iOS 설정앱 룩의 마이페이지.
+ * swift-ui `List(insetGrouped)` + `Section`(섹션 헤더) + `Picker`로 구성.
+ * 화면 타이틀은 (mypage) 스택의 native large-title 헤더가 제공한다.
  *
- * universal `@expo/ui`의 List/ListItem에는 색·배경 prop이 없어 앱 테마(강제 다크/라이트)가
- * 반영되지 않는다. 그래서 jetpack-compose의 Surface/Column/Row로 재작성하고 배경·텍스트·
- * 구분선 색을 모두 테마 토큰(`useTheme().colors`)으로 직접 칠한다. `Host`에 `colorScheme={mode}`를
- * 넘겨 Compose 트리의 외관도 앱 선택을 따르게 한다.
- *
- * 테마·언어 선택은 SegmentedButton(단일 선택)으로 제공한다. 화면 타이틀은 (mypage) 스택 헤더가 준다.
+ * 색은 시스템 시맨틱(secondaryLabel/tertiaryLabel — 다크모드 자동)과 테마 토큰만 사용.
  */
 import {
-  Column,
-  HorizontalDivider,
+  Button,
+  HStack,
   Host,
-  Icon,
-  Row,
-  SegmentedButton,
-  Shape,
-  SingleChoiceSegmentedButtonRow,
-  Surface,
+  Image,
+  List,
+  Picker,
+  Section,
+  Spacer,
   Text,
-} from "@expo/ui/jetpack-compose";
+} from "@expo/ui/swift-ui";
 import {
   background,
-  clickable,
-  fillMaxSize,
-  fillMaxWidth,
-  padding,
-  paddingAll,
-  verticalScroll,
-} from "@expo/ui/jetpack-compose/modifiers";
+  buttonStyle,
+  contentShape,
+  foregroundStyle,
+  frame,
+  listRowBackground,
+  listStyle,
+  scrollContentBackground,
+  shapes,
+  tag,
+  tint,
+} from "@expo/ui/swift-ui/modifiers";
 import Constants from "expo-constants";
 import { openBrowserAsync } from "expo-web-browser";
 import { Linking } from "react-native";
+import type { SFSymbol } from "sf-symbols-typescript";
 
-import { Radius, Spacing } from "@/constants/theme";
 import { useLocale, type Locale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
 import {
@@ -44,60 +44,6 @@ import { useTranslation } from "@/lib/i18n";
 
 const GITHUB_URL = "https://github.com/dwhddnjs/aram-augment-lab-app";
 const FEEDBACK_EMAIL = "syd1215no@gmail.com";
-
-/** 행 앞 아이콘 — Android Material Symbols(XML vector drawable). */
-const ICONS = {
-  theme: require("@expo/material-symbols/contrast.xml"),
-  language: require("@expo/material-symbols/language.xml"),
-  version: require("@expo/material-symbols/info.xml"),
-  github: require("@expo/material-symbols/code.xml"),
-  feedback: require("@expo/material-symbols/feedback.xml"),
-};
-
-/** 좌측 아이콘 + 라벨. */
-function RowLabel({
-  icon,
-  label,
-  color,
-}: {
-  icon: number;
-  label: string;
-  color: string;
-}) {
-  return (
-    <Row
-      verticalAlignment="center"
-      horizontalArrangement={{ spacedBy: Spacing.double }}
-    >
-      <Icon source={icon} tint={color} size={22} />
-      <Text color={color} style={{ fontSize: 16 }}>
-        {label}
-      </Text>
-    </Row>
-  );
-}
-
-function SectionHeader({
-  label,
-  color,
-  topSpacing = 0,
-}: {
-  label: string;
-  color: string;
-  topSpacing?: number;
-}) {
-  return (
-    <Text
-      color={color}
-      style={{ typography: "labelMedium" }}
-      modifiers={[
-        padding(Spacing.two, Spacing.two + topSpacing, Spacing.two, Spacing.two),
-      ]}
-    >
-      {label}
-    </Text>
-  );
-}
 
 const t = {
   ko: {
@@ -130,6 +76,86 @@ const t = {
   },
 };
 
+/** 아이콘 + 라벨 행 헤드. Picker `label` 슬롯에 넣어 leading 아이콘 색을 tint와 무관하게 고정한다. */
+function RowLabel({
+  icon,
+  label,
+  iconColor,
+}: {
+  icon: SFSymbol;
+  label: string;
+  iconColor: string;
+}) {
+  return (
+    <HStack spacing={12}>
+      <Image
+        systemName={icon}
+        size={17}
+        modifiers={[
+          foregroundStyle({ type: "color", color: iconColor }),
+          frame({ width: 26 }),
+        ]}
+      />
+      <Text>{label}</Text>
+    </HStack>
+  );
+}
+
+/** 좌측 아이콘 + 라벨 + 우측 값/disclosure chevron 행. onPress 없으면 비활성(정적 값). */
+function SettingsRow({
+  label,
+  value,
+  icon,
+  iconColor,
+  onPress,
+  rowBackgroundColor,
+}: {
+  label: string;
+  value?: string;
+  icon: SFSymbol;
+  iconColor: string;
+  onPress?: () => void;
+  rowBackgroundColor: string;
+}) {
+  return (
+    <Button
+      onPress={onPress}
+      modifiers={[buttonStyle("plain"), listRowBackground(rowBackgroundColor)]}
+    >
+      <HStack spacing={12} modifiers={[contentShape(shapes.rectangle())]}>
+        <Image
+          systemName={icon}
+          size={17}
+          modifiers={[
+            foregroundStyle({ type: "color", color: iconColor }),
+            frame({ width: 26 }),
+          ]}
+        />
+        <Text>{label}</Text>
+        <Spacer />
+        {value ? (
+          <Text
+            modifiers={[
+              foregroundStyle({ type: "color", color: "secondaryLabel" }),
+            ]}
+          >
+            {value}
+          </Text>
+        ) : null}
+        {onPress ? (
+          <Image
+            systemName="chevron.right"
+            size={13}
+            modifiers={[
+              foregroundStyle({ type: "color", color: "tertiaryLabel" }),
+            ]}
+          />
+        ) : null}
+      </HStack>
+    </Button>
+  );
+}
+
 export default function MyPageScreen() {
   const translate = useTranslation(t);
   const { colors, mode } = useTheme();
@@ -138,189 +164,84 @@ export default function MyPageScreen() {
 
   const version = Constants.expoConfig?.version ?? "1.0.0";
 
-  const cardShape = Shape.RoundedCorner({
-    cornerRadii: {
-      topStart: Radius.lg,
-      topEnd: Radius.lg,
-      bottomStart: Radius.lg,
-      bottomEnd: Radius.lg,
-    },
-  });
-
-  const segColors = {
-    activeContainerColor: colors.accent.subtle,
-    activeContentColor: colors.accent.default,
-    activeBorderColor: colors.accent.default,
-    inactiveContainerColor: colors.surface.raised,
-    inactiveContentColor: colors.text.secondary,
-    inactiveBorderColor: colors.border.default,
-  };
+  const rowBg = colors.surface.raised;
+  const pickerModifiers = [
+    tint(colors.accent.default),
+    listRowBackground(rowBg),
+  ];
 
   return (
-    <Host style={{ flex: 1 }} colorScheme={mode}>
-      <Column
+    // key={mode} — expo-ui가 SwiftUI Picker의 tint modifier를 런타임 테마 변경 시
+    // 갱신하지 않아(다른 모드의 accent가 남음), 모드가 바뀌면 Host를 remount해 강제 반영.
+    <Host key={mode} style={{ flex: 1 }} colorScheme={mode}>
+      <List
         modifiers={[
-          fillMaxSize(),
+          listStyle("insetGrouped"),
+          scrollContentBackground("hidden"),
           background(colors.surface.base),
-          verticalScroll(),
-          paddingAll(Spacing.three),
         ]}
       >
-        {/* 일반 */}
-        <SectionHeader label={translate("general")} color={colors.text.tertiary} />
-        <Surface color={colors.surface.raised} shape={cardShape}>
-          <Column
-            modifiers={[fillMaxWidth(), paddingAll(Spacing.double)]}
-            verticalArrangement={{ spacedBy: Spacing.double }}
+        <Section title={translate("general")}>
+          <Picker
+            label={
+              <RowLabel
+                icon="circle.lefthalf.filled"
+                label={translate("theme")}
+                iconColor={colors.text.primary}
+              />
+            }
+            selection={preference}
+            onSelectionChange={(next) => setPreference(next as ThemePreference)}
+            modifiers={pickerModifiers}
           >
-            {/* 테마 */}
-            <RowLabel
-              icon={ICONS.theme}
-              label={translate("theme")}
-              color={colors.text.primary}
-            />
-            <SingleChoiceSegmentedButtonRow modifiers={[fillMaxWidth()]}>
-              {(["system", "light", "dark"] as ThemePreference[]).map((opt) => {
-                const selected = preference === opt;
-                return (
-                  <SegmentedButton
-                    key={opt}
-                    selected={selected}
-                    onClick={() => setPreference(opt)}
-                    colors={segColors}
-                  >
-                    <SegmentedButton.Label>
-                      <Text
-                        color={
-                          selected ? colors.accent.default : colors.text.secondary
-                        }
-                        style={{ fontSize: 14 }}
-                      >
-                        {translate(opt)}
-                      </Text>
-                    </SegmentedButton.Label>
-                  </SegmentedButton>
-                );
-              })}
-            </SingleChoiceSegmentedButtonRow>
-
-            <HorizontalDivider color={colors.border.subtle} />
-
-            {/* 언어 */}
-            <RowLabel
-              icon={ICONS.language}
-              label={translate("language")}
-              color={colors.text.primary}
-            />
-            <SingleChoiceSegmentedButtonRow modifiers={[fillMaxWidth()]}>
-              {(
-                [
-                  { value: "ko", label: "한국어" },
-                  { value: "en", label: "English" },
-                ] as { value: Locale; label: string }[]
-              ).map((opt) => {
-                const selected = locale === opt.value;
-                return (
-                  <SegmentedButton
-                    key={opt.value}
-                    selected={selected}
-                    onClick={() => setLocale(opt.value)}
-                    colors={segColors}
-                  >
-                    <SegmentedButton.Label>
-                      <Text
-                        color={
-                          selected ? colors.accent.default : colors.text.secondary
-                        }
-                        style={{ fontSize: 14 }}
-                      >
-                        {opt.label}
-                      </Text>
-                    </SegmentedButton.Label>
-                  </SegmentedButton>
-                );
-              })}
-            </SingleChoiceSegmentedButtonRow>
-          </Column>
-        </Surface>
-
-        {/* 정보 — 일반 섹션과 시각적으로 분리되도록 상단 여백 추가 */}
-        <SectionHeader
-          label={translate("info")}
-          color={colors.text.tertiary}
-          topSpacing={Spacing.four}
-        />
-        <Surface color={colors.surface.raised} shape={cardShape}>
-          <Column modifiers={[fillMaxWidth()]}>
-            {/* 버전 */}
-            <Row
-              verticalAlignment="center"
-              horizontalArrangement="spaceBetween"
-              modifiers={[fillMaxWidth(), paddingAll(Spacing.double)]}
-            >
+            <Text modifiers={[tag("system")]}>{translate("system")}</Text>
+            <Text modifiers={[tag("light")]}>{translate("light")}</Text>
+            <Text modifiers={[tag("dark")]}>{translate("dark")}</Text>
+          </Picker>
+          <Picker
+            label={
               <RowLabel
-                icon={ICONS.version}
-                label={translate("version")}
-                color={colors.text.primary}
+                icon="globe"
+                label={translate("language")}
+                iconColor={colors.text.primary}
               />
-              <Text color={colors.text.secondary} style={{ fontSize: 16 }}>
-                {version}
-              </Text>
-            </Row>
+            }
+            selection={locale}
+            onSelectionChange={(next) => setLocale(next as Locale)}
+            modifiers={pickerModifiers}
+          >
+            <Text modifiers={[tag("ko")]}>한국어</Text>
+            <Text modifiers={[tag("en")]}>English</Text>
+          </Picker>
+        </Section>
 
-            {/* 정보 divider도 일반 섹션처럼 좌우 인셋(12dp)으로 통일 */}
-            <HorizontalDivider
-              color={colors.border.subtle}
-              modifiers={[padding(Spacing.double, 0, Spacing.double, 0)]}
-            />
-
-            {/* GitHub */}
-            <Row
-              verticalAlignment="center"
-              modifiers={[
-                fillMaxWidth(),
-                clickable(() => openBrowserAsync(GITHUB_URL)),
-                paddingAll(Spacing.double),
-              ]}
-            >
-              <RowLabel
-                icon={ICONS.github}
-                label={translate("github")}
-                color={colors.text.primary}
-              />
-            </Row>
-
-            <HorizontalDivider
-              color={colors.border.subtle}
-              modifiers={[padding(Spacing.double, 0, Spacing.double, 0)]}
-            />
-
-            {/* 피드백 */}
-            <Row
-              verticalAlignment="center"
-              modifiers={[
-                fillMaxWidth(),
-                clickable(() => Linking.openURL(`mailto:${FEEDBACK_EMAIL}`)),
-                paddingAll(Spacing.double),
-              ]}
-            >
-              <RowLabel
-                icon={ICONS.feedback}
-                label={translate("feedback")}
-                color={colors.text.primary}
-              />
-            </Row>
-          </Column>
-        </Surface>
-
-        <Text
-          color={colors.text.tertiary}
-          style={{ fontSize: 12, lineHeight: 16 }}
-          modifiers={[paddingAll(Spacing.three)]}
+        <Section
+          title={translate("info")}
+          footer={<Text>{translate("disclaimer")}</Text>}
         >
-          {translate("disclaimer")}
-        </Text>
-      </Column>
+          <SettingsRow
+            label={translate("version")}
+            value={version}
+            icon="info.circle"
+            iconColor={colors.text.primary}
+            rowBackgroundColor={rowBg}
+          />
+          <SettingsRow
+            label={translate("github")}
+            icon="chevron.left.forwardslash.chevron.right"
+            iconColor={colors.text.primary}
+            onPress={() => openBrowserAsync(GITHUB_URL)}
+            rowBackgroundColor={rowBg}
+          />
+          <SettingsRow
+            label={translate("feedback")}
+            icon="envelope"
+            iconColor={colors.text.primary}
+            onPress={() => Linking.openURL(`mailto:${FEEDBACK_EMAIL}`)}
+            rowBackgroundColor={rowBg}
+          />
+        </Section>
+      </List>
     </Host>
   );
 }

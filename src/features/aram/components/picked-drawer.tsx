@@ -21,7 +21,7 @@ const t = {
   },
 };
 
-// UI shows 5 slots; the draft logic itself still resolves in 4 picks.
+// UI shows 5 slots; the pick logic itself still resolves in 4 picks.
 const BASE_SLOTS = 5;
 
 interface AugmentCellProps {

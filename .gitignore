@@ -43,3 +43,6 @@ example
 /ios
 /android
 /build
+
+# 검증 스크린샷 — 저장소에 커밋하지 않는다 (docs/verification/README.md 참고)
+docs/verification/assets/

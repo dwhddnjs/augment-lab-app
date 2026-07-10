@@ -18,7 +18,6 @@ import { GlassButton } from "@/components/ui/glass-button";
 import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
-import { useHardwareBack } from "@/hooks/use-hardware-back";
 import { useTheme } from "@/hooks/use-theme";
 import { saveBuild } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
@@ -40,6 +39,7 @@ const CELL_GAP = Spacing.one; // 4px
 const t = {
   ko: {
     title: "아이템 선택",
+    stats: "스탯",
     augments: "증강",
     saveError: "빌드 저장에 실패했어요",
     exitConfirm: "저장하지 않고 나갈까요?",
@@ -48,6 +48,7 @@ const t = {
   },
   en: {
     title: "Item Select",
+    stats: "Stats",
     augments: "Augments",
     saveError: "Failed to save the build",
     exitConfirm: "Leave without saving?",
@@ -78,26 +79,6 @@ export function ItemSelectScreen() {
       ).catch(() => {});
     }, []),
   );
-
-  // Android 하드웨어 back — 그냥 pop되면 landscape가 잠긴 채 홈으로 튕기므로,
-  // 확인 다이얼로그 후 portrait 복귀 + 홈으로 나간다(저장 안 함).
-  const handleHardwareBack = useCallback(() => {
-    Alert.alert(translate("exitConfirm"), "", [
-      { text: translate("exitCancel"), style: "cancel" },
-      {
-        text: translate("exitOk"),
-        style: "destructive",
-        onPress: () => {
-          ScreenOrientation.lockAsync(
-            ScreenOrientation.OrientationLock.PORTRAIT_UP,
-          ).catch(() => {});
-          router.dismissTo("/");
-        },
-      },
-    ]);
-    return true;
-  }, [router, translate]);
-  useHardwareBack(handleHardwareBack);
 
   const [dims, setDims] = useState({ w: 0, h: 0 });
   const isLandscape = dims.w > dims.h && dims.w > 0;
@@ -242,10 +223,37 @@ function ItemSelectContent({
     router.push({ pathname: "/build/[id]", params: { id: build.id } });
   };
 
+  // 저장 외의 유일한 출구. 그냥 pop하면 landscape가 잠긴 채 홈으로 튕기므로
+  // 확인 후 portrait로 되돌린 다음 나간다(빌드는 저장하지 않는다).
+  const handleExit = () => {
+    Alert.alert(translate("exitConfirm"), "", [
+      { text: translate("exitCancel"), style: "cancel" },
+      {
+        text: translate("exitOk"),
+        style: "destructive",
+        onPress: () => {
+          ScreenOrientation.lockAsync(
+            ScreenOrientation.OrientationLock.PORTRAIT_UP,
+          ).catch(() => {});
+          router.dismissTo("/");
+        },
+      },
+    ]);
+  };
+
   return (
-    <SafeAreaView style={styles.safe} edges={["top", "left"]}>
-      {/* 헤더 — 타이틀 + 선택 수 + 저장 버튼 */}
+    // "right"가 빠지면 헤더 오른쪽 끝의 저장 버튼이 홈 인디케이터 제스처 영역에
+    // 걸려 탭이 시스템에 먹힌다 — 눌리지 않는 저장 버튼이 된다.
+    <SafeAreaView style={styles.safe} edges={["top", "left", "right"]}>
+      {/* 헤더 — 나가기 + 타이틀 + 선택 수 + 저장 버튼 */}
       <View style={styles.header}>
+        <GlassButton
+          systemImage="xmark"
+          fallbackIcon="close"
+          role="cancel"
+          onPress={handleExit}
+        />
+
         <View style={styles.headerTitleRow}>
           <ThemedText type="heading">{translate("title")}</ThemedText>
           <ThemedText type="label" color="secondary">
@@ -265,7 +273,10 @@ function ItemSelectContent({
       <View style={styles.body}>
         {/* ── 좌(7): 세로 필터 탭 + 아이템 그리드 + 트레이 ── */}
         <View style={styles.leftPanel}>
-          <ItemFilterBar activeFilter={activeFilter} onChange={setActiveFilter} />
+          <ItemFilterBar
+            activeFilter={activeFilter}
+            onChange={setActiveFilter}
+          />
 
           <ItemGrid
             rows={rows}
@@ -296,6 +307,7 @@ function ItemSelectContent({
           itemStatsList={itemStatsList}
           pickedAugments={pickedAugments}
           augmentGridWidth={augmentGridWidth}
+          statsLabel={translate("stats")}
           augmentsLabel={translate("augments")}
           onAugmentGridLayout={(e) =>
             setAugmentGridWidth(e.nativeEvent.layout.width)
@@ -313,17 +325,18 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    gap: Spacing.two,
-    paddingLeft: Spacing.three,
+    // 나가기 버튼과 타이틀이 붙어 보이지 않도록 gap을 넓게. 왼쪽 패딩은
+    // SafeAreaView의 left inset 위에 얹히므로 작게 유지한다.
+    gap: Spacing.three,
+    paddingLeft: Spacing.two,
     paddingRight: Spacing.three,
+    // aram/arena 헤더와 동일한 상단 간격.
     paddingTop: Spacing.double,
     paddingBottom: Spacing.two,
   },
   headerTitleRow: {
     flexDirection: "row",
-    justifyContent: "flex-end",
     alignItems: "flex-end",
-    marginTop: Spacing.double,
     gap: Spacing.two,
   },
   headerSpacer: { flex: 1 },

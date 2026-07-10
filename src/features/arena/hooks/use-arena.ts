@@ -2,7 +2,7 @@
  * useArena — 아레나 12라운드 진행 엔진.
  *
  * 12라운드를 평탄화한 step 흐름으로 진행한다(R1은 증강 + 신발 상점 2 step).
- * 칼바람 useDraft 패턴(현재 카드 state + advance 시 다음 카드 생성)을 따르되,
+ * 칼바람 useAram 패턴(현재 카드 state + advance 시 다음 카드 생성)을 따르되,
  * 골드 경제·증강 레벨업·프리즘/모루/재련 누적 상태를 추가로 관리한다.
  */
 import { useCallback, useMemo, useState } from "react";
