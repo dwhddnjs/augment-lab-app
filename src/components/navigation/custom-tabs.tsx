@@ -76,7 +76,7 @@ const CenterPlusButton = forwardRef<View, CenterPlusButtonProps>(
     return (
       <Pressable ref={ref} style={[style, styles.centerButton]} {...rest}>
         <View style={[styles.centerCircle, { backgroundColor: accentColor }]}>
-          <MaterialIcons name="add" size={30} color={iconColor} />
+          <MaterialIcons name="add" size={34} color={iconColor} />
         </View>
       </Pressable>
     );
@@ -120,7 +120,7 @@ export default function CustomTabBar() {
         <TabTrigger name="plus" href="/(tabs)/plus" asChild onPress={openModal}>
           <CenterPlusButton
             accentColor={colors.accent.default}
-            iconColor={colors.text.onAccent}
+            iconColor={colors.text.inverse}
           />
         </TabTrigger>
 

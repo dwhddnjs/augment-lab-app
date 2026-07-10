@@ -29,3 +29,4 @@ Claude Code에서는 `/verify` 로 실행한다(`.claude/commands/verify.md` 가
 | --- | --- | --- |
 | 2026-07-10 | [iOS 전용 전환 + `draft` → `aram` 리네임](./2026-07-10-ios-전용-전환-검증.md) | PASS |
 | 2026-07-10 | [UI 수정 4건 (large title·헤더·애니메이션·카드 간격)](./2026-07-10-ui-수정-4건-검증.md) | PASS |
+| 2026-07-11 | [accent 팔레트 교체 + 탭·스위치·Picker 테마 반영](./2026-07-11-accent-팔레트-교체-검증.md) | PASS |
