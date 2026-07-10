@@ -69,7 +69,14 @@ sips -g pixelWidth small.png     # → 193
 버튼 중심을 정확히 알아야 하면 원본을 crop해서 볼 것 — 축소본에서 눈대중한 중심은 자주 빗나간다.
 `sips -c <height> <width> --cropOffset <y> <x> shot.png`
 
-캡처: `xcrun simctl io $SIM screenshot out.png`
+캡처: `xcrun simctl io $SIM screenshot "$SHOTS/01-home.png"`
+
+**캡처물은 전부 임시 파일이다.** 저장소 안(`docs/`·프로젝트 루트)에 쓰지 말고 스크래치패드에
+모을 것. 세션 시작 때 한 번 잡아두면 된다:
+
+```bash
+SHOTS=$(mktemp -d)   # 또는 Claude Code가 알려주는 scratchpad 경로
+```
 
 **⌘←(창 회전)은 창 위치를 바꾼다.** 쓰지 말 것. 썼다면 `OX/OY`를 다시 재야 한다.
 
@@ -148,6 +155,12 @@ osascript -e 'tell application "System Events" to tell process "Simulator" \
 런타임 동작이 바뀌는 변경을 검증했으면 `docs/verification/` 에 결과를 남긴다.
 형식과 규칙은 `docs/verification/README.md` 참고.
 
-**스크린샷은 커밋하지 않는다.** 관찰한 것을 문서에 글로 적는다. 사용자에게 화면을 보여줘야
-하면(원격·모바일에서 결과를 확인하는 경우) `sips -Z 480` 으로 리사이즈한 뒤 Artifact 페이지에
-data URI로 임베드해 링크를 전달한다. 저장소에는 남기지 않는다.
+**이 skill의 산출물은 문서 `.md` 하나뿐이다.** 스크린샷은 검증을 *수행하는 수단*이지
+*결과물*이 아니다 — 좌표를 읽고 조작 후 상태를 확인하는 데 쓰고, 스크래치패드에 두고 잊는다.
+저장소에 커밋하지 않는다(`docs/verification/assets/` 는 `.gitignore` 에 있다).
+
+화면에서 본 것은 **글로 옮겨 적는다.** "large title이 정상 복원됐다", "X 버튼이 우측 끝에서
+잘리지 않는다" 처럼, 이미지를 열지 않고도 판정을 재구성할 수 있게 쓴다.
+
+사용자에게 화면을 직접 보여줘야 하면(원격·모바일에서 결과를 확인하는 경우) `sips -Z 480` 으로
+리사이즈해 Artifact 페이지에 data URI로 임베드하고 링크를 전달한다. 휘발성 증거로 취급한다.
