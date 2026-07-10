@@ -28,7 +28,6 @@
 npm install            # 의존성 설치
 npm start              # Expo 개발 서버 시작
 npm run ios            # iOS 시뮬레이터
-npm run android        # Android 에뮬레이터
 npm run lint           # ESLint
 ```
 
@@ -36,7 +35,9 @@ npm run lint           # ESLint
 
 ## 아키텍처
 
-**Expo SDK 56 / React 19 / React Native 0.85** 기반 iOS·Android 앱(웹 미지원). 파일 기반 라우팅(Expo Router v56), `experiments.typedRoutes` + `reactCompiler` 활성.
+**Expo SDK 56 / React 19 / React Native 0.85** 기반 **iOS 전용** 앱(Android·웹 미지원). 파일 기반 라우팅(Expo Router v56), `experiments.typedRoutes` + `reactCompiler` 활성.
+
+Android 지원 코드는 제거했다. `.android.tsx` 파일이나 `Platform.OS === 'android'` 분기를 새로 만들지 말 것. 남아 있는 플랫폼 폴백(`custom-tabs.tsx`, `glass-button-fallback.tsx`)은 Android가 아니라 **iOS 26 미만** 대응이다.
 
 ### 폴더 구조 — 필수 규칙
 

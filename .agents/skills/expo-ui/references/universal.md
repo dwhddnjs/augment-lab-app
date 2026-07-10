@@ -1,6 +1,6 @@
 # universal `@expo/ui`
 
-`import { ... } from '@expo/ui'` 에서 가져오는 크로스플랫폼 컴포넌트. **단일 파일**로 iOS=SwiftUI, Android=Jetpack Compose로 렌더된다(웹은 RN 폴백). 플랫폼 분기 파일이 필요 없는 게 핵심 장점.
+`import { ... } from '@expo/ui'` 에서 가져오는 컴포넌트. SwiftUI로 렌더된다.
 
 실제 export 목록은 `node_modules/@expo/ui/build/universal/index.d.ts` 확인:
 `Host, Column, Row, Spacer, Text, Button, ScrollView, Switch, Slider, Checkbox, BottomSheet, Collapsible, FieldGroup, Icon, List, ListItem, Picker, RNHostView, TextInput`.
@@ -26,7 +26,7 @@ import { Host, Column, Text, Button } from '@expo/ui';
 
 ## List + ListItem
 
-iOS SwiftUI `List`, Android `LazyColumn`에 위임. 설정·폼 같은 **소규모** 리스트용.
+SwiftUI `List`에 위임. 설정·폼 같은 **소규모** 리스트용.
 
 ```tsx
 import { Host, List, ListItem, Icon } from '@expo/ui';
@@ -79,6 +79,6 @@ import { Host, Switch } from '@expo/ui';
 
 ## 주의
 
-- SwiftUI/Compose 호스트는 bare 문자열을 못 그린다. 텍스트는 항상 `Text`(또는 `ListItem` children처럼 컴포넌트가 내부에서 감싸주는 경우)로.
+- SwiftUI 호스트는 bare 문자열을 못 그린다. 텍스트는 항상 `Text`(또는 `ListItem` children처럼 컴포넌트가 내부에서 감싸주는 경우)로.
 - 고밀도 대량 목록은 `List` 대신 RN `FlatList`(각 `ListItem`이 JS 스레드 비용).
 - 색·tint는 `useTheme()` 토큰만 주입.

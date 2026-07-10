@@ -1,9 +1,15 @@
-// Native fallback — runtime uses app-tabs.ios.tsx or app-tabs.android.tsx
+/**
+ * AppTabs — 하단 탭바.
+ * iOS 26+는 NativeTabs(리퀴드글래스), 그 미만은 CustomTabBar로 폴백한다.
+ */
 import { useRouter } from "expo-router";
 import { NativeTabs } from "expo-router/unstable-native-tabs";
+import { Platform } from "react-native";
 
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
+
+import CustomTabBar from "./custom-tabs";
 
 const t = {
   ko: {
@@ -15,16 +21,24 @@ const t = {
   en: { home: "Home", community: "Community", mypage: "My Page", plus: "Add" },
 };
 
+// iOS 26+ 만 NativeTabs(리퀴드글래스 탭바)를 쓴다. 그 미만은 커스텀 탭바로 폴백.
+// Platform.Version은 iOS에서 "26.0" 형태 문자열이라 String()+parseInt로 안전 파싱.
+const isIOS26Plus = Number.parseInt(String(Platform.Version), 10) >= 26;
+
 export default function AppTabs() {
   const { colors } = useTheme();
   const translate = useTranslation(t);
   const router = useRouter();
 
+  if (!isIOS26Plus) {
+    return <CustomTabBar />;
+  }
+
   return (
     <NativeTabs tintColor={colors.accent.default}>
       <NativeTabs.Trigger name="(home)">
         <NativeTabs.Trigger.Label>{translate("home")}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="house" md="home" />
+        <NativeTabs.Trigger.Icon sf="house" />
       </NativeTabs.Trigger>
 
       {/* <NativeTabs.Trigger name="(community)">
@@ -38,7 +52,7 @@ export default function AppTabs() {
         <NativeTabs.Trigger.Label>
           {translate("mypage")}
         </NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="person.crop.circle" md="account_circle" />
+        <NativeTabs.Trigger.Icon sf="person.crop.circle" />
       </NativeTabs.Trigger>
 
       {/* disabled → 탭 전환을 막아 현재 탭 유지(빈 화면 방지). 누르면
@@ -56,10 +70,9 @@ export default function AppTabs() {
         }}
       >
         <NativeTabs.Trigger.Label>{translate("plus")}</NativeTabs.Trigger.Label>
-        {/* iOS=SF Symbol(plus), Android=Material Symbol(add). 색은 accent 강제. */}
+        {/* 색은 accent 강제. */}
         <NativeTabs.Trigger.Icon
           sf="plus"
-          md="add"
           selectedColor={colors.accent.default}
         />
       </NativeTabs.Trigger>

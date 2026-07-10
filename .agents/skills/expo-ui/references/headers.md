@@ -14,7 +14,7 @@
 ## 플랫폼 파일 원칙
 
 - **웹 미지원** — `*.web.tsx` / `*.web.ts` 금지. `npm run web` 미사용.
-- **universal 우선, 필요시만 분리** — `@expo/ui` universal 단일 파일이 기본. universal로 부족하거나 플랫폼 고유 UI가 필요할 때만 `name.ios.tsx`(swift-ui) / `name.android.tsx`(jetpack-compose)로 분리. iOS만 분리하고 Android는 universal `.tsx`를 폴백으로 공유해도 된다(예: 마이페이지).
+- **universal 우선, 필요시만 swift-ui** — `@expo/ui` universal 단일 파일이 기본. universal로 부족할 때만 `@expo/ui/swift-ui`로 내려간다. iOS 전용 앱이므로 `.ios.tsx`/`.android.tsx` 분기 파일은 만들지 않는다.
 
 ## 라우팅 구조
 
@@ -26,4 +26,4 @@
 
 ## 탭/네이티브 아이콘
 
-`NativeTabs.Trigger.Icon`은 플랫폼별로 지정: iOS=SF Symbol(`sf`), Android=Material Symbol(`md`). 한 컴포넌트에 `sf`+`md`를 함께 줄 수 있다(iOS는 `sf`, Android는 `md` 사용). SF Symbol은 **weight 제어 불가** → 굵기는 `*.fill`/형태 variant로. 색은 `selectedColor`(또는 `NativeTabs` `tintColor`)에 테마 토큰 주입.
+`NativeTabs.Trigger.Icon`은 SF Symbol(`sf`)로 지정한다. SF Symbol은 **weight 제어 불가** → 굵기는 `*.fill`/형태 variant로. 색은 `selectedColor`(또는 `NativeTabs` `tintColor`)에 테마 토큰 주입.

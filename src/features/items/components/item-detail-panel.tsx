@@ -1,4 +1,9 @@
-import { ScrollView, StyleSheet, View, type LayoutChangeEvent } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  type LayoutChangeEvent,
+} from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { RemoteImage } from "@/components/ui/remote-image";
@@ -7,9 +12,9 @@ import type { Augment } from "@/features/augments/types";
 import type { Champion } from "@/features/champions/types";
 import { useTheme } from "@/hooks/use-theme";
 import { championSquareUrl } from "@/lib/ddragon";
+import type { ItemStats } from "../types";
 import { AugmentCard } from "./augment-card";
 import { ItemStatPanel } from "./item-stat-panel";
-import type { ItemStats } from "../types";
 
 const AUG_COLS = 3;
 
@@ -19,6 +24,7 @@ interface Props {
   pickedAugments: Augment[];
   /** 우측 그리드 실측 너비. 0이면 카드 크기 미정 → 증강 미렌더. */
   augmentGridWidth: number;
+  statsLabel: string;
   augmentsLabel: string;
   onAugmentGridLayout: (e: LayoutChangeEvent) => void;
 }
@@ -28,18 +34,29 @@ export function ItemDetailPanel({
   itemStatsList,
   pickedAugments,
   augmentGridWidth,
+  statsLabel,
   augmentsLabel,
   onAugmentGridLayout,
 }: Props) {
   const { colors } = useTheme();
-  const championIconUri = champion ? championSquareUrl(champion.imageKey) : null;
+  const championIconUri = champion
+    ? championSquareUrl(champion.imageKey)
+    : null;
   const augmentCardSize =
     augmentGridWidth > 0
       ? Math.floor((augmentGridWidth - Spacing.two * (AUG_COLS - 1)) / AUG_COLS)
       : 0;
 
   return (
-    <View style={[styles.rightPanel, { borderTopColor: colors.border.subtle }]}>
+    <View
+      style={[
+        styles.rightPanel,
+        {
+          borderTopColor: colors.border.subtle,
+          borderRightColor: colors.border.subtle,
+        },
+      ]}
+    >
       <ScrollView
         style={styles.rightScroll}
         contentContainerStyle={styles.rightContent}
@@ -79,13 +96,27 @@ export function ItemDetailPanel({
 
         {champion && (
           <View style={{ marginTop: Spacing.two }}>
-            <ItemStatPanel baseStats={champion.stats} itemStatsList={itemStatsList} />
+            <ThemedText
+              type="caption"
+              color="tertiary"
+              style={{ marginBottom: Spacing.two }}
+            >
+              {statsLabel}
+            </ThemedText>
+            <ItemStatPanel
+              baseStats={champion.stats}
+              itemStatsList={itemStatsList}
+            />
           </View>
         )}
 
         {pickedAugments.length > 0 && (
           <View style={{ marginTop: Spacing.three }}>
-            <ThemedText type="caption" color="tertiary" style={{ marginBottom: Spacing.two }}>
+            <ThemedText
+              type="caption"
+              color="tertiary"
+              style={{ marginBottom: Spacing.two }}
+            >
               {augmentsLabel}
             </ThemedText>
             <View style={styles.augmentGrid} onLayout={onAugmentGridLayout}>
@@ -106,12 +137,12 @@ export function ItemDetailPanel({
 }
 
 const styles = StyleSheet.create({
-  rightPanel: { flex: 3, minWidth: 0, borderTopWidth: 1 },
+  rightPanel: { flex: 3, minWidth: 0 },
   rightScroll: { flex: 1 },
   rightContent: {
-    paddingLeft: Spacing.two,
+    paddingLeft: Spacing.double,
     paddingRight: Spacing.two,
-    paddingTop: Spacing.two,
+    // paddingTop: Spacing.two,
     paddingBottom: Spacing.five,
   },
   championRow: {

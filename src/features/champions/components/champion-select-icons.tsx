@@ -1,6 +1,5 @@
 /**
- * 챔피언 선택 그리드 아이콘 — iOS: SF Symbol (expo-image "sf:" 소스).
- * Android 대응은 champion-select-icons.android.tsx (MaterialCommunityIcons).
+ * 챔피언 선택 그리드 아이콘 — SF Symbol (expo-image "sf:" 소스).
  */
 import { Image } from "expo-image";
 import { StyleSheet } from "react-native";

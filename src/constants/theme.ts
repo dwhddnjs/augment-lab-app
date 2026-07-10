@@ -1,5 +1,4 @@
 import "@/styles/global.css";
-import { Platform } from "react-native";
 
 export const Theme = {
   dark: {
@@ -117,48 +116,31 @@ type ElevationLevel = {
   shadowOpacity?: number;
   shadowOffset?: { width: number; height: number };
   shadowRadius?: number;
-  elevation?: number;
 };
 
-const makeElevation = (
-  ios: Omit<ElevationLevel, "elevation">,
-  androidElevation: number,
-): ElevationLevel =>
-  Platform.select({
-    ios,
-    android: { elevation: androidElevation } as ElevationLevel,
-    default: {},
-  })!;
-
-export const Elevation = {
-  level0: {} as ElevationLevel,
-  level1: makeElevation(
-    {
-      shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowOffset: { width: 0, height: 1 },
-      shadowRadius: 4,
-    },
-    1,
-  ),
-  level2: makeElevation(
-    {
-      shadowColor: "#000",
-      shadowOpacity: 0.14,
-      shadowOffset: { width: 0, height: 2 },
-      shadowRadius: 10,
-    },
-    4,
-  ),
-  level3: makeElevation(
-    {
-      shadowColor: "#000",
-      shadowOpacity: 0.22,
-      shadowOffset: { width: 0, height: 4 },
-      shadowRadius: 18,
-    },
-    8,
-  ),
+export const Elevation: Record<
+  "level0" | "level1" | "level2" | "level3",
+  ElevationLevel
+> = {
+  level0: {},
+  level1: {
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 4,
+  },
+  level2: {
+    shadowColor: "#000",
+    shadowOpacity: 0.14,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 10,
+  },
+  level3: {
+    shadowColor: "#000",
+    shadowOpacity: 0.22,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 18,
+  },
 };
 
 export const AugmentRarityColors = {
@@ -188,7 +170,7 @@ export const AugmentRarityColors = {
 } as const;
 
 // 증강 아이콘 미해결 시 표시하는 희귀도 폴백 글리프 (MaterialCommunityIcons).
-// 여러 feature(draft·builds·items)가 공유하므로 여기 단일 정의를 import해 쓴다.
+// 여러 feature(aram·builds·items)가 공유하므로 여기 단일 정의를 import해 쓴다.
 export const AugmentRarityGlyphs = {
   silver: "shield",
   gold: "star",
@@ -217,20 +199,12 @@ export const Brand = {
   logoBgTo: "#0274DF",
 } as const;
 
-export const Fonts = Platform.select({
-  ios: {
-    sans: "system-ui",
-    serif: "ui-serif",
-    rounded: "ui-rounded",
-    mono: "ui-monospace",
-  },
-  default: {
-    sans: "normal",
-    serif: "serif",
-    rounded: "normal",
-    mono: "monospace",
-  },
-})!;
+export const Fonts = {
+  sans: "system-ui",
+  serif: "ui-serif",
+  rounded: "ui-rounded",
+  mono: "ui-monospace",
+} as const;
 
 export const Spacing = {
   half: 2,
@@ -243,5 +217,5 @@ export const Spacing = {
   six: 64,
 } as const;
 
-export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
+export const BottomTabInset = 50;
 export const MaxContentWidth = 800;

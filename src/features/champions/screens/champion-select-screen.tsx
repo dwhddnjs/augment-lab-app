@@ -1,5 +1,5 @@
 /**
- * ChampionSelectScreen — iOS.
+ * ChampionSelectScreen.
  * large title 헤더에 SF Symbol 닫기(xmark)/시작(checkmark) 버튼을 박고,
  * 스크롤 시작 시 검색을 종료해 large title 모드로 되돌린다.
  * 공용 로직은 use-champion-select, 본문은 ChampionSelectGrid.

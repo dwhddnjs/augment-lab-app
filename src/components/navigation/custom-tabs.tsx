@@ -1,13 +1,13 @@
 /**
- * CustomTabBar — Android + iOS<26 공용 커스텀 하단 탭바.
- * iOS 26+는 NativeTabs(리퀴드글래스)를 그대로 쓰고, 그 외 환경에서만 이 컴포넌트가 렌더된다.
+ * CustomTabBar — iOS 26 미만 폴백 하단 탭바.
+ * iOS 26+는 NativeTabs(리퀴드글래스)를 그대로 쓰고, 그 미만에서만 이 컴포넌트가 렌더된다.
  *
  * `expo-router/ui`의 headless Tabs로 구성한다. 좌=메인, 중앙=원형 플러스 액션버튼,
  * 우=마이페이지. 중앙 버튼은 탭 전환 없이 mode-select 모달만 연다(기존 NativeTabs 동작과 동일):
  * TabTrigger의 onPress에서 `e.preventDefault()`를 호출하면 useTabTrigger가 탭 전환을 건너뛴다.
  *
- * 아이콘은 `@expo/vector-icons/MaterialIcons`를 쓴다. jetpack-compose용 XML drawable은
- * RN 트리(Pressable/Image)에서 렌더되지 않으므로 여기선 벡터 아이콘 폰트를 사용한다.
+ * 아이콘은 SF Symbol을 쓸 수 없는 RN 트리(Pressable/Image)이므로
+ * `@expo/vector-icons/MaterialIcons` 벡터 아이콘 폰트를 사용한다.
  */
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";

@@ -1,8 +1,8 @@
 import type { Augment } from '@/features/augments/types';
 
-export type DraftPhase = 'picking' | 'animating' | 'done';
+export type AramPhase = 'picking' | 'animating' | 'done';
 
-export interface DraftState {
+export interface AramState {
   round: number;
   currentCards: Augment[];
   picked: Augment[];
