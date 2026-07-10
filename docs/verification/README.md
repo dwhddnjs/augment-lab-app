@@ -10,8 +10,8 @@
 
 ## 어떻게 검증하나
 
-`.claude/skills/verify/SKILL.md` 에 빌드·실행·터치 주입·좌표 매핑 레시피가 있다.
-Claude Code에서는 `/verify` 로 실행한다.
+`.agents/skills/verify/SKILL.md` 에 빌드·실행·터치 주입·좌표 매핑 레시피가 있다.
+Claude Code에서는 `/verify` 로 실행한다(`.claude/commands/verify.md` 가 저 문서를 가리킨다).
 
 ## 파일 규칙
 

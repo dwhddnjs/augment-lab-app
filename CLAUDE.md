@@ -16,7 +16,7 @@
 
 ## 검증 기록
 
-런타임 동작이 바뀌는 변경(화면·라우팅·플랫폼 분기·네이티브 모듈)은 iOS 시뮬레이터에서 직접 굴려 확인하고, 결과를 `docs/verification/<YYYY-MM-DD>-<주제>.md`에 남길 것. 절차·규칙은 `.claude/skills/verify/SKILL.md`와 `docs/verification/README.md` 참고. 타입체크·lint 통과는 검증이 아니다 — 앱을 띄워 관찰한 것만 기록한다. 스크린샷은 커밋하지 않는다(글로 적고, 보여줄 땐 Artifact).
+런타임 동작이 바뀌는 변경(화면·라우팅·플랫폼 분기·네이티브 모듈)은 iOS 시뮬레이터에서 직접 굴려 확인하고, 결과를 `docs/verification/<YYYY-MM-DD>-<주제>.md`에 남길 것. 절차·규칙은 `.agents/skills/verify/SKILL.md`와 `docs/verification/README.md` 참고(`/verify` 로도 실행). 타입체크·lint 통과는 검증이 아니다 — 앱을 띄워 관찰한 것만 기록한다. 스크린샷은 커밋하지 않는다(글로 적고, 보여줄 땐 Artifact).
 
 ## i18n / 로케일 원칙
 
