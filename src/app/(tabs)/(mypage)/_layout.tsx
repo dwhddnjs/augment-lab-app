@@ -4,8 +4,8 @@ import { useTheme } from '@/hooks/use-theme';
 import { useTranslation } from '@/lib/i18n';
 
 const t = {
-  ko: { title: '마이페이지' },
-  en: { title: 'My Page' },
+  ko: { title: '마이페이지', data: '데이터 관리' },
+  en: { title: 'My Page', data: 'Manage Data' },
 };
 
 export default function MyPageStackLayout() {
@@ -25,6 +25,7 @@ export default function MyPageStackLayout() {
         name="index"
         options={{ title: translate('title'), headerLargeTitle: true }}
       />
+      <Stack.Screen name="data" options={{ title: translate('data') }} />
     </Stack>
   );
 }

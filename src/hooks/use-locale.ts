@@ -34,16 +34,18 @@ export function getLocale(): Locale {
   return _locale;
 }
 
-/** 앱 시작 시 1회 호출 — 저장된 로케일을 복원한다. */
+/**
+ * 앱 시작 시 1회 호출 — 저장된 로케일을 복원한다.
+ * 데이터 초기화/백업 복원 후에도 호출되므로, 저장값이 없으면 기본값('ko')으로
+ * 되돌린다(메모리에 남은 이전 선택이 살아남지 않게).
+ */
 export async function loadLocale(): Promise<void> {
   try {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
-    if (raw === 'ko' || raw === 'en') {
-      _locale = raw;
-      emit();
-    }
+    _locale = raw === 'en' ? 'en' : 'ko';
+    emit();
   } catch {
-    // 읽기 실패는 기본값('ko') 유지.
+    // 읽기 실패는 현재 값 유지.
   }
 }
 

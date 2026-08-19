@@ -6,30 +6,26 @@
  * 색은 시스템 시맨틱(secondaryLabel/tertiaryLabel — 다크모드 자동)과 테마 토큰만 사용.
  */
 import {
-  Button,
   HStack,
   Host,
   Image,
   List,
   Picker,
   Section,
-  Spacer,
   Text,
 } from "@expo/ui/swift-ui";
 import {
   background,
-  buttonStyle,
-  contentShape,
   foregroundStyle,
   frame,
   listRowBackground,
   listStyle,
   scrollContentBackground,
-  shapes,
   tag,
   tint,
 } from "@expo/ui/swift-ui/modifiers";
 import Constants from "expo-constants";
+import { useRouter } from "expo-router";
 import { openBrowserAsync } from "expo-web-browser";
 import { Linking } from "react-native";
 import type { SFSymbol } from "sf-symbols-typescript";
@@ -41,6 +37,7 @@ import {
   type ThemePreference,
 } from "@/hooks/use-theme-preference";
 import { useTranslation } from "@/lib/i18n";
+import { SettingsRow } from "../components/settings-row";
 
 const GITHUB_URL = "https://github.com/dwhddnjs/aram-augment-lab-app";
 const FEEDBACK_EMAIL = "syd1215no@gmail.com";
@@ -53,6 +50,7 @@ const t = {
     light: "라이트",
     dark: "다크",
     language: "언어",
+    dataManage: "데이터 관리",
     info: "정보",
     version: "버전",
     github: "GitHub",
@@ -67,6 +65,7 @@ const t = {
     light: "Light",
     dark: "Dark",
     language: "Language",
+    dataManage: "Manage Data",
     info: "About",
     version: "Version",
     github: "GitHub",
@@ -101,66 +100,12 @@ function RowLabel({
   );
 }
 
-/** 좌측 아이콘 + 라벨 + 우측 값/disclosure chevron 행. onPress 없으면 비활성(정적 값). */
-function SettingsRow({
-  label,
-  value,
-  icon,
-  iconColor,
-  onPress,
-  rowBackgroundColor,
-}: {
-  label: string;
-  value?: string;
-  icon: SFSymbol;
-  iconColor: string;
-  onPress?: () => void;
-  rowBackgroundColor: string;
-}) {
-  return (
-    <Button
-      onPress={onPress}
-      modifiers={[buttonStyle("plain"), listRowBackground(rowBackgroundColor)]}
-    >
-      <HStack spacing={12} modifiers={[contentShape(shapes.rectangle())]}>
-        <Image
-          systemName={icon}
-          size={17}
-          modifiers={[
-            foregroundStyle({ type: "color", color: iconColor }),
-            frame({ width: 26 }),
-          ]}
-        />
-        <Text>{label}</Text>
-        <Spacer />
-        {value ? (
-          <Text
-            modifiers={[
-              foregroundStyle({ type: "color", color: "secondaryLabel" }),
-            ]}
-          >
-            {value}
-          </Text>
-        ) : null}
-        {onPress ? (
-          <Image
-            systemName="chevron.right"
-            size={13}
-            modifiers={[
-              foregroundStyle({ type: "color", color: "tertiaryLabel" }),
-            ]}
-          />
-        ) : null}
-      </HStack>
-    </Button>
-  );
-}
-
 export default function MyPageScreen() {
   const translate = useTranslation(t);
   const { colors, mode } = useTheme();
   const { locale, setLocale } = useLocale();
   const { preference, setPreference } = useThemePreference();
+  const router = useRouter();
 
   const version = Constants.expoConfig?.version ?? "1.0.0";
 
@@ -213,6 +158,13 @@ export default function MyPageScreen() {
             <Text modifiers={[tag("ko")]}>한국어</Text>
             <Text modifiers={[tag("en")]}>English</Text>
           </Picker>
+          <SettingsRow
+            label={translate("dataManage")}
+            icon="externaldrive"
+            iconColor={colors.text.primary}
+            onPress={() => router.push("/data")}
+            rowBackgroundColor={rowBg}
+          />
         </Section>
 
         <Section

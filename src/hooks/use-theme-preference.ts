@@ -48,17 +48,19 @@ export function getThemePreference(): ThemePreference {
   return _pref;
 }
 
-/** 앱 시작 시 1회 호출 — 저장된 선택을 복원한다. */
+/**
+ * 앱 시작 시 1회 호출 — 저장된 선택을 복원한다.
+ * 데이터 초기화/백업 복원 후에도 호출되므로, 저장값이 없으면 기본값('system')으로
+ * 되돌린다(메모리에 남은 이전 선택이 살아남지 않게).
+ */
 export async function loadThemePreference(): Promise<void> {
   try {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
-    if (raw === 'system' || raw === 'light' || raw === 'dark') {
-      _pref = raw;
-      applyColorScheme(_pref);
-      emit();
-    }
+    _pref = raw === 'light' || raw === 'dark' ? raw : 'system';
+    applyColorScheme(_pref);
+    emit();
   } catch {
-    // 읽기 실패는 기본값('system') 유지.
+    // 읽기 실패는 현재 값 유지.
   }
 }
 
