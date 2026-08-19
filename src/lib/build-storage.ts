@@ -118,3 +118,12 @@ export async function removeBuild(id: string): Promise<void> {
   emit();
   await writeAll(cache);
 }
+
+/**
+ * 디스크에서 목록을 다시 읽어 캐시를 교체한다(백업 복원·데이터 초기화 후).
+ * readAll이 끝에 emit하므로 구독 중인 목록 화면이 자동으로 갱신된다.
+ */
+export async function reloadBuilds(): Promise<void> {
+  cache = null;
+  await readAll();
+}
