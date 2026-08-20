@@ -43,7 +43,12 @@ export function useImagePrewarm(): { showSetup: boolean; progress: number } {
         ...CHAMPION_TAGS.map((tag) => championClassIconUrl(tag)).filter(
           (u): u is string => u != null,
         ),
-        ...augments.map((a) => augmentImageUrl(a.iconPath, 'large')),
+        // 칼바람 풀에 있는 것만. modes 가 빈 증강(미출시·제거)과 클래식 전용은 앱의 어느
+        // 화면에도 뜨지 않는데 첫 설치 진행률을 막고 서 있다. 저장된 빌드가 참조하는
+        // 증강은 모두 칼바람 풀에서 뽑힌 것이라 여기 포함된다.
+        ...augments
+          .filter((a) => a.modes?.includes('aram'))
+          .map((a) => augmentImageUrl(a.iconPath, 'large')),
         ...arenaAugments.map((a) => augmentImageUrl(a.iconPath, 'large')),
         // 재련(special) 아이콘은 CDragon에 _large 자산이 없어(404) AugmentImage가
         // base(컬러 원본)→small로 폴백한다. large만 프리웜하면 404라 캐시에 남지 않아

@@ -322,7 +322,7 @@
   {
     "id": "clown-college",
     "name": "광대 대학",
-    "description": "속임수 소환사 주문을 얻습니다.\n\n속임수: 근처로 순간이동해 투명 상태가 됩니다. 투명 상태에서 다음 기본 공격 시 물리 피해를 추가로 입힙니다.\n\n사망 시, 폭발하는 상자를 생성하여 엄청난 마법 피해를 입히고 주변 적을 공포에 빠뜨립니다.",
+    "description": "속임수 소환사 주문을 얻습니다. 순간이동해 투명 상태가 되고 다음 기본 공격이 추가 물리 피해를 입힙니다. 사망 시 폭발 상자를 남겨 큰 마법 피해와 공포를 겁니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/clowncollege_small.png",
     "maxLevel": 1
@@ -682,7 +682,7 @@
   {
     "id": "gamba-anvil",
     "name": "감바 모루",
-    "description": "+%i:goldCoins%1000골드를 획득하고 모든 모루의 가격이 감소합니다.\n\n프리즘 모루: -%i:goldCoins%1500골드\n전설급 모루: -%i:goldCoins%750골드\n능력치 모루: -%i:goldCoins%250골드\n\n모루로 획득한 아이템을 되팔 때 받는 비용이 -%i:goldCoins%500골드 감소합니다.",
+    "description": "1000골드를 획득하고 모루 가격이 내려갑니다. 프리즘 -1500골드, 전설급 -750골드, 능력치 -250골드. 모루로 얻은 아이템의 재판매가는 500골드 감소합니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/thiefsgloves_small.png",
     "maxLevel": 1
@@ -1090,7 +1090,7 @@
   {
     "id": "blood-brother",
     "name": "피를 나눈 형제",
-    "description": "다리우스의 기본 지속 효과 과다출혈을 얻습니다.\n\n기본 공격과 공격 스킬이 대상에게 과다출혈을 일으켜 5초에 걸쳐 의 물리 피해를 입힙니다. 이 효과는 최대 5번 중첩됩니다.\n\n대상에게 과다출혈이 5회 중첩되면 드레이븐의 공격력이 증가합니다.",
+    "description": "다리우스의 과다출혈을 얻습니다. 기본 공격과 공격 스킬이 5초에 걸쳐 물리 피해를 입히며 최대 5회 중첩됩니다. 5중첩 시 드레이븐의 공격력이 증가합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bloodbrother_small.png",
     "maxLevel": 1

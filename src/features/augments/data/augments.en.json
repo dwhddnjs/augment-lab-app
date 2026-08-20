@@ -4,1553 +4,3159 @@
     "name": "ADAPt",
     "description": "Convert Bonus Attack Damage to Ability Power. Gain 15% Ability Power.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ADAPt_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ADAPt_small.png",
+    "augmentNameId": "ARAM_ADAPt",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "adamant",
     "name": "Adamant",
-    "description": "Immobilizing or grounding an enemy champion grants 10 bonus armor and bonus magic resistance for 10 seconds, stacking up to 10 times for a total of 100 bonus resistances, and refreshing on subsequent triggers (5 second cooldown per cast instance).\n\nThis augment is currently disabled.",
+    "description": "Immobilizing or grounding an enemy grants 10 armor and MR for 10s, stacking 10 times (100 total). (5s per cast)",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Adamant_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Adamant_small.png",
+    "augmentNameId": "Adamant",
+    "modes": [
+      "classic"
+    ]
   },
   {
     "id": "blunt-force",
     "name": "Blunt Force",
     "description": "Gain 20% Attack Damage.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BluntForce_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BluntForce_small.png",
+    "augmentNameId": "ARAM_BluntForce",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "deft",
     "name": "Deft",
     "description": "Gain 60% Attack Speed.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Deft_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Deft_small.png",
+    "augmentNameId": "ARAM_Deft",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "dive-bomber",
     "name": "Dive Bomber",
     "description": "Your team's first death each round explodes, dealing massive damage true damage.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DiveBomber_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DiveBomber_small.png",
+    "augmentNameId": "ARAM_DiveBomber",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "don-t-blink",
     "name": "Don't Blink",
     "description": "Gain 1% bonus damage per 10 Move Speed you have more than the target.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DontBlink_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DontBlink_small.png",
+    "augmentNameId": "ARAM_DontBlink",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "erosion",
     "name": "Erosion",
     "description": "Damaging enemies adds a stacking Armor and Magic Resist shred for 4s.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Erosion_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Erosion_small.png",
+    "augmentNameId": "ARAM_Erosion",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "escape-plan",
     "name": "Escape Plan",
-    "description": "Upon dropping below 35% of your maximum health, gain a shield for 65% of your maximum health, 150% bonus movement speed, and reduced size (75 second cooldown). These effects all decay over 5.5 seconds.",
+    "description": "Dropping below 35% max health grants a 65% max health shield, 150% move speed, and reduced size, all decaying over 5.5s. (75s)",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EscapePlan_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EscapePlan_small.png",
+    "augmentNameId": "EscapePlan",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "first-aid-kit",
     "name": "First-Aid Kit",
     "description": "Gain 20% Heal and Shield Power.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FirstAidKit_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FirstAidKit_small.png",
+    "augmentNameId": "ARAM_FirstAidKit",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "flashbang",
     "name": "Flashbang",
-    "description": "Using Flash creates an explosion around the blink location that deals 70 to 240 (+ 70% AD) (+ 60% AP) magic damage to nearby enemies and slows them by 35% for 1.25 seconds. Additionally, the cooldown of your Flash resets upon your death.\n\nIf Flash is not equipped, you will be prompted to replace one of your summoner spells with Flash.",
+    "description": "Flash explodes on arrival for 70-240 (+70% AD) (+60% AP) magic damage and a 35% slow for 1.25s. Your Flash also resets on death.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Flashbang_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Flashbang_small.png",
+    "augmentNameId": "ARAM_Flashbang",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "goredrink",
     "name": "Goredrink",
     "description": "Gain 15% Omnivamp.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/GoreDrink_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/GoreDrink_small.png",
+    "augmentNameId": "ARAM_Goredrink",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "heavy-hitter",
     "name": "Heavy Hitter",
     "description": "Your Attacks deal additional physical damage equal to 3.5% of your max Health.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/HeavyHitter_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/HeavyHitter_small.png",
+    "augmentNameId": "ARAM_HeavyHitter",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "homeguard",
     "name": "Homeguard",
     "description": "Gain 100% Move Speed, disabled for 6 seconds after taking damage.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Homeguard_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Homeguard_small.png",
+    "augmentNameId": "ARAM_Homeguard",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "ice-cold",
     "name": "Ice Cold",
     "description": "Your Slowing effects reduce Move Speed by an extra 75.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/IceCold_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/IceCold_small.png",
+    "augmentNameId": "ARAM_IceCold",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "infernal-soul",
     "name": "Infernal Soul",
     "description": "You gain the Infernal Dragon Soul, dealing bonus damage when you hit enemies with Abilities or Attacks.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/InfernalSoul_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/InfernalSoul_small.png",
+    "augmentNameId": "ARAM_InfernalSoul",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "leg-day",
     "name": "Leg Day",
     "description": "Gain 50 Movement Speed and 40% Slow Resist.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LegDay_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LegDay_small.png",
+    "augmentNameId": "ARAM_LegDay",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "light-em-up",
     "name": "Light 'em Up!",
     "description": "Every 4th Attack deals additional magic damage On-Hit.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightEmUp_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightEmUp_small.png",
+    "augmentNameId": "ARAM_LightemUp",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "mountain-soul",
     "name": "Mountain Soul",
     "description": "You gain the Mountain Soul, gaining a Shield after being out of combat for a short time.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MountainSoul_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MountainSoul_small.png",
+    "augmentNameId": "ARAM_MountainSoul",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "mighty-shield",
     "name": "Mighty Shield",
     "description": "Gain 40 to 100 adaptive force for 3 seconds upon gaining a shield (5 second cooldown).",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/MightyShield_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/MightyShield_small.png",
+    "augmentNameId": "MightyShield",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "mind-to-matter",
     "name": "Mind to Matter",
     "description": "Increase max Health by half of your Mana.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MindToMatter_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MindToMatter_small.png",
+    "augmentNameId": "ARAM_MindtoMatter",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "ocean-soul",
     "name": "Ocean Soul",
     "description": "Gain the Ocean Soul, granting high Health and Mana regen after damaging enemies.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OceanSoul_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OceanSoul_small.png",
+    "augmentNameId": "ARAM_OceanSoul",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "poltergeist",
     "name": "Poltergeist",
-    "description": "Replace a summoner spell with Poltergeist.\n\nPoltergeist:",
+    "description": "Replace a summoner spell with Poltergeist. Poltergeist:",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Poltergeist_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Poltergeist_small.png",
+    "augmentNameId": "Poltergeist",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "scoped-weapons",
     "name": "Scoped Weapons",
-    "description": "Gain 75/50 bonus attack range.",
+    "description": "Gain 50 bonus attack range (75 for melee champions).",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopedWeapons_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopedWeapons_small.png",
+    "augmentNameId": "ARAM_ScopedWeapons",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "shadow-runner",
     "name": "Shadow Runner",
     "description": "After using a dash, leap, blink, or teleport Ability or exiting Stealth, gain 300 Move Speed for 2 seconds.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ShadowRunner_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ShadowRunner_small.png",
+    "augmentNameId": "ARAM_ShadowRunner",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "sonic-boom",
     "name": "Sonic Boom",
     "description": "Buffing, Healing, or Shielding your ally deals damage and Slows enemies surrounding them.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SonicBoom_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SonicBoom_small.png",
+    "augmentNameId": "ARAM_SonicBoom",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "spin-to-win",
     "name": "Spin To Win",
-    "description": "Your spin Abilities gain 30 Ability Haste and deal 30% more damage!",
+    "description": "Your spin abilities deal 30% more damage and gain 30 ability haste.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SpinToWin_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SpinToWin_small.png",
+    "augmentNameId": "ARAM_SpinToWin",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "swift-and-safe",
     "name": "Swift and Safe",
-    "description": "After dashing or blinking, gain a shield that lasts for 2 seconds and absorbs 65 to 290 (+ 65% AD) (+ 26% AP) damage (5 second cooldown).",
+    "description": "After dashing or blinking, gain a shield for 2s absorbing 65-290 (+65% AD) (+26% AP) damage. (5s cooldown)",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SwiftandSafe_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SwiftandSafe_small.png",
+    "augmentNameId": "SwiftAndSafe",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "tank-it-or-leave-it",
     "name": "Tank It Or Leave It",
-    "description": "You can Critically Defend using your Crit Chance (max 50% chance), giving you a chance to reduce damage.\n\nGain 25% Crit Chance.",
+    "description": "You can Critically Defend using your Crit Chance (max 50% chance), giving you a chance to reduce damage. Gain 25% Crit Chance.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TankItOrLeaveIt_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TankItOrLeaveIt_small.png",
+    "augmentNameId": "ARAM_TankItOrLeaveIt",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "transmute-gold",
     "name": "Transmute: Gold",
     "description": "Gain a random Gold Augment.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TransmuteGold_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TransmuteGold_small.png",
+    "augmentNameId": "ARAM_TransmuteGold",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "typhoon",
     "name": "Typhoon",
     "description": "Your Attacks fire a bolt at an additional target dealing reduced damage and applying On-Hit effects.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Typhoon_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Typhoon_small.png",
+    "augmentNameId": "ARAM_Typhoon",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "ultimate-unstoppable",
     "name": "Ultimate Unstoppable",
     "description": "After using your Ultimate, you become immune to crowd control for 3 seconds. (8 second Cooldown).",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/UltimateUnstoppable_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/UltimateUnstoppable_small.png",
+    "augmentNameId": "ARAM_UltimateUnstoppable",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "upgrade-collector",
     "name": "Upgrade Collector",
-    "description": "Upgrades The Collector, empowering Death to have its execution threshold increased by 0.5% each time you kill an enemy champion, capped at a threshold of 12.5% of the target's maximum health, and Taxes to generate a further 25 (total 50) from kills. Additionally, gain 250.",
+    "description": "Upgrades The Collector: each kill raises its execute threshold 0.5% (max 12.5% health) and grants 25 more gold. Gain 250 gold.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeCollector_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeCollector_small.png",
+    "augmentNameId": "ARAM_Upgrade_Collector",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "upgrade-immolate",
     "name": "Upgrade Immolate",
-    "description": "Upgrades Bami's Cinder, Hollow Radiance, Sunfire Aegis, and Void Immolation, empowering Immolate to additionally grant you 12 per tick for each enemy champion afflicted by its effect. Additionally, gain 250.",
+    "description": "Upgrades all Immolate items: Immolate grants 12 per tick for each champion it burns. Gain 250 gold.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeImmolate_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeImmolate_small.png",
+    "augmentNameId": "ARAM_Upgrade_Immolate",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "upgrade-zhonya-s",
     "name": "Upgrade Zhonya's",
-    "description": "Upgrades Seeker's Armguard, Wooglet's Witchcap, and Zhonya's Hourglass, empowering Stasis to allow you to move during its active effect, during which time you also gain 50% bonus movement speed. Additionally, the cooldown of Zhonya's Hourglass Stasis is reduced to 45 seconds.",
+    "description": "Upgrades all Stasis items: move during Stasis with 50% bonus move speed, and Zhonya's drops to a 45s cooldown. Gain 250 gold.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeZH_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeZH_small.png",
+    "augmentNameId": "ARAM_Upgrade_ZH",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "veil-of-warding",
     "name": "Veil of Warding",
-    "description": "Grants a spell shield that blocks the next hostile ability (30 second cooldown, timer does not restart from champion damage taken).",
+    "description": "Grants a spell shield blocking the next hostile ability. (30s cooldown; champion damage does not restart the timer)",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Poltergeist_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Poltergeist_small.png",
+    "augmentNameId": "VeilOfWarding",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "witchful-thinking",
     "name": "Witchful Thinking",
     "description": "Gain 60 Ability Power.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WitchfulThinking_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WitchfulThinking_small.png",
+    "augmentNameId": "ARAM_WitchfulThinking",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "escapade",
     "name": "EscAPADe",
     "description": "Convert Ability Power to Bonus Attack Damage. Gain 15% Attack Damage.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Escapade_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Escapade_small.png",
+    "augmentNameId": "ARAM_escAPADe",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "all-for-you",
     "name": "All For You",
-    "description": "Your Heals and Shields are stronger when used on an ally.",
+    "description": "Your heals and shields on allied champions are 30% more effective.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/AllForYou_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/AllForYou_small.png",
+    "augmentNameId": "ARAM_AllForYou",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "apex-inventor",
     "name": "Apex Inventor",
-    "description": "Gain 100 Item Haste (equivalent to 50% Item CDR).\n\nItem Haste reduces the cooldown of all Item Abilities.",
+    "description": "Gain 100 Item Haste (equivalent to 50% Item CDR). Item Haste reduces the cooldown of all Item Abilities.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ApexInventor_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ApexInventor_small.png",
+    "augmentNameId": "ARAM_ApexInventor",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "big-brain",
     "name": "Big Brain",
     "description": "Gain a shield that absorbs damage equal to 300% of your Ability Power, replenished on respawn and every 70 seconds.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BigBrain_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BigBrain_small.png",
+    "augmentNameId": "ARAM_BigBrain",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "bread-and-butter",
     "name": "Bread And Butter",
-    "description": "Your gains 100 Ability Haste.",
+    "description": "Gain 100 ability haste on your Q.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BreadAndButter_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BreadAndButter_small.png",
+    "augmentNameId": "ARAM_BreadAndButter",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "bread-and-cheese",
     "name": "Bread And Cheese",
-    "description": "Your gains 100 Ability Haste.",
+    "description": "Gain 100 ability haste on your E.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BreadAndCheese_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BreadAndCheese_small.png",
+    "augmentNameId": "ARAM_BreadAndCheese",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "bread-and-jam",
     "name": "Bread And Jam",
-    "description": "Your gains 100 Ability Haste.",
+    "description": "Gain 100 ability haste on your W.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BreadAndJam_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BreadAndJam_small.png",
+    "augmentNameId": "ARAM_BreadAndJam",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "celestial-body",
     "name": "Celestial Body",
     "description": "Gain 1500 Health, but you deal 10% less damage.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CelestialBody_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CelestialBody_small.png",
+    "augmentNameId": "ARAM_CelestialBody",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "critical-healing",
     "name": "Critical Healing",
-    "description": "Your Heals and Shields can Critically Strike for an addtional.\n\nGain 25% Crit Chance.",
+    "description": "Your heals and shields have a chance equal to your crit chance to be 40% stronger. (5s per cast) Gain 25% crit chance.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CriticalHealing_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CriticalHealing_small.png",
+    "augmentNameId": "ARAM_CriticalHealing",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "critical-rhythm",
     "name": "Critical Rhythm",
-    "description": "Your critical strikes grant you 6% bonus attack speed for 6 seconds, stacking up to 10 times for a total of 60%. Additionally, gain 25% critical strike chance.",
+    "description": "Critical strikes grant 6% attack speed for 6s, stacking 10 times (60% total). Also gain 25% critical strike chance.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CriticalRhythm_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CriticalRhythm_small.png",
+    "augmentNameId": "CriticalRhythm",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "dawnbringer-s-resolve",
     "name": "Dawnbringer's Resolve",
     "description": "Upon dropping below 50% Health, heal for 30% of your max Health over 3 seconds. (45 second Cooldown).",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DawnbringersResolve_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DawnbringersResolve_small.png",
+    "augmentNameId": "ARAM_DawnbringersResolve",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "divine-intervention",
     "name": "Divine Intervention",
-    "description": "Shortly after combat starts, call a protective star. Upon its landing, you and nearby allies become Invulnerable for a few seconds.\n\nThen Autocast this every 25 seconds.",
+    "description": "Shortly after combat starts a star descends over 2.5s. On landing, you and allies within 400 become invulnerable for 2.5s. (35s)",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlowActingPainkillers_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlowActingPainkillers_small.png",
+    "augmentNameId": "ARAM_DivineIntervention",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "ethereal-weapon",
     "name": "Ethereal Weapon",
     "description": "Your Abilities apply On-Hit effects.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/EtherealWeapon_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/EtherealWeapon_small.png",
+    "augmentNameId": "ARAM_EtherealWeapon",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "firebrand",
     "name": "Firebrand",
     "description": "Your Attacks apply an infinitely stacking Burn On-Hit, dealing damage over time.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Firebrand_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Firebrand_small.png",
+    "augmentNameId": "ARAM_Firebrand",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "flash-2",
     "name": "Flash 2",
     "description": "Replace a summoner spell with Flash. Additionally, gain 70 summoner spell haste.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Flash2_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Flash2_small.png",
+    "augmentNameId": "Flash2",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "flashy",
     "name": "Flashy",
     "description": "Your Flash has 1 Ammo and a 2 second Cooldown.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Flashy_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Flashy_small.png",
+    "augmentNameId": "ARAM_Flashy",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "from-beginning-to-end",
     "name": "From Beginning to End",
     "description": "Gain the First Strike and Dark Harvest Keystone Runes.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FromBeginningToEnd_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FromBeginningToEnd_small.png",
+    "augmentNameId": "ARAM_FromBeginningToEnd",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "get-excited",
     "name": "Get Excited",
     "description": "Scoring a champion takedown grants you 100% bonus movement speed and 15% total attack speed for 4 seconds.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GetExcited_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GetExcited_small.png",
+    "augmentNameId": "ARAM_GetExcited",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "impassable",
     "name": "Impassable",
     "description": "Gain the Aftershock and Glacial Augment Keystone Runes.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Impassable_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Impassable_small.png",
+    "augmentNameId": "ARAM_Impassable",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "it-s-critical",
     "name": "It's Critical",
     "description": "Gain 50% Crit chance.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ItsCritical_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ItsCritical_small.png",
+    "augmentNameId": "ARAM_ItsCritical",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "it-s-killing-time",
     "name": "It's Killing Time",
-    "description": "After casting your Ultimate, mark all enemy champions for death.\n\nWhile marked, store damage dealt to them, and detonate the damage when the mark ends.",
+    "description": "After your ultimate, mark all champions for death. Damage dealt to marked targets is stored and detonates when the mark ends.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ItsKillingTime_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ItsKillingTime_small.png",
+    "augmentNameId": "ARAM_ItsKillingTime",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "magic-missile",
     "name": "Magic Missile",
     "description": "Dealing damage with an Ability fires 3 magic missiles, each dealing percent max Health true damage.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MagicMissile_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MagicMissile_small.png",
+    "augmentNameId": "ARAM_MagicMissile",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "marksmage",
     "name": "Marksmage",
     "description": "Your Attacks deal additional physical damage equal to 75% Ability Power.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Marksmage_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Marksmage_small.png",
+    "augmentNameId": "ARAM_Marksmage",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "minionmancer",
     "name": "Minionmancer",
     "description": "Your summons gain 40% increased size, health, and damage.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Minionmancer_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Minionmancer_small.png",
+    "augmentNameId": "ARAM_Minionmancer",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "nightstalking",
     "name": "Nightstalking",
-    "description": "Scoring a takedown against an enemy champion within 3 seconds of damaging them renders you invisible for 1.5 seconds. Attacking or casting abilites ends the stealth immediately.",
+    "description": "Taking down a champion within 3s of damaging them turns you invisible for 1.5s. Attacking or casting ends it immediately.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Nightstalking_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Nightstalking_small.png",
+    "augmentNameId": "Nightstalking",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "ok-boomerang",
     "name": "OK Boomerang",
     "description": "Autocast throw a boomerang at a nearby enemy every 7s.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OKBoomerang_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OKBoomerang_small.png",
+    "augmentNameId": "ARAM_OkBoomerang",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "outlaw-s-grit",
     "name": "Outlaw's Grit",
     "description": "After using a Dash, Blink, or Teleport Ability you gain Armor and Magic Resist.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OutlawsGrit_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OutlawsGrit_small.png",
+    "augmentNameId": "ARAM_OutlawsGrit",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "overflow",
     "name": "Overflow",
-    "description": "Your Mana costs are doubled.\n\nYour Ability Heals, Shields, and damage are increased based on your max Mana.",
+    "description": "Your abilities' mana costs are doubled, but you gain 10% (+0.5% per 100 max mana) increased damage, healing, and shielding.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Overflow_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Overflow_small.png",
+    "augmentNameId": "ARAM_Overflow",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "perseverance",
     "name": "Perseverance",
     "description": "Gain hugely increased Health Regen, further increased at low Health.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Perseverance_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Perseverance_small.png",
+    "augmentNameId": "ARAM_Perseverance",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "rabble-rousing",
     "name": "Rejuvenation",
-    "description": "Using an Ability restores Health.",
+    "description": "Upgrades an ability: casting it heals you 30-100 (+25% bonus AD) (+15% AP), increased up to 50% by the ability's cooldown.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/RabbleRousing_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/RabbleRousing_small.png",
+    "augmentNameId": "ARAM_RabbleRousing",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "recursion",
     "name": "Recursion",
     "description": "Gain 60 Ability Haste.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Recursion_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Recursion_small.png",
+    "augmentNameId": "ARAM_Recursion",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "scopier-weapons",
     "name": "Scopier Weapons",
-    "description": "Gain 200/100 bonus attack range.",
+    "description": "Gain 100 bonus attack range (200 for melee champions).",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopierWeapons_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopierWeapons_small.png",
+    "augmentNameId": "ARAM_ScopierWeapons",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "searing-dawn",
     "name": "Searing Dawn",
     "description": "Your Abilities mark enemies, causing them to take additional magic damage from your ally's next Attack or Ability.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SearingDawn_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SearingDawn_small.png",
+    "augmentNameId": "ARAM_SearingDawn",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "shrink-ray",
     "name": "Shrink Ray",
     "description": "Your Attacks reduce the target's damage by 15% for 3 seconds and shrink them On-Hit.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ShrinkRay_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ShrinkRay_small.png",
+    "augmentNameId": "ARAM_ShrinkRay",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "skilled-sniper",
     "name": "Skilled Sniper",
     "description": "Hitting an enemy with a non-Ultimate Ability at far range drastically reduces its Cooldown.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SkilledSniper_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SkilledSniper_small.png",
+    "augmentNameId": "ARAM_SkilledSniper",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "snowball-upgrade",
     "name": "Snowball Upgrade",
-    "description": "Your Mark is empowered to hail a snowstorm at the location where the target was hit for 2 seconds, granting sight of the area and dealing200 (+ 200% bonus AD) (+ 120% AP) magic damageto enemies within over the duration, as well as slowing them by 50% (+ 6% per 100 AP). Additionally, your Mark cooldown is reduced equivalent to 50 ability haste.\n\nIf Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.\n\nThis augment is currently disabled.",
+    "description": "Mark hails a snowstorm for 2s dealing 200 (+200% bonus AD) (+120% AP) magic damage and slowing 50%. Mark gains 50 haste.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SnowballUpgrade_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SnowballUpgrade_small.png",
+    "augmentNameId": "SnowballUpgrade",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "soul-siphon",
     "name": "Soul Siphon",
-    "description": "Heal for 12% of damage done by Critical Strikes.\n\nGain 25% Crit chance.",
+    "description": "Heal for 12% of damage done by Critical Strikes. Gain 25% Crit chance.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SoulSiphon_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SoulSiphon_small.png",
+    "augmentNameId": "ARAM_SoulSiphon",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "spiritual-purification",
     "name": "Spiritual Purification",
-    "description": "Scoring a champion takedown causes the area around the slain champion to explode in a 500 unit radius, dealing adaptive damage to enemies within equal to 15% of their current health and leaving behind a zone for 1.5 seconds that slows enemies within by 60%.",
+    "description": "Takedowns explode a 500 radius for adaptive damage equal to 15% of enemies' current health, leaving a 60% slow zone for 1.5s.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpiritualPurification_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpiritualPurification_small.png",
+    "augmentNameId": "ARAM_SpiritualPurification",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "tank-engine",
     "name": "Tank Engine",
     "description": "Gain increased size and percent bonus Health per takedown.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Tank_Engine_Small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Tank_Engine_Small.png",
+    "augmentNameId": "ARAM_TankEngine",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "thread-the-needle",
     "name": "Thread the Needle",
     "description": "Gain 18% Armor Penetration and Magic Penetration.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ThreadTheNeedle_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ThreadTheNeedle_small.png",
+    "augmentNameId": "ARAM_ThreadtheNeedle",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "transmute-prismatic",
     "name": "Transmute: Prismatic",
     "description": "Gain a random Prismatic Augment.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TransmutePrismatic_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TransmutePrismatic_small.png",
+    "augmentNameId": "ARAM_TransmutePrismatic",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "upgrade-infinity-edge",
     "name": "Upgrade Infinity Edge",
-    "description": "Upgrades Infinity Edge, empowering it to gain Sword of the Divine Excoriate. Additionally, gain 500 and 25% critical strike chance.\n\nExcoriate: Gain a random amount of bonus critical strike damage that scales up to 50% of your critical strike chance, with the value of this amount changing every 0.25 seconds.",
+    "description": "Upgrades Infinity Edge with Excoriate. Gain 25% crit chance and 500 gold. Excoriate: bonus crit damage rerolled every 0.25s.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeIE_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeIE_small.png",
+    "augmentNameId": "ARAM_Upgrade_IE",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "upgrade-sheen",
     "name": "Upgrade Sheen",
-    "description": "Upgrades all Spellblade items, empowering the passive effect to deal additional bonus physical damage equal to 4% of the target's maximum health and heal you for 3.5% of your maximum health. Additionally, gain 250.",
+    "description": "Upgrades all Spellblade items: the proc deals 4% target max health bonus physical damage and heals you 3.5%. Gain 250 gold.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeSheen_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeSheen_small.png",
+    "augmentNameId": "ARAM_Upgrade_Sheen",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "vampirism",
     "name": "Vampirism",
-    "description": "You can no longer be healed by allies and your health regeneration is set to 0. Gain 25% omnivamp.\n\nThis augment is currently disabled.",
+    "description": "You can no longer be healed by allies and your health regeneration is set to 0. Gain 25% omnivamp.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Vampired_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Vampired_small.png",
+    "augmentNameId": "Vampirism",
+    "modes": [
+      "classic"
+    ]
   },
   {
     "id": "vulnerability",
     "name": "Vulnerability",
-    "description": "Your Item and damage over time effects can Critically Strike.\n\nGain 25% Crit chance.",
+    "description": "Your Item and damage over time effects can Critically Strike. Gain 25% Crit chance.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Vulnerability_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Vulnerability_small.png",
+    "augmentNameId": "ARAM_Vulnerability",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "with-haste",
     "name": "With Haste",
     "description": "Gain Move Speed equal to 70% of your Ability Haste.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WithHaste_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WithHaste_small.png",
+    "augmentNameId": "ARAM_WithHaste",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "back-to-basics",
     "name": "Back to Basics",
-    "description": "Gain increased Ability Damage, Healing, Shielding, and Ability Haste, but you cannot use your Ultimate Ability.",
+    "description": "Abilities deal 35% more damage and you gain 70 ability haste and 35% heal and shield power, but your ultimate is sealed.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BackToBasics_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BackToBasics_small.png",
+    "augmentNameId": "ARAM_BacktoBasics",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "biggest-snowball-ever",
     "name": "Biggest Snowball Ever",
-    "description": "Upgrades your Mark into a massive snowball, empowering it with an increased size radius and the ability to pass through non-champions. The snowball additionally explodes upon impact of the target hit to deal 200 to 350 (+ 100% bonus AD) (+ 60% AP) magic damage to all nearby enemies, knock them up for 0.75 seconds, and slow them by 20% for 2 seconds. Additionally, your Mark cooldown is reduced equivalent to 100 ability haste.\n\nIf Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark. Non-champions hit by the snowball are stunned for 1.25 seconds.",
+    "description": "Mark becomes a giant snowball piercing minions and exploding for 200-350, knocking up 0.75s and slowing 20%. Mark gains 100 haste.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BiggestSnowballEver_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BiggestSnowballEver_small.png",
+    "augmentNameId": "BiggestSnowballEver",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "blade-waltz",
     "name": "Blade Waltz",
-    "description": "Gain the Blade Waltz Summoner Spell.\n\nBlade Waltz makes you untargetable while you dash at and damage enemies 6 times.",
+    "description": "Gain the Blade Waltz Summoner Spell. Blade Waltz makes you untargetable while you dash at and damage enemies 6 times.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BladeWaltz_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BladeWaltz_small.png",
+    "augmentNameId": "ARAM_BladeWaltz",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "can-t-touch-this",
     "name": "Can't Touch This",
-    "description": "Null",
+    "description": "Casting your ultimate grants invulnerability for 2 seconds. (8s cooldown)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CantTouchThis_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CantTouchThis_small.png",
+    "augmentNameId": "ARAM_CantTouchThis",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "circle-of-death",
     "name": "Circle of Death",
-    "description": "Healing and Health Regen you do deals a portion of the value as magic damage to the nearest enemy champion.",
+    "description": "Healing and health regeneration deal 70% of that value as magic damage to the nearest enemy champion within 1000 units.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CircleOfDeath_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CircleOfDeath_small.png",
+    "augmentNameId": "ARAM_CircleofDeath",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "clown-college",
     "name": "Clown College",
-    "description": "Gain Deceive Summoner Spell.\n\nDeceive: You teleport and become Invisible. Your next Attack while Invisible deals an additional physical damage.\n\nWhen you die, spawn an exploding box that deals a large amount of magic damage and Fear nearby enemies.",
+    "description": "Gain Deceive: blink and turn invisible, your next attack dealing bonus damage. On death, leave a box that explodes and fears.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ClownCollege_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ClownCollege_small.png",
+    "augmentNameId": "ARAM_ClownCollege",
+    "modes": [
+      "classic"
+    ]
   },
   {
     "id": "courage-of-the-colossus",
     "name": "Courage of the Colossus",
-    "description": "Gain Shield after Immobilizing or Grounding an enemy champion.",
+    "description": "Immobilizing or grounding a champion grants a 3s shield absorbing 150-450 (+4% max health). Shields stack. (5s per cast)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CourageOfTheColossus_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CourageOfTheColossus_small.png",
+    "augmentNameId": "ARAM_CourageoftheColossus",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "cruelty",
     "name": "Cruelty",
-    "description": "Immobilizing or grounding an enemy champion summons a comet above them that lands at their current location after 1 second, dealing 50 to 150 (+ 40% AP) (+ 4% of your maximum health) magic damage to enemies within the area (6 second cooldown per target per cast instance).",
+    "description": "Immobilizing or grounding a champion drops a comet on them after 1s for 50-150 (+4% max health) magic damage. (6s per target)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Cruelty_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Cruelty_small.png",
+    "augmentNameId": "ARAM_Cruelty",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "dashing",
     "name": "Dashing",
     "description": "Your dash, leap, blink, or teleport Abilities gain 175 Ability Haste.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Dashing_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Dashing_small.png",
+    "augmentNameId": "ARAM_Dashing",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "draw-your-sword",
     "name": "Draw Your Sword",
-    "description": "You are now melee.\n\nGain Attack Damage, Health, Attack Speed, Lifesteal, and Move Speed based on how much Attack Range you lost.",
+    "description": "You are now melee. Gain Attack Damage, Health, Attack Speed, Lifesteal, and Move Speed based on how much Attack Range you lost.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DrawYourSword_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DrawYourSword_small.png",
+    "augmentNameId": "ARAM_DrawYourSword",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "dual-wield",
     "name": "Dual Wield",
-    "description": "When you Attack, fire a bolt that deals 40% damage and applies your On-Hit effects at 40% effectiveness.\n\nGain 10% total Attack Speed.",
+    "description": "Attacks fire a bolt dealing 40% damage and applying on-hit effects at 40%. Gain 10% total attack speed.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DualWield_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DualWield_small.png",
+    "augmentNameId": "ARAM_DualWield",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "empyrean-promise",
     "name": "Empyrean Promise",
-    "description": "Replace a summoner spell with Empyrean Promise Vigilance active. Additionally, gain 15% heal and shield power.\n\nActive - Vigilance: After a 0.25-second delay, dash to the current location of the target allied champion and gain a 100 to 250 (+ 100% AP) (+ 10% bonus health) shield for 3 seconds. Upon arrival, grant the ally the same shield (20 second cooldown; 2000 range).",
+    "description": "Gain 15% heal and shield power and Empyrean Promise: dash to an ally, shielding both of you 100-250 for 3s. (20s, 2000 range)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EmpyreamPromise_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EmpyreamPromise_small.png",
+    "augmentNameId": "EmpyreanPromise",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "eureka",
     "name": "Eureka",
     "description": "Gain Ability Haste equal to 30% Ability Power.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Eureka_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Eureka_small.png",
+    "augmentNameId": "ARAM_Eureka",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "fan-the-hammer",
     "name": "Fan the Hammer",
     "description": "When you Attack, fire 5 bolts that each deal physical damage and applies your On-Hit.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FanTheHammer_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FanTheHammer_small.png",
+    "augmentNameId": "ARAM_FanTheHammer",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "fey-magic",
     "name": "Fey Magic",
-    "description": "Damaging with your Ultimate Polymorphs enemies for a few seconds.",
+    "description": "Damaging enemies with your ultimate polymorphs them for 2s, cutting 60 base move speed and disarming them. (15s per target)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FeyMagic_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FeyMagic_small.png",
+    "augmentNameId": "ARAM_FeyMagic",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "final-form",
     "name": "Final Form",
-    "description": "Casting your ultimate ability empowers you for 10 seconds, causing you to gain a shield for 50% of your maximum health, 20% omnivamp, and 30% bonus movement speed for the duration (20 second cooldown).",
+    "description": "Casting your ultimate grants a shield for 50% of your max health, 20% omnivamp, and 30% move speed for 10s. (20s cooldown)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/FinalForm_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/FinalForm_small.png",
+    "augmentNameId": "FinalForm",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "giant-slayer",
     "name": "Giant Slayer",
     "description": "Become tiny, gain Move Speed, and bonus damage to champions based on how much larger they are than you.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/GiantSlayer_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/GiantSlayer_small.png",
+    "augmentNameId": "ARAM_GiantSlayer",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "glass-cannon",
     "name": "Glass Cannon",
-    "description": "You gain a health threshold equal to 70% maximum health which cannot be By increases or decreases to maximum health nor By healing and health regeneration by any means. In return, you deal bonus true damage equal to 25%/15% of all of the damage you deal Damage calculated before modifiers.",
+    "description": "Max health locks to 70% and can't be raised or healed. In return, deal bonus true damage equal to 25% of damage dealt (melee 15%).",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GlassCannon_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GlassCannon_small.png",
+    "augmentNameId": "GlassCannon",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "goldrend",
     "name": "Goldrend",
-    "description": "Damaging basic attacks or abilities against enemy champions deal 50 to 150 (+ 40% bonus AD) (+ 20% AP) bonus magic damage, and grant you 30 and 25% bonus movement speed for 1.5 seconds (30 second cooldown per champion).",
+    "description": "Damaging a champion deals 50-150 bonus magic damage and grants 30 gold and 25% move speed for 1.5s. (30s per champion)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Goldrend_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Goldrend_small.png",
+    "augmentNameId": "Goldrend",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "goliath",
     "name": "Goliath",
     "description": "Become large, gaining 35% Health and 15% Adaptive Force.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Goliath_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Goliath_small.png",
+    "augmentNameId": "ARAM_Goliath",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "infernal-conduit",
     "name": "Infernal Conduit",
-    "description": "Your Abilities apply an infinitely stacking Burn, dealing magic damage over time.\n\nYour Burn effects reduce your basic Ability Cooldowns.",
+    "description": "Your abilities apply an infinitely stacking Burn over time. Your Burns reduce your basic ability cooldowns.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/InfernalConduit_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/InfernalConduit_small.png",
+    "augmentNameId": "ARAM_InfernalConduit",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "jeweled-gauntlet",
     "name": "Jeweled Gauntlet",
-    "description": "Your Abilities can Critically Strike.\n\nGain% Crit Chance.",
+    "description": "Your abilities can critically strike for 145% damage. Also gain 25% (+4.5% per 100 AP) critical strike chance.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/JeweledGauntlet_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/JeweledGauntlet_small.png",
+    "augmentNameId": "ARAM_JeweledGauntlet",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "king-me",
     "name": "King Me",
-    "description": "Upon entering the enemy team's gate or Catapult for the first time, either of which are located near their spawn, you become Kinged, causing you to gain one random Prismatic-tier augment and the first eligible Legendary item in your inventory to be upgraded with improved stats. The gold value of all Includes AH, AP, AD, AS, AR, MR, and HP on the item is increased by exactly 1000.\n\nKing Me prioritize upgrading the first Legendary item eligible for a upgrade based on its position in the inventory, detecting each slot until an eligible item is found.",
+    "description": "Entering the enemy gate or catapult crowns you: gain a random prismatic augment and 1000 gold of stats on your first legendary.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/KingMe_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/KingMe_small.png",
+    "augmentNameId": "KingMe",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "mad-scientist",
     "name": "Mad Scientist",
     "description": "Each Round you'll either grow large (Adaptive Force and Health) or tiny (Ability Haste and Move Speed).",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MadScientist_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MadScientist_small.png",
+    "augmentNameId": "ARAM_MadScientist",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "master-of-duality",
     "name": "Master of Duality",
     "description": "Your Attacks grant you Ability Power On-Hit and your Abilities grant you Attack Damage, until the end of the round.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MasterOfDuality_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MasterOfDuality_small.png",
+    "augmentNameId": "ARAM_MasterofDuality",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "mystic-punch",
     "name": "Mystic Punch",
     "description": "On-Hit reduce the cooldown of your abilities by 1.25 seconds.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MysticPunch_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MysticPunch_small.png",
+    "augmentNameId": "ARAM_MysticPunch",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "ominous-pact",
     "name": "Ominous Pact",
-    "description": "Gain 1 level now, and 1 bonus level every other round.\n\nYour level cap is removed.\n\nIf taken after round 4, gain 2 additional levels.",
+    "description": "Gain 1 level now and 1 more every other round. Your level cap is removed. Taken after round 4, gain 2 extra levels.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WisdomOfAges_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WisdomOfAges_small.png",
+    "augmentNameId": "OminousPact",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "omni-soul",
     "name": "Omni Soul",
     "description": "Gain 3 random Dragon Souls.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OmniSoul_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OmniSoul_small.png",
+    "augmentNameId": "ARAM_OmniSoul",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "protein-shake",
     "name": "Protein Shake",
     "description": "Gain 25% (+ 35% per 100 bonus armor) (+ 35% per 100 bonus magic resistance) heal and shield power.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ProteinShake_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ProteinShake_small.png",
+    "augmentNameId": "ARAM_ProteinShake",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "quantum-computing",
     "name": "Quantum Computing",
-    "description": "Periodically Autocast a massive slash around you, dealing physical damage.\n\nEnemies hit by the outer edge are Slowed, take additional damage, and heal you.",
+    "description": "With an enemy within 650, wind up 0.75s and slash a 650 radius for 200-350. Edge hits slow, deal extra damage, and heal you.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/QuantumComputing_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/QuantumComputing_small.png",
+    "augmentNameId": "ARAM_QuantumComputing",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "quest-steel-your-heart",
     "name": "Steel Your Heart",
-    "description": "Requirement: Possess Heartsteel with 400+ stacks.\n\nReward: Multiply your Heartsteel stacks by 3. Increase your Health Regeneration by 12.5% of your Heartsteel stacks.",
+    "description": "Requirement: Heartsteel with 400+ stacks. Reward: triple your Heartsteel stacks and gain health regen equal to 12.5% of them.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Quest_SteelYourHeart_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Quest_SteelYourHeart_small.png",
+    "augmentNameId": "ARAM_Quest_SteelYourHeart",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "quest-urf-s-champion",
     "name": "Urf's Champion",
-    "description": "Requirement: Score 10 takedowns.\n\nReward: Golden Spatula",
+    "description": "Requirement: Score 10 takedowns. Reward: Golden Spatula",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Quest_UrfsChampion_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Quest_UrfsChampion_small.png",
+    "augmentNameId": "ARAM_Quest_UrfsChampion",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "quest-wooglet-s-witchcap",
     "name": "Wooglet's Witchcap",
-    "description": "Immediate: Gain Needlessly Large Rod.\n\nRequirement: Possess Rabadon's Deathcap and Zhonya's Hourglass.\n\nReward: Gain Wooglet's Witchcap.",
+    "description": "Immediate: gain Needlessly Large Rod. Requirement: own Rabadon's Deathcap and Zhonya's Hourglass. Reward: Wooglet's Witchcap.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Quest_WoogletsWitchcap_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Quest_WoogletsWitchcap_small.png",
+    "augmentNameId": "ARAM_Quest_WoogletsWitchcap",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "scopiest-weapons",
     "name": "Scopiest Weapons",
-    "description": "Gain Attack Range.",
+    "description": "Gain 150 bonus attack range (250 for melee champions).",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopiestWeapons_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopiestWeapons_small.png",
+    "augmentNameId": "ARAM_ScopiestWeapons",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "symphony-of-war",
     "name": "Symphony of War",
     "description": "Gain the Lethal Tempo and Conqueror Keystone Runes.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SymphonyOfWar_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SymphonyOfWar_small.png",
+    "augmentNameId": "ARAM_SymphonyofWar",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "tap-dancer",
     "name": "Tap Dancer",
-    "description": "Your Attacks grant you 10 Move Speed On-Hit.\n\nGain Attack Speed equal to 10% of your Move Speed.",
+    "description": "Your Attacks grant you 10 Move Speed On-Hit. Gain Attack Speed equal to 10% of your Move Speed.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TapDancer_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TapDancer_small.png",
+    "augmentNameId": "ARAM_TapDancer",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "transmute-chaos",
     "name": "Transmute: Chaos",
     "description": "Gain 2 random Augments.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TransmuteChaos_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TransmuteChaos_small.png",
+    "augmentNameId": "ARAM_TransmuteChaos",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "ultimate-awakening",
     "name": "Ultimate Awakening",
-    "description": "Casting your ultimate ability resets the cooldowns of all your basic abilities and grants you 300 basic ability haste for 15 seconds (20 second cooldown). Additionally, gain 30 ultimate haste.",
+    "description": "Gain 30 ultimate haste. Your ultimate resets all basic abilities and grants 300 basic ability haste for 15s. (20s cooldown)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ZeroHour_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ZeroHour_small.png",
+    "augmentNameId": "UltimateAwakening",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "ultimate-revolution",
     "name": "Ultimate Revolution",
-    "description": "Once per round, refresh your Ultimate after casting it.",
+    "description": "Casting your ultimate resets its cooldown. (75s cooldown, resets on death)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/UltimateRevolution_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/UltimateRevolution_small.png",
+    "augmentNameId": "ARAM_UltimateRevolution",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "windspeaker-s-blessing",
     "name": "Windspeaker's Blessing",
-    "description": "Your or allies' heals and shields on yourself, or your heals and shields on allies, grant the target 30 to 60 bonus armor and bonus magic resistance for 3 seconds.",
+    "description": "Heals and shields you give allies, or receive yourself, grant the target 30-60 armor and magic resistance for 3s.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WindspeakersBlessing_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WindspeakersBlessing_small.png",
+    "augmentNameId": "ARAM_WindspeakersBlessing",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "earthwake",
     "name": "Earthwake",
     "description": "Your dash, blink, or teleport Abilities leave behind a trail that detonates after 1 second.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Earthwake_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Earthwake_small.png",
+    "augmentNameId": "ARAM_Earthwake",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "pandora-s-box",
     "name": "Pandora's Box",
     "description": "Transmute all of your augments into random Prismatic Augments.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Pandoras_Box_Small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Pandoras_Box_Small.png",
+    "augmentNameId": "ARAM_PandorasBox",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "slap-around",
     "name": "Slap Around",
     "description": "Each time you Immobilize or Ground an enemy, gain 10 Adaptive Force for the round.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlapAround_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlapAround_small.png",
+    "augmentNameId": "ARAM_SlapAround",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "hextech-soul",
     "name": "Hextech Soul",
     "description": "You gain the Infernal Dragon Soul, dealing bonus damage when you hit enemies with Abilities or Attacks.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/InfernalSoul_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/InfernalSoul_small.png",
+    "augmentNameId": "HextechSoul",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "infinite-recursion",
     "name": "Infinite Recursion",
     "description": "Gain 60 ability haste, increased by 3 each time you score a champion takedown.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/InfiniteRecursion_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/InfiniteRecursion_small.png",
+    "augmentNameId": "InfiniteRecursion",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "crit-n-cast",
     "name": "Crit 'n Cast",
     "description": "Gain ability haste equal to 40% of your critical strike chance.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CritnCast_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CritnCast_small.png",
+    "augmentNameId": "CritNCast",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "critical-missile",
     "name": "Critical Missile",
-    "description": "Critical strikes against enemy champions launch 1 (+ 1 per 33.33% critical strike chance) missiles at the target that each deal 20 to 100 magic damage. Additionally, gain 25% critical strike chance.",
+    "description": "Crits on champions launch 1 missile (+1 per 33.33% crit chance) dealing 20-100 magic damage each. Gain 25% crit chance.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CriticalMissile_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CriticalMissile_small.png",
+    "augmentNameId": "CriticalMissile",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "devil-on-your-shoulder",
     "name": "Devil on Your Shoulder",
-    "description": "Forge a pact with Little Devil, who drains 0.5% of your current health every second, increased to 5% if there are enemy champions within 1000 units. In return, you deal 20% bonus true damage and your basic attacks and abilities summon a Life Remnant nearby for 5 seconds (0.75-second spawn cooldown). You can absorb a Life Remnant by moving over it, healing you for 50 to 150 (+ 50% bonus AD) (+ 25% AP) and granting you 15% bonus movement speed.\n\nThis augment is currently disabled.",
+    "description": "Lose 0.5% current health per second (5% near enemies) for 20% bonus true damage. Hits drop Remnants that heal 50-150 on pickup.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/LittleDevil_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/LittleDevil_small.png",
+    "augmentNameId": "ARAM_LittleDevil",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "donation",
     "name": "Donation",
     "description": "Gain 1750 upon acquiring this augment.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Donation_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Donation_small.png",
+    "augmentNameId": "Donation",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "double-tap",
     "name": "Double Tap",
     "description": "Basic attacks that critically strike apply on-hit effects an additional time. Additionally, gain 25% critical strike chance.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/DoubleTap_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/DoubleTap_small.png",
+    "augmentNameId": "ARAM_DoubleTap",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "dropkick",
     "name": "Dropkick",
-    "description": "Your basic attacks and abilities execute enemy champions below 5% (+ 3.5% per 100 base AD) (+ 2% per 1000 bonus health) of their maximum health, which causes their corpse to be sent flying away in a line. Upon collision with an enemy champion or terrain, the target's corpse explodes to deal 150 to 500 (+ 100% bonus armor) (+ 100% bonus magic resistance) magic damage to nearby enemies. Successful executions heal you for 100 to 300 (+ 25% bonus health).\n\nThe execution may also be triggered by the explosion and goes through shields.",
+    "description": "Attacks execute champions below 5% max health (+3.5% per 100 base AD), launching the corpse for 150-500. Executions heal 100-300.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dropkick_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dropkick_small.png",
+    "augmentNameId": "ARAM_Dropkick",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "droppybara",
     "name": "Droppybara",
-    "description": "Replace Summoner Flee with Orbital Laser.\n\nAfter a delay, call down an orbital laser that deals 30% max Health true damage plus magic damage over 3 seconds.",
+    "description": "Replaces Summoner Flee with Droppybara: after a delay it deals 30% max health true damage plus magic damage over 3 seconds.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OrbitalLaser_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OrbitalLaser_small.png",
+    "augmentNameId": "Dropybara_Active",
+    "modes": [
+      "classic"
+    ]
   },
   {
     "id": "empowered-by-the-faithful",
     "name": "Empowered By The Faithful",
-    "description": "Granting a heal or shield to an allied champion blesses them for 8 seconds. Whenever a blessed ally damages an enemy champion, you generate a stack of Devotion, stacking up to 50 times. Upon reaching maximum stacks, you unleash a shockwave that deals 50 to 300 (+ 750% heal and shield power) magic damage to nearby enemies. Enemy champions damaged below a percentage of their maximum health equal to 25% of your heal and shield power are executed.",
+    "description": "Healing or shielding blesses an ally 8s. Their damage stacks Devotion (max 50); at max a shockwave deals 50-300 (+750% heal).",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EmpoweredByTheFaithful_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EmpoweredByTheFaithful_small.png",
+    "augmentNameId": "ARAM_EmpoweredByTheFaithful",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "final-city-transit",
     "name": "Final City Transit",
-    "description": "Upon death, you summon a train over 1 second that launches towards your killer at full speed, travelling in their direction at a global distance and dealing 150 to 750 (+ 65% bonus AD) (+ 50% AP) (+ 15% maximum health) physical damage to enemies it passes through.\n\nThe train is summoned a slight distance away from the front of your killer, based on their facing direction at the time of your death, and launches towards the position they were located at the time of your death.\n\nThis augment is currently disabled.",
+    "description": "On death you launch a train at your killer that pierces enemies for 150-750 (+50% AP) (+15% max health) physical damage.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Nightstalking_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Nightstalking_small.png",
+    "augmentNameId": "TrainOfTheDead",
+    "modes": [
+      "classic"
+    ]
   },
   {
     "id": "firefox",
     "name": "Firefox",
-    "description": "Autocast\nGain Movement Speed and conjure three flames that orbit you, targetting the closest visible enemy in range and dealing magic damage.",
+    "description": "Auto-cast: gain move speed and conjure three orbiting flames that target the nearest visible enemy in range for magic damage.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Firfox_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Firfox_small.png",
+    "augmentNameId": "ARAM_Firefox",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "growth-spurt",
     "name": "Growth Spurt",
-    "description": "Replace a summoner spell with Growth Spurt.\n\nGrowth Spurt:",
+    "description": "Replace a summoner spell with Growth Spurt. Growth Spurt:",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GrowthSpurt_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GrowthSpurt_small.png",
+    "augmentNameId": "GrowthSpurt",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "holy-snowball",
     "name": "Holy Snowball",
-    "description": "After using the Dash spell from Mark, you become invulnerable for 1.5 seconds upon arrival. Additionally, your Mark cooldown is reduced equivalent to 100 ability haste.\n\nIf Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
+    "description": "Dashing with Mark grants 1.5s of invulnerability on arrival, and Mark gains 100 ability haste. Grants Mark if unequipped.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GoldenSnowball_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GoldenSnowball_small.png",
+    "augmentNameId": "GoldenSnowball",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "triggered-inferno",
     "name": "Triggered Inferno",
-    "description": "Damaging enemy champions builds Style, granting Move Speed per stack. At max Style, auto-cast a barrage dealing physical damage to nearby enemies.",
+    "description": "Damaging champions builds Style, granting move speed per stack. At max Style, auto-cast a barrage that damages nearby enemies.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MadScientist_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MadScientist_small.png",
+    "augmentNameId": "ARAM_InfernoTriggered",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "juiced",
     "name": "Juiced",
-    "description": "Basic attacks on-hit against enemy champions consume 2.5% of your maximum mana to deal bonus magic damage equal to 4.5% of your maximum mana. This damage can critically strike for 100 bonus damage.",
+    "description": "Attacks on champions spend 2.5% max mana to deal bonus magic damage equal to 4.5% of your max mana. Can crit for 100 more.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Juiced_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Juiced_small.png",
+    "augmentNameId": "ARAM_Juiced",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "kill-secured",
     "name": "Kill Secured",
     "description": "Gain 60% bonus movement speed towards enemy champions below 40% of their maximum health.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/KillSecure_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/KillSecure_small.png",
+    "augmentNameId": "KillSecured",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "phenomenal-evil",
     "name": "Phenomenal Evil",
-    "description": "Gain Veigar.\n\nPhenomenal Evil Power: Generate a permanent stack of Phenomenal Evil each time you damage an enemy champion with ability damage. This effect cannot trigger more than once every second globally and once every 3 seconds from the same cast instance. For each stack, gain 1 ability power.\n\nIf this is not your first augment, start with 40 Phenomenal Evil stacks, granting you 40 ability power.",
+    "description": "Gain Phenomenal Evil: damaging a champion with an ability grants 1 permanent ability power. Starts at 40 if not your first.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ARAM_PhenomenalEvil_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ARAM_PhenomenalEvil_small.png",
+    "augmentNameId": "ARAM_PhenomenalEvil",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "pinball",
     "name": "Pinball",
-    "description": "Your Mark is empowered to instead throw a pinball, which deals 100 to 500 bonus true damage and ricochets off of terrain that it collides with. Each time the pinball ricochets, its remaining travel distance is reset, it increases in radius by 25%, deals 20% increased damage, and reduces Mark remaining cooldown by 30%. The pinball can ricochet up to 4 times, for a maximum radius increase of 100% and a damage increase of 80%. Additionally, your Mark cooldown is reduced equivalent to 50 ability haste.\n\nIf Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
+    "description": "Mark becomes a pinball dealing 100-500 true damage, ricocheting off terrain. Each bounce adds 25% size and 20% damage (max 4).",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PinballSnowball_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PinballSnowball_small.png",
+    "augmentNameId": "PinballSnowball",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "prom-queen",
     "name": "Prom Queen",
-    "description": "Automatically cast a modified version of Rakan, empowering you to break into a captivating sprint for 6 seconds. While empowered, you gain ghosting and 50% bonus movement speed, and enemies you 300 unit collision radius are knocked down and become charmed for 1.5 seconds (35 second cooldown).\n\nA sparkly tiara will descend upon you 2.5 seconds before the effect activates.",
+    "description": "Periodically auto-cast Rakan's sprint: 6s of ghosting and 50% move speed, knocking down and charming enemies for 1.5s. (35s)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PromQueen_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PromQueen_small.png",
+    "augmentNameId": "PromQueen",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "purist-caster",
     "name": "Purist - Caster",
-    "description": "Convert all of your bonus attack speed into ability haste at a rate of 0.65 ability haste per 1% bonus attack speed. Additionally, your abilities' total cooldowns are reduced by 10%.",
+    "description": "Convert all bonus attack speed to ability haste at 0.65 per 1%. Your abilities' total cooldowns are also reduced by 10%.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PuristCaster_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PuristCaster_small.png",
+    "augmentNameId": "ARAM_Purist_Caster",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "quest-icathia-s-fall",
     "name": "Icathia's Fall",
     "description": "Now: gain Bami’s Cinder. Quest: obtain Sunfire Aegis and Hollow Radiance. Reward: combine them into Void Immolation.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Quest_VoidImmolation_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Quest_VoidImmolation_small.png",
+    "augmentNameId": "ARAM_Quest_VoidImmolation",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "shrink-engine",
     "name": "Shrink Engine",
-    "description": "Scoring a champion takedown generates a stack, stacking infinitely. For each stack, gain 8 ability haste and 1% bonus movement speed, and reduce your size by 4%. Lose 65% of stacks on death.\n\nSize reduction is capped at 80% (20 stacks).",
+    "description": "Takedowns stack infinitely. Each grants 8 ability haste and 1% move speed and shrinks you 4% (max 80%). Death loses 65% of stacks.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ShrinkEngine_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ShrinkEngine_small.png",
+    "augmentNameId": "ShrinkEngine",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "sonata",
     "name": "Sonata",
-    "description": "Alternate between automatically casting a modified version of Sona and modified Sona, with the former being cast first (10 second cooldown).\n\nAria of Perseverance: Heal yourself for 60 (+ 60% AP) and send out a tone to the Based on greatest % missing health allied champion within 1000 units that heals them for the same amount. Additionally, generate an 400 unit radius, center-to-edge that grants you and tagged allied champions a 80 (+ 40% AP) shield for 1.5 seconds.\n\nSong of Celerity: Gain 30% bonus movement speed for 7 seconds. If you take damage during this time, the duration ends prematurely once or if 3 seconds have elapsed. Additionally, generate an 400 unit radius, center-to-edge that grants tagged allied champions 20% bonus movement speed for 3 seconds.",
+    "description": "Alternate Aria and Song every 10s. Aria heals you and your lowest ally 60, shields allies 80. Song grants 30% move speed for 7s.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Sonata_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Sonata_small.png",
+    "augmentNameId": "Sonata",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "soul-eater",
     "name": "Soul Eater",
     "description": "Immobilizing or grounding an enemy champion grants you 20 bonus health, stacking infinitely (5 second cooldown per cast instance).",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SoulEater_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SoulEater_small.png",
+    "augmentNameId": "SoulEater",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "spin-me-right-round",
     "name": "Spin Me Right Round",
-    "description": "Replace a summoner spell with Akshan (5.88 seconds after applying the 70 summoner spell haste from the global ARAM champion buff, starts post-effect).\n\nHeroic Swing - Active: You can activate Heroic Swing three times before the ability goes on cooldown, and you can use the third cast only after 0.5 seconds of the second cast. An attack or movement command may be inputted to use the second and third casts.\n\nFirst Cast: Fire a hook in the target direction that embeds in the first terrain hit for 2 seconds. Heroic Swing's second cast can be used while the hook is attached. If the hook fails to attach or you become immobilized, grounded, or polymorphed within the duration, Heroic Swing is cancelled and placed on full cooldown.\n\nSecond Cast: Swing around the terrain in either a clockwise or counterclockwise direction based on the position of the cursor Dash will move clockwise if the player's cursor is anywhere to the left of their champion from their facing direction (or perspective), and counterclockwise if the cursor is anywhere to their champion's right., stopping upon colliding with an enemy champion or terrain. While swinging, fire at the nearest visible enemy within your attack range (minimum 400 units) every 0.2 to deal them 15 to 75 (+ 15% AD) (1 + 0.3 per 100% bonus attack speed) physical damage and apply on-hit effects for each shot, with on-hit damage reduced to 25% effectiveness. The dash will be interrupted if you are affected by any immobilizing or polymorphing crowd control during the dash.\n\nThird Cast: End the swing by jumping to the target location and fire one last shot at a nearby visible enemy.",
+    "description": "A summoner spell becomes Akshan's Heroic Swing: swing around terrain, firing every 0.2s for 15-75 (+15% AD), then leap and fire.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/YouSpinMeRightRound_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/YouSpinMeRightRound_small.png",
+    "augmentNameId": "YouSpinMeRightRound",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "stats",
     "name": "Stats!",
     "description": "Gain 2 Stat Anvils!",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Stats_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Stats_small.png",
+    "augmentNameId": "ARAM_Stats",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "stats-on-stats",
     "name": "Stats on Stats!",
     "description": "Gain 3 Stat Anvils!",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/StatsOnStats_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/StatsOnStats_small.png",
+    "augmentNameId": "ARAM_StatsOnStats",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "stats-on-stats-on-stats",
     "name": "Stats on Stats on Stats!",
     "description": "Gain 4 Stat Anvils!",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/StatsOnStatsOnStats_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/StatsOnStatsOnStats_small.png",
+    "augmentNameId": "ARAM_StatsOnStatsOnStats",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "stuck-in-here-with-me",
     "name": "Stuck in Here With Me",
-    "description": "Casting your ultimate ability grants you an aura for 2 seconds, growing in size over the duration to up to 500 units. After the duration, you taunt all enemies within the aura for 2 seconds and gain 50% damage reduction for the same duration (30 second cooldown). Additionally, gain 30 ultimate haste.\n\nAura is activated once the ultimate's effect For instant-cast spells or has For duration-based spells.",
+    "description": "Your ultimate grows an aura to 500 over 2s. When it ends, enemies inside are taunted 2s and you take 50% less damage. (30s)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/StuckInHereWithMe_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/StuckInHereWithMe_small.png",
+    "augmentNameId": "ARAM_StuckInHereWithMe",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "twin-fire",
     "name": "Twin Fire",
-    "description": "Damaging abilities against enemy champions launch 1 (+ 1 per 33.33% critical strike chance) missiles at the target that each deal 10 to 30 (+ 7% bonus AD) (+ 7% AP) magic damage (5 second cooldown). Additionally, gain 25% critical strike chance.",
+    "description": "Damaging a champion with an ability launches 1 missile (+1 per 33.33% crit chance) for 10-30 each. (5s) Gain 25% crit chance.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TwinFire_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TwinFire_small.png",
+    "augmentNameId": "Twinfire",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "zealot",
     "name": "Zealot",
     "description": "Gain 35% (+ 5% per 100 AP) bonus attack speed and 25% (+ 5% per 100 AP) critical strike chance.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Zealot_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Zealot_small.png",
+    "augmentNameId": "ARAM_Zealot",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "hand-of-baron",
     "name": "Hand of Baron",
     "description": "Gain a modified Hand of Baron, which only grants 25% increased adaptive force and greatly empowers nearby allied minions.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/HandofBaron_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/HandofBaron_small.png",
+    "augmentNameId": "HandOfBaron",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "upgrade-sword-of-blossoming-dawn",
     "name": "Upgrade Sword of Blossoming Dawn",
-    "description": "Upgrades Sword of Blossoming Dawn, empowering Peppermint to have its healing increased by 250%. Additionally, you gain 100% bonus attack speed.",
+    "description": "Upgrades Sword of Blossoming Dawn: Peppermint healing is increased 250%. You also gain 100% bonus attack speed.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeMikaelsBlessing_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeMikaelsBlessing_small.png",
+    "augmentNameId": "Upgrade_SwordOfBlossom",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "archmage",
     "name": "Archmage",
     "description": "Whenever you cast an Ability, refund 30% of its cooldown to a random other Ability.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Eureka_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Eureka_small.png",
+    "augmentNameId": "ARAM_Archmage",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "from-downtown",
     "name": "From Downtown",
-    "description": "Quest: Hit enemy champions with abilities while located at least 700 units away from them (at the time of the hit) 15 times (counts up to 1 hit per champion per cast instance).\n\nReward: Upon completing your Quest, hitting enemy champions with abilities while located at least 700 units away from them at the time of the hit fires a meteor to their current location, which upon landing deals 75 to 200 (+ 50% bonus AD) (+ 20% AP) magic damage to enemies within the area (8 second cooldown per target per cast instance). The meteor's damage and radius are increased based on your distance to the target at the time of the ability hit, increasing its damage by 0 to 230 for 11/700 to 3000 and setting its radius to 120;180;270;405;607.5;911.25;1366.875/700;X;X;X;X;X;3000 units.\n\nMaximum meteor damage is 75*2.3 to 200*2.3 (+ 50*2.3% bonus AD) (+ 20*2.3% AP).",
+    "description": "Quest: hit champions from 700+ away 15 times. Reward: such hits call a meteor for 75-200 magic damage, scaling with distance. (8s)",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestBangBang_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestBangBang_small.png",
+    "augmentNameId": "ARAM_BangBang",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "rite-of-ascension",
     "name": "Rite of Ascension",
-    "description": "Scoring a takedown against an enemy champion within 3 seconds of damaging them causes them to leave behind their Essence for 8 seconds. You can basic attack the Essence to consume it: causing you to blink to its location after winding up for 1 second, during which you are untargetable (except to turrets), displacement immune, and unable to act. Upon consumption of the Essence, you gain 100% bonus movement speed decaying over 2 seconds, heal yourself for 75 to 300 (+ 50% bonus AD) (+ 25% AP), and reset the cooldowns of your basic abilities. The heal is increased by 0 to 100 for 11/0 to 100, for a maximum heal of 75*2 to 300*2 (+ 50*2% bonus AD) (+ 25*2% AP).",
+    "description": "Takedowns within 3s of damaging leave an Essence 8s. Attack it to blink there for move speed, a 75-300 heal, and a basic reset.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GlassCannon_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GlassCannon_small.png",
+    "augmentNameId": "ARAM_DivineDomain",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "dropbear",
     "name": "DropBear",
-    "description": "Upon death, you summon Tibbers who drops from above and lands onto the location of your death over 0.5 seconds. Upon landing, he deals 250 to 750 (+ 100% AP) (+ 2 per 1 flat magic penetration) (+ 5 per 1% magic penetration) magic damage to nearby enemies and stuns them for 1.5 seconds. Tibbers then chases after and targets the enemy champion that killed you, attacking them once he is in range.\n\nTibbers has all of your augments and lasts for up to 8 to 20 seconds. He gains 80 to 100 bonus attack speed and deals 25 to 150 (+ 50% AP) magic damage every second to enemies within 350 units of him. His stats are:\n1500 to 6000 (+ 15% maximum health) (+ 150% AP) health (rapidly decays over his lifetime) 50 to 300 (+ 75% AD) magic damage (basic attack damage)1.00 attack speed150 attack range50 armor50 magic resistance200 to 300 (+ 20% movement speed) movement speed",
+    "description": "On death Tibbers drops in for 250-750 magic damage and a 1.5s stun. He carries your augments and chases your killer for 8-20s.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Drop_Bear.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Drop_Bear_Small.png",
+    "augmentNameId": "ARAM_DropBear",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "en-passant",
     "name": "En Passant",
-    "description": "Periodically identify enemy champions' Vitals. Striking a Vital with an Attack or Ability deals max Health true damage, heals you, and grants Move Speed. This effect stacks.",
+    "description": "Periodically reveal enemy Vitals. Hitting one deals max health true damage, heals you, and grants move speed. This effect stacks.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Dashing_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Dashing_small.png",
+    "augmentNameId": "ARAM_EndlessHunt",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "hellbent",
     "name": "Hellbent",
-    "description": "Generate a stack of Revivemaxxing for each enemy champion you hit with basic attacks or abilities, lasting for 6 seconds, refreshing on subsequent hits, and stacking up to 10 times. At maximum stacks, you become Hellbent.\n\nHellbent: Upon taking lethal damage, you enter resurrection for 4 seconds, during which you are invulnerable, untargetable, and unable to act. Afterwards, you revive with 35 to 75 of your maximum health (120 second cooldown). Additionally, you become empowered for the next 15 seconds, granting you 25*0.6 to 200*0.6 bonus Attack Damage or 25 to 200 Ability Power (Adaptive), 20 to 40 bonus movement speed while facing toward nearby enemy champions, and 15 to 30 omnivamp for the duration.",
+    "description": "Hits stack (6s, max 10). At max, lethal damage triggers a 4s invulnerable revival at 35-75% health, then 15s of bonuses. (120s)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Hellbent_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Hellbent_small.png",
+    "augmentNameId": "ARAM_Hellbent",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "high-roller",
     "name": "High Roller",
-    "description": "Nearby enemies that die have a 7% chance to drop a Stat Bonus at the location of their death. You can pick up dropped anvils by moving over them. The obtained Stat Bonus will be consumed once the shop is enabled again (after your death).",
+    "description": "Nearby enemies that die have a 7% chance to drop a Stat Bonus anvil. Walk over to grab it; it applies when the shop reopens.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/HighRoller_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/HighRoller_small.png",
+    "augmentNameId": "ARAM_HighRoller",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "titan-s-resolve",
     "name": "Titan's Resolve",
-    "description": "You generate a stack of Juggernauting for each instance of damage you deal or take (excluding damage over time), lasting for 6 seconds and refreshing on subsequent damage dealt or taken. For every 10 stacks of Juggernauting, you gain 25*0.6 to 50*0.6 bonus Attack Damage or 25 to 50 Ability Power (Adaptive), 4 to 8 bonus armor and bonus magic resistance, 10% increased size, and 8% tenacity.\n\nStacks expire one by one when the duration ends, with the decay rate being faster the more stacks you have.",
+    "description": "Dealing or taking damage grants a stack for 6s (no DoT). Per 10 stacks: 25-50 adaptive, 4-8 armor and MR, 10% size, 8% tenacity.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/IAmTheJuggernaut_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/IAmTheJuggernaut_small.png",
+    "augmentNameId": "ARAM_ImTheJuggernaut",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "multishot",
     "name": "Multishot",
-    "description": "Assigns quests that require you to hit enemy champions with a specific ability's missile a number of times (counts up to 1 hit per champion per cast instance). There are six quest tiers, and each completed tier rewards you with an additional missile fired on the ability's cast. The reward effect also modifies the ability to fire all of its missiles in a cone. Subsequent missile hits from the same cast against the same enemy deal 30% damage.",
+    "description": "Quest: hit champions with a chosen missile (6 tiers). Reward: each tier adds a missile, fired in a cone. Extra hits deal 30%.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
+    "augmentNameId": "ARAM_Multishot",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "orbital-laser",
     "name": "Orbital Laser",
-    "description": "Replace Summoner Flee with Orbital Laser.\n\nAfter a delay, call down an orbital laser that deals 30% max Health true damage plus magic damage over 3 seconds.",
+    "description": "Replaces Summoner Flee with Orbital Laser: after a delay it deals 30% max health true damage plus magic damage over 3 seconds.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OrbitalLaser_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OrbitalLaser_small.png",
+    "augmentNameId": "ARAM_OrbitalLaser_Active",
+    "modes": []
   },
   {
     "id": "quickstep",
     "name": "Quickstep",
     "description": "Upgrades one of your champion's abilities, empowering the ability's cast to cause you to dash up to 350 units towards your cursor.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "ARAM_Quickstep",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "snowday",
     "name": "Snowday",
-    "description": "Your Mark deals bonus magic damage equal to 100% of its damage and has its cooldown reduced equivalent to 100 ability haste.\n\nIf Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
+    "description": "Mark deals bonus magic damage equal to 100% of its damage and gains 100 ability haste. Grants Mark if unequipped.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Snowday_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Snowday_small.png",
+    "augmentNameId": "ARAM_Snowday",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "pursuit-of-haste",
     "name": "Pursuit of Haste",
-    "description": "Assigns quests that require you to hit enemy champions with a specific ability a number of times (counts up to 1 hit per champion per cast instance). There are two quest tiers, and each completed tier rewards you with ability haste on the ability.",
+    "description": "Quest: hit enemy champions with a chosen ability (2 tiers). Reward: each tier grants that ability bonus ability haste.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "ARAM_SpecializedRecursion",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "spirit-bomb",
     "name": "Spirit Bomb",
-    "description": "Your healing and shielding on yourself or allies builds up a Spirit Bomb on top of you. Once you have healed and shielded a combined total of 200 to 2000, you toss the Spirit Bomb onto the Lowest health percent allied champion over 1.1 seconds. Upon impact, the Spirit Bomb explodes in a 475 radius to heal allied champions within the area for 5 to 15 (+ 3% per 100 AP) of their missing health and grants them a shield for 2 seconds that absorbs damage equal to 10 to 25 (+ 2% per 100 AP) of their current health.\n\nHealing and shielding from this effect do not count toward the Spirit Bomb's trigger condition.",
+    "description": "Heals and shields build a Spirit Bomb. At 200-2000 it flies to your lowest-health ally, healing 5-15% missing health nearby.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpiritBomb_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpiritBomb_small.png",
+    "augmentNameId": "ARAM_SpiritBomb",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "stackosaurus-rex",
     "name": "Stackosaurus Rex",
     "description": "When you gain permanent Stacks of an Ability, Augment, or Item gain 100% more!",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/StackosaurusRex_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/StackosaurusRex_small.png",
+    "augmentNameId": "ARAM_StackosaurusRex",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "siphon",
     "name": "Siphon",
-    "description": "Upgrades one of your champion's abilities, empowering the ability to heal you for 30% of its Damage calculated after modifiers dealt to enemy champions.",
+    "description": "Upgrades one of your champion's abilities, empowering it to heal you for 30% of the damage it deals to enemy champions.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
+    "augmentNameId": "ARAM_SustainingStrike",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "wee-woo-wee-woo",
     "name": "Wee Woo Wee Woo",
-    "description": "Gain 0 to 50 for 11/0 to 75 (based on target ally's missing health) bonus movement speed while facing toward nearby allied champions, lingering for 2 seconds after no longer facing them. Your heals and shields are also increased by 0 to 50 for 11/0 to 75.",
+    "description": "Facing nearby allies grants 0-50 move speed based on their missing health, lingering 2s. Heals and shields increase as much.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WeeWooWeeWoo_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WeeWooWeeWoo_small.png",
+    "augmentNameId": "ARAM_WeeWooWeeWoo",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "yowch-my-coins",
     "name": "Yowch, My Coins!",
-    "description": "Enemy champions that you score a takedown against drop 6 to 10 coins, with each coin landing 500 units away from the location of their death and lasting 10 seconds. You or allied champions can collect the coins by moving over them, granting 15 for each coin collected.",
+    "description": "Champions you take down drop 6-10 coins for 10s. You or allies collect them by walking over, granting 15 gold each.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/YouchMyCoins_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/YouchMyCoins_small.png",
+    "augmentNameId": "ARAM_YowchMyCoins",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "echo-cast",
     "name": "Echo Cast",
-    "description": "Upgrades one of your champion's abilities, empowering the ability's cast to summon a clone of your champion that is untargetable and moves up to 500 units towards your cursor. The clone then casts the ability it was summoned from after a 0.25-second delay, mimicking the active effects of the casted spell and disappearing after it finishes casting.",
+    "description": "Upgrades an ability: casting summons an untargetable clone that moves up to 500 toward your cursor and recasts it after 0.25s.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
+    "augmentNameId": "Ability_SelfAOE_DoubleCast",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "combusting-interest",
     "name": "Combusting Interest",
-    "description": "Gain 1 to 3 (+ 0.75% of damage dealt) gold for each tick of damage dealt to enemy champions with persistent damage effects as well as damage over time from item effects.",
+    "description": "Burns and damage-over-time on champions generate 1-3 gold (+0.75% of damage dealt) per tick.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BloodMoney2_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BloodMoney2_small.png",
+    "augmentNameId": "BloodMoneyBurn",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "bonk",
     "name": "BONK!",
-    "description": "Upgrades one of your champion's abilities that has an empowered basic attack effect, further enhancing the attack to deal 30% increased damage to the target and 30% of its damage to nearby enemies.",
+    "description": "Upgrades an ability with an empowered attack: it deals 30% more damage and 30% of that damage to nearby enemies.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "Bonk",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "hide-on-bush",
     "name": "Hide on Bush",
     "description": "While in brush, you deal 20% increased damage. This effect lingers for 2 seconds after leaving brush.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BrushPower_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BrushPower_small.png",
+    "augmentNameId": "BrushPower",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "tooth-fairy",
     "name": "Tooth Fairy",
-    "description": "When you deal damage to an enemy champion equal to or more than 25% of their maximum health within 2.5 seconds, they drop a Tooth on the ground (4 second cooldown per target). You can pick up this Tooth by moving over it, granting you a Dental Records stack. For each stack, you gain 4 lethality and flat magic penetration.",
+    "description": "Dealing 25% of a champion's max health in 2.5s drops a Tooth (4s per target). Each pickup grants 4 lethality and magic pen.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestBurstingTeeth_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestBurstingTeeth_small.png",
+    "augmentNameId": "BurstingTeeth",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "chain-reaction",
     "name": "Chain Reaction",
-    "description": "Upgrades one of your champion's abilities that has a knock back effect, empowering the ability to trigger a chain reaction effect when displaced champions hit other champions or terrain within 200 units. If a knocked back champion collides with another enemy champion during their displacement, the champions they collided with are dealt 100 to 400 magic damage and knocked up for 0.5 seconds. If they collide with terrain during their displacement, they will rebound to take 150 to 800 magic damage and become knocked up for 0.75 seconds and stunned for 0.5 seconds. The knock up duration is increased to up to 1.1 seconds based on how long the ability's cooldown is.",
-    "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+    "description": "Upgrades a knockback: a displaced champion hitting another deals 100-400 and knocks up; hitting terrain deals 150-800 and stuns.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "ChainReaction",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "ravenous-bind",
     "name": "Ravenous Bind",
-    "description": "Upgrades one of your champion's abilities that has a immobilizing or grounding effect, empowering the ability to deal 15 to 90 (+ 10% AP) (+ 0.5% of your maximum health) magic damage to affected targets and heal you for 50 to 200 (+ 5% AP) (+ 10% bonus health). The heal is increased by up to 50% based on how long the ability's cooldown is.",
+    "description": "Upgrades an immobilizing or grounding ability: it deals 15-90 (+0.5% max health) magic damage and heals you 50-200.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeHubris_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeHubris_small.png",
+    "augmentNameId": "DarkWind",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "dimension-shift",
     "name": "Dimension Shift",
-    "description": "Replace a summoner spell with When the Darkness Comes.\n\nWhen the Darkness Comes:\n\nThe Dark Realm is a battlefield that exists outside of the normal realm in an alternate dimension. It exists only for units hit by the cosmic light, and consists of an arena that has a radius of 1200 units and includes any terrain features that would exist in the map of the normal realm, including structures, walls, and brushes. The boundaries of the arena are impassable but not considered terrain themselves, and enemies that try to move out of the area will be displaced back inside.\n\nUnits between realms see each other as glowing stars, considering each other dead and negating any interactions between each other. Only units that were hit by the light will enter the realm; other units cannot follow them. Everything that occurs inside the Dark Realm is hidden to units outside of it, and vice versa.\n\nStructures exist in all realms at the same time, but are untargetable in the Dark Realm. Turrets will behave normally as if all units were in the same realm. Pets still inside the Dark Realm are killed at its end.",
+    "description": "A summoner spell becomes When the Darkness Comes: everything the light strikes is pulled into a 1200-unit Dark Realm, sealed off.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WhenTheDarknessComes_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WhenTheDarknessComes_small.png",
+    "augmentNameId": "DimensionShift_Active",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "don-t-change-the-channel",
     "name": "Don't Change the Channel",
-    "description": "For every second that you channel an ability, you gain a 50 to 200 (+ 50% AD) (+ 25% AP) (+ 10% bonus health) shield. The shield quickly decays once you stop channeling.",
+    "description": "Each second you channel an ability grants a 50-200 (+50% AD) (+25% AP) shield. It decays quickly once you stop channeling.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/DontChangeTheChannel_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/DontChangeTheChannel_small.png",
+    "augmentNameId": "DontChangeTheChannel",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "bolstered",
     "name": "Bolstered",
-    "description": "Upgrades one of your champion's abilities that has a shield effect, increasing the strength of the ability's shield by 0 to 60 for 11/0 to 70.",
+    "description": "Upgrades an ability with a shield, increasing its shield strength by 0-60.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
+    "augmentNameId": "DoubleDefense",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "double-strike",
     "name": "Double Strike",
-    "description": "Upgrades one of your champion's abilities that has an empowered basic attack effect, further enhancing the attack to apply on-hit effects to targets it hits a second time.",
+    "description": "Upgrades an ability with an empowered attack: it applies on-hit effects a second time.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Adamant_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Adamant_small.png",
+    "augmentNameId": "DoubleStrike",
+    "modes": [
+      "classic"
+    ]
   },
   {
     "id": "our-healing",
     "name": "Our Healing",
-    "description": "Whenever a nearby unit is healed (excluding yourself), you heal yourself equal to 15% of the amount they healed, doubled to 30% from the heals of enemies.",
+    "description": "Whenever a nearby unit is healed (not yourself), you heal for 15% of that amount, doubled to 30% from enemy heals.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Equillibrium_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Equillibrium_small.png",
+    "augmentNameId": "Equilibrium",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "shark-bait",
     "name": "Shark Bait",
-    "description": "Upon taking fatal damage, you become a Shark Bait, causing you to enter a zombie state for 3.5 seconds, during which your movement speed is set to a static 400, you gain ghosting, and enemies within 400 units of you are slowed by 40%. At the end of the duration, a massive shark emerges from beneath you that lets out a powerful chomp (400 radius), dealing 80 to 300 (+ 20% of target's missing health) magic damage to all enemies within the area and knocking them up for 1 second.\n\nWhile under the zombie state, you are able to move and become invulnerable, untargetable, and immune to crowd control, but you are also rendered unable to declare basic attacks, cast abilities, use summoner spells, and activate items.",
+    "description": "Lethal damage zombifies you 3.5s: invulnerable, can't act, slowing enemies 40%. Then a shark erupts for 80-300 and knocks up 1s.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/FishBait_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/FishBait_small.png",
+    "augmentNameId": "FishBait",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "forged-by-the-master",
     "name": "Forged By The Master",
     "description": "Increases the damage dealt by your item effects and augments by 45%.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ForgedByTheMaster_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ForgedByTheMaster_small.png",
+    "augmentNameId": "ForgedByTheMaster",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "it-s-go-time",
     "name": "It's Go Time",
-    "description": "Upgrades one of your champion's abilities that has a duration-based effect, empowering the ability to grant 25 to 45 bonus movement speed for the effect's duration.",
+    "description": "Upgrades an ability with a duration: gain 25-45 bonus move speed while the effect lasts.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
+    "augmentNameId": "ItsGoTime",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "lil-extra-help",
     "name": "Lil' Extra Help",
-    "description": "Upgrades one of your champion's abilities that has an effect which empowers your basic attacks for a duration, further enhancing the attacks by granting you 150/100 bonus attack range and 75%/40% bonus attack speed while the effect is active.",
+    "description": "Upgrades an attack-empowering ability: while active, gain 150 (melee 100) attack range and 75% (melee 40%) attack speed.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "LittleExtraHelp",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "mercy-s-strike",
     "name": "Mercy's Strike",
-    "description": "Upgrades one of your champion's abilities, empowering the ability's cast to enhance your next basic attack within a duration. The enhanced attack has 300 bonus range, gains 75% bonus attack speed, and deals bonus magic damage equal to 3% (+ 2% per 10% heal and shield power) of the target's maximum health.",
+    "description": "Upgrades an ability: after casting, your next attack gains 300 range, 75% attack speed, and 3% max health bonus magic damage.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "MercysStrike",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "spell-split",
     "name": "Spell Split",
-    "description": "Upgrades one of your champion's abilities that has a missile, empowering the ability's missile to split in two over 0.25 seconds upon hitting an enemy, at maximum range, or when recast. Each of the split missiles fire perpendicularly in opposite directions and apply the same effects to enemies they hit. Subsequent missile hits from the same cast against the same enemy deal 30% damage.\n\nRecast can be used after 0.15 seconds of the initial cast.",
+    "description": "Upgrades a missile ability: on hit, at max range, or on recast it splits in two, firing opposite ways. Extra hits deal 30% damage.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
+    "augmentNameId": "Missile_Split",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "nature-is-healing",
     "name": "Nature is Healing",
     "description": "Heal yourself for 0.6 to 2.1 of your maximum health for each second that you are within brush.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/NatureIsHealing_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/NatureIsHealing_small.png",
+    "augmentNameId": "NatureIsHealing",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "overextender",
     "name": "Overextender",
-    "description": "Your launch with the Cannon Launcher is now empowered, increasing the launch range by 12,000 units and the impact damage by 50%, as well as the travel speed by a significant amount. Additionally, your Recall is now functional and is upgraded to Empowered Recall.\n\nThis augment is only available on the Butcher's Bridge map.\n\nTotal launch range is 18,500 units, reduced to 16,500 after your team's Outer turret is destroyed. Increased impact damage is 120*1.5 to 460*1.5 magic damage.",
+    "description": "Your Cannon Launcher launch is empowered: 12,000 more range, 50% more impact damage, and far greater travel speed.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Overextender_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Overextender_small.png",
+    "augmentNameId": "Overextender",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "overloaded",
     "name": "Overloaded",
-    "description": "Upgrades one of your champion's abilities, empowering the ability to have its cooldown reset whenever you cast a different ability.",
+    "description": "Upgrades an ability: its cooldown resets whenever you cast a different ability.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
+    "augmentNameId": "Overloaded",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "pat-on-the-back",
     "name": "Pat On The Back",
-    "description": "Whenever you are within 200 units of an allied champion, they pat you on the back, granting you a 50 to 150 (+ 25% bonus movement speed) shield and 30% bonus movement speed for 3 seconds (9 second cooldown). This effect can stack and its duration refreshes with each pass.",
+    "description": "Being within 200 of an ally grants a 50-150 shield and 30% move speed for 3s, stacking and refreshing on each pass. (9s)",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PatOnTheBack_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PatOnTheBack_small.png",
+    "augmentNameId": "PatOnTheBack",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "porcupine",
     "name": "Porcupine",
-    "description": "You build up a burst of needles from within you when taking damage from enemy champions, storing up to 400 to 3900 Damage calculated before modifiers damage taken. After reaching the maximum damage stored, you consume the stored damage to burst the needles outward in a 400 radius, dealing 75 to 200 (+ 125% bonus armor) (+ 125% bonus magic resistance) physical damage to enemies hit and slowing them by 30% for 2 seconds.",
+    "description": "Damage from champions builds needles up to 400-3900. At max they burst in a 400 radius for 75-200 physical damage, slowing 30%.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PinCushion_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PinCushion_small.png",
+    "augmentNameId": "PinCushion",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "poro-stampede",
     "name": "Poro Stampede",
-    "description": "Poro-Snaxes will now randomly appear around you every 35 to 20 seconds. You can pick up a Poro-Snax by moving over it, granting you a Poro-Snax charge. Poro-Snaxes will not spawn while you are at the maximum number of Poro-Snax charges (2). Feeding a Poro with a Poro-Snax generates a stack of Poro Love. At 5 stacks, you are granted the Poro Charge summoner spell and are prompted to replace one of your summoner spells with it. You are then assigned with quests that require you to reach a certain amount of Poro Love stacks. There are nine quest tiers, and each completed tier rewards you with an additional Poro wave for Poro Charge.\n\nPoro Charge:",
+    "description": "Quest: collect Poro-Snax and feed the Poro. Reward: the Poro Stampede spell, launching a herd at the enemy team, larger each tier.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestPoroCharge_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestPoroCharge_small.png",
+    "augmentNameId": "PoroCharge_Active",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "pressure-cooker",
     "name": "Pressure Cooker",
-    "description": "Surrounds you in flames, causing you to apply a Burn every second to enemy champions within 300 units for 3 seconds that deals magic damage equal to0.5% of your maximum health per second.This Burn stacks infinitely and refreshes with each application.\n\nAdditionally, you are assigned with quests that require you to deal a certain amount of damage with the Burn effect against enemy champions. There are three quest tiers, and each completed tier grants you a reward that improves Pressure Cooker's effect.",
+    "description": "Burn enemies within 300 for 0.5% max health per second for 3s, stacking infinitely. Quest: deal burn damage to strengthen it.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestPressureCooker_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestPressureCooker_small.png",
+    "augmentNameId": "PressureCooker",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "sneakerhead",
     "name": "Sneakerhead",
     "description": "Immediate: Gain a random pair of upgraded boots. Requirement: Complete its quest to swap for another. Reward: Jarvan I's Boot",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Sneakerhead_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Sneakerhead_small.png",
+    "augmentNameId": "Quest_Sneakerhead",
+    "modes": []
   },
   {
     "id": "shark-tempest",
     "name": "Shark Tempest",
-    "description": "Your Mark is empowered to circle sharks around it in a 300 radius, dealing 50 to 100 magic damage to enemies it passes through as it travels and slowing targets hit by 30% for 1 second. If the missile hits an enemy champion, the sharks circle around their location in a 425 radius instead for 3 seconds, dealing25 to 75 (+ 20% bonus AD) (+ 12% AP) magic damage every secondto enemies within the area and slowing them by 30% for 3 seconds.\n\nIf Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
+    "description": "Sharks circle your Mark for 50-100 damage and a 30% slow. On champion hit they circle that spot 3s, dealing 25-75 per second.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SharkTempest_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SharkTempest_small.png",
+    "augmentNameId": "SharkTempest",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "ult-bot",
     "name": "Ult Bot",
-    "description": "Your ability haste now only applies to the cooldown of your ultimate ability. In return, increase your ability haste by 150% and gain 100 ability haste.",
+    "description": "Your ability haste applies only to your ultimate. In return, ability haste is increased 150% and you gain 100 more.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SkipTheBasic_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SkipTheBasic_small.png",
+    "augmentNameId": "SkipTheBasics",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "snap-back",
     "name": "Snap Back",
-    "description": "Upgrades one of your champion's abilities, empowering the ability with a recast. Using the recast causes you to blink back to your original casting position of the ability and explode to deal 100 to 300 (+ 20% AD) (+ 20% AP) magic damage to nearby enemies.",
+    "description": "Upgrades an ability with a recast: blink back to where you cast it and explode for 100-300 (+20% AD) (+20% AP) magic damage.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "SnapBack",
+    "modes": [
+      "classic"
+    ]
   },
   {
     "id": "snowblast",
     "name": "Snowblast",
-    "description": "Empowers the Dash spell from Mark to deal 100% increased damage and upon arrival cause you to knock up the target and knock back nearby enemies. Additionally, your Mark cooldown is reduced equivalent to 100 ability haste.\n\nIf Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
+    "description": "Mark's dash deals 100% more damage and on arrival knocks up the target and knocks back nearby enemies. Mark gains 100 haste.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Snowbomb_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Snowbomb_small.png",
+    "augmentNameId": "Snowbomb",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "tripleshot",
     "name": "Tripleshot",
-    "description": "Upgrades one of your champion's abilities that is unit-targeted and fires a missile, empowering the ability to fire its missiles at two additional enemies in front of you. Subsequent hits from the same cast against the same enemy deal 30% damage.",
+    "description": "Upgrades a unit-targeted missile ability to also fire at two more enemies ahead. Extra hits from one cast deal 30% damage.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
+    "augmentNameId": "SpellVolley",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "squishy-slappy-grab",
     "name": "Squishy Slappy Grab",
-    "description": "When an enemy champion is within 450 units of you, after a 1.5-second delay, you send out Squishy Slappy Hands that latch onto all nearby enemy champions within 800 units, forming a tether between yourself and each target for 4 seconds (45 second cooldown). While the tethers persist (950 tether radius), your next basic attack is empowered to pull all tethered enemies toward you, dealing 30 to 100 (+ 10% bonus health) magic damage to affected targets and stunning them for 0.25 seconds after the pull ends. Targets are pulled over 450 units, reduced to 350 for those farther away from you. Additionally, you gain a 25 to 75 (+ 50% bonus armor) (+ 50% bonus magic resistance) shield for each pulled enemy.",
+    "description": "With an enemy within 450, after 1.5s you tether enemies within 800 for 4s. Your next attack pulls them in, stunning 0.25s. (45s)",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SquishySlappyGrab_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SquishySlappyGrab_small.png",
+    "augmentNameId": "SquishySlappyGrab",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "support-main",
     "name": "Support Main",
-    "description": "QUEST: Heal allied champions for health. REWARD: Any healing you provide now also Heals Over Time for% of the initial heal over seconds. Healing Done: /",
+    "description": "Quest: heal allied champions. Reward: your healing also applies a portion of the initial heal as a heal over time.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestSupportMain_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestSupportMain_small.png",
+    "augmentNameId": "SupportMain",
+    "modes": []
   },
   {
     "id": "surge-field",
     "name": "Surge Field",
-    "description": "Upon casting your ultimate ability, you spawn a surge zone beneath you that has a 300 radius and lasts for 6 seconds. While you are within the zone, you gain 50 ability haste and 40% bonus movement speed, and your damage dealt to enemy champions fires missiles at them that deal 20% of the triggering damage instance Damage calculated before modifiers as bonus magic damage. The missile effect cannot trigger from itself.\n\nIf you leave the zone's radius for the first time, it moves to your current location. Exiting the zone a second time causes it to disappear if you do not re-enter the area within a short time.",
+    "description": "Your ultimate spawns a 300-radius zone for 6s. Inside you gain 50 ability haste, 40% move speed, and reflect 20% of your damage.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SurgeField_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SurgeField_small.png",
+    "augmentNameId": "SurgeField",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "stay-resolute",
     "name": "Stay Resolute",
-    "description": "Upgrades one of your champion's abilities, empowering the ability to grant you 4 to 12 for 3/1 to 11 bonus armor or bonus magic resistance for a duration when it damages an enemy champion (5 second cooldown per target per cast instance). This effect can stack up to a number of times.\n\nThe resistance type granted is based on the target's adaptive type: bonus armor for physical and bonus magic resistance for magic.\n\nIf this is not your first augment, gain 20 bonus armor and bonus magic resistance.",
+    "description": "Upgrades an ability: damaging a champion grants 4-12 armor or MR matching their adaptive type, stacking. (5s per target)",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
+    "augmentNameId": "TitansPulse",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "trusty-weapon",
     "name": "Trusty Weapon",
-    "description": "Upgrades one of your champion's abilities, empowering the ability to generate a Friendship stack for 6 seconds when it hits an enemy champion. For each Friendship stack you have, the ability deals 5% increased damage. This effect can stack up to a number of times.",
+    "description": "Upgrades an ability: hitting a champion grants a Friendship stack for 6s, each making that ability deal 5% more damage. Stacks.",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
+    "augmentNameId": "TrustyWeapon",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "void-dash",
     "name": "Void Dash",
-    "description": "Upgrades one of your champion's abilities that has a dash, empowering the ability to spawn a void zone (250 radius) at the dash's destination after a 0.3-second delay. Enemy champions within the zone are dealt 80 to 400 (+ 100% ability haste) magic damage and are slowed by 35% for 1 second.\n\nThis augment is currently disabled.",
+    "description": "Upgrades a dash: 0.3s after arriving a 250-radius void zone deals 80-400 (+100% ability haste) magic damage and slows 35% for 1s.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "VoidDash",
+    "modes": [
+      "classic"
+    ]
   },
   {
     "id": "adaptive-ward",
     "name": "Adaptive Ward",
-    "description": "Upgrades one of your champion's abilities, empowering the ability to grant you 5 to 10 bonus armor or bonus magic resistance for 6 seconds when it hits an enemy champion (4 second cooldown). This effect can stack up to a number of times.\n\nThe resistance type granted is based on the target's adaptive type: bonus armor for physical and bonus magic resistance for magic.",
+    "description": "Upgrades an ability: hitting a champion grants 5-10 armor or MR for 6s, matching their adaptive type. Stacks. (4s cooldown)",
     "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
+    "augmentNameId": "WardingWeapon",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "warlock-juicebox",
     "name": "Warlock Juicebox",
     "description": "Gain 10% (+ 3% per 100 AP) omnivamp.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WarlockJuicebox_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WarlockJuicebox_small.png",
+    "augmentNameId": "WarlockJuicebox",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "pursuit-of-power",
     "name": "Pursuit of Power",
-    "description": "Quest: Hit an enemy champion with a specific ability 10 times (counts up to 1 hit per champion per cast instance).\n\nReward: Upon completing your Quest, increase the damage of the ability by 30%.",
-    "rarity": "silver",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png"
+    "description": "Quest: hit an enemy champion with a chosen ability 10 times. Reward: that ability deals 30% more damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Marksmage_small.png",
+    "augmentNameId": "SpecializedEmpowerment",
+    "modes": [
+      "classic"
+    ]
   },
   {
     "id": "endless-decimation",
     "name": "Endless Decimation",
-    "description": "Automatically cast an improved version of Darius, winding up over 1.25 seconds to slash in a 460 radius around you. The slash deals 100 to 400 (+ 60% AD) (+ 40% AP) physical damage to enemies within the area (8 second cooldown). Enemies within the 240 inner radius of the slash take50% damage.Additionally, for each enemy champion hit along the outer edge, you heal for 15% of your missing health and the cooldown of this effect is reduced by 10%, down to a minimum of 3 seconds.",
+    "description": "Wind up 1.25s, then slash a 460 radius for 100-400 physical damage (50% inside 240). Edge hits heal 15% missing health. (8s)",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/EndlessDecimate_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/EndlessDecimate_small.png",
+    "augmentNameId": "EndlessDecimation",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "terraind",
     "name": "Terrain'd",
-    "description": "Upgrades an Ability that spawns terrain, dealing magic damage each second to nearby enemies. Increased if the Ability is an Ultimate.",
+    "description": "Upgrades a terrain-spawning ability to deal magic damage each second to nearby enemies. Increased if it is an ultimate.",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightningStrikes_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightningStrikes_small.png",
+    "augmentNameId": "Terraind",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "pin-cushion",
     "name": "Pin Cushion",
-    "description": "Gain the Lethal Tempo and Conqueror Keystone Runes.",
+    "description": "While active, your attacks drive Spikes into the target. Spikes store damage, execute, and grant move speed when they expire.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SymphonyOfWar_small.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
+    "augmentNameId": "Overkill",
+    "modes": [
+      "aram",
+      "classic"
+    ]
   },
   {
     "id": "one-trick",
     "name": "One Trick",
     "description": "Your chosen ability is greatly empowered, but your other capabilities are weakened.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
+    "augmentNameId": "",
+    "modes": []
   },
   {
     "id": "terror",
     "name": "Terror",
-    "description": "Upgrades one of your champion's abilities, empowering the ability's cast to fear all enemies within 450 units of you for 1.75 seconds (30 second cooldown).",
+    "description": "Upgrades an ability: casting it fears all enemies within 450 for 1.75s. (30s cooldown)",
     "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png"
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "ARAM_Terror",
+    "modes": [
+      "aram",
+      "classic"
+    ]
+  },
+  {
+    "id": "buff-buddies",
+    "name": "Buff Buddies",
+    "description": "Gain Crest of Cinders and Crest of Insight: ability haste and resource regen, and your attacks burn and slow champions.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BuffBuddies_small.png",
+    "augmentNameId": "ARAM_BuffBuddies",
+    "modes": []
+  },
+  {
+    "id": "cerberus",
+    "name": "Cerberus",
+    "description": "Gain the Hail of Blades and Press the Attack Keystone Runes.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Cerberus_Small.png",
+    "augmentNameId": "ARAM_Cerberus",
+    "modes": []
+  },
+  {
+    "id": "crack-open-that-egg",
+    "name": "Crack Open That Egg",
+    "description": "Your shields will detonate on expiration.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CrackOpenThatEgg_small.png",
+    "augmentNameId": "ARAM_CrackOpenThatEgg",
+    "modes": []
+  },
+  {
+    "id": "demon-s-dance",
+    "name": "Demon's Dance",
+    "description": "Gain the Fleet Footwork and Grasp of the Undying Keystone Runes.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DemonsDance_small.png",
+    "augmentNameId": "ARAM_DemonsDance",
+    "modes": []
+  },
+  {
+    "id": "executioner",
+    "name": "Executioner",
+    "description": "Deal 10% more damage to enemies below 40% Health. Reset your basic Abilities on takedown.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpiritualPurification_small.png",
+    "augmentNameId": "ARAM_Executioner",
+    "modes": []
+  },
+  {
+    "id": "feel-the-burn",
+    "name": "Feel the Burn",
+    "description": "Gain the Feel the Burn Summoner Spell. Feel the Burn casts Ignite and Exhaust on all nearby enemy champions.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FeelTheBurn_small.png",
+    "augmentNameId": "ARAM_FeeltheBurn",
+    "modes": []
+  },
+  {
+    "id": "frost-wraith",
+    "name": "Frost Wraith",
+    "description": "Autocast Root nearby enemies for 1.25 seconds every 6.5 seconds.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FrostWraith_small.png",
+    "augmentNameId": "ARAM_FrostWraith",
+    "modes": []
+  },
+  {
+    "id": "guilty-pleasure",
+    "name": "Guilty Pleasure",
+    "description": "Immobilizing or grounding an enemy champion restores health.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/GuiltyPleasure_small.png",
+    "augmentNameId": "ARAM_GuiltyPleasure",
+    "modes": []
+  },
+  {
+    "id": "holy-fire",
+    "name": "Holy Fire",
+    "description": "Healing or shielding applies an infinitely stacking Burn to a nearby enemy, dealing max health magic damage over a few seconds.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/HolyFire_small.png",
+    "augmentNameId": "ARAM_HolyFire",
+    "modes": []
+  },
+  {
+    "id": "keystone-conjurer",
+    "name": "Keystone Conjurer",
+    "description": "Gain the Summon Aery and Arcane Comet Keystone Runes.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/KeystoneConjurer_small.png",
+    "augmentNameId": "ARAM_KeystoneConjurer",
+    "modes": []
+  },
+  {
+    "id": "lightning-strikes",
+    "name": "Lightning Strikes",
+    "description": "Gain 20% total Attack Speed. At 3.5 Attacks per second, deal additional magic damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightningStrikes_small.png",
+    "augmentNameId": "ARAM_LightningStrikes",
+    "modes": []
+  },
+  {
+    "id": "bounce-of-the-poro-king",
+    "name": "Bounce of the Poro King",
+    "description": "Gain Bounce of the Poro King: become the Poro King, bouncing repeatedly to deal physical damage and knock back nearby enemies.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PoroKing_small.png",
+    "augmentNameId": "ARAM_PoroKing",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "poro-blaster",
+    "name": "Poro Blaster",
+    "description": "You gather Poros over time. Damaging an enemy fires them all for max health true damage each. At 5 Poros they also knock back.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PoroBlast_small.png",
+    "augmentNameId": "ARAM_Poro_Blast",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "cheating",
+    "name": "Cheating",
+    "description": "Press Recall to return to base, buy items, and acquire augments.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Cheating_small.png",
+    "augmentNameId": "ARAM_Recall",
+    "modes": []
+  },
+  {
+    "id": "repulsor",
+    "name": "Repulsor",
+    "description": "On dropping below 60% or 30% Health, nearby enemies are Knocked Back.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Repulsor_small.png",
+    "augmentNameId": "ARAM_Repulsor",
+    "modes": []
+  },
+  {
+    "id": "restless-restoration",
+    "name": "Restless Restoration",
+    "description": "You constantly heal while moving.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/RestlessRestoration_small.png",
+    "augmentNameId": "ARAM_RestlessRestoration",
+    "modes": []
+  },
+  {
+    "id": "self-destruct",
+    "name": "Self Destruct",
+    "description": "Periodically a bomb attaches to you. After 13 seconds it explodes, dealing true damage and knocking up enemies.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/Maps/Particles/Kiwi/SelfDestruct_small.png",
+    "augmentNameId": "ARAM_SelfDestruct",
+    "modes": []
+  },
+  {
+    "id": "slow-and-steady",
+    "name": "Slow And Steady",
+    "description": "Your attack speed is locked to 0.65 and all bonus attack speed is converted into attack damage.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlowAndSteady_small.png",
+    "augmentNameId": "ARAM_SlowAndSteady",
+    "modes": []
+  },
+  {
+    "id": "slow-cooker",
+    "name": "Slow Cooker",
+    "description": "Every second, apply an infinitely stacking Burn to nearby enemy champions, scaling with your max Health.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlowCooker_small.png",
+    "augmentNameId": "ARAM_SlowCooker",
+    "modes": []
+  },
+  {
+    "id": "speed-demon",
+    "name": "Speed Demon",
+    "description": "Damaging an enemy champion with an ability grants movement speed that decays over time.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpeedDemon_small.png",
+    "augmentNameId": "ARAM_SpeedDemon",
+    "modes": []
+  },
+  {
+    "id": "the-brutalizer",
+    "name": "The Brutalizer",
+    "description": "Gain 20 Attack Damage, 10 Ability Haste, and 10 Lethality.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TheBrutalizer_small.png",
+    "augmentNameId": "ARAM_TheBrutalizer",
+    "modes": []
+  },
+  {
+    "id": "tormentor",
+    "name": "Tormentor",
+    "description": "Immobilizing or grounding a champion applies a Burn for 0.6% max health magic damage per second over 5s. Stacks infinitely.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Tormentor_small.png",
+    "augmentNameId": "ARAM_Tormentor",
+    "modes": []
+  },
+  {
+    "id": "trueshot-prodigy",
+    "name": "Trueshot Prodigy",
+    "description": "When you damage a champion from far away, fire a Trueshot Barrage at them.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TrueshotProdigy_small.png",
+    "augmentNameId": "ARAM_TrueshotProdigy",
+    "modes": []
+  },
+  {
+    "id": "twice-thrice",
+    "name": "Twice Thrice",
+    "description": "Every 3 attacks, your effects trigger a second time.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TwiceThrice_small.png",
+    "augmentNameId": "ARAM_TwiceThrice",
+    "modes": []
+  },
+  {
+    "id": "upgrade-cutlass",
+    "name": "Upgrade Cutlass",
+    "description": "Reduces Spectral Cutlass and Lifeline's cooldown, and their active grants damage amplification. Gain 250 gold.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeCutlass_small.png",
+    "augmentNameId": "ARAM_Upgrade_Cutlass",
+    "modes": []
+  },
+  {
+    "id": "upgrade-hubris",
+    "name": "Upgrade Hubris",
+    "description": "On takedown, Hubris heals you and grants movement speed, both scaling with your Eminence stacks. Gain 250 gold.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeHubris_small.png",
+    "augmentNameId": "ARAM_Upgrade_Hubris",
+    "modes": []
+  },
+  {
+    "id": "void-rift",
+    "name": "Void Rift",
+    "description": "Abilities that damage enemies create a Void scar. Two nearby scars merge into a rift between them that damages and slows enemies.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/VoidRift_small.png",
+    "augmentNameId": "ARAM_VoidRift",
+    "modes": []
+  },
+  {
+    "id": "heads-up-cupcake",
+    "name": "Heads Up Cupcake!",
+    "description": "Cupcakes fly across the bridge. Catching one grants gold and heals the champion hit and nearby allies. Gold scales with healing.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WatchOutGrapefruit_small.png",
+    "augmentNameId": "ARAM_WatchOutGrapefruit",
+    "modes": []
+  },
+  {
+    "id": "weighted-popoffs",
+    "name": "Weighted Popoffs",
+    "description": "Striking enemies with Abilities grants you stacks of Popoff, reducing your non-Ultimate Ability Cooldowns.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WeightedPopoffs_small.png",
+    "augmentNameId": "ARAM_WeightedPopoffs",
+    "modes": []
+  },
+  {
+    "id": "i-m-a-baby-kitty-where-is-mama",
+    "name": "I'm a Baby Kitty Where is Mama",
+    "description": "Standing by an ally marks them as Mama. Gain move speed moving toward Mama, plus move speed and heal and shield power near them.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BabyKitty_small.png",
+    "augmentNameId": "BabyKitty",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "ragebait",
+    "name": "Ragebait",
+    "description": "Gain dodge chance.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Stabby_Stabby_Small.png",
+    "augmentNameId": "DipDiveDodge",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "do-or-die",
+    "name": "Do or Die",
+    "description": "Double the max stacks of Mejai's Soulstealer, Leviathan, and Sword of the Occult.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Do_or_Die_Small.png",
+    "augmentNameId": "DoOrDie",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "don-t-stop-cleavin",
+    "name": "Don't Stop Cleavin'",
+    "description": "Buy unlimited Black Cleavers; each purchase raises its stats for every copy you own. Immediately gain The Brutalizer.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dont_Stop_Cleaving_Small.png",
+    "augmentNameId": "DontStopCleavin",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "doran-s-biggest-fan",
+    "name": "Doran's Biggest Fan",
+    "description": "Each Doran's item bought past the first stacks onto the original for part of its stats. Passives don't stack and it can't be sold.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dorans_Fan_Small.png",
+    "augmentNameId": "DoransBiggestFan",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "drink-up",
+    "name": "Drink Up",
+    "description": "Everyone on your team instantly gains health potions, and you gain more every few takedowns.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Drink_Up_Small.png",
+    "augmentNameId": "DrinkUp",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "time-warp-heartsteel",
+    "name": "Time Warp: Heartsteel",
+    "description": "After gaining Bonus Health, reach into the future and gain a Heartsteel. Heartsteel is not sellable.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/FS_Heart_Steal_Small.png",
+    "augmentNameId": "FutureSightHeartsteel",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "gash",
+    "name": "Gash",
+    "description": "Gain attack speed and deal bonus true damage on-hit, scaling with your armor.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/DarksteelTalons_small.png",
+    "augmentNameId": "Gash",
+    "modes": []
+  },
+  {
+    "id": "grandma-s-chili-oil",
+    "name": "Grandma's Chili Oil",
+    "description": "Attacks and abilities burn enemies and leave Chili Oil that heals you and burns them. It grows stronger with the burns you apply.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GrandmasChiliOil_small.png",
+    "augmentNameId": "GrandmasChiliOil",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "haste-makes-waste",
+    "name": "Haste Makes Waste",
+    "description": "Gain cooldown reduction and raise your cooldown reduction cap.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Haste_Makes_Waste_Small.png",
+    "augmentNameId": "HasteMakesWaste",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "hat-on-a-hat",
+    "name": "Hat on a Hat",
+    "description": "Headwear items and hats give an extra Ability Power and Magic Resist.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/HatonaHat_small.png",
+    "augmentNameId": "HatOnAHat",
+    "modes": []
+  },
+  {
+    "id": "the-hex-core",
+    "name": "The Hex Core",
+    "description": "Get a Prototype Hex Core. Spend gold to upgrade the Hex Core and permanently upgrade your abilities.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dont_Stop_Cleaving_Small.png",
+    "augmentNameId": "HexCore",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "laser-heal",
+    "name": "Laser Heal",
+    "description": "Cast a laser for 2.5 seconds that heals allies, and Slows and deals magic damage to enemies.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/LaseHeal_small.png",
+    "augmentNameId": "LaserHeal",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "reenergize",
+    "name": "ReEnergize",
+    "description": "Gain an energized attack dealing damage based on the target's current health. Charges refund fully when you hit a new target.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/MobiusCoil_small.png",
+    "augmentNameId": "ReEnergize",
+    "modes": []
+  },
+  {
+    "id": "red-envelopes",
+    "name": "Red Envelopes",
+    "description": "Red envelopes appear around you randomly. Picking them up gives you Gold and a small amount of a random Stats.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/RedEnvelopes_small.png",
+    "augmentNameId": "RedEnvelopes",
+    "modes": []
+  },
+  {
+    "id": "snowball-roulette",
+    "name": "Snowball Roulette",
+    "description": "Mark gains ability haste. Hitting an enemy calls a snowfall that damages and slows nearby enemies. Grants Mark if unequipped.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SnowballUpgrade_small.png",
+    "augmentNameId": "SnowballRoulette",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "spirit-of-the-jungle-main",
+    "name": "Spirit of the Jungle Main",
+    "description": "The primary stats of jungle items you own are increased. Only one copy of each item benefits.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpiritualPurification_small.png",
+    "augmentNameId": "SpiritOfTheJungleMain",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "stabby-stabby",
+    "name": "Stabby Stabby",
+    "description": "Gain cooldown reduction and raise your cooldown reduction cap.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Stabby_Stabby_Small.png",
+    "augmentNameId": "StabbyStabby",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "summoner-s-safari",
+    "name": "Summoner's Safari",
+    "description": "While in the jungle or river, you quickly discover consumables. 'Mid? Where we're going we don",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Stabby_Stabby_Small.png",
+    "augmentNameId": "SummonersSafari",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "true-eternity",
+    "name": "True Eternity",
+    "description": "You may buy unlimited Rod of Ages; their stacks build faster and are uncapped. Gain a Catalyst of Aeons.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Do_or_Die_Small.png",
+    "augmentNameId": "TrueEternity",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "upgrade-deathfire-grasp",
+    "name": "Upgrade: Deathfire Grasp",
+    "description": "Deathfire Grasp's damage amplification rises and its cooldown falls, and it now hits every champion around the target.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Upgrade_Deathfire_Small.png",
+    "augmentNameId": "Upgrade_DeathFireGrasp",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "upgrade-innervating-locket",
+    "name": "Upgrade: Innervating Locket",
+    "description": "Innervating Locket restores more health and mana, and now affects all allied champions around the target.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Upgrade_Innervating_Small.png",
+    "augmentNameId": "Upgrade_InnervatingLocket",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "upgrade-mikael-s-blessing",
+    "name": "Upgrade Mikael's Blessing",
+    "description": "Gain Mikael's Blessing with a reduced cooldown. Its active cleanses nearby allies, heals them, and grants tenacity.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeMikaelsBlessing_small.png",
+    "augmentNameId": "Upgrade_MikaelsBlessing",
+    "modes": []
+  },
+  {
+    "id": "upgrade-ravenous-hydra",
+    "name": "Upgrade Ravenous Hydra",
+    "description": "Hitting an enemy champion with an ability triggers Cleave. Ravenous Hydra gains 18% life steal. Gain 500 gold.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeSheen_small.png",
+    "augmentNameId": "Upgrade_Ravenous",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "upgrade-sundered-sky",
+    "name": "Upgrade Sundered Sky",
+    "description": "Sundered Sky's per-target cooldown drops to 5 seconds and it heals you for 9% of your missing health. Gain 500 gold.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeIE_small.png",
+    "augmentNameId": "Upgrade_SunderedSky",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "upgrade-thornmail",
+    "name": "Upgrade Thornmail",
+    "description": "After a few seconds out of combat, your Thornmail or Bramble Vest grows a shell that reflects increased damage from attacks.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeCollector_small.png",
+    "augmentNameId": "Upgrade_Thornmail",
+    "modes": []
+  },
+  {
+    "id": "upgrade-zz-rot-portal",
+    "name": "Upgrade: Zz'Rot Portal",
+    "description": "Zz'Rot Portal spawns extra minions, plus one more per level. Minions also spawn when the portal is destroyed.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Upgrade_ZzrotPortal_Small.png",
+    "augmentNameId": "Upgrade_ZzRotPortal",
+    "modes": [
+      "classic"
+    ]
+  },
+  {
+    "id": "wind-beneath-blade",
+    "name": "Wind Beneath Blade",
+    "description": "The higher your Armor Penetration and Magic Penetration are, the faster you are.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WindBeneathBlade_small.png",
+    "augmentNameId": "WindBeneathBlade",
+    "modes": []
+  },
+  {
+    "id": "reload",
+    "name": "Reload",
+    "description": "While the ability is active, your basic attack cooldown is reduced.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightningStrikes_small.png",
+    "augmentNameId": "KeepGoing",
+    "modes": [
+      "classic"
+    ]
   }
 ]

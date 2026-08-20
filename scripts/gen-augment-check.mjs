@@ -20,6 +20,16 @@ const ko = JSON.parse(fs.readFileSync(path.join(dataDir, 'augments.ko.json'), 'u
 const en = JSON.parse(fs.readFileSync(path.join(dataDir, 'augments.en.json'), 'utf8'));
 const enMap = new Map(en.map((a) => [a.id, a]));
 
+// apply-mayhem-patch.mjs 가 남긴 패치 리포트. 없으면 배지 없이 그냥 그린다.
+const diffPath = path.join(root, 'docs/augment-diff.json');
+const diff = fs.existsSync(diffPath) ? JSON.parse(fs.readFileSync(diffPath, 'utf8')) : {};
+const newIds = new Set(diff.newIds ?? []);
+const noCoefIds = new Set((diff.noCoefficients ?? []).map((a) => a.id));
+const numberDiffs = diff.numberDiffs ?? [];
+// disabled 는 {id, name} 목록이다. 이름으로 맞추면 CDragon 의 동명이인 115쌍에서
+// 엉뚱한 증강에 배지가 붙거나, 개명된 증강이 배지를 조용히 잃는다 — 매칭 키는 늘 id 다.
+const disabledIds = new Set((diff.disabled ?? []).map((d) => d.id).filter(Boolean));
+
 const merged = ko.map((a) => ({
   id: a.id,
   ko: a.name,
@@ -28,6 +38,11 @@ const merged = ko.map((a) => ({
   iconPath: a.iconPath,
   descKo: a.description ?? '',
   descEn: enMap.get(a.id)?.description ?? '',
+  modes: a.modes ?? [],
+  isNew: newIds.has(a.id),
+  // 게임 bin 에 계수가 없어 수치를 확정하지 못한 항목 — 눈으로 확인이 필요하다.
+  noCoef: noCoefIds.has(a.id),
+  disabled: disabledIds.has(a.id),
 }));
 
 // 같은 아이콘 파일을 공유하는 증강 식별 (검수 표시용)
@@ -38,6 +53,16 @@ for (const a of merged) a.shared = counts.get(basename(a.iconPath)) > 1;
 
 const rarityCounts = merged.reduce((acc, a) => ((acc[a.rarity] = (acc[a.rarity] ?? 0) + 1), acc), {});
 const sharedCount = merged.filter((a) => a.shared).length;
+const newCount = merged.filter((a) => a.isNew).length;
+const noCoefCount = merged.filter((a) => a.noCoef).length;
+const aramCount = merged.filter((a) => a.modes.includes('aram')).length;
+const classicCount = merged.filter((a) => a.modes.includes('classic')).length;
+const unreleasedCount = merged.filter((a) => a.modes.length === 0).length;
+
+// script 블록 안에 넣는 값은 < 를 유니코드로 이스케이프한다. 설명·위키 텍스트에
+// </script> 나 <!-- 가 섞이면 브라우저가 거기서 script 를 끊어 페이지가 통째로 빈다.
+// JSON 파서에게 \u003c 와 < 는 같은 문자라 데이터 의미는 그대로다.
+const embed = (v) => JSON.stringify(v).replace(/</g, '\\u003c');
 
 const html = `<!doctype html>
 <html lang="ko">
@@ -55,16 +80,26 @@ const html = `<!doctype html>
   body { margin: 0; background: var(--bg); color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; }
   header { position: sticky; top: 0; z-index: 10; background: rgba(13,19,17,.92);
-    backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px; }
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 14px 24px 12px; }
   h1 { margin: 0 0 4px; font-size: 20px; }
   .stats { color: var(--text2); font-size: 13px; }
+  .stats > span, .stats > b { white-space: nowrap; }
   .stats b { color: var(--text); }
-  .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: center; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
+  .filters { display: grid; gap: 7px; margin-top: 10px; }
+  .frow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .flabel { flex: 0 0 38px; font-size: 11px; color: var(--text3); letter-spacing: .02em; }
+  .count { margin-left: auto; font-size: 12px; color: var(--text2); white-space: nowrap; }
+  .count b { color: var(--text); }
+  .reset { font-size: 12px; color: var(--text3); cursor: pointer; padding: 4px 6px; border-radius: 6px; }
+  .reset:hover { color: var(--text); background: var(--raised); }
   input[type=search] { background: var(--raised); border: 1px solid var(--border); color: var(--text);
-    border-radius: 9px; padding: 8px 12px; font-size: 14px; min-width: 220px; outline: none; }
+    border-radius: 9px; padding: 7px 12px; font-size: 13.5px; min-width: 240px; flex: 1; max-width: 420px; outline: none; }
   input[type=search]:focus { border-color: var(--mint); }
   .chip { background: var(--raised); border: 1px solid var(--border); color: var(--text2);
-    border-radius: 999px; padding: 6px 14px; font-size: 13px; cursor: pointer; user-select: none; }
+    border-radius: 999px; padding: 5px 12px; font-size: 12.5px; cursor: pointer; user-select: none;
+    line-height: 1.35; transition: background .12s, color .12s, border-color .12s; }
+  .chip:hover { border-color: #3a4a44; color: var(--text); }
   .chip.active { background: var(--mint); color: #06231b; border-color: var(--mint); font-weight: 600; }
   .chip.toggle.active { background: #4a2f2f; color: #ffd9d9; border-color: #7a4a4a; }
   main { padding: 20px 24px 60px; }
@@ -88,6 +123,25 @@ const html = `<!doctype html>
   .rb.prismatic { background: rgba(201,139,255,.15); color: var(--prism); }
   .sb { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px;
     background: rgba(232,150,80,.15); color: #e89650; }
+  .nb { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px;
+    background: rgba(30,215,160,.16); color: var(--mint); }
+  .cb { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px;
+    background: rgba(220,90,90,.16); color: #ff9a9a; }
+  .db { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px;
+    background: rgba(120,120,120,.18); color: var(--text3); }
+  .card.isnew { border-color: rgba(30,215,160,.45); }
+  .mb { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px; }
+  .mb.aram { background: rgba(90,170,255,.16); color: #8fc4ff; }
+  .mb.classic { background: rgba(255,180,90,.16); color: #ffc98f; }
+  .mb.none { background: rgba(120,120,120,.18); color: var(--text3); }
+  details.review { margin: 28px 0 0; border: 1px solid var(--border); border-radius: 12px;
+    background: var(--surface); padding: 12px 16px; }
+  details.review summary { cursor: pointer; font-size: 14px; font-weight: 600; }
+  details.review table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12px; }
+  details.review td { border-top: 1px solid var(--border); padding: 8px 6px; vertical-align: top; }
+  details.review td.n { width: 150px; color: var(--text); font-weight: 600; }
+  details.review td.a { color: var(--text2); }
+  details.review td.w { color: var(--text3); }
   .empty { color: var(--text3); padding: 40px; text-align: center; }
   .iconpath { font-size: 10px; color: var(--text3); margin-top: 4px; white-space: nowrap;
     overflow: hidden; text-overflow: ellipsis; font-family: ui-monospace, monospace; }
@@ -100,22 +154,50 @@ const html = `<!doctype html>
     총 <b>${merged.length}</b>개 ·
     <span style="color:var(--silver)">실버 ${rarityCounts.silver ?? 0}</span> ·
     <span style="color:var(--gold)">골드 ${rarityCounts.gold ?? 0}</span> ·
-    <span style="color:var(--prism)">프리즘 ${rarityCounts.prismatic ?? 0}</span> ·
-    아이콘 공유 <b style="color:#e89650">${sharedCount}</b>개
+    <span style="color:var(--prism)">프리즘 ${rarityCounts.prismatic ?? 0}</span>
+  </div>
+  <div class="stats" style="margin-top:3px">
+    <span style="color:#8fc4ff">칼바람 ${aramCount}</span> ·
+    <span style="color:#ffc98f">클래식 ${classicCount}</span> ·
+    미출시 ${unreleasedCount} ·
+    <span style="color:#e89650">아이콘 공유 ${sharedCount}</span> ·
+    <span style="color:var(--mint)">신규 ${newCount}</span> ·
+    <span style="color:#ff9a9a">수치 미확인 ${noCoefCount}</span>
   </div>
   <div class="controls">
-    <input id="q" type="search" placeholder="한글·영문 이름 검색…" autocomplete="off" />
-    <span class="chip active" data-r="all">전체</span>
-    <span class="chip" data-r="silver">실버</span>
-    <span class="chip" data-r="gold">골드</span>
-    <span class="chip" data-r="prismatic">프리즘</span>
-    <span class="chip toggle" id="sharedOnly">공유 아이콘만</span>
+    <input id="q" type="search" placeholder="한글·영문 이름·설명 검색…" autocomplete="off" />
+  </div>
+  <div class="filters">
+    <div class="frow">
+      <span class="flabel">등급</span>
+      <span class="chip active" data-g="rarity" data-v="all">전체</span>
+      <span class="chip" data-g="rarity" data-v="silver">실버</span>
+      <span class="chip" data-g="rarity" data-v="gold">골드</span>
+      <span class="chip" data-g="rarity" data-v="prismatic">프리즘</span>
+    </div>
+    <div class="frow">
+      <span class="flabel">모드</span>
+      <span class="chip active" data-g="mode" data-v="all">전체</span>
+      <span class="chip" data-g="mode" data-v="aram">칼바람</span>
+      <span class="chip" data-g="mode" data-v="classic">클래식</span>
+      <span class="chip" data-g="mode" data-v="both">양쪽 공유</span>
+      <span class="chip" data-g="mode" data-v="none">미출시</span>
+    </div>
+    <div class="frow">
+      <span class="flabel">표시</span>
+      <span class="chip toggle" data-t="shared">아이콘 공유</span>
+      <span class="chip toggle" data-t="isNew">신규</span>
+      <span class="chip toggle" data-t="noCoef">수치 미확인</span>
+      <span class="reset" id="reset">초기화</span>
+      <span class="count" id="count"></span>
+    </div>
   </div>
 </header>
 <main id="out"></main>
 
 <script>
-const DATA = ${JSON.stringify(merged)};
+const DATA = ${embed(merged)};
+const NUMBER_DIFFS = ${embed(numberDiffs)};
 const CDRAGON = 'https://raw.communitydragon.org/latest';
 // 앱의 augmentImageUrl(iconPath,'large')과 동일
 function iconUrl(p) {
@@ -137,13 +219,23 @@ function iconUrlSmall(p) {
 }
 const RNAME = { silver: '실버', gold: '골드', prismatic: '프리즘' };
 function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
-let rarity = 'all', sharedOnly = false, query = '';
+// 등급·모드는 단일 선택, 표시 플래그만 다중 토글.
+// 칼바람+클래식 동시 선택은 사실상 "양쪽 공유"라 별도 항목으로 뺐다 — 토글 두 개를 켜서
+// 교집합을 만들게 하는 것보다 그렇게 이름 붙여 두는 편이 무엇을 보는지 분명하다.
+let rarity = 'all', mode = 'all', query = '';
+const flags = { shared: false, isNew: false, noCoef: false };
 
 function render() {
   const out = document.getElementById('out');
   let items = DATA.filter((a) => {
     if (rarity !== 'all' && a.rarity !== rarity) return false;
-    if (sharedOnly && !a.shared) return false;
+    if (mode === 'aram' && !a.modes.includes('aram')) return false;
+    if (mode === 'classic' && !a.modes.includes('classic')) return false;
+    if (mode === 'both' && a.modes.length < 2) return false;
+    if (mode === 'none' && a.modes.length) return false;
+    if (flags.shared && !a.shared) return false;
+    if (flags.isNew && !a.isNew) return false;
+    if (flags.noCoef && !a.noCoef) return false;
     if (query) {
       const q = query.toLowerCase();
       const hay = (a.ko + ' ' + a.en + ' ' + a.id + ' ' + a.descKo + ' ' + a.descEn).toLowerCase();
@@ -151,6 +243,7 @@ function render() {
     }
     return true;
   });
+  document.getElementById('count').innerHTML = '<b>' + items.length + '</b> / ' + DATA.length + '개';
   const order = { silver: 0, gold: 1, prismatic: 2 };
   const groups = {};
   for (const a of items) (groups[a.rarity] ??= []).push(a);
@@ -167,7 +260,7 @@ function render() {
     grid.className = 'grid';
     for (const a of list) {
       const card = document.createElement('div');
-      card.className = 'card' + (a.shared ? ' shared' : '');
+      card.className = 'card' + (a.shared ? ' shared' : '') + (a.isNew ? ' isnew' : '');
       const img = document.createElement('img');
       img.className = 'icon';
       img.loading = 'lazy';
@@ -185,6 +278,12 @@ function render() {
       meta.innerHTML = '<div class="ko">' + esc(a.ko) + '</div>' +
         '<div class="en">' + esc(a.en) + '</div>' +
         '<div class="badges"><span class="rb ' + a.rarity + '">' + RNAME[a.rarity] + '</span>' +
+        (a.modes.includes('aram') ? '<span class="mb aram">칼바람</span>' : '') +
+        (a.modes.includes('classic') ? '<span class="mb classic">클래식</span>' : '') +
+        (a.modes.length === 0 ? '<span class="mb none">미출시</span>' : '') +
+        (a.isNew ? '<span class="nb">신규</span>' : '') +
+        (a.noCoef ? '<span class="cb">수치 미확인</span>' : '') +
+        (a.disabled ? '<span class="db">비활성</span>' : '') +
         (a.shared ? '<span class="sb">공유</span>' : '') + '</div>' +
         '<div class="desc">' + esc(a.descKo) + '</div>' +
         '<div class="descEn">' + esc(a.descEn) + '</div>' +
@@ -198,13 +297,57 @@ function render() {
 }
 
 document.getElementById('q').addEventListener('input', (e) => { query = e.target.value.trim(); render(); });
-document.querySelectorAll('.chip[data-r]').forEach((c) => c.addEventListener('click', () => {
-  document.querySelectorAll('.chip[data-r]').forEach((x) => x.classList.remove('active'));
-  c.classList.add('active'); rarity = c.dataset.r; render();
-}));
-document.getElementById('sharedOnly').addEventListener('click', (e) => {
-  sharedOnly = !sharedOnly; e.target.classList.toggle('active', sharedOnly); render();
+
+// 단일 선택 그룹(등급·모드)
+document.querySelectorAll('.chip[data-g]').forEach((c) =>
+  c.addEventListener('click', () => {
+    const g = c.dataset.g;
+    document.querySelectorAll('.chip[data-g="' + g + '"]').forEach((x) => x.classList.remove('active'));
+    c.classList.add('active');
+    if (g === 'rarity') rarity = c.dataset.v;
+    else mode = c.dataset.v;
+    render();
+  }),
+);
+
+// 다중 토글(표시)
+document.querySelectorAll('.chip[data-t]').forEach((c) =>
+  c.addEventListener('click', () => {
+    const k = c.dataset.t;
+    flags[k] = !flags[k];
+    c.classList.toggle('active', flags[k]);
+    render();
+  }),
+);
+
+document.getElementById('reset').addEventListener('click', () => {
+  rarity = 'all';
+  mode = 'all';
+  for (const k of Object.keys(flags)) flags[k] = false;
+  query = '';
+  document.getElementById('q').value = '';
+  document.querySelectorAll('.chip[data-t]').forEach((x) => x.classList.remove('active'));
+  for (const g of ['rarity', 'mode']) {
+    document.querySelectorAll('.chip[data-g="' + g + '"]').forEach((x) =>
+      x.classList.toggle('active', x.dataset.v === 'all'),
+    );
+  }
+  render();
 });
+
+// 앱 설명과 위키 수치가 엇갈리는 건들. 대개 서술 상세도 차이라 자동 반영하지 않고
+// 여기 모아만 둔다 — 실제 패치 변경인지 눈으로 가려 다음 커밋에서 정리한다.
+if (NUMBER_DIFFS.length) {
+  const d = document.createElement('details');
+  d.className = 'review';
+  const rows = NUMBER_DIFFS.map((r) =>
+    '<tr><td class="n">' + esc(r.name) + '</td>' +
+    '<td class="a"><b>앱</b> ' + esc(r.app) + '<br><b>위키</b> <span class="w">' + esc(r.wiki) + '</span></td></tr>'
+  ).join('');
+  d.innerHTML = '<summary>앱 · 위키 수치가 다른 ' + NUMBER_DIFFS.length +
+    '건 — 확인 필요 (자동 반영하지 않음)</summary><table>' + rows + '</table>';
+  document.body.appendChild(d);
+}
 render();
 </script>
 </body>

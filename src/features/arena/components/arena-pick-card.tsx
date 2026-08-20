@@ -12,7 +12,9 @@ import { useEffect } from "react";
 import { Pressable } from "react-native";
 import Animated, {
   Easing,
+  ReduceMotion,
   useAnimatedStyle,
+  useReducedMotion,
   useSharedValue,
   withDelay,
   withSequence,
@@ -21,6 +23,16 @@ import Animated, {
 
 export type ArenaCardExitMode = "none" | "picked" | "unchosen" | "reroll";
 export type ArenaCardEntryMode = "flip" | "fade";
+
+const DEFAULT_EASING = Easing.inOut(Easing.quad);
+const FLIP_EASING = Easing.out(Easing.cubic);
+
+// reanimated는 모든 애니메이션 기본값이 ReduceMotion.System이라, iOS '동작 줄이기'가
+// 켜진 기기에서는 아래 withTiming/withDelay가 통째로 스킵되고 값이 최종값으로 튄다
+// (= 카드가 애니메이션 없이 그냥 보인다). 명시적으로 opt-out하고, 어지럼증을 유발하는
+// 회전만 빼서 그 기기에서도 최소한 fade는 재생되게 한다.
+const timing = (toValue: number, duration: number, easing = DEFAULT_EASING) =>
+  withTiming(toValue, { duration, easing, reduceMotion: ReduceMotion.Never });
 
 interface Props {
   index: number;
@@ -39,46 +51,51 @@ export function ArenaPickCard({
   onPress,
   children,
 }: Props) {
+  const reduceMotion = useReducedMotion();
+  const flipIn = entryMode === "flip" && !reduceMotion;
+
   const opacity = useSharedValue(0);
   const scale = useSharedValue(1);
-  const rotateY = useSharedValue(entryMode === "flip" ? 90 : 0);
+  const rotateY = useSharedValue(flipIn ? 90 : 0);
 
   useEffect(() => {
     if (exitMode === "none") {
-      if (entryMode === "flip") {
+      if (flipIn) {
         // 새 step: 카드가 행을 가로질러 순차적으로 펼쳐지며 등장.
         const delay = index * 90;
         opacity.value = 0;
         scale.value = 1;
         rotateY.value = 90;
-        opacity.value = withDelay(delay, withTiming(1, { duration: 160 }));
+        opacity.value = withDelay(delay, timing(1, 160), ReduceMotion.Never);
         rotateY.value = withDelay(
           delay,
-          withTiming(0, { duration: 380, easing: Easing.out(Easing.cubic) }),
+          timing(0, 380, FLIP_EASING),
+          ReduceMotion.Never,
         );
       } else {
-        // 리롤 교체분: 빠른 fade + scale-in.
+        // 리롤 교체분(그리고 '동작 줄이기' 기기의 모든 카드): 빠른 fade + scale-in.
         rotateY.value = 0;
         opacity.value = 0;
         scale.value = 0.96;
-        opacity.value = withTiming(1, { duration: 200 });
-        scale.value = withTiming(1, { duration: 240 });
+        opacity.value = timing(1, 200);
+        scale.value = timing(1, 240);
       }
     } else if (exitMode === "picked") {
       scale.value = withSequence(
-        withTiming(1.05, { duration: 120 }),
-        withTiming(1, { duration: 90 }),
+        ReduceMotion.Never,
+        timing(1.05, 120),
+        timing(1, 90),
       );
     } else if (exitMode === "unchosen") {
-      opacity.value = withTiming(0, { duration: 280 });
-      scale.value = withTiming(0.94, { duration: 280 });
+      opacity.value = timing(0, 280);
+      scale.value = timing(0.94, 280);
     } else if (exitMode === "reroll") {
-      opacity.value = withTiming(0, { duration: 200 });
-      scale.value = withTiming(0.96, { duration: 200 });
+      opacity.value = timing(0, 200);
+      scale.value = timing(0.96, 200);
     }
     // Shared value는 안정적인 ref이므로 deps에서 의도적으로 제외한다.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exitMode, index, entryMode]);
+  }, [exitMode, index, flipIn]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
