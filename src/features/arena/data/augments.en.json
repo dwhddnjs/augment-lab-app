@@ -322,7 +322,7 @@
   {
     "id": "clown-college",
     "name": "Clown College",
-    "description": "Gain Deceive Summoner Spell.\n\nDeceive: You teleport and become Invisible. Your next Attack while Invisible deals an additional physical damage.\n\nWhen you die, spawn an exploding box that deals a large amount of magic damage and Fear nearby enemies.",
+    "description": "Gain the Deceive spell: blink and turn invisible, with your next attack dealing bonus physical damage. On death, leave an exploding box dealing heavy magic damage and fearing nearby enemies.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/clowncollege_small.png",
     "maxLevel": 1
@@ -682,7 +682,7 @@
   {
     "id": "gamba-anvil",
     "name": "Gamba Anvil",
-    "description": "Gain +%i:goldCoins%1000 gold and reduce the price of all anvils.\n\nPrismatic Anvils: -%i:goldCoins%1500 gold\nLegendary Anvils: -%i:goldCoins%750 gold\nStat Anvils: -%i:goldCoins%250 gold\n\nItems acquired from anvils resell for -%i:goldCoins%500 gold less.",
+    "description": "Gain 1000 gold and cheaper anvils: prismatic -1500 gold, legendary -750 gold, stat -250 gold. Items from anvils resell for 500 gold less.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/thiefsgloves_small.png",
     "maxLevel": 1
@@ -1090,7 +1090,7 @@
   {
     "id": "blood-brother",
     "name": "Blood Brother",
-    "description": "Gain Darius's Passive Hemorrhage.\n\nAttacks and damaging Abilities cause the target to Hemorrhage, dealing physical damage over 5 seconds, stacking up to 5 times.\n\nDraven gains Attack Damage at 5 Hemorrhage stacks.",
+    "description": "Gain Darius's Hemorrhage: attacks and damaging abilities deal physical damage over 5s, stacking up to 5 times. At 5 stacks, Draven gains attack damage.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bloodbrother_small.png",
     "maxLevel": 1

@@ -1,28 +1,11 @@
 import { useCallback, useMemo, useState } from 'react';
-import { useAugments } from '@/features/augments/hooks/use-augments';
+import { useAugmentPool } from '@/features/augments/hooks/use-augments';
 import type { Augment, AugmentRarity } from '@/features/augments/types';
+import { rollRarity } from '../rarity-odds';
 
 // "Transmute: Chaos" grants extra random augments when picked.
 const TRANSMUTE_CHAOS_ID = 'transmute-chaos';
 const TRANSMUTE_CHAOS_BONUS = 2;
-
-// Per-round [silver, gold] weights; prismatic = remainder. Higher rounds tilt rarer.
-const RARITY_WEIGHTS: [number, number][] = [
-  [0.70, 0.25],
-  [0.65, 0.27],
-  [0.60, 0.28],
-  [0.55, 0.30],
-];
-
-// Roll a single rarity for the whole round so all cards share one color.
-function rollRarity(round: number): AugmentRarity {
-  const [wSilver, wGold] = RARITY_WEIGHTS[Math.min(round, RARITY_WEIGHTS.length - 1)];
-  const wPrismatic = 1 - wSilver - wGold;
-  const r = Math.random();
-  if (r < wPrismatic) return 'prismatic';
-  if (r < wPrismatic + wGold) return 'gold';
-  return 'silver';
-}
 
 // Randomly pick `count` distinct augments from `pool`, marking them used.
 function sampleDistinct(pool: Augment[], count: number, used: Set<string>): Augment[] {
@@ -57,14 +40,14 @@ function drawOfRarity(
 }
 
 // Same-rarity round: roll one rarity, then draw `count` of it.
-function pickWeighted(pool: Augment[], round: number, count: number): Augment[] {
-  return drawOfRarity(pool, rollRarity(round), count);
+function pickWeighted(pool: Augment[], count: number): Augment[] {
+  return drawOfRarity(pool, rollRarity(), count);
 }
 
 export function useAram() {
-  const allAugments = useAugments();
+  const allAugments = useAugmentPool('aram');
 
-  const initialCards = useMemo(() => pickWeighted(allAugments, 0, 3), [allAugments]);
+  const initialCards = useMemo(() => pickWeighted(allAugments, 3), [allAugments]);
 
   const [round, setRound] = useState(0);
   const [currentCards, setCurrentCards] = useState<Augment[]>(initialCards);
@@ -73,10 +56,10 @@ export function useAram() {
   const [rerolled, setRerolled] = useState<boolean[]>([false, false, false]);
 
   const drawNext = useCallback(
-    (exclude: Augment[], nextRound: number) => {
+    (exclude: Augment[]) => {
       const excludeIds = new Set(exclude.map((a) => a.id));
       const pool = allAugments.filter((a) => !excludeIds.has(a.id));
-      return pickWeighted(pool, nextRound, 3);
+      return pickWeighted(pool, 3);
     },
     [allAugments],
   );
@@ -134,7 +117,7 @@ export function useAram() {
       setRound(nextRound);
 
       if (!done) {
-        setCurrentCards(drawNext(nextPicked, nextRound));
+        setCurrentCards(drawNext(nextPicked));
         setRerolled([false, false, false]); // fresh reroll budget each round
       }
 
