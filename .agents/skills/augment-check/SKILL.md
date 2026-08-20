@@ -13,7 +13,7 @@ license: MIT
 node scripts/gen-augment-check.mjs   # → docs/augment-check.html
 ```
 
-- 검수 페이지는 ko/en을 `id`로 병합해 전체 증강을 rarity별로 보여주고, 앱과 동일한 `augmentImageUrl(large)` 규칙으로 CDragon 아이콘을 렌더한다. (26.16 기준 279개)
+- 검수 페이지는 ko/en을 `id`로 병합해 전체 증강을 rarity별로 보여주고, 앱과 동일한 `augmentImageUrl(large)` 규칙으로 CDragon 아이콘을 렌더한다. (26.16 기준 280개)
 - 같은 아이콘 파일을 공유하는 증강은 **"공유" 배지**로 표시(오류 아님).
 - **신규**·**수치 미확인**·**비활성** 배지와 "앱·위키 수치가 다른 건" 목록은 `docs/augment-diff.json`에서 온다.
   이 파일은 `node scripts/apply-mayhem-patch.mjs --write`가 만든다.
@@ -28,8 +28,8 @@ node scripts/gen-augment-check.mjs   # → docs/augment-check.html
 
 | modeName | 이 앱의 모드 | 비고 |
 | --- | --- | --- |
-| `KIWI` | `aram` — 칼바람 나락 아수라장 | 220개 |
-| `KIWI_JADE` | `classic` — 아수라장 클래식 스타일 | 188개 |
+| `KIWI` | `aram` — 칼바람 나락 아수라장 | 풀 220개 → 앱 211개 |
+| `KIWI_JADE` | `classic` — 아수라장 클래식 스타일 | 풀 188개 → 앱 187개 |
 | `CHERRY` | 아레나 | `features/arena` 가 따로 관리 |
 
 두 모드는 증강을 상당수 공유하므로 한 증강이 `modes: ['aram','classic']` 을 가질 수 있다.
@@ -46,7 +46,8 @@ node scripts/gen-augment-check.mjs   # → docs/augment-check.html
 node scripts/apply-mayhem-patch.mjs --write    # (필요 시) 신규 증강 수집 + docs/augment-diff.json
 node scripts/tag-augment-modes.mjs --write     # augmentNameId·modes 확정, 아이콘 CDragon 기준 교정
 node scripts/tidy-augment-text.mjs --write     # 플레이버·군더더기 정리
-node scripts/check-augment-data.mjs            # 정합성 검증 (모드 분리·설명 길이·깨진 수치)
+node scripts/check-augment-data.mjs            # 정합성 검증 (개수 스냅샷·설명 길이·깨진 수치)
+node scripts/tidy-augment-text.mjs --selftest  # 정제 정규식이 문장을 먹지 않는지
 node scripts/gen-augment-check.mjs             # 검수 페이지 재생성
 ```
 
@@ -75,3 +76,22 @@ UI 가 아니라 데이터에서 맞춘다 — landscape 카드 기준 **130자�
 
 - **ARAM Mayhem 증강은 `.../UX/Kiwi/Augments/Icons/...` 폴더 사용**. `Cherry`/`Strawberry`(Arena) 폴더를 쓰지 말 것.
 - CDragon `cherry-augments.json`에서 rarity(`kSilver`/`kGold`/`kPrismatic`)가 데이터와 일치하는 `Kiwi` 항목을 정답으로 삼는다.
+
+## 개수가 바뀌면 검사가 멈춘다 — 정상이다
+
+어떤 증강이 어느 모드에 속하는지의 정답은 CDragon `augment-lists.json` 에만 있어서,
+데이터 파일만 놓고는 모드 분리가 맞는지 논리적으로 검증할 수 없다. 자기 자신을 근거로
+자기를 검사하는 꼴이 되기 때문이다(예전 검사가 `!modes.includes('aram') && modes.includes('aram')`
+라는 모순식이라 영원히 통과했던 이유가 이것이다).
+
+그래서 `check-augment-data.mjs` 는 사람이 확인한 시점의 개수를 `EXPECTED` 에 박아두고
+흔들리면 멈춘다. 클래식 전용 55개가 칼바람에 섞이면 211 → 266 이 되므로 여기서 걸린다.
+
+패치를 반영해 개수가 정말로 바뀌었다면 **검사를 지우지 말고 `EXPECTED` 를 갱신**하고,
+무엇이 몇 개 늘고 줄었는지 검증 기록에 남길 것.
+
+## map30 캐시
+
+`apply-mayhem-patch.mjs` 는 20MB 짜리 `map30.bin.json` 을 `node_modules/.cache/augment-data` 에
+캐시한다. 하루가 지나면 자동으로 다시 받고, 새 패치가 떴는데 즉시 갱신하려면 `--refresh` 를 붙인다.
+캐시가 깨졌으면 스크립트가 스스로 지우고 재실행을 안내한다.

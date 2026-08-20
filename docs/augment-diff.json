@@ -2436,16 +2436,46 @@
     }
   ],
   "disabled": [
-    "Adamant",
-    "Perseverance",
-    "Snowball Upgrade",
-    "Vampirism",
-    "Clown College",
-    "Quantum Computing",
-    "Devil on Your Shoulder",
-    "Droppybara",
-    "Final City Transit",
-    "Void Dash"
+    {
+      "id": "adamant",
+      "name": "Adamant"
+    },
+    {
+      "id": "perseverance",
+      "name": "Perseverance"
+    },
+    {
+      "id": "snowball-upgrade",
+      "name": "Snowball Upgrade"
+    },
+    {
+      "id": "vampirism",
+      "name": "Vampirism"
+    },
+    {
+      "id": "clown-college",
+      "name": "Clown College"
+    },
+    {
+      "id": "quantum-computing",
+      "name": "Quantum Computing"
+    },
+    {
+      "id": "devil-on-your-shoulder",
+      "name": "Devil on Your Shoulder"
+    },
+    {
+      "id": "droppybara",
+      "name": "Droppybara"
+    },
+    {
+      "id": "final-city-transit",
+      "name": "Final City Transit"
+    },
+    {
+      "id": "void-dash",
+      "name": "Void Dash"
+    }
   ],
   "newIds": [
     "buff-buddies",

@@ -26,7 +26,9 @@ const diff = fs.existsSync(diffPath) ? JSON.parse(fs.readFileSync(diffPath, 'utf
 const newIds = new Set(diff.newIds ?? []);
 const noCoefIds = new Set((diff.noCoefficients ?? []).map((a) => a.id));
 const numberDiffs = diff.numberDiffs ?? [];
-const disabledNames = new Set(diff.disabled ?? []);
+// disabled 는 {id, name} 목록이다. 이름으로 맞추면 CDragon 의 동명이인 115쌍에서
+// 엉뚱한 증강에 배지가 붙거나, 개명된 증강이 배지를 조용히 잃는다 — 매칭 키는 늘 id 다.
+const disabledIds = new Set((diff.disabled ?? []).map((d) => d.id).filter(Boolean));
 
 const merged = ko.map((a) => ({
   id: a.id,
@@ -40,7 +42,7 @@ const merged = ko.map((a) => ({
   isNew: newIds.has(a.id),
   // 게임 bin 에 계수가 없어 수치를 확정하지 못한 항목 — 눈으로 확인이 필요하다.
   noCoef: noCoefIds.has(a.id),
-  disabled: disabledNames.has(enMap.get(a.id)?.name),
+  disabled: disabledIds.has(a.id),
 }));
 
 // 같은 아이콘 파일을 공유하는 증강 식별 (검수 표시용)
@@ -56,6 +58,11 @@ const noCoefCount = merged.filter((a) => a.noCoef).length;
 const aramCount = merged.filter((a) => a.modes.includes('aram')).length;
 const classicCount = merged.filter((a) => a.modes.includes('classic')).length;
 const unreleasedCount = merged.filter((a) => a.modes.length === 0).length;
+
+// script 블록 안에 넣는 값은 < 를 유니코드로 이스케이프한다. 설명·위키 텍스트에
+// </script> 나 <!-- 가 섞이면 브라우저가 거기서 script 를 끊어 페이지가 통째로 빈다.
+// JSON 파서에게 \u003c 와 < 는 같은 문자라 데이터 의미는 그대로다.
+const embed = (v) => JSON.stringify(v).replace(/</g, '\\u003c');
 
 const html = `<!doctype html>
 <html lang="ko">
@@ -189,8 +196,8 @@ const html = `<!doctype html>
 <main id="out"></main>
 
 <script>
-const DATA = ${JSON.stringify(merged)};
-const NUMBER_DIFFS = ${JSON.stringify(numberDiffs)};
+const DATA = ${embed(merged)};
+const NUMBER_DIFFS = ${embed(numberDiffs)};
 const CDRAGON = 'https://raw.communitydragon.org/latest';
 // 앱의 augmentImageUrl(iconPath,'large')과 동일
 function iconUrl(p) {

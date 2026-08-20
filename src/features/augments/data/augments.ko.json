@@ -3014,7 +3014,7 @@
   {
     "id": "snowball-roulette",
     "name": "눈덩이 룰렛",
-    "description": "눈덩이의 스킬 가속이 만큼 증가합니다. 적에게 눈덩이가 적중하면 눈이 내려 주변 적에게 광역 피해를 입히고 둔화시킵니다. 눈덩이를 보유하지 않은 경우 눈덩이를 얻습니다.",
+    "description": "눈덩이의 스킬 가속이 증가합니다. 적에게 눈덩이가 적중하면 눈이 내려 주변 적에게 광역 피해를 입히고 둔화시킵니다. 눈덩이를 보유하지 않은 경우 눈덩이를 얻습니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SnowballUpgrade_small.png",
     "augmentNameId": "SnowballRoulette",
@@ -3131,7 +3131,7 @@
   {
     "id": "upgrade-zz-rot-portal",
     "name": "업그레이드: 즈롯 차원문",
-    "description": "즈롯 차원문이 미니언을 마리 및 레벨당 1마리 추가로 소환합니다. 또한 차원문이 파괴될 때 미니언을 소환합니다.",
+    "description": "즈롯 차원문이 미니언을 추가로 소환하며, 레벨당 1마리씩 늘어납니다. 또한 차원문이 파괴될 때 미니언을 소환합니다.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Upgrade_ZzrotPortal_Small.png",
     "augmentNameId": "Upgrade_ZzRotPortal",

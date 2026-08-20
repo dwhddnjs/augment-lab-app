@@ -17,7 +17,6 @@
  * 이름으로 매칭하면 어느 쌍둥이가 걸릴지 순회 순서에 달리므로, 풀 소속을 이름보다 먼저 본다.
  * 한 번 확정한 augmentNameId 는 데이터에 저장해 이후 조회가 이 키 하나로 가게 한다.
  */
-import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -127,7 +126,10 @@ for (const a of en) {
   let modes = poolsOf(cdEntry.augmentNameId)
     .map((m) => MODE_OF[m])
     .filter(Boolean);
-  if (NOT_IN_ARAM.has(cdEntry.augmentNameId)) {
+  // 실제로 aram 이 붙어 있을 때만 걷어내고 리포트한다. 조건 없이 push 하면 애초에
+  // KIWI 풀에 없던 증강까지 '제외한 건'으로 세어, 어느 항목에서 이 override 가
+  // 실제로 일했는지 구분할 수 없게 된다.
+  if (NOT_IN_ARAM.has(cdEntry.augmentNameId) && modes.includes('aram')) {
     modes = modes.filter((m) => m !== 'aram');
     forcedOut.push(a.name);
   }

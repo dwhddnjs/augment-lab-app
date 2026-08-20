@@ -23,13 +23,14 @@
  * 위키 수치를 일괄 반영하지 않는다 — 서술 상세도 차이가 대부분이라 덮으면 기존 설명이 무너진다.
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 const WRITE = process.argv.includes('--write');
+const REFRESH = process.argv.includes('--refresh'); // map30 캐시를 무시하고 다시 받는다
 const CDRAGON = 'https://raw.communitydragon.org/latest';
 const UA = { 'User-Agent': 'Mozilla/5.0 (augment-data-build)' };
 const EN_PATH = path.join(root, 'src/features/augments/data/augments.en.json');
@@ -123,11 +124,37 @@ async function getWiki() {
 async function getSpellValues() {
   const url = 'https://raw.communitydragon.org/latest/game/data/maps/shipping/map30/map30.bin.json';
   if (!existsSync(CACHE_DIR)) mkdirSync(CACHE_DIR, { recursive: true });
-  if (!existsSync(MAP30_CACHE)) {
-    console.log('  map30.bin.json 내려받는 중(20MB, 최초 1회)…');
-    execFileSync('curl', ['-sSL', '--max-time', '300', '-o', MAP30_CACHE, url], { stdio: 'inherit' });
+
+  // 캐시는 패치가 바뀌면 반드시 갈아야 한다 — 계수가 통째로 옛 패치 것이 되면 새 증강
+  // 수치가 조용히 틀린 채로 반영된다. 하루 지나면 자동으로 다시 받고 --refresh 로 강제한다.
+  const MAX_AGE_MS = 24 * 60 * 60 * 1000;
+  const stale =
+    REFRESH ||
+    !existsSync(MAP30_CACHE) ||
+    Date.now() - statSync(MAP30_CACHE).mtimeMs > MAX_AGE_MS;
+
+  if (stale) {
+    console.log('  map30.bin.json 내려받는 중(20MB)…');
+    // 임시 파일에 받고 성공했을 때만 옮긴다. 캐시 경로로 바로 받으면 전송이 끊겼을 때
+    // 잘린 파일이 남고, 다음 실행부터는 existsSync 가 true 라 영영 JSON.parse 에서 죽는다.
+    const tmp = MAP30_CACHE + '.download';
+    try {
+      execFileSync('curl', ['-sSL', '--fail', '--max-time', '300', '-o', tmp, url], { stdio: 'inherit' });
+      renameSync(tmp, MAP30_CACHE);
+    } catch (e) {
+      rmSync(tmp, { force: true });
+      throw new Error('map30.bin.json 다운로드 실패: ' + e.message);
+    }
   }
-  const bin = JSON.parse(readFileSync(MAP30_CACHE, 'utf8'));
+
+  let bin;
+  try {
+    bin = JSON.parse(readFileSync(MAP30_CACHE, 'utf8'));
+  } catch (e) {
+    // 예전 버전이 남긴 잘린 캐시일 수 있다. 스스로 치우고 재실행을 안내한다.
+    rmSync(MAP30_CACHE, { force: true });
+    throw new Error('map30 캐시가 깨져 있어 삭제했다. 다시 실행할 것 (' + e.message + ')');
+  }
 
   // 경로 기반 인덱스: Augment_<코드명> → {변수: 값}
   const byName = new Map();
@@ -163,12 +190,15 @@ function fillVars(raw, vals) {
   return { text, filled: missing.length === 0, missing };
 }
 
-const numsIn = (s) => (s.match(/\d+(?:\.\d+)?/g) ?? []).sort();
+// 등장 순서를 그대로 둔다. 정렬해 비교하면 "50 (근접 75)" 와 "75 (근접 50)" 이 같은
+// 다중집합이라 그냥 통과해, 값이 정확히 뒤바뀐 건(조준경 부착이 그랬다)을 영영 못 잡는다.
+const numsIn = (s) => s.match(/\d+(?:\.\d+)?/g) ?? [];
 
 async function main() {
   console.log('CDragon 소스 로드…');
-  const spellVals = await getSpellValues();
-  const [cdEn, cdKo, stEn, stKo] = await Promise.all([
+  // map30 로드는 20MB 동기 작업이라 앞에 따로 두면 뒤 fetch 4건과 직렬로 붙는다.
+  const [spellVals, cdEn, cdKo, stEn, stKo] = await Promise.all([
+    getSpellValues(),
     getJson(`${CDRAGON}/plugins/rcp-be-lol-game-data/global/default/v1/cherry-augments.json`),
     getJson(`${CDRAGON}/plugins/rcp-be-lol-game-data/global/ko_kr/v1/cherry-augments.json`),
     getJson(`${CDRAGON}/game/en_us/data/menu/en_us/lol.stringtable.json`),
@@ -327,7 +357,7 @@ async function main() {
   for (const a of en) {
     const w = wikiByName.get(norm(a.name));
     if (!w) continue;
-    if (/currently disabled/i.test(w.desc)) disabled.push(a.name);
+    if (/currently disabled/i.test(w.desc)) disabled.push({ id: a.id, name: a.name });
     const appNums = numsIn(a.description), wikiNums = numsIn(w.desc);
     if (JSON.stringify(appNums) === JSON.stringify(wikiNums)) continue;
     const row = { id: a.id, name: a.name, app: a.description, wiki: w.desc, appNums, wikiNums };
@@ -359,7 +389,7 @@ async function main() {
   console.log(`\n[확인 필요한 수치 차이] ${numberDiffs.length}건 — 대개 서술 상세도 차이. 자동 반영하지 않는다`);
   console.log(`  (전체 목록은 docs/augment-diff.json / 검수 페이지에서 확인)`);
 
-  if (disabled.length) console.log(`\n[위키가 "현재 비활성"이라 적은 증강] ${disabled.length}건 → ${disabled.join(', ')}`);
+  if (disabled.length) console.log(`\n[위키가 "현재 비활성"이라 적은 증강] ${disabled.length}건 → ${disabled.map((d) => d.name).join(', ')}`);
 
   if (WRITE) {
     writeFileSync(EN_PATH, JSON.stringify(outEn, null, 2) + '\n');
