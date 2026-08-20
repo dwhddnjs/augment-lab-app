@@ -9,7 +9,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const STORAGE_KEY = 'builds:v1';
 
-export type GameMode = 'aram' | 'arena';
+/**
+ * 'aram'    — 칼바람 나락 아수라장
+ * 'arena'   — 아레나
+ * 'classic' — 아수라장 클래식 스타일(협곡 맵 453). 증강·플로우는 칼바람과 같고
+ *             라운드가 4 또는 5, 아이템이 레트로 세트라는 점만 다르다.
+ */
+export type GameMode = 'aram' | 'arena' | 'classic';
+
+/**
+ * 드래프트(3장 중 1픽) 플로우를 공유하는 모드. 아레나는 자체 화면이라 빠진다.
+ * AugmentMode 와 값이 같아 useAugmentPool 에 그대로 넘길 수 있다.
+ */
+export type DraftMode = Exclude<GameMode, 'arena'>;
 
 export interface SavedBuild {
   id: string;

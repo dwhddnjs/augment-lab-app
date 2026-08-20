@@ -28,12 +28,18 @@ import { SettingsRow } from "../components/settings-row";
 
 const t = {
   ko: {
-    section: "데이터",
-    footer:
+    backupSection: "백업 · 복원",
+    backupFooter:
       "백업 파일(.alab)에는 저장된 빌드와 테마·언어 설정이 담깁니다. 앱을 지우기 전에 백업해 두면 재설치 후 그대로 되돌릴 수 있어요.",
-    restore: "데이터 복원",
-    backup: "데이터 백업",
-    reset: "데이터 초기화",
+    backup: "백업",
+    backupDesc: "지금 데이터를 .alab 파일로 내보냅니다",
+    restore: "복원",
+    restoreDesc: "백업 파일을 불러와 현재 데이터를 덮어씁니다",
+
+    resetSection: "초기화",
+    resetFooter: "되돌릴 수 없습니다. 지우기 전에 백업을 먼저 권합니다.",
+    reset: "초기화",
+    resetDesc: "저장된 빌드와 설정을 모두 지웁니다",
 
     restoreConfirmTitle: "데이터를 복원할까요?",
     restoreConfirmBody:
@@ -56,12 +62,18 @@ const t = {
     ok: "확인",
   },
   en: {
-    section: "Data",
-    footer:
+    backupSection: "Backup & Restore",
+    backupFooter:
       "A backup file (.alab) holds your saved builds and theme/language settings. Back up before deleting the app to restore everything after reinstalling.",
-    restore: "Restore Data",
-    backup: "Back Up Data",
-    reset: "Erase Data",
+    backup: "Back Up",
+    backupDesc: "Export your current data as an .alab file",
+    restore: "Restore",
+    restoreDesc: "Load a backup file and overwrite current data",
+
+    resetSection: "Erase",
+    resetFooter: "This can't be undone. Back up first.",
+    reset: "Erase",
+    resetDesc: "Deletes all saved builds and settings",
 
     restoreConfirmTitle: "Restore data?",
     restoreConfirmBody:
@@ -171,25 +183,33 @@ export default function DataManageScreen() {
         ]}
       >
         <Section
-          title={translate("section")}
-          footer={<Text>{translate("footer")}</Text>}
+          title={translate("backupSection")}
+          footer={<Text>{translate("backupFooter")}</Text>}
         >
           <SettingsRow
-            label={translate("restore")}
-            icon="square.and.arrow.down"
-            iconColor={colors.text.primary}
-            onPress={handleRestore}
-            rowBackgroundColor={rowBg}
-          />
-          <SettingsRow
             label={translate("backup")}
+            description={translate("backupDesc")}
             icon="square.and.arrow.up"
-            iconColor={colors.text.primary}
+            iconColor={colors.accent.default}
             onPress={handleBackup}
             rowBackgroundColor={rowBg}
           />
           <SettingsRow
+            label={translate("restore")}
+            description={translate("restoreDesc")}
+            icon="square.and.arrow.down"
+            iconColor={colors.accent.default}
+            onPress={handleRestore}
+            rowBackgroundColor={rowBg}
+          />
+        </Section>
+        <Section
+          title={translate("resetSection")}
+          footer={<Text>{translate("resetFooter")}</Text>}
+        >
+          <SettingsRow
             label={translate("reset")}
+            description={translate("resetDesc")}
             icon="trash"
             iconColor={colors.status.danger.default}
             labelColor={colors.status.danger.default}

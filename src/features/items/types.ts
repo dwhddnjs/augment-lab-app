@@ -15,6 +15,10 @@ export interface ItemStats {
   magicpenFlat?: number; // 마법 관통력(고정)
   movespeedFlat?: number;
   adaptive?: number; // 적응형 능력치
+  // 클래식 레트로 전용 — 5초당 재생을 절대값으로 준다. 현대 아이템의 hpregen/mpregen은
+  // 챔피언 기본 재생에 곱하는 비율이라 단위가 달라 합칠 수 없다.
+  hpregenFlat?: number;
+  mpregenFlat?: number;
   // 비율(0.4 = 40%)
   attackspeed?: number;
   movespeedPercent?: number;
@@ -28,6 +32,7 @@ export interface ItemStats {
   omnivamp?: number; // 모든 피해 흡혈
   tenacity?: number; // 강인함
   healshield?: number; // 체력 회복 및 보호막 효과
+  cdr?: number; // 클래식 레트로 전용 — 구버전 재사용 대기시간 감소(스킬 가속과 별개)
 }
 
 export interface Item {

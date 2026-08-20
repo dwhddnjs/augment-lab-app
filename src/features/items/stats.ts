@@ -48,6 +48,7 @@ export const STAT_DISPLAY_ORDER = [
   'tenacity',
   'healshield',
   'adaptive',
+  'cdr',
 ] as const;
 
 export type StatKey = (typeof STAT_DISPLAY_ORDER)[number];
@@ -88,6 +89,7 @@ export const STAT_LABELS: Record<StatKey, StatMeta> = {
   tenacity: { ko: '강인함', en: 'Tenacity', unit: '%', decimals: 1 },
   healshield: { ko: '회복 및 보호막', en: 'Heal & Shield', unit: '%', decimals: 1 },
   adaptive: { ko: '적응형 능력치', en: 'Adaptive Force' },
+  cdr: { ko: '재사용 대기시간 감소', en: 'Cooldown Reduction', unit: '%', decimals: 1 },
 };
 
 function sv(base: number, total: number): StatValue {
@@ -102,9 +104,10 @@ export function computeStats(
   const s: Required<{ [K in keyof ItemStats]: number }> = {
     hp: 0, mp: 0, attackdamage: 0, abilitypower: 0, armor: 0, spellblock: 0,
     abilityhaste: 0, lethality: 0, magicpenFlat: 0, movespeedFlat: 0, adaptive: 0,
+    hpregenFlat: 0, mpregenFlat: 0,
     attackspeed: 0, movespeedPercent: 0, hpregen: 0, mpregen: 0, crit: 0,
     critdamage: 0, armorpen: 0, magicpenPercent: 0, lifesteal: 0, omnivamp: 0,
-    tenacity: 0, healshield: 0,
+    tenacity: 0, healshield: 0, cdr: 0,
   };
   for (const it of itemStatsList) {
     for (const k of Object.keys(s) as (keyof ItemStats)[]) {
@@ -114,8 +117,9 @@ export function computeStats(
 
   const attackspeedTotal = base.attackspeed * (1 + s.attackspeed);
   const movespeedTotal = (base.movespeed + s.movespeedFlat) * (1 + s.movespeedPercent);
-  const hpregenTotal = base.hpregen * (1 + s.hpregen);
-  const mpregenTotal = base.mpregen * (1 + s.mpregen);
+  // 챔피언 기본 재생도 ddragon 기준 5초당 값이라 레트로 flat 재생을 그대로 더할 수 있다.
+  const hpregenTotal = (base.hpregen + s.hpregenFlat) * (1 + s.hpregen);
+  const mpregenTotal = (base.mpregen + s.mpregenFlat) * (1 + s.mpregen);
   const critTotal = Math.min(100, base.crit + s.crit * 100); // base.crit는 보통 0
 
   return {
@@ -142,5 +146,6 @@ export function computeStats(
     healshield: sv(0, s.healshield * 100),
     attackrange: sv(base.attackrange, base.attackrange),
     adaptive: sv(0, s.adaptive),
+    cdr: sv(0, s.cdr * 100),
   };
 }

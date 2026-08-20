@@ -23,7 +23,7 @@ import {
   TRAY_HEIGHT,
 } from "@/features/items/components/item-slot-grid";
 import { FILTERS, type FilterKey } from "@/features/items/data/item-filters";
-import { useItems } from "@/features/items/hooks/use-items";
+import { useItemPool } from "@/features/items/hooks/use-items";
 import type { Item } from "@/features/items/types";
 import { useTheme } from "@/hooks/use-theme";
 import { cdragonItemIconUrl, itemImageUrl } from "@/lib/ddragon";
@@ -50,10 +50,6 @@ const SELL_PRICE = {
   legendary: 1500,
   prismatic: PRISMATIC_SELL_PRICE,
 } as const;
-
-const ARAM_IDS: Set<string> = new Set(
-  require("@/features/items/data/aram-item-ids.json"),
-);
 
 // 신발 탭에서 숨길 신발(기본 장화 + 아레나 전용 부츠 업그레이드).
 const EXCLUDED_BOOT_IDS = new Set([
@@ -129,7 +125,9 @@ export function ArenaShop({
 }: Props) {
   const translate = useTranslation(t);
   const { colors } = useTheme();
-  const allItems = useItems();
+  // 아레나는 협곡 완성 아이템 풀을 쓴다. 전체 목록에는 클래식 레트로 아이템이
+  // 섞여 있어 태그 필터만으로는 걸러지지 않는다.
+  const allItems = useItemPool("aram");
 
   const [cat, setCat] = useState<ShopCat>("boots");
   const [typeFilter, setTypeFilter] = useState<FilterKey>(null);
@@ -147,10 +145,7 @@ export function ArenaShop({
   const legendaryPool = useMemo(
     () =>
       allItems.filter(
-        (it) =>
-          ARAM_IDS.has(it.id) &&
-          it.gold.purchasable &&
-          !it.tags.includes("Boots"),
+        (it) => it.gold.purchasable && !it.tags.includes("Boots"),
       ),
     [allItems],
   );

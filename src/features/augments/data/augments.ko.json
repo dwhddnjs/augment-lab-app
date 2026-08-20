@@ -2976,7 +2976,7 @@
     "name": "마공학 핵",
     "description": "프로토타입 마공학 핵을 획득합니다. 골드를 사용해 마공학 핵을 업그레이드하고 스킬을 영구적으로 강화하세요.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dont_Stop_Cleaving_Small.png",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Do_or_Die_Small.png",
     "augmentNameId": "HexCore",
     "modes": [
       "classic"

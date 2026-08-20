@@ -11,8 +11,10 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
 import { GlassSurface } from "@/components/ui/glass-surface";
 import { Radius, Spacing } from "@/constants/theme";
+
 import { useTheme } from "@/hooks/use-theme";
 import { augmentImageUrl } from "@/lib/ddragon";
+import type { DraftMode } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 import {
   AramCard,
@@ -28,7 +30,8 @@ const t = {
     round: "라운드",
     picks: "픽 현황",
     exit: "나가기",
-    exitConfirm: "칼바람을 종료할까요?",
+    exitConfirmAram: "칼바람을 종료할까요?",
+    exitConfirmClassic: "클래식을 종료할까요?",
     exitOk: "종료",
     exitCancel: "계속",
   },
@@ -36,7 +39,8 @@ const t = {
     round: "Round",
     picks: "Picks",
     exit: "Exit",
-    exitConfirm: "Exit ARAM?",
+    exitConfirmAram: "Exit ARAM?",
+    exitConfirmClassic: "Exit Classic?",
     exitOk: "Exit",
     exitCancel: "Continue",
   },
@@ -51,13 +55,32 @@ const ALL_FLIP: EntryModes = ["flip", "flip", "flip"];
 // 헤더 버튼 좌우 여백 — 카드 영역(hPad)보다 넓게 잡아 버튼이 기기 끝에 붙지 않게 한다.
 const HEADER_PAD = Spacing.five; // 32
 
+/**
+ * 칼바람·클래식 공용 드래프트 화면. 규칙·UI 는 같고 증강 풀과 라운드 수만 다르다.
+ * 모드는 라우트 파라미터로 들어와 아이템 화면(saveBuild)까지 그대로 전달된다.
+ */
 export function AramScreen() {
   const translate = useTranslation(t);
   const { colors } = useTheme();
   const router = useRouter();
-  const { championId } = useLocalSearchParams<{ championId: string }>();
+  const {
+    championId,
+    mode: modeParam,
+    rounds: roundsParam,
+  } = useLocalSearchParams<{
+    championId: string;
+    mode?: string;
+    rounds?: string;
+  }>();
+  const mode: DraftMode = modeParam === "classic" ? "classic" : "aram";
+  // 라운드 수는 챔피언 선택에서 확정해 넘어온다(클래식은 바론 간식 질문으로 4 또는 5).
+  // 여기서 묻지 않는 이유는 orientation — 가로 잠금 상태에서 Alert 을 띄우면 잠금이 풀린다.
+  const rounds = Number(roundsParam) || 4;
 
-  const { round, currentCards, picked, rerolled, reroll, pick } = useAram();
+  const { round, currentCards, picked, rerolled, reroll, pick } = useAram(
+    mode,
+    rounds,
+  );
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   // 이 화면이 포커스를 얻을 때 landscape로 전환한다. cleanup 없이 — portrait 복귀는
@@ -130,12 +153,13 @@ export function AramScreen() {
           const params = {
             picked: JSON.stringify(nextPicked),
             championId: championId ?? "",
+            mode,
           };
           router.replace({ pathname: "/aram-items", params });
         }
       }, 380);
     },
-    [animating, championId, pick, router],
+    [animating, championId, mode, pick, router],
   );
 
   const handleReroll = useCallback(
@@ -169,7 +193,10 @@ export function AramScreen() {
   );
 
   const handleExit = useCallback(() => {
-    Alert.alert(translate("exitConfirm"), "", [
+    Alert.alert(
+      translate(mode === "classic" ? "exitConfirmClassic" : "exitConfirmAram"),
+      "",
+      [
       { text: translate("exitCancel"), style: "cancel" },
       {
         text: translate("exitOk"),
@@ -182,8 +209,9 @@ export function AramScreen() {
           router.dismissTo("/");
         },
       },
-    ]);
-  }, [router, translate]);
+      ],
+    );
+  }, [mode, router, translate]);
 
   // 화면은 portrait로 mount되고 _layout의 pathname lock이 landscape로 회전시킨다.
   // 회전이 끝날 때까지 카드 렌더를 보류해, 카드가 portrait 레이아웃으로 먼저
@@ -205,6 +233,7 @@ export function AramScreen() {
           picked={picked}
           width={drawerWidth}
           championId={championId}
+          slots={rounds + 1}
         />
       )}
     >
@@ -229,7 +258,7 @@ export function AramScreen() {
               >
                 {translate("round")}
               </ThemedText>
-              <RoundIndicator round={round} />
+              <RoundIndicator round={round} total={rounds} />
             </GlassSurface>
 
             <GlassButton

@@ -25,7 +25,14 @@ export default function MyPageStackLayout() {
         name="index"
         options={{ title: translate('title'), headerLargeTitle: true }}
       />
-      <Stack.Screen name="data" options={{ title: translate('data') }} />
+      <Stack.Screen
+        name="data"
+        options={{
+          title: translate('data'),
+          // 뒤로가기는 화살표만 — "마이페이지" 라벨은 헤더 타이틀과 겹쳐 시끄럽다.
+          headerBackButtonDisplayMode: 'minimal',
+        }}
+      />
     </Stack>
   );
 }

@@ -1,0 +1,3199 @@
+[
+  {
+    "id": "771001",
+    "name": "Boots of Speed",
+    "description": "<mainText><stats></stats><br><br><danger>Limited to 1.</danger><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>25 Move Speed</speed></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 325,
+      "purchasable": true,
+      "total": 325,
+      "sell": 228
+    },
+    "tags": [
+      "Boots"
+    ],
+    "stats": {},
+    "imageKey": "771001.png"
+  },
+  {
+    "id": "771004",
+    "name": "Faerie Charm",
+    "description": "<mainText><stats><attention>3</attention> Mana Regen per 5 seconds</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 180,
+      "purchasable": true,
+      "total": 180,
+      "sell": 126
+    },
+    "tags": [
+      "ManaRegen"
+    ],
+    "stats": {
+      "mpregenFlat": 3
+    },
+    "imageKey": "771004.png"
+  },
+  {
+    "id": "771006",
+    "name": "Rejuvenation Bead",
+    "description": "<mainText><stats><attention>5</attention> Health Regen per 5 seconds</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 180,
+      "purchasable": true,
+      "total": 180,
+      "sell": 126
+    },
+    "tags": [
+      "HealthRegen"
+    ],
+    "stats": {
+      "hpregenFlat": 5
+    },
+    "imageKey": "771006.png"
+  },
+  {
+    "id": "771011",
+    "name": "Giant's Belt",
+    "description": "<mainText><stats><attention>380</attention> Health</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1000,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "Health"
+    ],
+    "stats": {
+      "hp": 380
+    },
+    "imageKey": "771011.png"
+  },
+  {
+    "id": "771018",
+    "name": "Cloak of Agility",
+    "description": "<mainText><stats><attention>15%</attention> Critical Strike Chance</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 730,
+      "purchasable": true,
+      "total": 730,
+      "sell": 511
+    },
+    "tags": [
+      "CriticalStrike"
+    ],
+    "stats": {
+      "crit": 0.15
+    },
+    "imageKey": "771018.png"
+  },
+  {
+    "id": "771026",
+    "name": "Blasting Wand",
+    "description": "<mainText><stats><attention>40</attention> Ability Power</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 860,
+      "purchasable": true,
+      "total": 860,
+      "sell": 602
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 40
+    },
+    "imageKey": "771026.png"
+  },
+  {
+    "id": "771027",
+    "name": "Sapphire Crystal",
+    "description": "<mainText><stats><attention>200</attention> Mana</stats><br><br><flavorText>\"Some say that Sapphire was the original source of classical magic.\"</flavorText></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 280
+    },
+    "tags": [
+      "Mana"
+    ],
+    "stats": {
+      "mp": 200
+    },
+    "imageKey": "771027.png"
+  },
+  {
+    "id": "771028",
+    "name": "Ruby Crystal",
+    "description": "<mainText><stats><attention>180</attention> Health</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 475,
+      "purchasable": true,
+      "total": 475,
+      "sell": 333
+    },
+    "tags": [
+      "Health"
+    ],
+    "stats": {
+      "hp": 180
+    },
+    "imageKey": "771028.png"
+  },
+  {
+    "id": "771029",
+    "name": "Cloth Armor",
+    "description": "<mainText><stats><attention>15</attention> Armor</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 300,
+      "sell": 210
+    },
+    "tags": [
+      "Armor"
+    ],
+    "stats": {
+      "armor": 15
+    },
+    "imageKey": "771029.png"
+  },
+  {
+    "id": "771031",
+    "name": "Chain Vest",
+    "description": "<mainText><stats><attention>40</attention> Armor</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 720,
+      "purchasable": true,
+      "total": 720,
+      "sell": 504
+    },
+    "tags": [
+      "Armor"
+    ],
+    "stats": {
+      "armor": 40
+    },
+    "imageKey": "771031.png"
+  },
+  {
+    "id": "771033",
+    "name": "Null-Magic Mantle",
+    "description": "<mainText><stats><attention>20</attention> Magic Resist</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 280
+    },
+    "tags": [
+      "SpellBlock"
+    ],
+    "stats": {
+      "spellblock": 20
+    },
+    "imageKey": "771033.png"
+  },
+  {
+    "id": "771036",
+    "name": "Long Sword",
+    "description": "<mainText><stats><attention>10</attention> Attack Damage</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 280
+    },
+    "tags": [
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 10
+    },
+    "imageKey": "771036.png"
+  },
+  {
+    "id": "771037",
+    "name": "Pickaxe",
+    "description": "<mainText><stats><attention>25</attention> Attack Damage</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 875,
+      "purchasable": true,
+      "total": 875,
+      "sell": 613
+    },
+    "tags": [
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 25
+    },
+    "imageKey": "771037.png"
+  },
+  {
+    "id": "771038",
+    "name": "B. F. Sword",
+    "description": "<mainText><stats><attention>45</attention> Attack Damage</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1550,
+      "purchasable": true,
+      "total": 1550,
+      "sell": 1085
+    },
+    "tags": [
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 45
+    },
+    "imageKey": "771038.png"
+  },
+  {
+    "id": "771039",
+    "name": "Hunter's Machete",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Passive:</jadeUnique> Basic Attacks deal <magicDamage>10 magic damage</magicDamage> to monsters On-Hit.<br><jadeUnique>Butcher:</jadeUnique> Damage dealt to monsters increased by 10%.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 300,
+      "purchasable": true,
+      "total": 300,
+      "sell": 120
+    },
+    "tags": [
+      "Damage",
+      "OnHit"
+    ],
+    "stats": {},
+    "imageKey": "771039.png"
+  },
+  {
+    "id": "771042",
+    "name": "Dagger",
+    "description": "<mainText><stats><attention>12%</attention> Attack Speed</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 280
+    },
+    "tags": [
+      "AttackSpeed"
+    ],
+    "stats": {
+      "attackspeed": 0.12
+    },
+    "imageKey": "771042.png"
+  },
+  {
+    "id": "771043",
+    "name": "Recurve Bow",
+    "description": "<mainText><stats><attention>30%</attention> Attack Speed</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 900,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "AttackSpeed"
+    ],
+    "stats": {
+      "attackspeed": 0.3
+    },
+    "imageKey": "771043.png"
+  },
+  {
+    "id": "771051",
+    "name": "Brawler's Gloves",
+    "description": "<mainText><stats><attention>8%</attention> Critical Strike Chance</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 280
+    },
+    "tags": [
+      "CriticalStrike"
+    ],
+    "stats": {
+      "crit": 0.08
+    },
+    "imageKey": "771051.png"
+  },
+  {
+    "id": "771052",
+    "name": "Amplifying Tome",
+    "description": "<mainText><stats><attention>20</attention> Ability Power</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 435,
+      "purchasable": true,
+      "total": 435,
+      "sell": 305
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 20
+    },
+    "imageKey": "771052.png"
+  },
+  {
+    "id": "771053",
+    "name": "Vampiric Scepter",
+    "description": "<mainText><stats><attention>10</attention> Attack Damage<br><attention>10%</attention> Life Steal</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 800,
+      "sell": 560
+    },
+    "tags": [
+      "Damage",
+      "LifeSteal"
+    ],
+    "stats": {
+      "attackdamage": 10,
+      "lifesteal": 0.1
+    },
+    "imageKey": "771053.png"
+  },
+  {
+    "id": "771054",
+    "name": "Doran's Shield",
+    "description": "<mainText><stats><attention>100</attention> Health<br><attention>10</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Shieldwall:</jadeUnique> Blocks 8 damage from champion Basic Attacks.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 440,
+      "purchasable": true,
+      "total": 440,
+      "sell": 176
+    },
+    "tags": [
+      "Health",
+      "HealthRegen"
+    ],
+    "stats": {
+      "hp": 100,
+      "hpregenFlat": 10
+    },
+    "imageKey": "771054.png"
+  },
+  {
+    "id": "771055",
+    "name": "Doran's Blade",
+    "description": "<mainText><stats><attention>80</attention> Health<br><attention>10</attention> Attack Damage</stats><br><br><jadeUnique>Passive:</jadeUnique> Basic Attacks restore <healing>5 Health</healing> On-Hit.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 475,
+      "purchasable": true,
+      "total": 475,
+      "sell": 190
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "LifeSteal",
+      "OnHit"
+    ],
+    "stats": {
+      "hp": 80,
+      "attackdamage": 10
+    },
+    "imageKey": "771055.png"
+  },
+  {
+    "id": "771056",
+    "name": "Doran's Ring",
+    "description": "<mainText><stats><attention>60</attention> Health<br><attention>15</attention> Ability Power<br><attention>3</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Restores <scaleMana>4 Mana</scaleMana> upon killing a unit.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 160
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "ManaRegen"
+    ],
+    "stats": {
+      "hp": 60,
+      "abilitypower": 15,
+      "mpregenFlat": 3
+    },
+    "imageKey": "771056.png"
+  },
+  {
+    "id": "771057",
+    "name": "Negatron Cloak",
+    "description": "<mainText><stats><attention>40</attention> Magic Resist</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 720,
+      "purchasable": true,
+      "total": 720,
+      "sell": 504
+    },
+    "tags": [
+      "SpellBlock"
+    ],
+    "stats": {
+      "spellblock": 40
+    },
+    "imageKey": "771057.png"
+  },
+  {
+    "id": "771058",
+    "name": "Needlessly Large Rod",
+    "description": "<mainText><stats><attention>80</attention> Ability Power</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1600,
+      "purchasable": true,
+      "total": 1600,
+      "sell": 1120
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 80
+    },
+    "imageKey": "771058.png"
+  },
+  {
+    "id": "771080",
+    "name": "Spirit Stone",
+    "description": "<mainText><stats><attention>14</attention> Health Regen per 5 seconds<br><attention>7</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Basic Attacks deal <magicDamage>10 magic damage</magicDamage> to monsters On-Hit.<br><jadeUnique>Butcher:</jadeUnique> Damage dealt to monsters increased by 20%.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 40,
+      "purchasable": true,
+      "total": 700,
+      "sell": 490
+    },
+    "tags": [
+      "HealthRegen",
+      "ManaRegen",
+      "OnHit"
+    ],
+    "stats": {
+      "hpregenFlat": 14,
+      "mpregenFlat": 7
+    },
+    "imageKey": "771080.png"
+  },
+  {
+    "id": "772001",
+    "name": "Recall",
+    "description": "",
+    "plaintext": "",
+    "gold": {
+      "base": 60,
+      "purchasable": false,
+      "total": 60,
+      "sell": 42
+    },
+    "tags": [],
+    "stats": {},
+    "imageKey": "772001.png"
+  },
+  {
+    "id": "772003",
+    "name": "Health Potion",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume: </jadeUnique>Restores <healing>150 Health</healing> over 15 seconds.<br><br><jadeLimit>Limited to 5 at one time.</jadeLimit></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 35,
+      "purchasable": true,
+      "total": 35,
+      "sell": 14
+    },
+    "tags": [
+      "HealthRegen",
+      "Consumable",
+      "Lane",
+      "Jungle"
+    ],
+    "stats": {},
+    "imageKey": "772003.png"
+  },
+  {
+    "id": "772004",
+    "name": "Mana Potion",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Restores <scaleMana>100 Mana</scaleMana> over 15 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 35,
+      "purchasable": true,
+      "total": 35,
+      "sell": 14
+    },
+    "tags": [
+      "Consumable"
+    ],
+    "stats": {},
+    "imageKey": "772004.png"
+  },
+  {
+    "id": "772009",
+    "name": "Total Biscuit of Rejuvenation",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume: </jadeUnique>Restores <healing>80 Health</healing> and <scaleMana>50 Mana</scaleMana> over 10 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 35,
+      "purchasable": false,
+      "total": 35,
+      "sell": 2
+    },
+    "tags": [
+      "Consumable"
+    ],
+    "stats": {},
+    "imageKey": "772009.png"
+  },
+  {
+    "id": "772037",
+    "name": "Elixir of Fortitude",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Grants <scaleHealth> Health</scaleHealth> and <physicalDamage>15 Attack Damage</physicalDamage> for 180 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 350,
+      "purchasable": true,
+      "total": 350,
+      "sell": 140
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "Consumable"
+    ],
+    "stats": {},
+    "imageKey": "772037.png"
+  },
+  {
+    "id": "772038",
+    "name": "Elixir of Agility",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Grants <attackSpeed> Attack Speed</attackSpeed> and 15% Critical Strike Chance for 180 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 250,
+      "purchasable": true,
+      "total": 250,
+      "sell": 100
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed",
+      "Consumable"
+    ],
+    "stats": {},
+    "imageKey": "772038.png"
+  },
+  {
+    "id": "772039",
+    "name": "Elixir of Brilliance",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Grants <scaleAP> Ability Power</scaleAP> and 10% Cooldown Reduction for 180 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 250,
+      "purchasable": true,
+      "total": 250,
+      "sell": 100
+    },
+    "tags": [
+      "SpellDamage",
+      "Consumable",
+      "CooldownReduction"
+    ],
+    "stats": {},
+    "imageKey": "772039.png"
+  },
+  {
+    "id": "772041",
+    "name": "Crystalline Flask",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Replenishment: </jadeUnique>Holds 3 charges and refills upon visiting the shop.<br><br><jadeUnique>Active</jadeUnique><br>Consumes a charge to restore <healing>120 Health</healing> and <scaleMana>60 Mana</scaleMana> over 12 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 345,
+      "purchasable": true,
+      "total": 345,
+      "sell": 138
+    },
+    "tags": [
+      "HealthRegen",
+      "ManaRegen",
+      "Consumable",
+      "Lane",
+      "Jungle"
+    ],
+    "stats": {},
+    "imageKey": "772041.png"
+  },
+  {
+    "id": "772042",
+    "name": "Oracle's Elixir",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Grants detection of nearby invisible units for up to 4 minutes. <jadeRules>Revealing a ward in this manner grants a portion of the gold reward for killing that unit.</jadeRules></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 400,
+      "sell": 160
+    },
+    "tags": [
+      "Consumable",
+      "Vision",
+      "Stealth"
+    ],
+    "stats": {},
+    "imageKey": "772042.png"
+  },
+  {
+    "id": "772043",
+    "name": "Vision Ward",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Places an invisible ward that reveals the surrounding area and invisible units in the area for 3 minutes.<jadeRules> Revealing a ward in this manner grants a portion of the gold reward when that unit is killed.</jadeRules></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 125,
+      "purchasable": true,
+      "total": 125,
+      "sell": 50
+    },
+    "tags": [
+      "Consumable",
+      "Vision",
+      "Stealth"
+    ],
+    "stats": {},
+    "imageKey": "772043.png"
+  },
+  {
+    "id": "772044",
+    "name": "Sight Ward",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Places an invisible ward that reveals the surrounding area for 3 minutes.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 75,
+      "purchasable": true,
+      "total": 75,
+      "sell": 30
+    },
+    "tags": [
+      "Consumable",
+      "Vision"
+    ],
+    "stats": {},
+    "imageKey": "772044.png"
+  },
+  {
+    "id": "772045",
+    "name": "Ruby Sightstone",
+    "description": "<mainText><stats><attention>380</attention> Health</stats><br><br><jadeUnique>Ward Refresh:</jadeUnique> Holds 5 charges and refills upon visiting the shop.<br><br><jadeUnique>Active</jadeUnique><br>Consumes a charge to place an invisible ward that reveals the surrounding area for 3 minutes <jadeRules>(maximum 3 wards placed from this item at once).</jadeRules></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 75,
+      "purchasable": true,
+      "total": 1700,
+      "sell": 680
+    },
+    "tags": [
+      "Health",
+      "Consumable",
+      "Vision"
+    ],
+    "stats": {
+      "hp": 380
+    },
+    "imageKey": "772045.png"
+  },
+  {
+    "id": "772049",
+    "name": "Sightstone",
+    "description": "<mainText><stats><attention>180</attention> Health</stats><br><br><jadeUnique>Ward Refresh:</jadeUnique> Holds 3 charges and refills upon visiting the shop.<br><br><jadeUnique>Active</jadeUnique><br>Consumes a charge to place an invisible ward that reveals the surrounding area for 3 minutes <jadeRules>(maximum 2 wards placed from this item at once).</jadeRules></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 325,
+      "purchasable": true,
+      "total": 800,
+      "sell": 320
+    },
+    "tags": [
+      "Health",
+      "Consumable",
+      "Vision"
+    ],
+    "stats": {
+      "hp": 180
+    },
+    "imageKey": "772049.png"
+  },
+  {
+    "id": "772050",
+    "name": "Explorer's Ward",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Places an invisible ward that reveals the surrounding area for 3 minutes.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 75,
+      "purchasable": false,
+      "total": 75,
+      "sell": 4
+    },
+    "tags": [
+      "Consumable",
+      "Vision"
+    ],
+    "stats": {},
+    "imageKey": "772050.png"
+  },
+  {
+    "id": "773001",
+    "name": "Abyssal Scepter",
+    "description": "<mainText><stats><attention>70</attention> Ability Power<br><attention>45</attention> Magic Resist</stats><br><br><jadeUnique>Aura - Despair:</jadeUnique> Reduces the <scaleMR>Magic Resist</scaleMR> of nearby enemies by <scaleMR>20</scaleMR></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 980,
+      "purchasable": true,
+      "total": 2560,
+      "sell": 1792
+    },
+    "tags": [
+      "SpellBlock",
+      "SpellDamage",
+      "Aura"
+    ],
+    "stats": {
+      "abilitypower": 70,
+      "spellblock": 45
+    },
+    "imageKey": "773001.png"
+  },
+  {
+    "id": "773003",
+    "name": "Archangel's Staff",
+    "description": "<mainText><stats><attention>250</attention> Mana<br><attention>60</attention> Ability Power<br><attention>10</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Insight:</jadeUnique> Grants <scaleAP>Ability Power</scaleAP> equal to <scaleMana>3% of maximum Mana</scaleMana>.<br><jadeUnique>Mana Charge:</jadeUnique> Grants <scaleMana>+8 maximum Mana</scaleMana> (max <scaleMana>750 Mana</scaleMana>) for each spell cast and Mana expenditure (occurs up to 2 times every 4 seconds).<br><jadeLimit>Transforms into <attention>Seraph's Embrace</attention> at <scaleMana>+750 Mana.</scaleMana></jadeLimit></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1140,
+      "purchasable": true,
+      "total": 2700,
+      "sell": 1890
+    },
+    "tags": [
+      "SpellDamage",
+      "Mana",
+      "ManaRegen"
+    ],
+    "stats": {
+      "mp": 250,
+      "abilitypower": 60,
+      "mpregenFlat": 10
+    },
+    "imageKey": "773003.png"
+  },
+  {
+    "id": "773004",
+    "name": "Manamune",
+    "description": "<mainText><stats><attention>250</attention> Mana<br><attention>20</attention> Attack Damage<br><attention>7</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Awe:</jadeUnique> Grants bonus <physicalDamage>Attack Damage</physicalDamage> equal to <scaleMana>2%</scaleMana> of maximum Mana.<br><jadeUnique>Mana Charge:</jadeUnique> Grants <scaleMana>4 maximum Mana</scaleMana> (max <scaleMana>750</scaleMana> Mana) for each Basic Attack, spell cast, and Mana expenditure (occurs up to 2 times every 8 seconds).<br><jadeLimit>Transforms into <attention>Muramana</attention> at <scaleMana>750 Mana</scaleMana>.</jadeLimit></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1000,
+      "purchasable": true,
+      "total": 2100,
+      "sell": 1470
+    },
+    "tags": [
+      "Damage",
+      "Mana",
+      "ManaRegen",
+      "OnHit"
+    ],
+    "stats": {
+      "mp": 250,
+      "attackdamage": 20,
+      "mpregenFlat": 7
+    },
+    "imageKey": "773004.png"
+  },
+  {
+    "id": "773005",
+    "name": "Atma's Impaler",
+    "description": "<mainText><stats><attention>45</attention> Armor<br><attention>15%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Impact:</jadeUnique> Grants bonus <physicalDamage>Attack Damage</physicalDamage> equal to <physicalDamage>1.5%</physicalDamage> of <scaleHealth>Maximum Health</scaleHealth>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 780,
+      "purchasable": true,
+      "total": 2300,
+      "sell": 1610
+    },
+    "tags": [
+      "Armor",
+      "Damage",
+      "CriticalStrike"
+    ],
+    "stats": {
+      "armor": 45,
+      "crit": 0.15
+    },
+    "imageKey": "773005.png"
+  },
+  {
+    "id": "773006",
+    "name": "Berserker's Greaves",
+    "description": "<mainText><stats><attention>20%</attention> Attack Speed</stats><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 175,
+      "purchasable": true,
+      "total": 900,
+      "sell": 630
+    },
+    "tags": [
+      "AttackSpeed",
+      "Boots"
+    ],
+    "stats": {
+      "attackspeed": 0.2
+    },
+    "imageKey": "773006.png"
+  },
+  {
+    "id": "773009",
+    "name": "Boots of Swiftness",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>60</speed> Move Speed<br><jadeUnique>Slow Resist:</jadeUnique> Movement slowing effects are reduced by <speed>25%</speed>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 675,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "Boots"
+    ],
+    "stats": {},
+    "imageKey": "773009.png"
+  },
+  {
+    "id": "773010",
+    "name": "Catalyst the Protector",
+    "description": "<mainText><stats><attention>200</attention> Health<br><attention>300</attention> Mana</stats><br><br><jadeUnique>Contemplation:</jadeUnique> Upon leveling up, restores <healing>150 Health</healing> and <scaleMana>200 Mana</scaleMana> over 8 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 325,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "Health",
+      "Mana"
+    ],
+    "stats": {
+      "hp": 200,
+      "mp": 300
+    },
+    "imageKey": "773010.png"
+  },
+  {
+    "id": "773020",
+    "name": "Sorcerer's Shoes",
+    "description": "<mainText><stats><attention>15</attention> Magic Penetration</stats><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 775,
+      "purchasable": true,
+      "total": 1100,
+      "sell": 770
+    },
+    "tags": [
+      "Boots",
+      "MagicPenetration"
+    ],
+    "stats": {
+      "magicpenFlat": 15
+    },
+    "imageKey": "773020.png"
+  },
+  {
+    "id": "773022",
+    "name": "Frozen Mallet",
+    "description": "<mainText><stats><attention>700</attention> Health<br><attention>30</attention> Attack Damage</stats><br><br><jadeUnique>Icy:</jadeUnique> Basic Attacks <status>Slow</status> the target's <speed>Move Speed</speed> for 1.5 seconds On-Hit (40% <status>Slow</status> for Melee Attacks, 30% <status>Slow</status> for Ranged Attacks).<br><br><flavorText>\"We brought it back just for you.\"</flavorText></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 950,
+      "purchasable": true,
+      "total": 3300,
+      "sell": 2310
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "OnHit",
+      "Slow"
+    ],
+    "stats": {
+      "hp": 700,
+      "attackdamage": 30
+    },
+    "imageKey": "773022.png"
+  },
+  {
+    "id": "773023",
+    "name": "Twin Shadows",
+    "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>40</attention> Magic Resist<br><attention>6%</attention> Move Speed</stats><br><br><jadeUnique>Active</jadeUnique> 120s<br>Summons up to 2 invulnerable ghosts that seek out the two nearest enemy champions for 6 seconds. If a ghost reaches its target, it reveals the target and <status>Slows</status> their <speed>Move Speed</speed> by 40% for 2.5 seconds (120 second cooldown).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 735,
+      "purchasable": true,
+      "total": 1900,
+      "sell": 1330
+    },
+    "tags": [
+      "SpellBlock",
+      "SpellDamage",
+      "NonbootsMovement",
+      "Slow"
+    ],
+    "stats": {
+      "abilitypower": 40,
+      "spellblock": 40,
+      "movespeedPercent": 0.06
+    },
+    "imageKey": "773023.png"
+  },
+  {
+    "id": "773024",
+    "name": "Glacial Shroud",
+    "description": "<mainText><stats><attention>45</attention> Armor<br><attention>300</attention> Mana</stats><br><br><jadeUnique>Coolheaded: </jadeUnique>10% Cooldown Reduction</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 230,
+      "purchasable": true,
+      "total": 1350,
+      "sell": 945
+    },
+    "tags": [
+      "Armor",
+      "Mana",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "armor": 45,
+      "mp": 300
+    },
+    "imageKey": "773024.png"
+  },
+  {
+    "id": "773025",
+    "name": "Iceborn Gauntlet",
+    "description": "<mainText><stats><attention>30</attention> Ability Power<br><attention>500</attention> Mana<br><attention>70</attention> Armor<br><attention>10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Spellblade of True Ice:</jadeUnique> After using an ability, the next Basic Attack (On-Hit) deals bonus <physicalDamage>physical damage equal to 125% of base Attack Damage</physicalDamage> to enemies near the target, and creates a field around the target for 2 seconds that <status>Slows</status> enemy <speed>Move Speed</speed> by 30% (2 second cooldown, half-sized field if ranged).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 3250,
+      "sell": 2275
+    },
+    "tags": [
+      "Armor",
+      "SpellDamage",
+      "Mana",
+      "CooldownReduction",
+      "Slow"
+    ],
+    "stats": {
+      "abilitypower": 30,
+      "mp": 500,
+      "armor": 70,
+      "cdr": 0.1
+    },
+    "imageKey": "773025.png"
+  },
+  {
+    "id": "773026",
+    "name": "Guardian Angel",
+    "description": "<mainText><stats><attention>50</attention> Armor<br><attention>40</attention> Magic Resist</stats><br><br><jadeUnique>Guardian's Intervention: </jadeUnique> Upon taking lethal damage, restores 30% of maximum <scaleHealth>Health</scaleHealth> and <scaleMana>Mana</scaleMana> after 4 seconds of stasis (5 minute cooldown).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1310,
+      "purchasable": true,
+      "total": 2750,
+      "sell": 1100
+    },
+    "tags": [
+      "SpellBlock",
+      "Armor"
+    ],
+    "stats": {
+      "armor": 50,
+      "spellblock": 40
+    },
+    "imageKey": "773026.png"
+  },
+  {
+    "id": "773027",
+    "name": "Rod of Ages",
+    "description": "<mainText><stats><attention>450</attention> Health<br><attention>450</attention> Mana<br><attention>60</attention> Ability Power</stats><br><br><jadeUnique>Wisdom of Ages:</jadeUnique> Grants <scaleHealth>20 Health</scaleHealth>, <scaleMana>20 Mana</scaleMana>, and <scaleAP>2 Ability Power</scaleAP> per stack (max <scaleHealth>200 Health</scaleHealth>, <scaleMana>200 Mana</scaleMana>, and <scaleAP>20 Ability Power</scaleAP>). Grants 1 stack per minute (max 10 stacks).<br><jadeUnique>Contemplation:</jadeUnique> Upon leveling up, restores <healing>150 Health</healing> and <scaleMana>200 Mana</scaleMana> over 8 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 740,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "Mana"
+    ],
+    "stats": {
+      "hp": 450,
+      "mp": 450,
+      "abilitypower": 60
+    },
+    "imageKey": "773027.png"
+  },
+  {
+    "id": "773028",
+    "name": "Chalice of Harmony",
+    "description": "<mainText><stats><attention>25</attention> Magic Resist<br><attention>7</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Mana Font:</jadeUnique> Increases <scaleMana>Mana Regen</scaleMana> by 1% per 1% of missing <scaleMana>Mana</scaleMana>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 120,
+      "purchasable": true,
+      "total": 880,
+      "sell": 616
+    },
+    "tags": [
+      "SpellBlock",
+      "ManaRegen"
+    ],
+    "stats": {
+      "spellblock": 25,
+      "mpregenFlat": 7
+    },
+    "imageKey": "773028.png"
+  },
+  {
+    "id": "773031",
+    "name": "Infinity Edge",
+    "description": "<mainText><stats><attention>70</attention> Attack Damage<br><attention>25%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Infinite Precision:</jadeUnique> Critical strikes deal <physicalDamage>250% damage</physicalDamage> instead of 200%.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 645,
+      "purchasable": true,
+      "total": 3800,
+      "sell": 2660
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike"
+    ],
+    "stats": {
+      "attackdamage": 70,
+      "crit": 0.25
+    },
+    "imageKey": "773031.png"
+  },
+  {
+    "id": "773035",
+    "name": "Last Whisper",
+    "description": "<mainText><stats><attention>40</attention> Attack Damage</stats><br><br><jadeUnique>Piercing Volley:</jadeUnique> You ignore <armorPen>35%</armorPen> of your opponent's <scaleArmor>Armor</scaleArmor>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1025,
+      "purchasable": true,
+      "total": 2300,
+      "sell": 1610
+    },
+    "tags": [
+      "Damage",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 40
+    },
+    "imageKey": "773035.png"
+  },
+  {
+    "id": "773037",
+    "name": "Mana Manipulator",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Aura - Mana Warp:</jadeUnique> Grants nearby allied champions <scaleMana>5 Mana Regen</scaleMana> per 5 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 120,
+      "purchasable": true,
+      "total": 300,
+      "sell": 210
+    },
+    "tags": [
+      "ManaRegen",
+      "Aura"
+    ],
+    "stats": {},
+    "imageKey": "773037.png"
+  },
+  {
+    "id": "773040",
+    "name": "Seraph's Embrace",
+    "description": "<mainText><stats><attention>1000</attention> Mana<br><attention>60</attention> Ability Power<br><attention>10</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Insight:</jadeUnique> Grants <scaleAP>Ability Power</scaleAP> equal to <scaleMana>3% of maximum Mana</scaleMana>.<br><jadeUnique>Active</jadeUnique> 120s<br>Consumes <scaleMana>20</scaleMana>% of current Mana to grant a <shield>Shield</shield> for 3 seconds that absorbs damage equal to <shield>150</shield> plus the amount of Mana consumed (120 second cooldown).<br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2700,
+      "purchasable": false,
+      "total": 2700,
+      "sell": 1890
+    },
+    "tags": [],
+    "stats": {
+      "mp": 1000,
+      "abilitypower": 60,
+      "mpregenFlat": 10
+    },
+    "imageKey": "773040.png"
+  },
+  {
+    "id": "773041",
+    "name": "Mejai's Soulstealer",
+    "description": "<mainText><stats><attention>20</attention> Ability Power</stats><br><br><jadeUnique>Soul Capture:</jadeUnique> Grants <scaleAP>8 Ability Power</scaleAP> per stack. Grants 2 stacks for a kill or 1 stack for an assist (max 20 stacks). A third of the stacks are lost upon death. At 20 stacks, grants 15% Cooldown Reduction.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 1235,
+      "sell": 865
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 20
+    },
+    "imageKey": "773041.png"
+  },
+  {
+    "id": "773042",
+    "name": "Muramana",
+    "description": "<mainText><stats><attention>20</attention> Attack Damage<br><attention>1000</attention> Mana<br><attention>7</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Awe:</jadeUnique> Grants bonus <physicalDamage>Attack Damage</physicalDamage> equal to <scaleMana>2% of maximum Mana.</scaleMana><br><jadeUnique>UNIQUE Toggle:</jadeUnique> Single target Spells and Attacks (On-Hit) consume <scaleMana>3%</scaleMana> of current Mana to deal bonus <physicalDamage>physical damage</physicalDamage> equal to twice the amount of <scaleMana>Mana</scaleMana> consumed.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2100,
+      "purchasable": false,
+      "total": 2100,
+      "sell": 1470
+    },
+    "tags": [
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 20,
+      "mp": 1000,
+      "mpregenFlat": 7
+    },
+    "imageKey": "773042.png"
+  },
+  {
+    "id": "773044",
+    "name": "Phage",
+    "description": "<mainText><stats><attention>200</attention> Health<br><attention>20</attention> Attack Damage</stats><br><br><jadeUnique>Rage:</jadeUnique> Basic Attacks grant <speed>20 Move Speed</speed> for 2 seconds On-Hit.<br>Kills grant <speed>60 Move Speed</speed> for 2 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 375,
+      "purchasable": true,
+      "total": 1250,
+      "sell": 875
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "OnHit"
+    ],
+    "stats": {
+      "hp": 200,
+      "attackdamage": 20
+    },
+    "imageKey": "773044.png"
+  },
+  {
+    "id": "773046",
+    "name": "Phantom Dancer",
+    "description": "<mainText><stats><attention>50%</attention> Attack Speed<br><attention>30%</attention> Critical Strike Chance<br><attention>5%</attention> Move Speed</stats><br><br><jadeUnique>Ghostly Waltz:</jadeUnique> Champion can move through units.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 495,
+      "purchasable": true,
+      "total": 2800,
+      "sell": 1960
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackspeed": 0.5,
+      "crit": 0.3,
+      "movespeedPercent": 0.05
+    },
+    "imageKey": "773046.png"
+  },
+  {
+    "id": "773047",
+    "name": "Ninja Tabi",
+    "description": "<mainText><stats><attention>25</attention> Armor</stats><br><br><jadeUnique>Ninja Footwork:</jadeUnique> Blocks <scaleArmor>10%</scaleArmor> of the damage from Basic Attacks.<br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 375,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "Armor",
+      "Boots"
+    ],
+    "stats": {
+      "armor": 25
+    },
+    "imageKey": "773047.png"
+  },
+  {
+    "id": "773050",
+    "name": "Stark's Fervor",
+    "description": "<mainText><stats><attention>250</attention> Health<br><attention>20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Aura - Triumph:</jadeUnique> Grants nearby allied champions <lifeSteal>10% Life Steal</lifeSteal> and <physicalDamage>20 Attack Damage</physicalDamage>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 900,
+      "purchasable": true,
+      "total": 2550,
+      "sell": 1785
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "LifeSteal",
+      "CooldownReduction",
+      "Aura"
+    ],
+    "stats": {
+      "hp": 250,
+      "cdr": 0.2
+    },
+    "imageKey": "773050.png"
+  },
+  {
+    "id": "773052",
+    "name": "Emblem of Valor",
+    "description": "<mainText><stats><attention>20</attention> Armor</stats><br><br><jadeUnique>Aura - Valor:</jadeUnique> Grants nearby allied champions <healing>7 Health Regen</healing> per 5 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 170,
+      "purchasable": true,
+      "total": 650,
+      "sell": 455
+    },
+    "tags": [
+      "Health",
+      "Armor"
+    ],
+    "stats": {
+      "armor": 20
+    },
+    "imageKey": "773052.png"
+  },
+  {
+    "id": "773056",
+    "name": "Ohmwrecker",
+    "description": "<mainText><stats><attention>350</attention> Health<br><attention>50</attention> Ability Power<br><attention>15</attention> Health Regen per 5 seconds<br><attention>15</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Active</jadeUnique> 120s<br>Prevents nearby enemy turrets from attacking for 2.5 seconds. This effect cannot be used against the same turret more than once every 7.5 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2835,
+      "sell": 1985
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "SpellDamage",
+      "ManaRegen"
+    ],
+    "stats": {
+      "hp": 350,
+      "abilitypower": 50,
+      "hpregenFlat": 15,
+      "mpregenFlat": 15
+    },
+    "imageKey": "773056.png"
+  },
+  {
+    "id": "773057",
+    "name": "Sheen",
+    "description": "<mainText><stats><attention>200</attention> Mana<br><attention>25</attention> Ability Power</stats><br><br><jadeUnique>Spellblade:</jadeUnique> After using an ability, the next Basic Attack deals bonus <physicalDamage>physical damage</physicalDamage> equal to base <physicalDamage>Attack Damage</physicalDamage> On-Hit (2 second cooldown).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 365,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "SpellDamage",
+      "Mana"
+    ],
+    "stats": {
+      "mp": 200,
+      "abilitypower": 25
+    },
+    "imageKey": "773057.png"
+  },
+  {
+    "id": "773060",
+    "name": "Banner of Command",
+    "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>30</attention> Armor<br><attention>10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Aura - Leadership:</jadeUnique> Grants nearby allies <healing>10 Health Regen</healing> per 5 seconds. Nearby allied minions deal 15% increased damage.<br><jadeUnique>Active</jadeUnique> 180s<br>Empowers a nearby siege or super minion with an additional <healing> Health</healing>, <scaleArmor>40 Armor</scaleArmor>, <attackSpeed>50% Attack Speed</attackSpeed>, and 75 Attack Range and grants all gold the unit earns.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 890,
+      "purchasable": true,
+      "total": 2360,
+      "sell": 1652
+    },
+    "tags": [
+      "HealthRegen",
+      "Armor",
+      "SpellDamage",
+      "CooldownReduction",
+      "Aura"
+    ],
+    "stats": {
+      "abilitypower": 40,
+      "armor": 30,
+      "cdr": 0.1
+    },
+    "imageKey": "773060.png"
+  },
+  {
+    "id": "773063",
+    "name": "Soul Shroud",
+    "description": "<mainText><stats><attention>520</attention> Health</stats><br><br><jadeUnique>Whispers of the Dead:</jadeUnique> Nearby allied Champions gain 10% Cooldown Reduction and <scaleMana>12 Mana Regen</scaleMana> per 5 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 660,
+      "purchasable": true,
+      "total": 2285,
+      "sell": 1600
+    },
+    "tags": [
+      "Health",
+      "ManaRegen",
+      "Aura",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "hp": 520
+    },
+    "imageKey": "773063.png"
+  },
+  {
+    "id": "773064",
+    "name": "Force of Nature",
+    "description": "<mainText><stats><attention>76</attention> Magic Resist<br><attention>8%</attention> Move Speed<br><attention>20</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Steadfast</jadeUnique>: Regenerate an additional <scaleHealth> health</scaleHealth> per 5 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1130,
+      "purchasable": true,
+      "total": 2610,
+      "sell": 1827
+    },
+    "tags": [
+      "SpellBlock",
+      "HealthRegen",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "spellblock": 76,
+      "movespeedPercent": 0.08,
+      "hpregenFlat": 20
+    },
+    "imageKey": "773064.png"
+  },
+  {
+    "id": "773065",
+    "name": "Spirit Visage",
+    "description": "<mainText><stats><attention>400</attention> Health<br><attention>55</attention> Magic Resist<br><attention>4</attention> Health Regen per 5 seconds<br><attention>20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Lifeforce:</jadeUnique> Increases <healing>self-healing</healing>, <healing>Health Regen</healing>, <lifeSteal>Lifesteal</lifeSteal>, and <lifeSteal>Spell Vamp</lifeSteal> effects by 20%.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 2750,
+      "sell": 1925
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "HealthRegen",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "hp": 400,
+      "spellblock": 55,
+      "hpregenFlat": 4,
+      "cdr": 0.2
+    },
+    "imageKey": "773065.png"
+  },
+  {
+    "id": "773067",
+    "name": "Kindlegem",
+    "description": "<mainText><stats><attention>200</attention> Health</stats><br><br><jadeUnique>Kindlespark:</jadeUnique> 10% Cooldown Reduction</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 375,
+      "purchasable": true,
+      "total": 850,
+      "sell": 595
+    },
+    "tags": [
+      "Health",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "hp": 200
+    },
+    "imageKey": "773067.png"
+  },
+  {
+    "id": "773068",
+    "name": "Sunfire Cape",
+    "description": "<mainText><stats><attention>450</attention> Health<br><attention>45</attention> Armor</stats><br><br><jadeUnique>Searing Heat:</jadeUnique> Deals <magicDamage>40 magic damage</magicDamage> per second to nearby enemies.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 930,
+      "purchasable": true,
+      "total": 2650,
+      "sell": 1855
+    },
+    "tags": [
+      "Health",
+      "Armor"
+    ],
+    "stats": {
+      "hp": 450,
+      "armor": 45
+    },
+    "imageKey": "773068.png"
+  },
+  {
+    "id": "773069",
+    "name": "Shurelya's Reverie",
+    "description": "<mainText><stats><attention>250</attention> Health<br><attention>10</attention> Health Regen per 5 seconds<br><attention>10</attention> Mana Regen per 5 seconds<br><attention>10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Active</jadeUnique> 60s<br>Grants nearby allies <speed>40% Move Speed</speed> for 3 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 550,
+      "purchasable": true,
+      "total": 2100,
+      "sell": 1470
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "ManaRegen",
+      "NonbootsMovement",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "hp": 250,
+      "hpregenFlat": 10,
+      "mpregenFlat": 10,
+      "cdr": 0.1
+    },
+    "imageKey": "773069.png"
+  },
+  {
+    "id": "773070",
+    "name": "Tear of the Goddess",
+    "description": "<mainText><stats><attention>250</attention> Mana<br><attention>7</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Mana Charge: </jadeUnique>Grants <scaleMana>4 maximum Mana</scaleMana> (max <scaleMana>750 Mana</scaleMana>) for each spell cast and Mana expenditure (occurs up to 2 times every 4 seconds).<br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 120,
+      "purchasable": true,
+      "total": 700,
+      "sell": 490
+    },
+    "tags": [
+      "Mana",
+      "ManaRegen"
+    ],
+    "stats": {
+      "mp": 250,
+      "mpregenFlat": 7
+    },
+    "imageKey": "773070.png"
+  },
+  {
+    "id": "773071",
+    "name": "The Black Cleaver",
+    "description": "<mainText><stats><attention>200</attention> Health<br><attention>50</attention> Attack Damage<br><attention>10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Wicked Edge:</jadeUnique> <armorPen>10 Lethality</armorPen><br><jadeUnique>Cleaving Strike:</jadeUnique> Dealing <physicalDamage>physical damage</physicalDamage> to an enemy champion reduces their <scaleArmor>Armor by 5%</scaleArmor> for 4 seconds (stacks up to 5 times, up to 25%).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1188,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "OnHit",
+      "CooldownReduction",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "hp": 200,
+      "attackdamage": 50,
+      "cdr": 0.1
+    },
+    "imageKey": "773071.png"
+  },
+  {
+    "id": "773072",
+    "name": "The Bloodthirster",
+    "description": "<mainText><stats><attention>70</attention> Attack Damage<br><attention>12%</attention> Life Steal</stats><br><br><jadeUnique>Bloodthirst:</jadeUnique> Grants <physicalDamage>1 Attack Damage</physicalDamage> and <lifeSteal>0.2% Life Steal</lifeSteal> per stack (max <physicalDamage>30 Attack Damage</physicalDamage> and <lifeSteal>6% Life Steal</lifeSteal>). Grants 1 stack per unit kill (max 30 stacks). Half of the stacks are lost upon death.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 2240
+    },
+    "tags": [
+      "Damage",
+      "LifeSteal"
+    ],
+    "stats": {
+      "attackdamage": 70,
+      "lifesteal": 0.12
+    },
+    "imageKey": "773072.png"
+  },
+  {
+    "id": "773073",
+    "name": "Stack of Sunfire Capes",
+    "description": "<mainText><stats><attention>450</attention> Health<br><attention>45</attention> Armor</stats><br><br><jadeUnique>Excessive Heat:</jadeUnique> Deals <magicDamage>40 magic damage</magicDamage> per second to nearby enemies.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1280,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "Armor",
+      "Bilgewater"
+    ],
+    "stats": {
+      "hp": 450,
+      "armor": 45
+    },
+    "imageKey": "773073.png"
+  },
+  {
+    "id": "773074",
+    "name": "Ravenous Hydra",
+    "description": "<mainText><stats><attention>75</attention> Attack Damage<br><attention>12%</attention> Life Steal<br><attention>15</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Insatiable Hunger:</jadeUnique> <lifeSteal>Life Steal</lifeSteal> applies to damage dealt by this item.<br><jadeUnique>Cleave:</jadeUnique> Basic Attacks deal 20% to 60% of total <physicalDamage>Attack Damage</physicalDamage> as bonus <physicalDamage>physical damage</physicalDamage> to enemies near the target On-Hit (enemies closest to the target take the most damage).<jadeUnique>Active</jadeUnique> 10s<br>Deals 60% to 100% of total <physicalDamage>Attack Damage</physicalDamage> as <physicalDamage>physical damage</physicalDamage> to nearby enemy units (closest enemies take the most damage).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 600,
+      "purchasable": true,
+      "total": 3300,
+      "sell": 2310
+    },
+    "tags": [
+      "HealthRegen",
+      "Damage",
+      "LifeSteal",
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 75,
+      "lifesteal": 0.12,
+      "hpregenFlat": 15
+    },
+    "imageKey": "773074.png"
+  },
+  {
+    "id": "773075",
+    "name": "Thornmail",
+    "description": "<mainText><stats><attention>100</attention> Armor</stats><br><br><jadeUnique>Enchanted Spikes:</jadeUnique> Upon being hit by a Basic Attack, returns 30% of the incoming damage (before being reduced by defenses) to the attacker as <magicDamage>magic damage</magicDamage>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1180,
+      "purchasable": true,
+      "total": 2200,
+      "sell": 1540
+    },
+    "tags": [
+      "Armor"
+    ],
+    "stats": {
+      "armor": 100
+    },
+    "imageKey": "773075.png"
+  },
+  {
+    "id": "773077",
+    "name": "Tiamat",
+    "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>15</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Cleave:</jadeUnique> Basic Attacks deal 20% to 60% of total <physicalDamage>Attack Damage</physicalDamage> as bonus <physicalDamage>physical damage</physicalDamage> to enemies near the target On-Hit (enemies closest to the target take the most damage).<jadeUnique>Active</jadeUnique> 10s<br>Deals 60% to 100% of total Attack Damage as <physicalDamage>physical damage</physicalDamage> to nearby enemy units (closest enemies take the most damage).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 265,
+      "purchasable": true,
+      "total": 1900,
+      "sell": 1330
+    },
+    "tags": [
+      "HealthRegen",
+      "Damage",
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 40,
+      "hpregenFlat": 15
+    },
+    "imageKey": "773077.png"
+  },
+  {
+    "id": "773078",
+    "name": "Trinity Force",
+    "description": "<mainText><stats><attention>30</attention> Attack Damage<br><attention>30</attention> Ability Power<br><attention>30%</attention> Attack Speed<br><attention>10%</attention> Critical Strike Chance<br><attention>8%</attention> Move Speed<br><attention>250</attention> Health<br><attention>200</attention> Mana</stats><br><br><jadeUnique>Rage:</jadeUnique> Basic Attacks grant <speed>20 Move Speed</speed> for 2 seconds On-Hit. Kills grant <speed>60 Move Speed</speed> for 2 seconds.<br><jadeUnique>Spellblade of Tons of Damage:</jadeUnique> After using an ability, the next Basic Attack deals bonus <physicalDamage>physical damage</physicalDamage> equal to <physicalDamage>200% of base Attack Damage</physicalDamage> On-Hit (2 second cooldown).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 3,
+      "purchasable": true,
+      "total": 3628,
+      "sell": 2540
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "CriticalStrike",
+      "AttackSpeed",
+      "SpellDamage",
+      "Mana",
+      "NonbootsMovement",
+      "OnHit",
+      "Slow"
+    ],
+    "stats": {
+      "attackdamage": 30,
+      "abilitypower": 30,
+      "attackspeed": 0.3,
+      "crit": 0.1,
+      "movespeedPercent": 0.08,
+      "hp": 250,
+      "mp": 200
+    },
+    "imageKey": "773078.png"
+  },
+  {
+    "id": "773082",
+    "name": "Warden's Mail",
+    "description": "<mainText><stats><attention>50</attention> Armor</stats><br><br><jadeUnique>Cold Steel:</jadeUnique> When hit by Basic Attacks, reduces the attacker's <attackSpeed>Attack Speed</attackSpeed> by 15% for 1 second.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "Armor",
+      "Slow"
+    ],
+    "stats": {
+      "armor": 50
+    },
+    "imageKey": "773082.png"
+  },
+  {
+    "id": "773083",
+    "name": "Warmog's Armor",
+    "description": "<mainText><stats><attention>920</attention> Health<br><attention>10</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Permanently gain <scaleHealth>3.5 Health</scaleHealth> and <healing>0.1 Health Regen</healing> per 5 sec. per stack. 1 stack is gained per minion or monster kill and 10 stacks are gained per Takedown. Maximum bonuses: <scaleHealth> Health</scaleHealth> and <healing> Health Regen</healing> per 5 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 995,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "Health",
+      "HealthRegen"
+    ],
+    "stats": {
+      "hp": 920,
+      "hpregenFlat": 10
+    },
+    "imageKey": "773083.png"
+  },
+  {
+    "id": "773084",
+    "name": "Innervating Locket",
+    "description": "<mainText><stats><attention>430</attention> Health<br><attention>450</attention> Mana</stats><br><br><jadeUnique>Innervation</jadeUnique>: Restore <healing>50 Health</healing> and <scaleMana>20 Mana</scaleMana> over 2 seconds to the lowest-Health nearby allied Champion whenever you use an Ability. <keywordMajor>Innervation</keywordMajor> has a 3 second cooldown.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 2650,
+      "sell": 1855
+    },
+    "tags": [
+      "Health",
+      "Damage",
+      "Mana"
+    ],
+    "stats": {
+      "hp": 430,
+      "mp": 450
+    },
+    "imageKey": "773084.png"
+  },
+  {
+    "id": "773085",
+    "name": "Runaan's Hurricane",
+    "description": "<mainText><stats><attention>70%</attention> Attack Speed</stats><br><br><jadeUnique>Hurricane Volley:</jadeUnique> When Attacking, bolts are fired at up to 2 enemies near the target, each dealing each dealing <physicalDamage> physical damage</physicalDamage>. These bolts apply on-hit effects.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 2400,
+      "sell": 1680
+    },
+    "tags": [
+      "AttackSpeed",
+      "OnHit"
+    ],
+    "stats": {
+      "attackspeed": 0.7
+    },
+    "imageKey": "773085.png"
+  },
+  {
+    "id": "773086",
+    "name": "Zeal",
+    "description": "<mainText><stats><attention>18%</attention> Attack Speed<br><attention>10%</attention> Critical Strike Chance<br><attention>5%</attention> Move Speed</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 375,
+      "purchasable": true,
+      "total": 1175,
+      "sell": 823
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackspeed": 0.18,
+      "crit": 0.1,
+      "movespeedPercent": 0.05
+    },
+    "imageKey": "773086.png"
+  },
+  {
+    "id": "773087",
+    "name": "Statikk Shiv",
+    "description": "<mainText><stats><attention>40%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><attention>6%</attention> Move Speed</stats><br><br><jadeUnique>Statikk Shank:</jadeUnique> Grants Static Charges upon moving or Attacking. At 100 Charges, Attacking expends all Charges to deal <magicDamage>100 bonus magic damage</magicDamage>  to up to 4 targets On-Hit (this damage can critically strike).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 525,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1750
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed",
+      "NonbootsMovement",
+      "OnHit"
+    ],
+    "stats": {
+      "attackspeed": 0.4,
+      "crit": 0.2,
+      "movespeedPercent": 0.06
+    },
+    "imageKey": "773087.png"
+  },
+  {
+    "id": "773089",
+    "name": "Rabadon's Deathcap",
+    "description": "<mainText><stats><attention>120</attention> Ability Power</stats><br><br><jadeUnique>Magical Opus:</jadeUnique> Increases <scaleAP>Ability Power by 30%</scaleAP>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 840,
+      "purchasable": true,
+      "total": 3300,
+      "sell": 2310
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 120
+    },
+    "imageKey": "773089.png"
+  },
+  {
+    "id": "773091",
+    "name": "Wit's End",
+    "description": "<mainText><stats><attention>40%</attention> Attack Speed<br><attention>25</attention> Magic Resist</stats><br><br><jadeUnique>Feedback Loop:</jadeUnique> Basic Attacks deal <magicDamage>42 bonus magic damage</magicDamage> On-Hit and increase your<scaleMR> Magic Resist</scaleMR> by 5 for 5 seconds (stacks up to 4 times.)</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 2150,
+      "sell": 1505
+    },
+    "tags": [
+      "SpellBlock",
+      "AttackSpeed",
+      "OnHit"
+    ],
+    "stats": {
+      "attackspeed": 0.4,
+      "spellblock": 25
+    },
+    "imageKey": "773091.png"
+  },
+  {
+    "id": "773092",
+    "name": "Shard of True Ice",
+    "description": "<mainText><stats><attention>45</attention> Ability Power</stats><br><br><jadeUnique>Lucky Shadow:</jadeUnique> <gold>4 Gold</gold> per 10 seconds<br><jadeUnique>Mana Infusion:</jadeUnique> Grants nearby allied champions <scaleMana>5 Mana Regen</scaleMana> per 5 seconds.<jadeUnique>Active</jadeUnique> 60s<br>Surrounds an ally with a blizzard for 4 seconds that <status>Slows</status> nearby enemy <speed>Movement Speed</speed> by 30%.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 535,
+      "purchasable": true,
+      "total": 1600,
+      "sell": 640
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "Aura",
+      "Slow",
+      "GoldPer"
+    ],
+    "stats": {
+      "abilitypower": 45
+    },
+    "imageKey": "773092.png"
+  },
+  {
+    "id": "773093",
+    "name": "Avarice Blade",
+    "description": "<mainText><stats><attention>10%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Avarice:</jadeUnique> <gold>3 Gold</gold> per 10 seconds<br><jadeUnique>Greed:</jadeUnique> Grants <gold>2 Gold</gold> upon killing a unit.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 800,
+      "sell": 320
+    },
+    "tags": [
+      "CriticalStrike",
+      "GoldPer"
+    ],
+    "stats": {
+      "crit": 0.1
+    },
+    "imageKey": "773093.png"
+  },
+  {
+    "id": "773096",
+    "name": "Philosopher's Stone",
+    "description": "<mainText><stats><attention>7</attention> Health Regen per 5 seconds<br><attention>9</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Transmute:</jadeUnique><gold> 5 Gold</gold> per 10 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 340,
+      "purchasable": true,
+      "total": 700,
+      "sell": 280
+    },
+    "tags": [
+      "HealthRegen",
+      "ManaRegen",
+      "GoldPer"
+    ],
+    "stats": {
+      "hpregenFlat": 7,
+      "mpregenFlat": 9
+    },
+    "imageKey": "773096.png"
+  },
+  {
+    "id": "773098",
+    "name": "Lucky Pick",
+    "description": "<mainText><stats><attention>25</attention> Ability Power</stats><br><br><jadeUnique>Lucky Shadow:</jadeUnique><gold> 4 Gold</gold> per 10 seconds</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 330,
+      "purchasable": true,
+      "total": 765,
+      "sell": 536
+    },
+    "tags": [
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 25
+    },
+    "imageKey": "773098.png"
+  },
+  {
+    "id": "773100",
+    "name": "Lich Bane",
+    "description": "<mainText><stats><attention>80</attention> Ability Power<br><attention>250</attention> Mana<br><attention>5%</attention> Move Speed</stats><br><br><jadeUnique>Spellblade of The Arcane:</jadeUnique> After using an ability, the next Basic Attack deals <magicDamage> bonus magic damage</magicDamage> On-Hit (2 second cooldown).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 940,
+      "purchasable": true,
+      "total": 3000,
+      "sell": 2100
+    },
+    "tags": [
+      "SpellDamage",
+      "Mana",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "abilitypower": 80,
+      "mp": 250,
+      "movespeedPercent": 0.05
+    },
+    "imageKey": "773100.png"
+  },
+  {
+    "id": "773101",
+    "name": "Stinger",
+    "description": "<mainText><stats><attention>40%</attention> Attack Speed</stats><br><br><jadeUnique>Light as a Feather: </jadeUnique>10% Cooldown Reduction</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 1250,
+      "sell": 875
+    },
+    "tags": [
+      "AttackSpeed",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "attackspeed": 0.4
+    },
+    "imageKey": "773101.png"
+  },
+  {
+    "id": "773102",
+    "name": "Banshee's Veil",
+    "description": "<mainText><stats><attention>450</attention> Health<br><attention>55</attention> Magic Resist</stats><br><br><jadeUnique>Intangibility:</jadeUnique> Grants a <shield>Spell Shield</shield> that blocks the next enemy ability. This <shield>Shield</shield> refreshes after no damage is taken from enemy champions for 25 seconds.<br><jadeUnique>Shadow Mending:</jadeUnique> Grants <healing>9 Health Regen</healing> per 5 for up to 10 seconds after taking damage from an enemy champion or when the <shield>Spell Shield</shield> breaks.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 875,
+      "purchasable": true,
+      "total": 2750,
+      "sell": 1925
+    },
+    "tags": [
+      "SpellBlock",
+      "HealthRegen",
+      "SpellDamage"
+    ],
+    "stats": {
+      "hp": 450,
+      "spellblock": 55
+    },
+    "imageKey": "773102.png"
+  },
+  {
+    "id": "773105",
+    "name": "Aegis of the Legion",
+    "description": "<mainText><stats><attention>250</attention> Health<br><attention>20</attention> Armor<br><attention>20</attention> Magic Resist</stats><br><br><jadeUnique>Aura - Legion:</jadeUnique> Grants nearby allies <scaleArmor>10 Armor</scaleArmor> and <scaleMR>15 Magic Resist</scaleMR>. This effect is increased by 50% on allied minions.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 625,
+      "purchasable": true,
+      "total": 2150,
+      "sell": 1505
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "Armor",
+      "Aura"
+    ],
+    "stats": {
+      "hp": 250,
+      "armor": 20,
+      "spellblock": 20
+    },
+    "imageKey": "773105.png"
+  },
+  {
+    "id": "773106",
+    "name": "Madred's Razors",
+    "description": "<mainText><stats><attention>25</attention> Armor</stats><br><br><jadeUnique>Passive:</jadeUnique> Basic Attacks have a 25% chance to deal <magicDamage>300 bonus magic damage</magicDamage> to minions and monsters On-Hit.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 100,
+      "purchasable": true,
+      "total": 700,
+      "sell": 490
+    },
+    "tags": [
+      "Armor",
+      "OnHit",
+      "Jungle"
+    ],
+    "stats": {
+      "armor": 25
+    },
+    "imageKey": "773106.png"
+  },
+  {
+    "id": "773107",
+    "name": "Runic Bulwark",
+    "description": "<mainText><stats><attention>300</attention> Health<br><attention>20</attention> Armor<br><attention>30</attention> Magic Resist</stats><br><br><jadeUnique>Aura - Legion:</jadeUnique> Grants nearby allies <scaleArmor>10 Armor</scaleArmor> and <scaleMR>25 Magic Resist</scaleMR>. This effect is increased by 50% on allied minions.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 2950,
+      "sell": 2065
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "HealthRegen",
+      "Armor",
+      "Aura"
+    ],
+    "stats": {
+      "hp": 300,
+      "armor": 20,
+      "spellblock": 30
+    },
+    "imageKey": "773107.png"
+  },
+  {
+    "id": "773108",
+    "name": "Fiendish Codex",
+    "description": "<mainText><stats><attention>30</attention> Ability Power</stats><br><br><jadeUnique>Fiendish Recall:</jadeUnique> 10% Cooldown Reduction</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 385,
+      "purchasable": true,
+      "total": 820,
+      "sell": 574
+    },
+    "tags": [
+      "SpellDamage",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "abilitypower": 30
+    },
+    "imageKey": "773108.png"
+  },
+  {
+    "id": "773109",
+    "name": "Madred's Bloodrazor",
+    "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>40%</attention> Attack Speed<br><attention>25</attention> Armor</stats><br><br><jadeUnique>Seeing Red</jadeUnique>: Attacks deal <healing>4% of the target's maximum Health</healing> as <magicDamage>bonus magic damage</magicDamage> on-hit.<br><br><rules>Deals a maximum of 120 bonus damage to monsters.</rules></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1325,
+      "purchasable": true,
+      "total": 3800,
+      "sell": 2660
+    },
+    "tags": [
+      "Armor",
+      "Damage",
+      "AttackSpeed",
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 40,
+      "attackspeed": 0.4,
+      "armor": 25
+    },
+    "imageKey": "773109.png"
+  },
+  {
+    "id": "773110",
+    "name": "Frozen Heart",
+    "description": "<mainText><stats><attention>95</attention> Armor<br><attention>400</attention> Mana<br><attention>20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Aura - Frostbite:</jadeUnique> Reduces the <attackSpeed>Attack Speed</attackSpeed> of nearby enemies by 20%.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 550,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Armor",
+      "Mana",
+      "CooldownReduction",
+      "Aura"
+    ],
+    "stats": {
+      "armor": 95,
+      "mp": 400,
+      "cdr": 0.2
+    },
+    "imageKey": "773110.png"
+  },
+  {
+    "id": "773111",
+    "name": "Mercury's Treads",
+    "description": "<mainText><stats><attention>25</attention> Magic Resist</stats><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 475,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "SpellBlock",
+      "Boots",
+      "Tenacity"
+    ],
+    "stats": {
+      "spellblock": 25
+    },
+    "imageKey": "773111.png"
+  },
+  {
+    "id": "773114",
+    "name": "Malady",
+    "description": "<mainText><stats><attention>25</attention> Ability Power<br><attention>45%</attention> Attack Speed</stats><br><br><jadeUnique>Cursed Blade:</jadeUnique> Basic Attacks deal <magicDamage> bonus magic damage</magicDamage> On-Hit and remove <scaleMR>4 Magic Resist</scaleMR> from the target for 8 seconds (stacks up to 7 times).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 2035,
+      "sell": 1425
+    },
+    "tags": [
+      "AttackSpeed",
+      "SpellDamage",
+      "OnHit",
+      "MagicPenetration"
+    ],
+    "stats": {
+      "abilitypower": 25,
+      "attackspeed": 0.45
+    },
+    "imageKey": "773114.png"
+  },
+  {
+    "id": "773115",
+    "name": "Nashor's Tooth",
+    "description": "<mainText><stats><attention>65</attention> Ability Power<br><attention>50%</attention> Attack Speed<br><attention>20%</attention> Cooldown Reduction</stats><br><br></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 430,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1750
+    },
+    "tags": [
+      "AttackSpeed",
+      "SpellDamage",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "abilitypower": 65,
+      "attackspeed": 0.5,
+      "cdr": 0.2
+    },
+    "imageKey": "773115.png"
+  },
+  {
+    "id": "773116",
+    "name": "Rylai's Crystal Scepter",
+    "description": "<mainText><stats><attention>500</attention> Health<br><attention>80</attention> Ability Power</stats><br><br><jadeUnique>Frost Crystal:</jadeUnique> Dealing spell damage <status>Slows</status> the target's <speed>Move Speed</speed> by 35% for 1.5 seconds (15% for multi-target and damage-over-time spells).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 605,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "Slow"
+    ],
+    "stats": {
+      "hp": 500,
+      "abilitypower": 80
+    },
+    "imageKey": "773116.png"
+  },
+  {
+    "id": "773117",
+    "name": "Boots of Mobility",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed>. Increases to <speed>105 Move Speed</speed> when out of combat for 5 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 675,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "Boots"
+    ],
+    "stats": {},
+    "imageKey": "773117.png"
+  },
+  {
+    "id": "773123",
+    "name": "Executioner's Calling",
+    "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>20%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Rending Strike:</jadeUnique> Basic Attacks inflict <status>Grievous Wounds</status> on enemy champions for 1.5 seconds On-Hit.<br><br><jadeRules>(<status>Grievous Wounds</status> reduces incoming healing and regeneration effects by 50%.)</jadeRules></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 700,
+      "purchasable": true,
+      "total": 1900,
+      "sell": 1330
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike",
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 25,
+      "crit": 0.2
+    },
+    "imageKey": "773123.png"
+  },
+  {
+    "id": "773124",
+    "name": "Guinsoo's Rageblade",
+    "description": "<mainText><stats><attention>30</attention> Attack Damage<br><attention>40</attention> Ability Power</stats><br><br><jadeUnique>Growing Fury:</jadeUnique> Basic Attacks (on attack) and spell casts grant <attackSpeed>4% Attack Speed</attackSpeed> and <scaleAP>4 Ability Power</scaleAP> for 8 seconds (stacks up to 8 times).<br><jadeUnique>Enrage:</jadeUnique> Falling below 50% Health grants <attackSpeed>20% Attack Speed</attackSpeed>, <lifeSteal>10% Life Steal</lifeSteal>, and <lifeSteal>10% Spell Vamp</lifeSteal> until out of combat (30 second cooldown).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 865,
+      "purchasable": true,
+      "total": 2600,
+      "sell": 1820
+    },
+    "tags": [
+      "Damage",
+      "AttackSpeed",
+      "LifeSteal",
+      "SpellDamage",
+      "OnHit",
+      "SpellVamp"
+    ],
+    "stats": {
+      "attackdamage": 30,
+      "abilitypower": 40
+    },
+    "imageKey": "773124.png"
+  },
+  {
+    "id": "773128",
+    "name": "Deathfire Grasp",
+    "description": "<mainText><stats><attention>120</attention> Ability Power<br><attention>10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Active</jadeUnique> 60s<br>Deals 15% of target champion's maximum Health in <magicDamage>magic damage</magicDamage> and increases all subsequent <magicDamage>magic damage</magicDamage> taken by the target by 20% for 4 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 680,
+      "purchasable": true,
+      "total": 3100,
+      "sell": 2170
+    },
+    "tags": [
+      "SpellDamage",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "abilitypower": 120,
+      "cdr": 0.1
+    },
+    "imageKey": "773128.png"
+  },
+  {
+    "id": "773131",
+    "name": "Sword of the Divine",
+    "description": "<mainText><stats></stats><br><br><attention>45%</attention> Attack Speed.<br><br><jadeUnique>Forsaken: </jadeUnique>This item does not grant any <attackSpeed>Attack Speed</attackSpeed> while on cooldown. Champion kills reduce the current cooldown by 50%.<jadeUnique>Active</jadeUnique> 60s<br>Grants <attackSpeed>100% Attack Speed</attackSpeed> and <scaleCrit>100% Critical Strike Chance</scaleCrit> for 3 seconds or 3 critical strikes.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 850,
+      "purchasable": true,
+      "total": 2150,
+      "sell": 1505
+    },
+    "tags": [
+      "CriticalStrike",
+      "AttackSpeed"
+    ],
+    "stats": {},
+    "imageKey": "773131.png"
+  },
+  {
+    "id": "773132",
+    "name": "Heart of Gold",
+    "description": "<mainText><stats><attention>200</attention> Health</stats><br><br><jadeUnique>Shelling Out:</jadeUnique><gold> 5 Gold</gold> per 10 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 350,
+      "purchasable": true,
+      "total": 825,
+      "sell": 413
+    },
+    "tags": [
+      "Health",
+      "GoldPer"
+    ],
+    "stats": {
+      "hp": 200
+    },
+    "imageKey": "773132.png"
+  },
+  {
+    "id": "773134",
+    "name": "The Brutalizer",
+    "description": "<mainText><stats><attention>25</attention> Attack Damage</stats><br><br><jadeUnique>Onslaught:</jadeUnique> 10% Cooldown Reduction<br><jadeUnique>Crushing Blow:</jadeUnique> <armorPen>10 Lethality</armorPen></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 537,
+      "purchasable": true,
+      "total": 1337,
+      "sell": 936
+    },
+    "tags": [
+      "Damage",
+      "CooldownReduction",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 25
+    },
+    "imageKey": "773134.png"
+  },
+  {
+    "id": "773135",
+    "name": "Void Staff",
+    "description": "<mainText><stats><attention>70</attention> Ability Power</stats><br><br><jadeUnique>Touch of the Void:</jadeUnique> Magic damage ignores <status>35%</status> of the target's <scaleMR>Magic Resist</scaleMR>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1000,
+      "purchasable": true,
+      "total": 2295,
+      "sell": 1607
+    },
+    "tags": [
+      "SpellDamage",
+      "MagicPenetration"
+    ],
+    "stats": {
+      "abilitypower": 70
+    },
+    "imageKey": "773135.png"
+  },
+  {
+    "id": "773136",
+    "name": "Haunting Guise",
+    "description": "<mainText><stats><attention>25</attention> Ability Power<br><attention>200</attention> Health</stats><br><br><jadeUnique>Eyes of Pain:</jadeUnique> <status>15 Magic Penetration</status></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 575,
+      "purchasable": true,
+      "total": 1485,
+      "sell": 1040
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "MagicPenetration"
+    ],
+    "stats": {
+      "abilitypower": 25,
+      "hp": 200
+    },
+    "imageKey": "773136.png"
+  },
+  {
+    "id": "773138",
+    "name": "Leviathan",
+    "description": "<mainText><stats><attention>180</attention> Health</stats><br><br><jadeUnique>Juggernaut:</jadeUnique> Grants <scaleHealth>32 Health</scaleHealth> per stack. Grants 2 stacks for a kill or 1 stack for an assist (maximum 20 stacks). A third of the stacks are lost upon death. At 20 stacks, reduces all damage taken by 15%.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 1275,
+      "sell": 893
+    },
+    "tags": [
+      "Health"
+    ],
+    "stats": {
+      "hp": 180
+    },
+    "imageKey": "773138.png"
+  },
+  {
+    "id": "773139",
+    "name": "Mercurial Scimitar",
+    "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>45</attention> Magic Resist</stats><br><br><jadeUnique>Active</jadeUnique> 90s<br>Removes all debuffs, and if champion is melee, also grants <speed>50% bonus Move Speed</speed> for 1 second.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 600,
+      "purchasable": true,
+      "total": 3700,
+      "sell": 2590
+    },
+    "tags": [
+      "SpellBlock",
+      "Damage",
+      "NonbootsMovement"
+    ],
+    "stats": {
+      "attackdamage": 60,
+      "spellblock": 45
+    },
+    "imageKey": "773139.png"
+  },
+  {
+    "id": "773140",
+    "name": "Quicksilver Sash",
+    "description": "<mainText><stats><attention>45</attention> Magic Resist</stats><br><br><jadeUnique>Active</jadeUnique> 90s<br>Removes all debuffs.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 830,
+      "purchasable": true,
+      "total": 1550,
+      "sell": 1085
+    },
+    "tags": [
+      "SpellBlock"
+    ],
+    "stats": {
+      "spellblock": 45
+    },
+    "imageKey": "773140.png"
+  },
+  {
+    "id": "773141",
+    "name": "Sword of the Occult",
+    "description": "<mainText><stats><attention>10</attention> Attack Damage</stats><br><br><jadeUnique>Demonic Pact:</jadeUnique> Grants <physicalDamage>5 Attack Damage</physicalDamage> per stack. Grants 2 stacks for a kill or 1 stack for an assist (max 20 stacks). A third of the stacks are lost upon death. At 20 stacks, grants <speed>15% bonus Move Speed</speed>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 10
+    },
+    "imageKey": "773141.png"
+  },
+  {
+    "id": "773142",
+    "name": "Youmuu's Ghostblade",
+    "description": "<mainText><stats><attention>30</attention> Attack Damage<br><attention>15%</attention> Critical Strike Chance<br><attention>10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Spirit Edge:</jadeUnique> <armorPen>20 Lethality</armorPen><jadeUnique>Active</jadeUnique> 45s<br>Grants <speed>20% Move Speed</speed> and <attackSpeed>40% Attack Speed</attackSpeed> (lasts 6 seconds for melee champions, 4 seconds for ranged champions).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 563,
+      "purchasable": true,
+      "total": 2700,
+      "sell": 1890
+    },
+    "tags": [
+      "Damage",
+      "CriticalStrike",
+      "AttackSpeed",
+      "NonbootsMovement",
+      "CooldownReduction",
+      "ArmorPenetration"
+    ],
+    "stats": {
+      "attackdamage": 30,
+      "crit": 0.15,
+      "cdr": 0.1
+    },
+    "imageKey": "773142.png"
+  },
+  {
+    "id": "773143",
+    "name": "Randuin's Omen",
+    "description": "<mainText><stats><attention>500</attention> Health<br><attention>70</attention> Armor</stats><br><br><jadeUnique>Cold Steel:</jadeUnique> When hit by Basic Attacks, reduces the attacker's <attackSpeed>Attack Speed by 15%</attackSpeed> and <speed>Move Speed by 10%</speed> for 1 seconds.<jadeUnique>Active</jadeUnique> 60s<br><status>Slows</status> nearby enemy units by 35% for  seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1000,
+      "purchasable": true,
+      "total": 3125,
+      "sell": 2188
+    },
+    "tags": [
+      "Health",
+      "Armor"
+    ],
+    "stats": {
+      "hp": 500,
+      "armor": 70
+    },
+    "imageKey": "773143.png"
+  },
+  {
+    "id": "773144",
+    "name": "Bilgewater Cutlass",
+    "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>12%</attention> Life Steal</stats><br><br><jadeUnique>Active</jadeUnique> 90s<br>Deals <magicDamage>100 magic damage</magicDamage> and <status>Slows</status> the target champion's <speed>Move Speed by 25%</speed> for 2 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 200,
+      "purchasable": true,
+      "total": 1400,
+      "sell": 980
+    },
+    "tags": [
+      "Damage",
+      "LifeSteal",
+      "Slow"
+    ],
+    "stats": {
+      "attackdamage": 25,
+      "lifesteal": 0.12
+    },
+    "imageKey": "773144.png"
+  },
+  {
+    "id": "773145",
+    "name": "Hextech Revolver",
+    "description": "<mainText><stats><attention>40</attention> Ability Power</stats><br><br><jadeUnique>Hex Bullets: </jadeUnique><lifeSteal>12% Spell Vamp</lifeSteal></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 330,
+      "purchasable": true,
+      "total": 1200,
+      "sell": 840
+    },
+    "tags": [
+      "SpellDamage",
+      "SpellVamp"
+    ],
+    "stats": {
+      "abilitypower": 40
+    },
+    "imageKey": "773145.png"
+  },
+  {
+    "id": "773146",
+    "name": "Hextech Gunblade",
+    "description": "<mainText><stats><attention>65</attention> Ability Power<br><attention>45</attention> Attack Damage<br><attention>12%</attention> Life Steal</stats><br><br><jadeUnique>Hex Cannon: </jadeUnique><lifeSteal>20% Spell Vamp</lifeSteal><br><jadeUnique>Reload:</jadeUnique> Basic Attacks (On-Hit) and single-target spells against champions reduce the cooldown of this item by 3 seconds.<jadeUnique>Active</jadeUnique> 60s<br>Deals <magicDamage> magic damage</magicDamage> and <status>Slows</status> the target champion's <speed>Move Speed by 40%</speed> for 2 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 800,
+      "purchasable": true,
+      "total": 3400,
+      "sell": 2380
+    },
+    "tags": [
+      "Damage",
+      "LifeSteal",
+      "SpellDamage",
+      "Slow",
+      "SpellVamp"
+    ],
+    "stats": {
+      "abilitypower": 65,
+      "attackdamage": 45,
+      "lifesteal": 0.12
+    },
+    "imageKey": "773146.png"
+  },
+  {
+    "id": "773151",
+    "name": "Liandry's Torment",
+    "description": "<mainText><stats><attention>50</attention> Ability Power<br><attention>300</attention> Health</stats><br><br><jadeUnique>Eyes of Pain:</jadeUnique> <status>15 Magic Penetration</status><br><jadeUnique>Mana Burn:</jadeUnique> Dealing spell damage applies a damage-over-time effect for 3 seconds that deals <magicDamage>bonus magic damage equal to 2% of the target's current Health per second</magicDamage>. This bonus damage is doubled against movement-impaired units and capped at <magicDamage>100 damage per second</magicDamage> vs. monsters.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 980,
+      "purchasable": true,
+      "total": 2900,
+      "sell": 2030
+    },
+    "tags": [
+      "Health",
+      "SpellDamage",
+      "MagicPenetration"
+    ],
+    "stats": {
+      "abilitypower": 50,
+      "hp": 300
+    },
+    "imageKey": "773151.png"
+  },
+  {
+    "id": "773152",
+    "name": "Will of the Ancients",
+    "description": "<mainText><stats><attention>50</attention> Ability Power</stats><br><br><jadeUnique>Aura - Tradition:</jadeUnique> Grants nearby allied champions <scaleAP>30 Ability Power</scaleAP> and <lifeSteal>20% Spellvamp</lifeSteal>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 585,
+      "purchasable": true,
+      "total": 2550,
+      "sell": 1785
+    },
+    "tags": [
+      "SpellDamage",
+      "Aura",
+      "SpellVamp"
+    ],
+    "stats": {
+      "abilitypower": 50
+    },
+    "imageKey": "773152.png"
+  },
+  {
+    "id": "773153",
+    "name": "Blade of The Ruined King",
+    "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>40%</attention> Attack Speed<br><attention>15%</attention> Life Steal</stats><br><br><jadeUnique>Ruination:</jadeUnique> Basic Attacks deal <scaleHealth>5% of the target's current Health</scaleHealth> as bonus <physicalDamage>physical damage</physicalDamage> On-Hit. (Max 60 to Minions and Monsters)<jadeUnique>Active</jadeUnique> 90s<br>Deals <scaleHealth>15% max health</scaleHealth> to target champion (Min 100 Damage) and steals <speed>30%</speed> of their <speed>Move Speed</speed> for 3 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 1000,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 2240
+    },
+    "tags": [
+      "Damage",
+      "AttackSpeed",
+      "LifeSteal",
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 25,
+      "attackspeed": 0.4,
+      "lifesteal": 0.15
+    },
+    "imageKey": "773153.png"
+  },
+  {
+    "id": "773154",
+    "name": "Wriggle's Lantern",
+    "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>25</attention> Armor<br><attention>15%</attention> Life Steal</stats><br><br><jadeUnique>Passive:</jadeUnique> Basic Attacks have a 25% chance to deal <magicDamage>500 bonus magic damage</magicDamage> to minions and monsters On-Hit.<br><br><jadeLimit>Transforms into <attention>Feral Flare</attention> after earning 30 large Monsters kills or Champion takedowns.</jadeLimit><jadeUnique>Active</jadeUnique> 180s<br>Places an invisible Sight Ward that reveals the surrounding area for 180 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 2000,
+      "sell": 1400
+    },
+    "tags": [
+      "Armor",
+      "Damage",
+      "LifeSteal",
+      "Vision",
+      "Active",
+      "OnHit",
+      "Jungle"
+    ],
+    "stats": {
+      "attackdamage": 25,
+      "armor": 25,
+      "lifesteal": 0.15
+    },
+    "imageKey": "773154.png"
+  },
+  {
+    "id": "773155",
+    "name": "Hexdrinker",
+    "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>25</attention> Magic Resist</stats><br><br><jadeUnique>Lifeline:</jadeUnique> Upon taking <magicDamage>magic damage</magicDamage> that would reduce Health below 30%, grants a <shield>Shield</shield> that absorbs <magicDamage>250 magic damage</magicDamage> for 5 seconds (90 second cooldown).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 550,
+      "purchasable": true,
+      "total": 1350,
+      "sell": 945
+    },
+    "tags": [
+      "SpellBlock",
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 25,
+      "spellblock": 25
+    },
+    "imageKey": "773155.png"
+  },
+  {
+    "id": "773156",
+    "name": "Maw of Malmortius",
+    "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>40</attention> Magic Resist</stats><br><br><jadeUnique>Feeding Frenzy:</jadeUnique> Grants <physicalDamage>1 Attack Damage</physicalDamage> for every 2% of missing <scaleHealth>Health</scaleHealth>, up to a maximum of <physicalDamage>35 Attack Damage</physicalDamage>.<br><jadeUnique>Lifeline:</jadeUnique> Upon taking <magicDamage>magic damage</magicDamage> that would reduce <scaleHealth>Health</scaleHealth> below 30%, grants a <shield>Shield</shield> that absorbs <magicDamage>400 magic damage</magicDamage> for 5 seconds (90 second cooldown).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 975,
+      "purchasable": true,
+      "total": 3200,
+      "sell": 2240
+    },
+    "tags": [
+      "SpellBlock",
+      "Damage"
+    ],
+    "stats": {
+      "attackdamage": 60,
+      "spellblock": 40
+    },
+    "imageKey": "773156.png"
+  },
+  {
+    "id": "773157",
+    "name": "Zhonya's Hourglass",
+    "description": "<mainText><stats><attention>120</attention> Ability Power<br><attention>50</attention> Armor</stats><br><br><jadeUnique>Active</jadeUnique> 90s<br>Champion becomes <status>Invulnerable</status> and <status>Untargetable</status> for 2.5 seconds, but is unable to move, attack, cast spells, or use items during this time.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 3260,
+      "sell": 2282
+    },
+    "tags": [
+      "Armor",
+      "SpellDamage"
+    ],
+    "stats": {
+      "abilitypower": 120,
+      "armor": 50
+    },
+    "imageKey": "773157.png"
+  },
+  {
+    "id": "773158",
+    "name": "Ionian Boots of Lucidity",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Light Step:</jadeUnique>15% Cooldown Reduction<br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed><br><br><flavorText>\"This item is dedicated in honor of Ionia's victory over Noxus in the Rematch for the Southern Provinces on 10 December, 20 CLE.\"</flavorText></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 675,
+      "purchasable": true,
+      "total": 1000,
+      "sell": 700
+    },
+    "tags": [
+      "Boots",
+      "CooldownReduction"
+    ],
+    "stats": {},
+    "imageKey": "773158.png"
+  },
+  {
+    "id": "773160",
+    "name": "Feral Flare",
+    "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>25</attention> Armor<br><attention>15%</attention> Life Steal</stats><br><br><jadeUnique>Feral Mark:</jadeUnique> Gain a Feral stack for each champion takedown scored and large monster killed. Basic Attacks deal <magicDamage>25 (+1 per Feral stack) bonus magic damage</magicDamage> on-hit. Minions and monsters have a 25% chance to take 425 more damage.<jadeUnique>Active</jadeUnique> 180s<br>Places an invisible Sight Ward that reveals the surrounding area for 180 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 2000,
+      "purchasable": false,
+      "total": 2000,
+      "sell": 1400
+    },
+    "tags": [
+      "Armor",
+      "Damage",
+      "LifeSteal",
+      "Vision",
+      "OnHit"
+    ],
+    "stats": {
+      "attackdamage": 25,
+      "armor": 25,
+      "lifesteal": 0.15
+    },
+    "imageKey": "773160.png"
+  },
+  {
+    "id": "773165",
+    "name": "Morellonomicon",
+    "description": "<mainText><stats><attention>75</attention> Ability Power<br><attention>12</attention> Mana Regen per 5 seconds<br><attention>20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Morello's Hatred:</jadeUnique> Dealing magic damage to enemy champions below <scaleHealth>40% Health</scaleHealth> inflicts <status>Grievous Wounds</status> for 4 seconds.<br><br><jadeRules>(<status>Grievous Wounds</status> reduces incoming healing and regeneration effects by 50%.)</jadeRules></mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 435,
+      "purchasable": true,
+      "total": 2200,
+      "sell": 1540
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "abilitypower": 75,
+      "mpregenFlat": 12,
+      "cdr": 0.2
+    },
+    "imageKey": "773165.png"
+  },
+  {
+    "id": "773172",
+    "name": "Zephyr",
+    "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>50%</attention> Attack Speed<br><attention>10%</attention> Move Speed<br><attention>10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 725,
+      "purchasable": true,
+      "total": 2850,
+      "sell": 1995
+    },
+    "tags": [
+      "Damage",
+      "AttackSpeed",
+      "NonbootsMovement",
+      "CooldownReduction",
+      "Tenacity"
+    ],
+    "stats": {
+      "attackdamage": 25,
+      "attackspeed": 0.5,
+      "movespeedPercent": 0.1,
+      "cdr": 0.1
+    },
+    "imageKey": "773172.png"
+  },
+  {
+    "id": "773173",
+    "name": "Eleisa's Miracle",
+    "description": "<mainText><stats><attention>10</attention> Health Regen per 5 seconds<br><attention>15</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Aid:</jadeUnique> <spellName>Heal, Clairvoyance</spellName> and <spellName>Clarity</spellName> summoner spell cooldowns are reduced by 30%.<br><jadeUnique>Eleisa's Blessing:</jadeUnique> Upon gaining 3 levels with this item, all effects of this item become permanent, and this item is consumed.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 400,
+      "purchasable": true,
+      "total": 1100,
+      "sell": 440
+    },
+    "tags": [
+      "HealthRegen",
+      "ManaRegen"
+    ],
+    "stats": {
+      "hpregenFlat": 10,
+      "mpregenFlat": 15
+    },
+    "imageKey": "773173.png"
+  },
+  {
+    "id": "773174",
+    "name": "Shushei's Mana Jug",
+    "description": "<mainText><stats><attention>60</attention> Ability Power<br><attention>40</attention> Magic Resist<br><attention>20%</attention> Cooldown Reduction<br><attention>15</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Rabble-Rousing:</jadeUnique> Restores <healing> Health</healing> and <scaleMana> Mana</scaleMana> on kill or assist.<br><jadeUnique>Mana Font:</jadeUnique> Increases <scaleMana>Mana Regen</scaleMana> by 1% for every 1% of missing Mana.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 900,
+      "purchasable": true,
+      "total": 2600,
+      "sell": 1820
+    },
+    "tags": [
+      "SpellBlock",
+      "SpellDamage",
+      "ManaRegen",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "abilitypower": 60,
+      "spellblock": 40,
+      "cdr": 0.2,
+      "mpregenFlat": 15
+    },
+    "imageKey": "773174.png"
+  },
+  {
+    "id": "773178",
+    "name": "Ionic Spark",
+    "description": "<mainText><stats><attention>50%</attention> Attack Speed<br><attention>250</attention> Health</stats><br><br><jadeUnique>Ionic Charge:</jadeUnique> Every 4th Basic Attack unleases a chain of lightning, dealing <magicDamage>125 magic damage</magicDamage> to up to 4 targets in a 400 radius of each other. Targets cannot be hit twice by the same lightning.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 575,
+      "purchasable": true,
+      "total": 1950,
+      "sell": 1365
+    },
+    "tags": [
+      "Health",
+      "AttackSpeed",
+      "OnHit"
+    ],
+    "stats": {
+      "attackspeed": 0.5,
+      "hp": 250
+    },
+    "imageKey": "773178.png"
+  },
+  {
+    "id": "773190",
+    "name": "Locket of the Iron Solari",
+    "description": "<mainText><stats><attention>300</attention> Health<br><attention>35</attention> Armor</stats><br><br><jadeUnique>Solari Resilience:</jadeUnique> Grants nearby allied champions <healing>15 Health Regen</healing> per 5 seconds.<jadeUnique>Active</jadeUnique> 60s<br>Grants a <shield>Shield</shield> to nearby allies for 5 seconds that absorbs up to  damage.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 750,
+      "purchasable": true,
+      "total": 2225,
+      "sell": 1558
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "Armor",
+      "Aura"
+    ],
+    "stats": {
+      "hp": 300,
+      "armor": 35
+    },
+    "imageKey": "773190.png"
+  },
+  {
+    "id": "773191",
+    "name": "Seeker's Armguard",
+    "description": "<mainText><stats><attention>30</attention> Armor<br><attention>20</attention> Ability Power</stats><br><br><jadeUnique>Seeker's Insight:</jadeUnique> Killing a unit grants 0.5 bonus <scaleArmor>Armor</scaleArmor> and <scaleAP>Ability Power.</scaleAP> This bonus stacks up to 30 times.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 125,
+      "purchasable": true,
+      "total": 1160,
+      "sell": 812
+    },
+    "tags": [
+      "Armor",
+      "SpellDamage"
+    ],
+    "stats": {
+      "armor": 30,
+      "abilitypower": 20
+    },
+    "imageKey": "773191.png"
+  },
+  {
+    "id": "773206",
+    "name": "Spirit of the Spectral Wraith",
+    "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>10</attention> Mana Regen per 5 seconds<br><attention>10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Wraith Touch:</jadeUnique> <lifeSteal>20% Spell Vamp</lifeSteal><br><jadeUnique>Haunting Memories:</jadeUnique> Reduces the cooldown of <spellName>Smite</spellName> by 20%.<br><jadeUnique>Butcher:</jadeUnique> Damage dealt to monsters increased by 30%.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 100,
+      "purchasable": true,
+      "total": 2000,
+      "sell": 1400
+    },
+    "tags": [
+      "SpellDamage",
+      "ManaRegen",
+      "OnHit",
+      "CooldownReduction",
+      "SpellVamp"
+    ],
+    "stats": {
+      "abilitypower": 40,
+      "mpregenFlat": 10,
+      "cdr": 0.1
+    },
+    "imageKey": "773206.png"
+  },
+  {
+    "id": "773207",
+    "name": "Spirit of the Ancient Golem",
+    "description": "<mainText><stats><attention>500</attention> Health<br><attention>14</attention> Health Regen per 5 seconds<br><attention>7</attention> Mana Regen per 5 seconds<br><attention>10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Butcher:</jadeUnique> Damage dealt to monsters increased by 30%.<br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by 35%.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 450,
+      "purchasable": true,
+      "total": 2000,
+      "sell": 1400
+    },
+    "tags": [
+      "Health",
+      "HealthRegen",
+      "ManaRegen",
+      "OnHit",
+      "CooldownReduction",
+      "Tenacity"
+    ],
+    "stats": {
+      "hp": 500,
+      "hpregenFlat": 14,
+      "mpregenFlat": 7,
+      "cdr": 0.1
+    },
+    "imageKey": "773207.png"
+  },
+  {
+    "id": "773209",
+    "name": "Spirit of the Elder Lizard",
+    "description": "<mainText><stats><attention>35</attention> Attack Damage<br><attention>14</attention> Health Regen per 5 seconds<br><attention>7</attention> Mana Regen per 5 seconds<br><attention>10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Butcher:</jadeUnique> Damage dealt to monsters increased by 30%.<br><jadeUnique>Touch of Flame:</jadeUnique> Basic Attacks and spells that do not inflict damage-over-time deal  bonus <trueDamage>true damage</trueDamage> over 3 seconds On-Hit.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 500,
+      "purchasable": true,
+      "total": 2000,
+      "sell": 1400
+    },
+    "tags": [
+      "HealthRegen",
+      "Damage",
+      "ManaRegen",
+      "OnHit",
+      "CooldownReduction"
+    ],
+    "stats": {
+      "attackdamage": 35,
+      "hpregenFlat": 14,
+      "mpregenFlat": 7,
+      "cdr": 0.1
+    },
+    "imageKey": "773209.png"
+  },
+  {
+    "id": "773211",
+    "name": "Spectre's Cowl",
+    "description": "<mainText><stats><attention>200</attention> Health<br><attention>45</attention> Magic Resist</stats><br><br><jadeUnique>Shadow Mending:</jadeUnique> Grants <healing>3 Health Regen</healing> per 5 seconds for up to 10 seconds after taking damage from an enemy champion.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 205,
+      "purchasable": true,
+      "total": 1400,
+      "sell": 980
+    },
+    "tags": [
+      "Health",
+      "SpellBlock",
+      "HealthRegen"
+    ],
+    "stats": {
+      "hp": 200,
+      "spellblock": 45
+    },
+    "imageKey": "773211.png"
+  },
+  {
+    "id": "773222",
+    "name": "Mikael's Crucible",
+    "description": "<mainText><stats><attention>40</attention> Magic Resist<br><attention>7</attention> Health Regen per 5 seconds<br><attention>18</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Mana Font:</jadeUnique> Increases <scaleMana>Mana Regen</scaleMana> by 1% for every 1% of missing Mana.<jadeUnique>Active</jadeUnique> 180s<br>Removes all <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> on an allied champion and <healing>Heals</healing> that champion for <healing>150</healing> (<scaleHealth>+10% of maximum Health</scaleHealth>).</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 920,
+      "purchasable": true,
+      "total": 2500,
+      "sell": 1750
+    },
+    "tags": [
+      "SpellBlock",
+      "HealthRegen",
+      "ManaRegen"
+    ],
+    "stats": {
+      "spellblock": 40,
+      "hpregenFlat": 7,
+      "mpregenFlat": 18
+    },
+    "imageKey": "773222.png"
+  },
+  {
+    "id": "773340",
+    "name": "Yellow Trinket",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Active</jadeUnique> s<br>Places an <keyword>Invisible</keyword> Stealth Ward that grants vision for 60 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 0,
+      "sell": 0
+    },
+    "tags": [
+      "Active",
+      "Jungle",
+      "Lane",
+      "Trinket",
+      "Vision"
+    ],
+    "stats": {},
+    "imageKey": "773340.png"
+  },
+  {
+    "id": "773348",
+    "name": "Red Trinket",
+    "description": "<mainText><stats></stats><br><br><jadeUnique>Active</jadeUnique> s<br>Reveals enemy wards in the area for 8 seconds.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 0,
+      "purchasable": true,
+      "total": 0,
+      "sell": 0
+    },
+    "tags": [
+      "Active",
+      "Jungle",
+      "Lane",
+      "Trinket",
+      "Vision"
+    ],
+    "stats": {},
+    "imageKey": "773348.png"
+  },
+  {
+    "id": "773504",
+    "name": "Ardent Censer",
+    "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>10%</attention> Cooldown Reduction<br><attention>10</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Dedication:</jadeUnique> <speed>8% Move Speed</speed><br><jadeUnique>Fervent Vapor:</jadeUnique> Your <healing>Heals</healing> and <shield>Shields</shield> on another unit grant them 25% attack speed for 6 seconds. This does not include regeneration effects or effects on yourself.</mainText>",
+    "plaintext": "",
+    "gold": {
+      "base": 895,
+      "purchasable": true,
+      "total": 2200,
+      "sell": 1540
+    },
+    "tags": [
+      "AttackSpeed",
+      "SpellDamage",
+      "ManaRegen",
+      "NonbootsMovement",
+      "AbilityHaste"
+    ],
+    "stats": {
+      "abilitypower": 40,
+      "cdr": 0.1,
+      "mpregenFlat": 10
+    },
+    "imageKey": "773504.png"
+  }
+]

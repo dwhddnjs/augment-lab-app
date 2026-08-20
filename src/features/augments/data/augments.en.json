@@ -2976,7 +2976,7 @@
     "name": "The Hex Core",
     "description": "Get a Prototype Hex Core. Spend gold to upgrade the Hex Core and permanently upgrade your abilities.",
     "rarity": "prismatic",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dont_Stop_Cleaving_Small.png",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Do_or_Die_Small.png",
     "augmentNameId": "HexCore",
     "modes": [
       "classic"
