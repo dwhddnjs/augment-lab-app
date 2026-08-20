@@ -1,6 +1,6 @@
 /**
  * ModeSelectOverlay — `+` 버튼을 누르면 뜨는 투명 모달.
- * 화면을 딤 처리하고 하단(+ 버튼 근처)에 아레나/칼바람 원형 버튼을 띄운다.
+ * 화면을 딤 처리하고 하단(+ 버튼 근처)에 아레나/칼바람/클래식 원형 버튼을 띄운다.
  * 모드를 고르면 챔피언 선택 모달로 교체(replace)한다.
  */
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -16,8 +16,8 @@ import type { GameMode } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 
 const t = {
-  ko: { arena: "아레나", aram: "칼바람" },
-  en: { arena: "Arena", aram: "ARAM" },
+  ko: { arena: "아레나", aram: "칼바람", classic: "클래식" },
+  en: { arena: "Arena", aram: "ARAM", classic: "Classic" },
 };
 
 const MODES: {
@@ -25,6 +25,9 @@ const MODES: {
   icon: keyof typeof MaterialCommunityIcons.glyphMap;
 }[] = [
   { mode: "arena", icon: "sword-cross" },
+  // 클래식은 구버전 아이템으로 하는 복고 모드라 되감기 시계(history).
+  // 24px에서 눈송이·교차검과 실루엣이 겹치지 않는다.
+  { mode: "classic", icon: "history" },
   { mode: "aram", icon: "snowflake" },
 ];
 

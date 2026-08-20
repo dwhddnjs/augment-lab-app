@@ -49,6 +49,7 @@ const t = {
     cancel: "취소",
     aram: "칼바람",
     arena: "아레나",
+    classic: "클래식",
   },
   en: {
     emptyTitle: "No saved builds",
@@ -59,21 +60,23 @@ const t = {
     cancel: "Cancel",
     aram: "ARAM",
     arena: "Arena",
+    classic: "Classic",
   },
 };
 
-const MODES: GameMode[] = ["aram", "arena"];
+const MODES: GameMode[] = ["aram", "classic", "arena"];
 
 // 가로 화면에서 돌아오면 (home) 스택이 재생성되며 이 화면도 remount된다((home)/_layout).
 // 보고 있던 목록 필터가 칼바람으로 튀지 않도록 모듈 스코프에 담아둔다.
 let lastMode: GameMode = "aram";
 
-// 헤더 컴팩트 토글용 모드 아이콘 — 칼바람=눈송이, 아레나=교차검.
+// 헤더 컴팩트 토글용 모드 아이콘 — 칼바람=눈송이, 클래식=되감기 시계(복고), 아레나=교차검.
 const MODE_ICONS: Record<
   GameMode,
   React.ComponentProps<typeof MaterialCommunityIcons>["name"]
 > = {
   aram: "snowflake",
+  classic: "history",
   arena: "sword-cross",
 };
 
@@ -102,13 +105,13 @@ export function BuildListScreen() {
     setShowHeaderToggle((prev) => (prev === shouldShow ? prev : shouldShow));
   };
 
-  // 세그먼트 스위치의 슬라이딩 thumb — 측정한 트랙 너비를 절반으로 나눠
-  // 선택 인덱스로 translateX 한다(spring).
+  // 세그먼트 스위치의 슬라이딩 thumb — 측정한 트랙 너비를 모드 수로 나눠
+  // 선택 인덱스로 translateX 한다.
   const trackWidth = useSharedValue(0);
   const activeIndex = MODES.indexOf(mode);
   const thumbStyle = useAnimatedStyle(() => {
     // width는 정적 퍼센트(styles.thumb)로 고정하고 여기선 슬라이드만.
-    // 헤더 remount로 trackWidth가 0→측정값으로 튀어도 pill 너비는 항상 절반이라
+    // 헤더 remount로 trackWidth가 0→측정값으로 튀어도 pill 너비는 항상 1/MODES라
     // width 제약이 사라져 트랙 전체로 늘어나는 현상이 없다.
     const seg = trackWidth.value / MODES.length;
     return {

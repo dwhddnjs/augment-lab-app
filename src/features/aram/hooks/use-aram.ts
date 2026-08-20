@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useAugmentPool } from '@/features/augments/hooks/use-augments';
-import type { Augment, AugmentRarity } from '@/features/augments/types';
+import type { Augment, AugmentMode, AugmentRarity } from '@/features/augments/types';
 import { rollRarity } from '../rarity-odds';
 
 // "Transmute: Chaos" grants extra random augments when picked.
@@ -44,8 +44,13 @@ function pickWeighted(pool: Augment[], count: number): Augment[] {
   return drawOfRarity(pool, rollRarity(), count);
 }
 
-export function useAram() {
-  const allAugments = useAugmentPool('aram');
+/**
+ * 칼바람·클래식 공용 드래프트. 두 모드는 규칙이 같고 증강 풀과 라운드 수만 다르다.
+ * - mode:   뽑기 풀 (칼바람 211개 / 클래식 187개, 156개는 공유)
+ * - rounds: 칼바람은 항상 4, 클래식은 바론 간식 여부에 따라 4 또는 5
+ */
+export function useAram(mode: AugmentMode = 'aram', rounds = 4) {
+  const allAugments = useAugmentPool(mode);
 
   const initialCards = useMemo(() => pickWeighted(allAugments, 3), [allAugments]);
 
@@ -94,7 +99,7 @@ export function useAram() {
     [allAugments, picked, currentCards, rerolled],
   );
 
-  // Returns nextPicked; caller should navigate to /aram-items when round === 4
+  // Returns nextPicked; caller navigates to /aram-items once `rounds` picks are done
   const pick = useCallback(
     (idx: number): { nextPicked: Augment[]; done: boolean } => {
       const chosen = currentCards[idx];
@@ -111,7 +116,7 @@ export function useAram() {
       }
 
       const nextRound = round + 1;
-      const done = nextRound >= 4;
+      const done = nextRound >= rounds;
 
       setPicked(nextPicked);
       setRound(nextRound);
@@ -123,7 +128,7 @@ export function useAram() {
 
       return { nextPicked, done };
     },
-    [allAugments, currentCards, drawNext, picked, round],
+    [allAugments, currentCards, drawNext, picked, round, rounds],
   );
 
   return { round, currentCards, picked, rerolled, reroll, pick };
