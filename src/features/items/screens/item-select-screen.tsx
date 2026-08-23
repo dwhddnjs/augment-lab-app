@@ -19,6 +19,7 @@ import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useTheme } from "@/hooks/use-theme";
+import { lockOrientation } from "@/lib/orientation";
 import { type DraftMode, saveBuild } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
@@ -214,9 +215,7 @@ function ItemSelectContent({
     }
     // lockAsync를 await해서 기기가 portrait로 전환된 후 navigation을 시작한다.
     // await 없이 바로 이동하면 landscape 상태로 build 상세가 mount돼 회전 잔상이 보인다.
-    await ScreenOrientation.lockAsync(
-      ScreenOrientation.OrientationLock.PORTRAIT_UP,
-    ).catch(() => {});
+    await lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
     router.dismissTo("/");
     router.push({ pathname: "/build/[id]", params: { id: build.id } });
   };

@@ -10,26 +10,14 @@ import Animated, { Easing, FadeIn, FadeInDown } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
+import { GAME_MODES, MODE_ICONS, MODE_LABELS } from "@/constants/game-modes";
 import { BottomTabInset, Radius, Spacing, Theme } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import type { GameMode } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 
-const t = {
-  ko: { arena: "아레나", aram: "칼바람", classic: "클래식" },
-  en: { arena: "Arena", aram: "ARAM", classic: "Classic" },
-};
-
-const MODES: {
-  mode: GameMode;
-  icon: keyof typeof MaterialCommunityIcons.glyphMap;
-}[] = [
-  { mode: "arena", icon: "sword-cross" },
-  // 클래식은 구버전 아이템으로 하는 복고 모드라 되감기 시계(history).
-  // 24px에서 눈송이·교차검과 실루엣이 겹치지 않는다.
-  { mode: "classic", icon: "history" },
-  { mode: "aram", icon: "snowflake" },
-];
+// + 버튼이 화면 아래에 있어 가까운 쪽부터 쌓는다 — 홈 필터 순서(칼바람→아레나)의 역순.
+const MODES: GameMode[] = [...GAME_MODES].reverse();
 
 // backdrop이 라이트/다크 모두 어두운 scrim이므로, 모드와 무관하게
 // 다크 테마의 밝은 민트를 써야 대비가 충분하다(라이트 민트는 어두워 안 보임).
@@ -38,7 +26,7 @@ const ON_SCRIM_ACCENT = Theme.dark.accent.default;
 export function ModeSelectOverlay() {
   const router = useRouter();
   const { colors } = useTheme();
-  const translate = useTranslation(t);
+  const translate = useTranslation(MODE_LABELS);
   // SafeAreaView(컴포넌트)는 첫 마운트 때 프레임을 비동기 측정해 inset이 0→실제로
   // 튀면서 버튼이 + 버튼을 가린다. 루트 provider에서 즉시 읽는 hook으로 고정한다.
   const insets = useSafeAreaInsets();
@@ -66,7 +54,7 @@ export function ModeSelectOverlay() {
       >
         {MODES.map((m, i) => (
           <Animated.View
-            key={m.mode}
+            key={m}
             // + 버튼에서 가까운 아래쪽(칼바람)부터 위로 한 장씩 올라온다.
             // spring은 오버슈트로 낭창거려 timing + ease-out으로 딱 떨어지게 한다.
             entering={FadeInDown.delay((MODES.length - 1 - i) * STAGGER)
@@ -75,17 +63,17 @@ export function ModeSelectOverlay() {
               .withInitialValues({ transform: [{ translateY: RISE }] })}
           >
             <Pressable
-              onPress={() => choose(m.mode)}
+              onPress={() => choose(m)}
               style={[styles.circle, { borderColor: ON_SCRIM_ACCENT }]}
             >
               <View style={styles.circleFill}>
                 <MaterialCommunityIcons
-                  name={m.icon}
+                  name={MODE_ICONS[m]}
                   size={24}
                   color={ON_SCRIM_ACCENT}
                 />
                 <ThemedText type="caption" style={{ color: ON_SCRIM_ACCENT }}>
-                  {translate(m.mode)}
+                  {translate(m)}
                 </ThemedText>
               </View>
             </Pressable>

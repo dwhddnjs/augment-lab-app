@@ -213,7 +213,7 @@ export function AramScreen() {
     );
   }, [mode, router, translate]);
 
-  // 화면은 portrait로 mount되고 _layout의 pathname lock이 landscape로 회전시킨다.
+  // 회전은 진입 직전(use-champion-select)과 위 useFocusEffect 두 곳에서 건다.
   // 회전이 끝날 때까지 카드 렌더를 보류해, 카드가 portrait 레이아웃으로 먼저
   // 떴다가 reflow되는 일을 막는다.
   if (!isLandscape) {
