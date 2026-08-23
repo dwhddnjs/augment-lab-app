@@ -12,6 +12,7 @@ import type { Augment } from "@/features/augments/types";
 import type { Champion } from "@/features/champions/types";
 import { useTheme } from "@/hooks/use-theme";
 import { championSquareUrl } from "@/lib/ddragon";
+import { CHAMPION_TAG_LABELS, useTranslation } from "@/lib/i18n";
 import type { ItemStats } from "../types";
 import { AugmentCard } from "./augment-card";
 import { ItemStatPanel } from "./item-stat-panel";
@@ -39,6 +40,7 @@ export function ItemDetailPanel({
   onAugmentGridLayout,
 }: Props) {
   const { colors } = useTheme();
+  const translateTag = useTranslation(CHAMPION_TAG_LABELS);
   const championIconUri = champion
     ? championSquareUrl(champion.imageKey)
     : null;
@@ -88,7 +90,7 @@ export function ItemDetailPanel({
                 {champion.title}
               </ThemedText>
               <ThemedText type="caption" color="disabled" numberOfLines={1}>
-                {champion.tags.join(" · ")}
+                {champion.tags.map(translateTag).join(" · ")}
               </ThemedText>
             </View>
           </View>

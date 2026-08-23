@@ -302,7 +302,13 @@ export function BuildDetailScreen() {
           ]}
         >
           {/* 챔피언 블록 */}
-          {champion && <BuildChampionHeader champion={champion} date={date} />}
+          {champion && (
+            <BuildChampionHeader
+              champion={champion}
+              mode={build.mode}
+              date={date}
+            />
+          )}
 
           {build.mode === "arena" ? (
             // 아레나 빌드 — 증강(레벨)·프리즘·전설·모루를 전용 본문으로 렌더.

@@ -21,8 +21,9 @@ const t = {
   },
 };
 
-// UI shows 5 slots; the pick logic itself still resolves in 4 picks.
-const BASE_SLOTS = 5;
+// 픽 수보다 한 칸 넉넉하게 — 칼바람 4픽이면 5칸, 클래식 5픽이면 6칸.
+// (증강 "혼돈 변환"이 보너스를 주면 그 이상으로 늘어난다.)
+const DEFAULT_SLOTS = 5;
 
 interface AugmentCellProps {
   augment: Augment | null;
@@ -89,9 +90,11 @@ interface Props {
   /** Actual drawer container width (from the parent <Drawer>). */
   width: number;
   championId?: string;
+  /** 표시 슬롯 수. 모드별 라운드 수 + 1. */
+  slots?: number;
 }
 
-export function PickedDrawer({ picked, width, championId }: Props) {
+export function PickedDrawer({ picked, width, championId, slots = DEFAULT_SLOTS }: Props) {
   const translate = useTranslation(t);
   const { colors } = useTheme();
 
@@ -104,14 +107,14 @@ export function PickedDrawer({ picked, width, championId }: Props) {
   // fills the drawer edge-to-edge instead of leaving a phantom gap.
   const padLeft = Spacing.three;
   const padRight = Spacing.three;
-  // Three-column grid (5 slots → 3 on top, 2 below); fills the width with 2 gaps.
+  // Three-column grid (5칸 → 3+2, 6칸 → 3+3); fills the width with 2 gaps.
   const COLUMNS = 3;
   const cellSize =
     (width - padLeft - padRight - Spacing.two * (COLUMNS - 1)) / COLUMNS;
 
-  // Grid grows past the 5 base slots if Transmute: Chaos adds bonus augments.
-  const total = Math.max(BASE_SLOTS, picked.length);
-  const slots: (Augment | null)[] = Array.from(
+  // Grid grows past the base slots if Transmute: Chaos adds bonus augments.
+  const total = Math.max(slots, picked.length);
+  const cells: (Augment | null)[] = Array.from(
     { length: total },
     (_, i) => picked[i] ?? null,
   );
@@ -136,11 +139,11 @@ export function PickedDrawer({ picked, width, championId }: Props) {
 
         <View style={styles.section}>
           <ThemedText type="label" color="secondary">
-            {translate("augments")} {picked.length}/{BASE_SLOTS}
+            {translate("augments")} {picked.length}/{slots}
           </ThemedText>
 
           <View style={styles.grid}>
-            {slots.map((item, i) => (
+            {cells.map((item, i) => (
               <AugmentCell key={i} augment={item} size={cellSize} />
             ))}
           </View>

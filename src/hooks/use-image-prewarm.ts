@@ -35,15 +35,21 @@ export function useImagePrewarm(): { showSetup: boolean; progress: number } {
   useEffect(() => {
     let cancelled = false;
 
-    // 아레나·칼바람 증강 + 챔피언 사각/역할 아이콘 + 프리즘·전체 아이템 아이콘을
-    // 전부 받는다. 겹치는 아이콘은 Set으로 제거해 진행률·개수 이중 계산을 막는다.
+    // 아레나·칼바람·클래식 증강 + 챔피언 사각/역할 아이콘 + 프리즘·전체 아이템(협곡
+    // 254 + 클래식 레트로 150) 아이콘을 전부 받는다. 겹치는 아이콘은 Set으로 제거해
+    // 진행률·개수 이중 계산을 막는다.
     const allUrls = Array.from(
       new Set([
         ...champions.map((c) => championSquareUrl(c.imageKey)),
         ...CHAMPION_TAGS.map((tag) => championClassIconUrl(tag)).filter(
           (u): u is string => u != null,
         ),
-        ...augments.map((a) => augmentImageUrl(a.iconPath, 'large')),
+        // 어느 모드 풀에든 속한 것만(칼바람 211 + 클래식 전용 31). modes 가 빈 증강은
+        // 미출시·제거라 앱의 어느 화면에도 뜨지 않는데 첫 설치 진행률을 막고 서 있다.
+        // 저장된 빌드가 참조하는 증강은 모두 두 풀 중 하나에서 뽑힌 것이라 여기 포함된다.
+        ...augments
+          .filter((a) => a.modes?.length)
+          .map((a) => augmentImageUrl(a.iconPath, 'large')),
         ...arenaAugments.map((a) => augmentImageUrl(a.iconPath, 'large')),
         // 재련(special) 아이콘은 CDragon에 _large 자산이 없어(404) AugmentImage가
         // base(컬러 원본)→small로 폴백한다. large만 프리웜하면 404라 캐시에 남지 않아

@@ -9,6 +9,7 @@ import { Pressable, StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { RemoteImage } from "@/components/ui/remote-image";
+import { ModeBadge } from "@/components/ui/mode-badge";
 import { Elevation, HeroOverlay, Radius, Spacing } from "@/constants/theme";
 import { useArenaAugments } from "@/features/arena/hooks/use-arena-augments";
 import { usePrismaticItems } from "@/features/arena/hooks/use-arena-items";
@@ -92,8 +93,19 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
               style={StyleSheet.absoluteFill}
               contentFit="cover"
               contentPosition={{ top: 0, left: "50%" }}
+              // 필터를 오갈 때마다 splash 를 다시 디코드하면 그 완료가 세그먼트
+              // 슬라이드 도중에 떨어져 프레임이 튄다. 메모리 캐시 + 재활용 키로
+              // 두 번째부터는 디코드 없이 붙는다.
+              recyclingKey={champion.id}
+              cachePolicy="memory-disk"
+              transition={0}
             />
           )}
+
+          {/* 모드 마킹 — splash 위 우상단. 절대배치라 하단 패널 레이아웃을 밀지 않는다. */}
+          <View style={styles.modeBadge} pointerEvents="none">
+            <ModeBadge mode={build.mode} variant="onHero" />
+          </View>
 
           {/* 하단 정보 패널 — 텍스트 뒤를 거의 솔리드로 덮어 가독성 확보 */}
           <View style={styles.content}>
@@ -208,6 +220,11 @@ const styles = StyleSheet.create({
 
     overflow: "hidden",
     justifyContent: "flex-end",
+  },
+  modeBadge: {
+    position: "absolute",
+    top: Spacing.two,
+    right: Spacing.two,
   },
   content: {
     paddingTop: Spacing.four,

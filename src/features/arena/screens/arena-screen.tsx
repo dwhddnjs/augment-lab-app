@@ -22,6 +22,7 @@ import {
 } from "@/features/arena/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useTheme } from "@/hooks/use-theme";
+import { lockOrientation } from "@/lib/orientation";
 import { saveBuild } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 import { ArenaAugmentCard } from "../components/arena-augment-card";
@@ -223,9 +224,7 @@ export function ArenaScreen() {
         Alert.alert(translate("saveError"));
         return;
       }
-      await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT_UP,
-      ).catch(() => {});
+      await lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
       router.dismissTo("/");
       router.push({ pathname: "/build/[id]", params: { id: build.id } });
     })();

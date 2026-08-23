@@ -1,8 +1,8 @@
 /**
- * ItemSelectScreen — 아이템 선택 페이즈 (옵셔널)
+ * ItemSelectScreen — 아이템 선택 페이즈 (옵셔널). 칼바람·클래식 공용.
  *
  * 레이아웃: 가로모드 / 좌7:우3
- *   좌: 카테고리 필터(ItemFilterBar) + ARAM 아이템 그리드(ItemGrid) + 선택 트레이
+ *   좌: 카테고리 필터(ItemFilterBar) + 모드별 아이템 그리드(ItemGrid) + 선택 트레이
  *   우: 챔피언 아이콘/이름 + 합산 스탯 + 증강 칩 (ItemDetailPanel)
  */
 import { Image } from "expo-image";
@@ -19,7 +19,8 @@ import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useTheme } from "@/hooks/use-theme";
-import { saveBuild } from "@/lib/build-storage";
+import { lockOrientation } from "@/lib/orientation";
+import { type DraftMode, saveBuild } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { ItemDetailPanel } from "../components/item-detail-panel";
@@ -27,10 +28,8 @@ import { ItemFilterBar, SIDE_TAB_WIDTH } from "../components/item-filter-bar";
 import { ItemGrid } from "../components/item-grid";
 import { ItemSlotGrid } from "../components/item-slot-grid";
 import { FILTERS, type FilterKey } from "../data/item-filters";
-import { useItems } from "../hooks/use-items";
+import { useItemPool } from "../hooks/use-items";
 import type { Item } from "../types";
-
-const ARAM_IDS: Set<string> = new Set(require("../data/aram-item-ids.json"));
 
 const MAX_ITEMS = 6;
 const NUM_COLS = 8;
@@ -63,10 +62,12 @@ export function ItemSelectScreen() {
   const { colors } = useTheme();
   const router = useRouter();
 
-  const { picked: pickedJson, championId } = useLocalSearchParams<{
+  const { picked: pickedJson, championId, mode: modeParam } = useLocalSearchParams<{
     picked: string;
     championId: string;
+    mode?: string;
   }>();
+  const mode: DraftMode = modeParam === "classic" ? "classic" : "aram";
   const pickedAugments: Augment[] = useMemo(
     () => (pickedJson ? JSON.parse(pickedJson) : []),
     [pickedJson],
@@ -98,6 +99,7 @@ export function ItemSelectScreen() {
           router={router}
           pickedAugments={pickedAugments}
           championId={championId ?? ""}
+          mode={mode}
         />
       )}
     </ThemedView>
@@ -111,14 +113,16 @@ function ItemSelectContent({
   router,
   pickedAugments,
   championId,
+  mode,
 }: {
   translate: (key: keyof (typeof t)["en"]) => string;
   accentColor: string;
   router: ReturnType<typeof useRouter>;
   pickedAugments: Augment[];
   championId: string;
+  mode: DraftMode;
 }) {
-  const allItems = useItems();
+  const modeItems = useItemPool(mode);
   const champions = useChampions();
   const champion = useMemo(
     () => champions.find((c) => c.id === championId) ?? null,
@@ -133,25 +137,20 @@ function ItemSelectContent({
   // 증강 카드 그리드(우측) 실측 너비 → 카드 크기 산출(패널 내부에서 사용)
   const [augmentGridWidth, setAugmentGridWidth] = useState(0);
 
-  const aramItems = useMemo(
-    () => allItems.filter((item) => ARAM_IDS.has(item.id)),
-    [allItems],
-  );
-
-  // 진입 시 ARAM 아이템 아이콘을 미리 디스크 캐시에 받아둔다.
+  // 진입 시 이 모드의 아이템 아이콘을 미리 디스크 캐시에 받아둔다.
   // (캐시가 비어 검은 박스가 깜빡이던 첫 설치 케이스 대응)
   useFocusEffect(
     useCallback(() => {
-      const urls = aramItems.map((it) => itemImageUrl(it.imageKey));
+      const urls = modeItems.map((it) => itemImageUrl(it.imageKey));
       if (urls.length) Image.prefetch(urls, { cachePolicy: "memory-disk" });
-    }, [aramItems]),
+    }, [modeItems]),
   );
 
   const displayItems = useMemo(() => {
-    if (!activeFilter) return aramItems;
+    if (!activeFilter) return modeItems;
     const def = FILTERS.find((f) => f.key === activeFilter);
-    return def ? aramItems.filter(def.predicate) : aramItems;
-  }, [aramItems, activeFilter]);
+    return def ? modeItems.filter(def.predicate) : modeItems;
+  }, [modeItems, activeFilter]);
 
   // 마지막 행 균등 크기를 위해 null로 패딩
   const paddedItems = useMemo((): (Item | null)[] => {
@@ -172,9 +171,9 @@ function ItemSelectContent({
   const selectedItems = useMemo(
     () =>
       selectedIds
-        .map((id) => aramItems.find((it) => it.id === id)!)
+        .map((id) => modeItems.find((it) => it.id === id)!)
         .filter(Boolean),
-    [selectedIds, aramItems],
+    [selectedIds, modeItems],
   );
   const itemStatsList = useMemo(
     () => selectedItems.map((it) => it.stats),
@@ -204,7 +203,7 @@ function ItemSelectContent({
     let build;
     try {
       build = await saveBuild({
-        mode: "aram",
+        mode,
         championId: championId ?? "",
         augmentIds: pickedAugments.map((a) => a.id),
         itemIds,
@@ -216,9 +215,7 @@ function ItemSelectContent({
     }
     // lockAsync를 await해서 기기가 portrait로 전환된 후 navigation을 시작한다.
     // await 없이 바로 이동하면 landscape 상태로 build 상세가 mount돼 회전 잔상이 보인다.
-    await ScreenOrientation.lockAsync(
-      ScreenOrientation.OrientationLock.PORTRAIT_UP,
-    ).catch(() => {});
+    await lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
     router.dismissTo("/");
     router.push({ pathname: "/build/[id]", params: { id: build.id } });
   };

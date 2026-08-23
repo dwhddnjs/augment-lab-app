@@ -19,6 +19,7 @@ import {
 } from "react-native";
 import Animated, {
   Easing,
+  type SharedValue,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -26,6 +27,7 @@ import Animated, {
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { GlassSurface } from "@/components/ui/glass-surface";
+import { GAME_MODES, MODE_ICONS, MODE_LABELS } from "@/constants/game-modes";
 import { BottomTabInset, Radius, Spacing } from "@/constants/theme";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
@@ -47,8 +49,7 @@ const t = {
     deleteConfirm: "빌드를 삭제할까요?",
     deleteOk: "삭제",
     cancel: "취소",
-    aram: "칼바람",
-    arena: "아레나",
+    ...MODE_LABELS.ko,
   },
   en: {
     emptyTitle: "No saved builds",
@@ -57,25 +58,13 @@ const t = {
     deleteConfirm: "Delete this build?",
     deleteOk: "Delete",
     cancel: "Cancel",
-    aram: "ARAM",
-    arena: "Arena",
+    ...MODE_LABELS.en,
   },
 };
-
-const MODES: GameMode[] = ["aram", "arena"];
 
 // 가로 화면에서 돌아오면 (home) 스택이 재생성되며 이 화면도 remount된다((home)/_layout).
 // 보고 있던 목록 필터가 칼바람으로 튀지 않도록 모듈 스코프에 담아둔다.
 let lastMode: GameMode = "aram";
-
-// 헤더 컴팩트 토글용 모드 아이콘 — 칼바람=눈송이, 아레나=교차검.
-const MODE_ICONS: Record<
-  GameMode,
-  React.ComponentProps<typeof MaterialCommunityIcons>["name"]
-> = {
-  aram: "snowflake",
-  arena: "sword-cross",
-};
 
 export function BuildListScreen() {
   const translate = useTranslation(t);
@@ -102,26 +91,41 @@ export function BuildListScreen() {
     setShowHeaderToggle((prev) => (prev === shouldShow ? prev : shouldShow));
   };
 
-  // 세그먼트 스위치의 슬라이딩 thumb — 측정한 트랙 너비를 절반으로 나눠
-  // 선택 인덱스로 translateX 한다(spring).
+  // 세그먼트 스위치의 슬라이딩 thumb — 측정한 트랙 너비를 모드 수로 나눠
+  // 선택 인덱스로 translateX 한다.
   const trackWidth = useSharedValue(0);
-  const activeIndex = MODES.indexOf(mode);
-  const thumbStyle = useAnimatedStyle(() => {
-    // width는 정적 퍼센트(styles.thumb)로 고정하고 여기선 슬라이드만.
-    // 헤더 remount로 trackWidth가 0→측정값으로 튀어도 pill 너비는 항상 절반이라
-    // width 제약이 사라져 트랙 전체로 늘어나는 현상이 없다.
-    const seg = trackWidth.value / MODES.length;
-    return {
-      transform: [
-        {
-          translateX: withTiming(activeIndex * seg, {
-            duration: 200,
-            easing: Easing.out(Easing.cubic),
-          }),
-        },
-      ],
-    };
-  });
+  const activeIndex = GAME_MODES.indexOf(mode);
+  // 애니메이션은 shared value에 담고 useAnimatedStyle은 읽기만 한다.
+  // withTiming을 useAnimatedStyle 안에서 부르면 Reanimated 4 + React Compiler
+  // 조합에서 worklet이 새 값으로 다시 돌긴 해도(=위치는 바뀐다) 전환이 보간되지
+  // 않고 그냥 순간이동한다. 시작점을 명시적으로 잡아 줘야 한다.
+  //
+  // 시작 시점은 press 가 아니라 **커밋 이후(useEffect)** 여야 한다.
+  // 모드를 바꾸면 목록이 갈리는데 그 커밋이 실측 약 110ms 다(탭→첫 페인트).
+  // press 에서 시작하면 그 110ms 가 애니메이션 시간에서 그냥 깎여, 목록이 비는
+  // 아레나로 갈 때(커밋이 싸다)만 온전히 보이고 카드가 있는 모드로 갈 때는
+  // 앞부분이 잘려 "한 칸 이동은 애니메이션이 없다"로 보인다.
+  // 커밋 뒤에 걸면 어느 방향이든 280ms 가 통째로 보인다.
+  const progress = useSharedValue(activeIndex);
+  useEffect(() => {
+    progress.value = withTiming(activeIndex, {
+      // 한 칸(트랙의 1/3) 이동이 눈에 읽히는 하한. 200ms 로는 두 칸 이동만 보이고
+      // 한 칸 이동은 순간이동처럼 느껴진다.
+      duration: 280,
+      easing: Easing.out(Easing.cubic),
+    });
+  }, [activeIndex, progress]);
+  const changeMode = (next: GameMode) => {
+    if (next !== mode) setMode(next);
+  };
+  // width는 정적 퍼센트(styles.thumb)로 고정하고 여기선 슬라이드만.
+  // 헤더 remount로 trackWidth가 0→측정값으로 튀어도 pill 너비는 항상 1/MODES라
+  // width 제약이 사라져 트랙 전체로 늘어나는 현상이 없다.
+  const thumbStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: progress.value * (trackWidth.value / GAME_MODES.length) },
+    ],
+  }));
 
   const modeTabs = (
     <View
@@ -138,26 +142,24 @@ export function BuildListScreen() {
             trackWidth.value = e.nativeEvent.layout.width;
           }}
         >
+          {/* 움직이는 pill 은 네이티브 글래스가 아니라 단색이다. GlassView 를
+              translate 하면 매 프레임 배경에 대해 굴절을 다시 계산해 눈에 띄게
+              끊긴다(트랙 자체는 정지해 있으므로 글래스 유지). 어차피 위에
+              accent.subtle 을 덮고 있어 글래스가 보이지도 않았다. */}
           <Animated.View
             pointerEvents="none"
-            style={[styles.thumb, thumbStyle]}
-          >
-            <GlassSurface
-              glassStyle="clear"
-              style={[
-                styles.thumbGlass,
-                { backgroundColor: colors.accent.subtle },
-              ]}
-            />
-          </Animated.View>
-          {MODES.map((m) => {
+            style={[
+              styles.thumb,
+              { backgroundColor: colors.accent.subtle },
+              thumbStyle,
+            ]}
+          />
+          {GAME_MODES.map((m) => {
             const active = mode === m;
             return (
               <Pressable
                 key={m}
-                onPress={() => {
-                  if (m !== mode) setMode(m);
-                }}
+                onPress={() => changeMode(m)}
                 style={styles.switchSegment}
               >
                 <ThemedText
@@ -240,7 +242,8 @@ export function BuildListScreen() {
               <HeaderModeToggle
                 mode={mode}
                 colors={colors}
-                onChange={setMode}
+                progress={progress}
+                onChange={changeMode}
               />
             ) : null,
         }}
@@ -302,25 +305,21 @@ const HEADER_CIRCLE = 34;
 function HeaderModeToggle({
   mode,
   colors,
+  progress,
   onChange,
 }: {
   mode: GameMode;
   colors: ReturnType<typeof useTheme>["colors"];
+  /** 상단 세그먼트와 공유하는 위치(모드 인덱스 단위). 화면이 소유한다. */
+  progress: SharedValue<number>;
   onChange: (m: GameMode) => void;
 }) {
   const trackWidth = useSharedValue(0);
-  const activeIndex = MODES.indexOf(mode);
   const circleStyle = useAnimatedStyle(() => {
-    const seg = trackWidth.value / MODES.length;
-    const centered = activeIndex * seg + (seg - HEADER_CIRCLE) / 2;
+    const seg = trackWidth.value / GAME_MODES.length;
     return {
       transform: [
-        {
-          translateX: withTiming(centered, {
-            duration: 220,
-            easing: Easing.out(Easing.cubic),
-          }),
-        },
+        { translateX: progress.value * seg + (seg - HEADER_CIRCLE) / 2 },
       ],
     };
   });
@@ -332,30 +331,25 @@ function HeaderModeToggle({
         trackWidth.value = e.nativeEvent.layout.width;
       }}
     >
+      {/* 상단 세그먼트와 같은 이유로 단색. 여기는 네이티브 헤더(그 자체가 글래스)
+          위라 글래스를 겹쳐 움직이면 더 심하게 끊겼다. */}
       <Animated.View
         pointerEvents="none"
         style={[
           styles.headerCircle,
-          { borderColor: colors.border.strong },
+          {
+            borderColor: colors.border.strong,
+            backgroundColor: colors.glass.fill,
+          },
           circleStyle,
         ]}
-      >
-        <GlassSurface
-          glassStyle="clear"
-          style={[
-            styles.headerCircleGlass,
-            { backgroundColor: colors.glass.fill },
-          ]}
-        />
-      </Animated.View>
-      {MODES.map((m) => {
+      />
+      {GAME_MODES.map((m) => {
         const active = mode === m;
         return (
           <Pressable
             key={m}
-            onPress={() => {
-              if (m !== mode) onChange(m);
-            }}
+            onPress={() => onChange(m)}
             style={styles.headerSegment}
             hitSlop={Spacing.two}
           >
@@ -401,14 +395,10 @@ const styles = StyleSheet.create({
     left: 0,
     // 너비는 측정값(shared value) 대신 정적 퍼센트로 고정 — 헤더 remount 시
     // width 미확정 프레임이 없어 트랙 전체로 늘어나는 버그를 방지한다.
-    width: `${100 / MODES.length}%`,
+    width: `${100 / GAME_MODES.length}%`,
     borderRadius: Radius.full,
     borderCurve: "continuous",
     overflow: "hidden",
-  },
-  thumbGlass: {
-    flex: 1,
-    borderRadius: Radius.full,
   },
   switchSegment: {
     flex: 1,
@@ -481,9 +471,5 @@ const styles = StyleSheet.create({
     borderRadius: Radius.full,
     borderWidth: StyleSheet.hairlineWidth,
     overflow: "hidden",
-  },
-  headerCircleGlass: {
-    flex: 1,
-    borderRadius: Radius.full,
   },
 });
