@@ -14,6 +14,7 @@ import { useLocale } from "@/hooks/use-locale";
 import type { GameMode } from "@/lib/build-storage";
 import { championClassIconUrl, championSquareUrl } from "@/lib/ddragon";
 import { matchChampionName } from "@/lib/hangul";
+import { lockOrientation } from "@/lib/orientation";
 import { CHAMPION_TAGS, useTranslation } from "@/lib/i18n";
 import type { Champion } from "../types";
 import { useChampions } from "./use-champions";
@@ -45,20 +46,31 @@ const t = {
   },
 };
 
+/** Alert dismiss 애니메이션이 끝나기를 기다리는 시간 — 아래 주석 참고. */
+const ALERT_DISMISS_MS = 300;
+
 /**
  * 클래식 라운드 수 질문(바론 간식 10개 → 5라운드, 아니면 4라운드).
  *
  * **가로 전환 전에** 물어야 한다. Alert 은 새 presentation 이라 iOS 가 지원 방향을 다시
  * 계산하는데, 드래프트 화면에서 띄우면 expo-screen-orientation 의 landscape 잠금이 풀려
  * 화면이 세로로 되돌아간다.
+ *
+ * 그리고 **dismiss 가 끝난 뒤에 resolve 해야 한다.** onPress 는 알럿이 아직 내려가는
+ * 중에 불리는데, 그 전환 중에 lockAsync 를 호출하면 회전은 걸리지만 완료 콜백이 유실돼
+ * Promise 가 영영 pending 이 된다 — 챔피언 선택 모달이 가로로 누운 채 멈췄다.
+ * 한 박자 늦춰 알럿을 완전히 보낸 뒤 잠그면 lockAsync 가 정상 resolve 한다.
+ * (그래도 못 받는 경우는 lockOrientation 의 타임아웃이 받아낸다.)
  */
 function askClassicRounds(
   translate: (key: keyof (typeof t)["en"]) => string,
 ): Promise<number> {
   return new Promise((resolve) => {
+    const answer = (rounds: number) =>
+      setTimeout(() => resolve(rounds), ALERT_DISMISS_MS);
     Alert.alert(translate("snackTitle"), translate("snackMessage"), [
-      { text: translate("snackYes"), onPress: () => resolve(5) },
-      { text: translate("snackNo"), style: "destructive", onPress: () => resolve(4) },
+      { text: translate("snackYes"), onPress: () => answer(5) },
+      { text: translate("snackNo"), style: "destructive", onPress: () => answer(4) },
     ]);
   });
 }
@@ -77,6 +89,9 @@ export function useChampionSelect() {
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const searchRef = useRef<SearchBarCommands>(null);
+  // 클래식은 알럿 응답 후 회전까지 몇백 ms가 뜨는데 그동안 ✓ 가 계속 눌린다.
+  // 가드가 없으면 replace 가 두 번 나가 드래프트가 겹쳐 뜬다.
+  const startingRef = useRef(false);
 
   const filtered = champions
     .filter((c) => !selectedTag || c.tags.includes(selectedTag))
@@ -113,20 +128,22 @@ export function useChampionSelect() {
   };
 
   const handleStart = async () => {
-    if (!selectedId) return;
+    if (!selectedId || startingRef.current) return;
+    startingRef.current = true;
     // 물음표(용기) 선택 시 전체 챔피언 중 한 명을 무작위 확정한다.
     const championId =
       selectedId === BRAVERY_ID
         ? champions[Math.floor(Math.random() * champions.length)]?.id
         : selectedId;
-    if (!championId) return;
+    if (!championId) {
+      startingRef.current = false;
+      return;
+    }
     // 클래식 라운드 수는 세로일 때 먼저 확정한다(가로에서 물으면 잠금이 풀린다).
     const rounds = mode === "classic" ? await askClassicRounds(translate) : 4;
-    // lockAsync를 await해서 기기가 landscape로 전환된 후 navigation을 시작한다.
+    // 잠금을 await해서 기기가 landscape로 전환된 후 navigation을 시작한다.
     // await 없이 바로 replace하면 portrait 상태로 화면이 mount될 수 있다.
-    await ScreenOrientation.lockAsync(
-      ScreenOrientation.OrientationLock.LANDSCAPE,
-    ).catch(() => {});
+    await lockOrientation(ScreenOrientation.OrientationLock.LANDSCAPE);
     // 클래식은 칼바람과 화면이 같아 /aram 라우트를 공유하고 mode 를 실어 보낸다.
     // 드래프트 → 아이템 → saveBuild 까지 이 파라미터가 모드를 나른다.
     router.replace(
