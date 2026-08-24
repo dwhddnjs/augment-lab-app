@@ -181,10 +181,20 @@ export const AugmentRarityGlyphs = {
 // 카드 위는 컬러풀한 splash라 모드와 무관하게 어두운 scrim/타일이 표준이며,
 // 이 그룹이 카드 내부 색의 유일한 출처다(다른 곳에서 hex 직접 쓰지 말 것).
 export const HeroOverlay = {
-  scrim0: "rgba(8,9,11,0)",
-  scrim1: "rgba(8,9,11,0.55)",
-  scrim2: "rgba(8,9,11,0.85)",
-  scrim3: "rgba(8,9,11,0.96)",
+  // 하단 scrim — 흰 텍스트 가독성용. 다크는 배경과 이어져 강하게 깔아도 되지만,
+  // 라이트는 밝은 배경과 맞닿아 검은 띠처럼 튀므로 톤을 낮춘다.
+  scrimDark: [
+    "rgba(8,9,11,0)",
+    "rgba(8,9,11,0.55)",
+    "rgba(8,9,11,0.85)",
+    "rgba(8,9,11,0.96)",
+  ],
+  scrimLight: [
+    "rgba(8,9,11,0)",
+    "rgba(8,9,11,0.3)",
+    "rgba(8,9,11,0.55)",
+    "rgba(8,9,11,0.7)",
+  ],
   cardBase: "#0A0B0D", // splash 로드 전/빈 영역 베이스
   tileBg: "rgba(0,0,0,0.45)", // 증강·아이템 타일 배경
   tileBorder: "rgba(255,255,255,0.14)", // 아이템 타일 테두리

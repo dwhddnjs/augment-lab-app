@@ -149,3 +149,35 @@ export function computeStats(
     cdr: sv(0, s.cdr * 100),
   };
 }
+
+/** ItemStats에서 %로 표기하는 비율 키(0.4 = 40%). */
+const RATIO_KEYS = new Set<keyof ItemStats>([
+  'attackspeed', 'movespeedPercent', 'hpregen', 'mpregen', 'crit', 'critdamage',
+  'armorpen', 'magicpenPercent', 'lifesteal', 'omnivamp', 'tenacity', 'healshield', 'cdr',
+]);
+
+/** ItemStats 전용 키 → STAT_LABELS 키. 나머지는 이름이 같다. */
+const LABEL_ALIAS: Partial<Record<keyof ItemStats, StatKey>> = {
+  movespeedFlat: 'movespeed',
+  movespeedPercent: 'movespeed',
+  hpregenFlat: 'hpregen',
+  mpregenFlat: 'mpregen',
+};
+
+/**
+ * 아이템 한 개의 스탯을 "체력 250 · 재사용 대기시간 감소 20%" 한 줄로 요약.
+ * 빌드 상세 카드 행의 설명 자리에 쓴다.
+ */
+export function formatItemStats(stats: ItemStats, locale: 'ko' | 'en'): string {
+  return (Object.entries(stats) as [keyof ItemStats, number][])
+    .filter(([, value]) => value)
+    .map(([key, value]) => {
+      const meta = STAT_LABELS[LABEL_ALIAS[key] ?? (key as StatKey)];
+      if (!meta) return null;
+      const ratio = RATIO_KEYS.has(key);
+      const shown = ratio ? value * 100 : value;
+      return `${meta[locale]} ${parseFloat(shown.toFixed(1))}${ratio ? '%' : ''}`;
+    })
+    .filter(Boolean)
+    .join(' · ');
+}

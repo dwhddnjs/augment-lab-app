@@ -1282,7 +1282,7 @@
   },
   {
     "id": "773050",
-    "name": "스타크의 열정",
+    "name": "지크의 전령",
     "description": "<mainText><stats>체력 <attention>250</attention><br>재사용 대기시간 감소 <attention>20%</attention></stats><br><br><jadeUnique>오라 - 승리:</jadeUnique> 주변 아군 챔피언에게 <lifeSteal>10%의 생명력 흡수</lifeSteal>와 <physicalDamage>20의 공격력</physicalDamage>을 부여합니다.</mainText>",
     "plaintext": "",
     "gold": {

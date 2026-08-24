@@ -111,12 +111,7 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
           <View style={styles.content}>
             {/* 패널 상단만 splash로 페이드, 나머지는 어두운 scrim으로(모드 무관) */}
             <LinearGradient
-              colors={[
-                HeroOverlay.scrim0,
-                HeroOverlay.scrim1,
-                HeroOverlay.scrim2,
-                HeroOverlay.scrim3,
-              ]}
+              colors={mode === "light" ? HeroOverlay.scrimLight : HeroOverlay.scrimDark}
               locations={[0, 0.42, 0.7, 1]}
               start={{ x: 0, y: 0 }}
               end={{ x: 0, y: 1 }}
