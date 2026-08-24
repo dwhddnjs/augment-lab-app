@@ -3,22 +3,21 @@
  * ArenaPrismaticCard를 본떠 일반 Item을 골드 등급 프레임으로 표시한다.
  * 칼바람/아레나 공용 ArenaPickCard 선택 애니메이션 + 카드당 1회 무료 리롤 버튼.
  */
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Pressable, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { RARITY } from "@/components/ui/rarity-card-frame";
+import { CARD_ASPECT, RARITY } from "@/components/ui/rarity-card-frame";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
-import { cleanItemDescription } from "@/features/items/item-text";
+import { itemDescriptionText } from "@/features/items/text";
 import type { Item } from "@/features/items/types";
-import { useTheme } from "@/hooks/use-theme";
 import { itemImageUrl } from "@/lib/ddragon";
 import {
   ArenaPickCard,
   type ArenaCardEntryMode,
   type ArenaCardExitMode,
 } from "./arena-pick-card";
+import { ArenaRerollButton } from "./arena-reroll-button";
 
 const GOLD = RARITY.gold;
 
@@ -45,10 +44,9 @@ export function ArenaItemPickCard({
   onPick,
   onReroll,
 }: Props) {
-  const { colors } = useTheme();
-  const cardHeight = Math.round(cardWidth * (14 / 9));
+  const cardHeight = Math.round(cardWidth * CARD_ASPECT);
   const framePad = Math.max(3, Math.round(cardWidth * 0.056));
-  const summary = cleanItemDescription(item.description);
+  const summary = itemDescriptionText(item.description);
 
   const frame = (
     <View
@@ -95,25 +93,11 @@ export function ArenaItemPickCard({
         {frame}
       </ArenaPickCard>
 
-      <Pressable
-        onPress={rerolled || disabled ? undefined : onReroll}
-        disabled={rerolled || disabled}
-        style={[
-          styles.reroll,
-          {
-            backgroundColor: rerolled
-              ? colors.surface.sunken
-              : colors.surface.raised,
-            borderColor: rerolled ? colors.border.subtle : colors.border.strong,
-          },
-        ]}
-      >
-        <MaterialCommunityIcons
-          name="refresh"
-          size={18}
-          color={rerolled ? colors.text.disabled : colors.text.primary}
-        />
-      </Pressable>
+      <ArenaRerollButton
+        rerolled={rerolled}
+        disabled={disabled}
+        onPress={onReroll}
+      />
     </View>
   );
 }
@@ -157,13 +141,5 @@ const styles = StyleSheet.create({
     lineHeight: 12,
     paddingHorizontal: Spacing.one,
     flexShrink: 1,
-  },
-  reroll: {
-    width: 36,
-    height: 36,
-    borderRadius: Radius.full,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });

@@ -18,6 +18,7 @@ import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useItems } from "@/features/items/hooks/use-items";
 import { useTheme } from "@/hooks/use-theme";
 import type { SavedBuild } from "@/lib/build-storage";
+import { resolveIds } from "@/lib/arrays";
 import { cdragonItemIconUrl, championSplashUrl, itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { AugmentTile } from "@/components/ui/augment-tile";
@@ -48,21 +49,12 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
 
   const isArena = build.mode === "arena";
   const champion = champions.find((c) => c.id === build.championId) ?? null;
-  // 데이터 갱신으로 해석 불가한 id는 조용히 건너뛴다 — crash 금지.
   // 아레나 증강은 칼바람과 별도 데이터셋이므로 모드에 맞는 풀에서 해석한다.
   const augmentPool = isArena ? arenaAugments : augments;
-  const buildAugments = build.augmentIds
-    .map((id) => augmentPool.find((a) => a.id === id))
-    .filter((a): a is NonNullable<typeof a> => a != null);
-  const buildItems = build.itemIds
-    .map((id) => items.find((it) => it.id === id))
-    .filter((it): it is NonNullable<typeof it> => it != null);
+  const buildAugments = resolveIds(build.augmentIds, augmentPool);
+  const buildItems = resolveIds(build.itemIds, items);
   // 아레나 빌드는 프리즘 아이템도 보유 — 전설 아이템 앞에 함께 노출.
-  const buildPrismatics = isArena
-    ? (build.prismaticIds ?? [])
-        .map((id) => prismatics.find((p) => p.id === id))
-        .filter((p): p is NonNullable<typeof p> => p != null)
-    : [];
+  const buildPrismatics = isArena ? resolveIds(build.prismaticIds, prismatics) : [];
 
   return (
     <Pressable
@@ -111,12 +103,7 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
           <View style={styles.content}>
             {/* 패널 상단만 splash로 페이드, 나머지는 어두운 scrim으로(모드 무관) */}
             <LinearGradient
-              colors={[
-                HeroOverlay.scrim0,
-                HeroOverlay.scrim1,
-                HeroOverlay.scrim2,
-                HeroOverlay.scrim3,
-              ]}
+              colors={mode === "light" ? HeroOverlay.scrimLight : HeroOverlay.scrimDark}
               locations={[0, 0.42, 0.7, 1]}
               start={{ x: 0, y: 0 }}
               end={{ x: 0, y: 1 }}

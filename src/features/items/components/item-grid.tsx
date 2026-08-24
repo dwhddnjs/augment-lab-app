@@ -14,7 +14,8 @@ import { itemImageUrl } from "@/lib/ddragon";
 import type { Item } from "../types";
 import { TRAY_HEIGHT } from "./item-slot-grid";
 
-const CELL_GAP = Spacing.one; // 4px
+/** 셀 사이 간격 — 화면이 셀 크기를 역산할 때 같은 값을 써야 한다. */
+export const CELL_GAP = Spacing.one; // 4px
 
 interface Props {
   /** NUM_COLS씩 묶고 마지막 행을 null로 패딩한 그리드. */

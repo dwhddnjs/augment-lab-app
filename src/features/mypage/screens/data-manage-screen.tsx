@@ -97,7 +97,7 @@ const t = {
   },
 };
 
-export default function DataManageScreen() {
+export function DataManageScreen() {
   const translate = useTranslation(t);
   const { colors, mode } = useTheme();
   // 파일 선택·공유 시트가 떠 있는 동안 다른 행을 누르지 못하게 막는다.

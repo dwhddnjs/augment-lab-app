@@ -4,7 +4,7 @@
  * - itemInCategory: 한 아이템이 특정 카테고리 탭에 노출될지 판단
  * - FILTERS: 사이드 탭 목록(아이콘 + predicate)
  */
-import type { Item } from "../types";
+import type { Item } from "./types";
 
 // ─── 아이템 카테고리 명시 지정 ───────────────────────────────────────────────
 // 태그 기반 predicate보다 우선 적용. 여러 카테고리 가능.
@@ -54,7 +54,7 @@ export const ITEM_CATEGORIES: Record<string, string[]> = {
   "773035": ["marksman"], // 최후의 속삭임
   "773040": ["mage"], // 대천사의 포옹
   "773042": ["fighter"], // 무라마나
-  "773050": ["fighter"], // 스타크의 열정 (= 지크의 전령 / Zeke's Herald. 개명 전 이름으로 들어있다)
+  "773050": ["fighter"], // 지크의 전령 / Zeke's Herald
   "773060": ["support"], // 지휘관의 깃발
   "773069": ["support"], // 슈렐리아의 몽상
   "773072": ["marksman"], // 피바라기

@@ -28,6 +28,7 @@ import {
   useStatShards,
 } from "@/features/arena/hooks/use-arena-items";
 import { useItems } from "@/features/items/hooks/use-items";
+import { resolveIds } from "@/lib/arrays";
 import { cleanAugmentDescription } from "@/lib/augment-text";
 import type { SavedBuild } from "@/lib/build-storage";
 import { cdragonItemIconUrl, itemImageUrl } from "@/lib/ddragon";
@@ -60,21 +61,11 @@ export function ArenaBuildSummary({ build }: Props) {
   const allShards = useStatShards();
   const allSpecials = useSpecialAugments();
 
-  const augments = build.augmentIds
-    .map((id) => arenaAugments.find((a) => a.id === id))
-    .filter((a): a is NonNullable<typeof a> => a != null);
-  const items = build.itemIds
-    .map((id) => allItems.find((it) => it.id === id))
-    .filter((it): it is NonNullable<typeof it> => it != null);
-  const prismatics = (build.prismaticIds ?? [])
-    .map((id) => allPrismatics.find((p) => p.id === id))
-    .filter((p): p is NonNullable<typeof p> => p != null);
-  const shards = (build.shardIds ?? [])
-    .map((id) => allShards.find((s) => s.id === id))
-    .filter((s): s is NonNullable<typeof s> => s != null);
-  const reforges = (build.reforgeIds ?? [])
-    .map((id) => allSpecials.find((s) => s.id === id))
-    .filter((s): s is NonNullable<typeof s> => s != null);
+  const augments = resolveIds(build.augmentIds, arenaAugments);
+  const items = resolveIds(build.itemIds, allItems);
+  const prismatics = resolveIds(build.prismaticIds, allPrismatics);
+  const shards = resolveIds(build.shardIds, allShards);
+  const reforges = resolveIds(build.reforgeIds, allSpecials);
 
   // 프리즘 + 전설을 하나의 아이템 셀 목록으로 합친다(아이콘 소스만 다름).
   const itemCells = [

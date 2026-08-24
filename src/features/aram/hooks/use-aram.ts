@@ -1,24 +1,12 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useAugmentPool } from '@/features/augments/hooks/use-augments';
 import type { Augment, AugmentMode, AugmentRarity } from '@/features/augments/types';
+import { sampleDistinct } from '@/lib/arrays';
 import { rollRarity } from '../rarity-odds';
 
 // "Transmute: Chaos" grants extra random augments when picked.
 const TRANSMUTE_CHAOS_ID = 'transmute-chaos';
 const TRANSMUTE_CHAOS_BONUS = 2;
-
-// Randomly pick `count` distinct augments from `pool`, marking them used.
-function sampleDistinct(pool: Augment[], count: number, used: Set<string>): Augment[] {
-  const available = pool.filter((a) => !used.has(a.id));
-  const result: Augment[] = [];
-  while (result.length < count && available.length > 0) {
-    const idx = Math.floor(Math.random() * available.length);
-    const [chosen] = available.splice(idx, 1);
-    result.push(chosen);
-    used.add(chosen.id);
-  }
-  return result;
-}
 
 // Draw `count` augments of a single rarity; if that pool is too small, fill the
 // remainder from any rarity so the round is never short.
