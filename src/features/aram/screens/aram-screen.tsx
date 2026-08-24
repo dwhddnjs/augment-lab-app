@@ -10,6 +10,7 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
 import { GlassSurface } from "@/components/ui/glass-surface";
+import { parseDraftMode } from "@/constants/game-modes";
 import { Radius, Spacing } from "@/constants/theme";
 
 import { useTheme } from "@/hooks/use-theme";
@@ -72,7 +73,7 @@ export function AramScreen() {
     mode?: string;
     rounds?: string;
   }>();
-  const mode: DraftMode = modeParam === "classic" ? "classic" : "aram";
+  const mode: DraftMode = parseDraftMode(modeParam);
   // 라운드 수는 챔피언 선택에서 확정해 넘어온다(클래식은 바론 간식 질문으로 4 또는 5).
   // 여기서 묻지 않는 이유는 orientation — 가로 잠금 상태에서 Alert 을 띄우면 잠금이 풀린다.
   const rounds = Number(roundsParam) || 4;
@@ -242,7 +243,7 @@ export function AramScreen() {
           style={styles.safe}
           edges={["top", "bottom", "left", "right"]}
         >
-          {/* Header — 네이티브 expo-ui glass 버튼 (폴백: GlassChip) */}
+          {/* Header — 네이티브 expo-ui glass 버튼 (iOS 26 미만은 GlassButton 내부 폴백) */}
           <View style={[styles.header, { paddingHorizontal: HEADER_PAD }]}>
             <GlassButton
               systemImage="xmark"

@@ -22,7 +22,7 @@ import {
   ItemSlotGrid,
   TRAY_HEIGHT,
 } from "@/features/items/components/item-slot-grid";
-import { FILTERS, type FilterKey } from "@/features/items/data/item-filters";
+import { FILTERS, type FilterKey } from "@/features/items/item-filters";
 import { useItemPool } from "@/features/items/hooks/use-items";
 import type { Item } from "@/features/items/types";
 import { useTheme } from "@/hooks/use-theme";

@@ -14,7 +14,7 @@ import type { PrismaticItem } from "@/features/arena/types";
 import {
   prismaticEffectSummary,
   prismaticStatSummary,
-} from "@/features/items/item-text";
+} from "@/features/items/text";
 import { useTheme } from "@/hooks/use-theme";
 import { cdragonItemIconUrl } from "@/lib/ddragon";
 import {

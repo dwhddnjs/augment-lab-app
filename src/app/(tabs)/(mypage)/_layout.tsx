@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router/stack';
 
+import { stackScreenOptions } from '@/components/navigation/stack-screen-options';
 import { useTheme } from '@/hooks/use-theme';
 import { useTranslation } from '@/lib/i18n';
 
@@ -13,14 +14,7 @@ export default function MyPageStackLayout() {
   const translate = useTranslation(t);
 
   return (
-    <Stack
-      screenOptions={{
-        headerShadowVisible: false,
-        headerTintColor: colors.accent.default,
-        headerTitleStyle: { color: colors.text.primary },
-        headerLargeTitleStyle: { color: colors.text.primary },
-      }}
-    >
+    <Stack screenOptions={stackScreenOptions(colors)}>
       <Stack.Screen
         name="index"
         options={{ title: translate('title'), headerLargeTitle: true }}

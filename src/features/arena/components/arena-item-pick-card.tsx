@@ -10,7 +10,7 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { RARITY } from "@/components/ui/rarity-card-frame";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
-import { cleanItemDescription } from "@/features/items/item-text";
+import { itemDescriptionText } from "@/features/items/text";
 import type { Item } from "@/features/items/types";
 import { useTheme } from "@/hooks/use-theme";
 import { itemImageUrl } from "@/lib/ddragon";
@@ -48,7 +48,7 @@ export function ArenaItemPickCard({
   const { colors } = useTheme();
   const cardHeight = Math.round(cardWidth * (14 / 9));
   const framePad = Math.max(3, Math.round(cardWidth * 0.056));
-  const summary = cleanItemDescription(item.description);
+  const summary = itemDescriptionText(item.description);
 
   const frame = (
     <View

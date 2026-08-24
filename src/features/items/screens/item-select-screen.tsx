@@ -4,70 +4,42 @@
  * 레이아웃: 가로모드 / 좌7:우3
  *   좌: 카테고리 필터(ItemFilterBar) + 모드별 아이템 그리드(ItemGrid) + 선택 트레이
  *   우: 챔피언 아이콘/이름 + 합산 스탯 + 증강 칩 (ItemDetailPanel)
+ *
+ * 필터·선택·그리드 계산·저장은 useItemSelect 가 맡는다.
  */
-import { Image } from "expo-image";
-import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import { useFocusEffect, useLocalSearchParams } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useMemo, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
+import { parseDraftMode } from "@/constants/game-modes";
 import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
-import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useTheme } from "@/hooks/use-theme";
-import { lockOrientation } from "@/lib/orientation";
-import { type DraftMode, saveBuild } from "@/lib/build-storage";
+import { type DraftMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
-import { useTranslation } from "@/lib/i18n";
 import { ItemDetailPanel } from "../components/item-detail-panel";
 import { ItemFilterBar, SIDE_TAB_WIDTH } from "../components/item-filter-bar";
 import { ItemGrid } from "../components/item-grid";
 import { ItemSlotGrid } from "../components/item-slot-grid";
-import { FILTERS, type FilterKey } from "../data/item-filters";
-import { useItemPool } from "../hooks/use-items";
-import type { Item } from "../types";
-
-const MAX_ITEMS = 6;
-const NUM_COLS = 8;
-const CELL_GAP = Spacing.one; // 4px
-
-const t = {
-  ko: {
-    title: "아이템 선택",
-    stats: "스탯",
-    augments: "증강",
-    saveError: "빌드 저장에 실패했어요",
-    exitConfirm: "저장하지 않고 나갈까요?",
-    exitOk: "나가기",
-    exitCancel: "계속",
-  },
-  en: {
-    title: "Item Select",
-    stats: "Stats",
-    augments: "Augments",
-    saveError: "Failed to save the build",
-    exitConfirm: "Leave without saving?",
-    exitOk: "Leave",
-    exitCancel: "Continue",
-  },
-};
+import { MAX_ITEMS, useItemSelect } from "../hooks/use-item-select";
 
 // ─── 화면 진입 래퍼 (landscape 가드) ─────────────────────────────────────────
 export function ItemSelectScreen() {
-  const translate = useTranslation(t);
-  const { colors } = useTheme();
-  const router = useRouter();
-
-  const { picked: pickedJson, championId, mode: modeParam } = useLocalSearchParams<{
+  const {
+    picked: pickedJson,
+    championId,
+    mode: modeParam,
+  } = useLocalSearchParams<{
     picked: string;
     championId: string;
     mode?: string;
   }>();
-  const mode: DraftMode = modeParam === "classic" ? "classic" : "aram";
+  const mode: DraftMode = parseDraftMode(modeParam);
   const pickedAugments: Augment[] = useMemo(
     () => (pickedJson ? JSON.parse(pickedJson) : []),
     [pickedJson],
@@ -94,9 +66,6 @@ export function ItemSelectScreen() {
     >
       {isLandscape && (
         <ItemSelectContent
-          translate={translate}
-          accentColor={colors.accent.default}
-          router={router}
           pickedAugments={pickedAugments}
           championId={championId ?? ""}
           mode={mode}
@@ -108,135 +77,33 @@ export function ItemSelectScreen() {
 
 // ─── 본체 ────────────────────────────────────────────────────────────────────
 function ItemSelectContent({
-  translate,
-  accentColor,
-  router,
   pickedAugments,
   championId,
   mode,
 }: {
-  translate: (key: keyof (typeof t)["en"]) => string;
-  accentColor: string;
-  router: ReturnType<typeof useRouter>;
   pickedAugments: Augment[];
   championId: string;
   mode: DraftMode;
 }) {
-  const modeItems = useItemPool(mode);
-  const champions = useChampions();
-  const champion = useMemo(
-    () => champions.find((c) => c.id === championId) ?? null,
-    [champions, championId],
-  );
-
-  const [activeFilter, setActiveFilter] = useState<FilterKey>(null);
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [saving, setSaving] = useState(false);
-  // 그리드 영역 실측 너비 → NUM_COLS 정확히 채우도록 셀 크기 계산
-  const [gridWidth, setGridWidth] = useState(0);
-  // 증강 카드 그리드(우측) 실측 너비 → 카드 크기 산출(패널 내부에서 사용)
-  const [augmentGridWidth, setAugmentGridWidth] = useState(0);
-
-  // 진입 시 이 모드의 아이템 아이콘을 미리 디스크 캐시에 받아둔다.
-  // (캐시가 비어 검은 박스가 깜빡이던 첫 설치 케이스 대응)
-  useFocusEffect(
-    useCallback(() => {
-      const urls = modeItems.map((it) => itemImageUrl(it.imageKey));
-      if (urls.length) Image.prefetch(urls, { cachePolicy: "memory-disk" });
-    }, [modeItems]),
-  );
-
-  const displayItems = useMemo(() => {
-    if (!activeFilter) return modeItems;
-    const def = FILTERS.find((f) => f.key === activeFilter);
-    return def ? modeItems.filter(def.predicate) : modeItems;
-  }, [modeItems, activeFilter]);
-
-  // 마지막 행 균등 크기를 위해 null로 패딩
-  const paddedItems = useMemo((): (Item | null)[] => {
-    const rem = displayItems.length % NUM_COLS;
-    if (rem === 0) return displayItems;
-    return [...displayItems, ...Array<null>(NUM_COLS - rem).fill(null)];
-  }, [displayItems]);
-
-  // 그리드 영역 실측 너비를 NUM_COLS로 나눠 셀 크기 산출 (gap 제외)
-  const cellSize =
-    gridWidth > 0
-      ? Math.max(
-          36,
-          Math.floor((gridWidth - (NUM_COLS - 1) * CELL_GAP) / NUM_COLS),
-        )
-      : 48;
-
-  const selectedItems = useMemo(
-    () =>
-      selectedIds
-        .map((id) => modeItems.find((it) => it.id === id)!)
-        .filter(Boolean),
-    [selectedIds, modeItems],
-  );
-  const itemStatsList = useMemo(
-    () => selectedItems.map((it) => it.stats),
-    [selectedItems],
-  );
-
-  // 그리드: NUM_COLS씩 row로 묶기
-  const rows = useMemo(() => {
-    const result: (Item | null)[][] = [];
-    for (let i = 0; i < paddedItems.length; i += NUM_COLS) {
-      result.push(paddedItems.slice(i, i + NUM_COLS));
-    }
-    return result;
-  }, [paddedItems]);
-
-  const handleItemPress = (item: Item) => {
-    setSelectedIds((prev) => {
-      if (prev.includes(item.id)) return prev.filter((id) => id !== item.id);
-      if (prev.length >= MAX_ITEMS) return prev;
-      return [...prev, item.id];
-    });
-  };
-
-  const saveAndOpenBuild = async (itemIds: string[]) => {
-    if (saving) return;
-    setSaving(true);
-    let build;
-    try {
-      build = await saveBuild({
-        mode,
-        championId: championId ?? "",
-        augmentIds: pickedAugments.map((a) => a.id),
-        itemIds,
-      });
-    } catch {
-      Alert.alert(translate("saveError"));
-      setSaving(false);
-      return;
-    }
-    // lockAsync를 await해서 기기가 portrait로 전환된 후 navigation을 시작한다.
-    // await 없이 바로 이동하면 landscape 상태로 build 상세가 mount돼 회전 잔상이 보인다.
-    await lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
-    router.dismissTo("/");
-    router.push({ pathname: "/build/[id]", params: { id: build.id } });
-  };
-
-  // 저장 외의 유일한 출구. 그냥 pop하면 landscape가 잠긴 채 홈으로 튕기므로
-  // 확인 후 portrait로 되돌린 다음 나간다(빌드는 저장하지 않는다).
-  const handleExit = () => {
-    Alert.alert(translate("exitConfirm"), "", [
-      { text: translate("exitCancel"), style: "cancel" },
-      {
-        text: translate("exitOk"),
-        style: "destructive",
-        onPress: () => {
-          ScreenOrientation.lockAsync(
-            ScreenOrientation.OrientationLock.PORTRAIT_UP,
-          ).catch(() => {});
-          router.dismissTo("/");
-        },
-      },
-    ]);
-  };
+  const { colors } = useTheme();
+  const {
+    translate,
+    champion,
+    rows,
+    cellSize,
+    activeFilter,
+    setActiveFilter,
+    selectedIds,
+    selectedItems,
+    itemStatsList,
+    augmentGridWidth,
+    handleItemPress,
+    handleSlotPress,
+    handleSave,
+    handleExit,
+    onGridLayout,
+    onAugmentGridLayout,
+  } = useItemSelect({ championId, mode, pickedAugments });
 
   return (
     // "right"가 빠지면 헤더 오른쪽 끝의 저장 버튼이 홈 인디케이터 제스처 영역에
@@ -262,8 +129,8 @@ function ItemSelectContent({
         <GlassButton
           systemImage="checkmark"
           fallbackIcon="check"
-          tint={accentColor}
-          onPress={() => saveAndOpenBuild(selectedIds)}
+          tint={colors.accent.default}
+          onPress={handleSave}
         />
       </View>
 
@@ -280,7 +147,7 @@ function ItemSelectContent({
             cellSize={cellSize}
             selectedIds={selectedIds}
             onItemPress={handleItemPress}
-            onGridLayout={(e) => setGridWidth(e.nativeEvent.layout.width)}
+            onGridLayout={onGridLayout}
           />
 
           {/* 선택된 아이템 트레이 (하단 absolute, 항상 6칸) */}
@@ -290,10 +157,7 @@ function ItemSelectContent({
                 id: it.id,
                 iconUri: itemImageUrl(it.imageKey),
               }))}
-              onSlotPress={(_i, slot) => {
-                if (slot)
-                  setSelectedIds((prev) => prev.filter((id) => id !== slot.id));
-              }}
+              onSlotPress={handleSlotPress}
             />
           </View>
         </View>
@@ -306,9 +170,7 @@ function ItemSelectContent({
           augmentGridWidth={augmentGridWidth}
           statsLabel={translate("stats")}
           augmentsLabel={translate("augments")}
-          onAugmentGridLayout={(e) =>
-            setAugmentGridWidth(e.nativeEvent.layout.width)
-          }
+          onAugmentGridLayout={onAugmentGridLayout}
         />
       </View>
     </SafeAreaView>

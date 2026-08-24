@@ -3,9 +3,10 @@
  * 같은 날짜끼리 묶어 날짜 태그 헤더 + 그 날짜 카드들을 SectionList로 렌더한다.
  * 반응형 스토어(useBuilds)를 구독해 드래프트 저장/삭제 직후 자동 갱신된다.
  * 화면 타이틀은 (home) 스택의 native large-title 헤더가 제공한다.
+ *
+ * 모드 전환 컨트롤(상단 세그먼트 · 헤더 토글)은 components/mode-switch 에 있다.
  */
 import Feather from "@expo/vector-icons/Feather";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Stack, useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -17,20 +18,11 @@ import {
   type NativeScrollEvent,
   type NativeSyntheticEvent,
 } from "react-native";
-import Animated, {
-  Easing,
-  interpolateColor,
-  runOnJS,
-  type SharedValue,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from "react-native-reanimated";
+import { Easing, runOnJS, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { GlassSurface } from "@/components/ui/glass-surface";
-import { GAME_MODES, MODE_ICONS, MODE_LABELS } from "@/constants/game-modes";
-import { BottomTabInset, Radius, Spacing, Typography } from "@/constants/theme";
+import { GAME_MODES } from "@/constants/game-modes";
+import { BottomTabInset, Radius, Spacing } from "@/constants/theme";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
 import {
@@ -40,6 +32,10 @@ import {
 } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 import { BuildCard } from "../components/build-card";
+import {
+  HeaderModeToggle,
+  ModeSegmentedControl,
+} from "../components/mode-switch";
 import { useBuilds } from "../hooks/use-builds";
 import { formatDate, groupByDate, type BuildSection } from "../utils/date";
 
@@ -51,7 +47,6 @@ const t = {
     deleteConfirm: "빌드를 삭제할까요?",
     deleteOk: "삭제",
     cancel: "취소",
-    ...MODE_LABELS.ko,
   },
   en: {
     emptyTitle: "No saved builds",
@@ -60,7 +55,6 @@ const t = {
     deleteConfirm: "Delete this build?",
     deleteOk: "Delete",
     cancel: "Cancel",
-    ...MODE_LABELS.en,
   },
 };
 
@@ -93,9 +87,6 @@ export function BuildListScreen() {
     setShowHeaderToggle((prev) => (prev === shouldShow ? prev : shouldShow));
   };
 
-  // 세그먼트 스위치의 슬라이딩 thumb — 측정한 트랙 너비를 모드 수로 나눠
-  // 선택 인덱스로 translateX 한다.
-  const trackWidth = useSharedValue(0);
   // 선택 위치의 단일 출처. 눌린 즉시 UI 스레드에서 보간되고, pill 위치뿐 아니라
   // 라벨/아이콘 색까지 전부 여기서 파생한다 — 이동에도 강조에도 React 커밋이
   // 끼어들지 않는다.
@@ -121,62 +112,6 @@ export function BuildListScreen() {
       },
     );
   };
-  // width는 정적 퍼센트(styles.thumb)로 고정하고 여기선 슬라이드만.
-  // 헤더 remount로 trackWidth가 0→측정값으로 튀어도 pill 너비는 항상 1/MODES라
-  // width 제약이 사라져 트랙 전체로 늘어나는 현상이 없다.
-  const thumbStyle = useAnimatedStyle(() => ({
-    transform: [
-      { translateX: progress.value * (trackWidth.value / GAME_MODES.length) },
-    ],
-  }));
-
-  const modeTabs = (
-    <View
-      style={styles.switchWrap}
-      onLayout={(e) => setSwitchHeight(e.nativeEvent.layout.height)}
-    >
-      <GlassSurface
-        glassStyle="regular"
-        style={[styles.switchTrack, { borderColor: colors.border.default }]}
-      >
-        <View
-          style={styles.switchInner}
-          onLayout={(e) => {
-            trackWidth.value = e.nativeEvent.layout.width;
-          }}
-        >
-          {/* 움직이는 pill 은 네이티브 글래스가 아니라 단색이다. GlassView 를
-              translate 하면 매 프레임 배경에 대해 굴절을 다시 계산해 눈에 띄게
-              끊긴다(트랙 자체는 정지해 있으므로 글래스 유지). 어차피 위에
-              accent.subtle 을 덮고 있어 글래스가 보이지도 않았다. */}
-          <Animated.View
-            pointerEvents="none"
-            style={[
-              styles.thumb,
-              { backgroundColor: colors.accent.subtle },
-              thumbStyle,
-            ]}
-          />
-          {GAME_MODES.map((m, i) => (
-            <Pressable
-              key={m}
-              onPress={() => changeMode(m)}
-              style={styles.switchSegment}
-            >
-              <ModeLabel
-                progress={progress}
-                index={i}
-                activeColor={colors.accent.default}
-                idleColor={colors.text.secondary}
-              >
-                {translate(m)}
-              </ModeLabel>
-            </Pressable>
-          ))}
-        </View>
-      </GlassSurface>
-    </View>
-  );
 
   const handleDelete = (build: SavedBuild) => {
     Alert.alert(translate("deleteConfirm"), "", [
@@ -236,11 +171,7 @@ export function BuildListScreen() {
           // (layout 애니메이션은 exiting 잔상이 겹쳐 쓰지 않음).
           headerRight: () =>
             showHeaderToggle ? (
-              <HeaderModeToggle
-                colors={colors}
-                progress={progress}
-                onChange={changeMode}
-              />
+              <HeaderModeToggle progress={progress} onChange={changeMode} />
             ) : null,
         }}
       />
@@ -256,7 +187,13 @@ export function BuildListScreen() {
         stickySectionHeadersEnabled={false}
         onScroll={handleScroll}
         scrollEventThrottle={16}
-        ListHeaderComponent={modeTabs}
+        ListHeaderComponent={
+          <ModeSegmentedControl
+            progress={progress}
+            onChange={changeMode}
+            onHeightChange={setSwitchHeight}
+          />
+        }
         ListEmptyComponent={builds == null ? null : emptyState}
         ItemSeparatorComponent={ItemGap}
         renderSectionHeader={({ section }) => (
@@ -290,174 +227,12 @@ export function BuildListScreen() {
   );
 }
 
-// 슬라이딩 원형 글래스 인디케이터 지름과 그걸 감싸는 세그먼트 너비.
-const HEADER_CIRCLE = 34;
-const HEADER_SEG = HEADER_CIRCLE + Spacing.two;
-
-/**
- * 활성 강조 색 — progress 와의 거리로 보간한다. mode state 를 안 거치므로
- * 목록 커밋을 기다리지 않고 손가락을 떼는 즉시 물든다.
- */
-function useSegmentColor(
-  progress: SharedValue<number>,
-  index: number,
-  activeColor: string,
-  idleColor: string,
-) {
-  return useAnimatedStyle(() => ({
-    color: interpolateColor(
-      Math.min(Math.abs(progress.value - index), 1),
-      [0, 1],
-      [activeColor, idleColor],
-    ),
-  }));
-}
-
-/** 굵기는 600(Typography.label) 고정 — 500↔700 을 오가면 전환마다 글자 폭이 바뀐다. */
-function ModeLabel({
-  progress,
-  index,
-  activeColor,
-  idleColor,
-  children,
-}: {
-  progress: SharedValue<number>;
-  index: number;
-  activeColor: string;
-  idleColor: string;
-  children: React.ReactNode;
-}) {
-  const style = useSegmentColor(progress, index, activeColor, idleColor);
-  return (
-    <Animated.Text style={[styles.switchLabel, style]}>
-      {children}
-    </Animated.Text>
-  );
-}
-
-const AnimatedIcon = Animated.createAnimatedComponent(MaterialCommunityIcons);
-
-function ModeIcon({
-  progress,
-  index,
-  name,
-  activeColor,
-  idleColor,
-}: {
-  progress: SharedValue<number>;
-  index: number;
-  name: (typeof MODE_ICONS)[GameMode];
-  activeColor: string;
-  idleColor: string;
-}) {
-  const style = useSegmentColor(progress, index, activeColor, idleColor);
-  return <AnimatedIcon name={name} size={18} style={style} />;
-}
-
-/**
- * 헤더 우측 컴팩트 모드 토글 — 상단 세그먼트 스위치가 스크롤로 사라졌을 때만
- * 렌더된다. 왼쪽=칼바람(눈송이), 오른쪽=아레나(교차검). 라벨 없이 아이콘만 두고,
- * 원형 글래스가 활성 아이콘 뒤로 슬라이드하며 그 아이콘 색을 민트로 하이라이트한다.
- */
-function HeaderModeToggle({
-  colors,
-  progress,
-  onChange,
-}: {
-  colors: ReturnType<typeof useTheme>["colors"];
-  /** 상단 세그먼트와 공유하는 위치(모드 인덱스 단위). 화면이 소유한다. */
-  progress: SharedValue<number>;
-  onChange: (m: GameMode) => void;
-}) {
-  // 세그먼트 너비가 상수라 측정하지 않는다. onLayout 으로 재던 시절엔
-  // 스크롤로 토글이 등장할 때 trackWidth 가 0인 첫 프레임에 원이 왼쪽으로
-  // 튀었다가 제자리를 찾아, 그 점프가 전환 끊김처럼 보였다.
-  const circleStyle = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateX:
-          progress.value * HEADER_SEG + (HEADER_SEG - HEADER_CIRCLE) / 2,
-      },
-    ],
-  }));
-
-  return (
-    <Animated.View style={styles.headerToggle}>
-      {/* 상단 세그먼트와 같은 이유로 단색. 여기는 네이티브 헤더(그 자체가 글래스)
-          위라 글래스를 겹쳐 움직이면 더 심하게 끊겼다. */}
-      <Animated.View
-        pointerEvents="none"
-        style={[
-          styles.headerCircle,
-          {
-            borderColor: colors.border.strong,
-            backgroundColor: colors.glass.fill,
-          },
-          circleStyle,
-        ]}
-      />
-      {GAME_MODES.map((m, i) => (
-        <Pressable
-          key={m}
-          onPress={() => onChange(m)}
-          style={styles.headerSegment}
-          hitSlop={Spacing.two}
-        >
-          <ModeIcon
-            progress={progress}
-            index={i}
-            name={MODE_ICONS[m]}
-            activeColor={colors.accent.default}
-            idleColor={colors.text.tertiary}
-          />
-        </Pressable>
-      ))}
-    </Animated.View>
-  );
-}
-
 /** 같은 날짜 섹션 안 카드 사이 간격. */
 function ItemGap() {
   return <View style={styles.itemGap} />;
 }
 
 const styles = StyleSheet.create({
-  switchWrap: {
-    paddingTop: Spacing.three,
-    paddingBottom: Spacing.one,
-  },
-  switchTrack: {
-    width: "100%",
-    padding: Spacing.one,
-    borderRadius: Radius.full,
-    borderCurve: "continuous",
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-  switchInner: {
-    flexDirection: "row",
-    position: "relative",
-  },
-  // 슬라이딩 thumb — switchInner 안에서 절대배치, 높이 꽉 채움.
-  // clear 글래스 pill이 활성 세그먼트 뒤로 슬라이드(텍스트만 민트로 강조).
-  thumb: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    // 너비는 측정값(shared value) 대신 정적 퍼센트로 고정 — 헤더 remount 시
-    // width 미확정 프레임이 없어 트랙 전체로 늘어나는 버그를 방지한다.
-    width: `${100 / GAME_MODES.length}%`,
-    borderRadius: Radius.full,
-    borderCurve: "continuous",
-    overflow: "hidden",
-  },
-  switchSegment: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: Spacing.two,
-  },
-  switchLabel: Typography.label,
   listContent: {
     flexGrow: 1,
     paddingHorizontal: Spacing.three,
@@ -466,7 +241,6 @@ const styles = StyleSheet.create({
   sectionHeader: {
     paddingTop: Spacing.four,
     paddingBottom: Spacing.three,
-    // borderWidth: 1,
     flexDirection: "row",
     justifyContent: "center",
   },
@@ -501,27 +275,5 @@ const styles = StyleSheet.create({
   },
   emptyHint: {
     textAlign: "center",
-  },
-  // 헤더 우측 컴팩트 아이콘 토글 — 배경 컨테이너 없이 아이콘 + 슬라이드 원형 글래스.
-  headerToggle: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  headerSegment: {
-    width: HEADER_SEG,
-    height: HEADER_CIRCLE,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  // 활성 아이콘 뒤로 슬라이드하는 원형 글래스.
-  headerCircle: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: HEADER_CIRCLE,
-    height: HEADER_CIRCLE,
-    borderRadius: Radius.full,
-    borderWidth: StyleSheet.hairlineWidth,
-    overflow: "hidden",
   },
 });

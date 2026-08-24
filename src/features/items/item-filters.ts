@@ -4,7 +4,7 @@
  * - itemInCategory: 한 아이템이 특정 카테고리 탭에 노출될지 판단
  * - FILTERS: 사이드 탭 목록(아이콘 + predicate)
  */
-import type { Item } from "../types";
+import type { Item } from "./types";
 
 // ─── 아이템 카테고리 명시 지정 ───────────────────────────────────────────────
 // 태그 기반 predicate보다 우선 적용. 여러 카테고리 가능.

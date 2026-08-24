@@ -2,6 +2,7 @@ import { Stack } from 'expo-router/stack';
 import { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 
+import { stackScreenOptions } from '@/components/navigation/stack-screen-options';
 import { useTheme } from '@/hooks/use-theme';
 import { useTranslation } from '@/lib/i18n';
 
@@ -27,15 +28,7 @@ export default function HomeStackLayout() {
   }, []);
 
   return (
-    <Stack
-      key={navKey}
-      screenOptions={{
-        headerShadowVisible: false,
-        headerTintColor: colors.accent.default,
-        headerTitleStyle: { color: colors.text.primary },
-        headerLargeTitleStyle: { color: colors.text.primary },
-      }}
-    >
+    <Stack key={navKey} screenOptions={stackScreenOptions(colors)}>
       <Stack.Screen
         name="index"
         options={{

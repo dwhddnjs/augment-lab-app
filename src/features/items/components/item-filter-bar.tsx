@@ -2,7 +2,7 @@ import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 
 import { Radius, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
-import { FILTERS, type FilterKey } from "../data/item-filters";
+import { FILTERS, type FilterKey } from "../item-filters";
 import { FilterIcon } from "./filter-icon";
 
 /** 세로 필터 사이드 탭 너비 — 그리드/트레이 정렬에 공유. */
