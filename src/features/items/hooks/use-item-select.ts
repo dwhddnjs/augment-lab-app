@@ -12,6 +12,7 @@ import { Alert, type LayoutChangeEvent } from "react-native";
 
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
+import { resolveIds } from "@/lib/arrays";
 import { saveBuild, type DraftMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
@@ -112,10 +113,7 @@ export function useItemSelect({
       : 48;
 
   const selectedItems = useMemo(
-    () =>
-      selectedIds
-        .map((id) => modeItems.find((it) => it.id === id)!)
-        .filter(Boolean),
+    () => resolveIds(selectedIds, modeItems),
     [selectedIds, modeItems],
   );
   const itemStatsList = useMemo(

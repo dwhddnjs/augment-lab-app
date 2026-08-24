@@ -75,9 +75,3 @@ export interface ArenaStep {
   gold?: number;
 }
 
-/** 골드 상점 안의 구매 옵션 종류. */
-export type ShopOptionKind =
-  | 'legendary'
-  | 'stat-anvil'
-  | 'prismatic-anvil'
-  | 'legendary-anvil';

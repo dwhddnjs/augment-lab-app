@@ -203,6 +203,12 @@ export const HeroOverlay = {
   textSecondary: "#B5BAC1",
 } as const;
 
+/**
+ * 아레나 골드(화폐) 색. 인게임 골드 톤이라 라이트/다크 공통으로 고정한다.
+ * 등급 프레임의 gold highlight 와 값이 같지만 의미가 달라 별도로 둔다.
+ */
+export const ArenaGold = "#F2C766";
+
 export const Brand = {
   splashBg: "#0E0F12",
   logoBgFrom: "#3C9FFE",

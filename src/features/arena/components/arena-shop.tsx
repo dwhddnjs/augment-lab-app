@@ -6,15 +6,14 @@
  *   - 모루   : 전설/프리즘 모루 2종(다른 탭과 동일한 셀). 구매 시 카드 3장 선택 오버레이.
  *             전설 모루는 챔피언 클래스 전용 아이템만, 프리즘 모루는 프리즘 아이템.
  * 골드가 충분한 항목만 구매 가능(부족 시 회색 비활성). R1은 500골드라 사실상 신발만 산다.
- * 하단 트레이에서 보유 아이템(일반·프리즘)을 다시 누르면 구매가만큼 환불된다.
+ * 하단 트레이에서 보유 아이템(일반·프리즘)을 다시 누르면 판매가만큼 환불된다.
+ *
+ * 가격·보유 한도는 ../arena-rules 가 단일 출처다.
  */
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 
-import { ThemedText } from "@/components/themed/themed-text";
-import { RemoteImage } from "@/components/ui/remote-image";
-import { Radius, Spacing } from "@/constants/theme";
+import { Spacing } from "@/constants/theme";
 import type { PrismaticItem } from "@/features/arena/types";
 import type { Champion } from "@/features/champions/types";
 import { FilterIcon } from "@/features/items/components/filter-icon";
@@ -22,34 +21,16 @@ import {
   ItemSlotGrid,
   TRAY_HEIGHT,
 } from "@/features/items/components/item-slot-grid";
-import { FILTERS, type FilterKey } from "@/features/items/item-filters";
 import { useItemPool } from "@/features/items/hooks/use-items";
+import { FILTERS, type FilterKey } from "@/features/items/item-filters";
 import type { Item } from "@/features/items/types";
 import { useTheme } from "@/hooks/use-theme";
+import { resolveIds } from "@/lib/arrays";
 import { cdragonItemIconUrl, itemImageUrl } from "@/lib/ddragon";
-import { useTranslation } from "@/lib/i18n";
-import {
-  MAX_ITEMS,
-  PRISMATIC_SELL_PRICE,
-  sampleDistinct,
-} from "../hooks/use-arena";
+import { MAX_ITEMS, SELL_PRICE, SHOP_PRICE } from "../arena-rules";
 import { ArenaAnvilPicker } from "./arena-anvil-picker";
-
-// 카테고리별 고정 구매가.
-export const SHOP_PRICE = {
-  boots: 500,
-  legendary: 2500,
-  legendaryAnvil: 2250,
-  prismaticAnvil: 4000,
-} as const;
-
-// 판매가 — 하단 트레이에서 팔 때 환원되는 골드(구매가보다 낮다).
-// 되돌리기(상점 그리드 재탭)는 구매가 전액을 돌려주므로 이 값과 무관하다.
-const SELL_PRICE = {
-  boots: 500,
-  legendary: 1500,
-  prismatic: PRISMATIC_SELL_PRICE,
-} as const;
+import { ShopCell } from "./arena-shop-cell";
+import { ShopCategoryTabs, type ShopCat } from "./arena-shop-tabs";
 
 // 신발 탭에서 숨길 신발(기본 장화 + 아레나 전용 부츠 업그레이드).
 const EXCLUDED_BOOT_IDS = new Set([
@@ -78,21 +59,7 @@ const anvilIconUri = (file: string) =>
 // 전설급 탭에서 노출할 클래스 필터(신발 제외 — 모든 카테고리 + 6개 클래스).
 const LEGENDARY_FILTERS = FILTERS.filter((f) => f.key !== "boots");
 
-type ShopCat = "boots" | "legendary" | "anvil";
 type AnvilKind = "legendary" | "prismatic";
-
-const t = {
-  ko: {
-    boots: "신발",
-    legendary: "전설급",
-    anvil: "모루",
-  },
-  en: {
-    boots: "Boots",
-    legendary: "Legendary",
-    anvil: "Anvil",
-  },
-};
 
 interface Props {
   gold: number;
@@ -123,7 +90,6 @@ export function ArenaShop({
   onBuyPrismatic,
   onSellPrismatic,
 }: Props) {
-  const translate = useTranslation(t);
   const { colors } = useTheme();
   // 아레나는 협곡 완성 아이템 풀을 쓴다. 전체 목록에는 클래식 레트로 아이템이
   // 섞여 있어 태그 필터만으로는 걸러지지 않는다.
@@ -131,288 +97,128 @@ export function ArenaShop({
 
   const [cat, setCat] = useState<ShopCat>("boots");
   const [typeFilter, setTypeFilter] = useState<FilterKey>(null);
-
-  // 모루 카드 선택 오버레이 상태.
-  const [pickerKind, setPickerKind] = useState<AnvilKind | null>(null);
-  const [pickerCards, setPickerCards] = useState<(Item | PrismaticItem)[]>([]);
-  const [pickerRerolled, setPickerRerolled] = useState<boolean[]>([
-    false,
-    false,
-    false,
-  ]);
+  // 열려 있는 모루 오버레이(카드 3장 선택). null이면 닫힘.
+  const [anvil, setAnvil] = useState<AnvilKind | null>(null);
 
   // 전설 풀(신발 제외)·신발 풀.
-  const legendaryPool = useMemo(
-    () =>
-      allItems.filter(
-        (it) => it.gold.purchasable && !it.tags.includes("Boots"),
-      ),
-    [allItems],
+  const legendaryPool = allItems.filter(
+    (it) => it.gold.purchasable && !it.tags.includes("Boots"),
   );
-  const bootsPool = useMemo(
-    () =>
-      allItems.filter(
-        (it) =>
-          it.tags.includes("Boots") &&
-          it.gold.purchasable &&
-          !EXCLUDED_BOOT_IDS.has(it.id),
-      ),
-    [allItems],
+  const bootsPool = allItems.filter(
+    (it) =>
+      it.tags.includes("Boots") &&
+      it.gold.purchasable &&
+      !EXCLUDED_BOOT_IDS.has(it.id),
   );
 
-  // 챔피언 1순위 태그 → 클래스 필터(전설 모루 풀·아이콘·이름 결정).
-  const champKey = champion?.tags[0]?.toLowerCase();
-  const classDef = FILTERS.find((f) => f.key === champKey);
-
+  // 챔피언 1순위 태그 → 클래스 필터(전설 모루 풀·아이콘 결정).
+  const classDef = FILTERS.find((f) => f.key === champion?.tags[0]?.toLowerCase());
   // 전설 모루 풀: 챔피언 클래스 아이템만(매핑 실패 시 전체).
-  const classLegendaryPool = useMemo(
-    () => (classDef ? legendaryPool.filter(classDef.predicate) : legendaryPool),
-    [legendaryPool, classDef],
-  );
+  const classLegendaryPool = classDef
+    ? legendaryPool.filter(classDef.predicate)
+    : legendaryPool;
 
-  // 전설 모루 아이콘(클래스 기반, fallback fighter).
-  const legendaryAnvilIcon = anvilIconUri(
-    classDef ? ANVIL_ICON[classDef.key] : ANVIL_ICON.fighter,
-  );
+  const filterDef = FILTERS.find((f) => f.key === typeFilter);
+  const displayLegendary = filterDef
+    ? legendaryPool.filter(filterDef.predicate)
+    : legendaryPool;
 
-  const displayLegendary = useMemo(() => {
-    if (!typeFilter) return legendaryPool;
-    const def = FILTERS.find((f) => f.key === typeFilter);
-    return def ? legendaryPool.filter(def.predicate) : legendaryPool;
-  }, [legendaryPool, typeFilter]);
+  // 하단 트레이 — 보유 아이템(일반 + 프리즘)을 구매 순서대로.
+  const traySlots = [
+    ...resolveIds(ownedItemIds, allItems).map((it) => ({
+      id: it.id,
+      iconUri: itemImageUrl(it.imageKey),
+    })),
+    ...resolveIds(ownedPrismaticIds, prismaticOptions).map((p) => ({
+      id: p.id,
+      iconUri: cdragonItemIconUrl(p.iconPath),
+    })),
+  ];
 
-  // 보유 아이템(트레이용) — 구매 순서대로. 일반 + 프리즘.
-  const ownedItems = useMemo(
-    () =>
-      ownedItemIds
-        .map((id) => allItems.find((it) => it.id === id))
-        .filter((it): it is Item => Boolean(it)),
-    [ownedItemIds, allItems],
-  );
-  const ownedPrismatics = useMemo(
-    () =>
-      ownedPrismaticIds
-        .map((id) => prismaticOptions.find((p) => p.id === id))
-        .filter((p): p is PrismaticItem => Boolean(p)),
-    [ownedPrismaticIds, prismaticOptions],
-  );
-  const traySlots = useMemo(
-    () => [
-      ...ownedItems.map((it) => ({
-        id: it.id,
-        iconUri: itemImageUrl(it.imageKey),
-      })),
-      ...ownedPrismatics.map((p) => ({
-        id: p.id,
-        iconUri: cdragonItemIconUrl(p.iconPath),
-      })),
-    ],
-    [ownedItems, ownedPrismatics],
-  );
+  // ─── 모루 ───
+  const anvilPrice =
+    anvil === "prismatic" ? SHOP_PRICE.prismaticAnvil : SHOP_PRICE.legendaryAnvil;
+  const anvilPool: (Item | PrismaticItem)[] =
+    anvil === "prismatic" ? prismaticOptions : classLegendaryPool;
+  const anvilExclude = anvil === "prismatic" ? ownedPrismaticIds : ownedItemIds;
 
-  // ─── 모루 구매 → 카드 3장 선택 오버레이 ───
   const openAnvil = (kind: AnvilKind) => {
-    if (kind === "legendary") {
-      if (gold < SHOP_PRICE.legendaryAnvil) return;
-      const cards = sampleDistinct(
-        classLegendaryPool,
-        3,
-        new Set(ownedItemIds),
-      );
-      if (!cards.length) return;
-      setPickerCards(cards);
-    } else {
-      if (gold < SHOP_PRICE.prismaticAnvil) return;
-      const cards = sampleDistinct(
-        prismaticOptions,
-        3,
-        new Set(ownedPrismaticIds),
-      );
-      if (!cards.length) return;
-      setPickerCards(cards);
-    }
-    setPickerRerolled([false, false, false]);
-    setPickerKind(kind);
-  };
-
-  const closePicker = () => {
-    setPickerKind(null);
-    setPickerCards([]);
+    const price =
+      kind === "prismatic" ? SHOP_PRICE.prismaticAnvil : SHOP_PRICE.legendaryAnvil;
+    if (gold < price) return;
+    // 뽑을 카드가 하나도 없으면 열지 않는다(빈 오버레이 방지).
+    const pool = kind === "prismatic" ? prismaticOptions : classLegendaryPool;
+    const owned = new Set(
+      kind === "prismatic" ? ownedPrismaticIds : ownedItemIds,
+    );
+    if (!pool.some((c) => !owned.has(c.id))) return;
+    setAnvil(kind);
   };
 
   // 카드 선택 → 모루 가격 차감 + 판매가 기록 후 보유 누적.
-  const handlePickerPick = (idx: number) => {
-    const card = pickerCards[idx];
-    if (!card) return closePicker();
-    if (pickerKind === "legendary") {
-      onBuyItem(card.id, SHOP_PRICE.legendaryAnvil, SELL_PRICE.legendary);
-    } else {
+  const confirmAnvil = (card: Item | PrismaticItem) => {
+    if (anvil === "prismatic") {
       onBuyPrismatic(
         card as PrismaticItem,
         SHOP_PRICE.prismaticAnvil,
         SELL_PRICE.prismatic,
       );
+    } else {
+      onBuyItem(card.id, SHOP_PRICE.legendaryAnvil, SELL_PRICE.legendary);
     }
-    closePicker();
+    setAnvil(null);
   };
 
-  // 카드당 1회 무료 리롤 — 현재 3장 + 보유 제외하고 1장 교체.
-  const handlePickerReroll = (idx: number) => {
-    setPickerCards((prev) => {
-      const excl = new Set<string>(
-        prev.filter((_, i) => i !== idx).map((c) => c.id),
-      );
-      let pool: (Item | PrismaticItem)[];
-      if (pickerKind === "legendary") {
-        ownedItemIds.forEach((id) => excl.add(id));
-        pool = classLegendaryPool;
-      } else {
-        ownedPrismaticIds.forEach((id) => excl.add(id));
-        pool = prismaticOptions;
-      }
-      const [replacement] = sampleDistinct(pool, 1, excl);
-      if (!replacement) return prev;
-      const next = [...prev];
-      next[idx] = replacement;
-      return next;
-    });
-    setPickerRerolled((prev) => {
-      const next = [...prev];
-      next[idx] = true;
-      return next;
-    });
-  };
-
-  // ─── 아이템 셀(신발/전설 그리드) ───
+  // ─── 셀 ───
   // 보유 중이면 재탭으로 되돌리기(구매가 전액 환원). 미보유는 골드 충분 시 구매.
-  // 오버레이(흐림)는 "골드 부족 + 미보유"일 때만 — 보유 아이템은 항상 또렷하게.
-  const renderItemCell = (item: Item, price: number, sellValue: number) => {
+  // 흐림은 "골드 부족 + 미보유"일 때만 — 보유 아이템은 항상 또렷하게.
+  const itemCell = (item: Item, price: number, sellValue: number) => {
     const owned = ownedItemIds.includes(item.id);
-    const canBuy = gold >= price;
     // 아이템 6칸이 꽉 차면 미보유 아이템은 더 못 산다(보유분은 되돌리기 가능).
-    const atCap = !owned && ownedItemIds.length >= MAX_ITEMS;
-    const dim = !owned && (!canBuy || atCap);
+    const dim = !owned && (gold < price || ownedItemIds.length >= MAX_ITEMS);
     return (
-      <Pressable
+      <ShopCell
         key={item.id}
+        uri={itemImageUrl(item.imageKey)}
+        recyclingKey={item.id}
+        price={price}
+        owned={owned}
         disabled={dim}
+        opacity={dim ? 0.4 : 1}
         onPress={() =>
           owned ? onUndoItem(item.id) : onBuyItem(item.id, price, sellValue)
         }
-        style={[styles.itemCell, { opacity: dim ? 0.4 : 1 }]}
-      >
-        <RemoteImage
-          uri={itemImageUrl(item.imageKey)}
-          recyclingKey={item.id}
-          style={[
-            styles.itemIcon,
-            {
-              borderColor: owned ? colors.accent.default : colors.border.subtle,
-            },
-          ]}
-          contentFit="cover"
-        />
-        <View style={styles.priceRow}>
-          <MaterialCommunityIcons
-            name="circle-multiple"
-            size={10}
-            color="#F2C766"
-          />
-          <ThemedText style={styles.cellPrice}>
-            {price.toLocaleString()}
-          </ThemedText>
-        </View>
-      </Pressable>
+      />
     );
   };
 
-  // ─── 모루 셀(전설/프리즘) — 아이템 셀과 동일 톤 ───
-  const renderAnvilCell = (kind: AnvilKind, iconUri: string, price: number) => {
+  const anvilCell = (kind: AnvilKind, iconUri: string, price: number) => {
     // 전설 모루도 전설 아이템 1칸을 차지하므로 6칸이 꽉 차면 비활성화한다.
     const atItemCap = kind === "legendary" && ownedItemIds.length >= MAX_ITEMS;
     const affordable = gold >= price && !atItemCap;
     return (
-      <Pressable
+      <ShopCell
         key={kind}
+        uri={iconUri}
+        recyclingKey={`anvil-${kind}`}
+        price={price}
         disabled={!affordable}
+        opacity={affordable ? 1 : 0.5}
+        contentFit="contain"
         onPress={() => openAnvil(kind)}
-        style={[styles.itemCell, { opacity: affordable ? 1 : 0.5 }]}
-      >
-        <RemoteImage
-          uri={iconUri}
-          recyclingKey={`anvil-${kind}`}
-          style={[styles.itemIcon, { borderColor: colors.border.subtle }]}
-          contentFit="contain"
-        />
-        <View style={styles.priceRow}>
-          <MaterialCommunityIcons
-            name="circle-multiple"
-            size={10}
-            color="#F2C766"
-          />
-          <ThemedText style={styles.cellPrice}>
-            {price.toLocaleString()}
-          </ThemedText>
-        </View>
-      </Pressable>
+      />
     );
   };
-
-  // ─── 좌측 카테고리 탭 ───
-  const CATS: { key: ShopCat; label: keyof (typeof t)["en"]; icon: string }[] =
-    [
-      { key: "boots", label: "boots", icon: "shoe-sneaker" },
-      { key: "legendary", label: "legendary", icon: "sword" },
-      { key: "anvil", label: "anvil", icon: "anvil" },
-    ];
 
   return (
     <View style={styles.root}>
       <View style={styles.body}>
-        {/* 좌측 카테고리 탭 */}
-        <View style={styles.catTabs}>
-          {CATS.map((c) => {
-            const active = cat === c.key;
-            return (
-              <Pressable
-                key={c.key}
-                onPress={() => setCat(c.key)}
-                style={[
-                  styles.catTab,
-                  {
-                    backgroundColor: active
-                      ? colors.accent.subtle
-                      : colors.surface.raised,
-                    borderColor: active
-                      ? colors.accent.default
-                      : colors.border.subtle,
-                  },
-                ]}
-              >
-                <MaterialCommunityIcons
-                  name={c.icon as never}
-                  size={20}
-                  color={active ? colors.accent.default : colors.text.secondary}
-                />
-                <ThemedText
-                  type="caption"
-                  style={{
-                    color: active
-                      ? colors.accent.default
-                      : colors.text.secondary,
-                  }}
-                  numberOfLines={1}
-                >
-                  {translate(c.label)}
-                </ThemedText>
-              </Pressable>
-            );
-          })}
-        </View>
+        <ShopCategoryTabs active={cat} onChange={setCat} />
+
         {cat === "boots" && (
           <ScrollView contentContainerStyle={styles.grid}>
             {bootsPool.map((it) =>
-              renderItemCell(it, SHOP_PRICE.boots, SELL_PRICE.boots),
+              itemCell(it, SHOP_PRICE.boots, SELL_PRICE.boots),
             )}
           </ScrollView>
         )}
@@ -458,11 +264,7 @@ export function ArenaShop({
                 contentContainerStyle={styles.grid}
               >
                 {displayLegendary.map((it) =>
-                  renderItemCell(
-                    it,
-                    SHOP_PRICE.legendary,
-                    SELL_PRICE.legendary,
-                  ),
+                  itemCell(it, SHOP_PRICE.legendary, SELL_PRICE.legendary),
                 )}
               </ScrollView>
             </View>
@@ -470,12 +272,14 @@ export function ArenaShop({
 
           {cat === "anvil" && (
             <ScrollView contentContainerStyle={styles.grid}>
-              {renderAnvilCell(
+              {anvilCell(
                 "legendary",
-                legendaryAnvilIcon,
+                anvilIconUri(
+                  ANVIL_ICON[classDef?.key ?? "fighter"] ?? ANVIL_ICON.fighter,
+                ),
                 SHOP_PRICE.legendaryAnvil,
               )}
-              {renderAnvilCell(
+              {anvilCell(
                 "prismatic",
                 anvilIconUri(PRISMATIC_ANVIL_ICON),
                 SHOP_PRICE.prismaticAnvil,
@@ -485,7 +289,7 @@ export function ArenaShop({
         </View>
       </View>
 
-      {/* 하단 보유 아이템 트레이 — absolute로 떠서 콘텐츠 위에 깔린다. 누르면 환불 */}
+      {/* 하단 보유 아이템 트레이 — absolute로 떠서 콘텐츠 위에 깔린다. 누르면 판매 */}
       <View style={styles.tray} pointerEvents="box-none">
         <ItemSlotGrid
           selectedItems={traySlots}
@@ -498,14 +302,14 @@ export function ArenaShop({
       </View>
 
       {/* 모루 카드 3장 선택 오버레이 */}
-      {pickerKind && (
+      {anvil && (
         <ArenaAnvilPicker
-          kind={pickerKind}
-          cards={pickerCards}
-          rerolled={pickerRerolled}
-          onPick={handlePickerPick}
-          onReroll={handlePickerReroll}
-          onClose={closePicker}
+          key={`${anvil}-${anvilPrice}`}
+          kind={anvil}
+          pool={anvilPool}
+          excludeIds={anvilExclude}
+          onPick={confirmAnvil}
+          onClose={() => setAnvil(null)}
         />
       )}
     </View>
@@ -518,19 +322,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     paddingHorizontal: Spacing.three,
-  },
-  catTabs: {
-    width: 96,
-    gap: Spacing.two,
-  },
-  catTab: {
-    alignItems: "center",
-    gap: Spacing.half,
-    paddingVertical: Spacing.two,
-    paddingHorizontal: Spacing.one,
-    borderRadius: Radius.md,
-    borderWidth: StyleSheet.hairlineWidth,
-    marginRight: Spacing.two,
   },
   content: { flex: 1 },
   legendaryBody: {
@@ -547,8 +338,8 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
     alignItems: "center",
   },
-  // itemCell(44)이 아이콘(40)보다 넓어 생기는 왼쪽 2px 여백을 상쇄해
-  // 필터열↔그리드 갭을 catTabs↔필터열 갭과 동일하게 맞춘다.
+  // ShopCell(44)이 아이콘(40)보다 넓어 생기는 왼쪽 2px 여백을 상쇄해
+  // 필터열↔그리드 갭을 탭↔필터열 갭과 동일하게 맞춘다.
   legendaryGrid: { flex: 1, marginLeft: -Spacing.half },
   filterIconTab: {
     width: 40,
@@ -562,28 +353,6 @@ const styles = StyleSheet.create({
     gap: Spacing.double,
     // 하단 absolute 트레이에 마지막 줄이 가리지 않도록 트레이 높이만큼 띄운다.
     paddingBottom: TRAY_HEIGHT + Spacing.three,
-  },
-  itemCell: {
-    alignItems: "center",
-    gap: Spacing.half,
-    width: 44,
-  },
-  // 아이템 아이콘 소스가 64px라 표시를 작게 둘수록 업스케일이 줄어 선명하다.
-  itemIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: Radius.md,
-    borderWidth: 1.5,
-  },
-  priceRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 2,
-  },
-  cellPrice: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: "#F2C766",
   },
   tray: {
     position: "absolute",

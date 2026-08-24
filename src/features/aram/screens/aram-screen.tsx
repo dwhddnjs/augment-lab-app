@@ -1,8 +1,8 @@
 import { Image } from "expo-image";
-import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useEffect, useState } from "react";
-import { Alert, StyleSheet, useWindowDimensions, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -10,9 +10,14 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
 import { GlassSurface } from "@/components/ui/glass-surface";
+import {
+  CARD_ROW_PAD,
+  cardWidthFor,
+} from "@/components/ui/rarity-card-frame";
 import { parseDraftMode } from "@/constants/game-modes";
 import { Radius, Spacing } from "@/constants/theme";
 
+import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
 import { augmentImageUrl } from "@/lib/ddragon";
 import type { DraftMode } from "@/lib/build-storage";
@@ -53,8 +58,11 @@ type EntryModes = [CardEntryMode, CardEntryMode, CardEntryMode];
 const IDLE: ExitModes = ["none", "none", "none"];
 const ALL_FLIP: EntryModes = ["flip", "flip", "flip"];
 
-// 헤더 버튼 좌우 여백 — 카드 영역(hPad)보다 넓게 잡아 버튼이 기기 끝에 붙지 않게 한다.
+// 헤더 버튼 좌우 여백 — 카드 영역(CARD_ROW_PAD)보다 넓게 잡아 버튼이 기기 끝에 붙지 않게 한다.
 const HEADER_PAD = Spacing.five; // 32
+const CARD_GAP = Spacing.four; // 24
+// 카드가 세로를 꽉 채우지 않게 56%로 잡아 헤더·하단 리롤 버튼 자리를 남긴다.
+const CARD_HEIGHT_RATIO = 0.56;
 
 /**
  * 칼바람·클래식 공용 드래프트 화면. 규칙·UI 는 같고 증강 풀과 라운드 수만 다르다.
@@ -84,31 +92,10 @@ export function AramScreen() {
   );
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // 이 화면이 포커스를 얻을 때 landscape로 전환한다. cleanup 없이 — portrait 복귀는
-  // handleExit에서 명시적으로 처리해 중간 orientation 변경이 생기지 않도록 한다.
-  useFocusEffect(
-    useCallback(() => {
-      ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.LANDSCAPE,
-      ).catch(() => {});
-    }, []),
-  );
+  // portrait 복귀는 handleExit에서 명시적으로 처리한다(중간 orientation 변경 방지).
+  const { isLandscape, screenW, screenH } = useLandscapeLock();
 
-  const { width, height } = useWindowDimensions();
-  const isLandscape = width > height;
-  const screenW = isLandscape ? width : height;
-  const screenH = isLandscape ? height : width;
-
-  const hPad = Spacing.four; // 24
-  const cardGap = Spacing.four; // 24
-
-  // Width-constrained: fill 3 columns across
-  const cardWidthByW = Math.floor((screenW - hPad * 2 - cardGap * 2) / 3);
-  // Height-constrained: card should occupy at most 56% of screen height,
-  // leaving room for safe-area insets, header, and the reroll button below —
-  // so the reroll row doesn't crowd the bottom safe area.
-  const cardWidthByH = Math.floor(screenH * 0.56 * (9 / 14));
-  const cardWidth = Math.min(cardWidthByW, cardWidthByH);
+  const cardWidth = cardWidthFor(screenW, screenH, CARD_GAP, CARD_HEIGHT_RATIO);
 
   // Drawer width in landscape
   const drawerWidth = Math.min(340, screenW * 0.38);
@@ -271,16 +258,7 @@ export function AramScreen() {
 
           {/* Cards row */}
           <View
-            style={[
-              styles.cardsRow,
-              {
-                paddingHorizontal: hPad,
-                gap: cardGap,
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center",
-              },
-            ]}
+            style={styles.cardsRow}
           >
             {currentCards.map((aug, i) => (
               <AramCard
@@ -319,7 +297,12 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.two,
   },
   cardsRow: {
+    flex: 1,
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: CARD_ROW_PAD,
+    gap: CARD_GAP,
   },
   roundBox: {
     alignItems: "center",

@@ -7,9 +7,8 @@
  *
  * 필터·선택·그리드 계산·저장은 useItemSelect 가 맡는다.
  */
-import { useFocusEffect, useLocalSearchParams } from "expo-router";
-import * as ScreenOrientation from "expo-screen-orientation";
-import { useCallback, useMemo, useState } from "react";
+import { useLocalSearchParams } from "expo-router";
+import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -19,6 +18,7 @@ import { GlassButton } from "@/components/ui/glass-button";
 import { parseDraftMode } from "@/constants/game-modes";
 import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
+import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
 import { type DraftMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
@@ -45,14 +45,9 @@ export function ItemSelectScreen() {
     [pickedJson],
   );
 
-  useFocusEffect(
-    useCallback(() => {
-      ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.LANDSCAPE,
-      ).catch(() => {});
-    }, []),
-  );
+  useLandscapeLock();
 
+  // 이 화면은 모달 위에 떠서 window 치수가 늦게 따라오므로 자체 onLayout으로 잰다.
   const [dims, setDims] = useState({ w: 0, h: 0 });
   const isLandscape = dims.w > dims.h && dims.w > 0;
 
