@@ -1,173 +1,43 @@
 /**
- * useArena — 아레나 12라운드 진행 엔진.
+ * useArena — 아레나 12라운드 진행 엔진(상태 전이 전담).
  *
  * 12라운드를 평탄화한 step 흐름으로 진행한다(R1은 증강 + 신발 상점 2 step).
  * 칼바람 useAram 패턴(현재 카드 state + advance 시 다음 카드 생성)을 따르되,
  * 골드 경제·증강 레벨업·프리즘/모루/재련 누적 상태를 추가로 관리한다.
+ *
+ * 진행 순서·경제 수치·카드 추첨 규칙은 ../arena-rules 에 있다.
  */
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 
-import type { AugmentRarity } from "@/features/augments/types";
+import { pickRandom, sampleDistinct } from "@/lib/arrays";
 import {
-  type ArenaAugment,
-  type ArenaPickedAugment,
-  type ArenaSpecialAugment,
-  type ArenaStep,
-  type PrismaticItem,
-} from "@/features/arena/types";
+  ARENA_START_GOLD,
+  ARENA_STEPS,
+  ARENA_TOTAL_ROUNDS,
+  AUGMENT_SLOT_ID,
+  ENHANCE_AUGMENT_ID,
+  ENHANCE_LEVELS,
+  MAX_ITEMS,
+  PRISMATIC_SELL_PRICE,
+  REFORGE_IDS,
+  augmentSlots,
+  buildAugmentCards,
+  drawAugments,
+  drawForRound,
+  maxedIds,
+} from "../arena-rules";
+import type {
+  ArenaAugment,
+  ArenaPickedAugment,
+  ArenaSpecialAugment,
+  ArenaStep,
+  PrismaticItem,
+} from "../types";
 import { useArenaAugments } from "./use-arena-augments";
 import { usePrismaticItems, useSpecialAugments } from "./use-arena-items";
 
-// 12라운드를 평탄화한 step 흐름. round는 표시용(1~12).
-// R1 골드(500)는 진입 시 즉시 보유하므로 step.gold로 지급하지 않는다(초기 gold=500).
-export const ARENA_STEPS: ArenaStep[] = [
-  { round: 1, kind: "augment" },
-  { round: 1, kind: "shop" },
-  { round: 2, kind: "prismatic" },
-  { round: 3, kind: "augment" },
-  { round: 4, kind: "shop", gold: 2500 },
-  { round: 5, kind: "augment" },
-  { round: 6, kind: "shop", gold: 2500 },
-  { round: 7, kind: "augment" },
-  { round: 8, kind: "reforge" },
-  { round: 9, kind: "shop", gold: 2500 },
-  { round: 10, kind: "augment" },
-  { round: 11, kind: "shop", gold: 2500 },
-  { round: 12, kind: "augment" },
-];
-
-export const ARENA_TOTAL_ROUNDS = 12;
-
-// 8라운드 재련(reforge)에 등장하는 제작 증강 id. 나머지 special-augments는
-// 카메오(go-h*) 계열이거나 효과 미구현이라 이 3종으로 제한한다.
-const REFORGE_IDS: Set<string> = new Set([
-  "crafting-pris-stat-anvil", // 프리즘 능력치 모루 획득
-  "crafting-augment-slot", // 증강 슬롯 획득(12라운드 보너스 실버 증강)
-  "crafting-sell-augment", // 증강 강화(증강 1개 제거 + 레벨 2개)
-]);
-
-// 증강 강화 재련 카드 id — 선택 시 advance 대신 보유 증강 선택 오버레이를 띄운다.
-export const ENHANCE_AUGMENT_ID = "crafting-sell-augment";
-// 증강 슬롯 획득 재련 카드 id — 12라운드 진입 시 보너스 실버 증강 1장을 부여한다.
-const AUGMENT_SLOT_ID = "crafting-augment-slot";
-// 증강 강화로 분배하는 총 레벨 수.
-const ENHANCE_LEVELS = 2;
-
-// 증강 슬롯 한도 — 기본 4개, 재련(증강 슬롯 획득)을 고르면 5개까지.
-const BASE_AUGMENT_SLOTS = 4;
-const REFORGED_AUGMENT_SLOTS = 5;
-
-// 전설/신발 아이템 보유 한도(상점). 프리즘 아이템은 별도로 센다.
-export const MAX_ITEMS = 6;
-
-// 프리즘 아이템 판매가(고정) — 상점 구매분·라운드 무료 픽 모두 동일하게 적용한다.
-export const PRISMATIC_SELL_PRICE = 2000;
-
-// ─── 카드 추첨 유틸 ───────────────────────────────────────────────────────────
-
-// round(1~12)가 오를수록 희귀 등급 확률이 높아진다.
-function rollRarity(round: number): AugmentRarity {
-  let wSilver: number;
-  let wGold: number;
-  if (round <= 2) {
-    wSilver = 0.7;
-    wGold = 0.25;
-  } else if (round <= 5) {
-    wSilver = 0.5;
-    wGold = 0.32;
-  } else if (round <= 8) {
-    wSilver = 0.35;
-    wGold = 0.38;
-  } else {
-    wSilver = 0.25;
-    wGold = 0.4;
-  }
-  const wPrismatic = 1 - wSilver - wGold;
-  const r = Math.random();
-  if (r < wPrismatic) return "prismatic";
-  if (r < wPrismatic + wGold) return "gold";
-  return "silver";
-}
-
-export function sampleDistinct<T extends { id: string }>(
-  pool: T[],
-  count: number,
-  used: Set<string>,
-): T[] {
-  const available = pool.filter((a) => !used.has(a.id));
-  const result: T[] = [];
-  while (result.length < count && available.length > 0) {
-    const idx = Math.floor(Math.random() * available.length);
-    const [chosen] = available.splice(idx, 1);
-    result.push(chosen);
-    used.add(chosen.id);
-  }
-  return result;
-}
-
-// 한 등급을 골라 count장 뽑되, 풀이 부족하면 다른 등급으로 채운다.
-function drawAugments(
-  pool: ArenaAugment[],
-  rarity: AugmentRarity,
-  count: number,
-  used: Set<string> = new Set(),
-): ArenaAugment[] {
-  const result = sampleDistinct(
-    pool.filter((a) => a.rarity === rarity),
-    count,
-    used,
-  );
-  if (result.length < count) {
-    result.push(...sampleDistinct(pool, count - result.length, used));
-  }
-  return result;
-}
-
-// 이미 최대 레벨에 도달한 증강은 더 등장시키지 않는다.
-function maxedIds(picked: ArenaPickedAugment[]): Set<string> {
-  return new Set(
-    picked
-      .filter((p) => p.level >= p.augment.maxLevel)
-      .map((p) => p.augment.id),
-  );
-}
-
-function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
-
-// 증강 step 카드 3장 구성.
-//  - 슬롯이 꽉 찼으면: 레벨업 여지가 있는 보유 증강만 노출해 레벨업을 유도한다
-//    (여유 증강이 없으면 만렙 보유 증강이라도 노출해 빈 화면을 막는다).
-//  - 슬롯에 여유가 있으면: 신규 증강 위주이되, 레벨업 가능한 보유 증강이 1개 이상
-//    있으면 그중 랜덤 1장을 반드시 끼워 매 증강턴에 레벨업 기회를 보장한다.
-function buildAugmentCards(
-  pool: ArenaAugment[],
-  picked: ArenaPickedAugment[],
-  round: number,
-  maxSlots: number,
-): ArenaAugment[] {
-  const levelable = picked.filter(
-    (p) => p.level < p.augment.maxLevel,
-  );
-
-  if (picked.length >= maxSlots) {
-    const source = levelable.length > 0 ? levelable : picked;
-    return shuffle(source)
-      .slice(0, 3)
-      .map((p) => p.augment);
-  }
-
-  const used = maxedIds(picked);
-  const cards: ArenaAugment[] = [];
-  if (levelable.length > 0) {
-    const forced = levelable[Math.floor(Math.random() * levelable.length)];
-    cards.push(forced.augment);
-    used.add(forced.augment.id);
-  }
-  cards.push(...drawAugments(pool, rollRarity(round), 3 - cards.length, used));
-  return shuffle(cards);
-}
+/** 아이템/프리즘 1개의 구매가·판매가 기록. 되돌리기는 buy, 판매는 sell 을 환원한다. */
+type PriceLog = Record<string, { buy: number; sell: number }>;
 
 export interface ArenaState {
   // 진행
@@ -182,6 +52,7 @@ export interface ArenaState {
   pickedAugments: ArenaPickedAugment[];
   itemIds: string[];
   prismaticIds: string[];
+  /** 능력치 모루(스탯) — 저장 포맷에는 있으나 상점 UI가 아직 없어 항상 비어 있다. */
   shardIds: string[];
   reforgeIds: string[];
 
@@ -208,7 +79,6 @@ export interface ArenaState {
   undoItem: (itemId: string) => void;
   /** 판매 — 기록된 판매가만큼만 골드 환원 후 보유에서 제거(하단 트레이 탭). */
   sellItem: (itemId: string) => void;
-  buyShard: (shardId: string, price: number) => boolean;
   buyPrismaticItem: (
     item: PrismaticItem,
     cost: number,
@@ -220,34 +90,34 @@ export interface ArenaState {
   endShop: () => void;
 }
 
+/** 가격 기록에서 한 id를 지운다(보유 해제 시). */
+function forget(prices: PriceLog, id: string): PriceLog {
+  const next = { ...prices };
+  delete next[id];
+  return next;
+}
+
 export function useArena(): ArenaState {
   const allAugments = useArenaAugments();
   const allPrismatics = usePrismaticItems();
   const allSpecials = useSpecialAugments();
 
   const [stepIndex, setStepIndex] = useState(0);
-  // R1 시작과 동시에 500골드 보유(증강 선택 화면부터 표시). 이후 shop step은 step.gold로 추가 지급.
-  const [gold, setGold] = useState(500);
+  // R1 시작과 동시에 골드를 보유(증강 선택 화면부터 표시). 이후 shop step은 step.gold로 추가 지급.
+  const [gold, setGold] = useState(ARENA_START_GOLD);
   const [pickedAugments, setPickedAugments] = useState<ArenaPickedAugment[]>(
     [],
   );
   const [itemIds, setItemIds] = useState<string[]>([]);
-  // 아이템별 구매가(buy)·판매가(sell)를 기록한다. 되돌리기는 구매가 전액, 판매는 판매가만 환원.
-  const [itemPrices, setItemPrices] = useState<
-    Record<string, { buy: number; sell: number }>
-  >({});
+  const [itemPrices, setItemPrices] = useState<PriceLog>({});
   const [prismaticIds, setPrismaticIds] = useState<string[]>([]);
-  // 상점 프리즘 모루로 산 프리즘 아이템의 구매가/판매가. 라운드 무료 픽은 기록하지 않는다.
-  const [prismaticPrices, setPrismaticPrices] = useState<
-    Record<string, { buy: number; sell: number }>
-  >({});
-  const [shardIds, setShardIds] = useState<string[]>([]);
+  const [prismaticPrices, setPrismaticPrices] = useState<PriceLog>({});
   const [reforgeIds, setReforgeIds] = useState<string[]>([]);
   // 증강 슬롯 획득 재련을 골랐는지 — 12라운드 진입 시 보너스 실버 증강을 1장 부여한다.
   const [augmentSlotGranted, setAugmentSlotGranted] = useState(false);
 
   const [augmentCards, setAugmentCards] = useState<ArenaAugment[]>(() =>
-    drawAugments(allAugments, rollRarity(1), 3),
+    drawForRound(allAugments, 1, 3),
   );
   const [prismaticCards, setPrismaticCards] = useState<PrismaticItem[]>([]);
   const [reforgeCards, setReforgeCards] = useState<ArenaSpecialAugment[]>([]);
@@ -256,6 +126,7 @@ export function useArena(): ArenaState {
   const [done, setDone] = useState(false);
 
   const step = ARENA_STEPS[Math.min(stepIndex, ARENA_STEPS.length - 1)];
+  const maxSlots = augmentSlots(augmentSlotGranted);
 
   // 다음 step으로 진행하며 해당 step의 골드 지급 + 선택지 생성.
   const advance = useCallback(
@@ -271,9 +142,6 @@ export function useArena(): ArenaState {
       setRerolled([false, false, false]);
 
       if (next.kind === "augment") {
-        const maxSlots = augmentSlotGranted
-          ? REFORGED_AUGMENT_SLOTS
-          : BASE_AUGMENT_SLOTS;
         // 증강 슬롯 보너스: 12라운드 진입 시 랜덤 실버 증강 1장을 보유에 자동 추가.
         // (12라운드 직전은 항상 11라운드 shop의 endShop 경로라 setPickedAugments 중첩 없음.)
         if (next.round === 12 && augmentSlotGranted) {
@@ -287,32 +155,37 @@ export function useArena(): ArenaState {
           buildAugmentCards(allAugments, nextPicked, next.round, maxSlots),
         );
       } else if (next.kind === "prismatic") {
-        const used = new Set(nextPrismaticIds);
-        setPrismaticCards(sampleDistinct(allPrismatics, 3, used));
+        setPrismaticCards(
+          sampleDistinct(allPrismatics, 3, new Set(nextPrismaticIds)),
+        );
       } else if (next.kind === "reforge") {
         const reforgePool = allSpecials.filter((s) => REFORGE_IDS.has(s.id));
         setReforgeCards(sampleDistinct(reforgePool, 3, new Set()));
       }
       setStepIndex(nextIndex);
     },
-    [stepIndex, allAugments, allPrismatics, allSpecials, augmentSlotGranted],
+    [
+      stepIndex,
+      allAugments,
+      allPrismatics,
+      allSpecials,
+      augmentSlotGranted,
+      maxSlots,
+    ],
   );
 
   const pickAugment = useCallback(
     (augment: ArenaAugment) => {
       setPickedAugments((prev) => {
         const existing = prev.find((p) => p.augment.id === augment.id);
-        let next: ArenaPickedAugment[];
-        if (existing) {
-          const max = augment.maxLevel;
-          next = prev.map((p) =>
-            p.augment.id === augment.id
-              ? { ...p, level: Math.min(p.level + 1, max) }
-              : p,
-          );
-        } else {
-          next = [...prev, { augment, level: 1 }];
-        }
+        // 이미 보유 중이면 레벨업(최대치 clamp), 아니면 신규 슬롯.
+        const next = existing
+          ? prev.map((p) =>
+              p.augment.id === augment.id
+                ? { ...p, level: Math.min(p.level + 1, augment.maxLevel) }
+                : p,
+            )
+          : [...prev, { augment, level: 1 }];
         advance(next, prismaticIds);
         return next;
       });
@@ -320,12 +193,18 @@ export function useArena(): ArenaState {
     [advance, prismaticIds],
   );
 
+  // idx 슬롯만 새 카드로 교체하고 그 슬롯의 리롤 권한을 소진한다.
+  const replaceCard = useCallback(
+    <T,>(setCards: (fn: (prev: T[]) => T[]) => void, idx: number, card: T) => {
+      setCards((prev) => prev.map((c, i) => (i === idx ? card : c)));
+      setRerolled((prev) => prev.map((r, i) => (i === idx ? true : r)));
+    },
+    [],
+  );
+
   const rerollAugment = useCallback(
     (idx: number) => {
       if (rerolled[idx]) return;
-      const maxSlots = augmentSlotGranted
-        ? REFORGED_AUGMENT_SLOTS
-        : BASE_AUGMENT_SLOTS;
       const shownExcept = new Set(
         augmentCards.filter((_, i) => i !== idx).map((a) => a.id),
       );
@@ -333,15 +212,14 @@ export function useArena(): ArenaState {
       let replacement: ArenaAugment | undefined;
       if (pickedAugments.length >= maxSlots) {
         // 슬롯이 꽉 찬 상태 — 화면에 없는, 레벨업 가능한 보유 증강으로만 교체한다.
-        const candidates = pickedAugments
-          .filter(
-            (p) =>
-              p.level < p.augment.maxLevel &&
-              !shownExcept.has(p.augment.id),
-          )
-          .map((p) => p.augment);
-        if (candidates.length === 0) return;
-        replacement = candidates[Math.floor(Math.random() * candidates.length)];
+        replacement = pickRandom(
+          pickedAugments
+            .filter(
+              (p) =>
+                p.level < p.augment.maxLevel && !shownExcept.has(p.augment.id),
+            )
+            .map((p) => p.augment),
+        );
       } else {
         const excludeIds = new Set([
           ...maxedIds(pickedAugments),
@@ -351,19 +229,16 @@ export function useArena(): ArenaState {
         [replacement] = drawAugments(pool, augmentCards[idx].rarity, 1);
       }
       if (!replacement) return;
-      const chosen = replacement;
-      setAugmentCards((prev) => {
-        const nextCards = [...prev];
-        nextCards[idx] = chosen;
-        return nextCards;
-      });
-      setRerolled((prev) => {
-        const nextR = [...prev];
-        nextR[idx] = true;
-        return nextR;
-      });
+      replaceCard(setAugmentCards, idx, replacement);
     },
-    [rerolled, pickedAugments, augmentCards, allAugments, augmentSlotGranted],
+    [
+      rerolled,
+      pickedAugments,
+      augmentCards,
+      allAugments,
+      maxSlots,
+      replaceCard,
+    ],
   );
 
   const pickPrismatic = useCallback(
@@ -392,18 +267,9 @@ export function useArena(): ArenaState {
       const pool = allPrismatics.filter((p) => !excludeIds.has(p.id));
       const [replacement] = sampleDistinct(pool, 1, new Set());
       if (!replacement) return;
-      setPrismaticCards((prev) => {
-        const nextCards = [...prev];
-        nextCards[idx] = replacement;
-        return nextCards;
-      });
-      setRerolled((prev) => {
-        const nextR = [...prev];
-        nextR[idx] = true;
-        return nextR;
-      });
+      replaceCard(setPrismaticCards, idx, replacement);
     },
-    [rerolled, prismaticIds, prismaticCards, allPrismatics],
+    [rerolled, prismaticIds, prismaticCards, allPrismatics, replaceCard],
   );
 
   const pickReforge = useCallback(
@@ -421,25 +287,20 @@ export function useArena(): ArenaState {
     (removeId: string) => {
       // 증강 강화도 재련 기록에 남겨 drawer '재련' 섹션에 표시한다.
       setReforgeIds((prev) =>
-        prev.includes(ENHANCE_AUGMENT_ID)
-          ? prev
-          : [...prev, ENHANCE_AUGMENT_ID],
+        prev.includes(ENHANCE_AUGMENT_ID) ? prev : [...prev, ENHANCE_AUGMENT_ID],
       );
       setPickedAugments((prev) => {
         const remaining = prev.filter((p) => p.augment.id !== removeId);
         // 분배 대상: 현재 레벨 < 최대 레벨인 증강(여유 capacity 보유).
-        const caps = remaining.map(
-          (p) => p.augment.maxLevel - p.level,
-        );
-        const totalCap = caps.reduce((s, c) => s + c, 0);
-        let toDistribute = Math.min(ENHANCE_LEVELS, totalCap);
+        const caps = remaining.map((p) => p.augment.maxLevel - p.level);
         const levels = remaining.map((p) => p.level);
+        let toDistribute = Math.min(
+          ENHANCE_LEVELS,
+          caps.reduce((s, c) => s + c, 0),
+        );
         while (toDistribute > 0) {
-          const eligible = caps
-            .map((_, i) => i)
-            .filter((i) => caps[i] > 0);
-          if (eligible.length === 0) break;
-          const i = eligible[Math.floor(Math.random() * eligible.length)];
+          const i = pickRandom(caps.map((_, k) => k).filter((k) => caps[k] > 0));
+          if (i == null) break;
           levels[i] += 1;
           caps[i] -= 1;
           toDistribute -= 1;
@@ -471,14 +332,9 @@ export function useArena(): ArenaState {
   const removeItem = useCallback(
     (itemId: string, refundKind: "buy" | "sell") => {
       if (!itemIds.includes(itemId)) return;
-      const refund = itemPrices[itemId]?.[refundKind] ?? 0;
-      setGold((g) => g + refund);
+      setGold((g) => g + (itemPrices[itemId]?.[refundKind] ?? 0));
       setItemIds((prev) => prev.filter((id) => id !== itemId));
-      setItemPrices((prev) => {
-        const next = { ...prev };
-        delete next[itemId];
-        return next;
-      });
+      setItemPrices((prev) => forget(prev, itemId));
     },
     [itemIds, itemPrices],
   );
@@ -490,16 +346,6 @@ export function useArena(): ArenaState {
   const sellItem = useCallback(
     (itemId: string) => removeItem(itemId, "sell"),
     [removeItem],
-  );
-
-  const buyShard = useCallback(
-    (shardId: string, price: number) => {
-      if (gold < price) return false;
-      setGold((g) => g - price);
-      setShardIds((prev) => [...prev, shardId]);
-      return true;
-    },
-    [gold],
   );
 
   const buyPrismaticItem = useCallback(
@@ -519,14 +365,9 @@ export function useArena(): ArenaState {
   const sellPrismatic = useCallback(
     (id: string) => {
       if (!prismaticIds.includes(id)) return;
-      const refund = prismaticPrices[id]?.sell ?? 0;
-      setGold((g) => g + refund);
+      setGold((g) => g + (prismaticPrices[id]?.sell ?? 0));
       setPrismaticIds((prev) => prev.filter((pid) => pid !== id));
-      setPrismaticPrices((prev) => {
-        const next = { ...prev };
-        delete next[id];
-        return next;
-      });
+      setPrismaticPrices((prev) => forget(prev, id));
     },
     [prismaticIds, prismaticPrices],
   );
@@ -535,64 +376,37 @@ export function useArena(): ArenaState {
     advance(pickedAugments, prismaticIds);
   }, [advance, pickedAugments, prismaticIds]);
 
-  return useMemo(
-    () => ({
-      step,
-      stepIndex,
-      round: step.round,
-      totalRounds: ARENA_TOTAL_ROUNDS,
-      done,
-      gold,
-      pickedAugments,
-      itemIds,
-      prismaticIds,
-      shardIds,
-      reforgeIds,
-      augmentCards,
-      prismaticCards,
-      reforgeCards,
-      rerolled,
-      pickAugment,
-      rerollAugment,
-      pickPrismatic,
-      rerollPrismatic,
-      pickReforge,
-      enhanceAugment,
-      buyItem,
-      undoItem,
-      sellItem,
-      buyShard,
-      buyPrismaticItem,
-      sellPrismatic,
-      endShop,
-    }),
-    [
-      step,
-      stepIndex,
-      done,
-      gold,
-      pickedAugments,
-      itemIds,
-      prismaticIds,
-      shardIds,
-      reforgeIds,
-      augmentCards,
-      prismaticCards,
-      reforgeCards,
-      rerolled,
-      pickAugment,
-      rerollAugment,
-      pickPrismatic,
-      rerollPrismatic,
-      pickReforge,
-      enhanceAugment,
-      buyItem,
-      undoItem,
-      sellItem,
-      buyShard,
-      buyPrismaticItem,
-      sellPrismatic,
-      endShop,
-    ],
-  );
+  return {
+    step,
+    stepIndex,
+    round: step.round,
+    totalRounds: ARENA_TOTAL_ROUNDS,
+    done,
+    gold,
+    pickedAugments,
+    itemIds,
+    prismaticIds,
+    shardIds: EMPTY_SHARDS,
+    reforgeIds,
+    augmentCards,
+    prismaticCards,
+    reforgeCards,
+    rerolled,
+    pickAugment,
+    rerollAugment,
+    pickPrismatic,
+    rerollPrismatic,
+    pickReforge,
+    enhanceAugment,
+    buyItem,
+    undoItem,
+    sellItem,
+    buyPrismaticItem,
+    sellPrismatic,
+    endShop,
+  };
 }
+
+// 능력치 모루 상점이 아직 없어 항상 빈 배열이다. 저장 포맷(SavedBuild.shardIds)과
+// drawer/상세의 표시 경로는 이미 있으므로, 상점이 붙으면 state로 바꾸기만 하면 된다.
+const EMPTY_SHARDS: string[] = [];

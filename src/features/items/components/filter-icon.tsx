@@ -2,7 +2,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Image } from "expo-image";
 
 import { championClassIconUrl } from "@/lib/ddragon";
-import type { FilterDef } from "../data/item-filters";
+import type { FilterDef } from "../item-filters";
 
 interface Props {
   filter: FilterDef;

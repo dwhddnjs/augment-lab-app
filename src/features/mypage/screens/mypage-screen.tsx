@@ -100,7 +100,7 @@ function RowLabel({
   );
 }
 
-export default function MyPageScreen() {
+export function MyPageScreen() {
   const translate = useTranslation(t);
   const { colors, mode } = useTheme();
   const { locale, setLocale } = useLocale();

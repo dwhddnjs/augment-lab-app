@@ -57,6 +57,28 @@ export const RARITY: Record<AugmentRarity, RarityStyle> = {
 };
 
 // Highlight gold/coin amounts inside the description (e.g. "250골드", "250 gold").
+/** 카드 비율(세로/가로). 프레임을 쓰지 않는 아이템·프리즘 카드도 이 비율을 따른다. */
+export const CARD_ASPECT = 14 / 9;
+
+/** 카드 3장 행의 좌우 여백. 카드 간격은 화면(넓게)/오버레이(좁게)가 각자 정한다. */
+export const CARD_ROW_PAD = Spacing.four;
+
+/**
+ * 카드 한 장의 너비 — 가로 3장이 들어가는 너비와 화면 높이 제한 중 작은 쪽.
+ * heightRatio 는 헤더와 아래 리롤 버튼 자리를 남기기 위한 상한으로, 카드 비율을
+ * 역산해 너비로 환산한다.
+ */
+export function cardWidthFor(
+  screenW: number,
+  screenH: number,
+  gap: number,
+  heightRatio: number,
+): number {
+  const byWidth = Math.floor((screenW - CARD_ROW_PAD * 2 - gap * 2) / 3);
+  const byHeight = Math.floor((screenH * heightRatio) / CARD_ASPECT);
+  return Math.min(byWidth, byHeight);
+}
+
 const AMOUNT_RE = /(\d[\d,]*\s*(?:골드|gold|원))/i;
 function splitDescription(text: string): { text: string; hl: boolean }[] {
   return text
@@ -75,7 +97,7 @@ interface Props {
 export function RarityCardFrame({ augment, cardWidth, topInset = 0 }: Props) {
   const rs = RARITY[augment.rarity];
 
-  const cardHeight = Math.round(cardWidth * (14 / 9));
+  const cardHeight = Math.round(cardWidth * CARD_ASPECT);
   const framePad = Math.max(3, Math.round(cardWidth * 0.056)); // 카드 태두리 크키 조절
 
   const iconSize = 72; // 증강 아이콘 사이즈;

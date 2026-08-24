@@ -10,6 +10,7 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { AugmentImage } from "@/components/ui/augment-image";
 import { RemoteImage } from "@/components/ui/remote-image";
 import {
+  ArenaGold,
   AugmentRarityColors,
   AugmentRarityGlyphs,
   Radius,
@@ -24,6 +25,7 @@ import type { ArenaPickedAugment } from "@/features/arena/types";
 import type { Champion } from "@/features/champions/types";
 import { useItems } from "@/features/items/hooks/use-items";
 import { useTheme } from "@/hooks/use-theme";
+import { resolveIds } from "@/lib/arrays";
 import {
   cdragonItemIconUrl,
   championSquareUrl,
@@ -78,18 +80,10 @@ export function ArenaDrawer({
   const allShards = useStatShards();
   const allSpecials = useSpecialAugments();
 
-  const items = itemIds
-    .map((id) => allItems.find((it) => it.id === id))
-    .filter((it): it is NonNullable<typeof it> => it != null);
-  const prismatics = prismaticIds
-    .map((id) => allPrismatics.find((p) => p.id === id))
-    .filter((p): p is NonNullable<typeof p> => p != null);
-  const shards = shardIds
-    .map((id) => allShards.find((s) => s.id === id))
-    .filter((s): s is NonNullable<typeof s> => s != null);
-  const reforges = reforgeIds
-    .map((id) => allSpecials.find((s) => s.id === id))
-    .filter((s): s is NonNullable<typeof s> => s != null);
+  const items = resolveIds(itemIds, allItems);
+  const prismatics = resolveIds(prismaticIds, allPrismatics);
+  const shards = resolveIds(shardIds, allShards);
+  const reforges = resolveIds(reforgeIds, allSpecials);
 
   return (
     <SafeAreaView
@@ -103,8 +97,8 @@ export function ArenaDrawer({
         <View style={styles.titleRow}>
           <ThemedText type="heading">{translate("title")}</ThemedText>
           <View style={[styles.goldBadge, { backgroundColor: colors.surface.raised }]}>
-            <MaterialCommunityIcons name="circle-multiple" size={14} color="#F2C766" />
-            <ThemedText type="label" style={{ color: "#F2C766", fontWeight: "800" }}>
+            <MaterialCommunityIcons name="circle-multiple" size={14} color={ArenaGold} />
+            <ThemedText type="label" style={{ color: ArenaGold, fontWeight: "800" }}>
               {gold.toLocaleString()}
             </ThemedText>
           </View>

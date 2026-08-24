@@ -1,171 +1,102 @@
 /**
  * ArenaAnvilPicker — 모루(전설/프리즘) 구매 시 뜨는 카드 3장 선택 오버레이.
- * 상점 위에 absolute full-cover로 깔리며, arena-screen의 카드 선택 애니메이션
- * (380ms pick / 220ms reroll, exit·entry 모드)을 자체적으로 복제해 관리한다.
- *   - 카드를 누르면 pick 애니메이션 후 onPick(idx) → 부모가 구매 확정 + 오버레이 닫기.
- *   - 카드당 1회 무료 리롤(onReroll). 빈 영역 탭 → onClose(부모가 모루 골드 환불).
- *   - 헤더(제목·닫기 X) 없이 카드 3장만 깔끔하게 노출, 닫기는 카드 바깥 탭으로 처리.
+ * 진열할 카드와 카드당 1회 리롤을 스스로 관리한다(부모는 풀과 확정 처리만 넘긴다).
+ *   - 카드를 누르면 pick 애니메이션 후 onPick(card) → 부모가 구매를 확정하고 닫는다.
+ *   - 빈 영역 탭 → onClose(구매 취소).
  */
 import { useState } from "react";
-import {
-  Modal,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { useWindowDimensions } from "react-native";
 
+import { cardWidthFor } from "@/components/ui/rarity-card-frame";
 import { Spacing } from "@/constants/theme";
 import type { PrismaticItem } from "@/features/arena/types";
 import type { Item } from "@/features/items/types";
-import { useTheme } from "@/hooks/use-theme";
-import {
-  type ArenaCardEntryMode,
-  type ArenaCardExitMode,
-} from "./arena-pick-card";
+import { sampleDistinct } from "@/lib/arrays";
+import { useCardPickAnim } from "../hooks/use-card-pick-anim";
+import { ArenaCardOverlay } from "./arena-card-overlay";
 import { ArenaItemPickCard } from "./arena-item-pick-card";
 import { ArenaPrismaticCard } from "./arena-prismatic-card";
 
+/** 오버레이 카드는 게임 화면보다 조금 크고 촘촘하게 깐다. */
+const CARD_GAP = Spacing.three;
+const CARD_HEIGHT_RATIO = 0.62;
+
+type AnvilCard = Item | PrismaticItem;
+
 interface Props {
   kind: "legendary" | "prismatic";
-  cards: (Item | PrismaticItem)[];
-  rerolled: boolean[];
-  onPick: (idx: number) => void;
-  onReroll: (idx: number) => void;
+  /** 뽑기 풀. 이미 보유한 항목은 excludeIds 로 걸러진다. */
+  pool: AnvilCard[];
+  excludeIds: string[];
+  onPick: (card: AnvilCard) => void;
   onClose: () => void;
 }
 
 export function ArenaAnvilPicker({
   kind,
-  cards,
-  rerolled,
+  pool,
+  excludeIds,
   onPick,
-  onReroll,
   onClose,
 }: Props) {
-  const { colors } = useTheme();
   const { width, height } = useWindowDimensions();
-  const screenW = Math.max(width, height);
-  const screenH = Math.min(width, height);
+  const cardWidth = cardWidthFor(
+    Math.max(width, height),
+    Math.min(width, height),
+    CARD_GAP,
+    CARD_HEIGHT_RATIO,
+  );
 
-  const hPad = Spacing.four;
-  const cardGap = Spacing.three;
-  const cardWidthByW = Math.floor((screenW - hPad * 2 - cardGap * 2) / 3);
-  const cardWidthByH = Math.floor(screenH * 0.62 * (9 / 14));
-  const cardWidth = Math.min(cardWidthByW, cardWidthByH);
+  const [cards, setCards] = useState<AnvilCard[]>(() =>
+    sampleDistinct(pool, 3, new Set(excludeIds)),
+  );
+  const [rerolled, setRerolled] = useState([false, false, false]);
+  const anim = useCardPickAnim();
 
-  const [exitModes, setExitModes] = useState<ArenaCardExitMode[]>([
-    "none",
-    "none",
-    "none",
-  ]);
-  const [entryModes, setEntryModes] = useState<ArenaCardEntryMode[]>([
-    "flip",
-    "flip",
-    "flip",
-  ]);
-  const [animating, setAnimating] = useState(false);
-
-  // 선택: 고른 카드 바운스 + 나머지 fade-out → 380ms 후 확정(onPick).
-  const handlePick = (idx: number) => {
-    if (animating) return;
-    setAnimating(true);
-    const modes: ArenaCardExitMode[] = ["unchosen", "unchosen", "unchosen"];
-    modes[idx] = "picked";
-    setExitModes(modes);
-    setTimeout(() => {
-      onPick(idx);
-    }, 380);
-  };
-
-  // 리롤: 대상 카드 fade-out → 220ms 후 교체(해당 슬롯 fade 재등장).
-  const handleReroll = (idx: number) => {
-    if (animating || rerolled[idx]) return;
-    setAnimating(true);
-    const modes: ArenaCardExitMode[] = ["none", "none", "none"];
-    modes[idx] = "reroll";
-    setExitModes(modes);
-    setTimeout(() => {
-      setEntryModes((prev) => {
-        const next = [...prev];
-        next[idx] = "fade";
-        return next;
-      });
-      onReroll(idx);
-      setExitModes(["none", "none", "none"]);
-      setAnimating(false);
-    }, 220);
+  // 카드당 1회 무료 리롤 — 현재 진열분 + 보유분을 뺀 나머지에서 1장 교체.
+  const swapCard = (idx: number) => {
+    const exclude = new Set([
+      ...excludeIds,
+      ...cards.filter((_, i) => i !== idx).map((c) => c.id),
+    ]);
+    const [replacement] = sampleDistinct(pool, 1, exclude);
+    if (!replacement) return;
+    setCards((prev) => prev.map((c, i) => (i === idx ? replacement : c)));
+    setRerolled((prev) => prev.map((r, i) => (i === idx ? true : r)));
   };
 
   return (
-    // Modal로 띄워 헤더를 포함한 화면 전체를 덮는다(상점 컨테이너 내부 absolute로는
-    // 헤더가 가려지지 않기 때문). 가로 고정이므로 supportedOrientations도 가로로 둔다.
-    <Modal
-      visible
-      transparent
-      animationType="fade"
-      supportedOrientations={["landscape", "landscape-left", "landscape-right"]}
-      onRequestClose={animating ? undefined : onClose}
+    <ArenaCardOverlay
+      modal
+      locked={anim.animating}
+      gap={CARD_GAP}
+      onClose={onClose}
     >
-      <View style={[styles.overlay, { backgroundColor: colors.surface.overlay }]}>
-        {/* 빈 영역 탭 → 닫기(환불) */}
-        <Pressable
-          style={StyleSheet.absoluteFill}
-          onPress={animating ? undefined : onClose}
-        />
-
-        <View
-          style={[styles.cardsRow, { paddingHorizontal: hPad, gap: cardGap }]}
-        >
-          {cards.map((card, i) =>
-            kind === "prismatic" ? (
-              <ArenaPrismaticCard
-                key={`${i}-${card.id}`}
-                item={card as PrismaticItem}
-                cardWidth={cardWidth}
-                index={i}
-                exitMode={exitModes[i]}
-                entryMode={entryModes[i]}
-                disabled={animating}
-                rerolled={rerolled[i]}
-                onPick={() => handlePick(i)}
-                onReroll={() => handleReroll(i)}
-              />
-            ) : (
-              <ArenaItemPickCard
-                key={`${i}-${card.id}`}
-                item={card as Item}
-                cardWidth={cardWidth}
-                index={i}
-                exitMode={exitModes[i]}
-                entryMode={entryModes[i]}
-                disabled={animating}
-                rerolled={rerolled[i]}
-                onPick={() => handlePick(i)}
-                onReroll={() => handleReroll(i)}
-              />
-            ),
-          )}
-        </View>
-      </View>
-    </Modal>
+      {cards.map((card, i) => {
+        const shared = {
+          cardWidth,
+          index: i,
+          exitMode: anim.exitModes[i],
+          entryMode: anim.entryModes[i],
+          disabled: anim.animating,
+          rerolled: rerolled[i],
+          onPick: () => anim.pick(i, () => onPick(card)),
+          onReroll: () => anim.reroll(i, () => swapCard(i)),
+        };
+        return kind === "prismatic" ? (
+          <ArenaPrismaticCard
+            key={`${i}-${card.id}`}
+            item={card as PrismaticItem}
+            {...shared}
+          />
+        ) : (
+          <ArenaItemPickCard
+            key={`${i}-${card.id}`}
+            item={card as Item}
+            {...shared}
+          />
+        );
+      })}
+    </ArenaCardOverlay>
   );
 }
-
-const styles = StyleSheet.create({
-  overlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  cardsRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

@@ -1282,7 +1282,7 @@
   },
   {
     "id": "773050",
-    "name": "Stark's Fervor",
+    "name": "Zeke's Herald",
     "description": "<mainText><stats><attention>250</attention> Health<br><attention>20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Aura - Triumph:</jadeUnique> Grants nearby allied champions <lifeSteal>10% Life Steal</lifeSteal> and <physicalDamage>20 Attack Damage</physicalDamage>.</mainText>",
     "plaintext": "",
     "gold": {

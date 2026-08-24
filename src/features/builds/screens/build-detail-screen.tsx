@@ -27,6 +27,7 @@ import { GlassSurface } from "@/components/ui/glass-surface";
 import { Radius, Spacing } from "@/constants/theme";
 import { ArenaBuildSummary } from "@/features/arena/components/arena-build-summary";
 import { useStatShards } from "@/features/arena/hooks/use-arena-items";
+import { resolveIds } from "@/lib/arrays";
 import { useAugments } from "@/features/augments/hooks/use-augments";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { ItemStatPanel } from "@/features/items/components/item-stat-panel";
@@ -148,16 +149,13 @@ export function BuildDetailScreen() {
   const buildAugments = (build?.augmentIds ?? [])
     .map((augId) => augments.find((a) => a.id === augId))
     .filter((a): a is NonNullable<typeof a> => a != null);
-  const buildItems = (build?.itemIds ?? [])
-    .map((itemId) => items.find((it) => it.id === itemId))
-    .filter((it): it is NonNullable<typeof it> => it != null);
+  const buildItems = resolveIds(build?.itemIds, items);
   // 아레나 빌드는 능력치 모루도 합산 스탯에 반영한다(각 모루를 단일 스탯으로 변환).
   const shardStatsList: ItemStats[] =
     build?.mode === "arena"
-      ? (build.shardIds ?? [])
-          .map((id) => statShards.find((s) => s.id === id))
-          .filter((s): s is NonNullable<typeof s> => s != null)
-          .map((s) => ({ [s.stat]: s.value }) as ItemStats)
+      ? resolveIds(build.shardIds, statShards).map(
+          (s) => ({ [s.stat]: s.value }) as ItemStats,
+        )
       : [];
   const itemStatsList = [
     ...buildItems.map((it) => it.stats),

@@ -3,7 +3,7 @@
  *
  * iOS 26+ & Xcode 26 dev build에서 `buttonStyle('glass')` 모디파이어로 진짜
  * 리퀴드글래스 버튼을 렌더한다. 강조(tint)가 지정되면 `tint(색)`을 더한다.
- * 글래스가 불가능한 iOS 26 미만에서는 GlassChip 폴백으로 떨어진다.
+ * 글래스가 불가능한 iOS 26 미만에서는 GlassButtonFallback 으로 떨어진다.
  */
 import { Button, Host, Image } from "@expo/ui/swift-ui";
 import {

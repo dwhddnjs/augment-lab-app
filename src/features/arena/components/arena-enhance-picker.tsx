@@ -1,135 +1,76 @@
 /**
  * ArenaEnhancePicker — 증강 강화(재련) 시 뜨는 보유 증강 선택 오버레이.
- * 보유 증강 3장을 깔고 그중 1장을 고르면 그 증강을 제거하는 데 쓴다.
- * arena-anvil-picker와 동일한 카드 선택 애니메이션(380ms pick / 220ms reroll)을 복제한다.
- *   - 카드를 누르면 pick 애니메이션 후 onPick(idx) → 부모가 강화 확정 + 오버레이 닫기.
- *   - 카드당 1회 리롤(아직 안 보여준 보유 증강으로 교체). 빈 영역 탭 → onClose.
+ * 보유 증강 중 3장을 깔고, 고른 1장이 제거 대상이 된다(남은 증강에 레벨이 분배된다).
+ * 리롤은 아직 안 보여준 보유 증강으로 1회씩 교체한다.
  */
 import { useState } from "react";
-import { Pressable, StyleSheet, useWindowDimensions, View } from "react-native";
+import { useWindowDimensions } from "react-native";
 
+import { cardWidthFor } from "@/components/ui/rarity-card-frame";
 import { Spacing } from "@/constants/theme";
-import { type ArenaPickedAugment } from "@/features/arena/types";
-import { useTheme } from "@/hooks/use-theme";
+import type { ArenaPickedAugment } from "@/features/arena/types";
+import { pickRandom, shuffle } from "@/lib/arrays";
+import { useCardPickAnim } from "../hooks/use-card-pick-anim";
 import { ArenaAugmentCard } from "./arena-augment-card";
-import {
-  type ArenaCardEntryMode,
-  type ArenaCardExitMode,
-} from "./arena-pick-card";
+import { ArenaCardOverlay } from "./arena-card-overlay";
+
+/** 모루 오버레이와 동일한 카드 크기. */
+const CARD_GAP = Spacing.three;
+const CARD_HEIGHT_RATIO = 0.62;
 
 interface Props {
-  cards: ArenaPickedAugment[];
-  rerolled: boolean[];
-  onPick: (idx: number) => void;
-  onReroll: (idx: number) => void;
+  /** 보유 증강 전체. 이 중 3장을 진열한다. */
+  pool: ArenaPickedAugment[];
+  /** 제거할 증강 id 확정. */
+  onPick: (augmentId: string) => void;
   onClose: () => void;
 }
 
-export function ArenaEnhancePicker({
-  cards,
-  rerolled,
-  onPick,
-  onReroll,
-  onClose,
-}: Props) {
-  const { colors } = useTheme();
+export function ArenaEnhancePicker({ pool, onPick, onClose }: Props) {
   const { width, height } = useWindowDimensions();
-  const screenW = Math.max(width, height);
-  const screenH = Math.min(width, height);
+  const cardWidth = cardWidthFor(
+    Math.max(width, height),
+    Math.min(width, height),
+    CARD_GAP,
+    CARD_HEIGHT_RATIO,
+  );
 
-  const hPad = Spacing.four;
-  const cardGap = Spacing.three;
-  const cardWidthByW = Math.floor((screenW - hPad * 2 - cardGap * 2) / 3);
-  const cardWidthByH = Math.floor(screenH * 0.62 * (9 / 14));
-  const cardWidth = Math.min(cardWidthByW, cardWidthByH);
+  const [cards, setCards] = useState<ArenaPickedAugment[]>(() =>
+    shuffle(pool).slice(0, 3),
+  );
+  const [rerolled, setRerolled] = useState([false, false, false]);
+  const anim = useCardPickAnim();
 
-  const [exitModes, setExitModes] = useState<ArenaCardExitMode[]>([
-    "none",
-    "none",
-    "none",
-  ]);
-  const [entryModes, setEntryModes] = useState<ArenaCardEntryMode[]>([
-    "flip",
-    "flip",
-    "flip",
-  ]);
-  const [animating, setAnimating] = useState(false);
-
-  // 선택: 고른 카드 바운스 + 나머지 fade-out → 380ms 후 확정(onPick).
-  const handlePick = (idx: number) => {
-    if (animating) return;
-    setAnimating(true);
-    const modes: ArenaCardExitMode[] = ["unchosen", "unchosen", "unchosen"];
-    modes[idx] = "picked";
-    setExitModes(modes);
-    setTimeout(() => {
-      onPick(idx);
-    }, 380);
-  };
-
-  // 리롤: 대상 카드 fade-out → 220ms 후 교체(해당 슬롯 fade 재등장).
+  // 현재 진열에 없는 보유 증강 중 랜덤 1장으로 교체.
+  // 후보가 없으면(보유가 3개뿐) 애니메이션도 걸지 않고 그대로 둔다.
   const handleReroll = (idx: number) => {
-    if (animating || rerolled[idx]) return;
-    setAnimating(true);
-    const modes: ArenaCardExitMode[] = ["none", "none", "none"];
-    modes[idx] = "reroll";
-    setExitModes(modes);
-    setTimeout(() => {
-      setEntryModes((prev) => {
-        const next = [...prev];
-        next[idx] = "fade";
-        return next;
-      });
-      onReroll(idx);
-      setExitModes(["none", "none", "none"]);
-      setAnimating(false);
-    }, 220);
+    const shown = new Set(cards.map((c) => c.augment.id));
+    const replacement = pickRandom(pool.filter((p) => !shown.has(p.augment.id)));
+    if (!replacement) return;
+    anim.reroll(idx, () => {
+      setCards((prev) => prev.map((c, i) => (i === idx ? replacement : c)));
+      setRerolled((prev) => prev.map((r, i) => (i === idx ? true : r)));
+    });
   };
 
   return (
-    <View style={[styles.overlay, { backgroundColor: colors.surface.overlay }]}>
-      {/* 빈 영역 탭 → 닫기 */}
-      <Pressable
-        style={StyleSheet.absoluteFill}
-        onPress={animating ? undefined : onClose}
-      />
-
-      <View style={[styles.cardsRow, { paddingHorizontal: hPad, gap: cardGap }]}>
-        {cards.map((card, i) => (
-          <ArenaAugmentCard
-            key={`${i}-${card.augment.id}`}
-            augment={card.augment}
-            level={card.level}
-            maxLevel={card.augment.maxLevel}
-            cardWidth={cardWidth}
-            index={i}
-            exitMode={exitModes[i]}
-            entryMode={entryModes[i]}
-            disabled={animating}
-            rerolled={rerolled[i]}
-            onPick={() => handlePick(i)}
-            onReroll={() => handleReroll(i)}
-          />
-        ))}
-      </View>
-    </View>
+    <ArenaCardOverlay locked={anim.animating} gap={CARD_GAP} onClose={onClose}>
+      {cards.map((card, i) => (
+        <ArenaAugmentCard
+          key={`${i}-${card.augment.id}`}
+          augment={card.augment}
+          level={card.level}
+          maxLevel={card.augment.maxLevel}
+          cardWidth={cardWidth}
+          index={i}
+          exitMode={anim.exitModes[i]}
+          entryMode={anim.entryModes[i]}
+          disabled={anim.animating}
+          rerolled={rerolled[i]}
+          onPick={() => anim.pick(i, () => onPick(card.augment.id))}
+          onReroll={() => handleReroll(i)}
+        />
+      ))}
+    </ArenaCardOverlay>
   );
 }
-
-const styles = StyleSheet.create({
-  overlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  cardsRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

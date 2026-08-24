@@ -10,6 +10,7 @@ import { useCallback, useRef, useState } from "react";
 import { Alert } from "react-native";
 import type { SearchBarCommands } from "react-native-screens";
 
+import { parseGameMode } from "@/constants/game-modes";
 import { useLocale } from "@/hooks/use-locale";
 import type { GameMode } from "@/lib/build-storage";
 import { championClassIconUrl, championSquareUrl } from "@/lib/ddragon";
@@ -81,10 +82,7 @@ export function useChampionSelect() {
   const { locale } = useLocale();
   const router = useRouter();
   const params = useLocalSearchParams<{ mode?: string }>();
-  // 삼항으로 두면 새 모드가 조용히 칼바람으로 흡수된다(클래식이 실제로 그랬다).
-  // 아는 모드만 통과시키고 나머지는 명시적으로 칼바람 폴백.
-  const mode: GameMode =
-    params.mode === "arena" || params.mode === "classic" ? params.mode : "aram";
+  const mode: GameMode = parseGameMode(params.mode);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);

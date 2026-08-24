@@ -3,17 +3,17 @@
  * 재사용하되, 선택 시 도달할 강화 레벨을 카드 상단 별로 표시하고 하단에 리롤 버튼을 둔다.
  */
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Pressable, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { RARITY, RarityCardFrame } from "@/components/ui/rarity-card-frame";
 import { Radius, Spacing } from "@/constants/theme";
 import type { ArenaAugment } from "@/features/arena/types";
-import { useTheme } from "@/hooks/use-theme";
 import {
   ArenaPickCard,
   type ArenaCardEntryMode,
   type ArenaCardExitMode,
 } from "./arena-pick-card";
+import { ArenaRerollButton } from "./arena-reroll-button";
 
 interface Props {
   augment: ArenaAugment;
@@ -68,7 +68,6 @@ export function ArenaAugmentCard({
   onPick,
   onReroll,
 }: Props) {
-  const { colors } = useTheme();
   const starColor = RARITY[augment.rarity].highlight;
   const cardBg = RARITY[augment.rarity].bodyColor;
 
@@ -100,26 +99,13 @@ export function ArenaAugmentCard({
         </View>
       </ArenaPickCard>
 
-      <Pressable
-        onPress={rerolled || disabled ? undefined : onReroll}
-        disabled={rerolled || disabled}
-        style={[
-          styles.reroll,
-          {
-            backgroundColor: rerolled
-              ? colors.surface.sunken
-              : colors.surface.raised,
-            borderColor: rerolled ? colors.border.subtle : colors.border.strong,
-            opacity: disabled && !rerolled ? 0.35 : 1,
-          },
-        ]}
-      >
-        <MaterialCommunityIcons
-          name="refresh"
-          size={18}
-          color={rerolled ? colors.text.disabled : colors.text.primary}
-        />
-      </Pressable>
+      {/* 픽 애니메이션 중에는 리롤을 눌러도 소용없으니 흐리게 눌러 죽인다. */}
+      <ArenaRerollButton
+        rerolled={rerolled}
+        disabled={disabled}
+        onPress={onReroll}
+        style={{ opacity: disabled && !rerolled ? 0.35 : 1 }}
+      />
     </View>
   );
 }
@@ -146,13 +132,5 @@ const styles = StyleSheet.create({
     paddingVertical: 1,
     borderRadius: Radius.full,
     // 배경색은 카드 내부 bg(RARITY.bodyColor)와 동일하게 inline 주입 — 라인 비침 제거.
-  },
-  reroll: {
-    width: 36,
-    height: 36,
-    borderRadius: Radius.full,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
