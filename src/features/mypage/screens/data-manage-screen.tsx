@@ -24,7 +24,7 @@ import {
 import { useTranslation } from "@/lib/i18n";
 import * as Sharing from "expo-sharing";
 
-import { SettingsRow } from "../components/settings-row";
+import { SettingsRow } from "@/components/ui/settings-row";
 
 const t = {
   ko: {

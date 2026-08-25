@@ -1,7 +1,7 @@
 /**
  * ModeSelectOverlay — `+` 버튼을 누르면 뜨는 투명 모달.
- * 화면을 딤 처리하고 하단(+ 버튼 근처)에 아레나/칼바람/클래식 원형 버튼을 띄운다.
- * 모드를 고르면 챔피언 선택 모달로 교체(replace)한다.
+ * 화면을 딤 처리하고 하단(+ 버튼 근처)에 진입점(칼바람/클래식/아레나/커스텀) 원형 버튼을
+ * 띄운다. 고르면 챔피언 선택 모달로 교체(replace)한다.
  */
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useRouter } from "expo-router";
@@ -10,14 +10,19 @@ import Animated, { Easing, FadeIn, FadeInDown } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { GAME_MODES, MODE_ICONS, MODE_LABELS } from "@/constants/game-modes";
+import {
+  LAUNCH_ICONS,
+  LAUNCH_LABELS,
+  LAUNCH_MODES,
+  type LaunchMode,
+} from "@/constants/game-modes";
 import { BottomTabInset, Radius, Spacing, Theme } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
-import type { GameMode } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 
-// + 버튼이 화면 아래에 있어 가까운 쪽부터 쌓는다 — 홈 필터 순서(칼바람→아레나)의 역순.
-const MODES: GameMode[] = [...GAME_MODES].reverse();
+// + 버튼이 화면 아래에 있어 가까운 쪽부터 쌓는다 — 진입점 순서(칼바람→커스텀)의 역순.
+// 뒤집으므로 신규 항목(커스텀)이 맨 위에 붙고 기존 세 개의 위치는 그대로다.
+const MODES: LaunchMode[] = [...LAUNCH_MODES].reverse();
 
 // backdrop이 라이트/다크 모두 어두운 scrim이므로, 모드와 무관하게
 // 다크 테마의 밝은 민트를 써야 대비가 충분하다(라이트 민트는 어두워 안 보임).
@@ -26,14 +31,14 @@ const ON_SCRIM_ACCENT = Theme.dark.accent.default;
 export function ModeSelectOverlay() {
   const router = useRouter();
   const { colors } = useTheme();
-  const translate = useTranslation(MODE_LABELS);
+  const translate = useTranslation(LAUNCH_LABELS);
   // SafeAreaView(컴포넌트)는 첫 마운트 때 프레임을 비동기 측정해 inset이 0→실제로
   // 튀면서 버튼이 + 버튼을 가린다. 루트 provider에서 즉시 읽는 hook으로 고정한다.
   const insets = useSafeAreaInsets();
 
   const close = () => router.back();
 
-  const choose = (mode: GameMode) => {
+  const choose = (mode: LaunchMode) => {
     router.replace({ pathname: "/select-champion-modal", params: { mode } });
   };
 
@@ -68,7 +73,7 @@ export function ModeSelectOverlay() {
             >
               <View style={styles.circleFill}>
                 <MaterialCommunityIcons
-                  name={MODE_ICONS[m]}
+                  name={LAUNCH_ICONS[m]}
                   size={24}
                   color={ON_SCRIM_ACCENT}
                 />
