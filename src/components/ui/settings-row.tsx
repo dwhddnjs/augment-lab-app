@@ -2,6 +2,8 @@
  * SettingsRow — iOS 설정앱 스타일 리스트 행(좌측 아이콘 + 라벨 + 우측 값/chevron).
  * `@expo/ui/swift-ui` List의 Section 안에서 쓴다. onPress 없으면 비활성(정적 값 표시).
  * `description`을 주면 라벨 아래 한 줄 설명이 붙는다(2줄 행).
+ *
+ * mypage(설정)와 custom(가로 drawer) 두 feature가 쓰므로 components/ui로 승격했다.
  */
 import { Button, HStack, Image, Spacer, Text, VStack } from "@expo/ui/swift-ui";
 import {

@@ -40,3 +40,35 @@ export function parseGameMode(param: string | undefined): GameMode {
 export function parseDraftMode(param: string | undefined): DraftMode {
   return param === "classic" ? "classic" : "aram";
 }
+
+/**
+ * `+` 오버레이가 띄우는 **진입점**. 저장 모드(GameMode)가 아니라 목적지 화면이다.
+ *
+ * 커스텀은 결과를 칼바람/클래식으로 저장하므로 GameMode 에 넣지 않는다. 넣으면
+ * mode-switch 가 GAME_MODES 를 map 하는 탓에 홈 세그먼트가 4칸이 되고, 헤더 토글이
+ * large title 과 부딪힌다(2026-08-21 클래식 플랜에서 이미 경고된 구간).
+ */
+export type LaunchMode = GameMode | "custom";
+
+export const LAUNCH_MODES: LaunchMode[] = [...GAME_MODES, "custom"];
+
+export const LAUNCH_ICONS: Record<
+  LaunchMode,
+  keyof typeof MaterialCommunityIcons.glyphMap
+> = {
+  ...MODE_ICONS,
+  // 조절 슬라이더 = "내가 값을 정한다". 눈송이·체스룩·교차검과 24px 실루엣이 겹치지 않는다.
+  custom: "tune-variant",
+};
+
+export const LAUNCH_LABELS = {
+  ko: { ...MODE_LABELS.ko, custom: "커스텀" },
+  en: { ...MODE_LABELS.en, custom: "Custom" },
+};
+
+/** parseGameMode 와 같은 이유로 매핑 방식. 모르는 값은 칼바람 폴백. */
+export function parseLaunchMode(param: string | undefined): LaunchMode {
+  return LAUNCH_MODES.includes(param as LaunchMode)
+    ? (param as LaunchMode)
+    : "aram";
+}

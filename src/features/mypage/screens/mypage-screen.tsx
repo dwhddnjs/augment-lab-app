@@ -37,7 +37,7 @@ import {
   type ThemePreference,
 } from "@/hooks/use-theme-preference";
 import { useTranslation } from "@/lib/i18n";
-import { SettingsRow } from "../components/settings-row";
+import { SettingsRow } from "@/components/ui/settings-row";
 
 const GITHUB_URL = "https://github.com/dwhddnjs/aram-augment-lab-app";
 const FEEDBACK_EMAIL = "syd1215no@gmail.com";
