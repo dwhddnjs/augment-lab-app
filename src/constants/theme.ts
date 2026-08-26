@@ -143,31 +143,26 @@ export const Elevation: Record<
   },
 };
 
-export const AugmentRarityColors = {
-  silver: {
-    border: "#9BA3AE",
-    glow: "rgba(155,163,174,0.35)",
-    badge: "#9BA3AE",
-    badgeText: "#0E0F12",
-  },
-  gold: {
-    border: "#E8B339",
-    glow: "rgba(232,179,57,0.40)",
-    badge: "#E8B339",
-    badgeText: "#1A0F00",
-  },
-  prismatic: {
-    border: "#C6A1FF",
-    gradient: ["#FF9ECE", "#C6A1FF", "#6EE7FF", "#9FFFC9"] as [
-      string,
-      string,
-      ...string[],
-    ],
-    glow: "rgba(198,161,255,0.45)",
-    badge: "#C6A1FF",
-    badgeText: "#1A0033",
-  },
-} as const;
+// 증강 희귀도 고유색. 앱이 실제로 읽는 값은 border 하나다 — 테두리·아이콘 tint·
+// 이름 색에 모두 이 한 색을 쓴다(gradient·glow·badge 는 쓰는 곳이 없어 걷어냈다).
+//
+// 다크(hero) 기준 팔레트. 밝은 배경 위에 그대로 올리면 대비가 무너지므로
+// 라이트 모드용 짝을 따로 두고 useRarityColors() 가 골라준다.
+export const AugmentRarityColors: Record<
+  "silver" | "gold" | "prismatic",
+  { border: string }
+> = {
+  silver: { border: "#9BA3AE" },
+  gold: { border: "#E8B339" },
+  prismatic: { border: "#E0D6FF" },
+};
+
+/** 라이트 모드 짝 — 흰 배경(surface.raised) 대비 5:1 이상이라 12pt 이름도 읽힌다. */
+export const AugmentRarityColorsLight: typeof AugmentRarityColors = {
+  silver: { border: "#5A6068" },
+  gold: { border: "#8A6410" },
+  prismatic: { border: "#6D3FC4" },
+};
 
 // 증강 아이콘 미해결 시 표시하는 희귀도 폴백 글리프 (MaterialCommunityIcons).
 // 여러 feature(aram·builds·items)가 공유하므로 여기 단일 정의를 import해 쓴다.

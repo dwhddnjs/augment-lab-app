@@ -3,9 +3,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { AugmentImage } from "@/components/ui/augment-image";
-import { AugmentRarityColors, AugmentRarityGlyphs, Radius, Spacing } from "@/constants/theme";
+import { AugmentRarityGlyphs, Radius, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
+import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
 import { ChampionSummary } from "./champion-summary";
@@ -32,6 +33,7 @@ interface AugmentCellProps {
 
 function AugmentCell({ augment, size }: AugmentCellProps) {
   const { colors } = useTheme();
+  const rarityColors = useRarityColors();
 
   if (!augment) {
     return (
@@ -49,7 +51,7 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
     );
   }
 
-  const tint = AugmentRarityColors[augment.rarity].border;
+  const tint = rarityColors[augment.rarity].border;
 
   return (
     <View style={[styles.cell, { width: size }]}>

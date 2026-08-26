@@ -11,7 +11,6 @@ import { AugmentImage } from "@/components/ui/augment-image";
 import { RemoteImage } from "@/components/ui/remote-image";
 import {
   ArenaGold,
-  AugmentRarityColors,
   AugmentRarityGlyphs,
   Radius,
   Spacing,
@@ -24,6 +23,7 @@ import {
 import type { ArenaPickedAugment } from "@/features/arena/types";
 import type { Champion } from "@/features/champions/types";
 import { useItems } from "@/features/items/hooks/use-items";
+import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { useTheme } from "@/hooks/use-theme";
 import { resolveIds } from "@/lib/arrays";
 import {
@@ -75,6 +75,7 @@ export function ArenaDrawer({
 }: Props) {
   const translate = useTranslation(t);
   const { colors } = useTheme();
+  const rarityColors = useRarityColors();
   const allItems = useItems();
   const allPrismatics = usePrismaticItems();
   const allShards = useStatShards();
@@ -119,7 +120,7 @@ export function ArenaDrawer({
         <Section label={`${translate("augments")} ${pickedAugments.length}`}>
           <View style={styles.grid}>
             {pickedAugments.map((p) => {
-              const tint = AugmentRarityColors[p.augment.rarity].border;
+              const tint = rarityColors[p.augment.rarity].border;
               return (
                 <View key={p.augment.id} style={styles.augCell}>
                   <View
@@ -218,7 +219,7 @@ export function ArenaDrawer({
                   <AugmentImage
                     iconPath={r.iconPath}
                     size={34}
-                    tint={AugmentRarityColors.gold.border}
+                    tint={rarityColors.gold.border}
                     fallbackGlyph="anvil"
                     recyclingKey={r.id}
                   />

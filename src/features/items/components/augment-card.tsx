@@ -2,8 +2,9 @@ import { StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { AugmentImage } from "@/components/ui/augment-image";
-import { AugmentRarityColors, AugmentRarityGlyphs, Spacing } from "@/constants/theme";
+import { AugmentRarityGlyphs, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
+import { useRarityColors } from "@/hooks/use-rarity-colors";
 
 interface Props {
   augment: Augment;
@@ -12,7 +13,7 @@ interface Props {
 
 /** 증강 카드 — 아이콘 + 이름 (박스 없음). */
 export function AugmentCard({ augment, size }: Props) {
-  const borderColor = AugmentRarityColors[augment.rarity].border;
+  const borderColor = useRarityColors()[augment.rarity].border;
   return (
     <View style={[styles.card, { width: size }]}>
       <AugmentImage

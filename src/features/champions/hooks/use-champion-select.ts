@@ -13,7 +13,7 @@ import type { SearchBarCommands } from "react-native-screens";
 import { parseLaunchMode, type LaunchMode } from "@/constants/game-modes";
 import { useLocale } from "@/hooks/use-locale";
 import { championClassIconUrl, championSquareUrl } from "@/lib/ddragon";
-import { matchChampionName } from "@/lib/hangul";
+import { matchName } from "@/lib/hangul";
 import { lockOrientation } from "@/lib/orientation";
 import { CHAMPION_TAGS, useTranslation } from "@/lib/i18n";
 import type { Champion } from "../types";
@@ -92,7 +92,7 @@ export function useChampionSelect() {
 
   const filtered = champions
     .filter((c) => !selectedTag || c.tags.includes(selectedTag))
-    .filter((c) => matchChampionName(c.name, query))
+    .filter((c) => matchName(c.name, query))
     .sort((a, b) => a.name.localeCompare(b.name, locale));
 
   // 아레나는 첫 칸에 물음표(용기) 박스를 둔다 — 검색/필터 중에는 숨긴다.
