@@ -21,13 +21,14 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
+import { GlassSurface } from "@/components/ui/glass-surface";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
 import { championSquareUrl } from "@/lib/ddragon";
-import { matchChampionName } from "@/lib/hangul";
+import { matchName } from "@/lib/hangul";
 import { useTranslation } from "@/lib/i18n";
 
 const t = {
@@ -57,37 +58,34 @@ export function ChampionChangeOverlay({
   const [gridW, setGridW] = useState(0);
 
   const filtered = champions
-    .filter((c) => matchChampionName(c.name, query))
+    .filter((c) => matchName(c.name, query))
     .sort((a, b) => a.name.localeCompare(b.name, locale));
 
+  // 하한을 둔다 — 시트가 좁아지면 (gridW - 56)/8 이 음수가 되어 셀이 뒤집힌다.
   const cell =
-    gridW > 0 ? Math.floor((gridW - GAP * (COLS - 1)) / COLS) : 48;
+    gridW > 0 ? Math.max(32, Math.floor((gridW - GAP * (COLS - 1)) / COLS)) : 48;
 
   return (
     <View style={[styles.backdrop, { backgroundColor: colors.surface.overlay }]}>
       {/* 배경 탭 → 취소 */}
       <Pressable style={StyleSheet.absoluteFill} onPress={onClose} />
 
+      {/* 세로 inset 은 먹지 않는다 — bottom(홈 인디케이터 21pt)을 먹으면 시트가
+          그만큼 위로 쏠려 화면 한가운데가 아니게 된다. 가로만 노치를 피한다. */}
       <SafeAreaView
         style={styles.safe}
-        edges={["top", "bottom", "left", "right"]}
+        edges={["left", "right"]}
         pointerEvents="box-none"
       >
-        <View
-          style={[
-            styles.sheet,
-            {
-              backgroundColor: colors.surface.base,
-              borderColor: colors.border.subtle,
-            },
-          ]}
+        {/* 화면 위에 떠 있는 표면이라 단색이 아니라 글라스 — design-system 규칙. */}
+        <GlassSurface
+          glassStyle="regular"
+          style={[styles.sheet, { borderColor: colors.border.subtle }]}
         >
           <View style={styles.header}>
             <ThemedText type="label">{translate("title")}</ThemedText>
             <Pressable onPress={onClose} hitSlop={12}>
-              <ThemedText type="label" color="accent">
-                ✕
-              </ThemedText>
+              <ThemedText type="label">✕</ThemedText>
             </Pressable>
           </View>
 
@@ -165,7 +163,7 @@ export function ChampionChangeOverlay({
               />
             )}
           </View>
-        </View>
+        </GlassSurface>
       </SafeAreaView>
     </View>
   );
@@ -173,20 +171,32 @@ export function ChampionChangeOverlay({
 
 const styles = StyleSheet.create({
   backdrop: { ...StyleSheet.absoluteFill },
-  safe: { flex: 1, padding: Spacing.three },
+  // 시트를 화면 한가운데 띄운다 — flex:1 로 두면 안전영역만큼 위로 쏠린 풀스크린이 된다.
+  safe: {
+    flex: 1,
+    padding: Spacing.three,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
   sheet: {
-    flex: 1,
+    width: "100%",
+    height: "90%",
     borderWidth: 1,
     borderRadius: Radius.xl,
     borderCurve: "continuous",
-    padding: Spacing.three,
+    // 하단은 비운다 — 리스트가 시트 끝까지 흘러야 스크롤 중 잘린 느낌이 안 난다.
+    paddingTop: Spacing.three,
+    paddingHorizontal: Spacing.three,
     gap: Spacing.two,
+    overflow: "hidden",
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    // 검색 입력과 붙지 않게.
+    marginBottom: Spacing.two,
   },
   input: {
     height: 36,
@@ -197,7 +207,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   gridArea: { flex: 1, minWidth: 0 },
-  gridContent: { gap: GAP, paddingBottom: Spacing.two },
+  gridContent: { gap: GAP },
   gridRow: { gap: GAP },
   empty: { flex: 1, alignItems: "center", justifyContent: "center" },
   icon: { borderRadius: Radius.md, overflow: "hidden" },

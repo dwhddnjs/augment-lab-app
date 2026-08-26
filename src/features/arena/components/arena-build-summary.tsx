@@ -15,12 +15,7 @@ import { AugmentImage } from "@/components/ui/augment-image";
 import { AugmentTile } from "@/components/ui/augment-tile";
 import { DetailCardRow } from "@/components/ui/detail-card-row";
 import { IconNameCell } from "@/components/ui/icon-name-cell";
-import {
-  AugmentRarityColors,
-  HeroOverlay,
-  Radius,
-  Spacing,
-} from "@/constants/theme";
+import { HeroOverlay, Radius, Spacing } from "@/constants/theme";
 import { useArenaAugments } from "@/features/arena/hooks/use-arena-augments";
 import {
   usePrismaticItems,
@@ -28,6 +23,7 @@ import {
   useStatShards,
 } from "@/features/arena/hooks/use-arena-items";
 import { useItems } from "@/features/items/hooks/use-items";
+import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { resolveIds } from "@/lib/arrays";
 import { cleanAugmentDescription } from "@/lib/augment-text";
 import type { SavedBuild } from "@/lib/build-storage";
@@ -54,6 +50,7 @@ interface Props {
 }
 
 export function ArenaBuildSummary({ build }: Props) {
+  const rarityColors = useRarityColors();
   const translate = useTranslation(t);
   const arenaAugments = useArenaAugments();
   const allItems = useItems();
@@ -90,7 +87,7 @@ export function ArenaBuildSummary({ build }: Props) {
             {translate("augments")} {augments.length}
           </ThemedText>
           {augments.map((aug, i) => {
-            const tint = AugmentRarityColors[aug.rarity].border;
+            const tint = rarityColors[aug.rarity].border;
             const level = build.augmentLevels?.[aug.id] ?? 1;
             return (
               <DetailCardRow
@@ -169,7 +166,7 @@ export function ArenaBuildSummary({ build }: Props) {
             {translate("reforge")} {reforges.length}
           </ThemedText>
           {reforges.map((r, i) => {
-            const tint = AugmentRarityColors.gold.border;
+            const tint = rarityColors.gold.border;
             return (
               <DetailCardRow
                 key={`${r.id}-${i}`}

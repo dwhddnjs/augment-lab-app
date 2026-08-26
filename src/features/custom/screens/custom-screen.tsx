@@ -15,21 +15,23 @@ import { useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
 import Animated, {
+  useAnimatedReaction,
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { scheduleOnRN } from "react-native-worklets";
 
-import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { AugmentTile } from "@/components/ui/augment-tile";
 import { GlassButton } from "@/components/ui/glass-button";
-import { AugmentRarityColors, Radius, Spacing } from "@/constants/theme";
+import { Radius, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
+import { AugmentSearchField } from "../components/augment-search-field";
 import {
   AugmentPickGrid,
   TIER_RAIL_WIDTH,
@@ -42,14 +44,12 @@ import { useCustomDraft } from "../hooks/use-custom-draft";
 
 const t = {
   ko: {
-    title: "커스텀",
     exitConfirm: "커스텀을 종료할까요?",
     exitMessage: "담은 증강은 저장되지 않습니다.",
     exitOk: "종료",
     exitCancel: "계속",
   },
   en: {
-    title: "Custom",
     exitConfirm: "Exit Custom?",
     exitMessage: "Your picks won't be saved.",
     exitOk: "Exit",
@@ -59,7 +59,8 @@ const t = {
 
 /** 좌:우 = 6.5:4.5 → 합 11. 드롭 판정 경계도 이 비율에서 나온다. */
 const LEFT_RATIO = 6.5 / 11;
-const HEADER_PAD = Spacing.four;
+/** 본문 좌우(그리드 contentContainer·패널 paddingHorizontal)와 같은 값. */
+const HEADER_PAD = Spacing.two;
 /** 손가락을 따라다니는 고스트 타일 크기. 카드 원본은 우측 패널을 통째로 가린다. */
 const GHOST = 64;
 
@@ -106,6 +107,9 @@ function CustomContent({
   const [changingChampion, setChangingChampion] = useState(false);
   // 고스트에 그릴 증강. null 이면 드래그 중이 아니다.
   const [dragged, setDragged] = useState<Augment | null>(null);
+  // 손가락이 드롭 경계를 넘었는지. 경계를 넘나들 때만 JS 로 알린다 —
+  // 매 프레임 넘기면 고스트가 튄다(augment-pick-grid 상단 주석의 이유와 같다).
+  const [overDrop, setOverDrop] = useState(false);
 
   const ghostX = useSharedValue(0);
   const ghostY = useSharedValue(0);
@@ -123,6 +127,13 @@ function CustomContent({
 
   const drawerWidth = Math.min(340, screenW * 0.38);
 
+  useAnimatedReaction(
+    () => ghostX.get() > dropBoundary,
+    (over, prev) => {
+      if (over !== prev) scheduleOnRN(setOverDrop, over);
+    },
+  );
+
   const ghostStyle = useAnimatedStyle(() => ({
     opacity: ghostOpacity.get(),
     transform: [
@@ -136,7 +147,7 @@ function CustomContent({
     if (result === "added") {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     } else {
-      // 중복·개수 초과 둘 다 "안 담겼다"는 같은 신호면 충분하다.
+      // 이미 담긴 증강 — "안 담겼다"는 신호만 주면 된다.
       Haptics.notificationAsync(
         Haptics.NotificationFeedbackType.Warning,
       ).catch(() => {});
@@ -184,22 +195,13 @@ function CustomContent({
       // 우측 가장자리로 카드를 끌면 drawer 가 열려버린다. 탭으로만 연다.
       swipeEnabled={false}
       drawerStyle={{ width: drawerWidth, backgroundColor: colors.surface.base }}
-      renderDrawerContent={() => (
-        <CustomSettingsDrawer
-          draft={draft}
-          onChangeChampion={() => {
-            setDrawerOpen(false);
-            setChangingChampion(true);
-          }}
-        />
-      )}
+      renderDrawerContent={() => <CustomSettingsDrawer draft={draft} />}
     >
       <ThemedView style={styles.container}>
-        <SafeAreaView
-          style={styles.safe}
-          edges={["top", "bottom", "left", "right"]}
-        >
-          {/* 헤더 — 나가기 / 타이틀 / 설정 */}
+        {/* bottom inset 은 여기서 먹지 않는다 — 리스트가 화면 끝까지 흐르고,
+            마지막 줄만 각 리스트의 contentContainer 가 홈 인디케이터만큼 띄운다. */}
+        <SafeAreaView style={styles.safe} edges={["top", "left", "right"]}>
+          {/* 헤더 — 나가기 / 증강 검색 / 설정 */}
           <View style={[styles.header, { paddingHorizontal: HEADER_PAD }]}>
             <GlassButton
               systemImage="xmark"
@@ -207,7 +209,7 @@ function CustomContent({
               role="cancel"
               onPress={handleExit}
             />
-            <ThemedText type="heading">{translate("title")}</ThemedText>
+            <AugmentSearchField value={draft.query} onChange={draft.setQuery} />
             {/* ponytail: 다음 턴 — 여기에 완료(checkmark) 버튼이 들어간다.
                 router.replace({ pathname: "/aram-items", params: {
                   picked: JSON.stringify(draft.picked),
@@ -235,6 +237,7 @@ function CustomContent({
                     onTierChange={draft.setTier}
                     quickMode={draft.quickMode}
                     cardWidth={cardWidth}
+                    bottomInset={insets.bottom}
                     ghostX={ghostX}
                     ghostY={ghostY}
                     onTap={commit}
@@ -247,9 +250,12 @@ function CustomContent({
                   <SelectedPanel
                     champion={champion}
                     picked={draft.picked}
-                    limit={draft.limit}
                     quickMode={draft.quickMode}
+                    dropActive={dragged !== null && overDrop}
+                    bottomInset={insets.bottom}
                     onRemove={draft.remove}
+                    onChangeChampion={() => setChangingChampion(true)}
+                    onClear={draft.clear}
                   />
                 </View>
               </>
@@ -271,13 +277,6 @@ function CustomContent({
                 size={GHOST}
                 recyclingKey={dragged.id}
               />
-              <ThemedText
-                type="caption"
-                numberOfLines={1}
-                style={{ color: AugmentRarityColors[dragged.rarity].border }}
-              >
-                {dragged.name}
-              </ThemedText>
             </View>
           )}
         </Animated.View>
@@ -305,9 +304,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    gap: Spacing.double,
     // safe-area top inset 위에 얹히므로 상단 패딩은 작게.
-    paddingTop: Spacing.double,
-    paddingBottom: Spacing.two,
+    paddingTop: Spacing.two,
+    paddingBottom: Spacing.one,
   },
 
   body: { flex: 1, flexDirection: "row" },
@@ -322,7 +322,6 @@ const styles = StyleSheet.create({
   },
   ghostInner: {
     alignItems: "center",
-    gap: Spacing.half,
     opacity: 0.9,
     transform: [{ scale: 1.05 }],
     borderRadius: Radius.md,
