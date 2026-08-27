@@ -34,7 +34,9 @@ export function ItemFilterBar({ activeFilter, onChange }: Props) {
             <FilterIcon
               filter={f}
               color={active ? colors.accent.default : colors.text.tertiary}
-              size={22}
+              // 커스텀 화면의 증강 티어 레일과 같은 크기 — 헤더 토글로 맞바뀌는
+              // 두 레일이라 크기가 다르면 전환할 때 눈에 띈다.
+              size={20}
             />
             <View
               style={[

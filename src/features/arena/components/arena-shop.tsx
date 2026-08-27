@@ -253,7 +253,8 @@ export function ArenaShop({
                         color={
                           active ? colors.accent.default : colors.text.tertiary
                         }
-                        size={24}
+                        // 아이템 필터탭 글리프는 모드 불문 20 (ItemFilterBar 와 동일).
+                        size={20}
                       />
                     </Pressable>
                   );
