@@ -13,7 +13,8 @@ function toChoseong(str: string): string {
   return out;
 }
 
-export function matchChampionName(name: string, query: string): boolean {
+/** 이름 부분일치 + 한글 초성 검색. 챔피언·증강 등 이름이면 무엇이든 받는다. */
+export function matchName(name: string, query: string): boolean {
   const q = query.trim().toLowerCase();
   if (!q) return true;
   if (name.toLowerCase().includes(q)) return true;

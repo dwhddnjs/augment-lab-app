@@ -35,6 +35,13 @@ export interface ItemStats {
   cdr?: number; // 클래식 레트로 전용 — 구버전 재사용 대기시간 감소(스킬 가속과 별개)
 }
 
+/**
+ * 한 빌드에 담을 수 있는 아이템 수. 아이템 선택 화면의 "n / 6" 표기와 커스텀 화면의
+ * 정원 판정이 함께 읽는다 — 화면 훅이 아니라 도메인 타입 옆에 둬서, 상수 하나 때문에
+ * expo-router·expo-image 를 끌고 오는 화면 모듈을 로드하지 않게 한다.
+ */
+export const MAX_ITEMS = 6;
+
 export interface Item {
   id: string;
   name: string;

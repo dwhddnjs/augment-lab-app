@@ -79,6 +79,8 @@ export default function RootLayout() {
         <Stack.Screen name="aram" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
         <Stack.Screen name="aram-items" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
         <Stack.Screen name="arena" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
+        {/* 커스텀 — 증강을 직접 골라 담는 가로 화면(뽑기 없음) */}
+        <Stack.Screen name="custom" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
       </Stack>
     </ThemeProvider>
   );

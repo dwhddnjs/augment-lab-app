@@ -10,11 +10,10 @@ import { useCallback, useRef, useState } from "react";
 import { Alert } from "react-native";
 import type { SearchBarCommands } from "react-native-screens";
 
-import { parseGameMode } from "@/constants/game-modes";
+import { parseLaunchMode, type LaunchMode } from "@/constants/game-modes";
 import { useLocale } from "@/hooks/use-locale";
-import type { GameMode } from "@/lib/build-storage";
 import { championClassIconUrl, championSquareUrl } from "@/lib/ddragon";
-import { matchChampionName } from "@/lib/hangul";
+import { matchName } from "@/lib/hangul";
 import { lockOrientation } from "@/lib/orientation";
 import { CHAMPION_TAGS, useTranslation } from "@/lib/i18n";
 import type { Champion } from "../types";
@@ -82,7 +81,7 @@ export function useChampionSelect() {
   const { locale } = useLocale();
   const router = useRouter();
   const params = useLocalSearchParams<{ mode?: string }>();
-  const mode: GameMode = parseGameMode(params.mode);
+  const mode: LaunchMode = parseLaunchMode(params.mode);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
@@ -93,7 +92,7 @@ export function useChampionSelect() {
 
   const filtered = champions
     .filter((c) => !selectedTag || c.tags.includes(selectedTag))
-    .filter((c) => matchChampionName(c.name, query))
+    .filter((c) => matchName(c.name, query))
     .sort((a, b) => a.name.localeCompare(b.name, locale));
 
   // 아레나는 첫 칸에 물음표(용기) 박스를 둔다 — 검색/필터 중에는 숨긴다.
@@ -144,14 +143,25 @@ export function useChampionSelect() {
     await lockOrientation(ScreenOrientation.OrientationLock.LANDSCAPE);
     // 클래식은 칼바람과 화면이 같아 /aram 라우트를 공유하고 mode 를 실어 보낸다.
     // 드래프트 → 아이템 → saveBuild 까지 이 파라미터가 모드를 나른다.
-    router.replace(
-      mode === "arena"
-        ? { pathname: "/arena", params: { championId } }
-        : {
-            pathname: "/aram",
-            params: { championId, mode, rounds: String(rounds) },
-          },
-    );
+    //
+    // 삼항이 아니라 Record 인 이유: 삼항으로 두면 새 모드가 조용히 칼바람으로 흡수된다
+    // (클래식이 실제로 그랬다 — game-modes.ts 주석 참고). Record 는 빠뜨리면 컴파일 에러다.
+    const go: Record<LaunchMode, () => void> = {
+      aram: () =>
+        router.replace({
+          pathname: "/aram",
+          params: { championId, mode: "aram", rounds: String(rounds) },
+        }),
+      classic: () =>
+        router.replace({
+          pathname: "/aram",
+          params: { championId, mode: "classic", rounds: String(rounds) },
+        }),
+      arena: () => router.replace({ pathname: "/arena", params: { championId } }),
+      // 커스텀은 라운드·뽑기가 없어 championId 만 나른다(모드는 화면 안 drawer 에서 고른다).
+      custom: () => router.replace({ pathname: "/custom", params: { championId } }),
+    };
+    go[mode]();
   };
 
   return {

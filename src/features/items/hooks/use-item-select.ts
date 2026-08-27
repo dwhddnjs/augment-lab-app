@@ -21,10 +21,10 @@ import { CELL_GAP } from "../components/item-grid";
 import type { SlotItem } from "../components/item-slot-grid";
 import { FILTERS, type FilterKey } from "../item-filters";
 import { useItemPool } from "./use-items";
-import type { Item } from "../types";
+import { MAX_ITEMS, type Item } from "../types";
 
-/** 한 빌드에 담을 수 있는 아이템 수 — 헤더의 "n / 6" 표기에도 쓴다. */
-export const MAX_ITEMS = 6;
+// 정의는 types.ts 로 내렸다 — 이 화면이 계속 여기서 읽도록 재수출만 남긴다.
+export { MAX_ITEMS };
 const NUM_COLS = 8;
 
 const t = {

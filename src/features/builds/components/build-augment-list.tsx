@@ -3,8 +3,9 @@ import { StyleSheet, View } from "react-native";
 import { ThemedText } from "@/components/themed/themed-text";
 import { AugmentTile } from "@/components/ui/augment-tile";
 import { DetailCardRow } from "@/components/ui/detail-card-row";
-import { AugmentRarityColors, HeroOverlay, Spacing } from "@/constants/theme";
+import { HeroOverlay, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
+import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { cleanAugmentDescription } from "@/lib/augment-text";
 
 interface Props {
@@ -15,6 +16,8 @@ interface Props {
 
 /** 빌드 상세 — 증강 목록(희귀도 카드 행 + 이름 + 설명). */
 export function BuildAugmentList({ augments, label }: Props) {
+  const rarityColors = useRarityColors();
+
   return (
     <View style={styles.section}>
       <ThemedText type="label" color="secondary">
@@ -23,7 +26,7 @@ export function BuildAugmentList({ augments, label }: Props) {
       {augments.map((aug, i) => (
         <DetailCardRow
           key={`${aug.id}-${i}`}
-          accentColor={AugmentRarityColors[aug.rarity].border}
+          accentColor={rarityColors[aug.rarity].border}
           icon={
             <AugmentTile
               iconPath={aug.iconPath}
