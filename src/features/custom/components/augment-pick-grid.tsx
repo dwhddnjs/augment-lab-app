@@ -1,13 +1,8 @@
 /**
  * AugmentPickGrid — 커스텀 화면 좌측(6.5). 티어 레일 + 증강 카드 3열 스크롤 그리드.
  *
- * 카드를 길게 눌러 우측 패널로 끌면 담긴다. 짧은 스와이프는 리스트 스크롤이라
- * activateAfterLongPress 로 갈라내고, 활성화된 뒤에는 blocksExternalGesture 로
- * FlatList 스크롤을 막는다 — 이게 없으면 드래그 중 리스트가 같이 흐른다.
- * (simultaneousWithExternalGesture 는 정반대 의미라 쓰면 안 된다.)
- *
- * 고스트 좌표는 worklet 이 shared value 에 직접 쓴다(UI 스레드). JS 로는 시작·끝만
- * 알린다 — 매 프레임 scheduleOnRN 하면 JS 스레드를 태워 프레임이 튄다.
+ * 카드를 길게 눌러 우측 패널로 끌면 담긴다(퀵모드면 탭 한 번). 끄는 조작 자체는
+ * DragCell 이 맡고 여기는 카드와 리스트만 그린다.
  */
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useState } from "react";
@@ -18,7 +13,6 @@ import {
   type GestureType,
 } from "react-native-gesture-handler";
 import type { SharedValue } from "react-native-reanimated";
-import { scheduleOnRN } from "react-native-worklets";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { RarityCardFrame } from "@/components/ui/rarity-card-frame";
@@ -27,6 +21,7 @@ import type { Augment, AugmentRarity } from "@/features/augments/types";
 import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
+import { DragCell, type DragPayload } from "./drag-cell";
 
 const t = {
   ko: {
@@ -50,8 +45,6 @@ export const TIER_RAIL_WIDTH = 44;
 const COLS = 3;
 const PAD = Spacing.two;
 const GAP = Spacing.two;
-/** 롱프레스 후 드래그 활성 — 짧으면 스크롤이 드래그로 오인되고, 길면 굼뜨다. */
-const LONG_PRESS_MS = 180;
 
 const TIERS: (AugmentRarity | null)[] = [null, "silver", "gold", "prismatic"];
 
@@ -72,7 +65,9 @@ const TIER_ICONS: Record<
 
 /** 레일을 뺀 그리드 실측 폭에서 카드 한 장 너비를 낸다. */
 export function cardWidthForGrid(gridW: number): number {
-  return Math.max(72, Math.floor((gridW - PAD * 2 - GAP * (COLS - 1)) / COLS));
+  // floor 하지 않는다 — 버린 소수가 열 수만큼 쌓여 행 끝에 남고, 그만큼
+  // 오른쪽 여백만 넓어진다(왼쪽은 padding 그대로라 좌우가 안 맞는다).
+  return Math.max(72, (gridW - PAD * 2 - GAP * (COLS - 1)) / COLS);
 }
 
 // ─── 티어 레일 ───────────────────────────────────────────────────────────────
@@ -136,9 +131,8 @@ interface CellProps {
   ghostX: SharedValue<number>;
   ghostY: SharedValue<number>;
   onTap: (augment: Augment) => void;
-  onDragStart: (augment: Augment) => void;
-  /** absoluteX 가 음수면 취소(시스템이 손가락을 가져감). */
-  onDragEnd: (augment: Augment, absoluteX: number) => void;
+  onDragStart: (payload: DragPayload) => void;
+  onDragEnd: (payload: DragPayload, absoluteX: number) => void;
 }
 
 function AugmentDragCell({
@@ -155,56 +149,38 @@ function AugmentDragCell({
 }: CellProps) {
   const { colors } = useTheme();
 
-  const pan = Gesture.Pan()
-    .enabled(!quickMode)
-    .activateAfterLongPress(LONG_PRESS_MS)
-    .blocksExternalGesture(listGesture)
-    .onStart((e) => {
-      "worklet";
-      ghostX.set(e.absoluteX);
-      ghostY.set(e.absoluteY);
-      scheduleOnRN(onDragStart, augment);
-    })
-    .onUpdate((e) => {
-      "worklet";
-      ghostX.set(e.absoluteX);
-      ghostY.set(e.absoluteY);
-    })
-    .onEnd((e) => {
-      "worklet";
-      scheduleOnRN(onDragEnd, augment, e.absoluteX);
-    })
-    // 손가락을 시스템에 뺏겨도 고스트가 화면에 남지 않도록 취소 경로를 닫는다.
-    .onTouchesCancelled(() => {
-      "worklet";
-      scheduleOnRN(onDragEnd, augment, -1);
-    });
-
   return (
-    <GestureDetector gesture={pan}>
-      <View style={{ width: cardWidth }}>
-        <Pressable
-          onPress={() => quickMode && onTap(augment)}
-          style={({ pressed }) => ({ opacity: pressed && quickMode ? 0.7 : 1 })}
-        >
-          <RarityCardFrame augment={augment} cardWidth={cardWidth} />
-          {checked && (
-            <>
-              <View style={styles.checkedVeil} />
-              <View
-                style={[styles.check, { backgroundColor: colors.accent.default }]}
+    <DragCell
+      payload={{ kind: "augment", augment }}
+      enabled={!quickMode}
+      listGesture={listGesture}
+      ghostX={ghostX}
+      ghostY={ghostY}
+      style={{ width: cardWidth }}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+    >
+      <Pressable
+        onPress={() => quickMode && onTap(augment)}
+        style={({ pressed }) => ({ opacity: pressed && quickMode ? 0.7 : 1 })}
+      >
+        <RarityCardFrame augment={augment} cardWidth={cardWidth} />
+        {checked && (
+          <>
+            <View style={styles.checkedVeil} />
+            <View
+              style={[styles.check, { backgroundColor: colors.accent.default }]}
+            >
+              <ThemedText
+                style={[styles.checkMark, { color: colors.accent.onAccent }]}
               >
-                <ThemedText
-                  style={[styles.checkMark, { color: colors.accent.onAccent }]}
-                >
-                  ✓
-                </ThemedText>
-              </View>
-            </>
-          )}
-        </Pressable>
-      </View>
-    </GestureDetector>
+                ✓
+              </ThemedText>
+            </View>
+          </>
+        )}
+      </Pressable>
+    </DragCell>
   );
 }
 
@@ -221,8 +197,8 @@ interface Props {
   ghostX: SharedValue<number>;
   ghostY: SharedValue<number>;
   onTap: (augment: Augment) => void;
-  onDragStart: (augment: Augment) => void;
-  onDragEnd: (augment: Augment, absoluteX: number) => void;
+  onDragStart: (payload: DragPayload) => void;
+  onDragEnd: (payload: DragPayload, absoluteX: number) => void;
 }
 
 export function AugmentPickGrid({
@@ -315,7 +291,8 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     overflow: "hidden",
   },
-  gridContent: { padding: PAD, gap: GAP },
+  // flexGrow — 결과가 없을 때 ListEmptyComponent 의 flex:1 이 살아나 안내가 보인다.
+  gridContent: { flexGrow: 1, padding: PAD, gap: GAP },
   gridRow: { gap: GAP },
   empty: { flex: 1, alignItems: "center", paddingTop: Spacing.six },
 

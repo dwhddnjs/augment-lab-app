@@ -1,7 +1,8 @@
 /**
- * CustomScreen — 커스텀 모드. 전체 증강 풀에서 직접 골라 담는 가로 화면.
+ * CustomScreen — 커스텀 모드. 전체 증강·아이템 풀에서 직접 골라 담는 가로 화면.
  *
  * 좌 6.5 : 우 4.5. 좌측 카드를 길게 눌러 우측 패널로 끌면 담긴다(퀵모드면 탭 한 번).
+ * 헤더 토글이 좌측 판(증강 그리드 ↔ 아이템 그리드)과 담기는 칸을 함께 바꾼다.
  * 뽑기·라운드·리롤이 없어 useAram 같은 엔진이 없고, 상태는 useCustomDraft 하나다.
  *
  * GestureDetector 는 GestureHandlerRootView 아래여야 __DEV__ throw 를 피하는데,
@@ -25,12 +26,13 @@ import { scheduleOnRN } from "react-native-worklets";
 import { ThemedView } from "@/components/themed/themed-view";
 import { AugmentTile } from "@/components/ui/augment-tile";
 import { GlassButton } from "@/components/ui/glass-button";
+import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
-import type { Augment } from "@/features/augments/types";
-import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
+import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
+import { lockOrientation } from "@/lib/orientation";
 import { AugmentSearchField } from "../components/augment-search-field";
 import {
   AugmentPickGrid,
@@ -38,22 +40,30 @@ import {
   cardWidthForGrid,
 } from "../components/augment-pick-grid";
 import { ChampionChangeOverlay } from "../components/champion-change-overlay";
+import { ChampionStatOverlay } from "../components/champion-stat-overlay";
 import { CustomSettingsDrawer } from "../components/custom-settings-drawer";
+import type { DragPayload } from "../components/drag-cell";
+import { ItemPickGrid } from "../components/item-pick-grid";
+import { PickTargetToggle } from "../components/pick-target-toggle";
 import { SelectedPanel } from "../components/selected-panel";
 import { useCustomDraft } from "../hooks/use-custom-draft";
 
 const t = {
   ko: {
     exitConfirm: "커스텀을 종료할까요?",
-    exitMessage: "담은 증강은 저장되지 않습니다.",
+    exitMessage: "담은 증강과 아이템은 저장되지 않습니다.",
     exitOk: "종료",
     exitCancel: "계속",
+    saveError: "빌드 저장에 실패했어요",
+    saveEmpty: "저장할 내용이 없어요",
   },
   en: {
     exitConfirm: "Exit Custom?",
     exitMessage: "Your picks won't be saved.",
     exitOk: "Exit",
     exitCancel: "Continue",
+    saveError: "Failed to save the build",
+    saveEmpty: "Nothing to save yet",
   },
 };
 
@@ -70,15 +80,18 @@ export function CustomScreen() {
   useLandscapeLock();
 
   // 이 화면은 모달 위에 떠서 window 치수가 늦게 따라오므로 자체 onLayout으로 잰다.
+  // 세로 값은 아예 담지 않는다 — 회전 잠금 중에도 앱 전환 복귀 같은 순간에 세로
+  // 레이아웃이 한 프레임 들어올 수 있고, 그때 CustomContent 가 unmount 되면 담아둔
+  // 증강·아이템이 통째로 사라진다(상태가 전부 그 안의 useCustomDraft 에 있다).
   const [dims, setDims] = useState({ w: 0, h: 0 });
-  const isLandscape = dims.w > dims.h && dims.w > 0;
+  const isLandscape = dims.w > 0;
 
   return (
     <ThemedView
       style={styles.container}
       onLayout={(e) => {
         const { width, height } = e.nativeEvent.layout;
-        setDims({ w: width, h: height });
+        if (width > height) setDims({ w: width, h: height });
       }}
     >
       {isLandscape && (
@@ -100,13 +113,13 @@ function CustomContent({
   const { colors } = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const champions = useChampions();
   const draft = useCustomDraft(initialChampionId);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [changingChampion, setChangingChampion] = useState(false);
-  // 고스트에 그릴 증강. null 이면 드래그 중이 아니다.
-  const [dragged, setDragged] = useState<Augment | null>(null);
+  const [showingStats, setShowingStats] = useState(false);
+  // 고스트에 그릴 것. null 이면 드래그 중이 아니다.
+  const [dragged, setDragged] = useState<DragPayload | null>(null);
   // 손가락이 드롭 경계를 넘었는지. 경계를 넘나들 때만 JS 로 알린다 —
   // 매 프레임 넘기면 고스트가 튄다(augment-pick-grid 상단 주석의 이유와 같다).
   const [overDrop, setOverDrop] = useState(false);
@@ -115,8 +128,8 @@ function CustomContent({
   const ghostY = useSharedValue(0);
   const ghostOpacity = useSharedValue(0);
 
-  const champion =
-    champions.find((c) => c.id === draft.championId) ?? null;
+  // 저장 가능 여부(챔피언을 못 찾았는지)를 훅이 함께 판정하므로 조회도 거기 있다.
+  const champion = draft.champion;
 
   // body 실측 폭 → 좌우 폭과 드롭 경계를 같은 숫자에서 낸다(flex 로 두면 어긋난다).
   const [bodyW, setBodyW] = useState(0);
@@ -142,30 +155,34 @@ function CustomContent({
     ],
   }));
 
-  const commit = (augment: Augment) => {
-    const result = draft.add(augment);
+  const commit = (payload: DragPayload) => {
+    const result =
+      payload.kind === "augment"
+        ? draft.add(payload.augment)
+        : draft.addItem(payload.item);
     if (result === "added") {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     } else {
-      // 이미 담긴 증강 — "안 담겼다"는 신호만 주면 된다.
+      // 이미 담겼거나(중복) 정원이 찼다(증강 5 · 아이템 6) — "안 담겼다"는 신호면 족하다.
       Haptics.notificationAsync(
         Haptics.NotificationFeedbackType.Warning,
       ).catch(() => {});
     }
   };
 
-  const handleDragStart = (augment: Augment) => {
-    setDragged(augment);
+  const handleDragStart = (payload: DragPayload) => {
+    setDragged(payload);
     ghostOpacity.set(1);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
   };
 
-  const handleDragEnd = (augment: Augment, absoluteX: number) => {
+  const handleDragEnd = (payload: DragPayload, absoluteX: number) => {
     // dragged 를 곧바로 비우므로 페이드는 보이지 않는다. 즉시 끈다.
     ghostOpacity.set(0);
     setDragged(null);
-    // 음수 = 제스처 취소. 좌측에서 놓으면 아무 일도 없다.
-    if (absoluteX >= 0 && absoluteX > dropBoundary) commit(augment);
+    // 취소는 -1 로 온다. dropBoundary 는 그리드가 그려진 뒤라 항상 양수이므로
+    // 이 비교 하나가 취소와 "좌측에서 놓음"을 함께 걸러낸다.
+    if (absoluteX > dropBoundary) commit(payload);
   };
 
   const handleExit = () => {
@@ -175,10 +192,10 @@ function CustomContent({
         text: translate("exitOk"),
         style: "destructive",
         onPress: () => {
-          // navigation 전에 portrait를 먼저 걸어 exit 애니메이션이 portrait로 재생된다.
-          ScreenOrientation.lockAsync(
-            ScreenOrientation.OrientationLock.PORTRAIT_UP,
-          ).catch(() => {});
+          // navigation 전에 portrait를 먼저 건다 — exit 애니메이션이 portrait로 재생된다.
+          // await 하지 않는다(회전은 요청 시점에 이미 걸린다). 저장 경로와 같은 래퍼를
+          // 쓰는 이유는 lockAsync 의 Promise 가 영영 resolve 되지 않는 구간 때문이다.
+          void lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
           router.dismissTo("/");
         },
       },
@@ -201,7 +218,7 @@ function CustomContent({
         {/* bottom inset 은 여기서 먹지 않는다 — 리스트가 화면 끝까지 흐르고,
             마지막 줄만 각 리스트의 contentContainer 가 홈 인디케이터만큼 띄운다. */}
         <SafeAreaView style={styles.safe} edges={["top", "left", "right"]}>
-          {/* 헤더 — 나가기 / 증강 검색 / 설정 */}
+          {/* 헤더 — 나가기 / 검색 / 증강·아이템 토글 / 저장 / 설정 */}
           <View style={[styles.header, { paddingHorizontal: HEADER_PAD }]}>
             <GlassButton
               systemImage="xmark"
@@ -209,18 +226,39 @@ function CustomContent({
               role="cancel"
               onPress={handleExit}
             />
-            <AugmentSearchField value={draft.query} onChange={draft.setQuery} />
-            {/* ponytail: 다음 턴 — 여기에 완료(checkmark) 버튼이 들어간다.
-                router.replace({ pathname: "/aram-items", params: {
-                  picked: JSON.stringify(draft.picked),
-                  championId: draft.championId,
-                  mode: draft.mode } })
-                draft.mode 가 DraftMode 라 parseDraftMode·saveBuild 가 무수정으로 받는다. */}
+            <View style={styles.headerSpacer} />
+            <GlassButton
+              systemImage="checkmark"
+              fallbackIcon="check"
+              tint={colors.accent.default}
+              onPress={() =>
+                draft.save((reason) =>
+                  Alert.alert(
+                    translate(reason === "invalid" ? "saveEmpty" : "saveError"),
+                  ),
+                )
+              }
+            />
             <GlassButton
               systemImage="slider.horizontal.3"
               fallbackIcon="tune-variant"
               onPress={() => setDrawerOpen(true)}
             />
+
+            {/* 검색 + 토글은 헤더 정중앙. 좌(1개)·우(2개) 버튼 수가 달라 flex 로
+                나누면 그만큼 왼쪽으로 밀린다 — 헤더 폭 기준으로 띄운다.
+                빈 자리는 box-none 이라 아래 버튼 탭이 그대로 통과한다. */}
+            <View style={styles.headerCenter} pointerEvents="box-none">
+              <AugmentSearchField
+                value={draft.query}
+                target={draft.target}
+                onChange={draft.setQuery}
+              />
+              <PickTargetToggle
+                target={draft.target}
+                onToggle={draft.toggleTarget}
+              />
+            </View>
           </View>
 
           <View
@@ -230,30 +268,50 @@ function CustomContent({
             {bodyW > 0 && (
               <>
                 <View style={{ width: leftW }}>
-                  <AugmentPickGrid
-                    list={draft.list}
-                    pickedIds={draft.pickedIds}
-                    tier={draft.tier}
-                    onTierChange={draft.setTier}
-                    quickMode={draft.quickMode}
-                    cardWidth={cardWidth}
-                    bottomInset={insets.bottom}
-                    ghostX={ghostX}
-                    ghostY={ghostY}
-                    onTap={commit}
-                    onDragStart={handleDragStart}
-                    onDragEnd={handleDragEnd}
-                  />
+                  {draft.target === "augment" ? (
+                    <AugmentPickGrid
+                      list={draft.list}
+                      pickedIds={draft.pickedIds}
+                      tier={draft.tier}
+                      onTierChange={draft.setTier}
+                      quickMode={draft.quickMode}
+                      cardWidth={cardWidth}
+                      bottomInset={insets.bottom}
+                      ghostX={ghostX}
+                      ghostY={ghostY}
+                      onTap={(augment) => commit({ kind: "augment", augment })}
+                      onDragStart={handleDragStart}
+                      onDragEnd={handleDragEnd}
+                    />
+                  ) : (
+                    <ItemPickGrid
+                      list={draft.itemList}
+                      selectedIds={draft.itemIds}
+                      filter={draft.itemFilter}
+                      onFilterChange={draft.setItemFilter}
+                      quickMode={draft.quickMode}
+                      bottomInset={insets.bottom}
+                      ghostX={ghostX}
+                      ghostY={ghostY}
+                      onTap={(item) => commit({ kind: "item", item })}
+                      onDragStart={handleDragStart}
+                      onDragEnd={handleDragEnd}
+                    />
+                  )}
                 </View>
 
                 <View style={styles.right}>
                   <SelectedPanel
                     champion={champion}
                     picked={draft.picked}
-                    quickMode={draft.quickMode}
-                    dropActive={dragged !== null && overDrop}
+                    items={draft.items}
+                    dropTarget={
+                      dragged !== null && overDrop ? dragged.kind : null
+                    }
                     bottomInset={insets.bottom}
                     onRemove={draft.remove}
+                    onRemoveItem={draft.removeItem}
+                    onShowStats={() => setShowingStats(true)}
                     onChangeChampion={() => setChangingChampion(true)}
                     onClear={draft.clear}
                   />
@@ -269,13 +327,23 @@ function CustomContent({
           pointerEvents="none"
           style={[styles.ghost, ghostStyle]}
         >
-          {dragged && (
+          {dragged?.kind === "augment" && (
             <View style={styles.ghostInner}>
               <AugmentTile
-                iconPath={dragged.iconPath}
-                rarity={dragged.rarity}
+                iconPath={dragged.augment.iconPath}
+                rarity={dragged.augment.rarity}
                 size={GHOST}
-                recyclingKey={dragged.id}
+                recyclingKey={dragged.augment.id}
+              />
+            </View>
+          )}
+          {dragged?.kind === "item" && (
+            <View style={styles.ghostInner}>
+              <RemoteImage
+                uri={itemImageUrl(dragged.item.imageKey)}
+                recyclingKey={dragged.item.id}
+                style={styles.ghostItem}
+                contentFit="contain"
               />
             </View>
           )}
@@ -291,6 +359,14 @@ function CustomContent({
             onClose={() => setChangingChampion(false)}
           />
         )}
+
+        {showingStats && champion && (
+          <ChampionStatOverlay
+            champion={champion}
+            items={draft.items}
+            onClose={() => setShowingStats(false)}
+          />
+        )}
       </ThemedView>
     </Drawer>
   );
@@ -303,11 +379,19 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    gap: Spacing.double,
+    gap: Spacing.two,
     // safe-area top inset 위에 얹히므로 상단 패딩은 작게.
     paddingTop: Spacing.two,
     paddingBottom: Spacing.one,
+  },
+  // 나가기 | (중앙 묶음) | 저장·설정 — 중앙 묶음이 절대배치라 이 하나로 갈린다.
+  headerSpacer: { flex: 1 },
+  headerCenter: {
+    ...StyleSheet.absoluteFill,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: Spacing.two,
   },
 
   body: { flex: 1, flexDirection: "row" },
@@ -326,4 +410,5 @@ const styles = StyleSheet.create({
     transform: [{ scale: 1.05 }],
     borderRadius: Radius.md,
   },
+  ghostItem: { width: GHOST, height: GHOST, borderRadius: Radius.sm },
 });

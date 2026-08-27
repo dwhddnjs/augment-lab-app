@@ -1,5 +1,8 @@
 /**
- * AugmentSearchField — 커스텀 화면 헤더 가운데의 증강 이름 검색 입력.
+ * AugmentSearchField — 커스텀 화면 헤더 가운데의 이름 검색 입력.
+ *
+ * 헤더 토글(target)이 가리키는 쪽을 찾는다 — 안내 문구만 바꾸면 되고, 실제 필터링은
+ * useCustomDraft 가 같은 query 로 증강/아이템 중 한쪽에만 건다.
  *
  * RN TextInput 을 쓰는 이유: 이 헤더는 네이티브 Stack 헤더가 아니라 transform 으로
  * 움직이는 <Drawer> 안의 커스텀 View 다. SwiftUI TextField Host 를 넣으면 포커스·
@@ -12,18 +15,26 @@ import { GlassSurface } from "@/components/ui/glass-surface";
 import { Radius, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
+import type { PickTarget } from "../hooks/use-custom-draft";
 
 const t = {
-  ko: { placeholder: "증강 이름을 입력해주세요" },
-  en: { placeholder: "Search augments by name" },
+  ko: {
+    placeholder: "증강 이름을 입력해주세요",
+    placeholderItem: "아이템 이름을 입력해주세요",
+  },
+  en: {
+    placeholder: "Search augments by name",
+    placeholderItem: "Search items by name",
+  },
 };
 
 interface Props {
   value: string;
+  target: PickTarget;
   onChange: (next: string) => void;
 }
 
-export function AugmentSearchField({ value, onChange }: Props) {
+export function AugmentSearchField({ value, target, onChange }: Props) {
   const { colors } = useTheme();
   const translate = useTranslation(t);
 
@@ -37,7 +48,9 @@ export function AugmentSearchField({ value, onChange }: Props) {
       <TextInput
         value={value}
         onChangeText={onChange}
-        placeholder={translate("placeholder")}
+        placeholder={translate(
+          target === "item" ? "placeholderItem" : "placeholder",
+        )}
         placeholderTextColor={colors.text.tertiary}
         autoCorrect={false}
         autoCapitalize="none"
