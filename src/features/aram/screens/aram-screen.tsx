@@ -1,6 +1,5 @@
 import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useEffect, useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
@@ -10,14 +9,12 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
 import { GlassSurface } from "@/components/ui/glass-surface";
-import {
-  CARD_ROW_PAD,
-  cardWidthFor,
-} from "@/components/ui/rarity-card-frame";
+import { CARD_ROW_PAD, cardWidthFor } from "@/components/ui/rarity-card-frame";
 import { parseDraftMode } from "@/constants/game-modes";
 import { Radius, Spacing } from "@/constants/theme";
 
 import { useLandscapeLock } from "@/hooks/use-landscape-lock";
+import { lockPortraitAfterExit } from "@/lib/orientation";
 import { useTheme } from "@/hooks/use-theme";
 import { augmentImageUrl } from "@/lib/ddragon";
 import type { DraftMode } from "@/lib/build-storage";
@@ -185,18 +182,15 @@ export function AramScreen() {
       translate(mode === "classic" ? "exitConfirmClassic" : "exitConfirmAram"),
       "",
       [
-      { text: translate("exitCancel"), style: "cancel" },
-      {
-        text: translate("exitOk"),
-        style: "destructive",
-        onPress: () => {
-          // navigation 전에 portrait를 먼저 걸어 exit 애니메이션이 portrait로 재생된다.
-          ScreenOrientation.lockAsync(
-            ScreenOrientation.OrientationLock.PORTRAIT_UP,
-          ).catch(() => {});
-          router.dismissTo("/");
+        { text: translate("exitCancel"), style: "cancel" },
+        {
+          text: translate("exitOk"),
+          style: "destructive",
+          onPress: () => {
+            router.dismissTo("/");
+            lockPortraitAfterExit();
+          },
         },
-      },
       ],
     );
   }, [mode, router, translate]);
@@ -257,9 +251,7 @@ export function AramScreen() {
           </View>
 
           {/* Cards row */}
-          <View
-            style={styles.cardsRow}
-          >
+          <View style={styles.cardsRow}>
             {currentCards.map((aug, i) => (
               <AramCard
                 key={`${roundKey}-${aug.id}`}

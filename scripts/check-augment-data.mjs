@@ -98,7 +98,7 @@ check(
 // 그래서 사람이 확인한 시점의 개수를 박아두고 흔들리면 멈춘다. 클래식 전용 55개가
 // 칼바람에 섞였던 사고는 aram 이 211 → 266 으로 뛰므로 여기서 확실히 걸린다.
 // 패치로 증강이 늘거나 줄면 tag-augment-modes.mjs 를 돌린 뒤 이 값을 함께 갱신할 것.
-const EXPECTED = { total: 280, aram: 211, classic: 187, unreleased: 38 };
+const EXPECTED = { total: 282, aram: 213, classic: 187, unreleased: 38 };
 check(ko.length === EXPECTED.total, `전체 ${EXPECTED.total}개 유지 (실제 ${ko.length})`);
 check(aram.length === EXPECTED.aram, `칼바람 ${EXPECTED.aram}개 유지 (실제 ${aram.length})`);
 check(classic.length === EXPECTED.classic, `클래식 ${EXPECTED.classic}개 유지 (실제 ${classic.length})`);

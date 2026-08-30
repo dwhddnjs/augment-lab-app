@@ -1328,6 +1328,17 @@
     ]
   },
   {
+    "id": "quest-ultra-hydra",
+    "name": "궁극의 히드라",
+    "description": "히드라 아이템을 완성하면 티아맷을 획득합니다. 퀘스트: 굶주린 히드라, 불경한 히드라, 거대한 히드라를 획득해야 합니다. 보상: 궁극의 히드라",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UltraHydra_small.png",
+    "augmentNameId": "Quest_UltraHydra",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
     "id": "quest-urf-s-champion",
     "name": "우르프의 챔피언",
     "description": "조건: 처치에 10회 관여해야 합니다. 보상: 황금 뒤집개",
@@ -1502,7 +1513,7 @@
   {
     "id": "critical-missile",
     "name": "치명적 미사일",
-    "description": "적 챔피언에게 치명타 적중 시 1발(+ 치명타 확률 33.33%당 1발)의 폭죽을 발사해 각 20~100의 마법 피해를 입힙니다. 또한 치명타 확률을 25% 얻습니다.",
+    "description": "적 챔피언에게 치명타 적중 시 1발(+ 치명타 확률 50%당 1발, 최대 3발)의 미사일을 발사해 각 15~65의 마법 피해를 입힙니다. 3연발은 주 대상 주변 적을 우선합니다. 또한 치명타 확률을 25% 얻습니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CriticalMissile_small.png",
     "augmentNameId": "CriticalMissile",
@@ -1539,8 +1550,8 @@
     "id": "double-tap",
     "name": "한 발에 두 놈",
     "description": "치명타가 적용된 기본 공격이 적중 효과(온히트)를 한 번 더 적용합니다. 또한 치명타 확률을 25% 얻습니다.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/DoubleTap_small.png",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DualWield_small.png",
     "augmentNameId": "ARAM_DoubleTap",
     "modes": [
       "aram",
@@ -3096,6 +3107,17 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeMikaelsBlessing_small.png",
     "augmentNameId": "Upgrade_MikaelsBlessing",
     "modes": []
+  },
+  {
+    "id": "upgrade-death-s-dance",
+    "name": "죽음의 무도 업그레이드",
+    "description": "죽음의 무도를 강화합니다. 받은 피해의 40%를 3초에 걸쳐 입고, 처치 관여 시 추가 공격력 125%만큼 즉시 회복합니다. 250골드를 획득합니다.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeDeathDance_small.png",
+    "augmentNameId": "Upgrade_DeathDance",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "upgrade-ravenous-hydra",

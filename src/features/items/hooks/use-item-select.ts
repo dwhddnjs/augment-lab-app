@@ -16,7 +16,7 @@ import { resolveIds } from "@/lib/arrays";
 import { saveBuild, type DraftMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import { lockOrientation } from "@/lib/orientation";
+import { lockOrientation, lockPortraitAfterExit } from "@/lib/orientation";
 import { CELL_GAP } from "../components/item-grid";
 import type { SlotItem } from "../components/item-slot-grid";
 import { FILTERS, type FilterKey } from "../item-filters";
@@ -157,7 +157,7 @@ export function useItemSelect({
   };
 
   // 저장 외의 유일한 출구. 그냥 pop하면 landscape가 잠긴 채 홈으로 튕기므로
-  // 확인 후 portrait로 되돌린 다음 나간다(빌드는 저장하지 않는다).
+  // 홈으로 보낸 뒤 portrait로 되돌린다(빌드는 저장하지 않는다).
   const handleExit = () => {
     Alert.alert(translate("exitConfirm"), "", [
       { text: translate("exitCancel"), style: "cancel" },
@@ -165,10 +165,8 @@ export function useItemSelect({
         text: translate("exitOk"),
         style: "destructive",
         onPress: () => {
-          ScreenOrientation.lockAsync(
-            ScreenOrientation.OrientationLock.PORTRAIT_UP,
-          ).catch(() => {});
           router.dismissTo("/");
+          lockPortraitAfterExit();
         },
       },
     ]);
