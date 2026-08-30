@@ -70,7 +70,11 @@ function askClassicRounds(
       setTimeout(() => resolve(rounds), ALERT_DISMISS_MS);
     Alert.alert(translate("snackTitle"), translate("snackMessage"), [
       { text: translate("snackYes"), onPress: () => answer(5) },
-      { text: translate("snackNo"), style: "destructive", onPress: () => answer(4) },
+      {
+        text: translate("snackNo"),
+        style: "destructive",
+        onPress: () => answer(4),
+      },
     ]);
   });
 }
@@ -100,6 +104,21 @@ export function useChampionSelect() {
   const listData: GridItem[] = showBravery
     ? [{ id: BRAVERY_ID }, ...filtered]
     : filtered;
+
+  /**
+   * 이 화면은 세로다 — 포커스마다 그렇게 잠근다.
+   *
+   * 가로 화면 넷은 `useLandscapeLock` 으로 매번 가로를 주장하는데, 세로 쪽은
+   * "나가는 화면이 나가면서 한 번 돌려준다"가 전부였다. 그래서 여기 도착했을 때의
+   * 방향은 직전에 누가 무엇을 걸었느냐에 달려 있었고, 가로 잠금이 남은 채로 들어오면
+   * 그리드는 세로로 보이는데 **Alert 만 가로로** 떴다(클래식 라운드 질문에서 실제로).
+   * Alert 은 새 presentation 이라 그 순간 지원 방향을 다시 계산하기 때문이다.
+   */
+  useFocusEffect(
+    useCallback(() => {
+      void lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+    }, []),
+  );
 
   // 첫 진입 시 챔피언 아이콘·역할 칩을 미리 디스크 캐시에 받아둔다.
   // (캐시가 비어 검은 박스가 깜빡이던 첫 설치 케이스 대응)
@@ -157,9 +176,11 @@ export function useChampionSelect() {
           pathname: "/aram",
           params: { championId, mode: "classic", rounds: String(rounds) },
         }),
-      arena: () => router.replace({ pathname: "/arena", params: { championId } }),
+      arena: () =>
+        router.replace({ pathname: "/arena", params: { championId } }),
       // 커스텀은 라운드·뽑기가 없어 championId 만 나른다(모드는 화면 안 drawer 에서 고른다).
-      custom: () => router.replace({ pathname: "/custom", params: { championId } }),
+      custom: () =>
+        router.replace({ pathname: "/custom", params: { championId } }),
     };
     go[mode]();
   };

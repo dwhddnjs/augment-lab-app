@@ -23,7 +23,7 @@ import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
 import { saveBuild } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
-import { lockOrientation } from "@/lib/orientation";
+import { lockOrientation, lockPortraitAfterExit } from "@/lib/orientation";
 import { ENHANCE_AUGMENT_ID } from "../arena-rules";
 import { ArenaAugmentCard } from "../components/arena-augment-card";
 import { ArenaDrawer } from "../components/arena-drawer";
@@ -76,12 +76,7 @@ export function ArenaScreen() {
   const savingRef = useRef(false);
 
   const { isLandscape, screenW, screenH } = useLandscapeLock();
-  const cardWidth = cardWidthFor(
-    screenW,
-    screenH,
-    CARD_GAP,
-    CARD_HEIGHT_RATIO,
-  );
+  const cardWidth = cardWidthFor(screenW, screenH, CARD_GAP, CARD_HEIGHT_RATIO);
   const drawerWidth = Math.min(360, screenW * 0.42);
 
   // 선택 시 도달할 강화 레벨(신규=1, 보유 중이면 현재+1, 최대치 clamp).
@@ -129,10 +124,8 @@ export function ArenaScreen() {
         text: translate("exitOk"),
         style: "destructive",
         onPress: () => {
-          ScreenOrientation.lockAsync(
-            ScreenOrientation.OrientationLock.PORTRAIT_UP,
-          ).catch(() => {});
           router.dismissTo("/");
+          lockPortraitAfterExit();
         },
       },
     ]);
@@ -238,9 +231,7 @@ export function ArenaScreen() {
                   disabled={anim.animating}
                   rerolled={arena.rerolled[i]}
                   onPick={() => anim.pick(i, () => arena.pickAugment(aug))}
-                  onReroll={() =>
-                    anim.reroll(i, () => arena.rerollAugment(i))
-                  }
+                  onReroll={() => anim.reroll(i, () => arena.rerollAugment(i))}
                 />
               ))}
             </CardRow>

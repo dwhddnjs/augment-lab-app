@@ -92,9 +92,19 @@ interface Props {
   cardWidth: number;
   /** 본문 상단 추가 여백(px). 아레나 증강 카드의 상단 별 오버레이 공간 확보용(기본 0). */
   topInset?: number;
+  /**
+   * 외곽 글로우를 끈다. 커스텀 화면 그리드는 카드가 촘촘히 붙어 서로의 글로우가 번진다 —
+   * 한 장씩 크게 보여주는 칼바람·아레나에서는 그대로 켜 둔다.
+   */
+  noShadow?: boolean;
 }
 
-export function RarityCardFrame({ augment, cardWidth, topInset = 0 }: Props) {
+export function RarityCardFrame({
+  augment,
+  cardWidth,
+  topInset = 0,
+  noShadow = false,
+}: Props) {
   const rs = RARITY[augment.rarity];
 
   const cardHeight = Math.round(cardWidth * CARD_ASPECT);
@@ -119,7 +129,7 @@ export function RarityCardFrame({ augment, cardWidth, topInset = 0 }: Props) {
           padding: framePad,
           borderRadius: Radius.lg + 3,
           experimental_backgroundImage: rs.frameImage,
-          boxShadow: rs.outerGlow,
+          boxShadow: noShadow ? undefined : rs.outerGlow,
         },
       ]}
     >

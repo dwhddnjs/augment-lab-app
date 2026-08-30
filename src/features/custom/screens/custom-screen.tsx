@@ -11,7 +11,6 @@
  */
 import * as Haptics from "expo-haptics";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import * as ScreenOrientation from "expo-screen-orientation";
 import { useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
@@ -20,7 +19,10 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { scheduleOnRN } from "react-native-worklets";
 
 import { ThemedView } from "@/components/themed/themed-view";
@@ -32,7 +34,7 @@ import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
 import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import { lockOrientation } from "@/lib/orientation";
+import { lockPortraitAfterExit } from "@/lib/orientation";
 import { AugmentSearchField } from "../components/augment-search-field";
 import {
   AugmentPickGrid,
@@ -164,9 +166,9 @@ function CustomContent({
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     } else {
       // 이미 담겼거나(중복) 정원이 찼다(증강 5 · 아이템 6) — "안 담겼다"는 신호면 족하다.
-      Haptics.notificationAsync(
-        Haptics.NotificationFeedbackType.Warning,
-      ).catch(() => {});
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning).catch(
+        () => {},
+      );
     }
   };
 
@@ -192,11 +194,8 @@ function CustomContent({
         text: translate("exitOk"),
         style: "destructive",
         onPress: () => {
-          // navigation 전에 portrait를 먼저 건다 — exit 애니메이션이 portrait로 재생된다.
-          // await 하지 않는다(회전은 요청 시점에 이미 걸린다). 저장 경로와 같은 래퍼를
-          // 쓰는 이유는 lockAsync 의 Promise 가 영영 resolve 되지 않는 구간 때문이다.
-          void lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
           router.dismissTo("/");
+          lockPortraitAfterExit();
         },
       },
     ]);
@@ -305,10 +304,10 @@ function CustomContent({
                     champion={champion}
                     picked={draft.picked}
                     items={draft.items}
-                    dropTarget={
-                      dragged !== null && overDrop ? dragged.kind : null
-                    }
+                    target={draft.target}
+                    dropping={dragged !== null && overDrop}
                     bottomInset={insets.bottom}
+                    onSwitchTarget={draft.toggleTarget}
                     onRemove={draft.remove}
                     onRemoveItem={draft.removeItem}
                     onShowStats={() => setShowingStats(true)}
@@ -323,10 +322,7 @@ function CustomContent({
 
         {/* 드래그 고스트 — FlatList 가 children 을 클리핑하므로 화면 최상단에 둔다.
             셀 안에 두면 좌측 패널 경계에서 잘려 우측까지 못 간다. */}
-        <Animated.View
-          pointerEvents="none"
-          style={[styles.ghost, ghostStyle]}
-        >
+        <Animated.View pointerEvents="none" style={[styles.ghost, ghostStyle]}>
           {dragged?.kind === "augment" && (
             <View style={styles.ghostInner}>
               <AugmentTile

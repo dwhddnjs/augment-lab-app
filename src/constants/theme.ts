@@ -157,11 +157,17 @@ export const AugmentRarityColors: Record<
   prismatic: { border: "#E0D6FF" },
 };
 
-/** 라이트 모드 짝 — 흰 배경(surface.raised) 대비 5:1 이상이라 12pt 이름도 읽힌다. */
+/**
+ * 라이트 모드 짝 — 흰 배경(surface.raised) 대비 3.5:1.
+ * 진하기를 두 번 낮춘 결과다(#5A6068 급 6.3~6.7:1 → 4.6:1 → 지금). 인게임 색에
+ * 가까워진 대신 11pt 이름은 본문 텍스트 AA(4.5:1)를 밑돈다 — UI 요소 기준(3:1)만
+ * 남는다. 색을 더 살리려면 값을 더 내리지 말고, 이름을 text.primary 로 돌리고
+ * 티어 색은 보더·타일에만 남기는 쪽으로 갈 것.
+ */
 export const AugmentRarityColorsLight: typeof AugmentRarityColors = {
-  silver: { border: "#5A6068" },
-  gold: { border: "#8A6410" },
-  prismatic: { border: "#6D3FC4" },
+  silver: { border: "#828A93" },
+  gold: { border: "#AD821F" },
+  prismatic: { border: "#9877DA" },
 };
 
 // 증강 아이콘 미해결 시 표시하는 희귀도 폴백 글리프 (MaterialCommunityIcons).

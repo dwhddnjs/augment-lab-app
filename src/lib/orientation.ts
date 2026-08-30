@@ -9,16 +9,33 @@
  * 회전은 잠금 요청 시점에 이미 걸리므로, 완료 통보를 못 받아도 그냥 진행하면 된다.
  * 각 드래프트 화면이 useFocusEffect 에서 한 번 더 잠그는 것이 최종 방어선이다.
  */
-import * as ScreenOrientation from 'expo-screen-orientation';
+import * as ScreenOrientation from "expo-screen-orientation";
 
 /** 완료 통보를 기다릴 최대 시간. 실제 회전은 보통 300ms 안에 끝난다. */
 const LOCK_TIMEOUT_MS = 700;
 
 export async function lockOrientation(
-  lock: ScreenOrientation.OrientationLock
+  lock: ScreenOrientation.OrientationLock,
 ): Promise<void> {
   await Promise.race([
     ScreenOrientation.lockAsync(lock).catch(() => {}),
     new Promise((resolve) => setTimeout(resolve, LOCK_TIMEOUT_MS)),
   ]);
+}
+
+/**
+ * 드래프트 화면을 나갈 때의 세로 복귀. `router.dismissTo("/")` **뒤에** 부른다.
+ *
+ * 회전을 먼저 걸면 아직 나가는 화면이 떠 있는 채로 기기가 돌아, 가로 레이아웃이
+ * 세로로 찌그러지는 게 그대로 보인다. 그래서 홈 전환이 끝날 때까지 미룬다 —
+ * `InteractionManager.runAfterInteractions` 는 쓸 수 없다. 네이티브 스택
+ * (react-native-screens)의 dismiss 는 InteractionManager 핸들을 만들지 않아
+ * 콜백이 곧바로 실행된다(시뮬레이터에서 확인: 여전히 나가는 화면이 회전했다).
+ */
+const EXIT_ROTATE_DELAY_MS = 420; // iOS dismiss 애니메이션(≈0.35s)보다 살짝 길게
+
+export function lockPortraitAfterExit(): void {
+  setTimeout(() => {
+    void lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+  }, EXIT_ROTATE_DELAY_MS);
 }
