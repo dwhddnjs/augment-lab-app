@@ -164,7 +164,7 @@ function AugmentDragCell({
         onPress={() => quickMode && onTap(augment)}
         style={({ pressed }) => ({ opacity: pressed && quickMode ? 0.7 : 1 })}
       >
-        <RarityCardFrame augment={augment} cardWidth={cardWidth} />
+        <RarityCardFrame augment={augment} cardWidth={cardWidth} noShadow />
         {checked && (
           <>
             <View style={styles.checkedVeil} />
