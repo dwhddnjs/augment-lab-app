@@ -1328,6 +1328,17 @@
     ]
   },
   {
+    "id": "quest-ultra-hydra",
+    "name": "Ultra Hydra",
+    "description": "Completing a Hydra item grants a Tiamat. Quest: obtain Ravenous Hydra, Profane Hydra and Titanic Hydra. Reward: Ultra Hydra.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UltraHydra_small.png",
+    "augmentNameId": "Quest_UltraHydra",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
     "id": "quest-urf-s-champion",
     "name": "Urf's Champion",
     "description": "Requirement: Score 10 takedowns. Reward: Golden Spatula",
@@ -1502,7 +1513,7 @@
   {
     "id": "critical-missile",
     "name": "Critical Missile",
-    "description": "Crits on champions launch 1 missile (+1 per 33.33% crit chance) dealing 20-100 magic damage each. Gain 25% crit chance.",
+    "description": "Crits fire 1-3 missiles (+1 per 50% crit) for 15-65 magic damage each, favoring enemies near the target. Gain 25% crit chance.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CriticalMissile_small.png",
     "augmentNameId": "CriticalMissile",
@@ -1539,8 +1550,8 @@
     "id": "double-tap",
     "name": "Double Tap",
     "description": "Basic attacks that critically strike apply on-hit effects an additional time. Additionally, gain 25% critical strike chance.",
-    "rarity": "gold",
-    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/DoubleTap_small.png",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DualWield_small.png",
     "augmentNameId": "ARAM_DoubleTap",
     "modes": [
       "aram",
@@ -3096,6 +3107,17 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeMikaelsBlessing_small.png",
     "augmentNameId": "Upgrade_MikaelsBlessing",
     "modes": []
+  },
+  {
+    "id": "upgrade-death-s-dance",
+    "name": "Upgrade Death's Dance",
+    "description": "Upgrades Death's Dance: 40% of damage taken is dealt over 3s, and takedowns instantly heal for 125% bonus AD. Gain 250 gold.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeDeathDance_small.png",
+    "augmentNameId": "Upgrade_DeathDance",
+    "modes": [
+      "aram"
+    ]
   },
   {
     "id": "upgrade-ravenous-hydra",
