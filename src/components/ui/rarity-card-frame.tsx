@@ -138,7 +138,7 @@ export function RarityCardFrame({
           style={[
             styles.content,
             { paddingTop: Spacing.two + topInset },
-            compact && { paddingHorizontal: Spacing.one, gap: Spacing.one },
+            compact && { paddingHorizontal: Spacing.half, gap: Spacing.one },
           ]}
         >
           {/* Emblem with soft halo */}
@@ -162,6 +162,7 @@ export function RarityCardFrame({
               alignItems: "center",
               gap: Spacing.half,
               position: "relative",
+              paddingHorizontal: compact ? 4 : 0,
             }}
           >
             <ThemedText
@@ -226,7 +227,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     paddingTop: Spacing.two,
-    paddingBottom: Spacing.two,
+    paddingBottom: Spacing.half,
     paddingHorizontal: Spacing.one,
     gap: Spacing.one,
   },
