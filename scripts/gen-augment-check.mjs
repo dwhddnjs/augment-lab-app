@@ -30,6 +30,11 @@ const numberDiffs = diff.numberDiffs ?? [];
 // 엉뚱한 증강에 배지가 붙거나, 개명된 증강이 배지를 조용히 잃는다 — 매칭 키는 늘 id 다.
 const disabledIds = new Set((diff.disabled ?? []).map((d) => d.id).filter(Boolean));
 
+// 원문이 길어 손으로 줄여 쓴 설명들. 라이엇 원문과 문장이 다르므로 수치를 대조할 때
+// 여기 실린 건 "우리가 줄인 것"이지 데이터가 틀린 게 아니라는 표시가 필요하다.
+const trimmedPath = path.join(root, 'docs/augment-desc-trimmed.json');
+const trimmedIds = new Set(fs.existsSync(trimmedPath) ? JSON.parse(fs.readFileSync(trimmedPath, 'utf8')) : []);
+
 const merged = ko.map((a) => ({
   id: a.id,
   ko: a.name,
@@ -43,6 +48,7 @@ const merged = ko.map((a) => ({
   // 게임 bin 에 계수가 없어 수치를 확정하지 못한 항목 — 눈으로 확인이 필요하다.
   noCoef: noCoefIds.has(a.id),
   disabled: disabledIds.has(a.id),
+  trimmed: trimmedIds.has(a.id),
 }));
 
 // 같은 아이콘 파일을 공유하는 증강 식별 (검수 표시용)
@@ -55,6 +61,7 @@ const rarityCounts = merged.reduce((acc, a) => ((acc[a.rarity] = (acc[a.rarity] 
 const sharedCount = merged.filter((a) => a.shared).length;
 const newCount = merged.filter((a) => a.isNew).length;
 const noCoefCount = merged.filter((a) => a.noCoef).length;
+const trimmedCount = merged.filter((a) => a.trimmed).length;
 const aramCount = merged.filter((a) => a.modes.includes('aram')).length;
 const classicCount = merged.filter((a) => a.modes.includes('classic')).length;
 const unreleasedCount = merged.filter((a) => a.modes.length === 0).length;
@@ -129,6 +136,8 @@ const html = `<!doctype html>
     background: rgba(220,90,90,.16); color: #ff9a9a; }
   .db { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px;
     background: rgba(120,120,120,.18); color: var(--text3); }
+  .tb { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px;
+    background: rgba(140,160,255,.16); color: #b3c2ff; }
   .card.isnew { border-color: rgba(30,215,160,.45); }
   .mb { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px; }
   .mb.aram { background: rgba(90,170,255,.16); color: #8fc4ff; }
@@ -162,7 +171,8 @@ const html = `<!doctype html>
     미출시 ${unreleasedCount} ·
     <span style="color:#e89650">아이콘 공유 ${sharedCount}</span> ·
     <span style="color:var(--mint)">신규 ${newCount}</span> ·
-    <span style="color:#ff9a9a">수치 미확인 ${noCoefCount}</span>
+    <span style="color:#ff9a9a">수치 미확인 ${noCoefCount}</span> ·
+    <span style="color:#b3c2ff">설명 축약 ${trimmedCount}</span>
   </div>
   <div class="controls">
     <input id="q" type="search" placeholder="한글·영문 이름·설명 검색…" autocomplete="off" />
@@ -188,6 +198,7 @@ const html = `<!doctype html>
       <span class="chip toggle" data-t="shared">아이콘 공유</span>
       <span class="chip toggle" data-t="isNew">신규</span>
       <span class="chip toggle" data-t="noCoef">수치 미확인</span>
+      <span class="chip toggle" data-t="trimmed">설명 축약</span>
       <span class="reset" id="reset">초기화</span>
       <span class="count" id="count"></span>
     </div>
@@ -223,7 +234,7 @@ function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<
 // 칼바람+클래식 동시 선택은 사실상 "양쪽 공유"라 별도 항목으로 뺐다 — 토글 두 개를 켜서
 // 교집합을 만들게 하는 것보다 그렇게 이름 붙여 두는 편이 무엇을 보는지 분명하다.
 let rarity = 'all', mode = 'all', query = '';
-const flags = { shared: false, isNew: false, noCoef: false };
+const flags = { shared: false, isNew: false, noCoef: false, trimmed: false };
 
 function render() {
   const out = document.getElementById('out');
@@ -236,6 +247,7 @@ function render() {
     if (flags.shared && !a.shared) return false;
     if (flags.isNew && !a.isNew) return false;
     if (flags.noCoef && !a.noCoef) return false;
+    if (flags.trimmed && !a.trimmed) return false;
     if (query) {
       const q = query.toLowerCase();
       const hay = (a.ko + ' ' + a.en + ' ' + a.id + ' ' + a.descKo + ' ' + a.descEn).toLowerCase();
@@ -284,6 +296,7 @@ function render() {
         (a.isNew ? '<span class="nb">신규</span>' : '') +
         (a.noCoef ? '<span class="cb">수치 미확인</span>' : '') +
         (a.disabled ? '<span class="db">비활성</span>' : '') +
+        (a.trimmed ? '<span class="tb">설명 축약</span>' : '') +
         (a.shared ? '<span class="sb">공유</span>' : '') + '</div>' +
         '<div class="desc">' + esc(a.descKo) + '</div>' +
         '<div class="descEn">' + esc(a.descEn) + '</div>' +
@@ -357,4 +370,4 @@ const outPath = path.join(root, 'docs/augment-check.html');
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
 fs.writeFileSync(outPath, html);
 console.log(`✓ ${merged.length}개 증강 → ${path.relative(root, outPath)}`);
-console.log(`  실버 ${rarityCounts.silver} · 골드 ${rarityCounts.gold} · 프리즘 ${rarityCounts.prismatic} · 공유 아이콘 ${sharedCount}개`);
+console.log(`  실버 ${rarityCounts.silver} · 골드 ${rarityCounts.gold} · 프리즘 ${rarityCounts.prismatic} · 공유 아이콘 ${sharedCount}개 · 설명 축약 ${trimmedCount}개`);
