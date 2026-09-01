@@ -93,24 +93,24 @@ interface Props {
   /** 본문 상단 추가 여백(px). 아레나 증강 카드의 상단 별 오버레이 공간 확보용(기본 0). */
   topInset?: number;
   /**
-   * 외곽 글로우를 끈다. 커스텀 화면 그리드는 카드가 촘촘히 붙어 서로의 글로우가 번진다 —
-   * 한 장씩 크게 보여주는 칼바람·아레나에서는 그대로 켜 둔다.
+   * 커스텀 화면 그리드용 조밀 배치. 카드가 촘촘히 붙으므로 아이콘·여백을 줄이고
+   * 서로 번지는 외곽 글로우를 끈다. 한 장씩 크게 보여주는 칼바람·클래식·아레나는 기본값.
    */
-  noShadow?: boolean;
+  compact?: boolean;
 }
 
 export function RarityCardFrame({
   augment,
   cardWidth,
   topInset = 0,
-  noShadow = false,
+  compact = false,
 }: Props) {
   const rs = RARITY[augment.rarity];
 
   const cardHeight = Math.round(cardWidth * CARD_ASPECT);
   const framePad = Math.max(3, Math.round(cardWidth * 0.056)); // 카드 태두리 크키 조절
 
-  const iconSize = 72; // 증강 아이콘 사이즈;
+  const iconSize = compact ? 64 : 72; // 증강 아이콘 사이즈;
 
   const nameSize = 12;
   const descSize = 8;
@@ -129,14 +129,25 @@ export function RarityCardFrame({
           padding: framePad,
           borderRadius: Radius.lg + 3,
           experimental_backgroundImage: rs.frameImage,
-          boxShadow: noShadow ? undefined : rs.outerGlow,
+          boxShadow: compact ? undefined : rs.outerGlow,
         },
       ]}
     >
       <View style={[styles.body, { backgroundColor: rs.bodyColor }]}>
-        <View style={[styles.content, { paddingTop: Spacing.two + topInset }]}>
+        <View
+          style={[
+            styles.content,
+            { paddingTop: Spacing.two + topInset },
+            compact && { paddingHorizontal: Spacing.one, gap: Spacing.one },
+          ]}
+        >
           {/* Emblem with soft halo */}
-          <View style={[styles.iconArea, { marginBottom: Spacing.one }]}>
+          <View
+            style={[
+              styles.iconArea,
+              { marginBottom: compact ? Spacing.half : Spacing.one },
+            ]}
+          >
             <AugmentImage
               iconPath={augment.iconPath}
               size={iconSize}
@@ -217,7 +228,7 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.two,
     paddingBottom: Spacing.two,
     paddingHorizontal: Spacing.one,
-    gap: Spacing.two,
+    gap: Spacing.one,
   },
   iconArea: {
     alignItems: "center",
