@@ -10,12 +10,12 @@ import { cardWidthFor } from "@/components/ui/rarity-card-frame";
 import { Spacing } from "@/constants/theme";
 import type { ArenaPickedAugment } from "@/features/arena/types";
 import { pickRandom, shuffle } from "@/lib/arrays";
-import { useCardPickAnim } from "../hooks/use-card-pick-anim";
+import { useCardPickAnim } from "@/hooks/use-card-pick-anim";
 import { ArenaAugmentCard } from "./arena-augment-card";
 import { ArenaCardOverlay } from "./arena-card-overlay";
 
 /** 모루 오버레이와 동일한 카드 크기. */
-const CARD_GAP = Spacing.three;
+const OVERLAY_CARD_GAP = Spacing.three;
 const CARD_HEIGHT_RATIO = 0.62;
 
 interface Props {
@@ -31,7 +31,7 @@ export function ArenaEnhancePicker({ pool, onPick, onClose }: Props) {
   const cardWidth = cardWidthFor(
     Math.max(width, height),
     Math.min(width, height),
-    CARD_GAP,
+    OVERLAY_CARD_GAP,
     CARD_HEIGHT_RATIO,
   );
 
@@ -54,7 +54,7 @@ export function ArenaEnhancePicker({ pool, onPick, onClose }: Props) {
   };
 
   return (
-    <ArenaCardOverlay locked={anim.animating} gap={CARD_GAP} onClose={onClose}>
+    <ArenaCardOverlay locked={anim.animating} gap={OVERLAY_CARD_GAP} onClose={onClose}>
       {cards.map((card, i) => (
         <ArenaAugmentCard
           key={`${i}-${card.augment.id}`}

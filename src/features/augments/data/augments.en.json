@@ -14,7 +14,7 @@
   {
     "id": "adamant",
     "name": "Adamant",
-    "description": "Immobilizing or grounding an enemy grants 10 armor and MR for 10s, stacking 10 times (100 total). (5s per cast)",
+    "description": "Immobilizing an enemy or grounding their movement abilities grants armor and magic resist.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Adamant_small.png",
     "augmentNameId": "Adamant",
@@ -1025,7 +1025,7 @@
   {
     "id": "clown-college",
     "name": "Clown College",
-    "description": "Gain Deceive: blink and turn invisible, your next attack dealing bonus damage. On death, leave a box that explodes and fears.",
+    "description": "Gain Deceive and the Nightstalker passive. On death, leave a box that explodes for massive true damage and fears nearby enemies.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ClownCollege_small.png",
     "augmentNameId": "ARAM_ClownCollege",
@@ -2410,7 +2410,7 @@
   {
     "id": "snap-back",
     "name": "Snap Back",
-    "description": "Upgrades an ability with a recast: blink back to where you cast it and explode for 100-300 (+20% AD) (+20% AP) magic damage.",
+    "description": "Recasting the chosen ability explodes and returns you to where you cast it.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "SnapBack",
@@ -2501,7 +2501,7 @@
   {
     "id": "void-dash",
     "name": "Void Dash",
-    "description": "Upgrades a dash: 0.3s after arriving a 250-radius void zone deals 80-400 (+100% ability haste) magic damage and slows 35% for 1s.",
+    "description": "Dashing with the chosen ability creates a void zone that slows enemy champions and deals magic damage.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "VoidDash",
@@ -2912,7 +2912,7 @@
   {
     "id": "doran-s-biggest-fan",
     "name": "Doran's Biggest Fan",
-    "description": "Each Doran's item bought past the first stacks onto the original for part of its stats. Passives don't stack and it can't be sold.",
+    "description": "Each Doran's item bought past the first stacks onto the original, granting 125% of that item's stats per stack.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dorans_Fan_Small.png",
     "augmentNameId": "DoransBiggestFan",

@@ -1,7 +1,7 @@
 /**
  * ArenaItemPickCard — 전설 모루(클래스 전설 아이템) 카드 3장용.
  * ArenaPrismaticCard를 본떠 일반 Item을 골드 등급 프레임으로 표시한다.
- * 칼바람/아레나 공용 ArenaPickCard 선택 애니메이션 + 카드당 1회 무료 리롤 버튼.
+ * 칼바람/아레나 공용 PickCard 선택 애니메이션 + 카드당 1회 무료 리롤 버튼.
  */
 import { StyleSheet, View } from "react-native";
 
@@ -13,11 +13,11 @@ import { itemDescriptionText } from "@/features/items/text";
 import type { Item } from "@/features/items/types";
 import { itemImageUrl } from "@/lib/ddragon";
 import {
-  ArenaPickCard,
-  type ArenaCardEntryMode,
-  type ArenaCardExitMode,
-} from "./arena-pick-card";
-import { ArenaRerollButton } from "./arena-reroll-button";
+  PickCard,
+  type CardEntryMode,
+  type CardExitMode,
+} from "@/components/ui/pick-card";
+import { RerollButton } from "@/components/ui/reroll-button";
 
 const GOLD = RARITY.gold;
 
@@ -25,8 +25,8 @@ interface Props {
   item: Item;
   cardWidth: number;
   index: number;
-  exitMode: ArenaCardExitMode;
-  entryMode: ArenaCardEntryMode;
+  exitMode: CardExitMode;
+  entryMode: CardEntryMode;
   disabled: boolean;
   rerolled: boolean;
   onPick: () => void;
@@ -83,7 +83,7 @@ export function ArenaItemPickCard({
 
   return (
     <View style={styles.wrapper}>
-      <ArenaPickCard
+      <PickCard
         index={index}
         exitMode={exitMode}
         entryMode={entryMode}
@@ -91,10 +91,10 @@ export function ArenaItemPickCard({
         onPress={onPick}
       >
         {frame}
-      </ArenaPickCard>
+      </PickCard>
 
-      <ArenaRerollButton
-        rerolled={rerolled}
+      <RerollButton
+        used={rerolled}
         disabled={disabled}
         onPress={onReroll}
       />

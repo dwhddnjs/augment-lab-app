@@ -16,11 +16,11 @@ import {
 import { useTheme } from "@/hooks/use-theme";
 import { cdragonItemIconUrl } from "@/lib/ddragon";
 import {
-  ArenaPickCard,
-  type ArenaCardEntryMode,
-  type ArenaCardExitMode,
-} from "./arena-pick-card";
-import { ArenaRerollButton } from "./arena-reroll-button";
+  PickCard,
+  type CardEntryMode,
+  type CardExitMode,
+} from "@/components/ui/pick-card";
+import { RerollButton } from "@/components/ui/reroll-button";
 
 const PRISM = RARITY.prismatic;
 
@@ -28,8 +28,8 @@ interface Props {
   item: PrismaticItem;
   cardWidth: number;
   index: number;
-  exitMode: ArenaCardExitMode;
-  entryMode: ArenaCardEntryMode;
+  exitMode: CardExitMode;
+  entryMode: CardEntryMode;
   disabled: boolean;
   rerolled: boolean;
   onPick: () => void;
@@ -55,7 +55,7 @@ export function ArenaPrismaticCard({
 
   return (
     <View style={styles.wrapper}>
-      <ArenaPickCard
+      <PickCard
         index={index}
         exitMode={exitMode}
         entryMode={entryMode}
@@ -103,10 +103,10 @@ export function ArenaPrismaticCard({
             </ThemedText>
           </View>
         </View>
-      </ArenaPickCard>
+      </PickCard>
 
-      <ArenaRerollButton
-        rerolled={rerolled}
+      <RerollButton
+        used={rerolled}
         disabled={disabled}
         onPress={onReroll}
       />

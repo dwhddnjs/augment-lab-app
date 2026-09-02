@@ -120,7 +120,16 @@ export async function saveBuild(
   // 캐시를 먼저 갱신하고 알린 뒤 디스크에 기록 — 목록이 즉시 반영된다.
   cache = sortDesc([build, ...builds]);
   emit();
-  await writeAll(cache);
+  try {
+    await writeAll(cache);
+  } catch (error) {
+    // 디스크에 못 남겼으면 화면에도 남기지 않는다. 되돌리지 않으면 목록에는 있는데
+    // 앱을 껐다 켜면 사라지는 유령 빌드가 생기고, 호출부는 실패를 알리면서도
+    // 화면에는 저장된 것처럼 보이는 모순이 남는다.
+    cache = builds;
+    emit();
+    throw error;
+  }
   return build;
 }
 
@@ -128,7 +137,15 @@ export async function removeBuild(id: string): Promise<void> {
   const builds = await readAll();
   cache = builds.filter((b) => b.id !== id);
   emit();
-  await writeAll(cache);
+  try {
+    await writeAll(cache);
+  } catch (error) {
+    // 저장과 같은 이유로 되돌린다 — 화면에서만 지워지고 디스크에 남아 있으면
+    // 다음 실행에서 되살아난다(삭제한 줄 알았던 빌드가 돌아온다).
+    cache = builds;
+    emit();
+    throw error;
+  }
 }
 
 /**

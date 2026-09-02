@@ -11,6 +11,7 @@ import { Alert } from "react-native";
 import type { SearchBarCommands } from "react-native-screens";
 
 import { parseLaunchMode, type LaunchMode } from "@/constants/game-modes";
+import { useAlive } from "@/hooks/use-alive";
 import { useLocale } from "@/hooks/use-locale";
 import { championClassIconUrl, championSquareUrl } from "@/lib/ddragon";
 import { matchName } from "@/lib/hangul";
@@ -93,6 +94,10 @@ export function useChampionSelect() {
   // 클래식은 알럿 응답 후 회전까지 몇백 ms가 뜨는데 그동안 ✓ 가 계속 눌린다.
   // 가드가 없으면 replace 가 두 번 나가 드래프트가 겹쳐 뜬다.
   const startingRef = useRef(false);
+  // 이 화면은 모달이라 라운드를 묻는 동안 스와이프로 닫힐 수 있다. 그 뒤에도
+  // handleStart 의 await 체인은 계속 흘러 회전과 navigation 을 마저 하려 든다 —
+  // 닫힌 모달이 가로로 돌린 채 드래프트를 띄우는 셈이다. 살아 있을 때만 진행한다.
+  const alive = useAlive();
 
   const filtered = champions
     .filter((c) => !selectedTag || c.tags.includes(selectedTag))
@@ -157,9 +162,16 @@ export function useChampionSelect() {
     }
     // 클래식 라운드 수는 세로일 때 먼저 확정한다(가로에서 물으면 잠금이 풀린다).
     const rounds = mode === "classic" ? await askClassicRounds(translate) : 4;
+    // 묻는 사이 모달이 닫혔으면 회전조차 걸지 않는다.
+    if (!alive.current) return;
     // 잠금을 await해서 기기가 landscape로 전환된 후 navigation을 시작한다.
     // await 없이 바로 replace하면 portrait 상태로 화면이 mount될 수 있다.
     await lockOrientation(ScreenOrientation.OrientationLock.LANDSCAPE);
+    // 회전을 기다리는 동안 닫혔다면 가로로 눕힌 것부터 되돌리고 물러난다.
+    if (!alive.current) {
+      void lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+      return;
+    }
     // 클래식은 칼바람과 화면이 같아 /aram 라우트를 공유하고 mode 를 실어 보낸다.
     // 드래프트 → 아이템 → saveBuild 까지 이 파라미터가 모드를 나른다.
     //

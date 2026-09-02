@@ -9,11 +9,11 @@ import { RARITY, RarityCardFrame } from "@/components/ui/rarity-card-frame";
 import { Radius, Spacing } from "@/constants/theme";
 import type { ArenaAugment } from "@/features/arena/types";
 import {
-  ArenaPickCard,
-  type ArenaCardEntryMode,
-  type ArenaCardExitMode,
-} from "./arena-pick-card";
-import { ArenaRerollButton } from "./arena-reroll-button";
+  PickCard,
+  type CardEntryMode,
+  type CardExitMode,
+} from "@/components/ui/pick-card";
+import { RerollButton } from "@/components/ui/reroll-button";
 
 interface Props {
   augment: ArenaAugment;
@@ -22,8 +22,8 @@ interface Props {
   maxLevel: number;
   cardWidth: number;
   index: number;
-  exitMode: ArenaCardExitMode;
-  entryMode: ArenaCardEntryMode;
+  exitMode: CardExitMode;
+  entryMode: CardEntryMode;
   disabled: boolean;
   rerolled: boolean;
   onPick: () => void;
@@ -73,7 +73,7 @@ export function ArenaAugmentCard({
 
   return (
     <View style={styles.wrapper}>
-      <ArenaPickCard
+      <PickCard
         index={index}
         exitMode={exitMode}
         entryMode={entryMode}
@@ -97,14 +97,13 @@ export function ArenaAugmentCard({
             </View>
           )}
         </View>
-      </ArenaPickCard>
+      </PickCard>
 
       {/* 픽 애니메이션 중에는 리롤을 눌러도 소용없으니 흐리게 눌러 죽인다. */}
-      <ArenaRerollButton
-        rerolled={rerolled}
+      <RerollButton
+        used={rerolled}
         disabled={disabled}
         onPress={onReroll}
-        style={{ opacity: disabled && !rerolled ? 0.35 : 1 }}
       />
     </View>
   );

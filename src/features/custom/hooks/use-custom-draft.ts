@@ -16,6 +16,7 @@ import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useItemPool } from "@/features/items/hooks/use-items";
 import { FILTERS, type FilterKey } from "@/features/items/item-filters";
 import { MAX_ITEMS, type Item } from "@/features/items/types";
+import { useAlive } from "@/hooks/use-alive";
 import { useLocale } from "@/hooks/use-locale";
 import { saveBuild, type DraftMode } from "@/lib/build-storage";
 import { matchName } from "@/lib/hangul";
@@ -48,6 +49,7 @@ export type SaveError = "invalid" | "failed";
 export function useCustomDraft(initialChampionId: string) {
   const { locale } = useLocale();
   const router = useRouter();
+  const alive = useAlive();
   const champions = useChampions();
 
   // params 는 초기값으로만 쓴다 — 패널의 "챔피언 변경"이 setState 한 번으로 끝나도록.
@@ -67,18 +69,10 @@ export function useCustomDraft(initialChampionId: string) {
   // 저장 가능 여부를 여기서 판단하려면 훅이 챔피언을 알아야 한다.
   const champion = champions.find((c) => c.id === championId) ?? null;
 
-  // 두 모드 풀을 모두 들고 있는다 — 모드를 바꿀 때 "다음 모드에서도 유효한 것"을
-  // 가려내야 하는데 훅은 조건부로 부를 수 없다. 넷 다 useMemo 로 캐시되는 필터다.
-  //
   // modes 태그가 없는 항목(미출시·제거)이 섞이지 않도록 증강은 반드시 useAugmentPool,
   // 아이템은 useItemPool — 전체 목록에 필터를 걸면 다른 모드 것이 조용히 섞인다.
-  const aramAugments = useAugmentPool("aram");
-  const classicAugments = useAugmentPool("classic");
-  const aramItems = useItemPool("aram");
-  const classicItems = useItemPool("classic");
-
-  const pool = mode === "aram" ? aramAugments : classicAugments;
-  const itemPool = mode === "aram" ? aramItems : classicItems;
+  const pool = useAugmentPool(mode);
+  const itemPool = useItemPool(mode);
 
   const filtered = pool.filter(
     (a) => (!tier || a.rarity === tier) && matchName(a.name, query),
@@ -149,25 +143,15 @@ export function useCustomDraft(initialChampionId: string) {
   };
 
   /**
-   * 모드를 바꾸면 그 모드에서 **고를 수 없게 된 것만** 덜어낸다. 같은 모드를 다시
-   * 고르면 아무 일도 없다.
-   *
-   * 전부 비우지 않는 이유: 세그먼트 탭 한 번은 삭제를 의도한 조작이 아니고(되돌리기도
-   * 없다), 두 모드에 다 실리는 공유 증강은 modes:["aram","classic"] 한 레코드라 모드를
-   * 바꿔도 그대로 유효하다. 반대로 아무것도 거르지 않으면 협곡 아이템을 담은 채 클래식
-   * 빌드로 저장돼, 그 모드에서는 만들 수 없는 조합이 목록에 남는다.
+   * 모드를 바꾸면 담아 둔 증강·아이템을 전부 비운다. 같은 모드를 다시 고르면 아무 일도
+   * 없다. 두 모드에 다 실리는 공유 증강도 남기지 않는다 — 모드 전환은 "이 모드 빌드를
+   * 새로 짠다"는 조작이라, 앞 모드에서 고른 조합이 일부만 남아 있으면 무엇이 사라지고
+   * 무엇이 남았는지 화면만 보고는 알 수 없다.
    */
   const setMode = (next: DraftMode) => {
     if (next === mode) return;
     setModeState(next);
-    const validAugments = new Set(
-      (next === "aram" ? aramAugments : classicAugments).map((a) => a.id),
-    );
-    const validItems = new Set(
-      (next === "aram" ? aramItems : classicItems).map((it) => it.id),
-    );
-    setPicked((prev) => prev.filter((a) => validAugments.has(a.id)));
-    setItems((prev) => prev.filter((it) => validItems.has(it.id)));
+    clear();
   };
 
   /**
@@ -196,9 +180,13 @@ export function useCustomDraft(initialChampionId: string) {
       setSaving(false);
       return;
     }
+    // 저장을 기다리는 동안 헤더의 나가기가 계속 살아 있다. 이미 나갔으면 회전도
+    // navigation 도 하지 않는다 — 방향은 나가기 경로가 되돌려 놨다.
+    if (!alive.current) return;
     // 회전이 끝난 뒤 navigation 을 시작한다. 바로 이동하면 landscape 상태로
     // 빌드 상세가 mount 돼 회전 잔상이 보인다(아이템 선택 화면과 같은 이유).
     await lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+    if (!alive.current) return;
     router.dismissTo("/");
     router.push({ pathname: "/build/[id]", params: { id: build.id } });
   };
