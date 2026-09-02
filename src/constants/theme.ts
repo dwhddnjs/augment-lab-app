@@ -235,4 +235,3 @@ export const Spacing = {
 } as const;
 
 export const BottomTabInset = 50;
-export const MaxContentWidth = 800;

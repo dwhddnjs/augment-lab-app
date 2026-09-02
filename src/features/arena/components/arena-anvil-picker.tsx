@@ -12,13 +12,13 @@ import { Spacing } from "@/constants/theme";
 import type { PrismaticItem } from "@/features/arena/types";
 import type { Item } from "@/features/items/types";
 import { sampleDistinct } from "@/lib/arrays";
-import { useCardPickAnim } from "../hooks/use-card-pick-anim";
+import { useCardPickAnim } from "@/hooks/use-card-pick-anim";
 import { ArenaCardOverlay } from "./arena-card-overlay";
 import { ArenaItemPickCard } from "./arena-item-pick-card";
 import { ArenaPrismaticCard } from "./arena-prismatic-card";
 
 /** 오버레이 카드는 게임 화면보다 조금 크고 촘촘하게 깐다. */
-const CARD_GAP = Spacing.three;
+const OVERLAY_CARD_GAP = Spacing.three;
 const CARD_HEIGHT_RATIO = 0.62;
 
 type AnvilCard = Item | PrismaticItem;
@@ -43,7 +43,7 @@ export function ArenaAnvilPicker({
   const cardWidth = cardWidthFor(
     Math.max(width, height),
     Math.min(width, height),
-    CARD_GAP,
+    OVERLAY_CARD_GAP,
     CARD_HEIGHT_RATIO,
   );
 
@@ -69,7 +69,7 @@ export function ArenaAnvilPicker({
     <ArenaCardOverlay
       modal
       locked={anim.animating}
-      gap={CARD_GAP}
+      gap={OVERLAY_CARD_GAP}
       onClose={onClose}
     >
       {cards.map((card, i) => {

@@ -3,14 +3,13 @@
  *
  * 우선순위:
  *   1. iOS 26+ 네이티브 리퀴드글라스 (expo-glass-effect GlassView)
- *   2. expo-blur BlurView 폴백
- *   3. colors.surface.overlay 단색 최종 폴백
+ *   2. expo-blur BlurView 폴백 (iOS 26 미만)
  *
  * 직접 GlassView / BlurView를 호출하지 말고 이 컴포넌트를 사용할 것.
  */
 import { BlurView } from 'expo-blur';
 import { GlassView, isLiquidGlassAvailable } from 'expo-glass-effect';
-import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import { StyleSheet, type StyleProp, type ViewStyle } from 'react-native';
 
 import { useTheme } from '@/hooks/use-theme';
 
@@ -50,7 +49,7 @@ export function GlassSurface({
       </GlassView>
     );
   }
-  // expo-blur 폴백 (iOS 구버전, 안드로이드)
+  // expo-blur 폴백 (iOS 26 미만)
   return (
     <BlurView
       intensity={intensity}
@@ -59,19 +58,6 @@ export function GlassSurface({
     >
       {children}
     </BlurView>
-  );
-}
-
-/** 글래스 효과가 불가능한 환경을 위한 단색 폴백 래퍼 */
-export function GlassSurfaceFallback({
-  children,
-  style,
-}: Pick<GlassSurfaceProps, 'children' | 'style'>) {
-  const { colors } = useTheme();
-  return (
-    <View style={[styles.base, { backgroundColor: colors.surface.overlay }, style]}>
-      {children}
-    </View>
   );
 }
 

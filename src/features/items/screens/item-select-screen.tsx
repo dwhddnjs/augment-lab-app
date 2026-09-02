@@ -26,7 +26,8 @@ import { ItemDetailPanel } from "../components/item-detail-panel";
 import { ItemFilterBar, SIDE_TAB_WIDTH } from "../components/item-filter-bar";
 import { ItemGrid } from "../components/item-grid";
 import { ItemSlotGrid } from "../components/item-slot-grid";
-import { MAX_ITEMS, useItemSelect } from "../hooks/use-item-select";
+import { useItemSelect } from "../hooks/use-item-select";
+import { MAX_ITEMS } from "../types";
 
 // ─── 화면 진입 래퍼 (landscape 가드) ─────────────────────────────────────────
 export function ItemSelectScreen() {

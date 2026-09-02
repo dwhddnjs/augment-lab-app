@@ -12,6 +12,7 @@ import { Alert, type LayoutChangeEvent } from "react-native";
 
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
+import { useAlive } from "@/hooks/use-alive";
 import { resolveIds } from "@/lib/arrays";
 import { saveBuild, type DraftMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
@@ -23,8 +24,6 @@ import { FILTERS, type FilterKey } from "../item-filters";
 import { useItemPool } from "./use-items";
 import { MAX_ITEMS, type Item } from "../types";
 
-// 정의는 types.ts 로 내렸다 — 이 화면이 계속 여기서 읽도록 재수출만 남긴다.
-export { MAX_ITEMS };
 const NUM_COLS = 8;
 
 const t = {
@@ -59,6 +58,7 @@ export function useItemSelect({
 }) {
   const translate = useTranslation(t);
   const router = useRouter();
+  const alive = useAlive();
   const modeItems = useItemPool(mode);
   const champions = useChampions();
   const champion = useMemo(
@@ -149,9 +149,13 @@ export function useItemSelect({
       setSaving(false);
       return;
     }
+    // 저장을 기다리는 동안 헤더의 나가기가 계속 살아 있다. 이미 나갔으면 회전도
+    // navigation 도 하지 않는다 — 방향은 나가기 경로가 되돌려 놨다.
+    if (!alive.current) return;
     // lockAsync를 await해서 기기가 portrait로 전환된 후 navigation을 시작한다.
     // await 없이 바로 이동하면 landscape 상태로 build 상세가 mount돼 회전 잔상이 보인다.
     await lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+    if (!alive.current) return;
     router.dismissTo("/");
     router.push({ pathname: "/build/[id]", params: { id: build.id } });
   };

@@ -1,15 +1,18 @@
 /**
- * ArenaPickCard — 아레나 선택 카드(증강/프리즘/재련)의 공용 선택 애니메이션 래퍼.
- * 칼바람 AramCard와 동일한 동작으로 통일한다:
+ * PickCard — 카드 3장 중 하나를 고르는 화면들의 공용 선택 애니메이션 래퍼.
+ * 칼바람·클래식(AramCard)과 아레나(증강/프리즘/재련/모루)가 같은 연출을 쓴다:
  *   - picked   : 선택한 카드 scale 1.05→1 바운스
  *   - unchosen : 나머지 카드 fade-out + scale-down
  *   - reroll   : 리롤 대상 카드 fade-out
- *   - 새 step 진입은 flip(좌우 회전) 등장, 리롤 교체분은 fade 등장
- * children(카드 프레임)을 Pressable + Animated.View로 감싼다. 별표·리롤 버튼 등
- * 카드별 부가 UI는 호출부에서 형제로 둔다.
+ *   - 새 라운드·step 진입은 flip(좌우 회전) 등장, 리롤 교체분은 fade 등장
+ *
+ * children(카드 프레임)을 Pressable + Animated.View 로 감싼다. 별표·리롤 버튼 등
+ * 카드별 부가 UI 는 호출부에서 형제로 둔다.
+ *
+ * 상태(어느 슬롯이 어떤 모드인지)는 useCardPickAnim 이 들고 있다.
  */
 import { useEffect } from "react";
-import { Pressable } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import Animated, {
   Easing,
   ReduceMotion,
@@ -21,8 +24,11 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-export type ArenaCardExitMode = "none" | "picked" | "unchosen" | "reroll";
-export type ArenaCardEntryMode = "flip" | "fade";
+import { CARD_GAP, CARD_ROW_PAD } from "@/components/ui/rarity-card-frame";
+
+export type CardExitMode = "none" | "picked" | "unchosen" | "reroll";
+/** 갓 마운트된 카드가 등장하는 방식: 새 라운드는 'flip', 리롤 교체분은 'fade'. */
+export type CardEntryMode = "flip" | "fade";
 
 const DEFAULT_EASING = Easing.inOut(Easing.quad);
 const FLIP_EASING = Easing.out(Easing.cubic);
@@ -36,14 +42,14 @@ const timing = (toValue: number, duration: number, easing = DEFAULT_EASING) =>
 
 interface Props {
   index: number;
-  exitMode: ArenaCardExitMode;
-  entryMode: ArenaCardEntryMode;
+  exitMode: CardExitMode;
+  entryMode: CardEntryMode;
   disabled: boolean;
   onPress: () => void;
   children: React.ReactNode;
 }
 
-export function ArenaPickCard({
+export function PickCard({
   index,
   exitMode,
   entryMode,
@@ -61,7 +67,7 @@ export function ArenaPickCard({
   useEffect(() => {
     if (exitMode === "none") {
       if (flipIn) {
-        // 새 step: 카드가 행을 가로질러 순차적으로 펼쳐지며 등장.
+        // 새 라운드: 카드가 행을 가로질러 순차적으로 펼쳐지며 등장.
         const delay = index * 90;
         opacity.value = 0;
         scale.value = 1;
@@ -114,3 +120,22 @@ export function ArenaPickCard({
     </Animated.View>
   );
 }
+
+/**
+ * CardRow — 카드 3장을 가운데 정렬로 깐 행. 칼바람·클래식과 아레나가 공유한다.
+ * 여백·간격은 카드 너비 계산(cardWidthFor)이 쓰는 값과 같아야 해서 거기서 가져온다.
+ */
+export function CardRow({ children }: { children: React.ReactNode }) {
+  return <View style={rowStyles.row}>{children}</View>;
+}
+
+const rowStyles = StyleSheet.create({
+  row: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: CARD_ROW_PAD,
+    gap: CARD_GAP,
+  },
+});

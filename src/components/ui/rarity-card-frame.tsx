@@ -56,12 +56,23 @@ export const RARITY: Record<AugmentRarity, RarityStyle> = {
   },
 };
 
-// Highlight gold/coin amounts inside the description (e.g. "250골드", "250 gold").
 /** 카드 비율(세로/가로). 프레임을 쓰지 않는 아이템·프리즘 카드도 이 비율을 따른다. */
 export const CARD_ASPECT = 14 / 9;
 
-/** 카드 3장 행의 좌우 여백. 카드 간격은 화면(넓게)/오버레이(좁게)가 각자 정한다. */
+/** 카드 3장 행의 좌우 여백. */
 export const CARD_ROW_PAD = Spacing.four;
+
+/**
+ * 화면(칼바람·클래식·아레나)에서 카드 3장 사이 간격. 오버레이(모루·증강 강화)는
+ * 더 좁은 자기 값을 쓴다 — 시트 안이라 여유가 없다.
+ */
+export const CARD_GAP = Spacing.four;
+
+/**
+ * 카드 높이의 화면 세로 대비 상한. 꽉 채우면 헤더와 아래 리롤 버튼 자리가 없다.
+ * 칼바람·아레나가 같은 값을 써야 두 화면의 카드 크기가 같아 보인다.
+ */
+export const CARD_HEIGHT_RATIO = 0.56;
 
 /**
  * 카드 한 장의 너비 — 가로 3장이 들어가는 너비와 화면 높이 제한 중 작은 쪽.
@@ -79,12 +90,21 @@ export function cardWidthFor(
   return Math.min(byWidth, byHeight);
 }
 
-const AMOUNT_RE = /(\d[\d,]*\s*(?:골드|gold|원))/i;
+// 설명 안의 골드 금액("250골드", "250 gold")을 강조색으로 뽑아내는 패턴.
+// split 은 캡처 그룹째로 쪼개므로 같은 패턴 하나를 판정에도 그대로 쓴다 —
+// 예전엔 둘이 따로 적혀 있어 한쪽만 고치면 조용히 어긋났다.
+// 카드마다 렌더할 때 부르는 함수라 정규식은 모듈 상수로 한 번만 만든다.
+// 쪼개기용(g)과 판정용(g 없음)을 따로 두는 이유: test 는 g 가 붙으면 lastIndex 를
+// 들고 다녀 같은 문자열에도 번갈아 다른 답을 낸다.
+const AMOUNT = "(\\d[\\d,]*\\s*(?:골드|gold|원))";
+const AMOUNT_SPLIT_RE = new RegExp(AMOUNT, "gi");
+const AMOUNT_TEST_RE = new RegExp(AMOUNT, "i");
+
 function splitDescription(text: string): { text: string; hl: boolean }[] {
   return text
-    .split(/(\d[\d,]*\s*(?:골드|gold|원))/gi)
+    .split(AMOUNT_SPLIT_RE)
     .filter((p) => p.length > 0)
-    .map((p) => ({ text: p, hl: AMOUNT_RE.test(p) }));
+    .map((p) => ({ text: p, hl: AMOUNT_TEST_RE.test(p) }));
 }
 
 interface Props {
@@ -112,7 +132,7 @@ export function RarityCardFrame({
 
   const iconSize = compact ? 64 : 72; // 증강 아이콘 사이즈;
 
-  const nameSize = 12;
+  const nameSize = compact ? 10 : 12;
   const descSize = 8;
 
   const segments = splitDescription(

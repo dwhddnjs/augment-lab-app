@@ -8,17 +8,17 @@ import { RarityCardFrame } from "@/components/ui/rarity-card-frame";
 import { Spacing } from "@/constants/theme";
 import type { ArenaSpecialAugment } from "@/features/arena/types";
 import {
-  ArenaPickCard,
-  type ArenaCardEntryMode,
-  type ArenaCardExitMode,
-} from "./arena-pick-card";
+  PickCard,
+  type CardEntryMode,
+  type CardExitMode,
+} from "@/components/ui/pick-card";
 
 interface Props {
   special: ArenaSpecialAugment;
   cardWidth: number;
   index: number;
-  exitMode: ArenaCardExitMode;
-  entryMode: ArenaCardEntryMode;
+  exitMode: CardExitMode;
+  entryMode: CardEntryMode;
   disabled?: boolean;
   onPick: () => void;
 }
@@ -34,7 +34,7 @@ export function ArenaReforgeCard({
 }: Props) {
   return (
     <View style={styles.wrapper}>
-      <ArenaPickCard
+      <PickCard
         index={index}
         exitMode={exitMode}
         entryMode={entryMode}
@@ -46,7 +46,7 @@ export function ArenaReforgeCard({
           augment={{ ...special, rarity: "gold" }}
           cardWidth={cardWidth}
         />
-      </ArenaPickCard>
+      </PickCard>
     </View>
   );
 }
