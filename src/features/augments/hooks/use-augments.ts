@@ -1,8 +1,10 @@
 import { useMemo } from 'react';
-import { useLocale } from '@/hooks/use-locale';
-import type { Augment, AugmentMode } from '@/features/augments/types';
 
-const data: Record<string, Augment[]> = {
+import type { Augment, AugmentMode } from '@/features/augments/types';
+import type { Locale } from '@/hooks/use-locale';
+import { useLocalizedData } from '@/lib/i18n';
+
+const data: Record<Locale, Augment[]> = {
   ko: require('@/features/augments/data/augments.ko.json'),
   en: require('@/features/augments/data/augments.en.json'),
 };
@@ -12,8 +14,7 @@ const data: Record<string, Augment[]> = {
  * 과거 빌드가 지금은 어느 모드에도 없는 증강을 참조할 수 있으므로 여기서 거르지 않는다.
  */
 export function useAugments(): Augment[] {
-  const { locale } = useLocale();
-  return useMemo(() => data[locale] ?? data.en, [locale]);
+  return useLocalizedData(data);
 }
 
 /**

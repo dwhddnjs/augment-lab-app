@@ -1,12 +1,14 @@
 import { useMemo } from 'react';
-import { useLocale } from '@/hooks/use-locale';
+
 import type { Item } from '@/features/items/types';
+import type { Locale } from '@/hooks/use-locale';
 import type { DraftMode } from '@/lib/build-storage';
+import { useLocalizedData } from '@/lib/i18n';
 
 // 협곡(칼바람·아레나)과 클래식은 완전히 다른 아이템 세트다. 클래식은 시즌 초기
 // 레트로 아이템(77xxxx)을 쓰고 협곡 아이템은 하나도 등장하지 않는다. id 가 겹치지
 // 않으므로 조회용 목록은 한 벌로 이어 붙여 둔다.
-const data: Record<string, Item[]> = {
+const data: Record<Locale, Item[]> = {
   ko: [
     ...require('@/features/items/data/items.ko.json'),
     ...require('@/features/items/data/classic-items.ko.json'),
@@ -28,8 +30,7 @@ const POOL_IDS: Record<DraftMode, Set<string>> = {
  * 모드가 섞여 있으므로 여기서 고를 수 있는 아이템을 고르면 안 된다.
  */
 export function useItems(): Item[] {
-  const { locale } = useLocale();
-  return useMemo(() => data[locale] ?? data.en, [locale]);
+  return useLocalizedData(data);
 }
 
 /**

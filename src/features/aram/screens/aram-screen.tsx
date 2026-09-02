@@ -1,3 +1,10 @@
+/**
+ * 칼바람·클래식 공용 드래프트 화면. 규칙·UI 는 같고 증강 풀과 라운드 수만 다르다.
+ * 모드는 라우트 파라미터로 들어와 아이템 화면(saveBuild)까지 그대로 전달된다.
+ *
+ * 카드 3장의 선택·리롤 연출은 useCardPickAnim 이, 실제 트랜지션은 PickCard 가 맡는다
+ * (아레나 화면과 같은 조합).
+ */
 import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
@@ -9,21 +16,22 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
 import { GlassSurface } from "@/components/ui/glass-surface";
-import { CARD_ROW_PAD, cardWidthFor } from "@/components/ui/rarity-card-frame";
+import { CardRow } from "@/components/ui/pick-card";
+import {
+  CARD_GAP,
+  CARD_HEIGHT_RATIO,
+  cardWidthFor,
+} from "@/components/ui/rarity-card-frame";
 import { parseDraftMode } from "@/constants/game-modes";
 import { Radius, Spacing } from "@/constants/theme";
-
+import { useCardPickAnim } from "@/hooks/use-card-pick-anim";
 import { useLandscapeLock } from "@/hooks/use-landscape-lock";
-import { lockPortraitAfterExit } from "@/lib/orientation";
 import { useTheme } from "@/hooks/use-theme";
-import { augmentImageUrl } from "@/lib/ddragon";
 import type { DraftMode } from "@/lib/build-storage";
+import { augmentImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import {
-  AramCard,
-  type CardEntryMode,
-  type CardExitMode,
-} from "../components/aram-card";
+import { lockPortraitAfterExit } from "@/lib/orientation";
+import { AramCard } from "../components/aram-card";
 import { PickedDrawer } from "../components/picked-drawer";
 import { RoundIndicator } from "../components/round-indicator";
 import { useAram } from "../hooks/use-aram";
@@ -49,22 +57,9 @@ const t = {
   },
 };
 
-type ExitModes = [CardExitMode, CardExitMode, CardExitMode];
-type EntryModes = [CardEntryMode, CardEntryMode, CardEntryMode];
-
-const IDLE: ExitModes = ["none", "none", "none"];
-const ALL_FLIP: EntryModes = ["flip", "flip", "flip"];
-
 // 헤더 버튼 좌우 여백 — 카드 영역(CARD_ROW_PAD)보다 넓게 잡아 버튼이 기기 끝에 붙지 않게 한다.
 const HEADER_PAD = Spacing.five; // 32
-const CARD_GAP = Spacing.four; // 24
-// 카드가 세로를 꽉 채우지 않게 56%로 잡아 헤더·하단 리롤 버튼 자리를 남긴다.
-const CARD_HEIGHT_RATIO = 0.56;
 
-/**
- * 칼바람·클래식 공용 드래프트 화면. 규칙·UI 는 같고 증강 풀과 라운드 수만 다르다.
- * 모드는 라우트 파라미터로 들어와 아이템 화면(saveBuild)까지 그대로 전달된다.
- */
 export function AramScreen() {
   const translate = useTranslation(t);
   const { colors } = useTheme();
@@ -87,25 +82,16 @@ export function AramScreen() {
     mode,
     rounds,
   );
+  const anim = useCardPickAnim();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   // portrait 복귀는 handleExit에서 명시적으로 처리한다(중간 orientation 변경 방지).
   const { isLandscape, screenW, screenH } = useLandscapeLock();
 
   const cardWidth = cardWidthFor(screenW, screenH, CARD_GAP, CARD_HEIGHT_RATIO);
-
-  // Drawer width in landscape
   const drawerWidth = Math.min(340, screenW * 0.38);
 
-  // Animation state
-  const [exitModes, setExitModes] = useState<ExitModes>(IDLE);
-  // Per-card entry: flip on a new round, fade for a single rerolled card.
-  const [entryModes, setEntryModes] = useState<EntryModes>(ALL_FLIP);
-  const [animating, setAnimating] = useState(false);
-  // roundKey forces card remount (new entry animation) each round
-  const [roundKey, setRoundKey] = useState(0);
-
-  // Warm the image cache for the current cards so emblems appear with the card.
+  // 현재 카드의 이미지 캐시를 데워 엠블럼이 카드와 함께 뜨게 한다.
   useEffect(() => {
     // large가 없는 신규(Kiwi) 아이콘은 small로 폴백하므로 두 사이즈 모두 워밍한다.
     const urls = currentCards
@@ -117,65 +103,29 @@ export function AramScreen() {
     if (urls.length) Image.prefetch(urls, { cachePolicy: "memory-disk" });
   }, [currentCards]);
 
-  const handlePick = useCallback(
-    (idx: number) => {
-      if (animating) return;
-      setAnimating(true);
+  // 마지막 라운드를 고르면 아이템 선택으로 넘어간다. 픽 연출이 끝난 뒤 호출되므로
+  // 도중에 화면을 나가면 훅이 타이머를 끊어 이 콜백 자체가 실행되지 않는다.
+  const commitPick = (idx: number) => {
+    const { done, nextPicked } = pick(idx);
+    if (!done) return;
+    router.replace({
+      pathname: "/aram-items",
+      params: {
+        picked: JSON.stringify(nextPicked),
+        championId: championId ?? "",
+        mode,
+      },
+    });
+  };
 
-      const modes: ExitModes = ["unchosen", "unchosen", "unchosen"];
-      modes[idx] = "picked";
-      setExitModes(modes);
-
-      // Wait for unchosen exit anim (~350ms), then commit state
-      setTimeout(() => {
-        const { done, nextPicked } = pick(idx);
-        setExitModes(IDLE);
-        setEntryModes(ALL_FLIP); // next round flips in
-        setRoundKey((k) => k + 1);
-        setAnimating(false);
-
-        if (done) {
-          const params = {
-            picked: JSON.stringify(nextPicked),
-            championId: championId ?? "",
-            mode,
-          };
-          router.replace({ pathname: "/aram-items", params });
-        }
-      }, 380);
-    },
-    [animating, championId, mode, pick, router],
-  );
-
-  const handleReroll = useCallback(
-    (idx: number) => {
-      if (animating) return;
-      setAnimating(true);
-
-      const modes: ExitModes = ["none", "none", "none"];
-      modes[idx] = "reroll";
-      setExitModes(modes);
-
-      // Wait for the fade-out (~200ms), then swap the augment so it fades back in.
-      setTimeout(() => {
-        // The rerolled card remounts (new id) — mark it to fade in, not flip.
-        setEntryModes((prev) => {
-          const next = [...prev] as EntryModes;
-          next[idx] = "fade";
-          return next;
-        });
-        const newAugment = reroll(idx);
-        if (newAugment?.iconPath) {
-          Image.prefetch([augmentImageUrl(newAugment.iconPath, "large")], {
-            cachePolicy: "memory-disk",
-          });
-        }
-        setExitModes(["none", "none", "none"]);
-        setAnimating(false);
-      }, 220);
-    },
-    [animating, reroll],
-  );
+  const swapCard = (idx: number) => {
+    const newAugment = reroll(idx);
+    if (newAugment?.iconPath) {
+      Image.prefetch([augmentImageUrl(newAugment.iconPath, "large")], {
+        cachePolicy: "memory-disk",
+      });
+    }
+  };
 
   const handleExit = useCallback(() => {
     Alert.alert(
@@ -195,7 +145,7 @@ export function AramScreen() {
     );
   }, [mode, router, translate]);
 
-  // 회전은 진입 직전(use-champion-select)과 위 useFocusEffect 두 곳에서 건다.
+  // 회전은 진입 직전(use-champion-select)과 useLandscapeLock 두 곳에서 건다.
   // 회전이 끝날 때까지 카드 렌더를 보류해, 카드가 portrait 레이아웃으로 먼저
   // 떴다가 reflow되는 일을 막는다.
   if (!isLandscape) {
@@ -250,23 +200,22 @@ export function AramScreen() {
             />
           </View>
 
-          {/* Cards row */}
-          <View style={styles.cardsRow}>
+          <CardRow>
             {currentCards.map((aug, i) => (
               <AramCard
-                key={`${roundKey}-${aug.id}`}
+                key={`${anim.roundKey}-${aug.id}`}
                 augment={aug}
                 index={i}
                 cardWidth={cardWidth}
-                exitMode={exitModes[i]}
-                entryMode={entryModes[i]}
-                disabled={animating}
+                exitMode={anim.exitModes[i]}
+                entryMode={anim.entryModes[i]}
+                disabled={anim.animating}
                 rerolled={rerolled[i]}
-                onPick={() => handlePick(i)}
-                onReroll={() => handleReroll(i)}
+                onPick={() => anim.pick(i, () => commitPick(i))}
+                onReroll={() => anim.reroll(i, () => swapCard(i))}
               />
             ))}
-          </View>
+          </CardRow>
         </SafeAreaView>
       </ThemedView>
     </Drawer>
@@ -288,20 +237,11 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.double,
     paddingBottom: Spacing.two,
   },
-  cardsRow: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: CARD_ROW_PAD,
-    gap: CARD_GAP,
-  },
   roundBox: {
     alignItems: "center",
     gap: Spacing.half,
     paddingHorizontal: Spacing.four,
     paddingVertical: Spacing.one,
     borderRadius: Radius.full,
-    // borderCurve: "continuous",
   },
 });

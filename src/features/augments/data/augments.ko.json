@@ -14,7 +14,7 @@
   {
     "id": "adamant",
     "name": "단호함",
-    "description": "적을 이동 불가로 만들거나 이동 스킬을 봉인하면 10초간 방어력·마법 저항력 10을 얻습니다. 최대 10회(총 100) 중첩되고 재발동 시 지속시간이 갱신됩니다. (시전당 재사용 5초)",
+    "description": "적을 이동 불가 상태로 만들거나 이동 스킬을 사용할 수 없게 할 때마다 방어력 및 마법 저항력을 얻습니다.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Adamant_small.png",
     "augmentNameId": "Adamant",
@@ -1025,7 +1025,7 @@
   {
     "id": "clown-college",
     "name": "광대 대학",
-    "description": "속임수 소환사 주문을 얻습니다. 순간이동해 투명 상태가 되고 다음 기본 공격이 추가 물리 피해를 입힙니다. 사망 시 폭발 상자를 남겨 큰 마법 피해와 공포를 겁니다.",
+    "description": "속임수 소환사 주문을 얻습니다. 암습 지속 효과를 얻습니다. 사망 시, 폭발하는 상자를 생성하여 엄청난 고정 피해를 입히고 주변 적을 공포에 빠뜨립니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ClownCollege_small.png",
     "augmentNameId": "ARAM_ClownCollege",
@@ -2410,7 +2410,7 @@
   {
     "id": "snap-back",
     "name": "원상복구",
-    "description": "선택한 스킬에 재시전을 부여합니다. 재시전 시 원래 시전 위치로 순간이동하며 폭발해 주변 적에게 100~300(+ 공격력의 20%)(+ 주문력의 20%)의 마법 피해를 입힙니다.",
+    "description": "선택한 스킬 재사용 시 폭발하며 원래 위치로 돌아갑니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "SnapBack",
@@ -2501,7 +2501,7 @@
   {
     "id": "void-dash",
     "name": "공허 돌진",
-    "description": "돌진이 있는 스킬을 강화합니다. 돌진 도착 지점에 0.3초 후 250 범위 공허 지대를 생성해 적에게 80~400(+ 스킬 가속의 100%)의 마법 피해를 입히고 1초간 35% 둔화시킵니다.",
+    "description": "선택한 스킬로 돌진 시 적 챔피언을 둔화시키고 마법 피해를 입히는 공허 지대를 생성합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "VoidDash",
@@ -2912,7 +2912,7 @@
   {
     "id": "doran-s-biggest-fan",
     "name": "도란 열혈 팬",
-    "description": "도란의 검·반지·방패를 두 번째부터 구매할 때마다 첫 아이템에 중첩이 쌓여 능력치의 일부를 추가로 얻습니다. 기본 지속 효과는 증가하지 않으며 해당 도란 아이템은 판매할 수 없습니다.",
+    "description": "도란의 검, 반지, 방패 첫 구매 후 추가로 구매할 때마다 기존 아이템에 중첩이 쌓입니다. 중첩당 아이템 능력치의 125%를 부여합니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dorans_Fan_Small.png",
     "augmentNameId": "DoransBiggestFan",

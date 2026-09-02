@@ -62,13 +62,18 @@ src/
 └── styles/global.css
 ```
 
+feature 는 두 종류다 — 이 구분이 아래 경계 규칙의 전제다:
+- **데이터 도메인**(`augments`·`champions`·`items`): 로케일별 JSON + 조회 훅 + 타입. 누구나 읽는다.
+- **화면 도메인**(`aram`·`arena`·`custom`·`builds`·`mypage`): 실제 화면. 데이터 도메인을 읽어 쓴다.
+
 경계 규칙:
 1. `src/app/` — 라우트 파일만. UI는 `features/*/screens`에서 import.
-2. `features/<도메인>/` — **screens(화면)와 components(조각)를 분리**. 다른 feature를 import하지 않는다(공유는 `hooks/`·`lib/`로 승격).
-3. `src/components/` — 도메인 무관 공용 프리미티브만. feature를 import하지 않는다.
+2. `features/<도메인>/` — **screens(화면)와 components(조각)를 분리**. 화면 도메인이 데이터 도메인을 import 하는 건 정상이다(그게 데이터 도메인의 용도). 금지되는 건 **화면 도메인끼리의 참조** — 공유가 필요하면 `components/ui`·`hooks/`·`lib/`로 승격한다.
+   예외는 `builds` 하나 — 모든 모드의 빌드를 되살려 보여주는 화면이라 각 모드의 데이터 훅과 요약 컴포넌트(`ArenaBuildSummary`)를 읽는다.
+3. `src/components/` — 두 개 이상 feature가 쓰는 공용 UI. 데이터 도메인의 **타입**은 import 해도 된다(`RarityCardFrame`이 `Augment`를 그린다). 화면 도메인은 import 하지 않는다.
 4. `src/hooks/` — 여러 feature 공유 글로벌 훅만.
 5. `src/lib/` — 외부 클라이언트 + 순수 유틸(React 훅 아님. `i18n.ts`의 `useTranslation`만 예외).
-6. 공용 UI는 2개 이상 feature에서 쓰일 때 `components/ui`로 승격.
+6. 공용 UI는 2개 이상 feature에서 쓰일 때 `components/ui`로 승격 — 단 그 UI가 특정 도메인 데이터에 매여 있으면(`ItemFilterBar`가 `FILTERS`를, `ItemStatPanel`이 `ItemStats`를 안다) 원래 feature에 두고 가져다 쓴다.
 7. `src/types/` 폴더 만들지 말 것 — 타입은 사용처(feature)와 동거.
 
 ## 경로 별칭 / React Compiler
