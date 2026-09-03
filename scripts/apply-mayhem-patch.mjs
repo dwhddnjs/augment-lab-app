@@ -398,7 +398,7 @@ async function main() {
       DIFF_PATH,
       JSON.stringify({ generatedFrom: 'CDragon latest + map30.bin + wiki MayhemAugmentData', newIds: newEn.map((a) => a.id), needsNumbers, noCoefficients, missingNumbers, numberDiffs, disabled }, null, 2) + '\n',
     );
-    console.log('\n✓ 파일 반영 완료. 이제: node scripts/gen-augment-check.mjs');
+    console.log('\n✓ 파일 반영 완료. 이제: node scripts/gen-data-check.mjs');
   } else {
     console.log('\n(미리보기 — 반영하려면 --write)');
   }

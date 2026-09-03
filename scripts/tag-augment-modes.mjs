@@ -198,7 +198,7 @@ if (missingClassic.length) {
 if (WRITE) {
   writeFileSync(EN_PATH, JSON.stringify(en, null, 2) + '\n');
   writeFileSync(KO_PATH, JSON.stringify(ko, null, 2) + '\n');
-  console.log('\n✓ 반영 완료. 이제: node scripts/gen-augment-check.mjs');
+  console.log('\n✓ 반영 완료. 이제: node scripts/gen-data-check.mjs');
 } else {
   console.log('\n(미리보기 — 반영하려면 --write)');
 }

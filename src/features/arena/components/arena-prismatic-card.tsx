@@ -89,14 +89,14 @@ export function ArenaPrismaticCard({
             </ThemedText>
             {!!stats && (
               <ThemedText
-                numberOfLines={2}
+                numberOfLines={4}
                 style={[styles.stats, { color: PRISM.title }]}
               >
                 {stats}
               </ThemedText>
             )}
             <ThemedText
-              numberOfLines={7}
+              numberOfLines={6}
               style={[styles.desc, { color: PRISM.desc }]}
             >
               {summary}
@@ -124,16 +124,18 @@ const styles = StyleSheet.create({
     borderRadius: Radius.lg + 3,
     borderCurve: "continuous",
   },
+  // 여백은 증강 카드(rarity-card-frame)와 같은 값을 쓴다. 여기만 paddingTop 16·gap 8로
+  // 두 배였던 탓에 32px 을 여백이 먹고, 스탯 넉 줄짜리 아이템이 들어갈 자리가 없었다.
   body: {
     flex: 1,
     borderRadius: Radius.lg,
     borderCurve: "continuous",
     overflow: "hidden",
     alignItems: "center",
-    paddingTop: Spacing.three,
-    paddingBottom: Spacing.two,
+    paddingTop: Spacing.two,
+    paddingBottom: Spacing.half,
     paddingHorizontal: Spacing.one,
-    gap: Spacing.two,
+    gap: Spacing.one,
   },
   // 아이템 아이콘 소스가 64px라 표시를 작게 둘수록 업스케일이 줄어 선명하다.
   icon: {
