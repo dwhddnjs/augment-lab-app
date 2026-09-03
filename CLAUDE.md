@@ -8,7 +8,7 @@
 
 - **UI 작업**(컴포넌트·리스트·폼·컨트롤·시트·메뉴·헤더·라우팅) → `.agents/skills/expo-ui/SKILL.md`. 진짜 네이티브가 hero. universal `@expo/ui` 1순위, 안 될 때만 RN으로 내려간다.
 - **디자인**(색·타이포·간격/반경·리퀴드글라스·이미지/아이콘) → `.agents/skills/design-system/SKILL.md`. 모든 값은 `src/constants/theme.ts` 토큰만. hex·숫자 리터럴 하드코딩 금지.
-- **증강 데이터 변경**(`src/features/augments/data/augments.{ko,en}.json` 수정·추가·삭제) → `.agents/skills/augment-check/SKILL.md`. 변경 때마다 검수 페이지를 재생성하고 함께 커밋.
+- **데이터 변경**(`src/features/augments/data/`·`src/features/arena/data/`·`src/features/items/data/` 의 JSON 수정·추가·삭제) → `.agents/skills/augment-check/SKILL.md`. 변경 때마다 검수 페이지(`docs/index.html`)를 재생성하고 함께 커밋.
 
 ## 플랜 문서 저장
 

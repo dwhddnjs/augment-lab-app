@@ -31,13 +31,13 @@
     "id": "447104",
     "name": "Innervating Locket",
     "description": "70 Ability Power\n20 Ability Haste\n200 Health\n\nFill the Soul\nAbilities cast nearby grant charges; at 30, gain a shield, ability power, and move speed for the round.",
-    "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/3032_Innervating_Locket.png",
+    "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/3032_Innervating_Locket.project_jade.png",
     "price": 2750
   },
   {
     "id": "447105",
     "name": "Empyrean Promise",
-    "description": "70 Ability Power\n18% Heal and Shield Power\n30 Ability Haste\n125% Base Mana Regen\n\nVigilance (Active)\nTeleport to an ally and grant a shield. Usable when an ally is downed. (20s cooldown)",
+    "description": "70 Ability Power\n18% Heal/Shield Power\n30 Ability Haste\n125% Base Mana Regen\n\nVigilance (Active)\nTeleport to an ally and grant a shield. Usable when an ally is downed. (20s cooldown)",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/7105_AngelicPromise.png",
     "price": 2750
   },
@@ -100,7 +100,7 @@
   {
     "id": "447114",
     "name": "Reverberation",
-    "description": "35 Armor\n35 Magic Resist\n40% Attack Speed\n\nReverberate / Resonate / Rumble\nReverberate: gain 50 max health per 10% bonus attack speed at combat start.\nResonate: basic attacks deal bonus on-hit magic damage.\nRumble: immobilizing an enemy applies on-hit effects 3 times.",
+    "description": "35 Armor\n35 Magic Resist\n40% Attack Speed\n\nReverberate: 50 max Health per 10% bonus AS at start.\nResonate: bonus on-hit magic damage.\nRumble: immobilizing applies on-hit effects 3 times.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447114_Reverberation.png",
     "price": 2750
   },
@@ -121,42 +121,42 @@
   {
     "id": "447118",
     "name": "Pyromancer's Cloak",
-    "description": "85 Adaptive Force\n400 Health\n15 Ability Haste\n\nSpark / Cleansing Flame\nSpark: attacks and abilities Burn enemies for magic damage (5s cooldown).\nCleansing Flame: a Burn creates a Blaze that heals and speeds allies while damaging enemies.",
+    "description": "85 Adaptive Force\n400 Health\n15 Ability Haste\n\nSpark: attacks and abilities Burn for magic damage (5s cooldown).\nCleansing Flame: a Burn creates a Blaze that heals allies and damages enemies.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447118_PyromancersCloak.png",
     "price": 2750
   },
   {
     "id": "447119",
     "name": "Lightning Rod",
-    "description": "500 Health\n30 Armor\n30 Magic Resist\n20 Ability Haste\n\nCall Lightning / Fully Automated\nEvery 16s, a lightning bolt deals magic damage and slows. Being struck grants a shield.\nFully Automated: autocast spells benefit from ability haste.",
+    "description": "500 Health\n30 Armor\n30 Magic Resist\n20 Ability Haste\n\nCall Lightning: every 16s a bolt deals magic damage and slows. Being struck grants a shield.\nFully Automated: autocast spells benefit from ability haste.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447119_LightningRod.png",
     "price": 2750
   },
   {
     "id": "447120",
     "name": "Diamond-Tipped Spear",
-    "description": "75 Adaptive Force\n40% Attack Speed\n\nReach Weapon / Sweet Spot\nReach Weapon: attack range increased by 75.\nSweet Spot: deal up to 30% more attack and 50% more ability damage based on distance to target.",
+    "description": "75 Adaptive Force\n40% Attack Speed\n\nReach Weapon: attack range increased by 75.\nSweet Spot: deal up to 30% more attack and 50% more ability damage based on distance to target.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447120_DiamondTippedSpear.png",
     "price": 2750
   },
   {
     "id": "447121",
     "name": "Twilight's Edge",
-    "description": "70 Attack Damage\n100 Ability Power\n\nThe Path Between\nMaterial World: +25% AD and attack speed. Spirit World: +25% AP and ability haste.\nAt the threshold, orbiting weapons continuously damage enemies they hit.",
+    "description": "70 Attack Damage\n100 Ability Power\n\nThe Path Between\nMaterial World: +25% AD and AS. Spirit World: +25% AP and AH.\nAt the threshold, orbiting weapons damage enemies hit.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447121_TwilightsEdge.png",
     "price": 2750
   },
   {
     "id": "447122",
     "name": "Black Hole Gauntlet",
-    "description": "900 Health\n25 Ability Haste\n\nAccretion / Dark Star (Active)\nAccretion: on-hit and immobilizing stacks grow your size (up to 50).\nDark Star: summon a black hole that pulls in nearby enemies and deals magic damage.",
+    "description": "900 Health\n25 Ability Haste\n\nAccretion: on-hit and immobilizing stacks grow your size (max 50).\nDark Star (Active): a black hole pulls in nearby enemies and deals magic damage.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447122_BlackHoleGauntlet.png",
     "price": 2750
   },
   {
     "id": "447123",
     "name": "Puppeteer",
-    "description": "30% Attack Speed\n15% Heal and Shield Power\n40 Ability Haste\n150% Base Mana Regen\n\nPull Their Strings\nAttacking a champion 4 times Berserks them for 2s. Healing, shielding, or buffing an ally reduces the cooldown.",
+    "description": "30% Attack Speed\n15% Heal/Shield Power\n40 Ability Haste\n150% Base Mana Regen\n\nPull Their Strings\n4 attacks Berserk a champion for 2s. Healing, shielding or buffing an ally reduces the cooldown.",
     "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/447123_Puppeteer.png",
     "price": 2750
   }

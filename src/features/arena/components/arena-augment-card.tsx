@@ -68,7 +68,10 @@ export function ArenaAugmentCard({
   onPick,
   onReroll,
 }: Props) {
-  const starColor = RARITY[augment.rarity].highlight;
+  // 별은 아이콘과 같은 티어 색(iconTint)을 쓴다. highlight 는 설명 안 골드 금액을
+  // 강조하는 색이라 실버·골드는 우연히 비슷했지만 프리즘만 어두운 보라(#7A4FC0)여서,
+  // 홀로그래픽 프레임·아이콘과 따로 노는 별이 나왔다.
+  const starColor = RARITY[augment.rarity].iconTint;
   const cardBg = RARITY[augment.rarity].bodyColor;
 
   return (
