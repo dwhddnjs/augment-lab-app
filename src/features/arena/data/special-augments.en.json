@@ -140,7 +140,7 @@
   {
     "id": "go-hwolf",
     "name": "Wolf's Frenzy",
-    "description": "Lose your innate revive.\n\nIncrease your Health by 15%.\n\nIf you deal damage that would leave a champion below below 10% maximum health, execute them.",
+    "description": "Lose your innate revive.\n\nGain 15% Health.\n\nDamage that would leave a champion below 10% max Health executes them.",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wolf_small.arena_2026_s2.png"
   },
   {

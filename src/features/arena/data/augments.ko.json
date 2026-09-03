@@ -42,7 +42,7 @@
   {
     "id": "serve-beyond-death",
     "name": "기사회생",
-    "description": "라운드마다 처음으로 사망할 때 체력을 완전히 회복하고, 회복된 체력이 점차 줄어듭니다.\n\n체력이 줄어드는 동안 적 챔피언 처치에 관여하면 체력 감소가 중단됩니다.",
+    "description": "라운드마다 처음 사망할 때 체력을 완전히 회복하고 점차 줄어듭니다.\n\n줄어드는 동안 적 챔피언 처치에 관여하면 감소가 멈춥니다.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/servebeyonddeath_small.png",
     "maxLevel": 2
@@ -50,7 +50,7 @@
   {
     "id": "undying-guard",
     "name": "불멸의 경계",
-    "description": "전쟁 단련으로 부활 시 자헨이 주위 적들에게 각 유닛의 현재 체력에 비례한 피해를 입히고 모든 대상을 뒤로 밀어내며 일정 거리 밖에 있는 적 챔피언에게 피해를 받지 않는 상태가 됩니다. 또한 이동 속도가 잠시 동안 크게 증가합니다.",
+    "description": "전쟁 단련으로 부활 시 주위 적들에게 현재 체력에 비례한 피해를 입히고 밀어냅니다. 범위 밖 챔피언에게는 피해를 받지 않으며 이동 속도가 잠시 크게 증가합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
     "maxLevel": 1
@@ -138,7 +138,7 @@
   {
     "id": "firefox",
     "name": "불여우",
-    "description": "자동 사용\n이동 속도가 증가하고 주위를 빙빙 도는 불꽃 3개를 생성합니다. 불꽃은 시야에 들어오는 가장 가까운 적을 대상으로 지정해 마법 피해를 입힙니다.",
+    "description": "자동 사용\n\n이동 속도가 증가하고 주위를 도는 불꽃 3개를 생성합니다. 불꽃은 시야 안의 가장 가까운 적에게 마법 피해를 입힙니다.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/firfox_small.png",
     "maxLevel": 1
@@ -450,7 +450,7 @@
   {
     "id": "quest-wooglets-witchcap",
     "name": "퀘스트: 우글렛의 마녀 모자",
-    "description": "즉시: 쓸데없이 큰 지팡이를 획득합니다.\n\n조건: 라바돈의 죽음모자와 존야의 모래시계를 보유해야 합니다.\n\n보상: 우글렛의 마녀 모자를 획득합니다.",
+    "description": "즉시: 쓸데없이 큰 지팡이 획득\n\n조건: 라바돈의 죽음모자와 존야의 모래시계 보유\n\n보상: 우글렛의 마녀 모자 획득",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
     "maxLevel": 1
@@ -586,7 +586,7 @@
   {
     "id": "raid-boss",
     "name": "끝판왕",
-    "description": "매 라운드를 갇힌 상태로 시작합니다. 갇힌 동안 받는 피해량이 큰 폭으로 감소하고 크기와 능력치가 지속적으로 축적됩니다.\n\n해방 시 적들을 밀어내고 보호막을 얻습니다.",
+    "description": "매 라운드 갇힌 상태로 시작합니다. 갇힌 동안 받는 피해가 크게 감소하고 크기와 능력치가 쌓입니다.\n\n해방 시 적을 밀어내고 보호막을 얻습니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/raidboss_small.png",
     "maxLevel": 2
@@ -626,7 +626,7 @@
   {
     "id": "infernal-conduit",
     "name": "지옥의 전도체",
-    "description": "스킬 사용 시 무한히 중첩되는 화상 효과를 적용해 지속적으로 마법 피해를 입힙니다.\n\n화상 효과가 기본 스킬의 재사용 대기시간을 감소시킵니다.",
+    "description": "스킬 사용 시 무한히 중첩되는 화상을 적용해 마법 피해를 입힙니다.\n\n화상이 기본 스킬의 재사용 대기시간을 감소시킵니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/infernalconduit_small.png",
     "maxLevel": 3
@@ -794,7 +794,7 @@
   {
     "id": "quest-angelof-retribution",
     "name": "퀘스트: 응징의 천사",
-    "description": "조건: 2500만큼 아군의 체력을 회복시키거나 피해량을 막아야 합니다.\n\n보상: 100%의 공격 속도를 얻습니다. 또한 기본 공격 시 체력 회복과 보호막 효과의 350%에 해당하는 추가 마법 피해를 입힙니다.",
+    "description": "조건: 아군 체력 2500 회복 또는 피해 차단\n\n보상: 공격 속도 100% 증가. 기본 공격이 회복·보호막 효과의 350%만큼 마법 피해를 추가로 입힙니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_angelofretribution_small.png",
     "maxLevel": 1
@@ -826,7 +826,7 @@
   {
     "id": "well-be-right-back",
     "name": "금방 돌아올게",
-    "description": "시간 정지 소환사 주문을 얻습니다.\n\n시간 정지: 주변 모든 챔피언이 경직 상태에 빠집니다. 자신에게 적용되는 경직 효과는 지속시간이 짧으며, 지속시간 동안 잃은 체력에 따라 체력을 회복합니다.",
+    "description": "시간 정지 소환사 주문을 얻습니다.\n\n시간 정지: 주변 모든 챔피언이 경직됩니다. 자신의 경직은 더 짧고, 그동안 잃은 체력에 비례해 회복합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wellberightback_small.png",
     "maxLevel": 2
@@ -866,7 +866,7 @@
   {
     "id": "hive-mind",
     "name": "군체 의식",
-    "description": "매 라운드를 벌 0마리와 함께 시작합니다. 꽃을 수확하면 추가로 벌을 얻습니다. 적 챔피언에게 피해를 입히면 벌을 보냅니다. 벌은 대상에 다다르면 2초 동안 의 마법 피해를 입히고 다시 돌아옵니다.",
+    "description": "매 라운드를 벌 0마리로 시작하고, 꽃을 수확하면 벌을 더 얻습니다. 적 챔피언에게 피해를 입히면 벌을 보내 2초 동안 마법 피해를 입히고 되돌아옵니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/hive_mind_small.png",
     "maxLevel": 3
@@ -1090,7 +1090,7 @@
   {
     "id": "blood-brother",
     "name": "피를 나눈 형제",
-    "description": "다리우스의 과다출혈을 얻습니다. 기본 공격과 공격 스킬이 5초에 걸쳐 물리 피해를 입히며 최대 5회 중첩됩니다. 5중첩 시 드레이븐의 공격력이 증가합니다.",
+    "description": "다리우스의 과다출혈을 얻습니다. 기본 공격과 공격 스킬이 5초에 걸쳐 물리 피해를 입히며 5회까지 중첩됩니다. 5중첩 시 공격력이 증가합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bloodbrother_small.png",
     "maxLevel": 1
@@ -1170,7 +1170,7 @@
   {
     "id": "orbital-laser",
     "name": "궤도형 레이저",
-    "description": "소환사 질주를 궤도형 레이저로 교체합니다.\n\n교체가 끝나면 잠시 후 궤도형 레이저로 최대 체력의 30%에 해당하는 고정 피해를 입히고, 추가로 3초 동안 의 마법 피해를 입힙니다.",
+    "description": "소환사 질주를 궤도형 레이저로 교체합니다.\n\n잠시 후 레이저가 내려와 최대 체력의 30%에 해당하는 고정 피해를 입히고 3초 동안 마법 피해를 입힙니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/orbitallaser_small.png",
     "maxLevel": 2
@@ -1258,7 +1258,7 @@
   {
     "id": "apex-inventor",
     "name": "최첨단 발명가",
-    "description": "아이템 가속이 100 증가합니다. (50%의 아이템 재사용 대기시간 감소 효과와 동일)\n\n아이템 가속은 모든 아이템 스킬의 재사용 대기시간%i:cooldown%을 감소시킵니다.",
+    "description": "아이템 가속이 100 증가합니다. 모든 아이템 스킬의 재사용 대기시간이 50% 감소하는 것과 같습니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/apexinventor_small.png",
     "maxLevel": 2
@@ -1434,7 +1434,7 @@
   {
     "id": "oathsworn",
     "name": "계약",
-    "description": "도주를 운명의 부름으로 교체합니다.\n\n운명의 부름으로 아군이 최대 4초 동안 대상으로 지정할 수 없는 상태가 됩니다. 아군은 직접 날아가 적을 밀어낼 수 있습니다.",
+    "description": "도주를 운명의 부름으로 교체합니다.\n\n아군이 최대 4초 동안 대상 지정 불가 상태가 되며, 직접 날아가 적을 밀어낼 수 있습니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/oathsworn_small.png",
     "maxLevel": 1
@@ -1546,7 +1546,7 @@
   {
     "id": "its-killing-time",
     "name": "처형 시간",
-    "description": "궁극기 사용 후 모든 적 챔피언에게 죽음의 표식을 남깁니다.\n\n표식이 있는 동안 적에게 입힌 피해를 비축합니다. 표식의 효과가 끝날 때 폭발해 비축된 피해를 입힙니다.",
+    "description": "궁극기 사용 후 모든 적 챔피언에게 죽음의 표식을 남깁니다.\n\n표식이 있는 동안 입힌 피해를 비축했다가 표식이 끝날 때 폭발시킵니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/itskillingtime_small.png",
     "maxLevel": 3
@@ -1554,7 +1554,7 @@
   {
     "id": "wisdomof-ages",
     "name": "세월의 지혜",
-    "description": "지금 1레벨이 증가하고 두 라운드마다 추가로 1레벨이 증가합니다.\n\n레벨 제한이 사라집니다.\n\n4라운드 이후 이 증강을 선택할 경우, 2레벨이 추가로 증가합니다.",
+    "description": "지금 1레벨, 이후 두 라운드마다 1레벨이 추가로 증가합니다.\n\n레벨 제한이 사라집니다.\n\n4라운드 이후 선택하면 2레벨을 더 얻습니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wisdomofages_small.png",
     "maxLevel": 3
@@ -1594,7 +1594,7 @@
   {
     "id": "and-my-axe",
     "name": "도끼 받아라!",
-    "description": "자동 사용:\n주기적으로 가장 가까운 적에게 도끼를 던져 물리 피해를 입히고, 둔화를 적용하며, 방어력과 마법 저항력을 감소시킵니다. 도끼를 회수하면 재사용 대기시간이 감소합니다.",
+    "description": "자동 사용: 주기적으로 가까운 적에게 도끼를 던져 물리 피해를 입히고 둔화시키며 방어력·마법 저항력을 깎습니다. 회수 시 재사용 대기시간 감소.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/andmyaxe_small.png",
     "maxLevel": 2

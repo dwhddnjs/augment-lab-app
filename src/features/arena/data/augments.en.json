@@ -42,7 +42,7 @@
   {
     "id": "serve-beyond-death",
     "name": "Serve Beyond Death",
-    "description": "The first time you would die each round, instead return to full Health, decaying over time.\n\nTaking down an enemy champion while your Health is decaying stops the decay.",
+    "description": "The first time you would die each round, return to full Health instead, decaying over time.\n\nA takedown while decaying stops the decay.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/servebeyonddeath_small.png",
     "maxLevel": 2
@@ -50,7 +50,7 @@
   {
     "id": "undying-guard",
     "name": "Undying Guard",
-    "description": "Upon reviving with Cultivation of War, Zaahen deals damage to nearby enemies based on their current Health and knocks all targets back, becoming impervious to damage dealt by champions outside of the circle created and gains a brief burst of movement speed.",
+    "description": "On revive, damage nearby enemies based on their current Health and knock them back. Champions outside the circle can't damage you.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
     "maxLevel": 1
@@ -58,7 +58,7 @@
   {
     "id": "quantum-computing",
     "name": "Quantum Computing",
-    "description": "Periodically Autocast a massive slash around you, dealing physical damage.\n\nEnemies hit by the outer edge are Slowed, take additional damage, and heal you.",
+    "description": "Periodically Autocast a massive slash around you, dealing physical damage.\n\nEnemies hit by the outer edge are Slowed, take extra damage and heal you.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quantumcomputing_small.png",
     "maxLevel": 3
@@ -90,7 +90,7 @@
   {
     "id": "chauffeur",
     "name": "Chauffeur",
-    "description": "You are attached to your ally and can't move on your own.\n\nYour bonus Move Speed is also granted to your ally, and you gain Ability Haste and Attack Speed.",
+    "description": "Attached to your ally and unable to move alone. Your bonus Move Speed is shared, and you gain Ability Haste and Attack Speed.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/chauffeur_small.png",
     "maxLevel": 2
@@ -138,7 +138,7 @@
   {
     "id": "firefox",
     "name": "Firefox",
-    "description": "Autocast\nGain Movement Speed and conjure three flames that orbit you, targetting the closest visible enemy in range and dealing magic damage.",
+    "description": "Autocast\n\nGain Move Speed and conjure three flames that orbit you, striking the closest visible enemy in range for magic damage.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/firfox_small.png",
     "maxLevel": 1
@@ -322,7 +322,7 @@
   {
     "id": "clown-college",
     "name": "Clown College",
-    "description": "Gain the Deceive spell: blink and turn invisible, with your next attack dealing bonus physical damage. On death, leave an exploding box dealing heavy magic damage and fearing nearby enemies.",
+    "description": "Gain Deceive: blink and turn invisible; your next attack deals bonus physical damage. On death, leave a box that explodes and fears.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/clowncollege_small.png",
     "maxLevel": 1
@@ -450,7 +450,7 @@
   {
     "id": "quest-wooglets-witchcap",
     "name": "Quest: Wooglet's Witchcap",
-    "description": "Immediate: Gain Needlessly Large Rod.\n\nRequirement: Possess Rabadon's Deathcap and Zhonya's Hourglass.\n\nReward: Gain Wooglet's Witchcap.",
+    "description": "Immediate: Needlessly Large Rod.\n\nQuest: Rabadon's Deathcap + Zhonya's Hourglass.\n\nReward: Wooglet's Witchcap.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
     "maxLevel": 1
@@ -578,7 +578,7 @@
   {
     "id": "buff-buddies",
     "name": "Buff Buddies",
-    "description": "You gain Crest of Cinders and Crest of Insight.\n\nGranting yourself Ability Haste and resource regeneration and causing your Attacks to Burn and Slow enemy champions.",
+    "description": "Gain Crest of Cinders and Crest of Insight: Ability Haste and resource regeneration, and your Attacks Burn and Slow enemy champions.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/buffbuddies_small.png",
     "maxLevel": 2
@@ -586,7 +586,7 @@
   {
     "id": "raid-boss",
     "name": "Raid Boss",
-    "description": "You start each round imprisoned. While imprisoned, you have massive damage reduction and accumulate size, and power over time.\n\nWhen you escape, Knock Back enemies and gaining Shield.",
+    "description": "Start each round imprisoned, with massive damage reduction while size and power accumulate.\n\nOn escape, knock back enemies and gain a shield.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/raidboss_small.png",
     "maxLevel": 2
@@ -626,7 +626,7 @@
   {
     "id": "infernal-conduit",
     "name": "Infernal Conduit",
-    "description": "Your Abilities apply an infinitely stacking Burn, dealing magic damage over time.\n\nYour Burn effects reduce your basic Ability Cooldowns.",
+    "description": "Your Abilities apply an infinitely stacking Burn dealing magic damage over time.\n\nYour Burns reduce your basic Ability Cooldowns.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/infernalconduit_small.png",
     "maxLevel": 3
@@ -650,7 +650,7 @@
   {
     "id": "prismatic-egg",
     "name": "Prismatic Egg",
-    "description": "Gain 1 stack on takedown, once per champion per round.\n\nAfter 5 stacks, this hatches into a Prismatic Item Anvil, %i:Augment% Prismatic Augment, and a %i:StatAnvil% Prismatic Stat Anvil.",
+    "description": "Gain 1 stack on takedown, once per champion per round. At 5 stacks, hatch a Prismatic Item Anvil, Augment and Stat Anvil.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
     "maxLevel": 1
@@ -690,7 +690,7 @@
   {
     "id": "divine-intervention",
     "name": "Divine Intervention",
-    "description": "Shortly after combat starts, call a protective star. Upon its landing, you and nearby allies become Invulnerable for a few seconds.\n\nThen Autocast this every 25 seconds.",
+    "description": "Shortly after combat starts, a protective star lands, making you and nearby allies Invulnerable briefly. Autocast every 25 seconds.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/slowactingpainkillers_small.png",
     "maxLevel": 2
@@ -762,7 +762,7 @@
   {
     "id": "dual-wield",
     "name": "Dual Wield",
-    "description": "When you Attack, fire a bolt that deals 40% damage and applies your On-Hit effects at 40% effectiveness.\n\nGain 15% total Attack Speed.",
+    "description": "Attacks fire a bolt dealing 40% damage and applying On-Hit effects at 40%.\n\nGain 15% total Attack Speed.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/dualwield_small.png",
     "maxLevel": 3
@@ -794,7 +794,7 @@
   {
     "id": "quest-angelof-retribution",
     "name": "Quest: Angel of Retribution",
-    "description": "Requirement: Heal or prevent 2500 damage to allies.\n\nReward: Gain 100% Attack Speed, and your Attacks deal additional magic damage equal to 350% Heal/Shield Power.",
+    "description": "Requirement: Heal or prevent 2500 damage.\n\nReward: 100% Attack Speed; Attacks deal magic damage equal to 350% Heal/Shield Power.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_angelofretribution_small.png",
     "maxLevel": 1
@@ -826,7 +826,7 @@
   {
     "id": "well-be-right-back",
     "name": "We'll Be Right Back",
-    "description": "Gain Time Stop Summoner Spell.\n\nTime Stop: ALL nearby champions are put in Stasis. The Stasis is shorter on you, and during it you Heal based on missing Health.",
+    "description": "Gain Time Stop: ALL nearby champions enter Stasis. Yours is shorter, and you Heal based on missing Health during it.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/wellberightback_small.png",
     "maxLevel": 2
@@ -858,7 +858,7 @@
   {
     "id": "hybrid",
     "name": "Hybrid",
-    "description": "When you deal damage with an Attack, your next Ability deals 10% increased damage.\n\nWhen you deal damage with an Ability, your next Attack deals 10% increased damage.",
+    "description": "Damaging with an Attack makes your next Ability deal 10% more damage, and vice versa.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/hybrid_small.png",
     "maxLevel": 3
@@ -866,7 +866,7 @@
   {
     "id": "hive-mind",
     "name": "Hive Mind",
-    "description": "Start each round with 0 Bee, gain additonal Bees by harvesting flowers. Damaging an enemy champion sends a Bee dealing magic damage over 2 seconds on arrival, before returning to you.",
+    "description": "Start each round with 0 Bees; harvest flowers for more. Damaging an enemy champion sends a Bee dealing magic damage over 2 seconds.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/hive_mind_small.png",
     "maxLevel": 3
@@ -898,7 +898,7 @@
   {
     "id": "slime-time",
     "name": "Slime Time",
-    "description": "Every few seconds Autocast a burst slime from your body, dealing magic damage to nearby enemies.\n\nIf you hit a champion, secrete a blob that heals you when walked over.",
+    "description": "Autocast a slime burst every few seconds, damaging nearby enemies. Hitting a champion leaves a blob that heals you when walked over.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/slimetime_small.png",
     "maxLevel": 2
@@ -962,7 +962,7 @@
   {
     "id": "nesting-doll",
     "name": "Nesting Doll",
-    "description": "Gain 1 additional Revives, and begin reviving yourself after you die.\n\nWhen you Revive Knockback enemies around you, and come back smaller with reduced max Health.",
+    "description": "Gain 1 extra Revive and auto-revive after death, knocking back nearby enemies and returning smaller with reduced max Health.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/nesting_doll_small.png",
     "maxLevel": 3
@@ -1042,7 +1042,7 @@
   {
     "id": "hold-very-still",
     "name": "Hold Very Still",
-    "description": "Gain Guerrilla Warfare.\n\nNot moving causes you to turn Invisibile until you move. Exiting this Invisibility, causes your next attack to deal bonus magic damage.",
+    "description": "Gain Guerrilla Warfare.\n\nStanding still turns you Invisible until you move. Leaving it makes your next attack deal bonus magic damage.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/holdverystill_small.png",
     "maxLevel": 1
@@ -1090,7 +1090,7 @@
   {
     "id": "blood-brother",
     "name": "Blood Brother",
-    "description": "Gain Darius's Hemorrhage: attacks and damaging abilities deal physical damage over 5s, stacking up to 5 times. At 5 stacks, Draven gains attack damage.",
+    "description": "Gain Darius's Hemorrhage: attacks and damaging abilities deal physical damage over 5s, stacking 5 times. At 5 stacks, gain attack damage.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/bloodbrother_small.png",
     "maxLevel": 1
@@ -1170,7 +1170,7 @@
   {
     "id": "orbital-laser",
     "name": "Orbital Laser",
-    "description": "Replace Summoner Flee with Orbital Laser.\n\nAfter a delay, call down an orbital laser that deals 30% max Health true damage plus magic damage over 3 seconds.",
+    "description": "Replace Summoner Flee with Orbital Laser.\n\nAfter a delay, a laser deals 30% max Health true damage plus magic damage over 3 seconds.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/orbitallaser_small.png",
     "maxLevel": 2
@@ -1202,7 +1202,7 @@
   {
     "id": "hat-trick",
     "name": "Hat Trick",
-    "description": "Instantly gain 3 hats, and reduce the price of Cappa Juice by 350.\n\nWhen your health drops below 30% gain Move Speed and a shield, but lose one hat.",
+    "description": "Instantly gain 3 hats and reduce the price of Cappa Juice by 350.\n\nBelow 30% health, gain Move Speed and a shield, but lose one hat.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/hattrick_small.png",
     "maxLevel": 1
@@ -1274,7 +1274,7 @@
   {
     "id": "magical-girl",
     "name": "Magical Girl",
-    "description": "Each round a star falls, picking it up transforms you into a powerful Magical Girl.\n\nAs a Magical Girl, stars rain down around you and your enemies, dealing magic damage.",
+    "description": "Each round a star falls; pick it up to become a Magical Girl, making stars rain around you and your enemies for magic damage.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/magic_girl_small.png",
     "maxLevel": 3
@@ -1434,7 +1434,7 @@
   {
     "id": "oathsworn",
     "name": "Oathsworn",
-    "description": "Replace Flee with Fate's Call.\n\nFate's Call making your ally Untargetable for up to 4 seconds. your ally can launch themself out, Knocking Back enemies.",
+    "description": "Replace Flee with Fate's Call: your ally becomes Untargetable for up to 4 seconds, then launches out, knocking back enemies.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/oathsworn_small.png",
     "maxLevel": 1
@@ -1442,7 +1442,7 @@
   {
     "id": "aim-for-the-head",
     "name": "Aim for the Head",
-    "description": "Your Critical Strike Chance is capped at 50%. Convert 40% of Critical Strike Chance above 50% into Critical Strike Damage.\n\nGain 25% Critical Strike Chance and 25% Critical Strike Damage.",
+    "description": "Critical Strike Chance is capped at 50%; 40% of the excess becomes Critical Strike Damage. Gain 25% of each.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/aim_for_the_head_small.png",
     "maxLevel": 2
@@ -1482,7 +1482,7 @@
   {
     "id": "quest-steel-your-heart",
     "name": "Quest: Steel Your Heart",
-    "description": "Requirement: Possess Heartsteel with 400+ stacks.\n\nReward: Multiply your Heartsteel stacks by 3. Increase your Health Regeneration by 12.5% of your Heartsteel stacks.",
+    "description": "Requirement: Heartsteel with 400+ stacks.\n\nReward: Triple the stacks and gain Health Regeneration equal to 12.5% of them.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/quest_steelyourheart_small.png",
     "maxLevel": 1
@@ -1546,7 +1546,7 @@
   {
     "id": "its-killing-time",
     "name": "It's Killing Time",
-    "description": "After casting your Ultimate, mark all enemy champions for death.\n\nWhile marked, store damage dealt to them, and detonate the damage when the mark ends.",
+    "description": "After casting your Ultimate, mark all enemy champions for death.\n\nStore damage dealt to them while marked, detonating it when the mark ends.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/itskillingtime_small.png",
     "maxLevel": 3
@@ -1594,7 +1594,7 @@
   {
     "id": "and-my-axe",
     "name": "And My Axe!",
-    "description": "Autocast:\nPeriodically throws an axe at the nearest opponent, dealing physical damage, slowing, and shredding their armor and magic resist. Picking up the axe reduces its Cooldown.",
+    "description": "Autocast: throw an axe at the nearest enemy for physical damage, slowing and shredding resistances. Pick it up to cut the Cooldown.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/assets/ux/cherry/augments/icons/andmyaxe_small.png",
     "maxLevel": 2
