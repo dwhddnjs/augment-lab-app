@@ -187,8 +187,13 @@ export function useCustomDraft(initialChampionId: string) {
     // 빌드 상세가 mount 돼 회전 잔상이 보인다(아이템 선택 화면과 같은 이유).
     await lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
     if (!alive.current) return;
-    router.dismissTo("/");
-    router.push({ pathname: "/build/[id]", params: { id: build.id } });
+    // dismissTo + push 를 잇달아 부르지 말 것. expo-router 는 라우팅 액션을 큐에 모아
+    // 한 배치에서 dispatch 하고, 두 번째 액션은 첫 번째가 반영되기 전의 state 를 읽는다.
+    // 릴리즈 빌드에서는 둘이 확실히 같은 배치에 들어가 화면 제거와 추가가 한 프레임에
+    // 겹치고, 세로 복귀 회전까지 동시에 일어나 빌드 상세가 죽은 프레임으로 떴다
+    // (뒤로가기를 눌러야 되살아났다). 진입이 replace 체인이라 스택은
+    // [(tabs), 드래프트화면] — replace 한 번이면 결과가 같고 전환도 1회다.
+    router.replace({ pathname: "/build/[id]", params: { id: build.id } });
   };
 
   return {
