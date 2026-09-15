@@ -172,8 +172,13 @@ export const AugmentRarityColorsLight: typeof AugmentRarityColors = {
 
 /**
  * 챔피언 티어(S~D) 색 — 인게임 등급 위계를 그대로 빌린다.
- * S 프리즘 / A 골드 / B 실버 는 위 증강 희귀도 색을 재사용하고(같은 색이 같은 등급을
- * 뜻해야 한다), C 는 그 아래 "쇠", D 는 무채색 바닥이다.
+ * A 골드 / B 실버 는 위 증강 희귀도 색을 재사용하고(같은 색이 같은 등급을 뜻해야 한다),
+ * C 는 그 아래 동(브론즈), D 는 철이다. C·D 를 둘 다 어두운 무채색으로 두면 서로도
+ * 배경과도 구분되지 않아서(#6D737C/#4F545C 였다) C 에만 색상을 주고 D 는 명도를 올렸다.
+ *
+ * S 만 증강 프리즘(#E0D6FF)을 그대로 쓰지 않는다. 그 값은 증강 카드의 얇은 테두리·
+ * 아이콘 tint 용이라 넓은 배너 그라데이션으로 깔면 채도가 날아가 실버(B)와 구분이
+ * 안 된다 — 같은 색도 면적이 커지면 옅어 보인다. 티어 배너용으로 채도만 올린 짝을 둔다.
  *
  * 쓰이는 곳은 티어 배너 그라데이션과 챔피언 타일 테두리 — 둘 다 UI 요소라 대비 기준이
  * 3:1 이다. 라이트 짝을 따로 두는 이유는 useRarityColors 주석과 같다(프리즘이 흰 배경에서 사라진다).
@@ -183,18 +188,18 @@ export const TierColors: Record<
   Record<"S" | "A" | "B" | "C" | "D", string>
 > = {
   dark: {
-    S: AugmentRarityColors.prismatic.border,
+    S: "#D3BFFF",
     A: AugmentRarityColors.gold.border,
     B: AugmentRarityColors.silver.border,
-    C: "#6D737C",
-    D: "#4F545C",
+    C: "#C08C5C",
+    D: "#767D87",
   },
   light: {
     S: AugmentRarityColorsLight.prismatic.border,
     A: AugmentRarityColorsLight.gold.border,
     B: AugmentRarityColorsLight.silver.border,
-    C: "#5C626A",
-    D: "#43484F",
+    C: "#8A5F33",
+    D: "#5C626A",
   },
 };
 

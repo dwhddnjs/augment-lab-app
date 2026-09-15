@@ -27,14 +27,14 @@ const t = {
     empty: '검색 결과가 없습니다',
     pickShort: '픽',
     source:
-      'aram.gg 집계 · 패치 {patch} · {date} 기준\n챔피언 승률·픽률은 중국(텐센트) 서버 통계, 증강 승률은 이용자 클라이언트가 업로드한 표본입니다. 아이템은 일반 칼바람(ARAM) 통계입니다. 표본 편향이 있을 수 있습니다.',
+      'aram.gg 집계 · 패치 {patch} · {date} 기준\n티어는 aram.gg 자체 등급(승률·픽률 종합)을 그대로 씁니다. 챔피언 승률·픽률은 칼바람 광란(아수라장) 기준 중국(텐센트) 서버 통계, 증강 승률은 이용자 클라이언트가 업로드한 표본입니다. 아이템은 일반 칼바람(ARAM) 통계입니다. 표본 편향이 있을 수 있습니다.',
   },
   en: {
     searchPlaceholder: 'Search champions',
     empty: 'No champions found',
     pickShort: 'Pick',
     source:
-      'Data by aram.gg · Patch {patch} · as of {date}\nChampion win/pick rates are from CN (Tencent) servers; augment win rates come from user-uploaded samples. Item stats are from standard ARAM. Sampling bias may apply.',
+      'Data by aram.gg · Patch {patch} · as of {date}\nTiers are aram.gg\'s own grades (win rate + pick rate combined). Champion win/pick rates are from ARAM Mayhem on CN (Tencent) servers; augment win rates come from user-uploaded samples. Item stats are from standard ARAM. Sampling bias may apply.',
   },
 };
 
@@ -104,7 +104,12 @@ export function TierlistScreen() {
                 { borderColor: `${c}66`, backgroundColor: colors.surface.raised },
               ]}
             >
-              <ThemedText type="title" style={[styles.tierMark, { color: c }]}>
+              {/* 글자는 등급색이 아니라 흰색이다 — 배경이 이미 등급색 그라데이션이라
+                  같은 색을 얹으면 대비가 1.4:1 밖에 안 나와 C·D 에서 글자가 사라진다. */}
+              <ThemedText
+                type="heading"
+                style={[styles.tierMark, { color: colors.text.primary }]}
+              >
                 {section.title}
               </ThemedText>
             </LinearGradient>
@@ -138,7 +143,10 @@ export function TierlistScreen() {
                         {champion.name}
                       </ThemedText>
                       <ThemedText type="caption" color="tertiary" numberOfLines={1}>
-                        {`${pct(entry.score)} · ${translate('pickShort')} ${pct(entry.sub)}`}
+                        <ThemedText type="caption" color="accent">
+                          {pct(entry.score)}
+                        </ThemedText>
+                        {` · ${translate('pickShort')} ${pct(entry.sub)}`}
                       </ThemedText>
                     </View>
                   </Pressable>
@@ -169,12 +177,12 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.five,
   },
   banner: {
-    height: 48,
+    height: Spacing.five,
     marginHorizontal: INSET,
     marginTop: Spacing.three,
     marginBottom: Spacing.two,
-    borderRadius: Radius.lg,
-    borderCurve: 'continuous',
+    // 캡슐이므로 borderCurve 없음 — continuous 는 둥근 사각형에만 의미가 있다.
+    borderRadius: Radius.full,
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
