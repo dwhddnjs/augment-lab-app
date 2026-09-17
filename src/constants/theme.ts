@@ -170,6 +170,45 @@ export const AugmentRarityColorsLight: typeof AugmentRarityColors = {
   prismatic: { border: "#9877DA" },
 };
 
+/**
+ * 챔피언 티어(S~D) 색 — 인게임 등급 위계를 그대로 빌린다.
+ * A 골드 / B 실버 는 위 증강 희귀도 색을 재사용하고(같은 색이 같은 등급을 뜻해야 한다),
+ * C 는 그 아래 동(브론즈), D 는 철이다. C·D 를 둘 다 어두운 무채색으로 두면 서로도
+ * 배경과도 구분되지 않아서(#6D737C/#4F545C 였다) C 에만 색상을 주고 D 는 명도를 올렸다.
+ *
+ * S 만 증강 프리즘(#E0D6FF)을 그대로 쓰지 않는다. 그 값은 증강 카드의 얇은 테두리·
+ * 아이콘 tint 용이라 넓은 배너 그라데이션으로 깔면 채도가 날아가 실버(B)와 구분이
+ * 안 된다 — 같은 색도 면적이 커지면 옅어 보인다. 티어 배너용으로 채도만 올린 짝을 둔다.
+ *
+ * 쓰이는 곳은 티어 배너 그라데이션과 챔피언 타일 테두리 — 둘 다 UI 요소라 대비 기준이
+ * 3:1 이다. 라이트 짝을 따로 두는 이유는 useRarityColors 주석과 같다(프리즘이 흰 배경에서 사라진다).
+ */
+export const TierColors: Record<
+  "dark" | "light",
+  Record<"S" | "A" | "B" | "C" | "D", string>
+> = {
+  dark: {
+    S: "#D3BFFF",
+    A: AugmentRarityColors.gold.border,
+    B: AugmentRarityColors.silver.border,
+    C: "#C08C5C",
+    D: "#767D87",
+  },
+  light: {
+    S: AugmentRarityColorsLight.prismatic.border,
+    A: AugmentRarityColorsLight.gold.border,
+    B: AugmentRarityColorsLight.silver.border,
+    C: "#8A5F33",
+    D: "#5C626A",
+  },
+};
+
+/**
+ * 티어 배너·배지 그라데이션 알파(8자리 hex 의 뒤 2자리). TierColors 에 붙여 쓴다 —
+ * 가장자리는 옅게(10%) 가운데는 진하게(65%), 테두리는 40%.
+ */
+export const TierGradientAlpha = { edge: "1A", center: "A6", border: "66" } as const;
+
 // 증강 아이콘 미해결 시 표시하는 희귀도 폴백 글리프 (MaterialCommunityIcons).
 // 여러 feature(aram·builds·items)가 공유하므로 여기 단일 정의를 import해 쓴다.
 export const AugmentRarityGlyphs = {
@@ -235,3 +274,6 @@ export const Spacing = {
 } as const;
 
 export const BottomTabInset = 50;
+
+/** 모달(챔피언 선택·티어리스트 챔피언 상세)의 native large title 크기 — 두 모달이 같은 헤더로 보여야 한다. */
+export const ModalLargeTitleStyle = { fontSize: 28 } as const;

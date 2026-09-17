@@ -74,6 +74,13 @@ export default function RootLayout() {
           name="select-champion-modal"
           options={{ presentation: 'modal', gestureEnabled: true }}
         />
+        {/* 티어리스트 챔피언 상세 — 증강·아이템 성적표.
+            dangerouslySingular: 카드를 빠르게 두 번 누르면 push 가 두 번 들어가 모달이 두 겹 쌓인다. */}
+        <Stack.Screen
+          name="tierlist-champion-modal"
+          options={{ presentation: 'modal', gestureEnabled: true }}
+          dangerouslySingular
+        />
         {/* 모드 선택 — + 버튼이 띄우는 투명 오버레이(딤 + 원형 버튼) */}
         <Stack.Screen name="mode-select" options={{ presentation: 'transparentModal', animation: 'fade', headerShown: false, gestureEnabled: true }} />
         <Stack.Screen name="aram" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
