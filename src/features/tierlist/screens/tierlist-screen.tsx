@@ -5,7 +5,6 @@
  *
  * 칼바람 전용이다 — tiers.ts 주석 참고. 모드 세그먼트는 없다.
  */
-import { LinearGradient } from 'expo-linear-gradient';
 import { Stack, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Pressable, SectionList, StyleSheet, View } from 'react-native';
@@ -13,9 +12,10 @@ import type { SearchBarCommands } from 'react-native-screens';
 
 import { ThemedText } from '@/components/themed/themed-text';
 import { RemoteImage } from '@/components/ui/remote-image';
-import { Radius, Spacing, TierColors } from '@/constants/theme';
+import { Radius, Spacing, TierColors, Typography } from '@/constants/theme';
 import { useChampions } from '@/features/champions/hooks/use-champions';
-import { tierSections, tierlistMeta } from '@/features/tierlist/tiers';
+import { TierGradient } from '@/features/tierlist/components/tier-gradient';
+import { formatSource, pct, tierSections } from '@/features/tierlist/tiers';
 import { useTheme } from '@/hooks/use-theme';
 import { championSquareUrl } from '@/lib/ddragon';
 import { matchName } from '@/lib/hangul';
@@ -40,8 +40,10 @@ const t = {
 
 /** 격자·배너 공통 좌우 인셋. */
 const INSET = Spacing.three;
-
-const pct = (n: number) => `${(n * 100).toFixed(1)}%`;
+/** 격자 셀의 챔피언 아이콘 한 변. 셀 안에 이름·승률 두 줄과 높이를 맞춘다. */
+const CHAMPION_ICON = 46;
+/** 배너의 S~D 글자 자간 — 한 글자라 넓혀야 배너 폭에 비해 덜 허전하다. */
+const TIER_MARK_TRACKING = 2;
 
 export function TierlistScreen() {
   const { colors, mode: themeMode } = useTheme();
@@ -58,10 +60,6 @@ export function TierlistScreen() {
     const champion = byKey.get(row.key);
     return champion != null && matchName(champion.name, query);
   });
-
-  const source = translate('source')
-    .replace('{patch}', tierlistMeta.patch)
-    .replace('{date}', tierlistMeta.date);
 
   return (
     <>
@@ -89,30 +87,26 @@ export function TierlistScreen() {
         showsVerticalScrollIndicator={false}
         stickySectionHeadersEnabled={false}
         keyboardShouldPersistTaps="handled"
-        // 검색 active(취소버튼) 상태로 스크롤하면 inline 타이틀이 안 뜬다.
-        onScrollBeginDrag={() => searchRef.current?.cancelSearch()}
+        // 검색 active(취소버튼) 상태로 스크롤하면 inline 타이틀이 안 뜬다 — 그래서 검색을 끝내는데,
+        // cancelSearch 는 네이티브에서 검색어를 "" 로 지운다(RNSSearchBar.mm). 검색어가 있을 때
+        // 그러면 결과를 스크롤하려는 순간 전체 목록으로 돌아가므로, 그때는 키보드만 내린다.
+        onScrollBeginDrag={() =>
+          query ? searchRef.current?.blur() : searchRef.current?.cancelSearch()
+        }
         renderSectionHeader={({ section }) => {
           const c = tint[section.title];
           return (
-            <LinearGradient
-              // 등급색을 좌우로 흘려 가운데만 남긴다. 8자리 hex = 6자리 + 알파.
-              colors={[`${c}1A`, `${c}A6`, `${c}1A`]}
-              start={{ x: 0, y: 0.5 }}
-              end={{ x: 1, y: 0.5 }}
-              style={[
-                styles.banner,
-                { borderColor: `${c}66`, backgroundColor: colors.surface.raised },
-              ]}
+            <TierGradient
+              color={c}
+              style={[styles.banner, { backgroundColor: colors.surface.raised }]}
             >
-              {/* 글자는 등급색이 아니라 흰색이다 — 배경이 이미 등급색 그라데이션이라
-                  같은 색을 얹으면 대비가 1.4:1 밖에 안 나와 C·D 에서 글자가 사라진다. */}
               <ThemedText
                 type="heading"
                 style={[styles.tierMark, { color: colors.text.primary }]}
               >
                 {section.title}
               </ThemedText>
-            </LinearGradient>
+            </TierGradient>
           );
         }}
         renderItem={({ item: row, section }) => {
@@ -164,7 +158,7 @@ export function TierlistScreen() {
         }
         ListFooterComponent={
           <ThemedText type="caption" color="tertiary" style={styles.source}>
-            {source}
+            {formatSource(translate('source'))}
           </ThemedText>
         }
       />
@@ -189,7 +183,7 @@ const styles = StyleSheet.create({
   },
   tierMark: {
     fontWeight: '800',
-    letterSpacing: 2,
+    letterSpacing: TIER_MARK_TRACKING,
   },
   gridRow: {
     flexDirection: 'row',
@@ -207,9 +201,10 @@ const styles = StyleSheet.create({
     borderCurve: 'continuous',
   },
   image: {
-    width: 46,
-    height: 46,
+    width: CHAMPION_ICON,
+    height: CHAMPION_ICON,
     borderRadius: Radius.md,
+    borderCurve: 'continuous',
     borderWidth: 1.5,
     overflow: 'hidden',
   },
@@ -224,6 +219,6 @@ const styles = StyleSheet.create({
   source: {
     paddingHorizontal: INSET,
     paddingTop: Spacing.four,
-    lineHeight: 16,
+    lineHeight: Typography.caption.lineHeight,
   },
 });

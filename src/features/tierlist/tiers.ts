@@ -22,14 +22,6 @@ import data from '@/features/tierlist/data/tierlist.json';
 export const TIERS = ['S', 'A', 'B', 'C', 'D'] as const;
 export type Tier = (typeof TIERS)[number];
 
-/** 아이템 한 줄. 증강과 달리 개수가 적어 객체 그대로다. */
-export interface TierEntry {
-  id: string;
-  /** 승률(0~1). */
-  score: number;
-  games: number;
-}
-
 /**
  * 증강 한 줄 — `[augSlugs 인덱스, 승률×10000, 소스 티어(1~4)]`.
  * 챔피언마다 120개 넘게 실어서 객체로 두면 파일이 1.3MB가 된다(fetch 스크립트 주석 참고).
@@ -53,12 +45,28 @@ export interface TierRow {
   /** 소스 티어에서 굽힌 표시 등급. fetch 스크립트가 박는다. */
   tier: Tier;
   augments: AugEntry[];
-  items: TierEntry[];
+  /** 완성템 구매 순서(아이템 id). */
+  build: string[];
+  /** 상황템(아이템 id) — 판수 내림차순, build 와 겹치지 않는다. */
+  situational: string[];
+  /** 최다 스펠 조합(스펠 id). `spellIcons` 키다. */
+  spells: number[];
+  /** 위 스펠 조합의 픽률 — 태그 빌드 전체 판수 대비. */
+  spellPick: number;
 }
 
 const COLUMNS = 2;
 
-export const tierlistMeta = { patch: data.patch, date: data.date };
+/** 승률·픽률 표시 — 목록과 모달이 같은 자릿수를 써야 한다. */
+export const pct = (n: number) => `${(n * 100).toFixed(1)}%`;
+
+/** 출처 문구의 `{patch}`·`{date}` 를 생성물 값으로 채운다. */
+export function formatSource(text: string): string {
+  return text.replace('{patch}', data.patch).replace('{date}', data.date);
+}
+
+/** 스펠 id → CDragon iconPath. 이름은 그리지 않아 로케일 무관이다. */
+export const spellIcons: Record<string, string> = data.spellIcons;
 
 /** JSON 의 `tier` 는 string 으로 추론된다 — 굽는 쪽에서 Tier 로 좁혀 쓴다. */
 export function tierRows(): TierRow[] {
@@ -67,23 +75,6 @@ export function tierRows(): TierRow[] {
 
 export function findTierRow(key: string): TierRow | undefined {
   return tierRows().find((r) => r.key === key);
-}
-
-/**
- * 승률 순위(1부터). 모달 헤더에서 "승률 171명 중 3위"로 쓴다.
- * 배열 순서는 티어 순이라 인덱스를 쓸 수 없다 — 승률로 직접 센다.
- */
-export function tierRankOf(key: string): { rank: number; total: number } {
-  const rows = tierRows();
-  const row = rows.find((r) => r.key === key);
-  return {
-    rank: row ? rows.filter((r) => r.score > row.score).length + 1 : 0,
-    total: rows.length,
-  };
-}
-
-export function tierOf(key: string): Tier | null {
-  return findTierRow(key)?.tier ?? null;
 }
 
 /**

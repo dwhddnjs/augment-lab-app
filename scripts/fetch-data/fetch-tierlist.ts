@@ -6,7 +6,7 @@
  *
  * 소스 2개:
  *   - data.dtodo.cn (aram.gg)      챔피언 승률 + 챔피언별 증강 승률 + 아이템
- *   - CommunityDragon              숫자 id ↔ 앱 슬러그 매핑, 아이템 이름/아이콘
+ *   - CommunityDragon              숫자 id ↔ 앱 슬러그 매핑, 아이템 이름/아이콘, 스펠 아이콘
  *
  * 티어는 우리가 매기지 않는다 — dtodo 의 `stats.tier`(1~5)를 S/A/B/C/D 로 옮길 뿐이다.
  * 승률만으로 줄 세우면 픽률 3%대 장인픽이 S로 올라오고 징크스 같은 주력픽이 빠져서 다른
@@ -28,23 +28,19 @@ const APP_DIR = path.resolve(__dirname, '../../src/features');
 const DTODO = 'https://data.dtodo.cn/api/client/v1';
 const CDRAGON = 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global';
 
-/** 크기 손잡이. 늘리면 tierlist.json이 비례해 커진다(앱은 담긴 만큼 다 그린다). */
-const N_ITEM = 6;
-
 /**
- * 최소 표본. **증강**은 dtodo가 winRateMinimumGames(255)를 같이 주지만 아이템에는
- * 임계값이 없어 직접 건다. 없으면 저픽 챔피언에서 71판짜리 66.2% 가
- * 1,042판짜리 61.4% 를 제치고 1위로 올라온다(실제로 그웬에서 나왔다).
+ * 상황템 최소 표본. 판수 내림차순이라 순위를 흔들진 않지만, 저픽 챔피언에서 수십 판짜리
+ * 아이템이 꼬리에 붙는 노이즈를 막는다.
  */
 const MIN_GAMES = 200;
 
-const LIMIT = Number(process.argv[2]) || Infinity;
+/**
+ * 빌드 순서(코어 조합·확장 step) 최소 표본. 조합 단위라 상황템보다 판수가 훨씬 적다.
+ * dtodo 가 확장에 이미 ~50판 하한을 거는 듯하지만(실측 최저 52) 정책이 바뀌면 노이즈가 샌다.
+ */
+const MIN_BUILD_GAMES = 50;
 
-interface Entry {
-  id: string;
-  score: number;
-  games: number;
-}
+const LIMIT = Number(process.argv[2]) || Infinity;
 
 /**
  * 증강 한 줄 — `[augIds 인덱스, 승률×10000, 소스 티어(1~4)]`.
@@ -69,7 +65,13 @@ interface Row {
   sub: number;
   tier: Tier;
   augments: AugEntry[];
-  items: Entry[];
+  /** 완성템 구매 순서(코어 3 + 확장 최대 3). */
+  build: string[];
+  /** 상황템 — 판수 내림차순, build 에 있는 건 뺀다. */
+  situational: string[];
+  spells: number[];
+  /** 위 스펠 조합의 픽률 — 태그 빌드 전체 판수 대비(최다 빌드 하나 안의 비율이 아니다). */
+  spellPick: number;
   /** 소스 tier(1~5). 정렬·매핑에만 쓰고 JSON 에는 남기지 않는다. */
   srcTier: number;
 }
@@ -91,23 +93,73 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 /** 소수 4자리면 승률 표시에 충분하다. 원본은 자릿수가 길어 파일이 배로 커진다. */
 const r4 = (n: number) => Math.round(n * 1e4) / 1e4;
 const readApp = (p: string) => JSON.parse(fs.readFileSync(path.join(APP_DIR, p), 'utf8'));
+const setKey = (ids: number[]) => [...ids].sort((a, b) => a - b).join('-');
 
-/** 표본 필터 → 조인 실패 제거 → 정렬 → slice. 순서가 중요하다:
- *  조인 실패를 먼저 버려야 항상 N개가 찬다. */
-function top(rows: { id: string | null; score: number; games: number }[], n: number): Entry[] {
-  return rows
-    .filter((r): r is Entry => r.id != null)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, n)
-    .map((e) => ({ ...e, score: r4(e.score) }));
+/**
+ * 완성템 구매 순서. `coreItems[0].itemIds` 가 최다 코어 3개를 **산 순서대로** 준다
+ * (같은 셋이 순서만 달리 별개 항목으로 온다). 4~6번째는 `itemExtensions` 에서 잇는다 —
+ * extension 의 `coreItemIds` 는 정렬된 셋이라 셋으로 맞추고, `itemIds` 는 step 까지 누적된 셋이다.
+ *
+ * ponytail: 탐욕 경로 — step 마다 지금까지 붙인 아이템을 전부 포함하는 후보 중 최다 판수 하나.
+ * 이어지는 후보가 없으면 거기서 멈춘다 — 3~5개로 끝나는 챔피언이 있다(step1 이 비고 step2 만
+ * 있는 챔피언도 있는데, 건너뛰면 두 아이템의 선후를 모르므로 붙이지 않는다).
+ * 전역 최다 경로가 필요하면 step3 셋을 먼저 고르고 역추적.
+ */
+function buildOrder(b: any): number[] {
+  const top = b?.coreItems?.[0];
+  if (!top || top.games < MIN_BUILD_GAMES || !Array.isArray(top.itemIds)) return [];
+  const core: number[] = top.itemIds;
+  // 비공식 API라 필드가 빠진 항목이 섞여도 수집 전체가 죽지 않게 거른다.
+  const ext = ((b?.itemExtensions ?? []) as any[]).filter(
+    (e) =>
+      Array.isArray(e.coreItemIds) &&
+      Array.isArray(e.itemIds) &&
+      e.games >= MIN_BUILD_GAMES &&
+      setKey(e.coreItemIds) === setKey(core),
+  );
+  const order = [...core];
+  for (const step of [1, 2, 3]) {
+    const next = ext
+      .filter((e) => e.step === step && order.slice(core.length).every((id) => e.itemIds.includes(id)))
+      .sort((x, y) => y.games - x.games)[0];
+    if (!next) break;
+    order.push(...(next.itemIds as number[]).filter((id) => !order.includes(id)));
+  }
+  return order;
+}
+
+/**
+ * 최다 스펠 조합과 그 픽률. `build.summonerSpells` 의 pickRate 는 최다 태그 빌드 **안에서의** 비율이라
+ * (말파이트는 AP 빌드가 전체의 62%뿐) 태그 빌드(`builds`) 전체를 조합별로 합산해 다시 나눈다.
+ * 분모는 빌드 판수(`stats.games`) — summonerSpells 는 상위 몇 개만 와서 합이 판수에 못 미친다.
+ */
+function topSpells(dt: any): { ids: number[]; pick: number } | null {
+  const builds = ((dt.builds?.length ? dt.builds : [dt.build]) as any[]).filter(Boolean);
+  let total = 0;
+  const combos = new Map<string, { ids: number[]; games: number }>();
+  for (const b of builds) {
+    total += b.stats?.games ?? 0;
+    for (const s of (b.summonerSpells ?? []) as any[]) {
+      if (!Array.isArray(s.summonerSpellIds)) continue;
+      const k = setKey(s.summonerSpellIds);
+      const c = combos.get(k) ?? { ids: s.summonerSpellIds, games: 0 };
+      c.games += s.games ?? 0;
+      combos.set(k, c);
+    }
+  }
+  const top = [...combos.values()].sort((a, b) => b.games - a.games)[0];
+  return top && total > 0 ? { ids: top.ids, pick: Math.min(1, top.games / total) } : null;
 }
 
 async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
   // ── 앱 로컬 데이터: 조인의 목적지 ──────────────────────────────────
-  const champions = readApp('champions/data/champions.ko.json') as { key: string }[];
-  const aramAug = readApp('augments/data/augments.ko.json') as any[];
+  const champions = readApp('champions/data/champions.ko.json') as { key: string; name: string; tags: string[] }[];
+  const tagsByKey = new Map(champions.map((c) => [c.key, c.tags]));
+  const nameByKey = new Map(champions.map((c) => [c.key, c.name]));
+  // 칼바람 풀만 — 클래식 전용 증강이 칼바람 추천에 섞이면 앱 뽑기 풀과 어긋난다.
+  const aramAug = (readApp('augments/data/augments.ko.json') as any[]).filter((a) => a.modes?.includes('aram'));
 
   // ── CDragon: 숫자 id → 앱 증강 슬러그 ────────────────────────────
   const cherry = await fetchJson(`${CDRAGON}/ko_kr/v1/cherry-augments.json`);
@@ -137,6 +189,10 @@ async function main() {
     }
   }
 
+  const spells = await fetchJson(`${CDRAGON}/default/v1/summoner-spells.json`);
+  if (!spells) throw new Error('CDragon summoner-spells.json fetch 실패');
+  const spellIcon = new Map<number, string>((spells as any[]).map((s) => [s.id, s.iconPath]));
+
   // ── 소스 목록 ────────────────────────────────────────────────────
   const cfg = await fetchJson(`${DTODO}/config`);
   if (!cfg) throw new Error('dtodo config fetch 실패');
@@ -155,6 +211,7 @@ async function main() {
   const keys = champions.map((c) => c.key).slice(0, LIMIT);
   const aram: Row[] = [];
   const usedItems = new Set<string>();
+  const usedSpells = new Set<number>();
   /** 증강 슬러그 사전. 등장 순서대로 채우고 챔피언 행에는 인덱스만 싣는다. */
   const augIds: string[] = [];
   const augIndex = new Map<string, number>();
@@ -200,12 +257,22 @@ async function main() {
       .map((e: any): AugEntry => [indexOfAug(e.slug), Math.round(e.score * 1e4), e.tier]);
 
     // ponytail: 아이템은 build.queueId=450 — 일반 칼바람이지 광란(2400)이 아니다.
-    // 광란 아이템 승률은 어느 소스에도 없다(Blitz는 tier 1~5만 줘서 정렬하면 동점 수십 개).
-    // 출처 문구에 "아이템은 일반 칼바람 통계"로 명시한다.
-    const items = ((dt.build?.situationalItems ?? []) as any[])
-      // situationalItems[].winRate 필드는 쓰지 않는다 — 음수까지 나오는 별개의 정규화 점수다.
-      .filter((x) => (x.games ?? 0) >= MIN_GAMES)
-      .map((x) => ({ id: String(x.id), score: x.wins / x.games, games: x.games }));
+    // 광란 아이템 통계는 어느 소스에도 없다(Blitz는 tier 1~5만 준다).
+    // 티어리스트 목록 하단 출처 문구에 "아이템은 일반 칼바람 통계"로 명시한다.
+    //
+    // `build` 는 태그별 빌드(`builds`) 중 최다 픽 하나다. 예전엔 코어를 버리고 situationalItems 를
+    // 승률순으로 뽑아서 탱커 46명 중 강철심장이 4명에게만 나왔다 — 강철심장은 코어라 상황템 풀에
+    // 애초에 없고, 승률순이면 늦게 사는 방템이 생존자 편향으로 뜬다. 코어 → 확장 → 상황템(판수순)이 정답.
+    // startingItems 는 챔피언 대부분이 표본 1~11판이라 싣지 않는다.
+    const build = buildOrder(dt.build).map(String);
+    // 판수순은 응답 순서에 기대지 않고 직접 정렬한다 — 승률순으로 바뀌면 생존자 편향 방템이 앞에 온다.
+    const situational = ((dt.build?.situationalItems ?? []) as any[])
+      .filter((x) => (x.games ?? 0) >= MIN_GAMES && !build.includes(String(x.id)))
+      .sort((a, b) => (b.games ?? 0) - (a.games ?? 0))
+      .map((x) => String(x.id));
+    // 아이콘이 없는 스펠이 하나라도 있으면 통째로 뺀다 — 화면은 스펠 pill 을 숨긴다.
+    const spell = topSpells(dt);
+    const spellIds: number[] = spell?.ids ?? [];
 
     const row: Row = {
       key,
@@ -214,9 +281,14 @@ async function main() {
       tier: 'D', // 아래 매핑에서 덮어쓴다
       srcTier: cs.tier,
       augments,
-      items: top(items, N_ITEM),
+      build,
+      situational,
+      ...(spellIds.length && spellIds.every((id) => spellIcon.has(id))
+        ? { spells: spellIds, spellPick: r4(spell!.pick) }
+        : { spells: [], spellPick: 0 }),
     };
-    row.items.forEach((e) => usedItems.add(e.id));
+    [...build, ...situational].forEach((id) => usedItems.add(id));
+    row.spells.forEach((id) => usedSpells.add(id));
     aram.push(row);
 
     if ((i + 1) % 20 === 0) console.log(`  ${i + 1}/${keys.length}...`);
@@ -238,9 +310,12 @@ async function main() {
     throw new Error(`수집 부족 — ${aram.length}명. 쓰지 않고 중단.`);
   }
 
+  // 스펠은 이름을 안 그려서 로케일 무관 — 아이콘 경로만 본 파일에 싣는다.
+  const spellIcons = Object.fromEntries([...usedSpells].sort((a, b) => a - b).map((id) => [id, spellIcon.get(id)]));
+
   fs.writeFileSync(
     path.join(OUT_DIR, 'tierlist.json'),
-    JSON.stringify({ patch, date, generatedAt: new Date().toISOString(), augIds, aram }),
+    JSON.stringify({ patch, date, generatedAt: new Date().toISOString(), augIds, spellIcons, aram }),
   );
   for (const suffix of ['ko', 'en'] as const) {
     const dict = [...usedItems]
@@ -256,6 +331,10 @@ async function main() {
     .join(' · ');
   console.log(`\n칼바람 ${aram.length}명 (${dist}) · 증강 사전 ${augIds.length}개 · 아이템 사전 ${usedItems.size}개`);
   console.log(`증강 조인 실패 ${augMiss}/${augTotal} (${((augMiss / augTotal) * 100).toFixed(1)}%)`);
+  // 정확도 회귀 체크 — 탱커 빌드에 강철심장이 빠지면 매핑이 다시 깨진 것이다.
+  const tanks = aram.filter((r) => tagsByKey.get(r.key)?.includes('Tank'));
+  const noHeart = tanks.filter((r) => !r.build.includes('3084')).map((r) => nameByKey.get(r.key));
+  console.log(`탱커 빌드 강철심장 ${tanks.length - noHeart.length}/${tanks.length} · 없음: ${noHeart.join(', ')}`);
   if (skipped.length) console.log(`스킵: ${skipped.join(', ')}`);
   console.log(
     `→ tierlist.json ${kb('tierlist.json')}KB · items.ko ${kb('tierlist-items.ko.json')}KB · items.en ${kb('tierlist-items.en.json')}KB`,
