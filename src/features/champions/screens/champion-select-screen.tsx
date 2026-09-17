@@ -1,13 +1,14 @@
 /**
  * ChampionSelectScreen.
  * large title 헤더에 SF Symbol 닫기(xmark)/시작(checkmark) 버튼을 박고,
- * 스크롤 시작 시 검색을 종료해 large title 모드로 되돌린다.
+ * 스크롤 시작 시 검색을 종료해 large title 모드로 되돌린다(검색어가 있으면 키보드만 내린다).
  * 공용 로직은 use-champion-select, 본문은 ChampionSelectGrid.
  */
 import { Image } from "expo-image";
 import { Stack, useRouter } from "expo-router";
 import { Pressable, StyleSheet } from "react-native";
 
+import { ModalLargeTitleStyle } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { ChampionSelectGrid } from "../components/champion-select-grid";
 import { useChampionSelect } from "../hooks/use-champion-select";
@@ -21,6 +22,7 @@ export function ChampionSelectScreen() {
     selectedTag,
     searchRef,
     listData,
+    query,
     setQuery,
     handleSelect,
     handleTagPress,
@@ -34,7 +36,7 @@ export function ChampionSelectScreen() {
         options={{
           title: translate("title"),
           headerLargeTitle: true,
-          headerLargeTitleStyle: { fontSize: 28 },
+          headerLargeTitleStyle: ModalLargeTitleStyle,
           headerLeft: () => (
             <Pressable onPress={() => router.back()} hitSlop={12}>
               <Image
@@ -81,7 +83,11 @@ export function ChampionSelectScreen() {
         onTagPress={handleTagPress}
         // 검색 active(취소버튼) 상태로 스크롤하면 inline 타이틀이 안 뜨므로,
         // 스크롤 시작 시 검색을 종료해 일반 large title 모드로 되돌린다.
-        onScrollBeginDrag={() => searchRef.current?.cancelSearch()}
+        // 단 cancelSearch 는 검색어까지 "" 로 지운다 — 검색어가 있으면 결과를 스크롤할 수
+        // 있게 키보드만 내린다(tierlist-screen 과 같은 이유).
+        onScrollBeginDrag={() =>
+          query ? searchRef.current?.blur() : searchRef.current?.cancelSearch()
+        }
       />
     </>
   );

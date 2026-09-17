@@ -203,6 +203,12 @@ export const TierColors: Record<
   },
 };
 
+/**
+ * 티어 배너·배지 그라데이션 알파(8자리 hex 의 뒤 2자리). TierColors 에 붙여 쓴다 —
+ * 가장자리는 옅게(10%) 가운데는 진하게(65%), 테두리는 40%.
+ */
+export const TierGradientAlpha = { edge: "1A", center: "A6", border: "66" } as const;
+
 // 증강 아이콘 미해결 시 표시하는 희귀도 폴백 글리프 (MaterialCommunityIcons).
 // 여러 feature(aram·builds·items)가 공유하므로 여기 단일 정의를 import해 쓴다.
 export const AugmentRarityGlyphs = {
@@ -268,3 +274,6 @@ export const Spacing = {
 } as const;
 
 export const BottomTabInset = 50;
+
+/** 모달(챔피언 선택·티어리스트 챔피언 상세)의 native large title 크기 — 두 모달이 같은 헤더로 보여야 한다. */
+export const ModalLargeTitleStyle = { fontSize: 28 } as const;

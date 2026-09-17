@@ -203,6 +203,7 @@ export function useChampionSelect() {
     selectedTag,
     searchRef,
     listData,
+    query,
     setQuery,
     handleSelect,
     handleTagPress,
