@@ -79,7 +79,6 @@ export function ChampionChangeOverlay({
       >
         {/* 화면 위에 떠 있는 표면이라 단색이 아니라 글라스 — design-system 규칙. */}
         <GlassSurface
-          glassStyle="regular"
           style={[styles.sheet, { borderColor: colors.border.subtle }]}
         >
           <View style={styles.header}>

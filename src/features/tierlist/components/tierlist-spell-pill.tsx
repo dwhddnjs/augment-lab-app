@@ -5,7 +5,7 @@ import { RemoteImage } from '@/components/ui/remote-image';
 import { Radius, Spacing } from '@/constants/theme';
 import { pct, spellIcons } from '@/features/tierlist/tiers';
 import { useTheme } from '@/hooks/use-theme';
-import { cdragonItemIconUrl } from '@/lib/ddragon';
+import { cdragonIconUrl } from '@/lib/ddragon';
 import { useTranslation } from '@/lib/i18n';
 
 const t = {
@@ -45,7 +45,7 @@ export function TierlistSpellPill({ spells, pick }: Props) {
         <RemoteImage
           key={spells[i]}
           // 스펠 iconPath 도 아이템과 같은 CDragon 경로 규칙이다.
-          uri={cdragonItemIconUrl(path)}
+          uri={cdragonIconUrl(path)}
           size={SPELL_ICON}
           style={[styles.icon, { borderColor: colors.border.subtle }]}
         />

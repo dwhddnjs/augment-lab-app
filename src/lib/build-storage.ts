@@ -7,6 +7,9 @@
  */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { GAME_MODES } from '@/constants/game-modes';
+import type { AugmentMode } from '@/features/augments/types';
+
 const STORAGE_KEY = 'builds:v1';
 
 /**
@@ -14,13 +17,13 @@ const STORAGE_KEY = 'builds:v1';
  * 'classic' — 아수라장 클래식 스타일(협곡 맵 453). 증강·플로우는 칼바람과 같고
  *             라운드가 4 또는 5, 아이템이 레트로 세트라는 점만 다르다.
  *
- * AugmentMode 와 값이 같아 useAugmentPool 에 그대로 넘길 수 있다.
+ * useAugmentPool 에 그대로 넘기므로 AugmentMode 를 그대로 쓴다(따로 적으면 어긋날 수 있다).
  */
-export type GameMode = 'aram' | 'classic';
+export type GameMode = AugmentMode;
 
 export interface SavedBuild {
   id: string;
-  /** 게임 모드. mode 없는 기존 데이터는 readAll에서 'aram'으로 폴백한다. */
+  /** 게임 모드. mode 없는 기존 데이터는 parseBuilds에서 'aram'으로 폴백한다. */
   mode: GameMode;
   championId: string;
   /** 픽한 증강 id — 최대 6 */
@@ -57,22 +60,42 @@ export function getBuildsSnapshot(): SavedBuild[] | null {
   return cache;
 }
 
+/**
+ * 저장 원문(JSON 문자열)을 빌드 목록으로 해석한다. 복원 확인 다이얼로그의 개수도 이걸로 센다.
+ *
+ * 항목 단위로 거른다 — 하나가 깨졌다고 전체를 버리면 다음 저장이 빈 목록 + 1개로
+ * 디스크를 덮어써 나머지 빌드가 영영 사라진다. mode 필드 도입 전 데이터는 칼바람(aram)으로
+ * 간주하고, 모르는 mode(제거된 아레나 등)는 그릴 데이터가 없으니 버린다.
+ */
+export function parseBuilds(raw: string | null | undefined): SavedBuild[] {
+  let parsed: unknown;
+  try {
+    parsed = raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+  if (!Array.isArray(parsed)) return [];
+  return parsed.flatMap((b): SavedBuild[] => {
+    if (!b || typeof b !== 'object') return [];
+    const build = { ...b, mode: b.mode ?? 'aram' };
+    const ok =
+      GAME_MODES.includes(build.mode) &&
+      typeof build.id === 'string' &&
+      typeof build.championId === 'string' &&
+      typeof build.createdAt === 'string' &&
+      Array.isArray(build.augmentIds) &&
+      Array.isArray(build.itemIds);
+    return ok ? [build] : [];
+  });
+}
+
 async function readAll(): Promise<SavedBuild[]> {
   if (cache) return cache;
   try {
-    const raw = await AsyncStorage.getItem(STORAGE_KEY);
-    const parsed = raw ? JSON.parse(raw) : [];
-    // mode 필드 도입 전 데이터는 칼바람(aram)으로 간주한다.
-    // 아레나 모드는 제거됐다(2026-09-19) — 그 빌드는 그릴 데이터가 없으니 버린다.
-    // 백업 복원도 reloadBuilds → 여기를 거치므로 걸러내는 곳은 이 한 군데다.
-    const list = Array.isArray(parsed)
-      ? parsed
-          .map((b) => ({ ...b, mode: b.mode ?? 'aram' }))
-          .filter((b) => b.mode !== 'arena')
-      : [];
-    cache = sortDesc(list);
+    // 백업 복원도 reloadBuilds → 여기를 거치므로 걸러내는 곳은 parseBuilds 한 군데다.
+    cache = sortDesc(parseBuilds(await AsyncStorage.getItem(STORAGE_KEY)));
   } catch {
-    // 손상된 데이터는 빈 목록으로 폴백 — 다음 저장에서 덮어쓴다.
+    // 저장소를 못 읽으면 빈 목록으로 폴백 — 다음 저장에서 덮어쓴다.
     cache = [];
   }
   // 최초 로드 완료를 구독자에게 알린다(스냅샷 null→배열).

@@ -4,8 +4,9 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 import { ThemedText } from '@/components/themed/themed-text';
 import { AugmentTile } from '@/components/ui/augment-tile';
 import { AugmentRarityColors, HeroOverlay, Radius, Spacing, TierColors } from '@/constants/theme';
-import type { Augment } from '@/features/augments/types';
+import type { AugmentRarity } from '@/features/augments/types';
 import { augTierOf } from '@/features/tierlist/tiers';
+import type { TierAugment } from '@/features/tierlist/types';
 import { useTheme } from '@/hooks/use-theme';
 
 /** 증강 격자 카드의 아이콘·배지 크기. 배지를 아이콘 하단 가운데에 물리는 계산에 쓴다. */
@@ -17,10 +18,10 @@ const BADGE_FONT = { fontSize: 10, lineHeight: 14 };
 const CARD_FADE = FadeIn.duration(220);
 
 interface Props {
-  rarity: Augment['rarity'];
+  rarity: AugmentRarity;
   label: string;
-  /** 이미 보여줄 개수·순서로 잘라 온 목록. `tier` 는 소스 티어(1~4). */
-  entries: { aug: Augment; tier: number }[];
+  /** 이미 보여줄 개수·순서로 잘라 온 목록. */
+  entries: TierAugment[];
   /** 이 인덱스부터의 카드는 마운트될 때 페이드로 나온다. 처음부터 보이는 카드까지 깜빡이지 않게. */
   fadeFrom?: number;
 }
@@ -50,12 +51,7 @@ function AugmentCard({
   tier,
   rarity,
   fade,
-}: {
-  aug: Augment;
-  tier: number;
-  rarity: Augment['rarity'];
-  fade: boolean;
-}) {
+}: TierAugment & { rarity: AugmentRarity; fade: boolean }) {
   const { colors, mode } = useTheme();
   const badge = augTierOf(tier);
   const badgeColor = TierColors[mode][badge];

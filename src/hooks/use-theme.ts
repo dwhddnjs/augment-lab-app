@@ -1,10 +1,6 @@
-/**
- * Learn more about light and dark modes:
- * https://docs.expo.dev/guides/color-schemes/
- */
+import { useColorScheme } from 'react-native';
 
-import { Elevation, Radius, Theme, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Theme } from '@/constants/theme';
 import { useThemePreference } from '@/hooks/use-theme-preference';
 
 export function useTheme() {
@@ -14,11 +10,5 @@ export function useTheme() {
   // 사용자가 'system'을 고르면 기기 설정을 따르고, 아니면 선택값으로 강제 고정.
   const mode = preference === 'system' ? system : preference;
 
-  return {
-    mode,
-    colors: Theme[mode],
-    typography: Typography,
-    radius: Radius,
-    elevation: Elevation,
-  };
+  return { mode, colors: Theme[mode] };
 }

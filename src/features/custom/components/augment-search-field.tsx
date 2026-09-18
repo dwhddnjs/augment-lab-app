@@ -39,7 +39,7 @@ export function AugmentSearchField({ value, target, onChange }: Props) {
   const translate = useTranslation(t);
 
   return (
-    <GlassSurface glassStyle="regular" style={styles.container}>
+    <GlassSurface style={styles.container}>
       <MaterialCommunityIcons
         name="magnify"
         size={15}

@@ -16,7 +16,7 @@ node scripts/gen-data-check.mjs   # → docs/index.html
 - 검수 페이지는 **하나뿐이다**(`docs/index.html`). 칼바람·클래식 증강과 아이템을 상단 `데이터`
   칩으로 갈라 본다. 그래서 **아이템 데이터를 고칠 때도 이 페이지를 재생성**한다.
 - ko/en을 `id`로 병합해 rarity별로 보여주고, 앱과 동일한 이미지 URL 규칙
-  (`augmentImageUrl(large)` 3단 폴백 / `itemImageUrl`)으로 아이콘을 렌더한다.
+  (`augmentImageUrls` large→base→small 3단 폴백 / `itemImageUrl`)으로 아이콘을 렌더한다.
 - 아이템은 **앱 진열 풀만**(칼바람 111 · 클래식 81) 싣는다. 나머지는 저장된 빌드를 되살릴 때만
   쓰여 카드로 뜨지 않는다 — 검수 대상이 아니다.
 - 같은 아이콘 파일을 공유하는 증강은 **"공유" 배지**로 표시(오류 아님).

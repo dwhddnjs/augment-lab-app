@@ -111,6 +111,7 @@ function ItemSelectContent({
           systemImage="xmark"
           fallbackIcon="close"
           role="cancel"
+          accessibilityLabel={translate("exitOk")}
           onPress={handleExit}
         />
 
@@ -126,6 +127,7 @@ function ItemSelectContent({
           systemImage="checkmark"
           fallbackIcon="check"
           tint={colors.accent.default}
+          accessibilityLabel={translate("save")}
           onPress={handleSave}
         />
       </View>

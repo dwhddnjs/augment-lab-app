@@ -11,7 +11,7 @@ export interface BuildSection {
 }
 
 /** 로컬 기준 같은 '날(day)'을 식별하는 키. createdAt은 ISO 문자열. */
-export function dayKey(iso: string): string {
+function dayKey(iso: string): string {
   const d = new Date(iso);
   return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
 }

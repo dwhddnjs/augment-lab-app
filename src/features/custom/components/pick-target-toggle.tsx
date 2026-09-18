@@ -74,11 +74,10 @@ export function PickTargetToggle({ target, onToggle }: Props) {
       accessibilityState={{ checked: target === "item" }}
     >
       <GlassSurface
-        glassStyle="regular"
         style={[styles.track, { borderColor: colors.border.subtle }]}
       >
         <Animated.View pointerEvents="none" style={[styles.knob, knobStyle]}>
-          <GlassSurface glassStyle="regular" style={styles.knobGlass}>
+          <GlassSurface style={styles.knobGlass}>
             <View
               style={[
                 StyleSheet.absoluteFill,

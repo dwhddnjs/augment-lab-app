@@ -34,9 +34,9 @@ export async function hasPrewarmed(): Promise<boolean> {
 /**
  * 한 장을 받는다. `chain` 은 폴백 주소 목록이라, 앞 주소가 없으면(404) 다음 주소를 받는다 —
  * 증강은 `_large` 가 없는 아이콘이 있어 화면이 base 로 폴백해 그린다(AugmentImage).
- * PREFETCH_TIMEOUT 을 넘기면 실패로 간주하고 넘어간다.
+ * PREFETCH_TIMEOUT 을 넘기면 실패로 간주하고 넘어간다. 드래프트 화면의 카드 프리페치도 이걸 쓴다.
  */
-async function prefetchOne(chain: string[]): Promise<void> {
+export async function prefetchOne(chain: string[]): Promise<void> {
   for (const url of chain) {
     let timer: ReturnType<typeof setTimeout> | undefined;
     const timeout = new Promise<'timeout'>((resolve) => {

@@ -57,7 +57,7 @@ src/
 │       └── types.ts
 ├── components/                 # 도메인 무관 공용 UI (themed/, navigation/, ui/)
 ├── hooks/                      # 여러 feature 공유 글로벌 훅 (테마/로케일/색상스킴)
-├── lib/                        # 외부 클라이언트 + 순수 유틸 (supabase/ddragon/i18n/hangul)
+├── lib/                        # 외부 클라이언트 + 순수 유틸 (ddragon/i18n/hangul/orientation)
 ├── constants/theme.ts
 └── styles/global.css
 ```

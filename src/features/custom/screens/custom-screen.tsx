@@ -56,6 +56,8 @@ const t = {
     exitMessage: "담은 증강과 아이템은 저장되지 않습니다.",
     exitOk: "종료",
     exitCancel: "계속",
+    save: "저장",
+    settings: "설정",
     saveError: "빌드 저장에 실패했어요",
     saveEmpty: "저장할 내용이 없어요",
   },
@@ -64,6 +66,8 @@ const t = {
     exitMessage: "Your picks won't be saved.",
     exitOk: "Exit",
     exitCancel: "Continue",
+    save: "Save",
+    settings: "Settings",
     saveError: "Failed to save the build",
     saveEmpty: "Nothing to save yet",
   },
@@ -223,6 +227,7 @@ function CustomContent({
               systemImage="xmark"
               fallbackIcon="close"
               role="cancel"
+              accessibilityLabel={translate("exitOk")}
               onPress={handleExit}
             />
             <View style={styles.headerSpacer} />
@@ -230,6 +235,7 @@ function CustomContent({
               systemImage="checkmark"
               fallbackIcon="check"
               tint={colors.accent.default}
+              accessibilityLabel={translate("save")}
               onPress={() =>
                 draft.save((reason) =>
                   Alert.alert(
@@ -241,6 +247,7 @@ function CustomContent({
             <GlassButton
               systemImage="slider.horizontal.3"
               fallbackIcon="tune-variant"
+              accessibilityLabel={translate("settings")}
               onPress={() => setDrawerOpen(true)}
             />
 

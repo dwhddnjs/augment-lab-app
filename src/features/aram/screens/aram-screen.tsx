@@ -4,9 +4,8 @@
  *
  * 카드 3장의 선택·리롤 연출은 useCardPickAnim 이, 실제 트랜지션은 PickCard 가 맡는다.
  */
-import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -27,8 +26,9 @@ import { useCardPickAnim } from "@/hooks/use-card-pick-anim";
 import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
 import type { GameMode } from "@/lib/build-storage";
-import { augmentImageUrl } from "@/lib/ddragon";
+import { augmentImageUrls } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
+import { prefetchOne } from "@/lib/image-prewarm";
 import { lockPortraitAfterExit } from "@/lib/orientation";
 import { AramCard } from "../components/aram-card";
 import { PickedDrawer } from "../components/picked-drawer";
@@ -38,8 +38,8 @@ import { useAram } from "../hooks/use-aram";
 const t = {
   ko: {
     round: "라운드",
-    picks: "픽 현황",
     exit: "나가기",
+    picks: "픽 현황",
     exitConfirmAram: "칼바람을 종료할까요?",
     exitConfirmClassic: "클래식을 종료할까요?",
     exitOk: "종료",
@@ -47,8 +47,8 @@ const t = {
   },
   en: {
     round: "Round",
-    picks: "Picks",
     exit: "Exit",
+    picks: "Picks",
     exitConfirmAram: "Exit ARAM?",
     exitConfirmClassic: "Exit Classic?",
     exitOk: "Exit",
@@ -90,16 +90,13 @@ export function AramScreen() {
   const cardWidth = cardWidthFor(screenW, screenH, CARD_GAP, CARD_HEIGHT_RATIO);
   const drawerWidth = Math.min(340, screenW * 0.38);
 
-  // 현재 카드의 이미지 캐시를 데워 엠블럼이 카드와 함께 뜨게 한다.
+  // 현재 카드의 이미지 캐시를 데워 엠블럼이 카드와 함께 뜨게 한다. 리롤로 한 장이 바뀌어도
+  // currentCards 가 바뀌어 여기서 받는다(이미 받은 장은 캐시라 바로 끝난다).
   useEffect(() => {
-    // large가 없는 신규(Kiwi) 아이콘은 small로 폴백하므로 두 사이즈 모두 워밍한다.
-    const urls = currentCards
+    // 폴백 주소를 앞에서부터 받다가 성공한 데서 멈춘다 — 실제로 그려질 한 장만 받는다.
+    currentCards
       .filter((a) => a.iconPath)
-      .flatMap((a) => [
-        augmentImageUrl(a.iconPath, "large"),
-        augmentImageUrl(a.iconPath, "small"),
-      ]);
-    if (urls.length) Image.prefetch(urls, { cachePolicy: "memory-disk" });
+      .forEach((a) => prefetchOne(augmentImageUrls(a.iconPath)));
   }, [currentCards]);
 
   // 마지막 라운드를 고르면 아이템 선택으로 넘어간다. 픽 연출이 끝난 뒤 호출되므로
@@ -117,16 +114,7 @@ export function AramScreen() {
     });
   };
 
-  const swapCard = (idx: number) => {
-    const newAugment = reroll(idx);
-    if (newAugment?.iconPath) {
-      Image.prefetch([augmentImageUrl(newAugment.iconPath, "large")], {
-        cachePolicy: "memory-disk",
-      });
-    }
-  };
-
-  const handleExit = useCallback(() => {
+  const handleExit = () => {
     Alert.alert(
       translate(mode === "classic" ? "exitConfirmClassic" : "exitConfirmAram"),
       "",
@@ -142,7 +130,7 @@ export function AramScreen() {
         },
       ],
     );
-  }, [mode, router, translate]);
+  };
 
   // 회전은 진입 직전(use-champion-select)과 useLandscapeLock 두 곳에서 건다.
   // 회전이 끝날 때까지 카드 렌더를 보류해, 카드가 portrait 레이아웃으로 먼저
@@ -179,9 +167,10 @@ export function AramScreen() {
               systemImage="xmark"
               fallbackIcon="close"
               role="cancel"
+              accessibilityLabel={translate("exit")}
               onPress={handleExit}
             />
-            <GlassSurface glassStyle="regular" style={styles.roundBox}>
+            <GlassSurface style={styles.roundBox}>
               <ThemedText
                 type="label"
                 color="primary"
@@ -195,6 +184,7 @@ export function AramScreen() {
             <GlassButton
               systemImage="list.bullet"
               fallbackIcon="format-list-bulleted"
+              accessibilityLabel={translate("picks")}
               onPress={() => setDrawerOpen(true)}
             />
           </View>
@@ -211,7 +201,7 @@ export function AramScreen() {
                 disabled={anim.animating}
                 rerolled={rerolled[i]}
                 onPick={() => anim.pick(i, () => commitPick(i))}
-                onReroll={() => anim.reroll(i, () => swapCard(i))}
+                onReroll={() => anim.reroll(i, () => reroll(i))}
               />
             ))}
           </CardRow>

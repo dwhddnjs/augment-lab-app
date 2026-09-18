@@ -24,7 +24,7 @@ import Animated, {
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassSurface } from "@/components/ui/glass-surface";
-import { Radius, Spacing } from "@/constants/theme";
+import { Radius, Spacing, Typography } from "@/constants/theme";
 import { resolveIds } from "@/lib/arrays";
 import { useAugments } from "@/features/augments/hooks/use-augments";
 import { useChampions } from "@/features/champions/hooks/use-champions";
@@ -73,7 +73,7 @@ const PULL_EXTRA = 140;
 
 export function BuildDetailScreen() {
   const translate = useTranslation(t);
-  const { colors, typography } = useTheme();
+  const { colors } = useTheme();
   const { locale } = useLocale();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -200,7 +200,6 @@ export function BuildDetailScreen() {
           headerBackground: () => (
             <Animated.View style={[StyleSheet.absoluteFill, headerFadeStyle]}>
               <GlassSurface
-                glassStyle="regular"
                 style={StyleSheet.absoluteFill}
               />
             </Animated.View>
@@ -210,7 +209,7 @@ export function BuildDetailScreen() {
               numberOfLines={1}
               style={[
                 {
-                  ...typography.heading,
+                  ...Typography.heading,
                   fontSize: 17,
                   color: colors.text.primary,
                 },

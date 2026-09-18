@@ -9,8 +9,7 @@ import { useAugments } from '@/features/augments/hooks/use-augments';
 import { useChampions } from '@/features/champions/hooks/use-champions';
 import { useItemPool } from '@/features/items/hooks/use-items';
 import {
-  AUGMENT_IMAGE_VARIANTS,
-  augmentImageUrl,
+  augmentImageUrls,
   championClassIconUrl,
   championSquareUrl,
   itemImageUrl,
@@ -44,7 +43,7 @@ export function useImagePrewarm(): { showSetup: boolean; progress: number } {
       // base 로 폴백해 그리므로 프리웜도 같은 순서로 받는다.
       ...augments
         .filter((a) => a.modes?.length)
-        .map((a) => AUGMENT_IMAGE_VARIANTS.map((v) => augmentImageUrl(a.iconPath, v))),
+        .map((a) => augmentImageUrls(a.iconPath)),
       // 진열 풀만. 전체 목록의 나머지(협곡 하위 아이템·옛 아이템)는 패치로 풀에서 빠진
       // 아이템을 옛 빌드에서 되살릴 때만 쓰여, 첫 설치 시간을 쓸 만큼 자주 뜨지 않는다.
       ...[...aramItems, ...classicItems].map((it) => [itemImageUrl(it.imageKey)]),

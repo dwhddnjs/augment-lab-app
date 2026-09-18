@@ -29,10 +29,6 @@
         ]
       }
     },
-    "web": {
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
     "plugins": [
       "expo-router",
       "expo-screen-orientation",
@@ -57,9 +53,6 @@
         "projectId": "bc6939d3-df92-44f8-82b8-703d52156302"
       }
     },
-    "owner": "dwhddnjs",
-    "android": {
-      "package": "com.augmentlab"
-    }
+    "owner": "dwhddnjs"
   }
 }

@@ -48,7 +48,6 @@ export function ChampionStatOverlay({ champion, items, onClose }: Props) {
         pointerEvents="box-none"
       >
         <GlassSurface
-          glassStyle="regular"
           style={[styles.sheet, { borderColor: colors.border.subtle }]}
         >
           <View style={styles.header}>

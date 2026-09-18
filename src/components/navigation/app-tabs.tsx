@@ -15,14 +15,12 @@ const t = {
   ko: {
     home: "메인",
     tierlist: "티어리스트",
-    community: "커뮤니티",
     mypage: "마이페이지",
     plus: "추가",
   },
   en: {
     home: "Home",
     tierlist: "Tier List",
-    community: "Community",
     mypage: "My Page",
     plus: "Add",
   },
@@ -54,13 +52,6 @@ export default function AppTabs() {
         </NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="chart.bar" />
       </NativeTabs.Trigger>
-
-      {/* <NativeTabs.Trigger name="(community)">
-        <NativeTabs.Trigger.Label>
-          {translate("community")}
-        </NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="person.2" />
-      </NativeTabs.Trigger> */}
 
       <NativeTabs.Trigger name="(mypage)">
         <NativeTabs.Trigger.Label>

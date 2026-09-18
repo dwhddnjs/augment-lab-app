@@ -12,7 +12,7 @@
 import type { ChampionStats } from '@/features/champions/types';
 import type { ItemStats } from './types';
 
-export interface StatValue {
+interface StatValue {
   base: number; // 챔피언 기본값
   added: number; // 아이템으로 추가된 양
   total: number; // 최종 합산

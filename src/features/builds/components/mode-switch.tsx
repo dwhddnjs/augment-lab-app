@@ -64,7 +64,6 @@ export function ModeSegmentedControl({
       onLayout={(e) => onHeightChange(e.nativeEvent.layout.height)}
     >
       <GlassSurface
-        glassStyle="regular"
         style={[styles.switchTrack, { borderColor: colors.border.default }]}
       >
         <View

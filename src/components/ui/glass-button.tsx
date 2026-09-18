@@ -7,6 +7,7 @@
  */
 import { Button, Host, Image } from "@expo/ui/swift-ui";
 import {
+  accessibilityLabel as a11yLabel,
   buttonStyle,
   controlSize,
   font,
@@ -32,6 +33,7 @@ export function GlassButton({
   systemImage,
   tint,
   role,
+  accessibilityLabel,
   onPress,
   fallbackIcon,
 }: GlassButtonProps) {
@@ -42,6 +44,7 @@ export function GlassButton({
         fallbackIcon={fallbackIcon}
         tint={tint}
         role={role}
+        accessibilityLabel={accessibilityLabel}
         onPress={onPress}
       />
     );
@@ -67,6 +70,7 @@ export function GlassButton({
               },
               shape: "circle",
             }),
+            ...(accessibilityLabel ? [a11yLabel(accessibilityLabel)] : []),
           ]}
         />
       </Host>
@@ -75,33 +79,15 @@ export function GlassButton({
 
   // padding을 buttonStyle 앞에 두어 glass 배경 안쪽 여백으로 작동시킨다
   // (텍스트가 컨테이너에 꽉 차 보이지 않도록 좌우 여백 확보).
-  const innerPadding = padding({
-    // horizontal: Spacing.three,
-    vertical: Spacing.two,
-    leading: Spacing.three,
-  });
-  // tint(완료=primary)는 glassProminent로 채워 위계를 만들고,
-  // 그 외(건너뛰기=보조)는 중성 glass.
-  const modifiers = tint
-    ? [
-        innerPadding,
-        buttonStyle("glass"),
-        controlSize("regular"),
-        tintModifier(tint),
-        font({
-          weight: "medium",
-          size: 16,
-        }),
-      ]
-    : [
-        innerPadding,
-        buttonStyle("glass"),
-        controlSize("regular"),
-        font({
-          weight: "medium",
-          size: 16,
-        }),
-      ];
+  // 강조(tint)가 있으면 민트로 칠하고, 없으면(건너뛰기 등 보조) 중성 glass.
+  const modifiers = [
+    padding({ vertical: Spacing.two, leading: Spacing.three }),
+    buttonStyle("glass"),
+    controlSize("regular"),
+    ...(tint ? [tintModifier(tint)] : []),
+    font({ weight: "medium", size: 16 }),
+    ...(accessibilityLabel ? [a11yLabel(accessibilityLabel)] : []),
+  ];
 
   return (
     <Host matchContents>

@@ -1,44 +1,38 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
 import { Stack } from 'expo-router/stack';
 import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
 
-import { AnimatedSplashOverlay } from '@/components/navigation/animated-icon';
+import { AnimatedSplashOverlay } from '@/components/navigation/animated-splash-overlay';
 import { SetupScreen } from '@/components/navigation/setup-screen';
 import { Theme } from '@/constants/theme';
 import { useImagePrewarm } from '@/hooks/use-image-prewarm';
 import { loadLocale } from '@/hooks/use-locale';
-import { loadThemePreference, useThemePreference } from '@/hooks/use-theme-preference';
+import { useTheme } from '@/hooks/use-theme';
+import { loadThemePreference } from '@/hooks/use-theme-preference';
 
-const darkNavTheme = {
-  ...DarkTheme,
-  colors: {
-    ...DarkTheme.colors,
-    primary: Theme.dark.accent.default,
-    background: Theme.dark.surface.base,
-    card: Theme.dark.surface.base,
-    text: Theme.dark.text.primary,
-    border: Theme.dark.border.default,
-    notification: Theme.dark.status.danger.default,
-  },
-};
+/** 네비게이션 컨테이너(헤더·배경) 색을 앱 테마 토큰에 맞춘다. */
+function navTheme(base: typeof DefaultTheme, c: (typeof Theme)[keyof typeof Theme]) {
+  return {
+    ...base,
+    colors: {
+      ...base.colors,
+      primary: c.accent.default,
+      background: c.surface.base,
+      card: c.surface.base,
+      text: c.text.primary,
+      border: c.border.default,
+      notification: c.status.danger.default,
+    },
+  };
+}
 
-const lightNavTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: Theme.light.accent.default,
-    background: Theme.light.surface.base,
-    card: Theme.light.surface.base,
-    text: Theme.light.text.primary,
-    border: Theme.light.border.default,
-    notification: Theme.light.status.danger.default,
-  },
+const NAV_THEMES = {
+  dark: navTheme(DarkTheme, Theme.dark),
+  light: navTheme(DefaultTheme, Theme.light),
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const { preference } = useThemePreference();
+  const { mode } = useTheme();
   // 첫 설치 시 챔피언 아이콘을 받는 동안 설치 화면(진행률)을 보여준다.
   const { showSetup, progress } = useImagePrewarm();
 
@@ -48,11 +42,8 @@ export default function RootLayout() {
     loadLocale();
   }, []);
 
-  const system = colorScheme === 'light' ? 'light' : 'dark';
-  const mode = preference === 'system' ? system : preference;
-
   return (
-    <ThemeProvider value={mode === 'dark' ? darkNavTheme : lightNavTheme}>
+    <ThemeProvider value={NAV_THEMES[mode]}>
       {showSetup && <SetupScreen progress={progress} />}
       <AnimatedSplashOverlay />
       <Stack>
