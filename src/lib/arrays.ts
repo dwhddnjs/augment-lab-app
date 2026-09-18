@@ -1,6 +1,6 @@
 /**
  * 배열 순수 유틸 — 뽑기(랜덤)와 id 해석. React 훅 아님.
- * 드래프트 엔진(칼바람·아레나)과 빌드 표시가 함께 쓴다.
+ * 드래프트 엔진과 빌드 표시가 함께 쓴다.
  */
 
 /**
@@ -22,16 +22,6 @@ export function sampleDistinct<T extends { id: string }>(
     used.add(chosen.id);
   }
   return result;
-}
-
-/** 원본을 건드리지 않고 섞는다. 카드 진열 순서용이라 완전 균등일 필요는 없다. */
-export function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
-
-/** 균등 랜덤 1개. 빈 배열이면 undefined. */
-export function pickRandom<T>(arr: T[]): T | undefined {
-  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 /**

@@ -29,6 +29,8 @@ export interface GlassButtonProps {
   tint?: string;
   /** 버튼 시맨틱 역할. 폴백은 destructive를 danger 색으로 반영한다. */
   role?: "default" | "cancel" | "destructive";
+  /** VoiceOver 가 읽을 이름. 아이콘 전용 버튼은 이게 없으면 SF 심볼 이름을 그대로 읽는다. */
+  accessibilityLabel?: string;
   onPress: () => void;
 }
 
@@ -37,6 +39,7 @@ export function GlassButtonFallback({
   fallbackIcon,
   tint,
   role,
+  accessibilityLabel,
   onPress,
 }: GlassButtonProps) {
   const { colors } = useTheme();
@@ -58,6 +61,8 @@ export function GlassButtonFallback({
     <Pressable
       onPress={onPress}
       hitSlop={8}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel ?? label}
       style={({ pressed }) => [
         styles.base,
         iconOnly ? styles.circle : styles.pill,

@@ -113,7 +113,8 @@ for (const id of ['upgrade-sundered-sky', 'upgrade-ravenous-hydra']) {
 }
 // 풀 목록에는 있지만 실제 드래프트에 뜨지 않아 뺀 증강. 스크립트를 다시 돌려도 살아나면 안 된다.
 for (const id of ['double-strike', 'support-main', 'sneakerhead',
-                  'adamant', 'void-dash', 'snap-back', 'reload', 'vampirism', 'pursuit-of-power']) {
+                  'adamant', 'void-dash', 'snap-back', 'reload', 'vampirism', 'pursuit-of-power',
+                  'devil-on-your-shoulder']) {
   const a = ko.find((x) => x.id === id);
   check(!!a && !a.modes.includes('aram'), `${a?.name ?? id} 가 칼바람에서 빠져 있음`);
 }

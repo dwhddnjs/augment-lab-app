@@ -13,20 +13,18 @@ license: MIT
 node scripts/gen-data-check.mjs   # → docs/index.html
 ```
 
-- 검수 페이지는 **하나뿐이다**(`docs/index.html`). 칼바람·클래식 증강만이 아니라 아레나 증강·특수
-  증강·아이템·프리즘 아이템까지 상단 `데이터` 칩으로 갈라 본다. 그래서 **아레나 데이터
-  (`src/features/arena/data/*`)나 아이템 데이터를 고칠 때도 이 페이지를 재생성**한다.
+- 검수 페이지는 **하나뿐이다**(`docs/index.html`). 칼바람·클래식 증강과 아이템을 상단 `데이터`
+  칩으로 갈라 본다. 그래서 **아이템 데이터를 고칠 때도 이 페이지를 재생성**한다.
 - ko/en을 `id`로 병합해 rarity별로 보여주고, 앱과 동일한 이미지 URL 규칙
-  (`augmentImageUrl(large)` 3단 폴백 / `cdragonItemIconUrl` / `itemImageUrl`)으로 아이콘을 렌더한다.
+  (`augmentImageUrls` large→base→small 3단 폴백 / `itemImageUrl`)으로 아이콘을 렌더한다.
 - 아이템은 **앱 진열 풀만**(칼바람 111 · 클래식 81) 싣는다. 나머지는 저장된 빌드를 되살릴 때만
-  쓰여 카드로 뜨지 않는다 — 검수 대상이 아니다. 아레나 아이템은 칼바람 풀과 같은 집합이라
-  배열을 나누지 않고 `modes` 플래그로만 가른다.
+  쓰여 카드로 뜨지 않는다 — 검수 대상이 아니다.
 - 같은 아이콘 파일을 공유하는 증강은 **"공유" 배지**로 표시(오류 아님).
 - **신규**·**수치 미확인**·**비활성** 배지와 "앱·위키 수치가 다른 건" 목록은 `docs/augment-diff.json`에서 온다.
   이 파일은 `node scripts/apply-mayhem-patch.mjs --write`가 만든다.
 - **설명 수정됨** 배지는 `docs/desc-edited.json`에서 온다. 라이엇 원문을 손으로 줄이거나 고쳐 쓴
-  항목의 id 목록이고, 데이터셋별로 키가 나뉜다(`aram`·`arena`·`special`) — 아레나와 칼바람은
-  id가 99개 겹쳐 한 배열에 담을 수 없다. 설명을 손볼 때마다 여기에 id를 추가할 것.
+  항목의 id 목록이고, 데이터셋별로 키가 나뉜다(지금은 `aram` 하나). 설명을 손볼 때마다 여기에
+  id를 추가할 것.
 - 데이터 변경 후 `docs/index.html`도 **함께 커밋**할 것.
 
 ## 모드 구분이 먼저다 — 여기서 틀리면 전부 틀린다
@@ -40,7 +38,7 @@ node scripts/gen-data-check.mjs   # → docs/index.html
 | --- | --- | --- |
 | `KIWI` | `aram` — 칼바람 나락 아수라장 | 풀 220개 → 앱 211개 |
 | `KIWI_JADE` | `classic` — 아수라장 클래식 스타일 | 풀 188개 → 앱 187개 |
-| `CHERRY` | 아레나 | `features/arena` 가 따로 관리 |
+| `CHERRY` | 아레나 | 앱에서 제거됨(2026-09-19) — 가져오지 않는다 |
 
 두 모드는 증강을 상당수 공유하므로 한 증강이 `modes: ['aram','classic']` 을 가질 수 있다.
 어느 풀에도 없으면 `modes: []`(미출시/제거) — 데이터는 남기되 뽑기에는 안 쓴다.
@@ -71,8 +69,8 @@ CDragon 값이 `GenericAbilityAugmentIcon*` 이면 앱에 들어 있는 개별 �
 UI 가 아니라 데이터에서 맞춘다 — `rarity-card-frame.tsx` 가 `numberOfLines={6}` · `fontSize 8`
 이라 **6줄을 넘기면 말줄임표로 잘린다**.
 
-글자 수만 세면 안 된다. 명시적 줄바꿈(`\n`)이 든 설명은 129자로도 9줄이 된다 — 아레나의
-`불멸의 경계`가 그 경우다. 그래서 `gen-data-check.mjs` 의 `estimateCardLines()` 가 어절 단위로
+글자 수만 세면 안 된다. 명시적 줄바꿈(`\n`)이 든 설명은 129자로도 9줄이 된다(옛 아레나의
+`불멸의 경계`가 그 경우였다). 그래서 `gen-data-check.mjs` 의 `estimateCardLines()` 가 어절 단위로
 줄바꿈을 시뮬레이션해 **`잘림 ko N줄` / `잘림 en N줄` 배지**를 붙이고, `표시 > 설명 잘림` 칩으로
 모아 본다. 폭 상수 `CARD_DESC_WIDTH = 109` 는 iPhone 15 가로 기준이다(시뮬레이터와 어긋나면
 이 숫자만 조정).

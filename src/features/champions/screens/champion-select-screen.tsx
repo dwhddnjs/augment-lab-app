@@ -38,7 +38,12 @@ export function ChampionSelectScreen() {
           headerLargeTitle: true,
           headerLargeTitleStyle: ModalLargeTitleStyle,
           headerLeft: () => (
-            <Pressable onPress={() => router.back()} hitSlop={12}>
+            <Pressable
+              onPress={() => router.back()}
+              hitSlop={12}
+              accessibilityRole="button"
+              accessibilityLabel={translate("cancel")}
+            >
               <Image
                 source="sf:xmark"
                 style={styles.headerBtnIcon}
@@ -51,6 +56,8 @@ export function ChampionSelectScreen() {
               onPress={handleStart}
               disabled={!selectedId}
               hitSlop={12}
+              accessibilityRole="button"
+              accessibilityLabel={translate("start")}
               style={{ opacity: selectedId ? 1 : 0.4 }}
             >
               <Image

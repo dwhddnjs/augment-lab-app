@@ -15,12 +15,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
-import { parseDraftMode } from "@/constants/game-modes";
+import { parseGameMode } from "@/constants/game-modes";
 import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
-import { type DraftMode } from "@/lib/build-storage";
+import { type GameMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
 import { ItemDetailPanel } from "../components/item-detail-panel";
 import { ItemFilterBar, SIDE_TAB_WIDTH } from "../components/item-filter-bar";
@@ -40,7 +40,7 @@ export function ItemSelectScreen() {
     championId: string;
     mode?: string;
   }>();
-  const mode: DraftMode = parseDraftMode(modeParam);
+  const mode: GameMode = parseGameMode(modeParam);
   const pickedAugments: Augment[] = useMemo(
     () => (pickedJson ? JSON.parse(pickedJson) : []),
     [pickedJson],
@@ -79,7 +79,7 @@ function ItemSelectContent({
 }: {
   pickedAugments: Augment[];
   championId: string;
-  mode: DraftMode;
+  mode: GameMode;
 }) {
   const { colors } = useTheme();
   const {
@@ -111,6 +111,7 @@ function ItemSelectContent({
           systemImage="xmark"
           fallbackIcon="close"
           role="cancel"
+          accessibilityLabel={translate("exitOk")}
           onPress={handleExit}
         />
 
@@ -126,6 +127,7 @@ function ItemSelectContent({
           systemImage="checkmark"
           fallbackIcon="check"
           tint={colors.accent.default}
+          accessibilityLabel={translate("save")}
           onPress={handleSave}
         />
       </View>
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     gap: Spacing.three,
     paddingLeft: Spacing.two,
     paddingRight: Spacing.three,
-    // aram/arena 헤더와 동일한 상단 간격.
+    // aram 헤더와 동일한 상단 간격.
     paddingTop: Spacing.double,
     paddingBottom: Spacing.two,
   },

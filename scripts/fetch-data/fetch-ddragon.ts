@@ -1,16 +1,19 @@
 /**
  * Fetches champion and item data from Riot Data Dragon for ko_KR and en_US,
- * then writes JSON files to src/data/.
+ * then writes them to each feature's data/ folder and bumps src/lib/version.json.
  *
- * Run via: npm run data:refresh
+ * Run via: npm run data:refresh — it chains parse-item-stats.mjs and gen-data-check.mjs.
+ * DDragon의 raw `stats`(FlatHPPoolMod 등)는 앱이 읽지 않는 키라, 단독 실행하면 반드시 이어서 파싱해야 한다.
  */
 
 import fs from 'fs';
 import path from 'path';
-import type { Champion } from '../../src/types/champion';
-import type { Item } from '../../src/types/item';
+import type { Champion } from '../../src/features/champions/types';
+import type { Item } from '../../src/features/items/types';
 
-const OUT_DIR = path.resolve(__dirname, '../../src/data');
+const SRC = path.resolve(__dirname, '../../src');
+const CHAMPION_DIR = path.join(SRC, 'features/champions/data');
+const ITEM_DIR = path.join(SRC, 'features/items/data');
 const LOCALES = ['ko_KR', 'en_US'] as const;
 const LOCALE_SUFFIX: Record<string, string> = { ko_KR: 'ko', en_US: 'en' };
 
@@ -60,8 +63,6 @@ async function fetchItems(version: string, locale: string): Promise<Item[]> {
 }
 
 async function main() {
-  fs.mkdirSync(OUT_DIR, { recursive: true });
-
   console.log('Fetching latest Data Dragon version...');
   const version = await getLatestVersion();
   console.log(`Version: ${version}`);
@@ -71,7 +72,7 @@ async function main() {
     console.log(`\nFetching champions [${locale}]...`);
     const champions = await fetchChampions(version, locale);
     fs.writeFileSync(
-      path.join(OUT_DIR, `champions.${suffix}.json`),
+      path.join(CHAMPION_DIR, `champions.${suffix}.json`),
       JSON.stringify(champions, null, 2)
     );
     console.log(`  → ${champions.length} champions written`);
@@ -79,17 +80,17 @@ async function main() {
     console.log(`Fetching items [${locale}]...`);
     const items = await fetchItems(version, locale);
     fs.writeFileSync(
-      path.join(OUT_DIR, `items.${suffix}.json`),
+      path.join(ITEM_DIR, `items.${suffix}.json`),
       JSON.stringify(items, null, 2)
     );
     console.log(`  → ${items.length} items written`);
   }
 
   fs.writeFileSync(
-    path.join(OUT_DIR, 'version.json'),
+    path.join(SRC, 'lib/version.json'),
     JSON.stringify({ ddragonVersion: version, generatedAt: new Date().toISOString() }, null, 2)
   );
-  console.log('\nDone. src/data/ updated.');
+  console.log('\nDone. 단독 실행했다면 이어서 실행할 것: node scripts/parse-item-stats.mjs && node scripts/gen-data-check.mjs');
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

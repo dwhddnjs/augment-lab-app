@@ -17,12 +17,7 @@ import { championClassIconUrl, championSquareUrl } from "@/lib/ddragon";
 import { matchName } from "@/lib/hangul";
 import { lockOrientation } from "@/lib/orientation";
 import { CHAMPION_TAGS, useTranslation } from "@/lib/i18n";
-import type { Champion } from "../types";
 import { useChampions } from "./use-champions";
-
-// 아레나 "용기" — 그리드 맨 앞에 끼우는 무작위 챔피언 선택 항목.
-export const BRAVERY_ID = "__bravery__";
-export type GridItem = Champion | { id: typeof BRAVERY_ID };
 
 const t = {
   ko: {
@@ -99,16 +94,10 @@ export function useChampionSelect() {
   // 닫힌 모달이 가로로 돌린 채 드래프트를 띄우는 셈이다. 살아 있을 때만 진행한다.
   const alive = useAlive();
 
-  const filtered = champions
+  const listData = champions
     .filter((c) => !selectedTag || c.tags.includes(selectedTag))
     .filter((c) => matchName(c.name, query))
     .sort((a, b) => a.name.localeCompare(b.name, locale));
-
-  // 아레나는 첫 칸에 물음표(용기) 박스를 둔다 — 검색/필터 중에는 숨긴다.
-  const showBravery = mode === "arena" && !query && !selectedTag;
-  const listData: GridItem[] = showBravery
-    ? [{ id: BRAVERY_ID }, ...filtered]
-    : filtered;
 
   /**
    * 이 화면은 세로다 — 포커스마다 그렇게 잠근다.
@@ -151,15 +140,7 @@ export function useChampionSelect() {
   const handleStart = async () => {
     if (!selectedId || startingRef.current) return;
     startingRef.current = true;
-    // 물음표(용기) 선택 시 전체 챔피언 중 한 명을 무작위 확정한다.
-    const championId =
-      selectedId === BRAVERY_ID
-        ? champions[Math.floor(Math.random() * champions.length)]?.id
-        : selectedId;
-    if (!championId) {
-      startingRef.current = false;
-      return;
-    }
+    const championId = selectedId;
     // 클래식 라운드 수는 세로일 때 먼저 확정한다(가로에서 물으면 잠금이 풀린다).
     const rounds = mode === "classic" ? await askClassicRounds(translate) : 4;
     // 묻는 사이 모달이 닫혔으면 회전조차 걸지 않는다.
@@ -188,8 +169,6 @@ export function useChampionSelect() {
           pathname: "/aram",
           params: { championId, mode: "classic", rounds: String(rounds) },
         }),
-      arena: () =>
-        router.replace({ pathname: "/arena", params: { championId } }),
       // 커스텀은 라운드·뽑기가 없어 championId 만 나른다(모드는 화면 안 drawer 에서 고른다).
       custom: () =>
         router.replace({ pathname: "/custom", params: { championId } }),

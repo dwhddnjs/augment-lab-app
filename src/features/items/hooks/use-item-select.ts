@@ -14,7 +14,7 @@ import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useAlive } from "@/hooks/use-alive";
 import { resolveIds } from "@/lib/arrays";
-import { saveBuild, type DraftMode } from "@/lib/build-storage";
+import { saveBuild, type GameMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { lockOrientation, lockPortraitAfterExit } from "@/lib/orientation";
@@ -31,6 +31,7 @@ const t = {
     title: "아이템 선택",
     stats: "스탯",
     augments: "증강",
+    save: "저장",
     saveError: "빌드 저장에 실패했어요",
     exitConfirm: "저장하지 않고 나갈까요?",
     exitOk: "나가기",
@@ -40,6 +41,7 @@ const t = {
     title: "Item Select",
     stats: "Stats",
     augments: "Augments",
+    save: "Save",
     saveError: "Failed to save the build",
     exitConfirm: "Leave without saving?",
     exitOk: "Leave",
@@ -53,7 +55,7 @@ export function useItemSelect({
   pickedAugments,
 }: {
   championId: string;
-  mode: DraftMode;
+  mode: GameMode;
   pickedAugments: Augment[];
 }) {
   const translate = useTranslation(t);

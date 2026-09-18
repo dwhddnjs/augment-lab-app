@@ -15,7 +15,7 @@ export default function HomeStackLayout() {
   const { colors } = useTheme();
   const translate = useTranslation(t);
 
-  // 칼바람/아레나(가로 고정)를 다녀오면 이 스택의 네비게이션 바가 large title이
+  // 칼바람/커스텀(가로 고정)을 다녀오면 이 스택의 네비게이션 바가 large title이
   // 접힌 채로 잠긴다 — 스크롤 오프셋은 맨 위인데 소형 inline 타이틀만 보인다.
   // headerLargeTitle 토글·스크롤 복원·화면 remount로는 다시 펴지지 않아서,
   // 세로로 돌아오는 순간 스택을 통째로 재생성해 네비바를 새로 만든다.

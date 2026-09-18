@@ -16,33 +16,19 @@ import { useTheme } from '@/hooks/use-theme';
 interface GlassSurfaceProps {
   children?: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-  /** 블러 강도 — BlurView 폴백에서만 사용 (default 20) */
-  intensity?: number;
-  /** GlassView glassEffectStyle (default 'regular') */
-  glassStyle?: 'clear' | 'regular' | 'none';
-  /** 네이티브 글래스 버튼 인터랙션 — iOS 26+ GlassView 전용 (폴백 무시) */
-  isInteractive?: boolean;
-  /** 글래스 틴트 — iOS 26+ GlassView 전용 (폴백 무시) */
-  tintColor?: string;
 }
 
-export function GlassSurface({
-  children,
-  style,
-  intensity = 20,
-  glassStyle = 'regular',
-  isInteractive,
-  tintColor,
-}: GlassSurfaceProps) {
+/** 블러 강도 — BlurView 폴백 전용. */
+const BLUR_INTENSITY = 20;
+
+export function GlassSurface({ children, style }: GlassSurfaceProps) {
   const { mode } = useTheme();
 
   if (isLiquidGlassAvailable()) {
     return (
       <GlassView
-        glassEffectStyle={glassStyle}
-        colorScheme={mode === 'dark' ? 'dark' : 'light'}
-        isInteractive={isInteractive}
-        tintColor={tintColor}
+        glassEffectStyle="regular"
+        colorScheme={mode}
         style={[styles.base, style]}
       >
         {children}
@@ -52,8 +38,8 @@ export function GlassSurface({
   // expo-blur 폴백 (iOS 26 미만)
   return (
     <BlurView
-      intensity={intensity}
-      tint={mode === 'dark' ? 'dark' : 'light'}
+      intensity={BLUR_INTENSITY}
+      tint={mode}
       style={[styles.base, style]}
     >
       {children}

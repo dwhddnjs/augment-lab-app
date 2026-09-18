@@ -59,7 +59,6 @@ export function SelectedChampionRow({
       style={({ pressed }) => ({ opacity: pressed ? 0.55 : 1 })}
     >
       <GlassSurface
-        glassStyle="regular"
         style={[styles.pill, style, { borderColor: colors.border.strong }]}
       >
         {body}

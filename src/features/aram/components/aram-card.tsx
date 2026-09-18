@@ -1,7 +1,6 @@
 /**
  * AramCard — 칼바람·클래식 드래프트 카드 한 장.
- * 공용 PickCard 애니메이션 위에 증강 프레임과 카드당 1회 리롤 버튼을 얹는다
- * (아레나의 ArenaAugmentCard 와 같은 구성 — 연출 코드는 PickCard 한 곳에만 있다).
+ * 공용 PickCard 애니메이션 위에 증강 프레임과 카드당 1회 리롤 버튼을 얹는다.
  */
 import { StyleSheet, View } from "react-native";
 

@@ -40,7 +40,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { MODE_LABELS } from "@/constants/game-modes";
 import { Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
-import type { DraftMode } from "@/lib/build-storage";
+import type { GameMode } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 import type { SortKey, useCustomDraft } from "../hooks/use-custom-draft";
 
@@ -134,12 +134,11 @@ export function CustomSettingsDrawer({ draft }: Props) {
         >
           {/* 한 Section 안에 묶는다 — 섹션을 나누면 그룹 사이가 40pt 넘게 벌어진다. */}
           <Section>
-            {/* 아레나는 증강 체계(레벨업·재련)가 달라 제외한다. */}
             {group(
               "mode",
               <Picker
                 selection={draft.mode}
-                onSelectionChange={(next) => draft.setMode(next as DraftMode)}
+                onSelectionChange={(next) => draft.setMode(next as GameMode)}
                 modifiers={pickerModifiers}
               >
                 <Text modifiers={[tag("aram")]}>{translate("aram")}</Text>

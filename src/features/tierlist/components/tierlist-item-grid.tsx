@@ -3,25 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed/themed-text';
 import { RemoteImage } from '@/components/ui/remote-image';
 import { Radius, Spacing } from '@/constants/theme';
-import type { Locale } from '@/hooks/use-locale';
+import { useTierlistItems } from '@/features/tierlist/hooks/use-tierlist-items';
 import { useTheme } from '@/hooks/use-theme';
-import { cdragonItemIconUrl } from '@/lib/ddragon';
-import { useLocalizedData } from '@/lib/i18n';
-
-interface TierItem {
-  id: string;
-  name: string;
-  iconPath: string;
-}
-
-/**
- * 아이템 이름·아이콘은 앱 items.ko.json 이 아니라 tierlist-items.{ko,en}.json 에서 온다
- * — 앱 아이템 데이터에 없는 id 가 섞여 있어 CDragon 에서 직접 구웠다.
- */
-const itemData: Record<Locale, TierItem[]> = {
-  ko: require('@/features/tierlist/data/tierlist-items.ko.json'),
-  en: require('@/features/tierlist/data/tierlist-items.en.json'),
-};
+import { cdragonIconUrl } from '@/lib/ddragon';
 
 /** 아이템 격자 아이콘. 402pt 폭에서 한 줄 7개 — 빌드 순서 1줄, 상황템 2줄. */
 const ITEM_ICON = 44;
@@ -38,8 +22,7 @@ interface Props {
  */
 export function TierlistItemGrid({ label, ids }: Props) {
   const { colors } = useTheme();
-  const items = useLocalizedData(itemData);
-  const byId = new Map(items.map((i) => [i.id, i]));
+  const byId = useTierlistItems();
   const list = ids.flatMap((id) => byId.get(id) ?? []);
   if (!list.length) return null;
 
@@ -52,7 +35,7 @@ export function TierlistItemGrid({ label, ids }: Props) {
         {list.map((item) => (
           <RemoteImage
             key={item.id}
-            uri={cdragonItemIconUrl(item.iconPath)}
+            uri={cdragonIconUrl(item.iconPath)}
             size={ITEM_ICON}
             recyclingKey={item.id}
             // 빌드 상세 아이템 타일(build-item-row)과 같은 1px border.subtle 테두리.

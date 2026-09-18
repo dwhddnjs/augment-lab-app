@@ -7,10 +7,10 @@
  */
 import type MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import type { DraftMode, GameMode } from "@/lib/build-storage";
+import type { GameMode } from "@/lib/build-storage";
 
 /** 홈 필터·세그먼트 기준 순서. `+` 오버레이는 FAB에서 가까운 쪽부터라 이걸 뒤집어 쓴다. */
-export const GAME_MODES: GameMode[] = ["aram", "classic", "arena"];
+export const GAME_MODES: GameMode[] = ["aram", "classic"];
 
 export const MODE_ICONS: Record<
   GameMode,
@@ -18,14 +18,13 @@ export const MODE_ICONS: Record<
 > = {
   aram: "snowflake",
   // 체스 룩 = 성벽 얹힌 탑. 고전 보드게임 말이자 협곡 포탑이라 복고 모드에 맞고,
-  // 24px에서 눈송이·교차검과 실루엣이 겹치지 않는다.
+  // 24px에서 눈송이와 실루엣이 겹치지 않는다.
   classic: "chess-rook",
-  arena: "sword-cross",
 };
 
 export const MODE_LABELS = {
-  ko: { aram: "칼바람", classic: "클래식", arena: "아레나" },
-  en: { aram: "ARAM", classic: "Classic", arena: "Arena" },
+  ko: { aram: "칼바람", classic: "클래식" },
+  en: { aram: "ARAM", classic: "Classic" },
 };
 
 /**
@@ -34,11 +33,6 @@ export const MODE_LABELS = {
  */
 export function parseGameMode(param: string | undefined): GameMode {
   return GAME_MODES.includes(param as GameMode) ? (param as GameMode) : "aram";
-}
-
-/** 드래프트 플로우(칼바람·클래식) 전용. 아레나는 자체 화면이라 여기로 오지 않는다. */
-export function parseDraftMode(param: string | undefined): DraftMode {
-  return param === "classic" ? "classic" : "aram";
 }
 
 /**
@@ -57,7 +51,7 @@ export const LAUNCH_ICONS: Record<
   keyof typeof MaterialCommunityIcons.glyphMap
 > = {
   ...MODE_ICONS,
-  // 조절 슬라이더 = "내가 값을 정한다". 눈송이·체스룩·교차검과 24px 실루엣이 겹치지 않는다.
+  // 조절 슬라이더 = "내가 값을 정한다". 눈송이·체스룩과 24px 실루엣이 겹치지 않는다.
   custom: "tune-variant",
 };
 

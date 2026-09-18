@@ -1,6 +1,6 @@
 /**
  * PickCard — 카드 3장 중 하나를 고르는 화면들의 공용 선택 애니메이션 래퍼.
- * 칼바람·클래식(AramCard)과 아레나(증강/프리즘/재련/모루)가 같은 연출을 쓴다:
+ * 칼바람·클래식(AramCard)이 이 연출을 쓴다:
  *   - picked   : 선택한 카드 scale 1.05→1 바운스
  *   - unchosen : 나머지 카드 fade-out + scale-down
  *   - reroll   : 리롤 대상 카드 fade-out
@@ -122,7 +122,7 @@ export function PickCard({
 }
 
 /**
- * CardRow — 카드 3장을 가운데 정렬로 깐 행. 칼바람·클래식과 아레나가 공유한다.
+ * CardRow — 카드 3장을 가운데 정렬로 깐 행.
  * 여백·간격은 카드 너비 계산(cardWidthFor)이 쓰는 값과 같아야 해서 거기서 가져온다.
  */
 export function CardRow({ children }: { children: React.ReactNode }) {

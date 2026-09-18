@@ -89,8 +89,8 @@ npx expo run:ios --no-bundler --device <udid>
 ## 5. 드라이브할 만한 플로우
 
 ```
-홈(빌드 목록) → [+] → mode-select → 칼바람/아레나
-  → select-champion-modal (챔피언 선택 + '용기' 물음표)
+홈(빌드 목록) → [+] → mode-select → 칼바람/클래식/커스텀
+  → select-champion-modal (챔피언 선택)
   → /aram (landscape 잠금, 증강 카드 3장 × 4라운드)
   → /aram-items (아이템 선택, 저장 체크만 있고 나가기 버튼 없음)
   → build/[id] (collapsing 헤더, 증강/아이템/합산 스탯)
@@ -98,7 +98,7 @@ npx expo run:ios --no-bundler --device <udid>
   → 데이터 관리 (백업·복원 / 초기화 두 섹션)
 ```
 
-- landscape 잠금 화면(`/aram`, `/aram-items`, `/arena`)은 시뮬레이터 창이 세로라
+- landscape 잠금 화면(`/aram`, `/aram-items`, `/custom`)은 시뮬레이터 창이 세로라
   **콘텐츠가 90° 회전**해 보인다. 정상이다. 탭 좌표는 스크린샷에 보이는 그대로 쓴다.
 - `/aram-items`의 출구는 헤더 좌측 **나가기(xmark)** 와 우측 **저장(checkmark)** 두 개다.
 
@@ -113,7 +113,7 @@ npx expo run:ios --no-bundler --device <udid>
   열릴 수 있으니, 열리면 X로 닫고 다시 누른다.
   치워도 계속 먹히면 두 가지 우회가 있다:
   dev menu 를 열어 아래로 스크롤 → **`Tools button` 토글을 끄거나**,
-  아예 **딥링크로 목적지에 직행**한다(`augmentlab://arena?championId=Garen`).
+  아예 **딥링크로 목적지에 직행**한다(`augmentlab://aram?championId=Garen&mode=aram&rounds=4`).
 - **시스템 공유 시트·문서 피커는 앱이 아니라 OS UI다.** 백업(공유 시트)·복원(파일 앱)처럼
   OS 시트로 나가는 플로우는 시트가 뜬 것까지 확인하고 취소로 되돌린다. 시뮬레이터의 파일 앱은
   비어 있어 실제 파일 왕복은 iCloud/드래그앤드롭 없이는 안 된다 — 저장까지 검증하려면

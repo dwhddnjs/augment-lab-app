@@ -1,7 +1,7 @@
 /**
  * useCardPickAnim — 카드 3장의 선택·리롤 애니메이션 상태.
  *
- * 칼바람·클래식 드래프트와 아레나 게임 화면·두 오버레이(모루·증강 강화)가 같은 연출을 쓴다:
+ * 칼바람·클래식 드래프트가 쓰는 연출:
  *   - pick   : 고른 카드 바운스 + 나머지 fade-out → 380ms 뒤 commit
  *   - reroll : 대상 카드 fade-out → 220ms 뒤 교체(그 슬롯만 fade 재등장)
  * 실제 카드 트랜지션은 PickCard 가 exitMode/entryMode 를 보고 재생한다.
