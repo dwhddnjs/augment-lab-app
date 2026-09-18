@@ -47,6 +47,7 @@ const NOT_IN_ARAM = new Set([
   'KeepGoing',              // 재장전
   'Vampirism',              // 흡혈병
   'SpecializedEmpowerment', // 위력 추구
+  'ARAM_LittleDevil',       // 어깨 위의 악마
 ]);
 
 async function getJson(url) {
