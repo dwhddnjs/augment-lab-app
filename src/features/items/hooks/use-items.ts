@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 
 import type { Item } from '@/features/items/types';
 import type { Locale } from '@/hooks/use-locale';
-import type { DraftMode } from '@/lib/build-storage';
+import type { GameMode } from '@/lib/build-storage';
 import { useLocalizedData } from '@/lib/i18n';
 
-// 협곡(칼바람·아레나)과 클래식은 완전히 다른 아이템 세트다. 클래식은 시즌 초기
+// 협곡(칼바람)과 클래식은 완전히 다른 아이템 세트다. 클래식은 시즌 초기
 // 레트로 아이템(77xxxx)을 쓰고 협곡 아이템은 하나도 등장하지 않는다. id 가 겹치지
 // 않으므로 조회용 목록은 한 벌로 이어 붙여 둔다.
 const data: Record<Locale, Item[]> = {
@@ -20,7 +20,7 @@ const data: Record<Locale, Item[]> = {
 };
 
 // 모드별 진열 목록(완성 아이템). 칼바람 111 / 클래식 81.
-const POOL_IDS: Record<DraftMode, Set<string>> = {
+const POOL_IDS: Record<GameMode, Set<string>> = {
   aram: new Set(require('@/features/items/data/aram-item-ids.json')),
   classic: new Set(require('@/features/items/data/classic-item-ids.json')),
 };
@@ -36,9 +36,9 @@ export function useItems(): Item[] {
 /**
  * 해당 모드에서 실제로 고를 수 있는 아이템만. 상점·그리드는 반드시 이걸 쓴다.
  * 전체 목록에 태그(신발 등)로만 필터를 걸면 다른 모드 아이템이 조용히 섞인다 —
- * 레트로 신발 8종이 아레나 상점에 새던 게 그 경우다.
+ * 레트로 신발 8종이 다른 모드 상점에 새던 게 그 경우다.
  */
-export function useItemPool(mode: DraftMode): Item[] {
+export function useItemPool(mode: GameMode): Item[] {
   const all = useItems();
   return useMemo(() => all.filter((it) => POOL_IDS[mode].has(it.id)), [all, mode]);
 }

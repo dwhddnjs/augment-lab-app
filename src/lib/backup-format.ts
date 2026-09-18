@@ -42,16 +42,6 @@ export function buildFileName(date: Date): string {
   return `augment-lab-${local}.alab`;
 }
 
-/** 백업 파일에 담긴 빌드 개수. 복원 확인 다이얼로그 문구용. 파싱 실패 시 0. */
-export function countBuilds(file: BackupFile): number {
-  try {
-    const parsed = JSON.parse(file.data['builds:v1'] ?? '[]');
-    return Array.isArray(parsed) ? parsed.length : 0;
-  } catch {
-    return 0;
-  }
-}
-
 /**
  * .alab 텍스트를 검증해 파싱한다. 우리 파일이 아니거나 손상됐으면 throw —
  * 호출부는 실패 Alert만 띄우고 기존 데이터는 건드리지 않는다.

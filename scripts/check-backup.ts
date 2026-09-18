@@ -6,14 +6,13 @@ import assert from 'node:assert/strict';
 
 import {
   buildFileName,
-  countBuilds,
   parseBackup,
   serializeBackup,
 } from '../src/lib/backup-format';
 
 const builds = JSON.stringify([
   { id: 'a', mode: 'aram', championId: 'Ahri', augmentIds: [], itemIds: [], createdAt: '2026-08-20T00:00:00.000Z' },
-  { id: 'b', mode: 'arena', championId: 'Jinx', augmentIds: [], itemIds: [], createdAt: '2026-08-19T00:00:00.000Z' },
+  { id: 'b', mode: 'classic', championId: 'Jinx', augmentIds: [], itemIds: [], createdAt: '2026-08-19T00:00:00.000Z' },
 ]);
 const exportedAt = '2026-08-20T09:30:00.000Z';
 
@@ -27,7 +26,6 @@ assert.equal(parsed.data['builds:v1'], builds);
 assert.equal(parsed.data['theme:v1'], 'dark');
 assert.equal(parsed.data['locale:v1'], 'ko');
 assert.equal(parsed.exportedAt, exportedAt);
-assert.equal(countBuilds(parsed), 2);
 
 // 2. 파일명은 로컬 날짜를 쓴다 — UTC로 자르면 KST 새벽에 하루 전 날짜가 된다.
 assert.equal(buildFileName(new Date(2026, 7, 20, 4, 57)), 'augment-lab-2026-08-20.alab');
@@ -37,7 +35,6 @@ assert.equal(buildFileName(new Date('2026-08-19T19:57:00.000Z')).length, 'augmen
 const partial = parseBackup(serializeBackup({ 'locale:v1': 'en' }, exportedAt));
 assert.equal(partial.data['locale:v1'], 'en');
 assert.equal(partial.data['builds:v1'], undefined);
-assert.equal(countBuilds(partial), 0);
 
 // 4. 화이트리스트 밖 키는 조용히 버린다(미래 버전 파일 대비).
 const extra = parseBackup(

@@ -1,29 +1,22 @@
 /**
  * ChampionSelectGrid — 챔피언 선택 화면의 공용 본문.
- * 역할 필터칩(리스트 헤더) + 챔피언 그리드 + 아레나 "용기" 셀.
+ * 역할 필터칩(리스트 헤더) + 챔피언 그리드.
  */
 import { Image } from "expo-image";
-import { FlatList, Pressable, StyleSheet, View } from "react-native";
+import { FlatList, Pressable, StyleSheet } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
-import { GlassSurface } from "@/components/ui/glass-surface";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { championClassIconUrl, championSquareUrl } from "@/lib/ddragon";
-import { CHAMPION_TAGS, useTranslation } from "@/lib/i18n";
-import { BRAVERY_ID, type GridItem } from "../hooks/use-champion-select";
+import { CHAMPION_TAGS } from "@/lib/i18n";
 import type { Champion } from "../types";
-import { BraveryMark, FilterAllIcon } from "./champion-select-icons";
-
-const t = {
-  ko: { bravery: "용기" },
-  en: { bravery: "Bravery" },
-};
+import { FilterAllIcon } from "./champion-select-icons";
 
 type Props = {
-  listData: GridItem[];
+  listData: Champion[];
   selectedId: string | null;
   selectedTag: string | null;
   onSelect: (id: string) => void;
@@ -41,7 +34,6 @@ export function ChampionSelectGrid({
   onScrollBeginDrag,
 }: Props) {
   const { colors } = useTheme();
-  const translate = useTranslation(t);
 
   // 역할 필터칩 — 리스트 헤더로서 리스트와 함께 스크롤된다.
   const filterChips = (
@@ -119,42 +111,8 @@ export function ChampionSelectGrid({
       ListHeaderComponent={filterChips}
       keyboardShouldPersistTaps="handled"
       onScrollBeginDrag={onScrollBeginDrag}
-      renderItem={({ item }) => {
-        const isSelected = selectedId === item.id;
-        // 아레나 "용기" 박스 — 검정 정사각 위에 원형 글래스 + 민트 발광 물음표.
-        if (item.id === BRAVERY_ID) {
-          return (
-            <Pressable
-              onPress={() => onSelect(BRAVERY_ID)}
-              style={styles.cell}
-            >
-              <View
-                style={[
-                  styles.image,
-                  styles.braveryBox,
-                  {
-                    borderWidth: isSelected ? 2.5 : 1.5,
-                    borderColor: isSelected
-                      ? colors.accent.default
-                      : colors.border.default,
-                    backgroundColor: colors.surface.sunken,
-                  },
-                ]}
-              >
-                <GlassSurface glassStyle="regular" style={styles.braveryOrb} />
-                <BraveryMark color={colors.accent.pressed} />
-              </View>
-              <ThemedText
-                type="label"
-                numberOfLines={1}
-                color={isSelected ? "accent" : "secondary"}
-              >
-                {translate("bravery")}
-              </ThemedText>
-            </Pressable>
-          );
-        }
-        const champion = item as Champion;
+      renderItem={({ item: champion }) => {
+        const isSelected = selectedId === champion.id;
         return (
           <Pressable
             onPress={() => onSelect(champion.id)}
@@ -225,18 +183,5 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     borderRadius: Radius.md,
     overflow: "hidden",
-  },
-  braveryBox: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  // 검정 박스에 꽉 차는 글래스 원 — 배경으로 깔고, 물음표는 박스 flex center로 그 위 중앙.
-  braveryOrb: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    borderRadius: Radius.full,
   },
 });

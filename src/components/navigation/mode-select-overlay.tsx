@@ -1,6 +1,6 @@
 /**
  * ModeSelectOverlay — `+` 버튼을 누르면 뜨는 투명 모달.
- * 화면을 딤 처리하고 하단(+ 버튼 근처)에 진입점(칼바람/클래식/아레나/커스텀) 원형 버튼을
+ * 화면을 딤 처리하고 하단(+ 버튼 근처)에 진입점(칼바람/클래식/커스텀) 원형 버튼을
  * 띄운다. 고르면 챔피언 선택 모달로 교체(replace)한다.
  */
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";

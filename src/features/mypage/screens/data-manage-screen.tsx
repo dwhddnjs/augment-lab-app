@@ -14,13 +14,13 @@ import { useState } from "react";
 import { Alert } from "react-native";
 
 import { useTheme } from "@/hooks/use-theme";
-import { countBuilds } from "@/lib/backup-format";
 import {
   applyBackup,
   exportBackup,
   pickBackupFile,
   resetAllData,
 } from "@/lib/backup";
+import { parseBuilds } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 import * as Sharing from "expo-sharing";
 
@@ -59,7 +59,6 @@ const t = {
     resetDone: "삭제했습니다",
 
     cancel: "취소",
-    ok: "확인",
   },
   en: {
     backupSection: "Backup & Restore",
@@ -93,7 +92,6 @@ const t = {
     resetDone: "Erased",
 
     cancel: "Cancel",
-    ok: "OK",
   },
 };
 
@@ -112,7 +110,7 @@ export function DataManageScreen() {
       if (!file) return; // 사용자가 취소 — 아무것도 바꾸지 않는다.
       Alert.alert(
         translate("restoreConfirmTitle"),
-        translate("restoreConfirmBody").replace("{n}", String(countBuilds(file))),
+        translate("restoreConfirmBody").replace("{n}", String(parseBuilds(file.data["builds:v1"]).length)),
         [
           { text: translate("cancel"), style: "cancel" },
           {

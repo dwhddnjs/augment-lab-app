@@ -9,7 +9,7 @@
  * 스타크의 열정·쌍둥이 그림자·아트마의 창·마드레드의 피갈퀴손 같은 구버전 아이템이라
  * 앱의 items.{ko,en}.json(협곡 map 11) 254개에는 한 개도 없다.
  *
- * 정답지는 게임 bin 이다(아레나 증강 수치에 map30.bin.json 을 쓰는 것과 같은 구조):
+ * 정답지는 게임 bin 이다:
  *   Maps/Shipping/Map453/Modes/JADE
  *     ├ itemLists[]   → GameModeItemList.mItems      : 상점 전체
  *     └ mItemShopData → ItemShopGameModeData

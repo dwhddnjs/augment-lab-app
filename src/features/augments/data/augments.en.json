@@ -1030,6 +1030,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ClownCollege_small.png",
     "augmentNameId": "ARAM_ClownCollege",
     "modes": [
+      "aram",
       "classic"
     ]
   },
@@ -1530,7 +1531,6 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/LittleDevil_small.png",
     "augmentNameId": "ARAM_LittleDevil",
     "modes": [
-      "aram",
       "classic"
     ]
   },

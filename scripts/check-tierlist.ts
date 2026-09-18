@@ -14,6 +14,7 @@ import assert from 'node:assert/strict';
 
 import type { Augment } from '@/features/augments/types';
 import {
+  COLUMNS,
   TIERS,
   augSlugs,
   augTierOf,
@@ -29,7 +30,6 @@ const augments = require('@/features/augments/data/augments.ko.json') as Augment
 const itemsKo = require('@/features/tierlist/data/tierlist-items.ko.json') as { id: string; name: string }[];
 const itemsEn = require('@/features/tierlist/data/tierlist-items.en.json') as { id: string; name: string }[];
 
-const COLUMNS = 2;
 /** 모달이 한 줄 7개 격자로 그린다 — 빌드는 코어 3 + 확장 3 이 최대다. */
 const MAX_BUILD = 6;
 

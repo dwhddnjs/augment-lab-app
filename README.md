@@ -1,55 +1,35 @@
-# Welcome to your Expo app 👋
+# Augment Lab
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+칼바람 나락(아수라장) 증강·아이템 빌드 시뮬레이터 + 챔피언 티어리스트. **iOS 전용** Expo 앱.
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## 실행
 
 ```bash
-npm run reset-project
+npm install
+npm run ios      # 개발 빌드 설치 + 시뮬레이터 실행
+npm start        # 설치된 개발 빌드에 Metro 만 붙일 때
+npm run lint
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 데이터 갱신
 
-### Other setup steps
+| 명령 | 하는 일 |
+| --- | --- |
+| `npm run data:refresh` | DDragon 최신 챔피언·아이템 → `src/features/{champions,items}/data`, `src/lib/version.json` → 아이템 `stats` 재파싱 → 검수 페이지(`docs/index.html`) 재생성 |
+| `npm run data:item-stats` | 아이템 설명의 `<stats>` 를 파싱해 `stats` 재생성 (`data:refresh` 가 자동으로 이어 실행) |
+| `npm run data:tierlist` | 칼바람 티어리스트 → `src/features/tierlist/data` |
+| `node scripts/fetch-classic-items.mjs` | 클래식 모드 아이템 풀 |
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+증강 데이터 패치 절차와 검수 페이지(`docs/index.html`)는 `.agents/skills/augment-check/SKILL.md` 참고.
 
-## Learn more
+## 자체 점검 (테스트 러너 대신 assert 스크립트)
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npx tsx scripts/check-tierlist.ts
+npx tsx scripts/check-backup.ts
+npx tsx scripts/check-build-storage.ts
+node scripts/check-rarity-odds.mjs
+node scripts/check-augment-data.mjs
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create your first Expo project.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+구조·코딩 규칙은 `CLAUDE.md`.

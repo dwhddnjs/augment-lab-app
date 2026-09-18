@@ -23,8 +23,6 @@ export const Theme = {
     },
     accent: {
       default: "#00E994",
-      hover: "#2BEEA6",
-      pressed: "#00C87E",
       subtle: "rgba(0,233,148,0.14)",
       onAccent: "#04231A",
     },
@@ -34,12 +32,9 @@ export const Theme = {
       danger: { default: "#F26D6D", subtle: "rgba(242,109,109,0.16)" },
       info: { default: "#5BA8FF", subtle: "rgba(91,168,255,0.16)" },
     },
-    // 유리 질감용 — 어두운 배경 위 칩/패널의 광택·림 라이트
+    // 유리 질감 흉내 — 어두운 배경 위 칩/패널의 반투명 채움
     glass: {
-      fill: "rgba(255,255,255,0.06)", // 베이스 반투명 채움
-      sheen: "rgba(255,255,255,0.16)", // 상단 하이라이트 그라디언트 시작
-      rimTop: "rgba(255,255,255,0.32)", // 상단 가장자리(빛 받는 면)
-      rim: "rgba(255,255,255,0.10)", // 좌우/하단 가장자리
+      fill: "rgba(255,255,255,0.06)",
     },
   },
   light: {
@@ -68,8 +63,6 @@ export const Theme = {
     // #18A368 = 흰 배경 3.24:1(UI/큰 텍스트 AA). onAccent는 흰색보다 대비 높은 어두운 톤.
     accent: {
       default: "#18A368",
-      hover: "#1DB775",
-      pressed: "#148A57",
       subtle: "rgba(24,163,104,0.12)",
       onAccent: "#04231A",
     },
@@ -79,12 +72,9 @@ export const Theme = {
       danger: { default: "#D0463F", subtle: "rgba(208,70,63,0.16)" },
       info: { default: "#2E78D6", subtle: "rgba(46,120,214,0.16)" },
     },
-    // 유리 질감용 — 밝은 배경에선 흰 광택을 더 강하게 주어 유리알 느낌
+    // 밝은 배경에선 흰 채움을 더 강하게 주어 유리알 느낌
     glass: {
       fill: "rgba(255,255,255,0.45)",
-      sheen: "rgba(255,255,255,0.65)",
-      rimTop: "rgba(255,255,255,0.9)",
-      rim: "rgba(255,255,255,0.35)",
     },
   },
 } as const;
@@ -98,7 +88,6 @@ export const Typography = {
   body: { fontSize: 16, lineHeight: 24, fontWeight: "500" as const },
   label: { fontSize: 14, lineHeight: 20, fontWeight: "600" as const },
   caption: { fontSize: 12, lineHeight: 16, fontWeight: "500" as const },
-  code: { fontSize: 13, lineHeight: 18, fontWeight: "500" as const },
 } as const;
 
 export const Radius = {
@@ -118,11 +107,7 @@ type ElevationLevel = {
   shadowRadius?: number;
 };
 
-export const Elevation: Record<
-  "level0" | "level1" | "level2" | "level3",
-  ElevationLevel
-> = {
-  level0: {},
+export const Elevation: Record<"level1" | "level2", ElevationLevel> = {
   level1: {
     shadowColor: "#000",
     shadowOpacity: 0.08,
@@ -134,12 +119,6 @@ export const Elevation: Record<
     shadowOpacity: 0.14,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
-  },
-  level3: {
-    shadowColor: "#000",
-    shadowOpacity: 0.22,
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 18,
   },
 };
 
@@ -243,23 +222,9 @@ export const HeroOverlay = {
   textSecondary: "#B5BAC1",
 } as const;
 
-/**
- * 아레나 골드(화폐) 색. 인게임 골드 톤이라 라이트/다크 공통으로 고정한다.
- * 등급 프레임의 gold highlight 와 값이 같지만 의미가 달라 별도로 둔다.
- */
-export const ArenaGold = "#F2C766";
-
+/** 네이티브 스플래시(app.json backgroundColor)와 같은 색 — 스플래시 오버레이가 이어받는다. */
 export const Brand = {
   splashBg: "#0E0F12",
-  logoBgFrom: "#3C9FFE",
-  logoBgTo: "#0274DF",
-} as const;
-
-export const Fonts = {
-  sans: "system-ui",
-  serif: "ui-serif",
-  rounded: "ui-rounded",
-  mono: "ui-monospace",
 } as const;
 
 export const Spacing = {

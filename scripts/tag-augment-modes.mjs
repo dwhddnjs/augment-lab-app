@@ -11,7 +11,7 @@
  *   모드를 가르는 정답은 augment-lists.json 이다:
  *     KIWI      → 칼바람 나락 아수라장 (aram)
  *     KIWI_JADE → 아수라장 클래식 스타일 (classic)
- *     CHERRY    → 아레나 (이 앱에서는 features/arena 가 따로 관리)
+ *     CHERRY    → 아레나 (앱에서 제거됨 — 가져오지 않는다)
  *
  * 그리고 CDragon 에는 동명 증강이 115쌍 있다(ARAM_ADAPt vs ADAPt 처럼 한쪽만 풀에 속한다).
  * 이름으로 매칭하면 어느 쌍둥이가 걸릴지 순회 순서에 달리므로, 풀 소속을 이름보다 먼저 본다.
@@ -47,6 +47,7 @@ const NOT_IN_ARAM = new Set([
   'KeepGoing',              // 재장전
   'Vampirism',              // 흡혈병
   'SpecializedEmpowerment', // 위력 추구
+  'ARAM_LittleDevil',       // 어깨 위의 악마
 ]);
 
 async function getJson(url) {

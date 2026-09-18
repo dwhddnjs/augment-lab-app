@@ -8,18 +8,15 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Pressable, StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { RemoteImage } from "@/components/ui/remote-image";
 import { ModeBadge } from "@/components/ui/mode-badge";
 import { Elevation, HeroOverlay, Radius, Spacing } from "@/constants/theme";
-import { useArenaAugments } from "@/features/arena/hooks/use-arena-augments";
-import { usePrismaticItems } from "@/features/arena/hooks/use-arena-items";
 import { useAugments } from "@/features/augments/hooks/use-augments";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useItems } from "@/features/items/hooks/use-items";
 import { useTheme } from "@/hooks/use-theme";
 import type { SavedBuild } from "@/lib/build-storage";
 import { resolveIds } from "@/lib/arrays";
-import { cdragonItemIconUrl, championSplashUrl, itemImageUrl } from "@/lib/ddragon";
+import { championSplashUrl, itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { AugmentTile } from "@/components/ui/augment-tile";
 
@@ -43,18 +40,11 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
 
   const champions = useChampions();
   const augments = useAugments();
-  const arenaAugments = useArenaAugments();
   const items = useItems();
-  const prismatics = usePrismaticItems();
 
-  const isArena = build.mode === "arena";
   const champion = champions.find((c) => c.id === build.championId) ?? null;
-  // 아레나 증강은 칼바람과 별도 데이터셋이므로 모드에 맞는 풀에서 해석한다.
-  const augmentPool = isArena ? arenaAugments : augments;
-  const buildAugments = resolveIds(build.augmentIds, augmentPool);
+  const buildAugments = resolveIds(build.augmentIds, augments);
   const buildItems = resolveIds(build.itemIds, items);
-  // 아레나 빌드는 프리즘 아이템도 보유 — 전설 아이템 앞에 함께 노출.
-  const buildPrismatics = isArena ? resolveIds(build.prismaticIds, prismatics) : [];
 
   return (
     <Pressable
@@ -145,27 +135,8 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
                 </View>
               )}
 
-              {(buildItems.length > 0 || buildPrismatics.length > 0) && (
+              {buildItems.length > 0 && (
                 <View style={styles.row}>
-                  {buildPrismatics.map((item, i) => (
-                    <View
-                      key={`p-${item.id}-${i}`}
-                      style={[
-                        styles.itemTile,
-                        {
-                          backgroundColor: HeroOverlay.tileBg,
-                          borderColor: HeroOverlay.tileBorder,
-                        },
-                      ]}
-                    >
-                      <RemoteImage
-                        uri={cdragonItemIconUrl(item.iconPath)}
-                        recyclingKey={item.id}
-                        style={styles.itemIcon}
-                        contentFit="contain"
-                      />
-                    </View>
-                  ))}
                   {buildItems.map((item, i) => (
                     <View
                       key={`${item.id}-${i}`}

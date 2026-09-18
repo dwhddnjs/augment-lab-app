@@ -30,10 +30,6 @@ function getSnapshot(): Locale {
   return _locale;
 }
 
-export function getLocale(): Locale {
-  return _locale;
-}
-
 /**
  * 앱 시작 시 1회 호출 — 저장된 로케일을 복원한다.
  * 데이터 초기화/백업 복원 후에도 호출되므로, 저장값이 없으면 기본값('ko')으로
@@ -49,7 +45,7 @@ export async function loadLocale(): Promise<void> {
   }
 }
 
-export function setLocale(next: Locale) {
+function setLocale(next: Locale) {
   _locale = next;
   emit();
   AsyncStorage.setItem(STORAGE_KEY, next).catch(() => {});

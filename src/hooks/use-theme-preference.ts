@@ -44,10 +44,6 @@ function getSnapshot(): ThemePreference {
   return _pref;
 }
 
-export function getThemePreference(): ThemePreference {
-  return _pref;
-}
-
 /**
  * 앱 시작 시 1회 호출 — 저장된 선택을 복원한다.
  * 데이터 초기화/백업 복원 후에도 호출되므로, 저장값이 없으면 기본값('system')으로
@@ -64,7 +60,7 @@ export async function loadThemePreference(): Promise<void> {
   }
 }
 
-export function setThemePreference(next: ThemePreference) {
+function setThemePreference(next: ThemePreference) {
   _pref = next;
   applyColorScheme(next);
   emit();

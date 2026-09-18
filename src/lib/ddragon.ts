@@ -26,24 +26,27 @@ export function itemImageUrl(imageKey: string) {
 //   베이스 파일(silver_spoon.png 등)에 있다. `_large` 가 없는(404) 증강은
 //   여기서 컬러를 얻는다. `_small` 접미사를 제거.
 // - 'small' (64px): rcp-be-lol-game-data 플러그인 루트의 원본 `_small` 경로.
-export function augmentImageUrl(iconPath: string, size: 'small' | 'base' | 'large' = 'large') {
-  const stripped = iconPath.replace(/^\/lol-game-data\/assets/i, '').toLowerCase();
-  if (size === 'large') {
-    const large = stripped.replace(/_small(\.\w+)$/i, '_large$1');
-    return `${CDRAGON_BASE}/game${large}`;
-  }
-  if (size === 'base') {
-    const base = stripped.replace(/_small(\.\w+)$/i, '$1');
-    return `${CDRAGON_BASE}/game${base}`;
-  }
-  return `${CDRAGON_BASE}/plugins/rcp-be-lol-game-data/global/default${stripped}`;
+// 이 순서가 폴백 순서다. 첫 설치 프리웜도 같은 순서로 받아야 실제로 그려질 파일이 캐시에 들어간다.
+const AUGMENT_IMAGE_VARIANTS = ['large', 'base', 'small'] as const;
+
+const stripAssetPrefix = (iconPath: string) =>
+  iconPath.replace(/^\/lol-game-data\/assets/i, '').toLowerCase();
+
+// ddragon에 없는 아이콘(소환사 주문·일부 아이템·증강 small)은 CDragon 경로로 받는다.
+// iconPath: "/lol-game-data/assets/ASSETS/Items/Icons2D/7100_MirageBlade.png"
+export function cdragonIconUrl(iconPath: string) {
+  return `${CDRAGON_BASE}/plugins/rcp-be-lol-game-data/global/default${stripAssetPrefix(iconPath)}`;
 }
 
-// 아레나 프리즘 아이템(id 447xxx)은 ddragon에 없고 CDragon에만 존재한다.
-// iconPath: "/lol-game-data/assets/ASSETS/Items/Icons2D/7100_MirageBlade.png"
-export function cdragonItemIconUrl(iconPath: string) {
-  const stripped = iconPath.replace(/^\/lol-game-data\/assets/i, '').toLowerCase();
-  return `${CDRAGON_BASE}/plugins/rcp-be-lol-game-data/global/default${stripped}`;
+function augmentImageUrl(iconPath: string, size: (typeof AUGMENT_IMAGE_VARIANTS)[number]) {
+  if (size === 'small') return cdragonIconUrl(iconPath);
+  const suffix = size === 'large' ? '_large$1' : '$1';
+  return `${CDRAGON_BASE}/game${stripAssetPrefix(iconPath).replace(/_small(\.\w+)$/i, suffix)}`;
+}
+
+/** 증강 아이콘의 폴백 주소 목록(AUGMENT_IMAGE_VARIANTS 순). 로더·프리페치가 같은 순서를 쓴다. */
+export function augmentImageUrls(iconPath: string): string[] {
+  return AUGMENT_IMAGE_VARIANTS.map((v) => augmentImageUrl(iconPath, v));
 }
 
 const CLASS_ICON_KEYS: Record<string, string> = {

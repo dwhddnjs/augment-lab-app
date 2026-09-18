@@ -18,31 +18,29 @@ license: MIT
 
 ## `useTheme()` 토큰
 
-`const { mode, colors, typography, radius, elevation } = useTheme();`
+`const { mode, colors } = useTheme();` — 타이포·반경·간격·그림자는 `Typography`/`Radius`/`Spacing`/`Elevation` 을 `@/constants/theme` 에서 직접 import.
 
 - `colors.surface.base/raised/sunken/overlay` — 배경 레이어
 - `colors.text.primary/secondary/tertiary/disabled/inverse/onAccent` — 텍스트
 - `colors.border.default/subtle/strong` — 테두리
-- `colors.accent.default/hover/pressed/subtle/onAccent` — 민트 액센트
+- `colors.accent.default/subtle/onAccent` — 민트 액센트
 - `colors.status.success/warning/danger/info` — 상태색(각 `.default`/`.subtle`)
 
-## 타이포 (`ThemedText type=` / `typography.*`)
+## 타이포 (`ThemedText type=` / `Typography.*` — `@/constants/theme` 에서 import)
 
 | type | size | weight | 용도 |
 |---|---|---|---|
 | `display` | 48 | 700 | 대형 제목 |
 | `title` | 32 | 700 | 섹션 제목 |
-| `heading` | 22 | 600 | 화면 제목 |
+| `heading` | 20 | 600 | 화면 제목 |
 | `body` | 16 | 500 | 본문 |
 | `label` | 14 | 600 | 버튼·칩·소제목 |
 | `caption` | 12 | 500 | 부가 설명 |
-| `code` | 13 | 500 | 코드·모노 |
-| `link` | 16 | 500 | body + accent |
 
 ## 컴포넌트 사용 규칙 (RN 단계에서만)
 
 - 텍스트: `ThemedText` — `type` + `color`(`primary|secondary|tertiary|disabled|inverse|onAccent|accent`)
-- 뷰: `ThemedView` — `surface`(`base|raised|sunken|overlay`) + `elevation`(`0~3`)
+- 뷰: `ThemedView` — `surface`(`base|raised|sunken|overlay`)
 - 색상 직접 접근: `const { colors } = useTheme()` 후 인라인 스타일
 
 ## 간격·반경·기타
@@ -50,7 +48,7 @@ license: MIT
 - `Spacing.*` — 여백/패딩(`half`=2 … `six`=64)
 - `Radius.*` — `borderRadius`에 **반드시** 토큰(`none`/`sm`/`md`/`lg`/`xl`/`full`). 숫자 리터럴·`Spacing` 값 금지.
 - 둥근 모서리(캡슐 아님)에는 `{ borderCurve: 'continuous' }`.
-- 그림자는 `elevation` 토큰 또는 CSS `boxShadow`. legacy RN shadow/`elevation` 스타일 prop 금지.
+- 그림자는 `Elevation.level1/level2` 토큰 또는 CSS `boxShadow`. legacy RN shadow/`elevation` 스타일 prop 금지.
 - `SafeAreaView`(RN) 금지 → 헤더/탭/`contentInsetAdjustmentBehavior` 또는 `react-native-safe-area-context`.
 
 ## 절대 금지
@@ -64,7 +62,7 @@ license: MIT
 
 - iOS 26+ → `expo-glass-effect` 네이티브 글라스 · 구버전/안드로이드 → `expo-blur` `BlurView` 폴백 · 그 외 → `colors.surface.overlay` 단색
 - tint는 테마 토큰만. **본문 카드·섹션·고밀도 목록에 글라스 남발 금지**(성능). 화면 위에 떠 있는 선택 트레이(`ItemSlotGrid`)는 허용.
-- `glassStyle='clear'`(얇은 레이어) / `'regular'`(표준 패널)
+- 재질은 `regular` 하나로 통일(props 는 `style`·`children` 만). 다른 재질이 필요해지면 그때 prop 을 연다.
 
 ## 이미지·아이콘
 

@@ -20,8 +20,6 @@ interface Props {
   contentFit?: ImageContentFit;
   /** 리스트 재활용 식별자. 미지정 시 uri 사용. */
   recyclingKey?: string;
-  /** fade-in 지속(ms). 기본 200. */
-  transition?: number;
   /** 이름 없이 아이콘만 그릴 때 VoiceOver 가 읽을 이름. */
   accessibilityLabel?: string;
 }
@@ -32,7 +30,6 @@ export function RemoteImage({
   style,
   contentFit = 'cover',
   recyclingKey,
-  transition = 200,
   accessibilityLabel,
 }: Props) {
   const { colors } = useTheme();
@@ -47,7 +44,7 @@ export function RemoteImage({
       ]}
       contentFit={contentFit}
       cachePolicy="memory-disk"
-      transition={transition}
+      transition={200}
       recyclingKey={recyclingKey ?? uri}
       accessible={accessibilityLabel != null}
       accessibilityLabel={accessibilityLabel}

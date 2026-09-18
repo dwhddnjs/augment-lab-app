@@ -18,7 +18,7 @@ export interface Augment {
   /**
    * CDragon augmentNameId. 아이콘·모드·수치를 조회하는 유일한 키다.
    * CDragon 에는 동명 증강이 115쌍 있어(ARAM_ADAPt vs ADAPt) 이름으로는 특정할 수 없다.
-   * 아레나 증강 데이터에는 아직 없어 옵셔널이다.
+   * 값이 없는 항목이 남아 있어(현재 1개) 옵셔널이다.
    */
   augmentNameId?: string;
   /**

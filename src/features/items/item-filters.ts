@@ -8,7 +8,7 @@ import type { Item } from "./types";
 
 // ─── 아이템 카테고리 명시 지정 ───────────────────────────────────────────────
 // 태그 기반 predicate보다 우선 적용. 여러 카테고리 가능.
-export const ITEM_CATEGORIES: Record<string, string[]> = {
+const ITEM_CATEGORIES: Record<string, string[]> = {
   "2065": ["support"], // 슈렐리아의 군가
   "2517": ["fighter"], // 끝없는 갈망
   "2524": ["support"], // 밴들파이프
@@ -90,7 +90,7 @@ export const ITEM_CATEGORIES: Record<string, string[]> = {
  * - 신발은 boots/all 탭에서만 노출
  * - 나머지는 tagFallback 사용
  */
-export function itemInCategory(
+function itemInCategory(
   item: Item,
   key: string,
   tagFallback: () => boolean,

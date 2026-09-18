@@ -4,7 +4,7 @@
 
 화면 헤더는 **Expo Router `Stack.Screen`의 native 헤더를 기본**으로 사용한다. 커스텀 헤더(직접 그린 타이틀/뒤로가기) 지양:
 
-- 각 탭을 그룹+자체 `Stack`으로 구성한다(`(home)`/`(community)`/`(mypage)`). `NativeTabs.Trigger`의 `name`은 그룹명을 가리킨다.
+- 각 탭을 그룹+자체 `Stack`으로 구성한다(`(home)`/`(tierlist)`/`(mypage)`). `NativeTabs.Trigger`의 `name`은 그룹명을 가리킨다.
 - 헤더 색은 루트 `_layout.tsx`의 `ThemeProvider`가 주입. 스택 `screenOptions`로 동작만 제어(`headerLargeTitle`/`headerTransparent`/`headerTintColor`). hex 하드코딩 금지.
 - 목록형 화면은 `headerLargeTitle: true`. RN 스크롤뷰가 첫 자식이면 `contentInsetAdjustmentBehavior="automatic"`.
 - 몰입형 상세는 `headerTransparent: true` + 본문이 헤더 뒤로 스크롤. 스크롤에 따른 헤더 페이드인은 `headerBackground`/`headerTitle`에 reanimated `Animated.View`/`Animated.Text` 주입.
@@ -20,7 +20,7 @@
 
 - `_layout.tsx` — 루트(`ThemeProvider` 헤더 색 주입 + 스플래시/탭 부트스트랩)
 - `(tabs)/_layout.tsx` — `NativeTabs`. `Trigger`의 `name`은 그룹명
-- `(tabs)/(home|community|mypage)/` — 각 탭 그룹(자체 `Stack` + 화면)
+- `(tabs)/(home|tierlist|mypage)/` — 각 탭 그룹(자체 `Stack` + 화면)
 - `(tabs)/plus.tsx` — 가운데 추가(+) 탭
 - `draft.tsx` 등 — 몰입형 풀스크린 플로우(`headerShown: false` 허용)
 

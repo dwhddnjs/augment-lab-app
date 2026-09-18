@@ -6,7 +6,7 @@ import { AugmentRarityGlyphs, Radius, Spacing } from "@/constants/theme";
 import type { Augment, AugmentRarity } from "@/features/augments/types";
 import { cleanAugmentDescription } from "@/lib/augment-text";
 
-export interface RarityStyle {
+interface RarityStyle {
   // Outer metallic rim — diagonal brushed-metal sheen.
   frameImage: string;
   outerGlow: string;
@@ -22,8 +22,8 @@ export interface RarityStyle {
 
 // Each rarity is an intrinsic in-game palette (like the existing AugmentRarityColors),
 // so the metallic/holographic hexes live here rather than in the app theme tokens.
-// 칼바람·아레나 두 feature가 공유하는 순수 시각 컴포넌트라 components/ui로 승격했다.
-export const RARITY: Record<AugmentRarity, RarityStyle> = {
+// 칼바람·커스텀 두 feature가 공유하는 순수 시각 컴포넌트라 components/ui에 둔다.
+const RARITY: Record<AugmentRarity, RarityStyle> = {
   silver: {
     frameImage:
       "linear-gradient(135deg, #34383f 0%, #5b616a 15%, #818892 31%, #3f444c 50%, #6b7079 66%, #383c43 82%, #5e646d 100%)",
@@ -57,20 +57,18 @@ export const RARITY: Record<AugmentRarity, RarityStyle> = {
 };
 
 /** 카드 비율(세로/가로). 프레임을 쓰지 않는 아이템·프리즘 카드도 이 비율을 따른다. */
-export const CARD_ASPECT = 14 / 9;
+const CARD_ASPECT = 14 / 9;
 
 /** 카드 3장 행의 좌우 여백. */
 export const CARD_ROW_PAD = Spacing.four;
 
 /**
- * 화면(칼바람·클래식·아레나)에서 카드 3장 사이 간격. 오버레이(모루·증강 강화)는
- * 더 좁은 자기 값을 쓴다 — 시트 안이라 여유가 없다.
+ * 드래프트 화면(칼바람·클래식)에서 카드 3장 사이 간격.
  */
 export const CARD_GAP = Spacing.four;
 
 /**
  * 카드 높이의 화면 세로 대비 상한. 꽉 채우면 헤더와 아래 리롤 버튼 자리가 없다.
- * 칼바람·아레나가 같은 값을 써야 두 화면의 카드 크기가 같아 보인다.
  */
 export const CARD_HEIGHT_RATIO = 0.56;
 
@@ -110,11 +108,9 @@ function splitDescription(text: string): { text: string; hl: boolean }[] {
 interface Props {
   augment: Augment;
   cardWidth: number;
-  /** 본문 상단 추가 여백(px). 아레나 증강 카드의 상단 별 오버레이 공간 확보용(기본 0). */
-  topInset?: number;
   /**
    * 커스텀 화면 그리드용 조밀 배치. 카드가 촘촘히 붙으므로 아이콘·여백을 줄이고
-   * 서로 번지는 외곽 글로우를 끈다. 한 장씩 크게 보여주는 칼바람·클래식·아레나는 기본값.
+   * 서로 번지는 외곽 글로우를 끈다. 한 장씩 크게 보여주는 칼바람·클래식은 기본값.
    */
   compact?: boolean;
 }
@@ -122,7 +118,6 @@ interface Props {
 export function RarityCardFrame({
   augment,
   cardWidth,
-  topInset = 0,
   compact = false,
 }: Props) {
   const rs = RARITY[augment.rarity];
@@ -157,7 +152,7 @@ export function RarityCardFrame({
         <View
           style={[
             styles.content,
-            { paddingTop: Spacing.two + topInset },
+            { paddingTop: Spacing.two },
             compact && { paddingHorizontal: Spacing.half, gap: Spacing.one },
           ]}
         >

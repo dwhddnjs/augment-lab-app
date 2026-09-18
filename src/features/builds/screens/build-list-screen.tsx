@@ -41,7 +41,6 @@ import { formatDate, groupByDate, type BuildSection } from "../utils/date";
 
 const t = {
   ko: {
-    emptyTitle: "저장된 빌드가 없어요",
     emptyHint: "빌드를 완료하면 여기에 쌓여요",
     startBuild: "빌드 시작",
     deleteConfirm: "빌드를 삭제할까요?",
@@ -49,7 +48,6 @@ const t = {
     cancel: "취소",
   },
   en: {
-    emptyTitle: "No saved builds",
     emptyHint: "Finish a build to see it here",
     startBuild: "Start Build",
     deleteConfirm: "Delete this build?",

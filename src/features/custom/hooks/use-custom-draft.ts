@@ -18,7 +18,7 @@ import { FILTERS, type FilterKey } from "@/features/items/item-filters";
 import { MAX_ITEMS, type Item } from "@/features/items/types";
 import { useAlive } from "@/hooks/use-alive";
 import { useLocale } from "@/hooks/use-locale";
-import { saveBuild, type DraftMode } from "@/lib/build-storage";
+import { saveBuild, type GameMode } from "@/lib/build-storage";
 import { matchName } from "@/lib/hangul";
 import { lockOrientation } from "@/lib/orientation";
 
@@ -54,7 +54,7 @@ export function useCustomDraft(initialChampionId: string) {
 
   // params 는 초기값으로만 쓴다 — 패널의 "챔피언 변경"이 setState 한 번으로 끝나도록.
   const [championId, setChampionId] = useState(initialChampionId);
-  const [mode, setModeState] = useState<DraftMode>("aram");
+  const [mode, setModeState] = useState<GameMode>("aram");
   const [target, setTargetState] = useState<PickTarget>("augment");
   const [tier, setTier] = useState<AugmentRarity | null>(null);
   const [itemFilter, setItemFilter] = useState<FilterKey>(null);
@@ -148,7 +148,7 @@ export function useCustomDraft(initialChampionId: string) {
    * 새로 짠다"는 조작이라, 앞 모드에서 고른 조합이 일부만 남아 있으면 무엇이 사라지고
    * 무엇이 남았는지 화면만 보고는 알 수 없다.
    */
-  const setMode = (next: DraftMode) => {
+  const setMode = (next: GameMode) => {
     if (next === mode) return;
     setModeState(next);
     clear();
