@@ -6,4 +6,3 @@ const run = (script: string) =>
 
 run('fetch-ddragon.ts');
 run('fetch-augments.ts');
-run('fetch-arena.ts');

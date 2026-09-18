@@ -8,7 +8,7 @@
 
 - **UI 작업**(컴포넌트·리스트·폼·컨트롤·시트·메뉴·헤더·라우팅) → `.agents/skills/expo-ui/SKILL.md`. 진짜 네이티브가 hero. universal `@expo/ui` 1순위, 안 될 때만 RN으로 내려간다.
 - **디자인**(색·타이포·간격/반경·리퀴드글라스·이미지/아이콘) → `.agents/skills/design-system/SKILL.md`. 모든 값은 `src/constants/theme.ts` 토큰만. hex·숫자 리터럴 하드코딩 금지.
-- **데이터 변경**(`src/features/augments/data/`·`src/features/arena/data/`·`src/features/items/data/` 의 JSON 수정·추가·삭제) → `.agents/skills/augment-check/SKILL.md`. 변경 때마다 검수 페이지(`docs/index.html`)를 재생성하고 함께 커밋.
+- **데이터 변경**(`src/features/augments/data/`·`src/features/items/data/` 의 JSON 수정·추가·삭제) → `.agents/skills/augment-check/SKILL.md`. 변경 때마다 검수 페이지(`docs/index.html`)를 재생성하고 함께 커밋.
 
 ## 플랜 문서 저장
 
@@ -64,12 +64,11 @@ src/
 
 feature 는 두 종류다 — 이 구분이 아래 경계 규칙의 전제다:
 - **데이터 도메인**(`augments`·`champions`·`items`): 로케일별 JSON + 조회 훅 + 타입. 누구나 읽는다.
-- **화면 도메인**(`aram`·`arena`·`custom`·`builds`·`mypage`): 실제 화면. 데이터 도메인을 읽어 쓴다.
+- **화면 도메인**(`aram`·`custom`·`builds`·`tierlist`·`mypage`): 실제 화면. 데이터 도메인을 읽어 쓴다.
 
 경계 규칙:
 1. `src/app/` — 라우트 파일만. UI는 `features/*/screens`에서 import.
 2. `features/<도메인>/` — **screens(화면)와 components(조각)를 분리**. 화면 도메인이 데이터 도메인을 import 하는 건 정상이다(그게 데이터 도메인의 용도). 금지되는 건 **화면 도메인끼리의 참조** — 공유가 필요하면 `components/ui`·`hooks/`·`lib/`로 승격한다.
-   예외는 `builds` 하나 — 모든 모드의 빌드를 되살려 보여주는 화면이라 각 모드의 데이터 훅과 요약 컴포넌트(`ArenaBuildSummary`)를 읽는다.
 3. `src/components/` — 두 개 이상 feature가 쓰는 공용 UI. 데이터 도메인의 **타입**은 import 해도 된다(`RarityCardFrame`이 `Augment`를 그린다). 화면 도메인은 import 하지 않는다.
 4. `src/hooks/` — 여러 feature 공유 글로벌 훅만.
 5. `src/lib/` — 외부 클라이언트 + 순수 유틸(React 훅 아님. `i18n.ts`의 `useTranslation`만 예외).

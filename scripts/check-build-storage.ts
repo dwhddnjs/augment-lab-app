@@ -1,5 +1,5 @@
 /**
- * 빌드 저장소의 **쓰기 실패 롤백** 점검 — `npx tsx scripts/check-build-storage.ts`.
+ * 빌드 저장소의 **쓰기 실패 롤백**과 **제거된 모드 필터** 점검 — `npx tsx scripts/check-build-storage.ts`.
  *
  * 테스트 러너가 없으므로 assert만 쓴다(check-backup.ts 와 같은 방식).
  *
@@ -39,7 +39,7 @@ const KEY = 'builds:v1';
 const onDisk = (): unknown[] => JSON.parse(disk.get(KEY) ?? '[]');
 
 async function main() {
-  const { saveBuild, removeBuild, getBuildsSnapshot } = await import(
+  const { saveBuild, removeBuild, getBuildsSnapshot, reloadBuilds } = await import(
     '../src/lib/build-storage'
   );
 
@@ -82,7 +82,22 @@ async function main() {
   assert.equal(getBuildsSnapshot()?.length, 0, '삭제 후 캐시 0개');
   assert.equal(onDisk().length, 0, '삭제 후 디스크 0개');
 
-  console.log('✓ build-storage 쓰기 실패 롤백 통과');
+  // 5. 제거된 아레나 모드의 빌드(기존 로컬 데이터·옛 백업 복원)는 로드 시 걸러진다.
+  disk.set(
+    KEY,
+    JSON.stringify([
+      { ...draft, id: 'old-arena', mode: 'arena', createdAt: '2026-08-01T00:00:00.000Z' },
+      { ...draft, id: 'keep', createdAt: '2026-08-02T00:00:00.000Z' },
+    ]),
+  );
+  await reloadBuilds();
+  assert.deepEqual(
+    getBuildsSnapshot()?.map((b) => b.id),
+    ['keep'],
+    '아레나 빌드는 목록에 오지 않는다',
+  );
+
+  console.log('✓ build-storage 쓰기 실패 롤백 · 아레나 필터 통과');
 }
 
 main().catch((e) => {

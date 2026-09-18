@@ -11,35 +11,22 @@ const STORAGE_KEY = 'builds:v1';
 
 /**
  * 'aram'    — 칼바람 나락 아수라장
- * 'arena'   — 아레나
  * 'classic' — 아수라장 클래식 스타일(협곡 맵 453). 증강·플로우는 칼바람과 같고
  *             라운드가 4 또는 5, 아이템이 레트로 세트라는 점만 다르다.
- */
-export type GameMode = 'aram' | 'arena' | 'classic';
-
-/**
- * 드래프트(3장 중 1픽) 플로우를 공유하는 모드. 아레나는 자체 화면이라 빠진다.
+ *
  * AugmentMode 와 값이 같아 useAugmentPool 에 그대로 넘길 수 있다.
  */
-export type DraftMode = Exclude<GameMode, 'arena'>;
+export type GameMode = 'aram' | 'classic';
 
 export interface SavedBuild {
   id: string;
   /** 게임 모드. mode 없는 기존 데이터는 readAll에서 'aram'으로 폴백한다. */
   mode: GameMode;
   championId: string;
-  /** 픽한 증강 id — 칼바람 최대 6, 아레나는 레벨업 누적 */
+  /** 픽한 증강 id — 최대 6 */
   augmentIds: string[];
-  /** 선택한 아이템 id — 칼바람 0~6, 아레나는 전설/신발 누적 */
+  /** 선택한 아이템 id — 0~6 */
   itemIds: string[];
-  /** (아레나) 증강 id → 강화 레벨. 칼바람 빌드에는 없음. */
-  augmentLevels?: Record<string, number>;
-  /** (아레나) 보유 프리즘 아이템 id. */
-  prismaticIds?: string[];
-  /** (아레나) 보유 능력치 모루 id. */
-  shardIds?: string[];
-  /** (아레나) 선택한 재련(특수 증강) id. */
-  reforgeIds?: string[];
   /** ISO 8601 */
   createdAt: string;
 }
@@ -76,8 +63,12 @@ async function readAll(): Promise<SavedBuild[]> {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
     const parsed = raw ? JSON.parse(raw) : [];
     // mode 필드 도입 전 데이터는 칼바람(aram)으로 간주한다.
+    // 아레나 모드는 제거됐다(2026-09-19) — 그 빌드는 그릴 데이터가 없으니 버린다.
+    // 백업 복원도 reloadBuilds → 여기를 거치므로 걸러내는 곳은 이 한 군데다.
     const list = Array.isArray(parsed)
-      ? parsed.map((b) => ({ ...b, mode: b.mode ?? 'aram' }))
+      ? parsed
+          .map((b) => ({ ...b, mode: b.mode ?? 'aram' }))
+          .filter((b) => b.mode !== 'arena')
       : [];
     cache = sortDesc(list);
   } catch {

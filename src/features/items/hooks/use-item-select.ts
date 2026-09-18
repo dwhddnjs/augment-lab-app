@@ -14,7 +14,7 @@ import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useAlive } from "@/hooks/use-alive";
 import { resolveIds } from "@/lib/arrays";
-import { saveBuild, type DraftMode } from "@/lib/build-storage";
+import { saveBuild, type GameMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { lockOrientation, lockPortraitAfterExit } from "@/lib/orientation";
@@ -53,7 +53,7 @@ export function useItemSelect({
   pickedAugments,
 }: {
   championId: string;
-  mode: DraftMode;
+  mode: GameMode;
   pickedAugments: Augment[];
 }) {
   const translate = useTranslation(t);

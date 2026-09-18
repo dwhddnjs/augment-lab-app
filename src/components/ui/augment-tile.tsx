@@ -3,7 +3,7 @@
  * 희귀도 테두리 + CDragon 아이콘(AugmentImage가 large→base→small→글리프 폴백 처리).
  *
  * 도메인 타입(Augment)에 의존하지 않도록 iconPath·rarity 등 원시값만 받는다
- * (칼바람·아레나 양쪽 feature에서 공유). 희귀도는 테마 토큰 키로 타이핑한다.
+ * (빌드 카드·커스텀 등 여러 feature에서 공유). 희귀도는 테마 토큰 키로 타이핑한다.
  */
 import { StyleSheet, View } from 'react-native';
 

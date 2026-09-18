@@ -4,14 +4,14 @@
  *   node scripts/gen-data-check.mjs
  *   → docs/index.html
  *
- * 칼바람·클래식 증강 / 아레나 증강 / 특수 증강 / 아이템 / 프리즘 아이템을 ko·en 을
- * id 로 병합해 한 페이지에 담고, 앱과 동일한 이미지 URL 규칙(augmentImageUrl ·
- * cdragonItemIconUrl · itemImageUrl)으로 아이콘을 렌더한다. 데이터셋은 상단 칩으로
- * 가르고, 그 아래 모드·등급·표시 행은 고른 데이터셋에 맞는 것만 남는다.
+ * 칼바람·클래식 증강 / 아이템을 ko·en 을 id 로 병합해 한 페이지에 담고, 앱과 동일한
+ * 이미지 URL 규칙(augmentImageUrl · itemImageUrl)으로 아이콘을 렌더한다. 데이터셋은
+ * 상단 칩으로 가르고, 그 아래 모드·등급·표시 행은 고른 데이터셋에 맞는 것만 남는다.
  *
  * 예전엔 gen-augment-check(칼바람) · gen-arena-check(아레나) · gen-check-index(진입점)
  * 셋으로 나뉘어 있었다. 셋이 CSS 팔레트와 아이콘 URL 규칙을 각자 복붙해 들고 있었고
  * 진입점 개수는 손으로 적혀 있어 조용히 낡았다 — 그래서 하나로 합쳤다.
+ * 아레나(증강·특수 증강·프리즘 아이템)는 모드 제거(2026-09-19)와 함께 빠졌다.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -62,12 +62,6 @@ const CARD_DESC_WIDTH = 109;
 /** rarity-card-frame.tsx 의 numberOfLines. */
 const CARD_DESC_LINES = 6;
 
-// 프리즘 아이템 카드(arena-prismatic-card)는 증강 카드와 규칙이 다르다 — 스탯 줄과
-// 효과 줄이 따로고 numberOfLines 가 각각 4·6 이다. 다만 둘이 한 카드 세로를 나눠 쓰므로
-// 스탯이 넉 줄까지 가면 효과에 남는 건 다섯 줄이다.
-const prismFits = (statLines, effLines) =>
-  (statLines <= 3 && effLines <= 6) || (statLines === 4 && effLines <= 5);
-
 // ponytail: 폰트 메트릭 근사(8pt SF Pro). 시뮬레이터와 어긋나면 여기 숫자만 조정한다.
 const charWidth = (ch) => {
   const c = ch.codePointAt(0);
@@ -109,7 +103,7 @@ function estimateCardLines(text, maxW = CARD_DESC_WIDTH) {
 
 // ─────────────────────────── 데이터 로드 ───────────────────────────
 
-// 손으로 설명을 고친 항목. 아레나와 칼바람은 id 가 99개 겹치므로 데이터셋 키로 나눈다.
+// 손으로 설명을 고친 항목. 데이터셋 키로 나눈다(지금은 aram 하나).
 // ponytail: 사유 없는 id 배열. 필요해지면 원소를 {id, why} 객체로 승격한다.
 const edited = readIf('docs/desc-edited.json') ?? {};
 const editedSet = (k) => new Set(edited[k] ?? []);
@@ -164,30 +158,10 @@ const aug = mergeAugments(
   }),
 );
 
-// --- 아레나 증강 ---
-const arena = mergeAugments(
-  readJson('src/features/arena/data/augments.ko.json'),
-  readJson('src/features/arena/data/augments.en.json'),
-  editedSet('arena'),
-  (a) => ({ maxLevel: a.maxLevel ?? 1 }),
-);
-
-// --- 특수 증강 (원본 rarity 4: 재련 craft + 시즌 변형) ---
-// rarity 가 없다. 앱도 arena-reforge-card 에서 골드 프레임으로 통일해 그린다.
-const special = mergeAugments(
-  readJson('src/features/arena/data/special-augments.ko.json'),
-  readJson('src/features/arena/data/special-augments.en.json'),
-  editedSet('special'),
-);
-
 // --- 아이템 (앱 진열 풀만) ---
 // 전체 404개 중 조회용 212개는 저장된 빌드를 되살릴 때만 쓰여 카드로 뜨지 않는다.
 const aramIds = new Set(readJson('src/features/items/data/aram-item-ids.json'));
 const classicIds = new Set(readJson('src/features/items/data/classic-item-ids.json'));
-// 아레나는 협곡(칼바람) 완성 아이템 풀을 그대로 쓴다 — arena-shop.tsx 와 같은 규칙.
-// 지금은 제외 목록이 칼바람 풀과 겹치지 않아 두 풀이 같은 111개지만, 규칙을 그대로
-// 옮겨 둬야 라이엇이 갈라놓는 순간 개수가 갈라져 눈에 띈다.
-const EXCLUDED_BOOT_IDS = new Set(['1001', '3168', '3170', '3171', '3173', '3174', '3175']);
 const itemEn = byId([
   ...readJson('src/features/items/data/items.en.json'),
   ...readJson('src/features/items/data/classic-items.en.json'),
@@ -199,8 +173,6 @@ const items = [
   .filter((it) => aramIds.has(it.id) || classicIds.has(it.id))
   .map((it) => {
     const boots = it.tags.includes('Boots');
-    const inArena =
-      aramIds.has(it.id) && it.gold.purchasable && !(boots && EXCLUDED_BOOT_IDS.has(it.id));
     return {
       id: it.id,
       ko: it.name,
@@ -210,57 +182,21 @@ const items = [
       boots,
       descKo: cleanItemDesc(it.description),
       descEn: cleanItemDesc(itemEn.get(it.id)?.description),
-      modes: aramIds.has(it.id) ? ['aram', ...(inArena ? ['arena'] : [])] : ['classic'],
+      modes: aramIds.has(it.id) ? ['aram'] : ['classic'],
     };
   });
 
-// --- 프리즘 아이템 (id 447xxx, 아레나 전용) ---
-// 카드가 스탯 블록과 효과 블록을 따로 그리므로(앱의 prismaticStatSummary /
-// prismaticEffectSummary) 줄수도 블록별로 잰다.
-const prismBlocks = (raw) => cleanItemDesc(raw).split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
-const prismStats = (raw) => { const b = prismBlocks(raw); return b.length > 1 ? b[0].replace(/\n/g, ' · ') : ''; };
-const prismEffect = (raw) => {
-  const b = prismBlocks(raw);
-  return (b.length > 1 ? b.slice(1) : b).join(' ').replace(/\s*\n\s*/g, ' ').replace(/\s{2,}/g, ' ').trim();
-};
-const prismEn = byId(readJson('src/features/arena/data/prismatic-items.en.json'));
-const prismEdited = editedSet('prism');
-const prism = readJson('src/features/arena/data/prismatic-items.ko.json').map((i) => {
-  const enRaw = prismEn.get(i.id)?.description ?? '';
-  const ln = {
-    lnStatKo: estimateCardLines(prismStats(i.description)),
-    lnEffKo: estimateCardLines(prismEffect(i.description)),
-    lnStatEn: estimateCardLines(prismStats(enRaw)),
-    lnEffEn: estimateCardLines(prismEffect(enRaw)),
-  };
-  return {
-    id: i.id,
-    ko: i.name,
-    en: prismEn.get(i.id)?.name ?? i.name,
-    iconPath: i.iconPath,
-    price: i.price,
-    descKo: cleanItemDesc(i.description),
-    descEn: cleanItemDesc(enRaw),
-    ...ln,
-    edited: prismEdited.has(i.id),
-    clip: !prismFits(ln.lnStatKo, ln.lnEffKo) || !prismFits(ln.lnStatEn, ln.lnEffEn),
-  };
-});
-
 // 같은 아이콘 파일을 공유하는 증강 식별 (오류가 아니라 검수 표시용)
 const basename = (p) => p.replace(/.*\//, '').toLowerCase();
-for (const list of [aug, arena, special]) {
-  const counts = new Map();
-  for (const a of list) counts.set(basename(a.iconPath), (counts.get(basename(a.iconPath)) ?? 0) + 1);
-  for (const a of list) a.shared = counts.get(basename(a.iconPath)) > 1;
-}
+const iconCounts = new Map();
+for (const a of aug) iconCounts.set(basename(a.iconPath), (iconCounts.get(basename(a.iconPath)) ?? 0) + 1);
+for (const a of aug) a.shared = iconCounts.get(basename(a.iconPath)) > 1;
 
 // ─────────────────────────── 집계 ───────────────────────────
 
 const n = (list, fn) => list.filter(fn).length;
 const rarity = (list, r) => n(list, (a) => a.rarity === r);
 const clipped = (list) => n(list, (a) => a.clip);
-const augLike = [...aug, ...arena, ...special];
 
 const stat = {
   aram: n(aug, (a) => a.modes.includes('aram')),
@@ -269,14 +205,12 @@ const stat = {
   none: n(aug, (a) => a.modes.length === 0),
   itemAram: n(items, (i) => i.modes.includes('aram')),
   itemClassic: n(items, (i) => i.modes.includes('classic')),
-  itemArena: n(items, (i) => i.modes.includes('arena')),
-  shared: n(augLike, (a) => a.shared),
+  shared: n(aug, (a) => a.shared),
   isNew: n(aug, (a) => a.isNew),
   noCoef: n(aug, (a) => a.noCoef),
-  edited: n(augLike, (a) => a.edited) + n(prism, (p) => p.edited),
-  clipKo: n(augLike, (a) => a.lnKo > CARD_DESC_LINES),
-  clipEn: n(augLike, (a) => a.lnEn > CARD_DESC_LINES),
-  clipPrism: n(prism, (p) => p.clip),
+  edited: n(aug, (a) => a.edited),
+  clipKo: n(aug, (a) => a.lnKo > CARD_DESC_LINES),
+  clipEn: n(aug, (a) => a.lnEn > CARD_DESC_LINES),
 };
 
 // script 블록 안에 넣는 값은 < 를 유니코드로 이스케이프한다. 설명에 </script> 나
@@ -291,7 +225,7 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>증강연구서 데이터 검수 — 증강 ${aug.length + arena.length + special.length} · 아이템 ${items.length + prism.length}</title>
+<title>증강연구서 데이터 검수 — 증강 ${aug.length} · 아이템 ${items.length}</title>
 <style>
   :root {
     --bg: #0d1311; --surface: #131b18; --raised: #1a2420; --border: #25322d;
@@ -356,10 +290,7 @@ const html = `<!doctype html>
   .tb { background: rgba(140,160,255,.16); color: #b3c2ff; }
   .mb.aram { background: rgba(90,170,255,.16); color: #8fc4ff; }
   .mb.classic { background: rgba(255,180,90,.16); color: #ffc98f; }
-  .mb.arena { background: rgba(201,139,255,.16); color: var(--prism); }
   .mb.none { background: rgba(120,120,120,.18); color: var(--text3); }
-  .lvl { background: rgba(30,215,160,.14); color: var(--mint); letter-spacing: -.5px; }
-  .lvl.nolvl { background: rgba(108,127,120,.18); color: var(--text3); letter-spacing: 0; }
   .gb { background: rgba(232,196,95,.14); color: var(--gold); }
   details.review { margin: 28px 0 0; border: 1px solid var(--border); border-radius: 12px;
     background: var(--surface); padding: 12px 16px; }
@@ -379,10 +310,7 @@ const html = `<!doctype html>
   <h1>증강연구서 데이터 검수</h1>
   <div class="stats">
     증강 <b>${aug.length}</b> ·
-    아레나 증강 <b>${arena.length}</b> ·
-    특수 증강 <b>${special.length}</b> ·
-    아이템 <b>${items.length}</b> ·
-    프리즘 아이템 <b>${prism.length}</b>
+    아이템 <b>${items.length}</b>
   </div>
   <div class="stats" style="margin-top:3px">
     <span style="color:#8fc4ff">칼바람 ${stat.aram}</span> ·
@@ -392,7 +320,7 @@ const html = `<!doctype html>
     <span style="color:var(--mint)">신규 ${stat.isNew}</span> ·
     <span style="color:#ff9a9a">수치 미확인 ${stat.noCoef}</span> ·
     <span style="color:#b3c2ff">설명 수정됨 ${stat.edited}</span> ·
-    <span style="color:#ffb3b3">설명 잘림 ko ${stat.clipKo} · en ${stat.clipEn} · 프리즘 ${stat.clipPrism}</span>
+    <span style="color:#ffb3b3">설명 잘림 ko ${stat.clipKo} · en ${stat.clipEn}</span>
   </div>
   <div class="controls">
     <input id="q" type="search" placeholder="한글·영문 이름·설명 검색…" autocomplete="off" />
@@ -403,10 +331,7 @@ const html = `<!doctype html>
     <div class="frow">
       <span class="flabel">데이터</span>
       <span class="chip active" data-g="ds" data-v="aug">칼바람·클래식 증강<small>${aug.length}</small></span>
-      <span class="chip" data-g="ds" data-v="arena">아레나 증강<small>${arena.length}</small></span>
-      <span class="chip" data-g="ds" data-v="special">특수 증강<small>${special.length}</small></span>
       <span class="chip" data-g="ds" data-v="item">아이템<small>${items.length}</small></span>
-      <span class="chip" data-g="ds" data-v="prism">프리즘 아이템<small>${prism.length}</small></span>
     </div>
     <div class="frow" id="row-mode">
       <span class="flabel">모드</span>
@@ -417,23 +342,21 @@ const html = `<!doctype html>
       <span class="chip" data-g="mode" data-v="none" data-for="aug">미출시<small>${stat.none}</small></span>
       <span class="chip" data-g="mode" data-v="aram" data-for="item">칼바람<small>${stat.itemAram}</small></span>
       <span class="chip" data-g="mode" data-v="classic" data-for="item">클래식<small>${stat.itemClassic}</small></span>
-      <span class="chip" data-g="mode" data-v="arena" data-for="item">아레나<small>${stat.itemArena}</small></span>
     </div>
     <div class="frow" id="row-rarity">
       <span class="flabel">등급</span>
-      <span class="chip active" data-g="rarity" data-v="all" data-for="aug arena">전체</span>
-      <span class="chip" data-g="rarity" data-v="silver" data-for="aug arena">실버</span>
-      <span class="chip" data-g="rarity" data-v="gold" data-for="aug arena">골드</span>
-      <span class="chip" data-g="rarity" data-v="prismatic" data-for="aug arena">프리즘</span>
+      <span class="chip active" data-g="rarity" data-v="all" data-for="aug">전체</span>
+      <span class="chip" data-g="rarity" data-v="silver" data-for="aug">실버</span>
+      <span class="chip" data-g="rarity" data-v="gold" data-for="aug">골드</span>
+      <span class="chip" data-g="rarity" data-v="prismatic" data-for="aug">프리즘</span>
     </div>
     <div class="frow" id="row-flag">
       <span class="flabel">표시</span>
-      <span class="chip toggle" data-t="clip" data-for="aug arena special prism">설명 잘림</span>
-      <span class="chip toggle" data-t="edited" data-for="aug arena special prism">설명 수정됨</span>
-      <span class="chip toggle" data-t="shared" data-for="aug arena special">아이콘 공유</span>
+      <span class="chip toggle" data-t="clip" data-for="aug">설명 잘림</span>
+      <span class="chip toggle" data-t="edited" data-for="aug">설명 수정됨</span>
+      <span class="chip toggle" data-t="shared" data-for="aug">아이콘 공유</span>
       <span class="chip toggle" data-t="isNew" data-for="aug">신규</span>
       <span class="chip toggle" data-t="noCoef" data-for="aug">수치 미확인</span>
-      <span class="chip toggle" data-t="fixed" data-for="arena">레벨업 불가</span>
     </div>
   </div>
 </header>
@@ -442,15 +365,10 @@ const html = `<!doctype html>
 <script>
 const DATA = {
   aug: ${embed(aug)},
-  arena: ${embed(arena)},
-  special: ${embed(special)},
   item: ${embed(items)},
-  prism: ${embed(prism)},
 };
 const NUMBER_DIFFS = ${embed(numberDiffs)};
 const CLIP_LINES = ${CARD_DESC_LINES};
-// 프리즘 아이템 카드의 스탯·효과 줄 상한(생성기 prismFits 와 같은 규칙).
-const PRISM_FITS = (s, e) => (s <= 3 && e <= 6) || (s === 4 && e <= 5);
 const CDRAGON = 'https://raw.communitydragon.org/latest';
 const DDRAGON = 'https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}';
 const strip = (p) => p.replace(/^\\/lol-game-data\\/assets/i, '').toLowerCase();
@@ -458,8 +376,6 @@ const strip = (p) => p.replace(/^\\/lol-game-data\\/assets/i, '').toLowerCase();
 const augUrl = (p) => CDRAGON + '/game' + strip(p).replace(/_small(\\.\\w+)$/i, '_large$1');
 const augUrlBase = (p) => CDRAGON + '/game' + strip(p).replace(/_small(\\.\\w+)$/i, '$1');
 const augUrlSmall = (p) => CDRAGON + '/plugins/rcp-be-lol-game-data/global/default' + strip(p);
-// 앱의 cdragonItemIconUrl — 프리즘 아이템(447xxx)은 ddragon 에 없다
-const prismUrl = (p) => CDRAGON + '/plugins/rcp-be-lol-game-data/global/default' + strip(p);
 // 앱의 itemImageUrl
 const itemUrl = (k) => DDRAGON + '/img/item/' + k;
 
@@ -467,7 +383,7 @@ const RNAME = { silver: '실버', gold: '골드', prismatic: '프리즘' };
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 let ds = 'aug', mode = 'all', rarity = 'all', query = '';
-const flags = { clip: false, edited: false, shared: false, isNew: false, noCoef: false, fixed: false };
+const flags = { clip: false, edited: false, shared: false, isNew: false, noCoef: false };
 
 function pass(a) {
   if (rarity !== 'all' && a.rarity !== rarity) return false;
@@ -481,7 +397,6 @@ function pass(a) {
   if (flags.shared && !a.shared) return false;
   if (flags.isNew && !a.isNew) return false;
   if (flags.noCoef && !a.noCoef) return false;
-  if (flags.fixed && a.maxLevel !== 1) return false;
   if (query) {
     const hay = (a.ko + ' ' + a.en + ' ' + a.id + ' ' + a.descKo + ' ' + a.descEn).toLowerCase();
     if (!hay.includes(query.toLowerCase())) return false;
@@ -492,9 +407,6 @@ function pass(a) {
 function badges(a) {
   let b = '';
   if (a.rarity) b += '<span class="rb ' + a.rarity + '">' + RNAME[a.rarity] + '</span>';
-  if (ds === 'arena') b += a.maxLevel > 1
-    ? '<span class="lvl">' + '★'.repeat(a.maxLevel) + ' 최대 ' + a.maxLevel + '레벨</span>'
-    : '<span class="lvl nolvl">레벨업 불가</span>';
   if (ds === 'aug') {
     if (a.modes.includes('aram')) b += '<span class="mb aram">칼바람</span>';
     if (a.modes.includes('classic')) b += '<span class="mb classic">클래식</span>';
@@ -502,20 +414,11 @@ function badges(a) {
   }
   if (ds === 'item') {
     if (a.modes.includes('aram')) b += '<span class="mb aram">칼바람</span>';
-    if (a.modes.includes('arena')) b += '<span class="mb arena">아레나</span>';
     if (a.modes.includes('classic')) b += '<span class="mb classic">클래식</span>';
     b += '<span class="gb">' + a.gold + 'G</span>';
   }
-  if (ds === 'prism') {
-    b += '<span class="gb">' + a.price + 'G</span>';
-    // 스탯 · 효과가 서로 다른 줄 상한을 쓰므로 어느 블록이 넘쳤는지까지 적는다.
-    for (const [loc, s, e] of [['ko', a.lnStatKo, a.lnEffKo], ['en', a.lnStatEn, a.lnEffEn]]) {
-      if (!PRISM_FITS(s, e)) b += '<span class="xb">잘림 ' + loc + ' 스탯 ' + s + '줄 · 효과 ' + e + '줄</span>';
-    }
-  } else {
-    if (a.lnKo > CLIP_LINES) b += '<span class="xb">잘림 ko ' + a.lnKo + '줄</span>';
-    if (a.lnEn > CLIP_LINES) b += '<span class="xb">잘림 en ' + a.lnEn + '줄</span>';
-  }
+  if (a.lnKo > CLIP_LINES) b += '<span class="xb">잘림 ko ' + a.lnKo + '줄</span>';
+  if (a.lnEn > CLIP_LINES) b += '<span class="xb">잘림 en ' + a.lnEn + '줄</span>';
   if (a.isNew) b += '<span class="nb">신규</span>';
   if (a.noCoef) b += '<span class="cb">수치 미확인</span>';
   if (a.disabled) b += '<span class="db">비활성</span>';
@@ -532,9 +435,9 @@ function card(a) {
   img.className = 'icon';
   img.loading = 'lazy';
   img.alt = a.ko;
-  img.src = ds === 'item' ? itemUrl(a.imageKey) : ds === 'prism' ? prismUrl(a.iconPath) : augUrl(a.iconPath);
+  img.src = ds === 'item' ? itemUrl(a.imageKey) : augUrl(a.iconPath);
   img.onerror = () => {
-    if (ds !== 'item' && ds !== 'prism') {
+    if (ds !== 'item') {
       const st = img.dataset.step || '0';
       if (st === '0') { img.dataset.step = '1'; img.src = augUrlBase(a.iconPath); return; }
       if (st === '1') { img.dataset.step = '2'; img.src = augUrlSmall(a.iconPath); return; }
@@ -555,19 +458,16 @@ function card(a) {
   return el;
 }
 
-// 데이터셋마다 묶는 축이 다르다 — 증강은 등급, 아이템은 신발 여부, 나머지는 한 덩어리.
+// 데이터셋마다 묶는 축이 다르다 — 증강은 등급, 아이템은 신발 여부.
 function groupsOf(list) {
-  if (ds === 'aug' || ds === 'arena') {
+  if (ds === 'aug') {
     const order = ['silver', 'gold', 'prismatic'];
     return order
       .map((r) => [RNAME[r] + ' 증강', list.filter((a) => a.rarity === r)])
       .filter(([, l]) => l.length);
   }
-  if (ds === 'item') {
-    return [['전설 아이템', list.filter((a) => !a.boots)], ['신발', list.filter((a) => a.boots)]]
-      .filter(([, l]) => l.length);
-  }
-  return [[{ special: '특수 증강 (재련·시즌 변형)', prism: '프리즘 아이템' }[ds], list]];
+  return [['전설 아이템', list.filter((a) => !a.boots)], ['신발', list.filter((a) => a.boots)]]
+    .filter(([, l]) => l.length);
 }
 
 function render() {
@@ -671,6 +571,6 @@ fs.mkdirSync(path.dirname(outPath), { recursive: true });
 fs.writeFileSync(outPath, html);
 const kb = (Buffer.byteLength(html) / 1024).toFixed(0);
 console.log(`✓ ${path.relative(root, outPath)} (${kb}KB)`);
-console.log(`  증강 ${aug.length}(실버 ${rarity(aug, 'silver')}·골드 ${rarity(aug, 'gold')}·프리즘 ${rarity(aug, 'prismatic')}) · 아레나 ${arena.length} · 특수 ${special.length}`);
-console.log(`  아이템 ${items.length}(칼바람 ${stat.itemAram}·클래식 ${stat.itemClassic}·아레나 ${stat.itemArena}) · 프리즘 ${prism.length}`);
-console.log(`  설명 잘림 — 칼바람 ${clipped(aug)} · 아레나 ${clipped(arena)} · 특수 ${clipped(special)} · 프리즘 ${clipped(prism)}`);
+console.log(`  증강 ${aug.length}(실버 ${rarity(aug, 'silver')}·골드 ${rarity(aug, 'gold')}·프리즘 ${rarity(aug, 'prismatic')})`);
+console.log(`  아이템 ${items.length}(칼바람 ${stat.itemAram}·클래식 ${stat.itemClassic})`);
+console.log(`  설명 잘림 — 칼바람 ${clipped(aug)}`);

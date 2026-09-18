@@ -2,8 +2,7 @@
  * 칼바람·클래식 공용 드래프트 화면. 규칙·UI 는 같고 증강 풀과 라운드 수만 다르다.
  * 모드는 라우트 파라미터로 들어와 아이템 화면(saveBuild)까지 그대로 전달된다.
  *
- * 카드 3장의 선택·리롤 연출은 useCardPickAnim 이, 실제 트랜지션은 PickCard 가 맡는다
- * (아레나 화면과 같은 조합).
+ * 카드 3장의 선택·리롤 연출은 useCardPickAnim 이, 실제 트랜지션은 PickCard 가 맡는다.
  */
 import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -22,12 +21,12 @@ import {
   CARD_HEIGHT_RATIO,
   cardWidthFor,
 } from "@/components/ui/rarity-card-frame";
-import { parseDraftMode } from "@/constants/game-modes";
+import { parseGameMode } from "@/constants/game-modes";
 import { Radius, Spacing } from "@/constants/theme";
 import { useCardPickAnim } from "@/hooks/use-card-pick-anim";
 import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
-import type { DraftMode } from "@/lib/build-storage";
+import type { GameMode } from "@/lib/build-storage";
 import { augmentImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { lockPortraitAfterExit } from "@/lib/orientation";
@@ -73,7 +72,7 @@ export function AramScreen() {
     mode?: string;
     rounds?: string;
   }>();
-  const mode: DraftMode = parseDraftMode(modeParam);
+  const mode: GameMode = parseGameMode(modeParam);
   // 라운드 수는 챔피언 선택에서 확정해 넘어온다(클래식은 바론 간식 질문으로 4 또는 5).
   // 여기서 묻지 않는 이유는 orientation — 가로 잠금 상태에서 Alert 을 띄우면 잠금이 풀린다.
   const rounds = Number(roundsParam) || 4;
