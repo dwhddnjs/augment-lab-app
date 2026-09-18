@@ -2,7 +2,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { useState } from 'react';
 
-import { augmentImageUrl } from '@/lib/ddragon';
+import { AUGMENT_IMAGE_VARIANTS, augmentImageUrl } from '@/lib/ddragon';
 
 /**
  * 증강 아이콘 로더 — large(256px) → base(컬러 원본) → small(64px) → 글리프 폴백.
@@ -47,7 +47,7 @@ export function AugmentImage({
     );
   }
 
-  const variant = step === 0 ? 'large' : step === 1 ? 'base' : 'small';
+  const variant = AUGMENT_IMAGE_VARIANTS[step];
 
   return (
     <Image

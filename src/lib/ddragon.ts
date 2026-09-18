@@ -26,7 +26,13 @@ export function itemImageUrl(imageKey: string) {
 //   베이스 파일(silver_spoon.png 등)에 있다. `_large` 가 없는(404) 증강은
 //   여기서 컬러를 얻는다. `_small` 접미사를 제거.
 // - 'small' (64px): rcp-be-lol-game-data 플러그인 루트의 원본 `_small` 경로.
-export function augmentImageUrl(iconPath: string, size: 'small' | 'base' | 'large' = 'large') {
+// 이 순서가 폴백 순서다. 첫 설치 프리웜도 같은 순서로 받아야 실제로 그려질 파일이 캐시에 들어간다.
+export const AUGMENT_IMAGE_VARIANTS = ['large', 'base', 'small'] as const;
+
+export function augmentImageUrl(
+  iconPath: string,
+  size: (typeof AUGMENT_IMAGE_VARIANTS)[number] = 'large',
+) {
   const stripped = iconPath.replace(/^\/lol-game-data\/assets/i, '').toLowerCase();
   if (size === 'large') {
     const large = stripped.replace(/_small(\.\w+)$/i, '_large$1');
