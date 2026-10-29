@@ -1,5 +1,5 @@
 /**
- * 칼바람·클래식 공용 드래프트 화면. 규칙·UI 는 같고 증강 풀과 라운드 수만 다르다.
+ * 칼바람 드래프트 화면.
  * 모드는 라우트 파라미터로 들어와 아이템 화면(saveBuild)까지 그대로 전달된다.
  *
  * 카드 3장의 선택·리롤 연출은 useCardPickAnim 이, 실제 트랜지션은 PickCard 가 맡는다.
@@ -33,7 +33,7 @@ import { lockPortraitAfterExit } from "@/lib/orientation";
 import { AramCard } from "../components/aram-card";
 import { PickedDrawer } from "../components/picked-drawer";
 import { RoundIndicator } from "../components/round-indicator";
-import { useAram } from "../hooks/use-aram";
+import { ARAM_ROUNDS, useAram } from "../hooks/use-aram";
 
 const t = {
   ko: {
@@ -41,7 +41,6 @@ const t = {
     exit: "나가기",
     picks: "픽 현황",
     exitConfirmAram: "칼바람을 종료할까요?",
-    exitConfirmClassic: "클래식을 종료할까요?",
     exitOk: "종료",
     exitCancel: "계속",
   },
@@ -50,7 +49,6 @@ const t = {
     exit: "Exit",
     picks: "Picks",
     exitConfirmAram: "Exit ARAM?",
-    exitConfirmClassic: "Exit Classic?",
     exitOk: "Exit",
     exitCancel: "Continue",
   },
@@ -63,24 +61,14 @@ export function AramScreen() {
   const translate = useTranslation(t);
   const { colors } = useTheme();
   const router = useRouter();
-  const {
-    championId,
-    mode: modeParam,
-    rounds: roundsParam,
-  } = useLocalSearchParams<{
+  const { championId, mode: modeParam } = useLocalSearchParams<{
     championId: string;
     mode?: string;
-    rounds?: string;
   }>();
   const mode: GameMode = parseGameMode(modeParam);
-  // 라운드 수는 챔피언 선택에서 확정해 넘어온다(클래식은 바론 간식 질문으로 4 또는 5).
-  // 여기서 묻지 않는 이유는 orientation — 가로 잠금 상태에서 Alert 을 띄우면 잠금이 풀린다.
-  const rounds = Number(roundsParam) || 4;
 
-  const { round, currentCards, picked, rerolled, reroll, pick } = useAram(
-    mode,
-    rounds,
-  );
+  const { round, currentCards, picked, rerolled, reroll, pick } =
+    useAram(mode);
   const anim = useCardPickAnim();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -116,7 +104,7 @@ export function AramScreen() {
 
   const handleExit = () => {
     Alert.alert(
-      translate(mode === "classic" ? "exitConfirmClassic" : "exitConfirmAram"),
+      translate("exitConfirmAram"),
       "",
       [
         { text: translate("exitCancel"), style: "cancel" },
@@ -152,7 +140,6 @@ export function AramScreen() {
           picked={picked}
           width={drawerWidth}
           championId={championId}
-          slots={rounds + 1}
         />
       )}
     >
@@ -178,7 +165,7 @@ export function AramScreen() {
               >
                 {translate("round")}
               </ThemedText>
-              <RoundIndicator round={round} total={rounds} />
+              <RoundIndicator round={round} total={ARAM_ROUNDS} />
             </GlassSurface>
 
             <GlassButton

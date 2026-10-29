@@ -4,14 +4,15 @@
  *   node scripts/gen-data-check.mjs
  *   → docs/index.html
  *
- * 칼바람·클래식 증강 / 아이템을 ko·en 을 id 로 병합해 한 페이지에 담고, 앱과 동일한
+ * 칼바람 증강 / 아이템을 ko·en 을 id 로 병합해 한 페이지에 담고, 앱과 동일한
  * 이미지 URL 규칙(augmentImageUrl · itemImageUrl)으로 아이콘을 렌더한다. 데이터셋은
  * 상단 칩으로 가르고, 그 아래 모드·등급·표시 행은 고른 데이터셋에 맞는 것만 남는다.
  *
  * 예전엔 gen-augment-check(칼바람) · gen-arena-check(아레나) · gen-check-index(진입점)
  * 셋으로 나뉘어 있었다. 셋이 CSS 팔레트와 아이콘 URL 규칙을 각자 복붙해 들고 있었고
  * 진입점 개수는 손으로 적혀 있어 조용히 낡았다 — 그래서 하나로 합쳤다.
- * 아레나(증강·특수 증강·프리즘 아이템)는 모드 제거(2026-09-19)와 함께 빠졌다.
+ * 아레나(증강·특수 증강·프리즘 아이템)는 모드 제거(2026-09-19)와 함께 빠졌고,
+ * 클래식(레트로 아이템·클래식 모드 칩)도 2026-10-30 에 빠졌다.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -144,13 +145,28 @@ function mergeAugments(koList, enList, editedIds, extra = () => ({})) {
   });
 }
 
-// --- 칼바람·클래식 증강 ---
+// 앱의 localAugmentIcon(src/lib/ddragon.ts)과 같은 이미지 — CDN 에 컬러 원본이 없어 앱에 넣어 둔 것.
+// 폴더가 아니라 앱의 LOCAL_AUGMENT_ICONS 표를 읽는다. 폴더만 보면 표 등록 누락·키 오타가 있어도
+// 여기선 컬러로 떠서, 앱이 흰 실루엣을 그리는 걸 못 잡는다. 페이지가 파일 하나로 열리도록 data URI 로 심는다.
+const LOCAL_ICONS = new Map(
+  [...fs.readFileSync(path.join(root, 'src/lib/ddragon.ts'), 'utf8')
+    .matchAll(/'([^']+)':\s*require\('@\/assets\/augments\/([^']+)'\)/g)]
+    .map(([, key, file]) => [key, path.join(root, 'assets/augments', file)]),
+);
+if (LOCAL_ICONS.size === 0) throw new Error('ddragon.ts 에서 LOCAL_AUGMENT_ICONS 표를 못 읽었다');
+const localIcon = (iconPath) => {
+  const f = LOCAL_ICONS.get(iconPath.replace(/.*\//, '').toLowerCase());
+  return f ? 'data:image/png;base64,' + fs.readFileSync(f).toString('base64') : null;
+};
+
+// --- 칼바람 증강 (풀 밖 = 비공개 포함) ---
 const aug = mergeAugments(
   readJson('src/features/augments/data/augments.ko.json'),
   readJson('src/features/augments/data/augments.en.json'),
   editedSet('aram'),
   (a) => ({
     modes: a.modes ?? [],
+    localIcon: localIcon(a.iconPath),
     isNew: newIds.has(a.id),
     // 게임 bin 에 계수가 없어 수치를 확정하지 못한 항목 — 눈으로 확인이 필요하다.
     noCoef: noCoefIds.has(a.id),
@@ -159,18 +175,11 @@ const aug = mergeAugments(
 );
 
 // --- 아이템 (앱 진열 풀만) ---
-// 전체 404개 중 조회용 212개는 저장된 빌드를 되살릴 때만 쓰여 카드로 뜨지 않는다.
+// 전체 254개 중 진열 풀 밖 143개는 저장된 빌드를 되살릴 때만 쓰여 카드로 뜨지 않는다.
 const aramIds = new Set(readJson('src/features/items/data/aram-item-ids.json'));
-const classicIds = new Set(readJson('src/features/items/data/classic-item-ids.json'));
-const itemEn = byId([
-  ...readJson('src/features/items/data/items.en.json'),
-  ...readJson('src/features/items/data/classic-items.en.json'),
-]);
-const items = [
-  ...readJson('src/features/items/data/items.ko.json'),
-  ...readJson('src/features/items/data/classic-items.ko.json'),
-]
-  .filter((it) => aramIds.has(it.id) || classicIds.has(it.id))
+const itemEn = byId(readJson('src/features/items/data/items.en.json'));
+const items = readJson('src/features/items/data/items.ko.json')
+  .filter((it) => aramIds.has(it.id))
   .map((it) => {
     const boots = it.tags.includes('Boots');
     return {
@@ -182,7 +191,7 @@ const items = [
       boots,
       descKo: cleanItemDesc(it.description),
       descEn: cleanItemDesc(itemEn.get(it.id)?.description),
-      modes: aramIds.has(it.id) ? ['aram'] : ['classic'],
+      modes: ['aram'],
     };
   });
 
@@ -200,11 +209,7 @@ const clipped = (list) => n(list, (a) => a.clip);
 
 const stat = {
   aram: n(aug, (a) => a.modes.includes('aram')),
-  classic: n(aug, (a) => a.modes.includes('classic')),
-  both: n(aug, (a) => a.modes.length >= 2),
   none: n(aug, (a) => a.modes.length === 0),
-  itemAram: n(items, (i) => i.modes.includes('aram')),
-  itemClassic: n(items, (i) => i.modes.includes('classic')),
   shared: n(aug, (a) => a.shared),
   isNew: n(aug, (a) => a.isNew),
   noCoef: n(aug, (a) => a.noCoef),
@@ -289,7 +294,6 @@ const html = `<!doctype html>
   .db { background: rgba(120,120,120,.18); color: var(--text3); }
   .tb { background: rgba(140,160,255,.16); color: #b3c2ff; }
   .mb.aram { background: rgba(90,170,255,.16); color: #8fc4ff; }
-  .mb.classic { background: rgba(255,180,90,.16); color: #ffc98f; }
   .mb.none { background: rgba(120,120,120,.18); color: var(--text3); }
   .gb { background: rgba(232,196,95,.14); color: var(--gold); }
   details.review { margin: 28px 0 0; border: 1px solid var(--border); border-radius: 12px;
@@ -314,8 +318,7 @@ const html = `<!doctype html>
   </div>
   <div class="stats" style="margin-top:3px">
     <span style="color:#8fc4ff">칼바람 ${stat.aram}</span> ·
-    <span style="color:#ffc98f">클래식 ${stat.classic}</span> ·
-    미출시 ${stat.none} ·
+    비공개 ${stat.none} ·
     <span style="color:#e89650">아이콘 공유 ${stat.shared}</span> ·
     <span style="color:var(--mint)">신규 ${stat.isNew}</span> ·
     <span style="color:#ff9a9a">수치 미확인 ${stat.noCoef}</span> ·
@@ -330,18 +333,14 @@ const html = `<!doctype html>
   <div class="filters">
     <div class="frow">
       <span class="flabel">데이터</span>
-      <span class="chip active" data-g="ds" data-v="aug">칼바람·클래식 증강<small>${aug.length}</small></span>
+      <span class="chip active" data-g="ds" data-v="aug">칼바람 증강<small>${aug.length}</small></span>
       <span class="chip" data-g="ds" data-v="item">아이템<small>${items.length}</small></span>
     </div>
     <div class="frow" id="row-mode">
       <span class="flabel">모드</span>
       <span class="chip active" data-g="mode" data-v="all" data-for="aug item">전체</span>
       <span class="chip" data-g="mode" data-v="aram" data-for="aug">칼바람<small>${stat.aram}</small></span>
-      <span class="chip" data-g="mode" data-v="classic" data-for="aug">클래식<small>${stat.classic}</small></span>
-      <span class="chip" data-g="mode" data-v="both" data-for="aug">양쪽 공유<small>${stat.both}</small></span>
-      <span class="chip" data-g="mode" data-v="none" data-for="aug">미출시<small>${stat.none}</small></span>
-      <span class="chip" data-g="mode" data-v="aram" data-for="item">칼바람<small>${stat.itemAram}</small></span>
-      <span class="chip" data-g="mode" data-v="classic" data-for="item">클래식<small>${stat.itemClassic}</small></span>
+      <span class="chip" data-g="mode" data-v="none" data-for="aug">비공개<small>${stat.none}</small></span>
     </div>
     <div class="frow" id="row-rarity">
       <span class="flabel">등급</span>
@@ -388,9 +387,8 @@ const flags = { clip: false, edited: false, shared: false, isNew: false, noCoef:
 function pass(a) {
   if (rarity !== 'all' && a.rarity !== rarity) return false;
   if (mode !== 'all') {
-    if (mode === 'both' && (a.modes ?? []).length < 2) return false;
-    else if (mode === 'none' && (a.modes ?? []).length) return false;
-    else if (mode !== 'both' && mode !== 'none' && !(a.modes ?? []).includes(mode)) return false;
+    if (mode === 'none' && (a.modes ?? []).length) return false;
+    else if (mode !== 'none' && !(a.modes ?? []).includes(mode)) return false;
   }
   if (flags.clip && !a.clip) return false;
   if (flags.edited && !a.edited) return false;
@@ -409,14 +407,9 @@ function badges(a) {
   if (a.rarity) b += '<span class="rb ' + a.rarity + '">' + RNAME[a.rarity] + '</span>';
   if (ds === 'aug') {
     if (a.modes.includes('aram')) b += '<span class="mb aram">칼바람</span>';
-    if (a.modes.includes('classic')) b += '<span class="mb classic">클래식</span>';
-    if (!a.modes.length) b += '<span class="mb none">미출시</span>';
+    if (!a.modes.length) b += '<span class="mb none">비공개</span>';
   }
-  if (ds === 'item') {
-    if (a.modes.includes('aram')) b += '<span class="mb aram">칼바람</span>';
-    if (a.modes.includes('classic')) b += '<span class="mb classic">클래식</span>';
-    b += '<span class="gb">' + a.gold + 'G</span>';
-  }
+  if (ds === 'item') b += '<span class="gb">' + a.gold + 'G</span>';
   if (a.lnKo > CLIP_LINES) b += '<span class="xb">잘림 ko ' + a.lnKo + '줄</span>';
   if (a.lnEn > CLIP_LINES) b += '<span class="xb">잘림 en ' + a.lnEn + '줄</span>';
   if (a.isNew) b += '<span class="nb">신규</span>';
@@ -435,7 +428,7 @@ function card(a) {
   img.className = 'icon';
   img.loading = 'lazy';
   img.alt = a.ko;
-  img.src = ds === 'item' ? itemUrl(a.imageKey) : augUrl(a.iconPath);
+  img.src = ds === 'item' ? itemUrl(a.imageKey) : (a.localIcon || augUrl(a.iconPath));
   img.onerror = () => {
     if (ds !== 'item') {
       const st = img.dataset.step || '0';
@@ -452,7 +445,7 @@ function card(a) {
     '<div class="badges">' + badges(a) + '</div>' +
     '<div class="desc">' + esc(a.descKo) + '</div>' +
     '<div class="descEn">' + esc(a.descEn) + '</div>' +
-    '<div class="iconpath">' + esc(a.imageKey ?? a.iconPath.replace(/.*\\//, '')) + '</div>';
+    '<div class="iconpath">' + (a.localIcon ? '앱 내장 · ' : '') + esc(a.imageKey ?? a.iconPath.replace(/.*\\//, '')) + '</div>';
   el.appendChild(img);
   el.appendChild(meta);
   return el;
@@ -572,5 +565,5 @@ fs.writeFileSync(outPath, html);
 const kb = (Buffer.byteLength(html) / 1024).toFixed(0);
 console.log(`✓ ${path.relative(root, outPath)} (${kb}KB)`);
 console.log(`  증강 ${aug.length}(실버 ${rarity(aug, 'silver')}·골드 ${rarity(aug, 'gold')}·프리즘 ${rarity(aug, 'prismatic')})`);
-console.log(`  아이템 ${items.length}(칼바람 ${stat.itemAram}·클래식 ${stat.itemClassic})`);
+console.log(`  아이템 ${items.length}(칼바람 진열 풀)`);
 console.log(`  설명 잘림 — 칼바람 ${clipped(aug)}`);

@@ -37,7 +37,7 @@ export async function exportBackup(): Promise<string> {
   for (const [key, value] of entries) {
     if (value != null) data[key as BackupKey] = value;
   }
-  // 디스크 원문엔 로드 때 걸러진 빌드(제거된 모드·깨진 항목)가 다음 저장 전까지 남아 있다 —
+  // 디스크 원문엔 로드 때 걸러진 빌드(아레나·깨진 항목)가 다음 저장 전까지 남아 있다 —
   // 화면에 보이는 목록을 담아야 복원 뒤 개수가 맞는다.
   if (data['builds:v1'] != null) data['builds:v1'] = JSON.stringify(await listBuilds());
 

@@ -217,7 +217,6 @@ export const HeroOverlay = {
   cardBase: "#0A0B0D", // splash 로드 전/빈 영역 베이스
   tileBg: "rgba(0,0,0,0.45)", // 증강·아이템 타일 배경
   tileBorder: "rgba(255,255,255,0.14)", // 아이템 타일 테두리
-  chipBg: "rgba(0,0,0,0.55)", // 날짜 칩 배경
   textPrimary: "#F2F4F7",
   textSecondary: "#B5BAC1",
 } as const;

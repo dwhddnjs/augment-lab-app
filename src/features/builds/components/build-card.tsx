@@ -8,7 +8,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Pressable, StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { ModeBadge } from "@/components/ui/mode-badge";
 import { Elevation, HeroOverlay, Radius, Spacing } from "@/constants/theme";
 import { useAugments } from "@/features/augments/hooks/use-augments";
 import { useChampions } from "@/features/champions/hooks/use-champions";
@@ -83,11 +82,6 @@ export function BuildCard({ build, onPress, onLongPress }: Props) {
               transition={0}
             />
           )}
-
-          {/* 모드 마킹 — splash 위 우상단. 절대배치라 하단 패널 레이아웃을 밀지 않는다. */}
-          <View style={styles.modeBadge} pointerEvents="none">
-            <ModeBadge mode={build.mode} variant="onHero" />
-          </View>
 
           {/* 하단 정보 패널 — 텍스트 뒤를 거의 솔리드로 덮어 가독성 확보 */}
           <View style={styles.content}>
@@ -178,11 +172,6 @@ const styles = StyleSheet.create({
 
     overflow: "hidden",
     justifyContent: "flex-end",
-  },
-  modeBadge: {
-    position: "absolute",
-    top: Spacing.two,
-    right: Spacing.two,
   },
   content: {
     paddingTop: Spacing.four,

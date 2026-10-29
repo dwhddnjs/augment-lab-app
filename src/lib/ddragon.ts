@@ -44,9 +44,35 @@ function augmentImageUrl(iconPath: string, size: (typeof AUGMENT_IMAGE_VARIANTS)
   return `${CDRAGON_BASE}/game${stripAssetPrefix(iconPath).replace(/_small(\.\w+)$/i, suffix)}`;
 }
 
-/** 증강 아이콘의 폴백 주소 목록(AUGMENT_IMAGE_VARIANTS 순). 로더·프리페치가 같은 순서를 쓴다. */
+/**
+ * 증강 아이콘의 폴백 주소 목록(AUGMENT_IMAGE_VARIANTS 순). 로더·프리페치가 같은 순서를 쓴다.
+ * 앱에 넣어 둔 아이콘(localAugmentIcon)은 받을 게 없어 빈 목록이다 — 호출부마다 거르지 않게 여기서 막는다.
+ */
 export function augmentImageUrls(iconPath: string): string[] {
+  if (localAugmentIcon(iconPath)) return [];
   return AUGMENT_IMAGE_VARIANTS.map((v) => augmentImageUrl(iconPath, v));
+}
+
+// 26.21 신규 증강 중 CDragon 에 컬러 원본이 없는 10개 — `_small` 흰 실루엣 하나뿐이라 등급 색이
+// 입혀진 다른 아이콘 사이에서 튄다(tint 로 칠하면 테두리·문양 구분이 사라져 더 어색했다).
+// 위키(`<이름>_mayhem_augment.png`)에 올라온 게임 원본을 앱에 넣어 둔다. 위키 파일은
+// CDragon `_large` 와 픽셀 단위로 같다(비전 원칙으로 확인). CDragon 이 large 를 내면 이 표에서 지운다.
+const LOCAL_AUGMENT_ICONS: Record<string, number> = {
+  'armoredimpact_small.png': require('@/assets/augments/armoredimpact.png'),
+  'bees_small.png': require('@/assets/augments/bees.png'),
+  'bigshot_small.png': require('@/assets/augments/bigshot.png'),
+  'bluenote_small.png': require('@/assets/augments/bluenote.png'),
+  'enchantedbuttery_small.png': require('@/assets/augments/enchantedbuttery.png'),
+  'heavyisthecrown_small.png': require('@/assets/augments/heavyisthecrown.png'),
+  'stillhere_small.png': require('@/assets/augments/stillhere.png'),
+  'takeemdowndowndown_small.png': require('@/assets/augments/takeemdowndowndown.png'),
+  'theboomandthebass_small.png': require('@/assets/augments/theboomandthebass.png'),
+  'totentanz_small.png': require('@/assets/augments/totentanz.png'),
+};
+
+/** 앱에 넣어 둔 증강 아이콘. 있으면 CDN 대신 이걸 그리고, 프리웜·프리페치도 건너뛴다. */
+export function localAugmentIcon(iconPath: string): number | undefined {
+  return LOCAL_AUGMENT_ICONS[iconPath.replace(/.*\//, '').toLowerCase()];
 }
 
 const CLASS_ICON_KEYS: Record<string, string> = {

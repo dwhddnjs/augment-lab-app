@@ -1,5 +1,5 @@
 /**
- * ItemSelectScreen — 아이템 선택 페이즈 (옵셔널). 칼바람·클래식 공용.
+ * ItemSelectScreen — 아이템 선택 페이즈 (옵셔널).
  *
  * 레이아웃: 가로모드 / 좌7:우3
  *   좌: 카테고리 필터(ItemFilterBar) + 모드별 아이템 그리드(ItemGrid) + 선택 트레이

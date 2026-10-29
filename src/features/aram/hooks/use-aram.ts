@@ -32,12 +32,11 @@ function pickWeighted(pool: Augment[], count: number): Augment[] {
   return drawOfRarity(pool, rollRarity(), count);
 }
 
-/**
- * 칼바람·클래식 공용 드래프트. 두 모드는 규칙이 같고 증강 풀과 라운드 수만 다르다.
- * - mode:   뽑기 풀 (칼바람 211개 / 클래식 187개, 156개는 공유)
- * - rounds: 칼바람은 항상 4, 클래식은 바론 간식 여부에 따라 4 또는 5
- */
-export function useAram(mode: AugmentMode = 'aram', rounds = 4) {
+/** 칼바람 증강 선택 횟수. 화면의 슬롯 수·라운드 표시도 이 값을 쓴다. */
+export const ARAM_ROUNDS = 4;
+
+/** 칼바람 드래프트. mode 는 뽑기 풀(useAugmentPool)이다. */
+export function useAram(mode: AugmentMode = 'aram') {
   const allAugments = useAugmentPool(mode);
 
   const initialCards = useMemo(() => pickWeighted(allAugments, 3), [allAugments]);
@@ -87,7 +86,7 @@ export function useAram(mode: AugmentMode = 'aram', rounds = 4) {
     [allAugments, picked, currentCards, rerolled],
   );
 
-  // Returns nextPicked; caller navigates to /aram-items once `rounds` picks are done
+  // Returns nextPicked; caller navigates to /aram-items once ARAM_ROUNDS picks are done
   const pick = useCallback(
     (idx: number): { nextPicked: Augment[]; done: boolean } => {
       const chosen = currentCards[idx];
@@ -104,7 +103,7 @@ export function useAram(mode: AugmentMode = 'aram', rounds = 4) {
       }
 
       const nextRound = round + 1;
-      const done = nextRound >= rounds;
+      const done = nextRound >= ARAM_ROUNDS;
 
       setPicked(nextPicked);
       setRound(nextRound);
@@ -116,7 +115,7 @@ export function useAram(mode: AugmentMode = 'aram', rounds = 4) {
 
       return { nextPicked, done };
     },
-    [allAugments, currentCards, drawNext, picked, round, rounds],
+    [allAugments, currentCards, drawNext, picked, round],
   );
 
   return { round, currentCards, picked, rerolled, reroll, pick };

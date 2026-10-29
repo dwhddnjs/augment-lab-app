@@ -18,7 +18,7 @@ import { FILTERS, type FilterKey } from "@/features/items/item-filters";
 import { MAX_ITEMS, type Item } from "@/features/items/types";
 import { useAlive } from "@/hooks/use-alive";
 import { useLocale } from "@/hooks/use-locale";
-import { saveBuild, type GameMode } from "@/lib/build-storage";
+import { saveBuild } from "@/lib/build-storage";
 import { matchName } from "@/lib/hangul";
 import { lockOrientation } from "@/lib/orientation";
 
@@ -54,7 +54,6 @@ export function useCustomDraft(initialChampionId: string) {
 
   // params 는 초기값으로만 쓴다 — 패널의 "챔피언 변경"이 setState 한 번으로 끝나도록.
   const [championId, setChampionId] = useState(initialChampionId);
-  const [mode, setModeState] = useState<GameMode>("aram");
   const [target, setTargetState] = useState<PickTarget>("augment");
   const [tier, setTier] = useState<AugmentRarity | null>(null);
   const [itemFilter, setItemFilter] = useState<FilterKey>(null);
@@ -71,8 +70,8 @@ export function useCustomDraft(initialChampionId: string) {
 
   // modes 태그가 없는 항목(미출시·제거)이 섞이지 않도록 증강은 반드시 useAugmentPool,
   // 아이템은 useItemPool — 전체 목록에 필터를 걸면 다른 모드 것이 조용히 섞인다.
-  const pool = useAugmentPool(mode);
-  const itemPool = useItemPool(mode);
+  const pool = useAugmentPool("aram");
+  const itemPool = useItemPool("aram");
 
   const filtered = pool.filter(
     (a) => (!tier || a.rarity === tier) && matchName(a.name, query),
@@ -142,22 +141,7 @@ export function useCustomDraft(initialChampionId: string) {
     setItems([]);
   };
 
-  /**
-   * 모드를 바꾸면 담아 둔 증강·아이템을 전부 비운다. 같은 모드를 다시 고르면 아무 일도
-   * 없다. 두 모드에 다 실리는 공유 증강도 남기지 않는다 — 모드 전환은 "이 모드 빌드를
-   * 새로 짠다"는 조작이라, 앞 모드에서 고른 조합이 일부만 남아 있으면 무엇이 사라지고
-   * 무엇이 남았는지 화면만 보고는 알 수 없다.
-   */
-  const setMode = (next: GameMode) => {
-    if (next === mode) return;
-    setModeState(next);
-    clear();
-  };
-
-  /**
-   * 담은 것을 빌드로 저장하고 상세로 보낸다. mode 가 그대로 저장 모드라
-   * 칼바람 빌드는 칼바람 목록에, 클래식은 클래식 목록에 쌓인다.
-   */
+  /** 담은 것을 빌드로 저장하고 상세로 보낸다. */
   const save = async (onError: (reason: SaveError) => void) => {
     if (saving) return;
     // 챔피언을 못 찾았거나 아무것도 담지 않았다 — 저장하면 되살릴 수 없는 빈 레코드가
@@ -170,7 +154,7 @@ export function useCustomDraft(initialChampionId: string) {
     let build;
     try {
       build = await saveBuild({
-        mode,
+        mode: "aram",
         championId,
         augmentIds: picked.map((a) => a.id),
         itemIds: items.map((it) => it.id),
@@ -200,8 +184,6 @@ export function useCustomDraft(initialChampionId: string) {
     championId,
     setChampionId,
     champion,
-    mode,
-    setMode,
     target,
     toggleTarget,
     tier,

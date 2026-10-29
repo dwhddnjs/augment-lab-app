@@ -18,7 +18,6 @@ npm run lint
 | `npm run data:refresh` | DDragon 최신 챔피언·아이템 → `src/features/{champions,items}/data`, `src/lib/version.json` → 아이템 `stats` 재파싱 → 검수 페이지(`docs/index.html`) 재생성 |
 | `npm run data:item-stats` | 아이템 설명의 `<stats>` 를 파싱해 `stats` 재생성 (`data:refresh` 가 자동으로 이어 실행) |
 | `npm run data:tierlist` | 칼바람 티어리스트 → `src/features/tierlist/data` |
-| `node scripts/fetch-classic-items.mjs` | 클래식 모드 아이템 풀 |
 
 증강 데이터 패치 절차와 검수 페이지(`docs/index.html`)는 `.agents/skills/augment-check/SKILL.md` 참고.
 
