@@ -35,10 +35,14 @@ const MAX_BUILD = 6;
 
 const championKeys = new Set(champions.map((c) => c.key));
 const itemIds = new Set(itemsKo.map((i) => i.id));
-// 화면은 useAugmentPool('aram') 으로 조인한다 — 클래식 전용 증강은 여기서도 없는 것으로 친다.
+// 화면은 useAugmentPool('aram') 으로 조인한다 — 풀 밖(비공개) 증강은 여기서도 없는 것으로 친다.
 const rarityOf = new Map(
   augments.filter((a) => a.modes?.includes('aram')).map((a) => [a.id, a.rarity]),
 );
+const knownAug = new Set(augments.map((a) => a.id));
+// 티어리스트 데이터보다 증강 패치가 먼저 반영되면 추천에 삭제된 증강이 남는다. 화면이 빼고
+// 그리므로 실패로 치지 않고 개수만 알린다 — 데이터에 아예 없는 id(조인 키 오류)만 실패다.
+const outOfPool = new Map<string, number>();
 
 assert.ok(meta.patch, 'patch 비어 있음');
 assert.ok(meta.date, 'date 비어 있음');
@@ -79,7 +83,11 @@ for (const [i, row] of rows.entries()) {
   for (const [j, [idx, score, tier]] of row.augments.entries()) {
     const slug = augSlugs[idx];
     const rarity = rarityOf.get(slug);
-    assert.ok(rarity, `${row.key}: 칼바람 증강 풀에 없는 id ${slug}`);
+    assert.ok(knownAug.has(slug), `${row.key}: 증강 데이터에 없는 id ${slug}`);
+    if (!rarity) {
+      outOfPool.set(slug, (outOfPool.get(slug) ?? 0) + 1);
+      continue;
+    }
     assert.ok(score >= 2000 && score <= 8000, `${row.key}: 증강 ${slug} 승률 ${score} 범위 밖`);
     assert.ok(tier >= 1 && tier <= 4, `${row.key}: 증강 ${slug} 티어 ${tier}`);
     assert.equal(augTierOf(tier), TIERS[tier - 1], `${row.key}: augTierOf(${tier})`);
@@ -128,4 +136,8 @@ console.log(
   `칼바람 ${rows.length}명 · ` + sections.map((s) => `${s.title} ${s.data.flat().length}`).join(' / '),
 );
 console.log(`아이템 사전 ${itemsKo.length}개 · 스펠 ${Object.keys(spellIcons).length}개 · 패치 ${meta.patch} · ${meta.date}`);
+if (outOfPool.size) {
+  const total = [...outOfPool.values()].reduce((x, y) => x + y, 0);
+  console.warn(`⚠️  풀 밖 증강 추천 ${total}건(${outOfPool.size}종) — 화면에서는 빠진다. data:tierlist 갱신 대상: ${[...outOfPool.keys()].join(', ')}`);
+}
 console.log('check-tierlist: 통과');

@@ -1,6 +1,6 @@
 /**
  * PickCard — 카드 3장 중 하나를 고르는 화면들의 공용 선택 애니메이션 래퍼.
- * 칼바람·클래식(AramCard)이 이 연출을 쓴다:
+ * 칼바람 드래프트(AramCard)가 이 연출을 쓴다:
  *   - picked   : 선택한 카드 scale 1.05→1 바운스
  *   - unchosen : 나머지 카드 fade-out + scale-down
  *   - reroll   : 리롤 대상 카드 fade-out

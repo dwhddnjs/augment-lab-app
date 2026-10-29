@@ -73,20 +73,16 @@ const dupeNameId = nameIds.filter((v, i) => nameIds.indexOf(v) !== i);
 check(dupeNameId.length === 0, `augmentNameId 중복 없음${dupeNameId.length ? ` — ${dupeNameId.join(', ')}` : ''}`);
 
 // 3) 모드 태그
-const VALID = new Set(['aram', 'classic']);
+const VALID = new Set(['aram']);
 for (const [locale, list] of LOCALES) {
   const badMode = list.filter((a) => !Array.isArray(a.modes) || a.modes.some((m) => !VALID.has(m)));
   check(badMode.length === 0, `[${locale}] modes 값이 모두 유효${badMode.length ? ` — ${badMode.map((a) => a.name).join(', ')}` : ''}`);
 }
 
 const aram = ko.filter((a) => a.modes?.includes('aram'));
-const classic = ko.filter((a) => a.modes?.includes('classic'));
 const unreleased = ko.filter((a) => !a.modes?.length);
-console.log(`\n  칼바람 ${aram.length} · 클래식 ${classic.length} · 미출시 ${unreleased.length} (전체 ${ko.length})`);
-check(
-  aram.length + unreleased.length + classic.filter((a) => !a.modes.includes('aram')).length === ko.length,
-  '모드 분류에 빠진 항목 없음',
-);
+console.log(`\n  칼바람 ${aram.length} · 미출시 ${unreleased.length} (전체 ${ko.length})`);
+check(aram.length + unreleased.length === ko.length, '모드 분류에 빠진 항목 없음');
 
 // 4) 모드별 개수 스냅샷 — 이게 이 스크립트의 핵심이다.
 //
@@ -98,10 +94,10 @@ check(
 // 그래서 사람이 확인한 시점의 개수를 박아두고 흔들리면 멈춘다. 클래식 전용 55개가
 // 칼바람에 섞였던 사고는 aram 이 211 → 266 으로 뛰므로 여기서 확실히 걸린다.
 // 패치로 증강이 늘거나 줄면 tag-augment-modes.mjs 를 돌린 뒤 이 값을 함께 갱신할 것.
-const EXPECTED = { total: 282, aram: 213, classic: 187, unreleased: 38 };
+// 26.21: 신규 35 · 칼바람 풀에서 빠진 14 → 칼바람 213 → 234. 클래식 제거로 전용 31개도 미출시로.
+const EXPECTED = { total: 317, aram: 234, unreleased: 83 };
 check(ko.length === EXPECTED.total, `전체 ${EXPECTED.total}개 유지 (실제 ${ko.length})`);
 check(aram.length === EXPECTED.aram, `칼바람 ${EXPECTED.aram}개 유지 (실제 ${aram.length})`);
-check(classic.length === EXPECTED.classic, `클래식 ${EXPECTED.classic}개 유지 (실제 ${classic.length})`);
 check(unreleased.length === EXPECTED.unreleased, `미출시 ${EXPECTED.unreleased}개 유지 (실제 ${unreleased.length})`);
 
 // 5) 칼바람에 반드시 있어야 하는 것 / 절대 없어야 하는 것 — 게임에서 직접 확인한 결과다.
@@ -138,6 +134,11 @@ for (const [locale, list] of LOCALES) {
   const empty = list.filter((a) => !(a.description ?? '').trim());
   check(empty.length === 0, `[${locale}] 빈 설명 없음${empty.length ? ` — ${empty.map((a) => a.name).join(', ')}` : ''}`);
 }
+
+// ko 설명이 영문이면 안 된다. 26.21 부터 신규 증강의 ko 초안은 위키 영문으로 채워지므로
+// (apply-mayhem-patch), 손으로 옮기는 단계를 빠뜨리면 한국어 카드에 영어가 뜬다. 길이·빈칸 검사로는 안 걸린다.
+const notKo = ko.filter((a) => !/[가-힣]/.test(a.description ?? ''));
+check(notKo.length === 0, `[ko] 설명이 한국어${notKo.length ? ` — ${notKo.map((a) => a.name).join(', ')}` : ''}`);
 
 // 8) 수치가 빠져 문장이 깨진 흔적
 const broken = ko.filter(

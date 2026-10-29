@@ -286,11 +286,7 @@ export function BuildDetailScreen() {
         >
           {/* 챔피언 블록 */}
           {champion && (
-            <BuildChampionHeader
-              champion={champion}
-              mode={build.mode}
-              date={date}
-            />
+            <BuildChampionHeader champion={champion} date={date} />
           )}
 
           {/* 증강 */}

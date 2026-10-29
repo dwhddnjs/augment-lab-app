@@ -13,11 +13,11 @@ license: MIT
 node scripts/gen-data-check.mjs   # → docs/index.html
 ```
 
-- 검수 페이지는 **하나뿐이다**(`docs/index.html`). 칼바람·클래식 증강과 아이템을 상단 `데이터`
+- 검수 페이지는 **하나뿐이다**(`docs/index.html`). 칼바람 증강과 아이템을 상단 `데이터`
   칩으로 갈라 본다. 그래서 **아이템 데이터를 고칠 때도 이 페이지를 재생성**한다.
 - ko/en을 `id`로 병합해 rarity별로 보여주고, 앱과 동일한 이미지 URL 규칙
   (`augmentImageUrls` large→base→small 3단 폴백 / `itemImageUrl`)으로 아이콘을 렌더한다.
-- 아이템은 **앱 진열 풀만**(칼바람 111 · 클래식 81) 싣는다. 나머지는 저장된 빌드를 되살릴 때만
+- 아이템은 **앱 진열 풀만**(칼바람 111) 싣는다. 나머지는 저장된 빌드를 되살릴 때만
   쓰여 카드로 뜨지 않는다 — 검수 대상이 아니다.
 - 같은 아이콘 파일을 공유하는 증강은 **"공유" 배지**로 표시(오류 아님).
 - **신규**·**수치 미확인**·**비활성** 배지와 "앱·위키 수치가 다른 건" 목록은 `docs/augment-diff.json`에서 온다.
@@ -36,12 +36,14 @@ node scripts/gen-data-check.mjs   # → docs/index.html
 
 | modeName | 이 앱의 모드 | 비고 |
 | --- | --- | --- |
-| `KIWI` | `aram` — 칼바람 나락 아수라장 | 풀 220개 → 앱 211개 |
-| `KIWI_JADE` | `classic` — 아수라장 클래식 스타일 | 풀 188개 → 앱 187개 |
+| `KIWI` | `aram` — 칼바람 나락 아수라장 | 26.21 풀 249개 → 앱 234개 (펜타킬 헤드라이너 5 · 수동 제외 10 빠짐) |
+| `KIWI_JADE` | 아수라장 클래식 스타일 | 앱에서 제거됨(2026-10-30) — 태그하지 않는다 |
 | `CHERRY` | 아레나 | 앱에서 제거됨(2026-09-19) — 가져오지 않는다 |
 
-두 모드는 증강을 상당수 공유하므로 한 증강이 `modes: ['aram','classic']` 을 가질 수 있다.
-어느 풀에도 없으면 `modes: []`(미출시/제거) — 데이터는 남기되 뽑기에는 안 쓴다.
+칼바람 풀에 없으면 `modes: []`(**비공개** — 미출시·패치로 삭제·옛 클래식 전용) — 데이터는
+남기되 뽑기·첫 설치 프리웜에는 안 쓴다. 옛 빌드가 참조할 수 있어 지우지 않는다.
+패치 노트의 "삭제된 증강" 목록보다 **풀이 정답이다** — 26.21 에서 `으악, 내 동전!` 은 노트에
+없었지만 풀에서 빠졌다.
 
 **동명이인 함정**: CDragon 에는 이름이 같은 증강이 115쌍 있다(`ARAM_ADAPt` vs `ADAPt`).
 한쪽만 모드 풀에 속한다. 이름으로 매칭하면 어느 쪽이 걸릴지 순회 순서에 달리므로,
@@ -51,7 +53,7 @@ node scripts/gen-data-check.mjs   # → docs/index.html
 ## 패치 반영 절차
 
 ```bash
-node scripts/apply-mayhem-patch.mjs --write    # (필요 시) 신규 증강 수집 + docs/augment-diff.json
+node scripts/apply-mayhem-patch.mjs --write    # (필요 시) 신규 증강 수집(KIWI 풀 소속만) + docs/augment-diff.json
 node scripts/tag-augment-modes.mjs --write     # augmentNameId·modes 확정, 아이콘 CDragon 기준 교정
 node scripts/tidy-augment-text.mjs --write     # 플레이버·군더더기 정리
 node scripts/check-augment-data.mjs            # 정합성 검증 (개수 스냅샷·설명 길이·깨진 수치)
@@ -59,9 +61,29 @@ node scripts/tidy-augment-text.mjs --selftest  # 정제 정규식이 문장을 �
 node scripts/gen-data-check.mjs               # 검수 페이지 재생성
 ```
 
-`tag-augment-modes.mjs` 는 **아이콘을 CDragon 기준으로 되돌리되 generic 으로 퇴보시키지 않는다** —
-CDragon 값이 `GenericAbilityAugmentIcon*` 이면 앱에 들어 있는 개별 아이콘을 그대로 둔다
-(빵과 버터/치즈/잼이 이 경우다).
+두 스크립트 모두 **기존 증강의 아이콘을 바꾸지 않고 CDragon 과 다른 건만 리포트한다.**
+CDragon 값이 인게임과 다른 경우가 있어서다(꽁! 은 게임에서 generic, 빵과 버터/치즈/잼은 앱의
+개별 아이콘이 맞다). 리포트를 보고 사람이 판단한다.
+
+### 신규 증강 설명은 손으로 쓴다 (26.21 부터)
+
+26.21 부터 신규 증강의 stringtable 키가 해시(`{15ee3ba207}`)로만 나오고, Kiwi 계수도 map30 에
+없다. 그래서 `apply-mayhem-patch.mjs` 의 신규 설명은 **위키 `MayhemAugmentData` 영문 초안**으로
+채워진다(수치 포함). ko/en 최종 문장은 손으로 쓴다:
+
+1. 공식 한국어 문장 — 직전 패치 대비 **새로 생긴 해시 키**만 추려(`latest` vs `16.(N-1)`
+   `lol.stringtable.json`) 위키 영문 설명의 핵심어로 en 툴팁을 찾고, 같은 키의 ko 값을 쓴다.
+2. 수치 — 위키 값. 레벨 비례는 `40~100`(ko) / `40-100`(en). 소환사 주문형 증강(트럼펫 폭발 등)은
+   `Module:SpellData/data` 에 수치가 있다.
+3. 길이 — 카드 6줄(아래)과 `check-augment-data.mjs` 의 130자를 둘 다 지킨다.
+4. 신규 id 를 `docs/desc-edited.json` 에 추가.
+5. 패치 노트와 위키 수치가 다르면 위키(게임 데이터 추출)를 따르고 검증 기록에 남긴다.
+
+### 직전 패치들의 수치 변경도 확인한다
+
+패치 노트의 아수라장 "증강" 변경 목록은 매 패치 나온다. 앱 설명에 수치·동작이 적힌 증강이면
+반영해야 하는데, 신규 추가만 보다가 놓치기 쉽다(26.20 의 하체 운동의 날·주문 분산·도취가
+26.21 작업 때야 발견됐다). 반영할 때 **마지막 반영 이후 모든 패치 노트**의 아수라장 섹션을 본다.
 
 ## 설명 길이
 
@@ -90,6 +112,14 @@ UI 가 아니라 데이터에서 맞춘다 — `rarity-card-frame.tsx` 가 `numb
 위키는 Cloudflare 뒤에 있어 node `fetch`로는 403이 난다(스크립트가 `curl`로 우회).
 
 ## 아이콘 경로 원칙
+
+- **CDragon 에 컬러 원본이 없으면(흰 `_small` 실루엣뿐) 위키 원본을 앱에 넣는다.**
+  - `_small` 은 그레이스케일 흰 실루엣이라 컬러 아이콘들 사이에서 튄다.
+  - `tintColor` 로 칠하면 안 된다. iOS 템플릿 렌더링이라 테두리·문양 구분이 사라진다(26.21 에서 시도·폐기).
+  - 위키 `<이름>_mayhem_augment.png`(CDragon `_large` 와 픽셀 동일)를
+    `assets/augments/<CDragon 파일명에서 _small 뺀 것>.png` 로 넣는다.
+  - `src/lib/ddragon.ts` `LOCAL_AUGMENT_ICONS` 에 등록한다. 검수 페이지는 이 표를 읽어 그리므로, 등록을 빠뜨리면 검수 페이지에서도 흰 실루엣으로 보인다.
+  - CDragon 이 `_large` 를 내면 표와 파일을 지운다.
 
 - **ARAM Mayhem 증강은 `.../UX/Kiwi/Augments/Icons/...` 폴더 사용**. `Cherry`/`Strawberry`(Arena) 폴더를 쓰지 말 것.
 - CDragon `cherry-augments.json`에서 rarity(`kSilver`/`kGold`/`kPrismatic`)가 데이터와 일치하는 `Kiwi` 항목을 정답으로 삼는다.

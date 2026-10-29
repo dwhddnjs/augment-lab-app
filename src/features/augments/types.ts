@@ -2,11 +2,10 @@ export type AugmentRarity = 'silver' | 'gold' | 'prismatic';
 
 /**
  * 증강이 실제로 등장하는 게임 모드.
- * 'aram'    — 칼바람 나락 무작위 총력전: 아수라장 (CDragon augment-lists 의 KIWI)
- * 'classic' — 무작위 총력전: 아수라장 클래식 스타일 (KIWI_JADE)
- * 두 모드는 증강 상당수를 공유하므로 한 증강이 둘 다 가질 수 있다.
+ * 'aram' — 칼바람 나락 무작위 총력전: 아수라장 (CDragon augment-lists 의 KIWI)
+ * 클래식(KIWI_JADE)·아레나(CHERRY)는 앱에서 제거됐다(2026-10-30 · 2026-09-19).
  */
-export type AugmentMode = 'aram' | 'classic';
+export type AugmentMode = 'aram';
 
 export interface Augment {
   id: string;

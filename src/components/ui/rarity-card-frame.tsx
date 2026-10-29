@@ -63,7 +63,7 @@ const CARD_ASPECT = 14 / 9;
 export const CARD_ROW_PAD = Spacing.four;
 
 /**
- * 드래프트 화면(칼바람·클래식)에서 카드 3장 사이 간격.
+ * 칼바람 드래프트 화면에서 카드 3장 사이 간격.
  */
 export const CARD_GAP = Spacing.four;
 
@@ -110,7 +110,7 @@ interface Props {
   cardWidth: number;
   /**
    * 커스텀 화면 그리드용 조밀 배치. 카드가 촘촘히 붙으므로 아이콘·여백을 줄이고
-   * 서로 번지는 외곽 글로우를 끈다. 한 장씩 크게 보여주는 칼바람·클래식은 기본값.
+   * 서로 번지는 외곽 글로우를 끈다. 한 장씩 크게 보여주는 칼바람 드래프트는 기본값.
    */
   compact?: boolean;
 }

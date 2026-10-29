@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 /**
- * ARAM 아수라장 패치 반영 (공용 증강분). 최신 실행 기준: 26.16.
+ * ARAM 아수라장 패치 반영 (공용 증강분). 최신 실행 기준: 26.21.
  *
  *   node scripts/apply-mayhem-patch.mjs           # 미리보기(dry-run)
  *   node scripts/apply-mayhem-patch.mjs --write    # 실제 파일 반영
  *
  * 기준선 = 현재 augments.{ko,en}.json (augmentNameId로 CDragon에 매핑).
  * CommunityDragon latest 를 정답으로:
- *   - 신규 공용 증강 추가 (설명은 stringtable 자동 정제 초안 → 검수 페이지에서 다듬을 것)
- *   - 개명/리워크된 증강은 id 유지(빌드 augmentIds 참조 보호) 후 이름·rarity·아이콘 갱신
- *   - 아이콘 경로 / rarity 변경 반영
- * 기존 199개의 다듬어진 설명은 보존(개명건 제외).
+ *   - 신규 공용 증강 추가 — 후보는 KIWI 풀 소속만 (설명은 stringtable, 없으면 위키 초안 → 검수 페이지에서 다듬을 것)
+ *   - 개명/리워크된 증강은 id 유지(빌드 augmentIds 참조 보호) 후 이름·rarity 갱신
+ *   - rarity 변경 반영 (아이콘 차이는 개명건 포함 리포트만 — 손으로 맞춘 아이콘을 되돌리지 않는다)
+ * 기존 증강의 다듬어진 설명은 보존(개명건 제외).
  *
  * 챔피언 고유 증강은 아직 CDragon 미노출 → 이 스크립트 범위 밖.
  *
@@ -45,7 +45,6 @@ const core = (id) => id.replace(/^ARAM_/i, '').replace(/_(Active|Cutlass)$/i, ''
 const slugify = (n) => n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const isGeneric = (b) => /genericability/i.test(b);
 const RAR = { kSilver: 'silver', kGold: 'gold', kPrismatic: 'prismatic' };
-const iconSlug = (p) => base(p).replace(/\.(png|jpg|jpeg).*$/i, '').replace(/_(small|large)$/i, '');
 
 // stringtable 변수·마크업 정제 (초안 품질 — 검수에서 다듬음)
 function clean(s) {
@@ -99,7 +98,8 @@ function stripWiki(s) {
 }
 
 // 위키 Module:MayhemAugmentData/data → Map<이름, {desc, tier}>
-// 기존 증강의 실수치는 여기에만 있다. 신규분은 아직 반영돼 있지 않다(대조에 쓰지 않음).
+// 기존 증강 수치 대조의 정답지이자, 26.21 부터는 신규 증강 설명 초안의 유일한 출처다
+// (stringtable 키가 해시라 조회가 빈다). 로드에 실패하면 신규 설명이 빈 문자열로 나온다.
 async function getWiki() {
   // 위키는 Cloudflare 뒤에 있어 node fetch 의 TLS 지문으로는 403 이 난다(curl 은 통과).
   // 외부 프로세스 한 줄이 우회 라이브러리보다 싸다.
@@ -197,8 +197,9 @@ const numsIn = (s) => s.match(/\d+(?:\.\d+)?/g) ?? [];
 async function main() {
   console.log('CDragon 소스 로드…');
   // map30 로드는 20MB 동기 작업이라 앞에 따로 두면 뒤 fetch 4건과 직렬로 붙는다.
-  const [spellVals, cdEn, cdKo, stEn, stKo] = await Promise.all([
+  const [spellVals, lists, cdEn, cdKo, stEn, stKo] = await Promise.all([
     getSpellValues(),
+    getJson(`${CDRAGON}/plugins/rcp-be-lol-game-data/global/default/v1/augment-lists.json`),
     getJson(`${CDRAGON}/plugins/rcp-be-lol-game-data/global/default/v1/cherry-augments.json`),
     getJson(`${CDRAGON}/plugins/rcp-be-lol-game-data/global/ko_kr/v1/cherry-augments.json`),
     getJson(`${CDRAGON}/game/en_us/data/menu/en_us/lol.stringtable.json`),
@@ -230,14 +231,12 @@ async function main() {
   const slugsEn = buildSlugs(stEn);
   const slugsKo = buildSlugs(stKo);
   const rawFrom = (slugs, a) => {
-    const ic = iconSlug(a.augmentSmallIconPath);
-    // augmentNameId 를 먼저 본다. 아이콘 파일명을 앞에 두면 파일을 돌려 쓰는 증강끼리 설명이 뒤바뀐다
-    // (Executioner 의 아이콘이 spiritualpurification 이라 Spirit of the Jungle Main 설명을 물어왔었다).
+    // 아이콘 파일명으로는 찾지 않는다. 파일을 돌려 쓰는 증강끼리 설명이 뒤바뀐다 — Executioner 가
+    // Spirit of the Jungle Main 설명을, 26.21 의 더블 타임이 극악무도 설명을 물어왔었다.
     const cands = [
       a.augmentNameId.toLowerCase(), a.augmentNameId.toLowerCase().replace(/_/g, ''),
       core(a.augmentNameId), core(a.augmentNameId).replace(/_/g, ''),
       norm(a.nameTRA), norm(a.simpleNameTRA),
-      ic, ic.replace(/_/g, ''),
     ];
     for (const c of cands) {
       const r = slugs.get(c);
@@ -245,16 +244,24 @@ async function main() {
     }
     return '';
   };
-  const descFrom = (slugs, a) => clean(rawFrom(slugs, a));
 
   const en = JSON.parse(readFileSync(EN_PATH, 'utf8'));
   const ko = JSON.parse(readFileSync(KO_PATH, 'utf8'));
   const koById = new Map(ko.map((a) => [a.id, a]));
 
-  // 기준선 매핑
-  const cdByName = new Map(), cdByIcon = new Map();
-  for (const a of cd) { const n = norm(a.nameTRA); if (!cdByName.has(n)) cdByName.set(n, a); const b = base(a.augmentSmallIconPath); if (!isGeneric(b) && !cdByIcon.has(b)) cdByIcon.set(b, a); }
-  const baseline = en.map((a) => ({ app: a, cd: cdByName.get(norm(a.name)) || cdByIcon.get(base(a.iconPath)) }));
+  // 기준선 매핑 — 데이터에 확정해 둔 augmentNameId 가 먼저다. 이름으로 잡으면 동명이인 115쌍
+  // (ARAM_ADAPt vs ADAPt) 중 순회 순서상 먼저 나온 쪽이 걸려 엉뚱한 쌍둥이의 rarity 가 들어온다.
+  // 이름·아이콘은 nameId 가 없거나 CDragon 에서 사라진 항목의 폴백이다.
+  const cdByNameId = new Map(), cdByName = new Map(), cdByIcon = new Map();
+  for (const a of cd) {
+    if (!cdByNameId.has(a.augmentNameId)) cdByNameId.set(a.augmentNameId, a);
+    const n = norm(a.nameTRA); if (!cdByName.has(n)) cdByName.set(n, a);
+    const b = base(a.augmentSmallIconPath); if (!isGeneric(b) && !cdByIcon.has(b)) cdByIcon.set(b, a);
+  }
+  const baseline = en.map((a) => ({
+    app: a,
+    cd: cdByNameId.get(a.augmentNameId) || cdByName.get(norm(a.name)) || cdByIcon.get(base(a.iconPath)),
+  }));
   const baseIds = new Set(baseline.map((b) => b.cd?.augmentNameId).filter(Boolean));
   const baseCore = new Set([...baseIds].map(core));
   const appNames = new Set(en.map((a) => norm(a.name)));
@@ -265,9 +272,12 @@ async function main() {
     || /AugmentSlot|StatAnvil/i.test(id)
     || /MissingPing|placeholder|_test$|debug/i.test(id);
   const isUnfinished = (a) => !a.nameTRA || a.nameTRA === '???';
-  const looks = (a) => /^ARAM_/i.test(a.augmentNameId) || /\/Kiwi\//i.test(a.augmentSmallIconPath);
+  // 칼바람 풀(KIWI) 소속만 후보다. 예전엔 "ARAM_ 접두 또는 Kiwi 아이콘 경로"로 짐작했는데,
+  // 아레나 전용 증강도 Kiwi 아이콘을 빌려 써서(26.21 의 DeathDealer·GotThatDogInEm) 섞여 들어왔다.
+  const kiwi = new Set(lists.find((e) => e.modeName === 'KIWI')?.augmentList.map((p) => p.split('/').pop()) ?? []);
+  if (kiwi.size === 0) throw new Error('augment-lists.json 에 KIWI 풀이 없다');
   const seen = new Set();
-  const cand = cd.filter((a) => looks(a) && !isNoise(a.augmentNameId) && !isUnfinished(a) && (seen.has(a.augmentNameId) ? false : (seen.add(a.augmentNameId), true)));
+  const cand = cd.filter((a) => kiwi.has(a.augmentNameId) && !isNoise(a.augmentNameId) && !isUnfinished(a) && (seen.has(a.augmentNameId) ? false : (seen.add(a.augmentNameId), true)));
   const added = [], renamed = [];
   for (const a of cand) {
     if (baseIds.has(a.augmentNameId) || appNames.has(norm(a.nameTRA))) continue;
@@ -276,6 +286,16 @@ async function main() {
       if (old) renamed.push({ old, a });
     } else added.push(a);
   }
+
+  // 위키는 신규 설명 초안의 폴백이자(아래 1) 기존 증강 수치 대조(아래 4)의 정답지다.
+  console.log('위키 대조 데이터 로드…');
+  let wiki = new Map();
+  try {
+    wiki = await getWiki();
+  } catch (e) {
+    console.log(`  ⚠️  위키 로드 실패(${e.message}) — 신규 설명 폴백과 수치 대조를 건너뛴다.`);
+  }
+  const wikiByName = new Map([...wiki].map(([k, v]) => [norm(k), { name: k, ...v }]));
 
   // 1) 신규 추가
   const newEn = [], newKo = [], needsNumbers = [], noCoefficients = [];
@@ -297,7 +317,11 @@ async function main() {
     const vals = valsFor(a);
     // stringtable 의 @Var@ 를 게임 계수로 채운 뒤 정제한다. 순서를 바꾸면 수치가 먼저 지워진다.
     const fEn = fillVars(rawEn, vals), fKo = fillVars(rawKo, vals);
-    const enDesc = clean(fEn.text);
+    // 26.21 부터 신규 증강의 stringtable 키가 해시({15ee3ba207})라 위 조회가 비어 나온다.
+    // 그때는 수치가 든 위키 설명을 초안으로 쓴다. ko 는 손으로 옮겨야 한다(SKILL.md 참고).
+    const wikiDesc = wikiByName.get(norm(a.nameTRA))?.desc ?? '';
+    const enDesc = clean(fEn.text) || wikiDesc;
+    // ko 도 못 찾으면 영문 초안을 넣어 둔다 — 옮기는 걸 빠뜨리면 check-augment-data 의 한글 검사가 막는다.
     const koDesc = clean(fKo.text) || enDesc;
     newEn.push({ id, name: a.nameTRA, description: enDesc, rarity, iconPath });
     newKo.push({ id, name: koName, description: koDesc, rarity, iconPath });
@@ -311,32 +335,38 @@ async function main() {
       });
     }
     // 게임 bin 에 계수가 아예 없다 = 아직 미출시거나 이미 제거된 증강일 수 있다(예: Speed Demon 은 26.14 에서 제거).
-    if (!vals) noCoefficients.push({ id, name: koName, en: a.nameTRA, rarity });
+    // 위키에 설명이 있으면 수치 출처가 있는 셈이라 빼고 센다 — Kiwi 계수는 26.21 부터 map30 에 없다.
+    if (!vals && !wikiDesc) noCoefficients.push({ id, name: koName, en: a.nameTRA, rarity });
   }
 
-  // 2) 개명/리워크: id 유지, 이름·rarity·아이콘 갱신 (설명은 보존)
+  // 아이콘은 덮어쓰지 않고 리포트만 한다 — CDragon 값이 인게임과 다른 경우가 있어(꽁! 은 게임에서
+  // generic) 손으로 맞춰 둔 아이콘을 되돌린다. tag-augment-modes.mjs 와 같은 원칙이다(개명건도 같다).
+  const iconDiffs = [];
+  const reportIcon = (name, appIcon, cdIcon) => {
+    if (!isGeneric(base(cdIcon)) && base(appIcon) !== base(cdIcon)) {
+      iconDiffs.push(`${name}: 앱 ${base(appIcon)} / CDragon ${base(cdIcon)}`);
+    }
+  };
+
+  // 2) 개명/리워크: id 유지, 이름·rarity 갱신 (설명·아이콘은 보존)
   const renameLog = [];
   for (const { old, a } of renamed) {
     const id = old.app.id;
     const enRec = en.find((x) => x.id === id);
     const koRec = koById.get(id);
     renameLog.push(`${old.app.name} → ${a.nameTRA} (id 유지: ${id})`);
-    if (enRec) { enRec.name = a.nameTRA; enRec.rarity = RAR[a.rarity]; enRec.iconPath = a.augmentSmallIconPath; }
-    if (koRec) { koRec.name = koNameById.get(a.id) || a.nameTRA; koRec.rarity = RAR[a.rarity]; koRec.iconPath = a.augmentSmallIconPath; }
+    reportIcon(`${old.app.name} → ${a.nameTRA}`, old.app.iconPath, a.augmentSmallIconPath);
+    if (enRec) { enRec.name = a.nameTRA; enRec.rarity = RAR[a.rarity]; }
+    if (koRec) { koRec.name = koNameById.get(a.id) || a.nameTRA; koRec.rarity = RAR[a.rarity]; }
   }
 
-  // 3) 아이콘/rarity 변경 (개명·신규 외 기존 항목)
+  // 3) rarity 변경 반영 + 아이콘 차이 리포트 (개명·신규 외 기존 항목)
   const changeLog = [];
   for (const b of baseline) {
     if (!b.cd) continue;
     const enRec = en.find((x) => x.id === b.app.id);
     const koRec = koById.get(b.app.id);
-    const newIcon = b.cd.augmentSmallIconPath;
-    if (!isGeneric(base(newIcon)) && base(b.app.iconPath) !== base(newIcon)) {
-      changeLog.push(`아이콘 ${b.app.name}: ${base(b.app.iconPath)} → ${base(newIcon)}`);
-      if (enRec) enRec.iconPath = newIcon;
-      if (koRec) koRec.iconPath = newIcon;
-    }
+    reportIcon(b.app.name, b.app.iconPath, b.cd.augmentSmallIconPath);
     if (b.app.rarity !== RAR[b.cd.rarity]) {
       changeLog.push(`rarity ${b.app.name}: ${b.app.rarity} → ${RAR[b.cd.rarity]}`);
       if (enRec) enRec.rarity = RAR[b.cd.rarity];
@@ -345,14 +375,6 @@ async function main() {
   }
 
   // 4) 위키 대조 — 기존 증강의 수치 누락/차이만 뽑는다. 자동 반영은 하지 않는다.
-  console.log('위키 대조 데이터 로드…');
-  let wiki = new Map();
-  try {
-    wiki = await getWiki();
-  } catch (e) {
-    console.log(`  ⚠️  위키 로드 실패(${e.message}) — 수치 대조를 건너뛴다.`);
-  }
-  const wikiByName = new Map([...wiki].map(([k, v]) => [norm(k), { name: k, ...v }]));
   const missingNumbers = [], numberDiffs = [], disabled = [];
   for (const a of en) {
     const w = wikiByName.get(norm(a.name));
@@ -372,6 +394,8 @@ async function main() {
   console.log(`\n신규 ${newEn.length} · 개명 ${renamed.length} · 변경 ${changeLog.length}  →  ${en.length} → ${outEn.length}개`);
   console.log('\n[개명]'); renameLog.forEach((l) => console.log('  ' + l));
   console.log('\n[변경]'); changeLog.forEach((l) => console.log('  ' + l));
+  console.log(`\n[아이콘이 CDragon 과 다른 건] ${iconDiffs.length}건 — 자동으로 바꾸지 않는다. 눈으로 판단할 것`);
+  iconDiffs.forEach((l) => console.log('  ' + l));
   console.log('\n[신규 설명 정제 샘플 5]');
   for (const a of newKo.slice(0, 5)) console.log(`  · ${a.name} [${a.rarity}]\n      ${a.description || '(설명 없음)'}`);
   const emptyDesc = newKo.filter((a) => !a.description);

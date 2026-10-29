@@ -1,5 +1,5 @@
 /**
- * useItemSelect — 아이템 선택 화면의 상태/로직 (칼바람·클래식 공용).
+ * useItemSelect — 아이템 선택 화면의 상태/로직.
  *
  * 화면(item-select-screen.tsx)은 레이아웃만 그리고, 필터·선택·그리드 계산·저장은
  * 여기에 모은다. 챔피언 선택(use-champion-select)과 같은 분리 방식이다.

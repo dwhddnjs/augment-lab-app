@@ -9,6 +9,7 @@ import { useChampions } from "@/features/champions/hooks/use-champions";
 import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
+import { ARAM_ROUNDS } from "../hooks/use-aram";
 import { ChampionSummary } from "./champion-summary";
 
 const t = {
@@ -22,9 +23,9 @@ const t = {
   },
 };
 
-// 픽 수보다 한 칸 넉넉하게 — 칼바람 4픽이면 5칸, 클래식 5픽이면 6칸.
+// 픽 수보다 한 칸 넉넉하게 — 칼바람 4픽이면 5칸.
 // (증강 "혼돈 변환"이 보너스를 주면 그 이상으로 늘어난다.)
-const DEFAULT_SLOTS = 5;
+const SLOTS = ARAM_ROUNDS + 1;
 
 interface AugmentCellProps {
   augment: Augment | null;
@@ -92,11 +93,9 @@ interface Props {
   /** Actual drawer container width (from the parent <Drawer>). */
   width: number;
   championId?: string;
-  /** 표시 슬롯 수. 모드별 라운드 수 + 1. */
-  slots?: number;
 }
 
-export function PickedDrawer({ picked, width, championId, slots = DEFAULT_SLOTS }: Props) {
+export function PickedDrawer({ picked, width, championId }: Props) {
   const translate = useTranslation(t);
   const { colors } = useTheme();
 
@@ -115,7 +114,7 @@ export function PickedDrawer({ picked, width, championId, slots = DEFAULT_SLOTS 
     (width - padLeft - padRight - Spacing.two * (COLUMNS - 1)) / COLUMNS;
 
   // Grid grows past the base slots if Transmute: Chaos adds bonus augments.
-  const total = Math.max(slots, picked.length);
+  const total = Math.max(SLOTS, picked.length);
   const cells: (Augment | null)[] = Array.from(
     { length: total },
     (_, i) => picked[i] ?? null,
@@ -141,7 +140,7 @@ export function PickedDrawer({ picked, width, championId, slots = DEFAULT_SLOTS 
 
         <View style={styles.section}>
           <ThemedText type="label" color="secondary">
-            {translate("augments")} {picked.length}/{slots}
+            {translate("augments")} {picked.length}/{SLOTS}
           </ThemedText>
 
           <View style={styles.grid}>
