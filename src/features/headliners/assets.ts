@@ -16,18 +16,11 @@ export const HEADLINER_LOGOS: Record<HeadlinerId, number> = {
 /** 게임의 K/DA 마스크(kiwi_s3_bandlogo_kda_v3_mask)에 인게임처럼 얼음빛 그라데이션과 파란 글로우를 입혔다. */
 export const KDA_MARK: number = require('@/assets/headliners/kda-mark.png');
 
-/**
- * 커맨드 라인 리롤 버튼. 게임 로고(kiwi_s3_bandlogo_project_v2)를 금색으로 입혔고, flash 는 번쩍이는 순간의
- * 레이어다. 글로우는 밝은 배경에서 형태를 뭉개서 라이트 모드(iconLight)는 진한 외곽선으로 구분한다.
- */
+/** 커맨드 라인 리롤 버튼. 게임 로고(kiwi_s3_bandlogo_project_v2)를 금색으로 입혔고, flash 는 번쩍이는 순간의 레이어다. */
 export const COMMAND_LINE_REROLL = {
   icon: require('@/assets/headliners/command-line-reroll.png') as number,
-  iconLight: require('@/assets/headliners/command-line-reroll-light.png') as number,
   flash: require('@/assets/headliners/command-line-reroll-flash.png') as number,
 };
-
-/** 라이트 모드 헤더용 커맨드 라인 로고. 리롤 버튼의 iconLight 와 같은 외곽선 스타일이다. */
-export const COMMAND_LINE_LOGO_LIGHT: number = require('@/assets/headliners/command-line-light.png');
 
 /** 펜타킬 스킬 카드. 게임의 증강 카드 원본(ux/cherry·kiwi/augments/augmentselection)이다. */
 export const SKILL_CARD_ART = {
