@@ -63,7 +63,7 @@ src/
 ```
 
 feature 는 두 종류다 — 이 구분이 아래 경계 규칙의 전제다:
-- **데이터 도메인**(`augments`·`champions`·`items`): 로케일별 JSON + 조회 훅 + 타입. 누구나 읽는다.
+- **데이터 도메인**(`augments`·`champions`·`headliners`·`items`): 로케일별 JSON + 조회 훅 + 타입. 누구나 읽는다.
 - **화면 도메인**(`aram`·`custom`·`builds`·`tierlist`·`mypage`): 실제 화면. 데이터 도메인을 읽어 쓴다.
 
 경계 규칙:

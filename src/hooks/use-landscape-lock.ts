@@ -5,19 +5,28 @@
  * 나갈 때 명시적으로 걸어, 이동 중간에 방향이 한 번 더 바뀌지 않게 한다.
  * 회전이 끝나기 전 프레임에서는 isLandscape 가 false 이므로, 호출부는 그동안
  * 본문 렌더를 보류해 세로 레이아웃으로 떴다가 reflow 되는 것을 막는다.
+ *
+ * 챔피언 모달 뒤에 뜨는 화면은 lockDelay 로 AFTER_MODAL_MS 를 준다. 시트가 페이드되는 동안
+ * 회전하면 사라지는 시트가 함께 돌아가는 게 보인다.
  */
 import { useFocusEffect } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback } from "react";
 import { useWindowDimensions } from "react-native";
 
-export function useLandscapeLock() {
+/** 시트 페이드(UIKit cross dissolve) 길이보다 살짝 길게. */
+export const AFTER_MODAL_MS = 350;
+
+export function useLandscapeLock(lockDelay = 0) {
   useFocusEffect(
     useCallback(() => {
-      ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.LANDSCAPE,
-      ).catch(() => {});
-    }, []),
+      const timer = setTimeout(() => {
+        ScreenOrientation.lockAsync(
+          ScreenOrientation.OrientationLock.LANDSCAPE,
+        ).catch(() => {});
+      }, lockDelay);
+      return () => clearTimeout(timer);
+    }, [lockDelay]),
   );
 
   const { width, height } = useWindowDimensions();

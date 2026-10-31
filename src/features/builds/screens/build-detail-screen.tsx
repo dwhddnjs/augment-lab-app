@@ -28,6 +28,7 @@ import { Radius, Spacing, Typography } from "@/constants/theme";
 import { resolveIds } from "@/lib/arrays";
 import { useAugments } from "@/features/augments/hooks/use-augments";
 import { useChampions } from "@/features/champions/hooks/use-champions";
+import { HeadlinerSummary } from "@/features/headliners/components/headliner-summary";
 import { ItemStatPanel } from "@/features/items/components/item-stat-panel";
 import { useItems } from "@/features/items/hooks/use-items";
 import { useLocale } from "@/hooks/use-locale";
@@ -288,6 +289,12 @@ export function BuildDetailScreen() {
           {champion && (
             <BuildChampionHeader champion={champion} date={date} />
           )}
+
+          {/* 헤드라이너 */}
+          <HeadlinerSummary
+            headliner={build.headliner}
+            championId={build.championId}
+          />
 
           {/* 증강 */}
           <BuildAugmentList

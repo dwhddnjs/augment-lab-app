@@ -30,7 +30,7 @@ import { AugmentTile } from "@/components/ui/augment-tile";
 import { GlassButton } from "@/components/ui/glass-button";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
-import { useLandscapeLock } from "@/hooks/use-landscape-lock";
+import { AFTER_MODAL_MS, useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
 import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
@@ -83,7 +83,7 @@ const GHOST = 64;
 // ─── 화면 진입 래퍼 (landscape 가드) ─────────────────────────────────────────
 export function CustomScreen() {
   const { championId } = useLocalSearchParams<{ championId: string }>();
-  useLandscapeLock();
+  useLandscapeLock(AFTER_MODAL_MS);
 
   // 이 화면은 모달 위에 떠서 window 치수가 늦게 따라오므로 자체 onLayout으로 잰다.
   // 세로 값은 아예 담지 않는다 — 회전 잠금 중에도 앱 전환 복귀 같은 순간에 세로

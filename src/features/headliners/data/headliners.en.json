@@ -1,0 +1,49 @@
+{
+  "headliners": {
+    "kda": {
+      "name": "K/DA",
+      "description": "Collect 4 K/DA Cards to earn an extra Augment. Pick a bonus Augment after round 4."
+    },
+    "pentakill": {
+      "name": "Pentakill",
+      "description": "Empower a basic Ability at the start, then another at the end. Even your Ultimate!"
+    },
+    "heartsteel": {
+      "name": "HEARTSTEEL",
+      "description": "Members may put Stickers on your Augments. Pick a stickered Augment for a bonus."
+    },
+    "true-damage": {
+      "name": "True Damage",
+      "description": "Multi-kills, shutdowns, and destroying towers hype the crowd into dropping Anvils."
+    },
+    "disco": {
+      "name": "Disco",
+      "description": "Boogie down until the Disco Ball drops, granting everyone 1,000 gold."
+    },
+    "cafe-cuties": {
+      "name": "Cafe Cuties",
+      "description": "Health relics are especially powerful."
+    },
+    "bees": {
+      "name": "Bees",
+      "description": "Collect the honey pots and avoid the bees that fly across the map."
+    },
+    "command-line": {
+      "name": "Command Line",
+      "description": "Only Silver and Gold Augments appear. Your first reroll each round raises that Augment one tier."
+    }
+  },
+  "stickers": {
+    "aphelios": { "name": "Aphelios", "full": "2 Stat Anvils", "short": "2 Stat Anvils" },
+    "ezreal": { "name": "Ezreal", "full": "4 AD & 4 AP per Level", "short": "4 AD & AP per Level" },
+    "kayn": { "name": "Kayn", "full": "5% Omnivamp", "short": "5% Omnivamp" },
+    "ksante": { "name": "K'Sante", "full": "1 Level & Level Cap", "short": "1 Level & Cap" },
+    "sett": { "name": "Sett", "full": "30 Health per Level", "short": "30 Health per Level" },
+    "yone": { "name": "Yone", "full": "40% Attack Speed and 20 Ability Haste", "short": "40% AS & 20 Haste" }
+  },
+  "skills": { "q": "HEAVY", "w": "POWER", "e": "THRASH", "r": "DOOM" },
+  "skillTitle": "[e]Empower[/e] [s]{spell}[/s]!",
+  "skillBonus": "Gains 20 Ability Haste and 10% increased damage, [h]healing[/h], and [b]shielding[/b].",
+  "skillBonusShort": "20 Haste, 10% damage, healing, shielding",
+  "anvils": "{n} Stat Anvils"
+}

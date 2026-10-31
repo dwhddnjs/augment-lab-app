@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { GAME_MODES } from '@/constants/game-modes';
 import type { AugmentMode } from '@/features/augments/types';
+import type { BuildHeadliner, SkillKey } from '@/features/headliners/types';
 
 const STORAGE_KEY = 'builds:v1';
 
@@ -25,10 +26,12 @@ export interface SavedBuild {
   /** 게임 모드. mode 없는 기존 데이터는 parseBuilds에서 'aram'으로 폴백한다. */
   mode: GameMode;
   championId: string;
-  /** 픽한 증강 id — 최대 6 */
+  /** 픽한 증강 id — 최대 7(K/DA 5픽 + 혼돈 변환 2개) */
   augmentIds: string[];
   /** 선택한 아이템 id — 0~6 */
   itemIds: string[];
+  /** 이번 판 헤드라이너. 커스텀 빌드와 도입 전 빌드에는 없다. */
+  headliner?: BuildHeadliner;
   /** ISO 8601 */
   createdAt: string;
 }
@@ -59,6 +62,24 @@ export function getBuildsSnapshot(): SavedBuild[] | null {
   return cache;
 }
 
+const SKILL_KEYS: unknown[] = ['q', 'w', 'e', 'r'] satisfies SkillKey[];
+
+/**
+ * 헤드라이너 저장값을 정제한다. 라우트 파라미터와 .alab 백업도 여기를 거친다.
+ * id 는 문자열인지만 본다 — 여기서 걸러지면 다음 저장이 디스크에서도 지우므로, 지금 모르는
+ * 헤드라이너도 남겨 두고 표시할 때만 건너뛴다. 깨진 값이면 undefined(빌드는 그대로 산다).
+ */
+export function parseBuildHeadliner(raw: unknown): BuildHeadliner | undefined {
+  if (!raw || typeof raw !== 'object') return undefined;
+  const { id, skills, stickers } = raw as Record<string, unknown>;
+  if (typeof id !== 'string') return undefined;
+  return {
+    id,
+    skills: Array.isArray(skills) ? skills.filter((s) => SKILL_KEYS.includes(s)) : [],
+    stickers: Array.isArray(stickers) ? stickers.filter((s) => typeof s === 'string') : [],
+  };
+}
+
 /**
  * 저장 원문(JSON 문자열)을 빌드 목록으로 해석한다. 복원 확인 다이얼로그의 개수도 이걸로 센다.
  *
@@ -78,7 +99,11 @@ export function parseBuilds(raw: string | null | undefined): SavedBuild[] {
   if (!Array.isArray(parsed)) return [];
   return parsed.flatMap((b): SavedBuild[] => {
     if (!b || typeof b !== 'object') return [];
-    const build = { ...b, mode: !b.mode || b.mode === 'classic' ? 'aram' : b.mode };
+    const build = {
+      ...b,
+      mode: !b.mode || b.mode === 'classic' ? 'aram' : b.mode,
+      headliner: parseBuildHeadliner(b.headliner),
+    };
     const ok =
       GAME_MODES.includes(build.mode) &&
       typeof build.id === 'string' &&

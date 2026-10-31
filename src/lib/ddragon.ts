@@ -18,6 +18,10 @@ export function itemImageUrl(imageKey: string) {
   return `${CDN}/img/item/${imageKey}`;
 }
 
+export function spellImageUrl(imageKey: string) {
+  return `${CDN}/img/spell/${imageKey}`;
+}
+
 // iconPath from CDragon JSON: "/lol-game-data/assets/ASSETS/..."
 // 같은 아이콘이 CDragon `game/` 루트 아래 세 변형으로 존재할 수 있다. 호출측
 // (AugmentImage)이 large → base → small 순으로 폴백하며 첫 성공 URL을 쓴다.
