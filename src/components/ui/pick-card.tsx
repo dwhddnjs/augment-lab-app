@@ -112,9 +112,14 @@ export function PickCard({
     ],
   }));
 
+  // 펼쳐지는 중인 카드는 고를 수 없다. 앞 연출을 건너뛰려는 연타가 다음 카드를 집어 버린다.
+  const handlePress = () => {
+    if (rotateY.value === 0) onPress();
+  };
+
   return (
     <Animated.View style={[{ backfaceVisibility: "hidden" }, animatedStyle]}>
-      <Pressable onPress={disabled ? undefined : onPress} disabled={disabled}>
+      <Pressable onPress={disabled ? undefined : handlePress} disabled={disabled}>
         {children}
       </Pressable>
     </Animated.View>
@@ -122,18 +127,27 @@ export function PickCard({
 }
 
 /**
- * CardRow — 카드 3장을 가운데 정렬로 깐 행.
+ * CardRow — 카드 3장을 가로 가운데로 깐 행.
  * 여백·간격은 카드 너비 계산(cardWidthFor)이 쓰는 값과 같아야 해서 거기서 가져온다.
+ *
+ * 세로는 가운데가 아니라 위에서 topOffset 만큼 내린 자리에 고정한다. 가운데로 두면 카드 밑
+ * 표식이 있는 라운드만 카드가 올라가 헤드라이너마다 위치가 달라진다.
  */
-export function CardRow({ children }: { children: React.ReactNode }) {
-  return <View style={rowStyles.row}>{children}</View>;
+export function CardRow({
+  topOffset,
+  children,
+}: {
+  topOffset: number;
+  children: React.ReactNode;
+}) {
+  return <View style={[rowStyles.row, { paddingTop: topOffset }]}>{children}</View>;
 }
 
 const rowStyles = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
     paddingHorizontal: CARD_ROW_PAD,
     gap: CARD_GAP,

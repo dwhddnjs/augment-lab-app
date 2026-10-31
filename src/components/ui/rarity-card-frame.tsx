@@ -56,8 +56,11 @@ const RARITY: Record<AugmentRarity, RarityStyle> = {
   },
 };
 
+/** K/DA 보너스 카드의 글로우(K/DA 마크와 같은 파랑). 등급 프레임은 그대로 두어 티어를 읽을 수 있게 한다. */
+const KDA_GLOW = "0 6px 24px rgba(0,0,0,0.5), 0 0 20px rgba(52,120,255,0.75), 0 0 8px rgba(96,176,255,0.6)";
+
 /** 카드 비율(세로/가로). 프레임을 쓰지 않는 아이템·프리즘 카드도 이 비율을 따른다. */
-const CARD_ASPECT = 14 / 9;
+export const CARD_ASPECT = 14 / 9;
 
 /** 카드 3장 행의 좌우 여백. */
 export const CARD_ROW_PAD = Spacing.four;
@@ -113,14 +116,17 @@ interface Props {
    * 서로 번지는 외곽 글로우를 끈다. 한 장씩 크게 보여주는 칼바람 드래프트는 기본값.
    */
   compact?: boolean;
+  variant?: "kda";
 }
 
 export function RarityCardFrame({
   augment,
   cardWidth,
   compact = false,
+  variant,
 }: Props) {
   const rs = RARITY[augment.rarity];
+  const outerGlow = variant === "kda" ? KDA_GLOW : rs.outerGlow;
 
   const cardHeight = Math.round(cardWidth * CARD_ASPECT);
   const framePad = Math.max(3, Math.round(cardWidth * 0.056)); // 카드 태두리 크키 조절
@@ -144,7 +150,7 @@ export function RarityCardFrame({
           padding: framePad,
           borderRadius: Radius.lg + 3,
           experimental_backgroundImage: rs.frameImage,
-          boxShadow: compact ? undefined : rs.outerGlow,
+          boxShadow: compact ? undefined : outerGlow,
         },
       ]}
     >

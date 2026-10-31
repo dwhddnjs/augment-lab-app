@@ -6,10 +6,12 @@ import { AugmentImage } from "@/components/ui/augment-image";
 import { AugmentRarityGlyphs, Radius, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
+import { HeadlinerSummary } from "@/features/headliners/components/headliner-summary";
+import { ARAM_ROUNDS } from "@/features/headliners/rules";
+import type { BuildHeadliner } from "@/features/headliners/types";
 import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
-import { ARAM_ROUNDS } from "../hooks/use-aram";
 import { ChampionSummary } from "./champion-summary";
 
 const t = {
@@ -23,7 +25,7 @@ const t = {
   },
 };
 
-// 픽 수보다 한 칸 넉넉하게 — 칼바람 4픽이면 5칸.
+// 픽 수보다 한 칸 넉넉하게 — 칼바람 4픽이면 5칸. 게임의 증강 칸과 같고 5번째는 K/DA 가 채운다.
 // (증강 "혼돈 변환"이 보너스를 주면 그 이상으로 늘어난다.)
 const SLOTS = ARAM_ROUNDS + 1;
 
@@ -93,9 +95,10 @@ interface Props {
   /** Actual drawer container width (from the parent <Drawer>). */
   width: number;
   championId?: string;
+  headliner?: BuildHeadliner;
 }
 
-export function PickedDrawer({ picked, width, championId }: Props) {
+export function PickedDrawer({ picked, width, championId, headliner }: Props) {
   const translate = useTranslation(t);
   const { colors } = useTheme();
 
@@ -137,6 +140,8 @@ export function PickedDrawer({ picked, width, championId }: Props) {
         <ThemedText type="heading">{translate("title")}</ThemedText>
 
         {champion && <ChampionSummary champion={champion} />}
+
+        <HeadlinerSummary headliner={headliner} championId={championId} />
 
         <View style={styles.section}>
           <ThemedText type="label" color="secondary">

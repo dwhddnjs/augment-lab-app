@@ -14,6 +14,8 @@
  */
 import assert from 'node:assert/strict';
 
+import type { BuildHeadliner } from '../src/features/headliners/types';
+
 const disk = new Map<string, string>();
 let failWrite = false;
 
@@ -133,7 +135,43 @@ async function main() {
   assert.equal(parseBuilds(undefined).length, 0, '빌드 키 없는 백업은 0개');
   assert.equal(parseBuilds('{oops').length, 0, '깨진 JSON은 0개');
 
-  console.log('✓ build-storage 쓰기 실패 롤백 · 제거된 모드·깨진 항목 필터 통과');
+  // 8. 헤드라이너는 저장·재시작을 거쳐 그대로 남는다.
+  const headliner: BuildHeadliner = { id: 'pentakill', skills: ['q', 'r'], stickers: [] };
+  const saved = await saveBuild({ ...draft, headliner });
+  await reloadBuilds();
+  assert.deepEqual(
+    getBuildsSnapshot()?.find((b) => b.id === saved.id)?.headliner,
+    headliner,
+    '저장한 헤드라이너가 재로드 뒤에도 같다',
+  );
+
+  // 9. 헤드라이너가 깨져도 빌드는 산다. 모르는 id·스티커는 다음 저장에 지워지지 않게 남긴다.
+  const createdAt = '2026-08-02T00:00:00.000Z';
+  const parsed = parseBuilds(
+    JSON.stringify([
+      { ...draft, id: 'text', createdAt, headliner: 'oops' },
+      { ...draft, id: 'no-id', createdAt, headliner: { id: 3 } },
+      {
+        ...draft,
+        id: 'future',
+        createdAt,
+        headliner: { id: 'future-band', skills: ['q', 'x', 1], stickers: ['ahri', 2] },
+      },
+      { ...draft, id: 'older', createdAt },
+    ]),
+  );
+  assert.deepEqual(
+    parsed.map((b) => [b.id, b.headliner]),
+    [
+      ['text', undefined],
+      ['no-id', undefined],
+      ['future', { id: 'future-band', skills: ['q'], stickers: ['ahri'] }],
+      ['older', undefined],
+    ],
+    '깨진 헤드라이너만 빠지고 빌드는 그대로다',
+  );
+
+  console.log('✓ build-storage 쓰기 실패 롤백 · 제거된 모드·깨진 항목 필터 · 헤드라이너 보존 통과');
 }
 
 main().catch((e) => {

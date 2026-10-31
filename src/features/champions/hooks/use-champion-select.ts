@@ -4,13 +4,17 @@
  * 화면(champion-select-screen.tsx)과 분리해 검색/필터/선택/시작 로직을 여기에 모은다.
  */
 import { Image } from "expo-image";
-import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import {
+  useFocusEffect,
+  useLocalSearchParams,
+  useNavigation,
+  useRouter,
+} from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useCallback, useRef, useState } from "react";
 import type { SearchBarCommands } from "react-native-screens";
 
 import { parseLaunchMode, type LaunchMode } from "@/constants/game-modes";
-import { useAlive } from "@/hooks/use-alive";
 import { useLocale } from "@/hooks/use-locale";
 import { championClassIconUrl, championSquareUrl } from "@/lib/ddragon";
 import { matchName } from "@/lib/hangul";
@@ -38,19 +42,16 @@ export function useChampionSelect() {
   const translate = useTranslation(t);
   const { locale } = useLocale();
   const router = useRouter();
+  const navigation = useNavigation();
   const params = useLocalSearchParams<{ mode?: string }>();
   const mode: LaunchMode = parseLaunchMode(params.mode);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const searchRef = useRef<SearchBarCommands>(null);
-  // 회전을 기다리는 몇백 ms 동안 ✓ 가 계속 눌린다.
+  // 시트가 걷히는 동안 ✓ 가 계속 눌린다.
   // 가드가 없으면 replace 가 두 번 나가 드래프트가 겹쳐 뜬다.
   const startingRef = useRef(false);
-  // 이 화면은 모달이라 회전을 기다리는 동안 스와이프로 닫힐 수 있다. 그 뒤에도
-  // handleStart 의 await 체인은 계속 흘러 회전과 navigation 을 마저 하려 든다 —
-  // 닫힌 모달이 가로로 돌린 채 드래프트를 띄우는 셈이다. 살아 있을 때만 진행한다.
-  const alive = useAlive();
 
   const listData = champions
     .filter((c) => !selectedTag || c.tags.includes(selectedTag))
@@ -99,14 +100,11 @@ export function useChampionSelect() {
     if (!selectedId || startingRef.current) return;
     startingRef.current = true;
     const championId = selectedId;
-    // 잠금을 await해서 기기가 landscape로 전환된 후 navigation을 시작한다.
-    // await 없이 바로 replace하면 portrait 상태로 화면이 mount될 수 있다.
-    await lockOrientation(ScreenOrientation.OrientationLock.LANDSCAPE);
-    // 회전을 기다리는 동안 닫혔다면 가로로 눕힌 것부터 되돌리고 물러난다.
-    if (!alive.current) {
-      void lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
-      return;
-    }
+    // 시트를 페이드로 걷는다. 네이티브는 모달을 닫는 순간의 animation 값을 읽으므로, 값이 반영될
+    // 한 프레임을 기다린 뒤에 넘어간다. 회전은 여기서 걸지 않는다 — 시트가 사라진 뒤에 다음 화면이
+    // 빈 채로 돈다(useLandscapeLock).
+    navigation.setOptions({ animation: "fade" });
+    await new Promise(requestAnimationFrame);
     // 드래프트 → 아이템 → saveBuild 까지 mode 파라미터가 저장 모드를 나른다.
     //
     // 삼항이 아니라 Record 인 이유: 삼항으로 두면 새 모드가 조용히 칼바람으로 흡수된다

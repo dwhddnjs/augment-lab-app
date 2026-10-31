@@ -221,6 +221,31 @@ export const HeroOverlay = {
   textSecondary: "#B5BAC1",
 } as const;
 
+/** 헤드라이너 고유색(밴드 로고·컨셉). 등장 연출의 무대 조명이라 라이트/다크 공통이다. */
+export const HeadlinerColors = {
+  kda: "#B388FF",
+  pentakill: "#D4AF6A",
+  heartsteel: "#6FB1FF",
+  "true-damage": "#2DD4BF",
+  disco: "#F472D0",
+  "cafe-cuties": "#FFB0C4",
+  bees: "#FFC23D",
+  "command-line": "#FFB938",
+} as const;
+
+/** 펜타킬 스킬 카드의 인게임 고유색. 카드 아트가 어두운 고정색이라 라이트/다크 공통이다. */
+export const SkillCardColors = {
+  glow: "0 0 18px rgba(255,168,84,0.42)",
+  portraitRing: "#EBD7B4",
+  swirl: "#8F6F4C",
+  body: "#AEB4BD",
+  key: "#D9A441",
+  empower: "#E0709A",
+  spell: "#E2AE4C",
+  heal: "#7FCB74",
+  shield: "#5FBBD0",
+} as const;
+
 /** 네이티브 스플래시(app.json backgroundColor)와 같은 색 — 스플래시 오버레이가 이어받는다. */
 export const Brand = {
   splashBg: "#0E0F12",

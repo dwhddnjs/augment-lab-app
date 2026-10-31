@@ -1,0 +1,49 @@
+{
+  "headliners": {
+    "kda": {
+      "name": "K/DA",
+      "description": "K/DA 카드 4장을 모아 추가 증강을 획득합니다. 4라운드가 끝나면 보너스 증강을 고릅니다."
+    },
+    "pentakill": {
+      "name": "펜타킬",
+      "description": "시작할 때 기본 스킬 하나를 강화하고, 마지막에 다른 스킬을 하나 더 강화합니다. 궁극기도 가능합니다."
+    },
+    "heartsteel": {
+      "name": "HEARTSTEEL",
+      "description": "멤버가 일정 확률로 증강에 스티커를 붙입니다. 스티커가 붙은 증강을 선택하면 추가 효과를 얻습니다."
+    },
+    "true-damage": {
+      "name": "True Damage",
+      "description": "다중 킬, 제압, 포탑 파괴로 관중을 열광시키면 모루가 떨어집니다."
+    },
+    "disco": {
+      "name": "디스코",
+      "description": "디스코 볼이 떨어질 때까지 춤을 추면 모두가 1,000골드를 획득합니다."
+    },
+    "cafe-cuties": {
+      "name": "귀염둥이 카페",
+      "description": "체력 유물은 특히 강력한 성능을 자랑합니다."
+    },
+    "bees": {
+      "name": "꿀벌",
+      "description": "맵을 가로지르는 꿀벌을 피해 꿀단지를 모으세요."
+    },
+    "command-line": {
+      "name": "커맨드 라인",
+      "description": "실버·골드 증강만 나오고, 매 라운드 첫 새로고침이 그 증강을 한 등급 위로 올립니다."
+    }
+  },
+  "stickers": {
+    "aphelios": { "name": "아펠리오스", "full": "능력치 모루 2개", "short": "능력치 모루 2개" },
+    "ezreal": { "name": "이즈리얼", "full": "레벨당 공격력 4 및 주문력 4", "short": "레벨당 공격력·주문력 4" },
+    "kayn": { "name": "케인", "full": "모든 피해 흡혈 5%", "short": "모든 피해 흡혈 5%" },
+    "ksante": { "name": "크산테", "full": "레벨 및 레벨 제한 1", "short": "레벨·레벨 제한 +1" },
+    "sett": { "name": "세트", "full": "레벨당 체력 30", "short": "레벨당 체력 30" },
+    "yone": { "name": "요네", "full": "공격 속도 40% 및 스킬 가속 20", "short": "공속 40%·스킬 가속 20" }
+  },
+  "skills": { "q": "헤비", "w": "파워", "e": "스래시", "r": "둠" },
+  "skillTitle": "[s]{spell}[/s] [e]강화[/e]!",
+  "skillBonus": "[e]강화[/e] [s]{spell}[/s] 스킬은 스킬 가속이 20, 피해량이 10%, [h]체력 회복량[/h] 및 [b]보호막 흡수량[/b]이 10% 증가합니다.",
+  "skillBonusShort": "스킬 가속 20, 피해량·회복·보호막 10%",
+  "anvils": "능력치 모루 {n}개"
+}

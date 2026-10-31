@@ -17,7 +17,7 @@ const modUrl = pathToFileURL(
   path.resolve(__dirname, '../src/features/aram/rarity-odds.ts'),
 );
 // rarity-odds.ts 는 React 의존이 없어 Node 의 타입 스트립으로 그대로 실행된다.
-const { RARITY_ODDS, rollRarity } = await import(modUrl.href);
+const { COMMAND_LINE_ODDS, RARITY_ODDS, rollRarity } = await import(modUrl.href);
 
 const ROLLS = 200_000;
 const TOLERANCE = 0.03; // ±3%p
@@ -48,4 +48,13 @@ for (const [rarity, expected] of RARITY_ODDS) {
 }
 
 assert.ok(!failed, '등급 분포가 허용 오차를 벗어났다');
+
+// 커맨드 라인은 프리즘이 처음부터 나오면 안 된다 — 해킹 리롤로만 얻는다.
+let silver = 0;
+for (let i = 0; i < ROLLS; i++) {
+  const r = rollRarity(COMMAND_LINE_ODDS);
+  assert.notEqual(r, 'prismatic', '커맨드 라인 라운드에 프리즘이 나왔다');
+  if (r === 'silver') silver += 1;
+}
+assert.ok(Math.abs(silver / ROLLS - 0.5) <= TOLERANCE, '커맨드 라인 실버·골드 비율이 어긋난다');
 console.log('\n✓ 등급 확률 정상');

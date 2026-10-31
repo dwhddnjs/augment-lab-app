@@ -1,0 +1,3116 @@
+{
+  "Aatrox": {
+    "q": {
+      "name": "다르킨의 검",
+      "image": "AatroxQ.png"
+    },
+    "w": {
+      "name": "지옥사슬",
+      "image": "AatroxW.png"
+    },
+    "e": {
+      "name": "파멸의 돌진",
+      "image": "AatroxE.png"
+    },
+    "r": {
+      "name": "세계의 종결자",
+      "image": "AatroxR.png"
+    }
+  },
+  "Ahri": {
+    "q": {
+      "name": "현혹의 구슬",
+      "image": "AhriQ.png"
+    },
+    "w": {
+      "name": "여우불",
+      "image": "AhriW.png"
+    },
+    "e": {
+      "name": "매혹",
+      "image": "AhriE.png"
+    },
+    "r": {
+      "name": "혼령 질주",
+      "image": "AhriR.png"
+    }
+  },
+  "Akali": {
+    "q": {
+      "name": "오연투척검",
+      "image": "AkaliQ.png"
+    },
+    "w": {
+      "name": "황혼의 장막",
+      "image": "AkaliW.png"
+    },
+    "e": {
+      "name": "표창곡예",
+      "image": "AkaliE.png"
+    },
+    "r": {
+      "name": "무결처형",
+      "image": "AkaliR.png"
+    }
+  },
+  "Akshan": {
+    "q": {
+      "name": "복수의 부메랑",
+      "image": "AkshanQ.png"
+    },
+    "w": {
+      "name": "악당 처단",
+      "image": "AkshanW.png"
+    },
+    "e": {
+      "name": "영웅의 비상",
+      "image": "AkshanE.png"
+    },
+    "r": {
+      "name": "인과응보",
+      "image": "AkshanR.png"
+    }
+  },
+  "Alistar": {
+    "q": {
+      "name": "분쇄",
+      "image": "Pulverize.png"
+    },
+    "w": {
+      "name": "박치기",
+      "image": "Headbutt.png"
+    },
+    "e": {
+      "name": "짓밟기",
+      "image": "AlistarE.png"
+    },
+    "r": {
+      "name": "꺾을 수 없는 의지",
+      "image": "FerociousHowl.png"
+    }
+  },
+  "Ambessa": {
+    "q": {
+      "name": "교활한 휩쓸기 / 파멸의 일격",
+      "image": "AmbessaQ.png"
+    },
+    "w": {
+      "name": "배척",
+      "image": "AmbessaW.png"
+    },
+    "e": {
+      "name": "찢어 가르기",
+      "image": "AmbessaE.png"
+    },
+    "r": {
+      "name": "공개 처형",
+      "image": "AmbessaR.png"
+    }
+  },
+  "Amumu": {
+    "q": {
+      "name": "붕대 던지기",
+      "image": "BandageToss.png"
+    },
+    "w": {
+      "name": "절망",
+      "image": "AuraofDespair.png"
+    },
+    "e": {
+      "name": "짜증내기",
+      "image": "Tantrum.png"
+    },
+    "r": {
+      "name": "슬픈 미라의 저주",
+      "image": "CurseoftheSadMummy.png"
+    }
+  },
+  "Anivia": {
+    "q": {
+      "name": "냉기 폭발",
+      "image": "FlashFrost.png"
+    },
+    "w": {
+      "name": "결정화",
+      "image": "Crystallize.png"
+    },
+    "e": {
+      "name": "동상",
+      "image": "Frostbite.png"
+    },
+    "r": {
+      "name": "얼음 폭풍",
+      "image": "GlacialStorm.png"
+    }
+  },
+  "Annie": {
+    "q": {
+      "name": "붕괴",
+      "image": "AnnieQ.png"
+    },
+    "w": {
+      "name": "소각",
+      "image": "AnnieW.png"
+    },
+    "e": {
+      "name": "용암 방패",
+      "image": "AnnieE.png"
+    },
+    "r": {
+      "name": "소환: 티버",
+      "image": "AnnieR.png"
+    }
+  },
+  "Aphelios": {
+    "q": {
+      "name": "무기 스킬",
+      "image": "ApheliosQ_ClientTooltipWrapper.png"
+    },
+    "w": {
+      "name": "위상 변화",
+      "image": "ApheliosW.png"
+    },
+    "e": {
+      "name": "무기 교체 시스템",
+      "image": "ApheliosE_ClientTooltipWrapper.png"
+    },
+    "r": {
+      "name": "월광포화",
+      "image": "ApheliosR.png"
+    }
+  },
+  "Ashe": {
+    "q": {
+      "name": "궁사의 집중",
+      "image": "AsheQ.png"
+    },
+    "w": {
+      "name": "일제 사격",
+      "image": "Volley.png"
+    },
+    "e": {
+      "name": "매 날리기",
+      "image": "AsheSpiritOfTheHawk.png"
+    },
+    "r": {
+      "name": "마법의 수정화살",
+      "image": "EnchantedCrystalArrow.png"
+    }
+  },
+  "AurelionSol": {
+    "q": {
+      "name": "빛의 숨결",
+      "image": "AurelionSolQ.png"
+    },
+    "w": {
+      "name": "별의 비행",
+      "image": "AurelionSolW.png"
+    },
+    "e": {
+      "name": "특이점",
+      "image": "AurelionSolE.png"
+    },
+    "r": {
+      "name": "유성 / 천상 강림",
+      "image": "AurelionSolR.png"
+    }
+  },
+  "Aurora": {
+    "q": {
+      "name": "이중 저주",
+      "image": "AuroraQ.png"
+    },
+    "w": {
+      "name": "장막 너머로",
+      "image": "AuroraW.png"
+    },
+    "e": {
+      "name": "마법의 문",
+      "image": "AuroraE.png"
+    },
+    "r": {
+      "name": "세계의 경계",
+      "image": "AuroraR.png"
+    }
+  },
+  "Azir": {
+    "q": {
+      "name": "사막의 맹습",
+      "image": "AzirQWrapper.png"
+    },
+    "w": {
+      "name": "일어나라!",
+      "image": "AzirW.png"
+    },
+    "e": {
+      "name": "신기루",
+      "image": "AzirEWrapper.png"
+    },
+    "r": {
+      "name": "황제의 진영",
+      "image": "AzirR.png"
+    }
+  },
+  "Bard": {
+    "q": {
+      "name": "우주의 결속",
+      "image": "BardQ.png"
+    },
+    "w": {
+      "name": "수호자의 성소",
+      "image": "BardW.png"
+    },
+    "e": {
+      "name": "신비한 차원문",
+      "image": "BardE.png"
+    },
+    "r": {
+      "name": "운명의 소용돌이",
+      "image": "BardR.png"
+    }
+  },
+  "Belveth": {
+    "q": {
+      "name": "공허 쇄도",
+      "image": "BelvethQ.png"
+    },
+    "w": {
+      "name": "위와 아래",
+      "image": "BelvethW.png"
+    },
+    "e": {
+      "name": "여제의 소용돌이",
+      "image": "BelvethE.png"
+    },
+    "r": {
+      "name": "끝없는 연회",
+      "image": "BelvethR.png"
+    }
+  },
+  "Blitzcrank": {
+    "q": {
+      "name": "로켓 손",
+      "image": "RocketGrab.png"
+    },
+    "w": {
+      "name": "폭주",
+      "image": "Overdrive.png"
+    },
+    "e": {
+      "name": "강철 주먹",
+      "image": "PowerFist.png"
+    },
+    "r": {
+      "name": "정전기장",
+      "image": "StaticField.png"
+    }
+  },
+  "Brand": {
+    "q": {
+      "name": "불태우기",
+      "image": "BrandQ.png"
+    },
+    "w": {
+      "name": "화염 기둥",
+      "image": "BrandW.png"
+    },
+    "e": {
+      "name": "발화",
+      "image": "BrandE.png"
+    },
+    "r": {
+      "name": "파멸의 불덩이",
+      "image": "BrandR.png"
+    }
+  },
+  "Braum": {
+    "q": {
+      "name": "동상",
+      "image": "BraumQ.png"
+    },
+    "w": {
+      "name": "내가 지킨다",
+      "image": "BraumW.png"
+    },
+    "e": {
+      "name": "불굴",
+      "image": "BraumE.png"
+    },
+    "r": {
+      "name": "빙하 균열",
+      "image": "BraumRWrapper.png"
+    }
+  },
+  "Briar": {
+    "q": {
+      "name": "짜릿한 돌격",
+      "image": "BriarQ.png"
+    },
+    "w": {
+      "name": "핏빛 광분 / 식욕 폭발",
+      "image": "BriarW.png"
+    },
+    "e": {
+      "name": "오싹한 비명",
+      "image": "BriarE.png"
+    },
+    "r": {
+      "name": "불가항력적 죽음",
+      "image": "BriarR.png"
+    }
+  },
+  "Caitlyn": {
+    "q": {
+      "name": "필트오버 피스메이커",
+      "image": "CaitlynQ.png"
+    },
+    "w": {
+      "name": "요들잡이 덫",
+      "image": "CaitlynW.png"
+    },
+    "e": {
+      "name": "90구경 투망",
+      "image": "CaitlynE.png"
+    },
+    "r": {
+      "name": "비장의 한 발",
+      "image": "CaitlynR.png"
+    }
+  },
+  "Camille": {
+    "q": {
+      "name": "정확성 프로토콜",
+      "image": "CamilleQ.png"
+    },
+    "w": {
+      "name": "전술적 휩쓸기",
+      "image": "CamilleW.png"
+    },
+    "e": {
+      "name": "갈고리 발사",
+      "image": "CamilleE.png"
+    },
+    "r": {
+      "name": "마법공학 최후통첩",
+      "image": "CamilleR.png"
+    }
+  },
+  "Cassiopeia": {
+    "q": {
+      "name": "맹독 폭발",
+      "image": "CassiopeiaQ.png"
+    },
+    "w": {
+      "name": "독기의 늪",
+      "image": "CassiopeiaW.png"
+    },
+    "e": {
+      "name": "쌍독니",
+      "image": "CassiopeiaE.png"
+    },
+    "r": {
+      "name": "석화의 응시",
+      "image": "CassiopeiaR.png"
+    }
+  },
+  "Chogath": {
+    "q": {
+      "name": "파열",
+      "image": "Rupture.png"
+    },
+    "w": {
+      "name": "흉포한 울부짖음",
+      "image": "FeralScream.png"
+    },
+    "e": {
+      "name": "날카로운 가시",
+      "image": "VorpalSpikes.png"
+    },
+    "r": {
+      "name": "포식",
+      "image": "Feast.png"
+    }
+  },
+  "Corki": {
+    "q": {
+      "name": "인광탄",
+      "image": "PhosphorusBomb.png"
+    },
+    "w": {
+      "name": "발키리",
+      "image": "CarpetBomb.png"
+    },
+    "e": {
+      "name": "개틀링 건",
+      "image": "GGun.png"
+    },
+    "r": {
+      "name": "미사일 폭격",
+      "image": "MissileBarrage.png"
+    }
+  },
+  "Darius": {
+    "q": {
+      "name": "학살",
+      "image": "DariusCleave.png"
+    },
+    "w": {
+      "name": "마비의 일격",
+      "image": "DariusNoxianTacticsONH.png"
+    },
+    "e": {
+      "name": "포획",
+      "image": "DariusAxeGrabCone.png"
+    },
+    "r": {
+      "name": "녹서스의 단두대",
+      "image": "DariusExecute.png"
+    }
+  },
+  "Diana": {
+    "q": {
+      "name": "초승달 검기",
+      "image": "DianaQ.png"
+    },
+    "w": {
+      "name": "은빛 가호",
+      "image": "DianaOrbs.png"
+    },
+    "e": {
+      "name": "월광 쇄도",
+      "image": "DianaTeleport.png"
+    },
+    "r": {
+      "name": "달빛 낙하",
+      "image": "DianaR.png"
+    }
+  },
+  "Draven": {
+    "q": {
+      "name": "회전 도끼",
+      "image": "DravenSpinning.png"
+    },
+    "w": {
+      "name": "광기의 피",
+      "image": "DravenFury.png"
+    },
+    "e": {
+      "name": "비켜서라",
+      "image": "DravenDoubleShot.png"
+    },
+    "r": {
+      "name": "죽음의 소용돌이",
+      "image": "DravenRCast.png"
+    }
+  },
+  "DrMundo": {
+    "q": {
+      "name": "오염된 뼈톱",
+      "image": "DrMundoQ.png"
+    },
+    "w": {
+      "name": "심장 전기 충격",
+      "image": "DrMundoW.png"
+    },
+    "e": {
+      "name": "둔기에 의한 외상",
+      "image": "DrMundoE.png"
+    },
+    "r": {
+      "name": "최대 투여량",
+      "image": "DrMundoR.png"
+    }
+  },
+  "Ekko": {
+    "q": {
+      "name": "시간의 톱니바퀴",
+      "image": "EkkoQ.png"
+    },
+    "w": {
+      "name": "평행 시간 교차",
+      "image": "EkkoW.png"
+    },
+    "e": {
+      "name": "시간 도약",
+      "image": "EkkoE.png"
+    },
+    "r": {
+      "name": "시공간 붕괴",
+      "image": "EkkoR.png"
+    }
+  },
+  "Elise": {
+    "q": {
+      "name": "신경독 / 독이빨",
+      "image": "EliseHumanQ.png"
+    },
+    "w": {
+      "name": "위험한 새끼 거미 / 광란의 질주",
+      "image": "EliseHumanW.png"
+    },
+    "e": {
+      "name": "고치 / 줄타기",
+      "image": "EliseHumanE.png"
+    },
+    "r": {
+      "name": "거미 형태",
+      "image": "EliseR.png"
+    }
+  },
+  "Evelynn": {
+    "q": {
+      "name": "증오의 가시",
+      "image": "EvelynnQ.png"
+    },
+    "w": {
+      "name": "황홀한 저주",
+      "image": "EvelynnW.png"
+    },
+    "e": {
+      "name": "채찍유린",
+      "image": "EvelynnE.png"
+    },
+    "r": {
+      "name": "최후의 포옹",
+      "image": "EvelynnR.png"
+    }
+  },
+  "Ezreal": {
+    "q": {
+      "name": "신비한 화살",
+      "image": "EzrealQ.png"
+    },
+    "w": {
+      "name": "정수의 흐름",
+      "image": "EzrealW.png"
+    },
+    "e": {
+      "name": "비전 이동",
+      "image": "EzrealE.png"
+    },
+    "r": {
+      "name": "정조준 일격",
+      "image": "EzrealR.png"
+    }
+  },
+  "Fiddlesticks": {
+    "q": {
+      "name": "공포",
+      "image": "FiddleSticksQ.png"
+    },
+    "w": {
+      "name": "풍작",
+      "image": "FiddleSticksW.png"
+    },
+    "e": {
+      "name": "수확",
+      "image": "FiddleSticksE.png"
+    },
+    "r": {
+      "name": "까마귀 폭풍",
+      "image": "FiddleSticksR.png"
+    }
+  },
+  "Fiora": {
+    "q": {
+      "name": "찌르기",
+      "image": "FioraQ.png"
+    },
+    "w": {
+      "name": "응수",
+      "image": "FioraW.png"
+    },
+    "e": {
+      "name": "대가의 검술",
+      "image": "FioraE.png"
+    },
+    "r": {
+      "name": "대결투",
+      "image": "FioraR.png"
+    }
+  },
+  "Fizz": {
+    "q": {
+      "name": "성게 찌르기",
+      "image": "FizzQ.png"
+    },
+    "w": {
+      "name": "심해석 삼지창",
+      "image": "FizzW.png"
+    },
+    "e": {
+      "name": "장난치기 / 재간둥이",
+      "image": "FizzE.png"
+    },
+    "r": {
+      "name": "미끼 뿌리기",
+      "image": "FizzR.png"
+    }
+  },
+  "Galio": {
+    "q": {
+      "name": "전장의 돌풍",
+      "image": "GalioQ.png"
+    },
+    "w": {
+      "name": "듀란드의 방패",
+      "image": "GalioW.png"
+    },
+    "e": {
+      "name": "정의의 주먹",
+      "image": "GalioE.png"
+    },
+    "r": {
+      "name": "영웅출현",
+      "image": "GalioR.png"
+    }
+  },
+  "Gangplank": {
+    "q": {
+      "name": "혀어어어업상",
+      "image": "GangplankQWrapper.png"
+    },
+    "w": {
+      "name": "괴혈병 치료",
+      "image": "GangplankW.png"
+    },
+    "e": {
+      "name": "화약통",
+      "image": "GangplankE.png"
+    },
+    "r": {
+      "name": "포탄 세례",
+      "image": "GangplankR.png"
+    }
+  },
+  "Garen": {
+    "q": {
+      "name": "결정타",
+      "image": "GarenQ.png"
+    },
+    "w": {
+      "name": "용기",
+      "image": "GarenW.png"
+    },
+    "e": {
+      "name": "심판",
+      "image": "GarenE.png"
+    },
+    "r": {
+      "name": "데마시아의 정의",
+      "image": "GarenR.png"
+    }
+  },
+  "Gnar": {
+    "q": {
+      "name": "부메랑 던지기 / 돌덩이 던지기",
+      "image": "GnarQ.png"
+    },
+    "w": {
+      "name": "슝슝 / 쿵쾅",
+      "image": "GnarW.png"
+    },
+    "e": {
+      "name": "폴짝 / 우지끈",
+      "image": "GnarE.png"
+    },
+    "r": {
+      "name": "나르!",
+      "image": "GnarR.png"
+    }
+  },
+  "Gragas": {
+    "q": {
+      "name": "술통 굴리기",
+      "image": "GragasQ.png"
+    },
+    "w": {
+      "name": "취중 분노",
+      "image": "GragasW.png"
+    },
+    "e": {
+      "name": "몸통 박치기",
+      "image": "GragasE.png"
+    },
+    "r": {
+      "name": "술통 폭발",
+      "image": "GragasR.png"
+    }
+  },
+  "Graves": {
+    "q": {
+      "name": "화약 역류",
+      "image": "GravesQLineSpell.png"
+    },
+    "w": {
+      "name": "연막탄",
+      "image": "GravesSmokeGrenade.png"
+    },
+    "e": {
+      "name": "빨리 뽑기",
+      "image": "GravesMove.png"
+    },
+    "r": {
+      "name": "무고한 희생자",
+      "image": "GravesChargeShot.png"
+    }
+  },
+  "Gwen": {
+    "q": {
+      "name": "싹둑싹둑!",
+      "image": "GwenQ.png"
+    },
+    "w": {
+      "name": "신성한 안개",
+      "image": "GwenW.png"
+    },
+    "e": {
+      "name": "돌격가위",
+      "image": "GwenE.png"
+    },
+    "r": {
+      "name": "바느질",
+      "image": "GwenR.png"
+    }
+  },
+  "Hecarim": {
+    "q": {
+      "name": "회오리 베기",
+      "image": "HecarimRapidSlash.png"
+    },
+    "w": {
+      "name": "공포의 망령",
+      "image": "HecarimW.png"
+    },
+    "e": {
+      "name": "파멸의 돌격",
+      "image": "HecarimRamp.png"
+    },
+    "r": {
+      "name": "그림자의 맹습",
+      "image": "HecarimUlt.png"
+    }
+  },
+  "Heimerdinger": {
+    "q": {
+      "name": "H-28 G 진화형 포탑",
+      "image": "HeimerdingerQ.png"
+    },
+    "w": {
+      "name": "마법공학 초소형 로켓",
+      "image": "HeimerdingerW.png"
+    },
+    "e": {
+      "name": "CH-2 전자폭풍 수류탄",
+      "image": "HeimerdingerE.png"
+    },
+    "r": {
+      "name": "업그레이드!!!",
+      "image": "HeimerdingerR.png"
+    }
+  },
+  "Hwei": {
+    "q": {
+      "name": "주제: 참사",
+      "image": "HweiQ.png"
+    },
+    "w": {
+      "name": "주제: 평온",
+      "image": "HweiW.png"
+    },
+    "e": {
+      "name": "주제: 고통",
+      "image": "HweiE.png"
+    },
+    "r": {
+      "name": "절망의 소용돌이",
+      "image": "HweiR.png"
+    }
+  },
+  "Illaoi": {
+    "q": {
+      "name": "촉수 강타",
+      "image": "IllaoiQ.png"
+    },
+    "w": {
+      "name": "혹독한 가르침",
+      "image": "IllaoiW.png"
+    },
+    "e": {
+      "name": "영혼의 시험",
+      "image": "IllaoiE.png"
+    },
+    "r": {
+      "name": "믿음의 도약",
+      "image": "IllaoiR.png"
+    }
+  },
+  "Irelia": {
+    "q": {
+      "name": "칼날 쇄도",
+      "image": "IreliaQ.png"
+    },
+    "w": {
+      "name": "저항의 춤",
+      "image": "IreliaW.png"
+    },
+    "e": {
+      "name": "쌍검협무",
+      "image": "IreliaE.png"
+    },
+    "r": {
+      "name": "선봉진격검",
+      "image": "IreliaR.png"
+    }
+  },
+  "Ivern": {
+    "q": {
+      "name": "덩굴뿌리",
+      "image": "IvernQ.png"
+    },
+    "w": {
+      "name": "수풀 가꾸기",
+      "image": "IvernW.png"
+    },
+    "e": {
+      "name": "보호의 씨앗",
+      "image": "IvernE.png"
+    },
+    "r": {
+      "name": "데이지!",
+      "image": "IvernR.png"
+    }
+  },
+  "Janna": {
+    "q": {
+      "name": "울부짖는 돌풍",
+      "image": "HowlingGale.png"
+    },
+    "w": {
+      "name": "서풍",
+      "image": "SowTheWind.png"
+    },
+    "e": {
+      "name": "폭풍의 눈",
+      "image": "EyeOfTheStorm.png"
+    },
+    "r": {
+      "name": "계절풍",
+      "image": "ReapTheWhirlwind.png"
+    }
+  },
+  "JarvanIV": {
+    "q": {
+      "name": "용의 일격",
+      "image": "JarvanIVDragonStrike.png"
+    },
+    "w": {
+      "name": "황금빛 방패",
+      "image": "JarvanIVGoldenAegis.png"
+    },
+    "e": {
+      "name": "데마시아의 깃발",
+      "image": "JarvanIVDemacianStandard.png"
+    },
+    "r": {
+      "name": "대격변",
+      "image": "JarvanIVCataclysm.png"
+    }
+  },
+  "Jax": {
+    "q": {
+      "name": "도약 공격",
+      "image": "JaxQ.png"
+    },
+    "w": {
+      "name": "무기 강화",
+      "image": "JaxW.png"
+    },
+    "e": {
+      "name": "반격",
+      "image": "JaxE.png"
+    },
+    "r": {
+      "name": "무기의 달인",
+      "image": "JaxR.png"
+    }
+  },
+  "Jayce": {
+    "q": {
+      "name": "하늘로! / 전격 폭발",
+      "image": "JayceToTheSkies.png"
+    },
+    "w": {
+      "name": "전류 역장 / 초전하",
+      "image": "JayceStaticField.png"
+    },
+    "e": {
+      "name": "천둥 강타 / 가속 관문",
+      "image": "JayceThunderingBlow.png"
+    },
+    "r": {
+      "name": "머큐리 캐논 / 머큐리 해머",
+      "image": "JayceStanceHtG.png"
+    }
+  },
+  "Jhin": {
+    "q": {
+      "name": "춤추는 유탄",
+      "image": "JhinQ.png"
+    },
+    "w": {
+      "name": "살상연희",
+      "image": "JhinW.png"
+    },
+    "e": {
+      "name": "강제 관람",
+      "image": "JhinE.png"
+    },
+    "r": {
+      "name": "커튼 콜",
+      "image": "JhinR.png"
+    }
+  },
+  "Jinx": {
+    "q": {
+      "name": "휘릭휘릭!",
+      "image": "JinxQ.png"
+    },
+    "w": {
+      "name": "빠직!",
+      "image": "JinxW.png"
+    },
+    "e": {
+      "name": "와작와작 뻥!",
+      "image": "JinxE.png"
+    },
+    "r": {
+      "name": "초강력 초토화 로켓!",
+      "image": "JinxR.png"
+    }
+  },
+  "Kaisa": {
+    "q": {
+      "name": "이케시아 폭우",
+      "image": "KaisaQ.png"
+    },
+    "w": {
+      "name": "공허추적자",
+      "image": "KaisaW.png"
+    },
+    "e": {
+      "name": "고속 충전",
+      "image": "KaisaE.png"
+    },
+    "r": {
+      "name": "사냥본능",
+      "image": "KaisaR.png"
+    }
+  },
+  "Kalista": {
+    "q": {
+      "name": "꿰뚫는 창",
+      "image": "KalistaMysticShot.png"
+    },
+    "w": {
+      "name": "감시하는 혼",
+      "image": "KalistaW.png"
+    },
+    "e": {
+      "name": "뽑아 찢기",
+      "image": "KalistaExpungeWrapper.png"
+    },
+    "r": {
+      "name": "운명의 부름",
+      "image": "KalistaRx.png"
+    }
+  },
+  "Karma": {
+    "q": {
+      "name": "내면의 열정",
+      "image": "KarmaQ.png"
+    },
+    "w": {
+      "name": "굳은 결의",
+      "image": "KarmaSpiritBind.png"
+    },
+    "e": {
+      "name": "고무",
+      "image": "KarmaSolKimShield.png"
+    },
+    "r": {
+      "name": "만트라",
+      "image": "KarmaMantra.png"
+    }
+  },
+  "Karthus": {
+    "q": {
+      "name": "황폐화",
+      "image": "KarthusLayWasteA1.png"
+    },
+    "w": {
+      "name": "고통의 벽",
+      "image": "KarthusWallOfPain.png"
+    },
+    "e": {
+      "name": "부패",
+      "image": "KarthusDefile.png"
+    },
+    "r": {
+      "name": "진혼곡",
+      "image": "KarthusFallenOne.png"
+    }
+  },
+  "Kassadin": {
+    "q": {
+      "name": "무의 구체",
+      "image": "NullLance.png"
+    },
+    "w": {
+      "name": "황천의 검",
+      "image": "NetherBlade.png"
+    },
+    "e": {
+      "name": "힘의 파동",
+      "image": "ForcePulse.png"
+    },
+    "r": {
+      "name": "균열 이동",
+      "image": "RiftWalk.png"
+    }
+  },
+  "Katarina": {
+    "q": {
+      "name": "단검 투척",
+      "image": "KatarinaQ.png"
+    },
+    "w": {
+      "name": "준비",
+      "image": "KatarinaW.png"
+    },
+    "e": {
+      "name": "순보",
+      "image": "KatarinaEWrapper.png"
+    },
+    "r": {
+      "name": "죽음의 연꽃",
+      "image": "KatarinaR.png"
+    }
+  },
+  "Kayle": {
+    "q": {
+      "name": "광휘의 일격",
+      "image": "KayleQ.png"
+    },
+    "w": {
+      "name": "천상의 축복",
+      "image": "KayleW.png"
+    },
+    "e": {
+      "name": "화염주문검",
+      "image": "KayleE.png"
+    },
+    "r": {
+      "name": "신성한 심판",
+      "image": "KayleR.png"
+    }
+  },
+  "Kayn": {
+    "q": {
+      "name": "살상돌격",
+      "image": "KaynQ.png"
+    },
+    "w": {
+      "name": "몰아치는 낫",
+      "image": "KaynW.png"
+    },
+    "e": {
+      "name": "그림자의 길",
+      "image": "KaynE.png"
+    },
+    "r": {
+      "name": "그림자의 지배",
+      "image": "KaynR.png"
+    }
+  },
+  "Kennen": {
+    "q": {
+      "name": "천둥의 표창",
+      "image": "KennenShurikenHurlMissile1.png"
+    },
+    "w": {
+      "name": "전류 방출",
+      "image": "KennenBringTheLight.png"
+    },
+    "e": {
+      "name": "번개 질주",
+      "image": "KennenLightningRush.png"
+    },
+    "r": {
+      "name": "날카로운 소용돌이",
+      "image": "KennenShurikenStorm.png"
+    }
+  },
+  "Khazix": {
+    "q": {
+      "name": "공포 감지",
+      "image": "KhazixQ.png"
+    },
+    "w": {
+      "name": "공허의 가시",
+      "image": "KhazixW.png"
+    },
+    "e": {
+      "name": "도약",
+      "image": "KhazixE.png"
+    },
+    "r": {
+      "name": "공허의 습격",
+      "image": "KhazixR.png"
+    }
+  },
+  "Kindred": {
+    "q": {
+      "name": "화살 세례",
+      "image": "KindredQ.png"
+    },
+    "w": {
+      "name": "늑대의 광기",
+      "image": "KindredW.png"
+    },
+    "e": {
+      "name": "차오르는 공포",
+      "image": "KindredEWrapper.png"
+    },
+    "r": {
+      "name": "양의 안식처",
+      "image": "KindredR.png"
+    }
+  },
+  "Kled": {
+    "q": {
+      "name": "덫날리기",
+      "image": "KledQ.png"
+    },
+    "w": {
+      "name": "버럭버럭",
+      "image": "KledW.png"
+    },
+    "e": {
+      "name": "이랴!",
+      "image": "KledE.png"
+    },
+    "r": {
+      "name": "돌겨어어억!!!",
+      "image": "KledR.png"
+    }
+  },
+  "KogMaw": {
+    "q": {
+      "name": "부식성 침",
+      "image": "KogMawQ.png"
+    },
+    "w": {
+      "name": "생체마법 폭격",
+      "image": "KogMawBioArcaneBarrage.png"
+    },
+    "e": {
+      "name": "공허의 분비물",
+      "image": "KogMawVoidOoze.png"
+    },
+    "r": {
+      "name": "살아있는 곡사포",
+      "image": "KogMawLivingArtillery.png"
+    }
+  },
+  "KSante": {
+    "q": {
+      "name": "엔토포 타격",
+      "image": "KSanteQ.png"
+    },
+    "w": {
+      "name": "길을 여는 자",
+      "image": "KSanteW.png"
+    },
+    "e": {
+      "name": "발놀림",
+      "image": "KSanteE.png"
+    },
+    "r": {
+      "name": "총공세",
+      "image": "KSanteR.png"
+    }
+  },
+  "Leblanc": {
+    "q": {
+      "name": "악의의 인장",
+      "image": "LeblancQ.png"
+    },
+    "w": {
+      "name": "왜곡",
+      "image": "LeblancW.png"
+    },
+    "e": {
+      "name": "환영 사슬",
+      "image": "LeblancE.png"
+    },
+    "r": {
+      "name": "모방",
+      "image": "LeblancR.png"
+    }
+  },
+  "LeeSin": {
+    "q": {
+      "name": "음파 / 공명의 일격",
+      "image": "LeeSinQOne.png"
+    },
+    "w": {
+      "name": "방호 / 강철의 의지",
+      "image": "LeeSinWOne.png"
+    },
+    "e": {
+      "name": "폭풍/무력화",
+      "image": "LeeSinEOne.png"
+    },
+    "r": {
+      "name": "용의 분노",
+      "image": "LeeSinR.png"
+    }
+  },
+  "Leona": {
+    "q": {
+      "name": "여명의 방패",
+      "image": "LeonaShieldOfDaybreak.png"
+    },
+    "w": {
+      "name": "일식",
+      "image": "LeonaSolarBarrier.png"
+    },
+    "e": {
+      "name": "천공의 검",
+      "image": "LeonaZenithBlade.png"
+    },
+    "r": {
+      "name": "흑점 폭발",
+      "image": "LeonaSolarFlare.png"
+    }
+  },
+  "Lillia": {
+    "q": {
+      "name": "뾰로롱 강타",
+      "image": "LilliaQ.png"
+    },
+    "w": {
+      "name": "이익! 쿵!",
+      "image": "LilliaW.png"
+    },
+    "e": {
+      "name": "데굴데굴 씨앗",
+      "image": "LilliaE.png"
+    },
+    "r": {
+      "name": "감미로운 자장가",
+      "image": "LilliaR.png"
+    }
+  },
+  "Lissandra": {
+    "q": {
+      "name": "얼음 파편",
+      "image": "LissandraQ.png"
+    },
+    "w": {
+      "name": "서릿발",
+      "image": "LissandraW.png"
+    },
+    "e": {
+      "name": "얼음갈퀴 길",
+      "image": "LissandraE.png"
+    },
+    "r": {
+      "name": "얼음 무덤",
+      "image": "LissandraR.png"
+    }
+  },
+  "Locke": {
+    "q": {
+      "name": "의식용 대못",
+      "image": "LockeQ.png"
+    },
+    "w": {
+      "name": "영혼 점화",
+      "image": "LockeW.png"
+    },
+    "e": {
+      "name": "잿빛 추격",
+      "image": "LockeE.png"
+    },
+    "r": {
+      "name": "연옥",
+      "image": "LockeR.png"
+    }
+  },
+  "Lucian": {
+    "q": {
+      "name": "꿰뚫는 빛",
+      "image": "LucianQ.png"
+    },
+    "w": {
+      "name": "타는 불길",
+      "image": "LucianW.png"
+    },
+    "e": {
+      "name": "끈질긴 추격",
+      "image": "LucianE.png"
+    },
+    "r": {
+      "name": "빛의 심판",
+      "image": "LucianR.png"
+    }
+  },
+  "Lulu": {
+    "q": {
+      "name": "반짝반짝 창",
+      "image": "LuluQ.png"
+    },
+    "w": {
+      "name": "변덕쟁이",
+      "image": "LuluW.png"
+    },
+    "e": {
+      "name": "도와줘, 픽스!",
+      "image": "LuluE.png"
+    },
+    "r": {
+      "name": "급성장",
+      "image": "LuluR.png"
+    }
+  },
+  "Lux": {
+    "q": {
+      "name": "빛의 속박",
+      "image": "LuxLightBinding.png"
+    },
+    "w": {
+      "name": "프리즘 보호막",
+      "image": "LuxPrismaticWave.png"
+    },
+    "e": {
+      "name": "광휘의 특이점",
+      "image": "LuxLightStrikeKugel.png"
+    },
+    "r": {
+      "name": "최후의 섬광",
+      "image": "LuxR.png"
+    }
+  },
+  "Malphite": {
+    "q": {
+      "name": "지진의 파편",
+      "image": "SeismicShard.png"
+    },
+    "w": {
+      "name": "천둥소리",
+      "image": "Obduracy.png"
+    },
+    "e": {
+      "name": "지면 강타",
+      "image": "Landslide.png"
+    },
+    "r": {
+      "name": "멈출 수 없는 힘",
+      "image": "UFSlash.png"
+    }
+  },
+  "Malzahar": {
+    "q": {
+      "name": "공허의 부름",
+      "image": "MalzaharQ.png"
+    },
+    "w": {
+      "name": "공허의 무리",
+      "image": "MalzaharW.png"
+    },
+    "e": {
+      "name": "재앙의 환상",
+      "image": "MalzaharE.png"
+    },
+    "r": {
+      "name": "황천의 손아귀",
+      "image": "MalzaharR.png"
+    }
+  },
+  "Maokai": {
+    "q": {
+      "name": "덤불 주먹",
+      "image": "MaokaiQ.png"
+    },
+    "w": {
+      "name": "뒤틀린 전진",
+      "image": "MaokaiW.png"
+    },
+    "e": {
+      "name": "묘목 던지기",
+      "image": "MaokaiE.png"
+    },
+    "r": {
+      "name": "대자연의 마수",
+      "image": "MaokaiR.png"
+    }
+  },
+  "MasterYi": {
+    "q": {
+      "name": "일격 필살",
+      "image": "AlphaStrike.png"
+    },
+    "w": {
+      "name": "명상",
+      "image": "Meditate.png"
+    },
+    "e": {
+      "name": "우주류 검술",
+      "image": "WujuStyle.png"
+    },
+    "r": {
+      "name": "최후의 전사",
+      "image": "Highlander.png"
+    }
+  },
+  "Mel": {
+    "q": {
+      "name": "빛의 세례",
+      "image": "MelQ.png"
+    },
+    "w": {
+      "name": "반박",
+      "image": "MelW.png"
+    },
+    "e": {
+      "name": "태양 올가미",
+      "image": "MelE.png"
+    },
+    "r": {
+      "name": "황금 일식",
+      "image": "MelR.png"
+    }
+  },
+  "Milio": {
+    "q": {
+      "name": "초특급 불꽃 킥",
+      "image": "MilioQ.png"
+    },
+    "w": {
+      "name": "아늑한 모닥불",
+      "image": "MilioW.png"
+    },
+    "e": {
+      "name": "따스한 포옹",
+      "image": "MilioE.png"
+    },
+    "r": {
+      "name": "생명의 온기",
+      "image": "MilioR.png"
+    }
+  },
+  "MissFortune": {
+    "q": {
+      "name": "한 발에 두 놈",
+      "image": "MissFortuneRicochetShot.png"
+    },
+    "w": {
+      "name": "활보",
+      "image": "MissFortuneViciousStrikes.png"
+    },
+    "e": {
+      "name": "총알은 비를 타고",
+      "image": "MissFortuneScattershot.png"
+    },
+    "r": {
+      "name": "쌍권총 난사",
+      "image": "MissFortuneBulletTime.png"
+    }
+  },
+  "MonkeyKing": {
+    "q": {
+      "name": "파쇄격",
+      "image": "MonkeyKingDoubleAttack.png"
+    },
+    "w": {
+      "name": "분신 전사",
+      "image": "MonkeyKingDecoy.png"
+    },
+    "e": {
+      "name": "근두운 급습",
+      "image": "MonkeyKingNimbus.png"
+    },
+    "r": {
+      "name": "회전격",
+      "image": "MonkeyKingSpinToWin.png"
+    }
+  },
+  "Mordekaiser": {
+    "q": {
+      "name": "말살",
+      "image": "MordekaiserQ.png"
+    },
+    "w": {
+      "name": "불멸",
+      "image": "MordekaiserW.png"
+    },
+    "e": {
+      "name": "죽음의 손아귀",
+      "image": "MordekaiserE.png"
+    },
+    "r": {
+      "name": "죽음의 세계",
+      "image": "MordekaiserR.png"
+    }
+  },
+  "Morgana": {
+    "q": {
+      "name": "어둠의 속박",
+      "image": "MorganaQ.png"
+    },
+    "w": {
+      "name": "고통의 그림자",
+      "image": "MorganaW.png"
+    },
+    "e": {
+      "name": "칠흑의 방패",
+      "image": "MorganaE.png"
+    },
+    "r": {
+      "name": "영혼의 족쇄",
+      "image": "MorganaR.png"
+    }
+  },
+  "Naafiri": {
+    "q": {
+      "name": "다르킨 단검",
+      "image": "NaafiriQ.png"
+    },
+    "w": {
+      "name": "무리의 부름",
+      "image": "NaafiriR.png"
+    },
+    "e": {
+      "name": "적출",
+      "image": "NaafiriE.png"
+    },
+    "r": {
+      "name": "사냥개의 추적",
+      "image": "NaafiriW.png"
+    }
+  },
+  "Nami": {
+    "q": {
+      "name": "물의 감옥",
+      "image": "NamiQ.png"
+    },
+    "w": {
+      "name": "밀물 썰물",
+      "image": "NamiW.png"
+    },
+    "e": {
+      "name": "파도 소환사의 축복",
+      "image": "NamiE.png"
+    },
+    "r": {
+      "name": "해일",
+      "image": "NamiR.png"
+    }
+  },
+  "Nasus": {
+    "q": {
+      "name": "흡수의 일격",
+      "image": "NasusQ.png"
+    },
+    "w": {
+      "name": "쇠약",
+      "image": "NasusW.png"
+    },
+    "e": {
+      "name": "영혼의 불길",
+      "image": "NasusE.png"
+    },
+    "r": {
+      "name": "사막의 분노",
+      "image": "NasusR.png"
+    }
+  },
+  "Nautilus": {
+    "q": {
+      "name": "닻줄 견인",
+      "image": "NautilusAnchorDrag.png"
+    },
+    "w": {
+      "name": "타이탄의 분노",
+      "image": "NautilusPiercingGaze.png"
+    },
+    "e": {
+      "name": "역조",
+      "image": "NautilusSplashZone.png"
+    },
+    "r": {
+      "name": "폭뢰",
+      "image": "NautilusGrandLine.png"
+    }
+  },
+  "Neeko": {
+    "q": {
+      "name": "꽃망울 폭발",
+      "image": "NeekoQ.png"
+    },
+    "w": {
+      "name": "형상 분리",
+      "image": "NeekoW.png"
+    },
+    "e": {
+      "name": "칭칭올가미",
+      "image": "NeekoE.png"
+    },
+    "r": {
+      "name": "만개",
+      "image": "NeekoR.png"
+    }
+  },
+  "Nidalee": {
+    "q": {
+      "name": "창 투척 / 숨통 끊기",
+      "image": "JavelinToss.png"
+    },
+    "w": {
+      "name": "매복 덫 / 급습",
+      "image": "Bushwhack.png"
+    },
+    "e": {
+      "name": "태고의 생명력 / 할퀴기",
+      "image": "PrimalSurge.png"
+    },
+    "r": {
+      "name": "쿠거의 상",
+      "image": "AspectOfTheCougar.png"
+    }
+  },
+  "Nilah": {
+    "q": {
+      "name": "무형의 검",
+      "image": "NilahQ.png"
+    },
+    "w": {
+      "name": "승리의 장막",
+      "image": "NilahW.png"
+    },
+    "e": {
+      "name": "급류",
+      "image": "NilahE.png"
+    },
+    "r": {
+      "name": "환희",
+      "image": "NilahR.png"
+    }
+  },
+  "Nocturne": {
+    "q": {
+      "name": "황혼의 인도자",
+      "image": "NocturneDuskbringer.png"
+    },
+    "w": {
+      "name": "어둠의 장막",
+      "image": "NocturneShroudofDarkness.png"
+    },
+    "e": {
+      "name": "말할 수 없는 공포",
+      "image": "NocturneUnspeakableHorror.png"
+    },
+    "r": {
+      "name": "피해망상",
+      "image": "NocturneParanoia.png"
+    }
+  },
+  "Nunu": {
+    "q": {
+      "name": "잡아먹기",
+      "image": "NunuQ.png"
+    },
+    "w": {
+      "name": "데굴데굴 눈덩이!",
+      "image": "NunuW.png"
+    },
+    "e": {
+      "name": "눈덩이 팡팡팡",
+      "image": "NunuE.png"
+    },
+    "r": {
+      "name": "절대 영도",
+      "image": "NunuR.png"
+    }
+  },
+  "Olaf": {
+    "q": {
+      "name": "역류",
+      "image": "OlafAxeThrowCast.png"
+    },
+    "w": {
+      "name": "버티기",
+      "image": "OlafFrenziedStrikes.png"
+    },
+    "e": {
+      "name": "무모한 강타",
+      "image": "OlafRecklessStrike.png"
+    },
+    "r": {
+      "name": "라그나로크",
+      "image": "OlafRagnarok.png"
+    }
+  },
+  "Orianna": {
+    "q": {
+      "name": "명령: 공격",
+      "image": "OrianaIzunaCommand.png"
+    },
+    "w": {
+      "name": "명령: 불협화음",
+      "image": "OrianaDissonanceCommand.png"
+    },
+    "e": {
+      "name": "명령: 보호",
+      "image": "OrianaRedactCommand.png"
+    },
+    "r": {
+      "name": "명령: 충격파",
+      "image": "OrianaDetonateCommand.png"
+    }
+  },
+  "Ornn": {
+    "q": {
+      "name": "용암 균열",
+      "image": "OrnnQ.png"
+    },
+    "w": {
+      "name": "불꽃 풀무질",
+      "image": "OrnnW.png"
+    },
+    "e": {
+      "name": "화염 돌진",
+      "image": "OrnnE.png"
+    },
+    "r": {
+      "name": "대장장이 신의 부름",
+      "image": "OrnnR.png"
+    }
+  },
+  "Pantheon": {
+    "q": {
+      "name": "혜성의 창",
+      "image": "PantheonQ.png"
+    },
+    "w": {
+      "name": "방호의 도약",
+      "image": "PantheonW.png"
+    },
+    "e": {
+      "name": "방패 돌격",
+      "image": "PantheonE.png"
+    },
+    "r": {
+      "name": "거대 유성",
+      "image": "PantheonR.png"
+    }
+  },
+  "Poppy": {
+    "q": {
+      "name": "망치 강타",
+      "image": "PoppyQ.png"
+    },
+    "w": {
+      "name": "굳건한 태세",
+      "image": "PoppyW.png"
+    },
+    "e": {
+      "name": "용감한 돌진",
+      "image": "PoppyE.png"
+    },
+    "r": {
+      "name": "수호자의 심판",
+      "image": "PoppyR.png"
+    }
+  },
+  "Pyke": {
+    "q": {
+      "name": "뼈 작살",
+      "image": "PykeQ.png"
+    },
+    "w": {
+      "name": "유령 잠수",
+      "image": "PykeW.png"
+    },
+    "e": {
+      "name": "망자의 물살",
+      "image": "PykeE.png"
+    },
+    "r": {
+      "name": "깊은 바다의 처형",
+      "image": "PykeR.png"
+    }
+  },
+  "Qiyana": {
+    "q": {
+      "name": "원소의 분노 / 이쉬탈의 칼날",
+      "image": "QiyanaQ.png"
+    },
+    "w": {
+      "name": "대지창조",
+      "image": "QiyanaW.png"
+    },
+    "e": {
+      "name": "대담무쌍",
+      "image": "QiyanaE.png"
+    },
+    "r": {
+      "name": "여왕의 진가",
+      "image": "QiyanaR.png"
+    }
+  },
+  "Quinn": {
+    "q": {
+      "name": "실명 공격",
+      "image": "QuinnQ.png"
+    },
+    "w": {
+      "name": "예리한 감각",
+      "image": "QuinnW.png"
+    },
+    "e": {
+      "name": "공중제비",
+      "image": "QuinnE.png"
+    },
+    "r": {
+      "name": "후방 지원",
+      "image": "QuinnR.png"
+    }
+  },
+  "Rakan": {
+    "q": {
+      "name": "빛나는 깃털",
+      "image": "RakanQ.png"
+    },
+    "w": {
+      "name": "화려한 등장",
+      "image": "RakanW.png"
+    },
+    "e": {
+      "name": "전쟁무도",
+      "image": "RakanE.png"
+    },
+    "r": {
+      "name": "매혹의 질주",
+      "image": "RakanR.png"
+    }
+  },
+  "Rammus": {
+    "q": {
+      "name": "대회전",
+      "image": "PowerBall.png"
+    },
+    "w": {
+      "name": "몸 말아 웅크리기",
+      "image": "DefensiveBallCurl.png"
+    },
+    "e": {
+      "name": "광란의 도발",
+      "image": "PuncturingTaunt.png"
+    },
+    "r": {
+      "name": "지진 폭격",
+      "image": "Tremors2.png"
+    }
+  },
+  "RekSai": {
+    "q": {
+      "name": "여왕의 진노 / 먹잇감 추적",
+      "image": "RekSaiQ.png"
+    },
+    "w": {
+      "name": "매복 / 돌출",
+      "image": "RekSaiW.png"
+    },
+    "e": {
+      "name": "성난 이빨 / 땅굴 파기",
+      "image": "RekSaiE.png"
+    },
+    "r": {
+      "name": "공허의 돌진",
+      "image": "RekSaiR.png"
+    }
+  },
+  "Rell": {
+    "q": {
+      "name": "파열의 일격",
+      "image": "RellQ.png"
+    },
+    "w": {
+      "name": "철마술: 붕괴",
+      "image": "RellW_Dismount.png"
+    },
+    "e": {
+      "name": "전속력",
+      "image": "RellE.png"
+    },
+    "r": {
+      "name": "자기 폭풍",
+      "image": "RellR.png"
+    }
+  },
+  "Renata": {
+    "q": {
+      "name": "악수",
+      "image": "RenataQ.png"
+    },
+    "w": {
+      "name": "긴급 구제",
+      "image": "RenataW.png"
+    },
+    "e": {
+      "name": "충성 고객 우대",
+      "image": "RenataE.png"
+    },
+    "r": {
+      "name": "적대적 인수",
+      "image": "RenataR.png"
+    }
+  },
+  "Renekton": {
+    "q": {
+      "name": "양떼 도륙",
+      "image": "RenektonCleave.png"
+    },
+    "w": {
+      "name": "무자비한 포식자",
+      "image": "RenektonPreExecute.png"
+    },
+    "e": {
+      "name": "자르고 토막내기",
+      "image": "RenektonSliceAndDice.png"
+    },
+    "r": {
+      "name": "강신",
+      "image": "RenektonReignOfTheTyrant.png"
+    }
+  },
+  "Rengar": {
+    "q": {
+      "name": "포악함",
+      "image": "RengarQ.png"
+    },
+    "w": {
+      "name": "전투의 포효",
+      "image": "RengarW.png"
+    },
+    "e": {
+      "name": "올가미 투척",
+      "image": "RengarE.png"
+    },
+    "r": {
+      "name": "사냥의 전율",
+      "image": "RengarR.png"
+    }
+  },
+  "Riven": {
+    "q": {
+      "name": "부러진 날개",
+      "image": "RivenTriCleave.png"
+    },
+    "w": {
+      "name": "기 폭발",
+      "image": "RivenMartyr.png"
+    },
+    "e": {
+      "name": "용맹",
+      "image": "RivenFeint.png"
+    },
+    "r": {
+      "name": "추방자의 검",
+      "image": "RivenFengShuiEngine.png"
+    }
+  },
+  "Rumble": {
+    "q": {
+      "name": "화염방사기",
+      "image": "RumbleFlameThrower.png"
+    },
+    "w": {
+      "name": "고철 방패",
+      "image": "RumbleShield.png"
+    },
+    "e": {
+      "name": "전기 작살",
+      "image": "RumbleGrenade.png"
+    },
+    "r": {
+      "name": "이퀄라이저 미사일",
+      "image": "RumbleCarpetBomb.png"
+    }
+  },
+  "Ryze": {
+    "q": {
+      "name": "과부하",
+      "image": "RyzeQWrapper.png"
+    },
+    "w": {
+      "name": "룬 감옥",
+      "image": "RyzeW.png"
+    },
+    "e": {
+      "name": "주문 전이",
+      "image": "RyzeE.png"
+    },
+    "r": {
+      "name": "공간 왜곡",
+      "image": "RyzeR.png"
+    }
+  },
+  "Samira": {
+    "q": {
+      "name": "천부적 재능",
+      "image": "SamiraQ.png"
+    },
+    "w": {
+      "name": "원형 검무",
+      "image": "SamiraW.png"
+    },
+    "e": {
+      "name": "거침없는 질주",
+      "image": "SamiraE.png"
+    },
+    "r": {
+      "name": "지옥불 난사",
+      "image": "SamiraR.png"
+    }
+  },
+  "Sejuani": {
+    "q": {
+      "name": "혹한의 맹습",
+      "image": "SejuaniQ.png"
+    },
+    "w": {
+      "name": "혹한의 서릿발",
+      "image": "SejuaniW.png"
+    },
+    "e": {
+      "name": "만년 서리",
+      "image": "SejuaniE.png"
+    },
+    "r": {
+      "name": "빙하 감옥",
+      "image": "SejuaniR.png"
+    }
+  },
+  "Senna": {
+    "q": {
+      "name": "꿰뚫는 어둠",
+      "image": "SennaQ.png"
+    },
+    "w": {
+      "name": "마지막 포옹",
+      "image": "SennaW.png"
+    },
+    "e": {
+      "name": "검은 안개의 저주",
+      "image": "SennaE.png"
+    },
+    "r": {
+      "name": "여명의 그림자",
+      "image": "SennaR.png"
+    }
+  },
+  "Seraphine": {
+    "q": {
+      "name": "고음",
+      "image": "SeraphineQ.png"
+    },
+    "w": {
+      "name": "소리 장막",
+      "image": "SeraphineW.png"
+    },
+    "e": {
+      "name": "비트 발사",
+      "image": "SeraphineE.png"
+    },
+    "r": {
+      "name": "앙코르",
+      "image": "SeraphineR.png"
+    }
+  },
+  "Sett": {
+    "q": {
+      "name": "주먹다짐",
+      "image": "SettQ.png"
+    },
+    "w": {
+      "name": "강펀치",
+      "image": "SettW.png"
+    },
+    "e": {
+      "name": "안면 강타",
+      "image": "SettE.png"
+    },
+    "r": {
+      "name": "대미 장식",
+      "image": "SettR.png"
+    }
+  },
+  "Shaco": {
+    "q": {
+      "name": "속임수",
+      "image": "Deceive.png"
+    },
+    "w": {
+      "name": "깜짝 상자",
+      "image": "JackInTheBox.png"
+    },
+    "e": {
+      "name": "양날 독",
+      "image": "TwoShivPoison.png"
+    },
+    "r": {
+      "name": "환각",
+      "image": "HallucinateFull.png"
+    }
+  },
+  "Shen": {
+    "q": {
+      "name": "황혼 강습",
+      "image": "ShenQ.png"
+    },
+    "w": {
+      "name": "의지의 결계",
+      "image": "ShenW.png"
+    },
+    "e": {
+      "name": "그림자 돌진",
+      "image": "ShenE.png"
+    },
+    "r": {
+      "name": "단결된 의지",
+      "image": "ShenR.png"
+    }
+  },
+  "Shyvana": {
+    "q": {
+      "name": "잉걸불 일격",
+      "image": "ShyvanaQ.png"
+    },
+    "w": {
+      "name": "지옥불 방패",
+      "image": "ShyvanaW.png"
+    },
+    "e": {
+      "name": "용암 분출",
+      "image": "ShyvanaE.png"
+    },
+    "r": {
+      "name": "용의 강림",
+      "image": "ShyvanaR.png"
+    }
+  },
+  "Singed": {
+    "q": {
+      "name": "맹독의 자취",
+      "image": "PoisonTrail.png"
+    },
+    "w": {
+      "name": "초강력 접착제",
+      "image": "MegaAdhesive.png"
+    },
+    "e": {
+      "name": "던져넘기기",
+      "image": "Fling.png"
+    },
+    "r": {
+      "name": "광기의 물약",
+      "image": "InsanityPotion.png"
+    }
+  },
+  "Sion": {
+    "q": {
+      "name": "대량 학살 강타",
+      "image": "SionQ.png"
+    },
+    "w": {
+      "name": "영혼의 용광로",
+      "image": "SionW.png"
+    },
+    "e": {
+      "name": "학살자의 포효",
+      "image": "SionE.png"
+    },
+    "r": {
+      "name": "멈출 수 없는 맹공",
+      "image": "SionR.png"
+    }
+  },
+  "Sivir": {
+    "q": {
+      "name": "부메랑 검",
+      "image": "SivirQ.png"
+    },
+    "w": {
+      "name": "튕기는 부메랑",
+      "image": "SivirW.png"
+    },
+    "e": {
+      "name": "주문 방어막",
+      "image": "SivirE.png"
+    },
+    "r": {
+      "name": "사냥 개시",
+      "image": "SivirR.png"
+    }
+  },
+  "Skarner": {
+    "q": {
+      "name": "부서진 대지/지반 돌출",
+      "image": "SkarnerQ.png"
+    },
+    "w": {
+      "name": "대지의 수호자",
+      "image": "SkarnerW.png"
+    },
+    "e": {
+      "name": "이쉬탈의 격돌",
+      "image": "SkarnerE.png"
+    },
+    "r": {
+      "name": "꿰뚫기",
+      "image": "SkarnerR.png"
+    }
+  },
+  "Smolder": {
+    "q": {
+      "name": "초강력 화염 숨결",
+      "image": "SmolderQ.png"
+    },
+    "w": {
+      "name": "에취!",
+      "image": "SmolderW.png"
+    },
+    "e": {
+      "name": "펄럭펄럭",
+      "image": "SmolderE.png"
+    },
+    "r": {
+      "name": "엄마아아아!",
+      "image": "SmolderR.png"
+    }
+  },
+  "Sona": {
+    "q": {
+      "name": "용맹의 찬가",
+      "image": "SonaQ.png"
+    },
+    "w": {
+      "name": "인내의 아리아",
+      "image": "SonaW.png"
+    },
+    "e": {
+      "name": "기민함의 노래",
+      "image": "SonaE.png"
+    },
+    "r": {
+      "name": "크레센도",
+      "image": "SonaR.png"
+    }
+  },
+  "Soraka": {
+    "q": {
+      "name": "별부름",
+      "image": "SorakaQ.png"
+    },
+    "w": {
+      "name": "은하의 마력",
+      "image": "SorakaW.png"
+    },
+    "e": {
+      "name": "별의 균형",
+      "image": "SorakaE.png"
+    },
+    "r": {
+      "name": "기원",
+      "image": "SorakaR.png"
+    }
+  },
+  "Swain": {
+    "q": {
+      "name": "죽음의 손길",
+      "image": "SwainQ.png"
+    },
+    "w": {
+      "name": "제국의 눈",
+      "image": "SwainW.png"
+    },
+    "e": {
+      "name": "속박명령",
+      "image": "SwainE.png"
+    },
+    "r": {
+      "name": "악의 승천",
+      "image": "SwainR.png"
+    }
+  },
+  "Sylas": {
+    "q": {
+      "name": "사슬 후려치기",
+      "image": "SylasQ.png"
+    },
+    "w": {
+      "name": "국왕시해자",
+      "image": "SylasW.png"
+    },
+    "e": {
+      "name": "도주 / 억압",
+      "image": "SylasE.png"
+    },
+    "r": {
+      "name": "강탈",
+      "image": "SylasR.png"
+    }
+  },
+  "Syndra": {
+    "q": {
+      "name": "어둠 구체",
+      "image": "SyndraQ.png"
+    },
+    "w": {
+      "name": "의지의 힘",
+      "image": "SyndraW.png"
+    },
+    "e": {
+      "name": "적군 와해",
+      "image": "SyndraE.png"
+    },
+    "r": {
+      "name": "풀려난 힘",
+      "image": "SyndraR.png"
+    }
+  },
+  "TahmKench": {
+    "q": {
+      "name": "혀 채찍",
+      "image": "TahmKenchQ.png"
+    },
+    "w": {
+      "name": "심연 잠수",
+      "image": "TahmKenchW.png"
+    },
+    "e": {
+      "name": "두꺼운 피부",
+      "image": "TahmKenchE.png"
+    },
+    "r": {
+      "name": "집어삼키기",
+      "image": "TahmKenchRWrapper.png"
+    }
+  },
+  "Taliyah": {
+    "q": {
+      "name": "파편 난사",
+      "image": "TaliyahQ.png"
+    },
+    "w": {
+      "name": "지각변동",
+      "image": "TaliyahWVC.png"
+    },
+    "e": {
+      "name": "대지의 파동",
+      "image": "TaliyahE.png"
+    },
+    "r": {
+      "name": "바위술사의 벽",
+      "image": "TaliyahR.png"
+    }
+  },
+  "Talon": {
+    "q": {
+      "name": "녹서스식 외교",
+      "image": "TalonQ.png"
+    },
+    "w": {
+      "name": "갈퀴손",
+      "image": "TalonW.png"
+    },
+    "e": {
+      "name": "암살자의 길",
+      "image": "TalonE.png"
+    },
+    "r": {
+      "name": "그림자 공격",
+      "image": "TalonR.png"
+    }
+  },
+  "Taric": {
+    "q": {
+      "name": "별빛 손길",
+      "image": "TaricQ.png"
+    },
+    "w": {
+      "name": "수호의 고리",
+      "image": "TaricW.png"
+    },
+    "e": {
+      "name": "황홀한 강타",
+      "image": "TaricE.png"
+    },
+    "r": {
+      "name": "우주의 광휘",
+      "image": "TaricR.png"
+    }
+  },
+  "Teemo": {
+    "q": {
+      "name": "실명 다트",
+      "image": "TeemoQ.png"
+    },
+    "w": {
+      "name": "신속한 이동",
+      "image": "TeemoW.png"
+    },
+    "e": {
+      "name": "맹독 다트",
+      "image": "TeemoE.png"
+    },
+    "r": {
+      "name": "유독성 함정",
+      "image": "TeemoR.png"
+    }
+  },
+  "Thresh": {
+    "q": {
+      "name": "사형 선고",
+      "image": "ThreshQ.png"
+    },
+    "w": {
+      "name": "어둠의 통로",
+      "image": "ThreshW.png"
+    },
+    "e": {
+      "name": "사슬 채찍",
+      "image": "ThreshE.png"
+    },
+    "r": {
+      "name": "영혼 감옥",
+      "image": "ThreshRPenta.png"
+    }
+  },
+  "Tristana": {
+    "q": {
+      "name": "속사",
+      "image": "TristanaQ.png"
+    },
+    "w": {
+      "name": "로켓 점프",
+      "image": "TristanaW.png"
+    },
+    "e": {
+      "name": "폭발 화약",
+      "image": "TristanaE.png"
+    },
+    "r": {
+      "name": "대구경 탄환",
+      "image": "TristanaR.png"
+    }
+  },
+  "Trundle": {
+    "q": {
+      "name": "깨물기",
+      "image": "TrundleTrollSmash.png"
+    },
+    "w": {
+      "name": "얼음 왕국",
+      "image": "trundledesecrate.png"
+    },
+    "e": {
+      "name": "얼음 기둥",
+      "image": "TrundleCircle.png"
+    },
+    "r": {
+      "name": "진압",
+      "image": "TrundlePain.png"
+    }
+  },
+  "Tryndamere": {
+    "q": {
+      "name": "피의 갈망",
+      "image": "TryndamereQ.png"
+    },
+    "w": {
+      "name": "조롱의 외침",
+      "image": "TryndamereW.png"
+    },
+    "e": {
+      "name": "회전 베기",
+      "image": "TryndamereE.png"
+    },
+    "r": {
+      "name": "불사의 분노",
+      "image": "UndyingRage.png"
+    }
+  },
+  "TwistedFate": {
+    "q": {
+      "name": "와일드 카드",
+      "image": "WildCards.png"
+    },
+    "w": {
+      "name": "카드 뽑기",
+      "image": "PickACard.png"
+    },
+    "e": {
+      "name": "속임수 덱",
+      "image": "CardmasterStack.png"
+    },
+    "r": {
+      "name": "운명",
+      "image": "Destiny.png"
+    }
+  },
+  "Twitch": {
+    "q": {
+      "name": "매복",
+      "image": "TwitchHideInShadows.png"
+    },
+    "w": {
+      "name": "독약 병",
+      "image": "TwitchVenomCask.png"
+    },
+    "e": {
+      "name": "오염",
+      "image": "TwitchExpunge.png"
+    },
+    "r": {
+      "name": "무차별 난사",
+      "image": "TwitchFullAutomatic.png"
+    }
+  },
+  "Udyr": {
+    "q": {
+      "name": "야생 발톱",
+      "image": "UdyrQ.png"
+    },
+    "w": {
+      "name": "강철 갑옷",
+      "image": "UdyrW.png"
+    },
+    "e": {
+      "name": "불길 쇄도",
+      "image": "UdyrE.png"
+    },
+    "r": {
+      "name": "날개 돋친 폭풍",
+      "image": "UdyrR.png"
+    }
+  },
+  "Urgot": {
+    "q": {
+      "name": "부식성 폭약",
+      "image": "UrgotQ.png"
+    },
+    "w": {
+      "name": "심판의 원",
+      "image": "UrgotW.png"
+    },
+    "e": {
+      "name": "경멸",
+      "image": "UrgotE.png"
+    },
+    "r": {
+      "name": "불사의 공포",
+      "image": "UrgotR.png"
+    }
+  },
+  "Varus": {
+    "q": {
+      "name": "꿰뚫는 화살",
+      "image": "VarusQ.png"
+    },
+    "w": {
+      "name": "역병 화살",
+      "image": "VarusW.png"
+    },
+    "e": {
+      "name": "퍼붓는 화살",
+      "image": "VarusE.png"
+    },
+    "r": {
+      "name": "부패의 사슬",
+      "image": "VarusR.png"
+    }
+  },
+  "Vayne": {
+    "q": {
+      "name": "구르기",
+      "image": "VayneTumble.png"
+    },
+    "w": {
+      "name": "은화살",
+      "image": "VayneSilveredBolts.png"
+    },
+    "e": {
+      "name": "선고",
+      "image": "VayneCondemn.png"
+    },
+    "r": {
+      "name": "결전의 시간",
+      "image": "VayneInquisition.png"
+    }
+  },
+  "Veigar": {
+    "q": {
+      "name": "사악한 일격",
+      "image": "VeigarBalefulStrike.png"
+    },
+    "w": {
+      "name": "암흑 물질",
+      "image": "VeigarDarkMatter.png"
+    },
+    "e": {
+      "name": "사건의 지평선",
+      "image": "VeigarEventHorizon.png"
+    },
+    "r": {
+      "name": "태초의 폭발",
+      "image": "VeigarR.png"
+    }
+  },
+  "Velkoz": {
+    "q": {
+      "name": "플라즈마 분열",
+      "image": "VelkozQ.png"
+    },
+    "w": {
+      "name": "공허 균열",
+      "image": "VelkozW.png"
+    },
+    "e": {
+      "name": "지각 붕괴",
+      "image": "VelkozE.png"
+    },
+    "r": {
+      "name": "생물 분해 광선",
+      "image": "VelkozR.png"
+    }
+  },
+  "Vex": {
+    "q": {
+      "name": "안개 화살",
+      "image": "VexQ.png"
+    },
+    "w": {
+      "name": "거리 두기",
+      "image": "VexW.png"
+    },
+    "e": {
+      "name": "커지는 어둠",
+      "image": "VexE.png"
+    },
+    "r": {
+      "name": "그림자 파동",
+      "image": "VexR.png"
+    }
+  },
+  "Vi": {
+    "q": {
+      "name": "금고 부수기",
+      "image": "ViQ.png"
+    },
+    "w": {
+      "name": "찌그러뜨리기",
+      "image": "ViW.png"
+    },
+    "e": {
+      "name": "끈질긴 힘",
+      "image": "ViE.png"
+    },
+    "r": {
+      "name": "정지 명령",
+      "image": "ViR.png"
+    }
+  },
+  "Viego": {
+    "q": {
+      "name": "몰락한 왕의 검",
+      "image": "ViegoQ.png"
+    },
+    "w": {
+      "name": "망령의 나락",
+      "image": "ViegoW.png"
+    },
+    "e": {
+      "name": "안개의 길",
+      "image": "ViegoE.png"
+    },
+    "r": {
+      "name": "심장 파괴자",
+      "image": "ViegoR.png"
+    }
+  },
+  "Viktor": {
+    "q": {
+      "name": "힘의 흡수",
+      "image": "ViktorQ.png"
+    },
+    "w": {
+      "name": "중력장",
+      "image": "ViktorW.png"
+    },
+    "e": {
+      "name": "마법공학 광선",
+      "image": "ViktorE.png"
+    },
+    "r": {
+      "name": "아케인 폭풍",
+      "image": "ViktorR.png"
+    }
+  },
+  "Vladimir": {
+    "q": {
+      "name": "수혈",
+      "image": "VladimirQ.png"
+    },
+    "w": {
+      "name": "피의 웅덩이",
+      "image": "VladimirSanguinePool.png"
+    },
+    "e": {
+      "name": "선혈의 파도",
+      "image": "VladimirE.png"
+    },
+    "r": {
+      "name": "혈사병",
+      "image": "VladimirHemoplague.png"
+    }
+  },
+  "Volibear": {
+    "q": {
+      "name": "번개 강타",
+      "image": "VolibearQ.png"
+    },
+    "w": {
+      "name": "광란의 상처",
+      "image": "VolibearW.png"
+    },
+    "e": {
+      "name": "천공 분열",
+      "image": "VolibearE.png"
+    },
+    "r": {
+      "name": "폭풍을 부르는 자",
+      "image": "VolibearR.png"
+    }
+  },
+  "Warwick": {
+    "q": {
+      "name": "야수의 송곳니",
+      "image": "WarwickQ.png"
+    },
+    "w": {
+      "name": "피의 사냥",
+      "image": "WarwickW.png"
+    },
+    "e": {
+      "name": "원시의 포효",
+      "image": "WarwickE.png"
+    },
+    "r": {
+      "name": "무한의 구속",
+      "image": "WarwickR.png"
+    }
+  },
+  "Xayah": {
+    "q": {
+      "name": "깃털 연타",
+      "image": "XayahQ.png"
+    },
+    "w": {
+      "name": "죽음의 깃",
+      "image": "XayahW.png"
+    },
+    "e": {
+      "name": "깃부르미",
+      "image": "XayahE.png"
+    },
+    "r": {
+      "name": "저항의 비상",
+      "image": "XayahR.png"
+    }
+  },
+  "Xerath": {
+    "q": {
+      "name": "비전 파동",
+      "image": "XerathArcanopulseChargeUp.png"
+    },
+    "w": {
+      "name": "파멸의 눈",
+      "image": "XerathArcaneBarrage2.png"
+    },
+    "e": {
+      "name": "충격 구체",
+      "image": "XerathMageSpear.png"
+    },
+    "r": {
+      "name": "비전 의식",
+      "image": "XerathLocusOfPower2.png"
+    }
+  },
+  "XinZhao": {
+    "q": {
+      "name": "삼조격",
+      "image": "XinZhaoQ.png"
+    },
+    "w": {
+      "name": "풍전참뢰",
+      "image": "XinZhaoW.png"
+    },
+    "e": {
+      "name": "무쌍돌격",
+      "image": "XinZhaoE.png"
+    },
+    "r": {
+      "name": "현월수호",
+      "image": "XinZhaoR.png"
+    }
+  },
+  "Yasuo": {
+    "q": {
+      "name": "강철 폭풍",
+      "image": "YasuoQ1Wrapper.png"
+    },
+    "w": {
+      "name": "바람 장막",
+      "image": "YasuoW.png"
+    },
+    "e": {
+      "name": "질풍검",
+      "image": "YasuoE.png"
+    },
+    "r": {
+      "name": "최후의 숨결",
+      "image": "YasuoR.png"
+    }
+  },
+  "Yone": {
+    "q": {
+      "name": "필멸의 검",
+      "image": "YoneQ.png"
+    },
+    "w": {
+      "name": "영혼 가르기",
+      "image": "YoneW.png"
+    },
+    "e": {
+      "name": "영혼해방",
+      "image": "YoneE.png"
+    },
+    "r": {
+      "name": "운명봉인",
+      "image": "YoneR.png"
+    }
+  },
+  "Yorick": {
+    "q": {
+      "name": "최후의 의식",
+      "image": "YorickQ.png"
+    },
+    "w": {
+      "name": "망자의 진",
+      "image": "YorickW.png"
+    },
+    "e": {
+      "name": "애도의 안개",
+      "image": "YorickE.png"
+    },
+    "r": {
+      "name": "군도의 장송곡",
+      "image": "YorickR.png"
+    }
+  },
+  "Yunara": {
+    "q": {
+      "name": "영혼 단련",
+      "image": "YunaraQ.png"
+    },
+    "w": {
+      "name": "심판의 궤적 | 파멸의 궤적",
+      "image": "YunaraW.png"
+    },
+    "e": {
+      "name": "칸메이의 발자취 | 닿지 않는 그림자",
+      "image": "YunaraE.png"
+    },
+    "r": {
+      "name": "자기 초월",
+      "image": "YunaraR.png"
+    }
+  },
+  "Yuumi": {
+    "q": {
+      "name": "사르르탄",
+      "image": "YuumiQ.png"
+    },
+    "w": {
+      "name": "너랑 유미랑!",
+      "image": "YuumiW.png"
+    },
+    "e": {
+      "name": "슈우우웅",
+      "image": "YuumiE.png"
+    },
+    "r": {
+      "name": "대단원",
+      "image": "YuumiR.png"
+    }
+  },
+  "Zaahen": {
+    "q": {
+      "name": "다르킨의 글레이브",
+      "image": "ZaahenQ.png"
+    },
+    "w": {
+      "name": "공포의 귀환",
+      "image": "ZaahenW.png"
+    },
+    "e": {
+      "name": "찬란한 쇄도",
+      "image": "ZaahenE.png"
+    },
+    "r": {
+      "name": "단호한 판결",
+      "image": "ZaahenR.png"
+    }
+  },
+  "Zac": {
+    "q": {
+      "name": "탄성 주먹",
+      "image": "ZacQ.png"
+    },
+    "w": {
+      "name": "불안정 물질",
+      "image": "ZacW.png"
+    },
+    "e": {
+      "name": "새총 발사",
+      "image": "ZacE.png"
+    },
+    "r": {
+      "name": "바운스!",
+      "image": "ZacR.png"
+    }
+  },
+  "Zed": {
+    "q": {
+      "name": "예리한 표창",
+      "image": "ZedQ.png"
+    },
+    "w": {
+      "name": "살아있는 그림자",
+      "image": "ZedW.png"
+    },
+    "e": {
+      "name": "그림자 베기",
+      "image": "ZedE.png"
+    },
+    "r": {
+      "name": "죽음의 표식",
+      "image": "ZedR.png"
+    }
+  },
+  "Zeri": {
+    "q": {
+      "name": "집중 사격",
+      "image": "ZeriQ.png"
+    },
+    "w": {
+      "name": "초강력 레이저",
+      "image": "ZeriW.png"
+    },
+    "e": {
+      "name": "스파크 돌진",
+      "image": "ZeriE.png"
+    },
+    "r": {
+      "name": "번개 방출",
+      "image": "ZeriR.png"
+    }
+  },
+  "Ziggs": {
+    "q": {
+      "name": "반동 폭탄",
+      "image": "ZiggsQ.png"
+    },
+    "w": {
+      "name": "휴대용 폭약",
+      "image": "ZiggsW.png"
+    },
+    "e": {
+      "name": "마법공학 지뢰밭",
+      "image": "ZiggsE.png"
+    },
+    "r": {
+      "name": "지옥 화염 폭탄",
+      "image": "ZiggsR.png"
+    }
+  },
+  "Zilean": {
+    "q": {
+      "name": "시한 폭탄",
+      "image": "ZileanQ.png"
+    },
+    "w": {
+      "name": "되감기",
+      "image": "ZileanW.png"
+    },
+    "e": {
+      "name": "시간 왜곡",
+      "image": "TimeWarp.png"
+    },
+    "r": {
+      "name": "시간 역행",
+      "image": "ChronoShift.png"
+    }
+  },
+  "Zoe": {
+    "q": {
+      "name": "통통별",
+      "image": "ZoeQ.png"
+    },
+    "w": {
+      "name": "주문도둑",
+      "image": "ZoeW.png"
+    },
+    "e": {
+      "name": "헤롱헤롱쿨쿨방울",
+      "image": "ZoeE.png"
+    },
+    "r": {
+      "name": "차원 넘기",
+      "image": "ZoeR.png"
+    }
+  },
+  "Zyra": {
+    "q": {
+      "name": "치명적인 가시",
+      "image": "ZyraQ.png"
+    },
+    "w": {
+      "name": "맹렬한 성장",
+      "image": "ZyraW.png"
+    },
+    "e": {
+      "name": "휘감는 뿌리",
+      "image": "ZyraE.png"
+    },
+    "r": {
+      "name": "올가미 덩굴",
+      "image": "ZyraR.png"
+    }
+  }
+}

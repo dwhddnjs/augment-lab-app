@@ -31,3 +31,10 @@ export interface Champion {
   stats: ChampionStats;
   imageKey: string; // ddragon image file key (e.g. "Aatrox.png")
 }
+
+export interface ChampionSpell {
+  name: string;
+  image: string; // ddragon img/spell file key (e.g. "ApheliosW.png")
+}
+
+export type ChampionSpells = Record<'q' | 'w' | 'e' | 'r', ChampionSpell>;

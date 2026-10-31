@@ -18,9 +18,10 @@ import { GlassButton } from "@/components/ui/glass-button";
 import { parseGameMode } from "@/constants/game-modes";
 import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
+import type { BuildHeadliner } from "@/features/headliners/types";
 import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
-import { type GameMode } from "@/lib/build-storage";
+import { parseBuildHeadliner, type GameMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
 import { ItemDetailPanel } from "../components/item-detail-panel";
 import { ItemFilterBar, SIDE_TAB_WIDTH } from "../components/item-filter-bar";
@@ -29,14 +30,25 @@ import { ItemSlotGrid } from "../components/item-slot-grid";
 import { useItemSelect } from "../hooks/use-item-select";
 import { MAX_ITEMS } from "../types";
 
+// 딥링크로도 들어올 수 있는 값이라 깨져 있으면 헤드라이너 없이 진행한다.
+function parseHeadlinerParam(json?: string) {
+  try {
+    return json ? parseBuildHeadliner(JSON.parse(json)) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 // ─── 화면 진입 래퍼 (landscape 가드) ─────────────────────────────────────────
 export function ItemSelectScreen() {
   const {
     picked: pickedJson,
+    headliner: headlinerJson,
     championId,
     mode: modeParam,
   } = useLocalSearchParams<{
     picked: string;
+    headliner?: string;
     championId: string;
     mode?: string;
   }>();
@@ -45,6 +57,7 @@ export function ItemSelectScreen() {
     () => (pickedJson ? JSON.parse(pickedJson) : []),
     [pickedJson],
   );
+  const headliner = parseHeadlinerParam(headlinerJson);
 
   useLandscapeLock();
 
@@ -63,6 +76,7 @@ export function ItemSelectScreen() {
       {isLandscape && (
         <ItemSelectContent
           pickedAugments={pickedAugments}
+          headliner={headliner}
           championId={championId ?? ""}
           mode={mode}
         />
@@ -74,10 +88,12 @@ export function ItemSelectScreen() {
 // ─── 본체 ────────────────────────────────────────────────────────────────────
 function ItemSelectContent({
   pickedAugments,
+  headliner,
   championId,
   mode,
 }: {
   pickedAugments: Augment[];
+  headliner?: BuildHeadliner;
   championId: string;
   mode: GameMode;
 }) {
@@ -99,7 +115,7 @@ function ItemSelectContent({
     handleExit,
     onGridLayout,
     onAugmentGridLayout,
-  } = useItemSelect({ championId, mode, pickedAugments });
+  } = useItemSelect({ championId, mode, pickedAugments, headliner });
 
   return (
     // "right"가 빠지면 헤더 오른쪽 끝의 저장 버튼이 홈 인디케이터 제스처 영역에
@@ -165,6 +181,7 @@ function ItemSelectContent({
           champion={champion}
           itemStatsList={itemStatsList}
           pickedAugments={pickedAugments}
+          headliner={headliner}
           augmentGridWidth={augmentGridWidth}
           statsLabel={translate("stats")}
           augmentsLabel={translate("augments")}

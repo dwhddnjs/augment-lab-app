@@ -8,13 +8,19 @@ export const RARITY_ODDS: [AugmentRarity, number][] = [
   ['prismatic', 0.4],
 ];
 
+// 커맨드 라인은 실버·골드만 나온다. 프리즘은 해킹 리롤로만 얻는다.
+export const COMMAND_LINE_ODDS: [AugmentRarity, number][] = [
+  ['silver', 0.5],
+  ['gold', 0.5],
+];
+
 // Roll a single rarity for the whole round so all cards share one color.
-export function rollRarity(): AugmentRarity {
+export function rollRarity(table = RARITY_ODDS): AugmentRarity {
   let r = Math.random();
-  for (const [rarity, odds] of RARITY_ODDS) {
+  for (const [rarity, odds] of table) {
     if (r < odds) return rarity;
     r -= odds;
   }
   // Only reachable on floating-point drift at the very top of the range.
-  return RARITY_ODDS[RARITY_ODDS.length - 1][0];
+  return table[table.length - 1][0];
 }

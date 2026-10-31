@@ -12,6 +12,7 @@ import { Alert, type LayoutChangeEvent } from "react-native";
 
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
+import type { BuildHeadliner } from "@/features/headliners/types";
 import { useAlive } from "@/hooks/use-alive";
 import { resolveIds } from "@/lib/arrays";
 import { saveBuild, type GameMode } from "@/lib/build-storage";
@@ -53,10 +54,12 @@ export function useItemSelect({
   championId,
   mode,
   pickedAugments,
+  headliner,
 }: {
   championId: string;
   mode: GameMode;
   pickedAugments: Augment[];
+  headliner?: BuildHeadliner;
 }) {
   const translate = useTranslation(t);
   const router = useRouter();
@@ -145,6 +148,7 @@ export function useItemSelect({
         championId,
         augmentIds: pickedAugments.map((a) => a.id),
         itemIds: selectedIds,
+        headliner,
       });
     } catch {
       Alert.alert(translate("saveError"));
