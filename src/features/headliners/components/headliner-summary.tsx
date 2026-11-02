@@ -13,6 +13,7 @@ import { cdragonIconUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { STICKER_PORTRAITS } from "../assets";
 import { useHeadlinerTexts } from "../hooks/use-headliners";
+import { stripMarks } from "../marked";
 import { anvilCount, isHeadlinerId, STICKER_IDS } from "../rules";
 import type { BuildHeadliner } from "../types";
 import { HeadlinerLogo } from "./headliner-logo";
@@ -94,7 +95,7 @@ export function HeadlinerSummary({ headliner, championId }: Props) {
             description={
               id === "aphelios"
                 ? texts.anvils.replace("{n}", String(anvilCount(headliner.stickers)))
-                : sticker.full
+                : stripMarks(sticker.full) // 색 표기는 카드 위 문구에서만 쓴다
             }
           />
         );

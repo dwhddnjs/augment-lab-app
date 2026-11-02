@@ -8,15 +8,15 @@ import assert from 'node:assert/strict';
 
 import ko from '../src/features/headliners/data/headliners.ko.json';
 import en from '../src/features/headliners/data/headliners.en.json';
+import { parseMarked } from '../src/features/headliners/marked';
 import {
   ARAM_ROUNDS,
   HEADLINER_IDS,
-  STICKER_CHANCE,
   STICKER_IDS,
   anvilCount,
   nextRarity,
   rollHeadliner,
-  rollSticker,
+  rollRoundStickers,
   roundsFor,
   skillChoices,
 } from '../src/features/headliners/rules';
@@ -49,7 +49,26 @@ for (const texts of [ko, en]) {
   assert.deepEqual(Object.keys(texts.skills).sort(), ['e', 'q', 'r', 'w']);
   assert.ok(texts.skillTitle.includes('{spell}'));
   assert.ok(texts.anvils.includes('{n}'));
+  // 색 표기([as]…[/as])는 짝이 맞고 중첩이 없어야 하며, 키가 색 맵에 있어야 한다.
+  // 어긋나면 화면에 대괄호가 글자로 나오거나 색이 조용히 빠진다.
+  // ponytail: 키 목록은 StatTextColors(theme.ts)·skill-card 의 MARK_COLORS 를 옮겨 적었다. theme.ts 가 CSS 를 import 해서 여기서 못 읽는다.
+  const marked: [string, string[]][] = [
+    ...Object.values(texts.stickers).map(({ full }): [string, string[]] => [full, ['k', 'ad', 'ap', 'as', 'hp', 'sv']]),
+    [texts.skillTitle, ['e', 's', 'h', 'b']],
+    [texts.skillBonus, ['e', 's', 'h', 'b']],
+  ];
+  for (const [text, keys] of marked) {
+    for (const part of parseMarked(text)) {
+      assert.ok(!/[[\]]/.test(part.text), `색 표기 짝이 안 맞거나 중첩됐다: ${text}`);
+      assert.ok(part.mark === undefined || keys.includes(part.mark), `색 맵에 없는 키 [${part.mark}]: ${text}`);
+    }
+  }
 }
+
+// 파서: 같은 키로만 닫히고, 중첩·짝 오류는 대괄호가 든 평문으로 남는다.
+assert.deepEqual(parseMarked('a [x]b[/x] c'), [{ text: 'a ' }, { text: 'b', mark: 'x' }, { text: ' c' }]);
+assert.ok(parseMarked('[k]a [hp]b[/hp] c[/k]').some((p) => /[[\]]/.test(p.text)));
+assert.ok(parseMarked('[a]b[/c]').some((p) => /[[\]]/.test(p.text)));
 
 const ROLLS = 200_000;
 const TOLERANCE = 0.01;
@@ -65,16 +84,19 @@ for (const [id, n] of headliners) {
   assert.ok(drift <= TOLERANCE, `${id} 등장 확률 편차 ${drift}`);
 }
 
-let stickers = 0;
+// 스티커: 매 라운드 정확히 두 칸, 서로 다른 멤버. 빈 칸 위치와 멤버는 고르게 나온다.
+const emptySlots = [0, 0, 0];
 const seen = new Set<string>();
 for (let i = 0; i < ROLLS; i++) {
-  const id = rollSticker();
-  if (id) {
-    stickers += 1;
-    seen.add(id);
-  }
+  const slots = rollRoundStickers();
+  const members = slots.filter((s) => s !== null);
+  assert.equal(slots.length, 3);
+  assert.equal(members.length, 2);
+  assert.equal(new Set(members).size, members.length, '한 라운드에 같은 멤버가 두 번 붙었다');
+  emptySlots[slots.indexOf(null)] += 1;
+  members.forEach((m) => seen.add(m));
 }
-assert.ok(Math.abs(stickers / ROLLS - STICKER_CHANCE) <= TOLERANCE, '스티커 확률이 어긋난다');
+for (const n of emptySlots) assert.ok(Math.abs(n / ROLLS - 1 / 3) <= TOLERANCE, '빈 칸 위치가 치우친다');
 assert.equal(seen.size, STICKER_IDS.length);
 
 console.log('✓ 헤드라이너 규칙 정상');

@@ -26,9 +26,9 @@ interface Props {
   rerolled: boolean;
   hacked: boolean;
   variant?: "kda";
-  /** 카드에 겹치는 표식(HEARTSTEEL 스티커, K/DA 마크). */
+  /** 카드에 겹치는 표식(HEARTSTEEL 멤버 얼굴, K/DA 마크). */
   badge?: React.ReactNode;
-  /** 카드 밑 표식(HEARTSTEEL 툴팁). */
+  /** 카드 밑 표식(HEARTSTEEL 스티커 효과). */
   footer?: React.ReactNode;
   onPick: () => void;
   onReroll: () => void;
@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
     gap: Spacing.double,
   },
   tight: {
-    gap: Spacing.one,
+    gap: Spacing.two,
   },
 });

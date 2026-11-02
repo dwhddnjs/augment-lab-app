@@ -1,8 +1,7 @@
 import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
 
-import { HeroOverlay, Radius } from "@/constants/theme";
-import { useRarityColors } from "@/hooks/use-rarity-colors";
+import { CommandLineLightTint, HeroOverlay, Radius } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { HEADLINER_LOGOS, KDA_MARK } from "../assets";
 import type { HeadlinerId } from "../types";
@@ -25,13 +24,12 @@ interface Props {
 /** 로고는 대부분 흰색이라 기본은 라이트 모드에서도 보이도록 어두운 판 위에 그린다. */
 export function HeadlinerLogo({ id, size, plain }: Props) {
   const { colors, mode } = useTheme();
-  const rarityColors = useRarityColors();
 
   if (plain) {
     // 금색 커맨드 라인도 밝은 배경에 묻혀 진한 금색으로 칠한다.
     const lightTint =
       id === "command-line"
-        ? rarityColors.gold.border
+        ? CommandLineLightTint.mark
         : WHITE_LOGOS.includes(id)
           ? colors.text.primary
           : undefined;

@@ -21,9 +21,6 @@ export const HEADLINER_IDS = [
 
 export const STICKER_IDS = ['aphelios', 'ezreal', 'kayn', 'ksante', 'sett', 'yone'] as const;
 
-// ponytail: 게임이 확률을 공개하지 않아 임의로 정한 값(라운드당 평균 1.2장). 실측이 나오면 바꾼다.
-export const STICKER_CHANCE = 0.4;
-
 const ANVILS_PER_APHELIOS = 2;
 
 export function isHeadlinerId(id: unknown): id is HeadlinerId {
@@ -51,10 +48,15 @@ export function skillChoices(chosen: SkillKey[]): SkillKey[] {
   return (['q', 'w', 'e', 'r'] as const).filter((key) => !chosen.includes(key));
 }
 
-/** 슬롯 하나의 스티커. 빗나가면 null. */
-export function rollSticker(): StickerId | null {
-  if (Math.random() >= STICKER_CHANCE) return null;
-  return STICKER_IDS[Math.floor(Math.random() * STICKER_IDS.length)];
+/**
+ * 라운드의 슬롯 3칸 스티커. 무작위 두 칸에 서로 다른 멤버가 붙고 한 칸은 비운다(플레이 경험 기준).
+ * 슬롯에 붙는 것이라 그 칸을 리롤해도 바뀌지 않는다.
+ */
+export function rollRoundStickers(): (StickerId | null)[] {
+  const members: StickerId[] = [...STICKER_IDS];
+  const draw = () => members.splice(Math.floor(Math.random() * members.length), 1)[0];
+  const empty = Math.floor(Math.random() * 3);
+  return [0, 1, 2].map((i) => (i === empty ? null : draw()));
 }
 
 export function anvilCount(stickers: string[]): number {

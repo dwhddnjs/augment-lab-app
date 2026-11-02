@@ -15,7 +15,7 @@ import {
 import type { SharedValue } from "react-native-reanimated";
 
 import { ThemedText } from "@/components/themed/themed-text";
-import { RarityCardFrame } from "@/components/ui/rarity-card-frame";
+import { CARD_CORNER, RarityCardFrame } from "@/components/ui/rarity-card-frame";
 import { HeroOverlay, Radius, Spacing } from "@/constants/theme";
 import type { Augment, AugmentRarity } from "@/features/augments/types";
 import { useRarityColors } from "@/hooks/use-rarity-colors";
@@ -167,7 +167,12 @@ function AugmentDragCell({
         <RarityCardFrame augment={augment} cardWidth={cardWidth} compact />
         {checked && (
           <>
-            <View style={styles.checkedVeil} />
+            <View
+              style={[
+                styles.checkedVeil,
+                { borderRadius: cardWidth * CARD_CORNER },
+              ]}
+            />
             <View
               style={[styles.check, { backgroundColor: colors.accent.default }]}
             >
@@ -311,6 +316,5 @@ const styles = StyleSheet.create({
   checkedVeil: {
     ...StyleSheet.absoluteFill,
     backgroundColor: HeroOverlay.tileBg,
-    borderRadius: Radius.lg + 3,
   },
 });
