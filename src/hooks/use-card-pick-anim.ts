@@ -1,7 +1,7 @@
 /**
  * useCardPickAnim — 카드 3장의 선택·리롤 애니메이션 상태.
  *
- * 칼바람·클래식 드래프트가 쓰는 연출:
+ * 칼바람 드래프트가 쓰는 연출:
  *   - pick   : 고른 카드 바운스 + 나머지 fade-out → 380ms 뒤 commit
  *   - reroll : 대상 카드 fade-out → 220ms 뒤 교체(그 슬롯만 fade 재등장)
  * 실제 카드 트랜지션은 PickCard 가 exitMode/entryMode 를 보고 재생한다.

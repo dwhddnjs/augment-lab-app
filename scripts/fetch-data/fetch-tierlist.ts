@@ -158,7 +158,7 @@ async function main() {
   const champions = readApp('champions/data/champions.ko.json') as { key: string; name: string; tags: string[] }[];
   const tagsByKey = new Map(champions.map((c) => [c.key, c.tags]));
   const nameByKey = new Map(champions.map((c) => [c.key, c.name]));
-  // 칼바람 풀만 — 클래식 전용 증강이 칼바람 추천에 섞이면 앱 뽑기 풀과 어긋난다.
+  // 칼바람 풀만 — 비공개 증강(위력 추구 등 NOT_IN_ARAM)이 추천에 섞이면 앱 뽑기 풀과 어긋난다.
   const aramAug = (readApp('augments/data/augments.ko.json') as any[]).filter((a) => a.modes?.includes('aram'));
 
   // ── CDragon: 숫자 id → 앱 증강 슬러그 ────────────────────────────

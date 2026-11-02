@@ -5,24 +5,14 @@ import type { Locale } from '@/hooks/use-locale';
 import type { GameMode } from '@/lib/build-storage';
 import { useLocalizedData } from '@/lib/i18n';
 
-// 협곡(칼바람)과 클래식은 완전히 다른 아이템 세트다. 클래식은 시즌 초기
-// 레트로 아이템(77xxxx)을 쓰고 협곡 아이템은 하나도 등장하지 않는다. id 가 겹치지
-// 않으므로 조회용 목록은 한 벌로 이어 붙여 둔다.
 const data: Record<Locale, Item[]> = {
-  ko: [
-    ...require('@/features/items/data/items.ko.json'),
-    ...require('@/features/items/data/classic-items.ko.json'),
-  ],
-  en: [
-    ...require('@/features/items/data/items.en.json'),
-    ...require('@/features/items/data/classic-items.en.json'),
-  ],
+  ko: require('@/features/items/data/items.ko.json'),
+  en: require('@/features/items/data/items.en.json'),
 };
 
-// 모드별 진열 목록(완성 아이템). 칼바람 111 / 클래식 81.
+// 모드별 진열 목록(완성 아이템). 칼바람 111. 클래식(레트로 77xxxx 세트)은 2026-10-30 제거.
 const POOL_IDS: Record<GameMode, Set<string>> = {
   aram: new Set(require('@/features/items/data/aram-item-ids.json')),
-  classic: new Set(require('@/features/items/data/classic-item-ids.json')),
 };
 
 /**

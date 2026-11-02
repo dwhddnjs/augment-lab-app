@@ -1,6 +1,6 @@
 /**
  * ModeSelectOverlay — `+` 버튼을 누르면 뜨는 투명 모달.
- * 화면을 딤 처리하고 하단(+ 버튼 근처)에 진입점(칼바람/클래식/커스텀) 원형 버튼을
+ * 화면을 딤 처리하고 하단(+ 버튼 근처)에 진입점(칼바람/커스텀) 원형 버튼을
  * 띄운다. 고르면 챔피언 선택 모달로 교체(replace)한다.
  */
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -21,7 +21,7 @@ import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
 
 // + 버튼이 화면 아래에 있어 가까운 쪽부터 쌓는다 — 진입점 순서(칼바람→커스텀)의 역순.
-// 뒤집으므로 신규 항목(커스텀)이 맨 위에 붙고 기존 세 개의 위치는 그대로다.
+// 뒤집으므로 칼바람이 + 버튼 바로 위, 커스텀이 그 위에 붙는다.
 const MODES: LaunchMode[] = [...LAUNCH_MODES].reverse();
 
 // backdrop이 라이트/다크 모두 어두운 scrim이므로, 모드와 무관하게

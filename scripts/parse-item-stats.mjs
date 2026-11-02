@@ -40,13 +40,6 @@ const LABEL_MAP = {
   '강인함': { key: 'tenacity', kind: 'percent' },
   '체력 회복 및 보호막': { key: 'healshield', kind: 'percent' },
   '적응형 능력치': { key: 'adaptive', kind: 'flat' },
-  // 클래식 레트로 아이템은 단위가 다르다. 현대 아이템의 "기본 체력 재생 100%"는
-  // 챔피언 기본 재생에 곱하는 비율이지만, 레트로의 "5초당 체력 재생 10"은 절대값이다.
-  // 같은 키에 담으면 10배 곱해지므로 별도 flat 키로 받는다.
-  '5초당 체력 재생': { key: 'hpregenFlat', kind: 'flat' },
-  '5초당 마나 재생': { key: 'mpregenFlat', kind: 'flat' },
-  // 구버전 쿨감. 현대의 스킬 가속과 계산식이 달라 합칠 수 없다.
-  '재사용 대기시간 감소': { key: 'cdr', kind: 'percent' },
 };
 /** 스탯이 아니므로 패널에서 제외하는 라벨 */
 const SKIP_LABELS = new Set(['초당 골드', '10초당 골드']);
@@ -87,9 +80,8 @@ function parseStats(description) {
   return stats;
 }
 
-// 협곡(items)과 클래식 레트로(classic-items)는 완전히 다른 아이템 세트라 파일이 나뉜다.
-// 두 벌 다 같은 규칙으로 파싱한다 — 클래식 id(77xxxx)는 협곡과 겹치지 않는다.
-const BASENAMES = ['items', 'classic-items'];
+// 아이템 세트가 늘면 여기에 basename 을 더한다(클래식 레트로 세트는 2026-10-30 제거).
+const BASENAMES = ['items'];
 
 const statsById = new Map();
 let total = 0;
@@ -127,8 +119,7 @@ if (unknownLabels.size > 0) {
 }
 
 console.log('\n대표 아이템 검수:');
-// 협곡 2 + 클래식 2 — 두 세트가 다 파싱됐는지 한눈에 본다.
-const samples = ['3031', '3041', '773031', '773050'];
+const samples = ['3031', '3041'];
 const named = new Map(
   BASENAMES.flatMap((b) =>
     JSON.parse(readFileSync(path.join(DATA_DIR, `${b}.ko.json`), 'utf8')).map((it) => [it.id, it]),

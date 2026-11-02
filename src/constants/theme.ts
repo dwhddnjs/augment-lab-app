@@ -123,59 +123,57 @@ export const Elevation: Record<"level1" | "level2", ElevationLevel> = {
 };
 
 // 증강 희귀도 고유색. 앱이 실제로 읽는 값은 border 하나다 — 테두리·아이콘 tint·
-// 이름 색에 모두 이 한 색을 쓴다(gradient·glow·badge 는 쓰는 곳이 없어 걷어냈다).
+// 이름 색에 모두 이 한 색을 쓴다.
 //
-// 다크(hero) 기준 팔레트. 밝은 배경 위에 그대로 올리면 대비가 무너지므로
+// 값은 게임 증강 카드 프레임(assets/augment-card/frame-*.png) 테두리 그라데이션에서 뽑았다.
+// 다크는 금속 면(위에서 1/4 지점)의 색이다. 프리즘은 위쪽이 분홍·민트로 변해서, 아래쪽을
+// 덮는 보라 중 가장 밝은 값을 쓴다. 밝은 배경 위에 그대로 올리면 대비가 무너지므로
 // 라이트 모드용 짝을 따로 두고 useRarityColors() 가 골라준다.
 export const AugmentRarityColors: Record<
   "silver" | "gold" | "prismatic",
   { border: string }
 > = {
-  silver: { border: "#9BA3AE" },
-  gold: { border: "#E8B339" },
-  prismatic: { border: "#E0D6FF" },
+  silver: { border: "#B5B6B5" },
+  gold: { border: "#D0AE80" },
+  prismatic: { border: "#B592D6" },
 };
 
 /**
- * 라이트 모드 짝 — 흰 배경(surface.raised) 대비 3.5:1.
- * 진하기를 두 번 낮춘 결과다(#5A6068 급 6.3~6.7:1 → 4.6:1 → 지금). 인게임 색에
- * 가까워진 대신 11pt 이름은 본문 텍스트 AA(4.5:1)를 밑돈다 — UI 요소 기준(3:1)만
- * 남는다. 색을 더 살리려면 값을 더 내리지 말고, 이름을 text.primary 로 돌리고
- * 티어 색은 보더·타일에만 남기는 쪽으로 갈 것.
+ * 라이트 모드 짝. 같은 프레임 그라데이션을 따라 내려가다 흰 배경(surface.raised)
+ * 대비가 3.5:1 을 넘는 첫 지점의 색이다(실버 3.7, 골드 3.9, 프리즘 3.8).
+ * 11pt 이름은 본문 텍스트 AA(4.5:1)에 못 미치고 UI 요소 기준(3:1)만 넘는다. 그래서 라이트 모드의
+ * 증강 이름(아이템 화면·픽 현황)은 text.secondary 로 쓰고 이 색은 보더·아이콘에만 남긴다.
  */
 export const AugmentRarityColorsLight: typeof AugmentRarityColors = {
-  silver: { border: "#828A93" },
-  gold: { border: "#AD821F" },
-  prismatic: { border: "#9877DA" },
+  silver: { border: "#848484" },
+  gold: { border: "#9C7A58" },
+  prismatic: { border: "#976ED3" },
 };
 
 /**
  * 챔피언 티어(S~D) 색 — 인게임 등급 위계를 그대로 빌린다.
- * A 골드 / B 실버 는 위 증강 희귀도 색을 재사용하고(같은 색이 같은 등급을 뜻해야 한다),
- * C 는 그 아래 동(브론즈), D 는 철이다. C·D 를 둘 다 어두운 무채색으로 두면 서로도
+ * S 프리즘 / B 실버 는 위 증강 희귀도 색을 재사용하고(같은 색이 같은 등급을 뜻해야 한다),
+ * C 는 그 아래 동(브론즈), D 는 철이다. A 만 증강 골드(게임 카드의 샴페인색)를 쓰지 않는다 — 브론즈 C 와
+ * 색상각이 같아 배너 그라데이션에서 구분되지 않는다(ΔE 14). 채도 높은 금색을 따로 둔다. C·D 를 둘 다 어두운 무채색으로 두면 서로도
  * 배경과도 구분되지 않아서(#6D737C/#4F545C 였다) C 에만 색상을 주고 D 는 명도를 올렸다.
  *
- * S 만 증강 프리즘(#E0D6FF)을 그대로 쓰지 않는다. 그 값은 증강 카드의 얇은 테두리·
- * 아이콘 tint 용이라 넓은 배너 그라데이션으로 깔면 채도가 날아가 실버(B)와 구분이
- * 안 된다 — 같은 색도 면적이 커지면 옅어 보인다. 티어 배너용으로 채도만 올린 짝을 둔다.
- *
  * 쓰이는 곳은 티어 배너 그라데이션과 챔피언 타일 테두리 — 둘 다 UI 요소라 대비 기준이
- * 3:1 이다. 라이트 짝을 따로 두는 이유는 useRarityColors 주석과 같다(프리즘이 흰 배경에서 사라진다).
+ * 3:1 이다. 라이트 짝을 따로 두는 이유는 useRarityColors 주석과 같다(실버가 흰 배경에서 사라진다).
  */
 export const TierColors: Record<
   "dark" | "light",
   Record<"S" | "A" | "B" | "C" | "D", string>
 > = {
   dark: {
-    S: "#D3BFFF",
-    A: AugmentRarityColors.gold.border,
+    S: AugmentRarityColors.prismatic.border,
+    A: "#E8B339",
     B: AugmentRarityColors.silver.border,
     C: "#C08C5C",
     D: "#767D87",
   },
   light: {
     S: AugmentRarityColorsLight.prismatic.border,
-    A: AugmentRarityColorsLight.gold.border,
+    A: "#AD821F",
     B: AugmentRarityColorsLight.silver.border,
     C: "#8A5F33",
     D: "#5C626A",
@@ -217,9 +215,80 @@ export const HeroOverlay = {
   cardBase: "#0A0B0D", // splash 로드 전/빈 영역 베이스
   tileBg: "rgba(0,0,0,0.45)", // 증강·아이템 타일 배경
   tileBorder: "rgba(255,255,255,0.14)", // 아이템 타일 테두리
-  chipBg: "rgba(0,0,0,0.55)", // 날짜 칩 배경
   textPrimary: "#F2F4F7",
   textSecondary: "#B5BAC1",
+} as const;
+
+/**
+ * 증강 카드(RarityCardFrame) 고유색. 카드 아트가 어두운 고정색이라 라이트/다크 공통이다.
+ * - amount: 설명 안 골드 금액 강조. 증강 골드 토큰(샴페인색)은 회색 설명과 너무 가까워 채도 높은 금색을 따로 둔다.
+ * - glowAlpha: 외곽 글로우의 등급색 알파(8자리 hex 뒤 2자리). 등급이 오를수록 진하게 번진다.
+ * - kdaGlow: K/DA 보너스 카드 글로우(K/DA 마크와 같은 파랑). 등급 프레임은 그대로 두어 티어를 읽을 수 있게 한다.
+ */
+export const AugmentCardColors = {
+  amount: "#E8B339",
+  shadow: "rgba(0,0,0,0.55)",
+  glowAlpha: { silver: "2E", gold: "52", prismatic: "73" },
+  kdaGlow:
+    "0 6px 24px rgba(0,0,0,0.5), 0 0 20px rgba(52,120,255,0.75), 0 0 8px rgba(96,176,255,0.6)",
+} as const;
+
+/** 헤드라이너 고유색(밴드 로고·컨셉). 등장 연출의 무대 조명이라 라이트/다크 공통이다. */
+export const HeadlinerColors = {
+  kda: "#B388FF",
+  pentakill: "#D4AF6A",
+  heartsteel: "#6FB1FF",
+  "true-damage": "#2DD4BF",
+  disco: "#F472D0",
+  "cafe-cuties": "#FFB0C4",
+  bees: "#FFC23D",
+  "command-line": "#FFB938",
+} as const;
+
+/**
+ * 라이트 모드에서 금색 커맨드 라인 마크를 칠하는 색. 밝은 배경에 묻히지 않도록 진한 금색을 칠하고,
+ * 그 위로 밝은 금색이 번쩍인다. 증강 골드 토큰을 빌려 쓰다가, 토큰이 게임 카드의 샴페인색으로
+ * 바뀌면서 따로 떼어 냈다.
+ */
+export const CommandLineLightTint = { mark: "#AD821F", flash: "#E8B339" } as const;
+
+/**
+ * 게임 툴팁의 스탯 글자색(HEARTSTEEL 스티커 문구). 문구 안 `[as]공격 속도 40%[/as]` 처럼 표시한 구간에 입힌다.
+ * 키는 표시 이름이다. 스탯 색은 게임 스탯 아이콘(CDragon `texticons/lol/statsicon/scale*.png`) 색이고, k 는 게임의 강조어
+ * (`keywordMajor` — 멤버 이름·능력치 모루·레벨) 색을 인게임 캡처에서 뽑았다.
+ * 카드 밖 화면 배경 위에 쓰므로 라이트 짝을 둔다. 라이트는 색상·채도를 두고 명도만 내려 배경 대비 4.5:1 을 넘긴 값이다.
+ * 다크의 흡혈(sv)만 게임 색(#D52042)이 어두운 배경에서 3.6:1 이라 밝혔다.
+ */
+export const StatTextColors = {
+  dark: {
+    k: "#C2C59B", // keywordMajor
+    ad: "#EC8D34",
+    ap: "#786CFF",
+    as: "#FFE78C",
+    hp: "#21995C",
+    sv: "#DC4460",
+  },
+  light: {
+    k: "#6E7142",
+    ad: "#AA5A10",
+    ap: "#5E50FF",
+    as: "#876B00",
+    hp: "#1B7E4C",
+    sv: "#D52042",
+  },
+} as const;
+
+/** 펜타킬 스킬 카드의 인게임 고유색. 카드 아트가 어두운 고정색이라 라이트/다크 공통이다. */
+export const SkillCardColors = {
+  glow: "0 0 18px rgba(255,168,84,0.42)",
+  portraitRing: "#EBD7B4",
+  swirl: "#8F6F4C",
+  body: "#AEB4BD",
+  key: "#D9A441",
+  empower: "#E0709A",
+  spell: "#E2AE4C",
+  heal: "#7FCB74",
+  shield: "#5FBBD0",
 } as const;
 
 /** 네이티브 스플래시(app.json backgroundColor)와 같은 색 — 스플래시 오버레이가 이어받는다. */

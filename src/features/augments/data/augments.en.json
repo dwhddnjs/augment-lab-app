@@ -7,8 +7,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ADAPt_small.png",
     "augmentNameId": "ARAM_ADAPt",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -18,9 +17,7 @@
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Adamant_small.png",
     "augmentNameId": "Adamant",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "blunt-force",
@@ -30,8 +27,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BluntForce_small.png",
     "augmentNameId": "ARAM_BluntForce",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -42,8 +38,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Deft_small.png",
     "augmentNameId": "ARAM_Deft",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -54,8 +49,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DiveBomber_small.png",
     "augmentNameId": "ARAM_DiveBomber",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -66,8 +60,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DontBlink_small.png",
     "augmentNameId": "ARAM_DontBlink",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -78,8 +71,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Erosion_small.png",
     "augmentNameId": "ARAM_Erosion",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -90,8 +82,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EscapePlan_small.png",
     "augmentNameId": "EscapePlan",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -102,8 +93,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FirstAidKit_small.png",
     "augmentNameId": "ARAM_FirstAidKit",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -114,8 +104,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Flashbang_small.png",
     "augmentNameId": "ARAM_Flashbang",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -126,8 +115,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/GoreDrink_small.png",
     "augmentNameId": "ARAM_Goredrink",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -138,8 +126,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/HeavyHitter_small.png",
     "augmentNameId": "ARAM_HeavyHitter",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -161,8 +148,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/IceCold_small.png",
     "augmentNameId": "ARAM_IceCold",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -179,13 +165,12 @@
   {
     "id": "leg-day",
     "name": "Leg Day",
-    "description": "Gain 50 Movement Speed and 40% Slow Resist.",
+    "description": "Gain 50 Movement Speed and 50% Slow Resist.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LegDay_small.png",
     "augmentNameId": "ARAM_LegDay",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -196,8 +181,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightEmUp_small.png",
     "augmentNameId": "ARAM_LightemUp",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -219,8 +203,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/MightyShield_small.png",
     "augmentNameId": "MightyShield",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -231,8 +214,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MindToMatter_small.png",
     "augmentNameId": "ARAM_MindtoMatter",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -254,8 +236,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Poltergeist_small.png",
     "augmentNameId": "Poltergeist",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -266,8 +247,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopedWeapons_small.png",
     "augmentNameId": "ARAM_ScopedWeapons",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -278,8 +258,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ShadowRunner_small.png",
     "augmentNameId": "ARAM_ShadowRunner",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -290,14 +269,13 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SonicBoom_small.png",
     "augmentNameId": "ARAM_SonicBoom",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
     "id": "spin-to-win",
     "name": "Spin To Win",
-    "description": "Your spin abilities deal 30% more damage and gain 30 ability haste.",
+    "description": "Your spin abilities deal 30% more damage (50% for ultimates) and gain 30 ability haste.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SpinToWin_small.png",
     "augmentNameId": "ARAM_SpinToWin",
@@ -313,8 +291,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SwiftandSafe_small.png",
     "augmentNameId": "SwiftAndSafe",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -325,8 +302,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TankItOrLeaveIt_small.png",
     "augmentNameId": "ARAM_TankItOrLeaveIt",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -337,8 +313,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TransmuteGold_small.png",
     "augmentNameId": "ARAM_TransmuteGold",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -349,8 +324,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Typhoon_small.png",
     "augmentNameId": "ARAM_Typhoon",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -361,8 +335,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/UltimateUnstoppable_small.png",
     "augmentNameId": "ARAM_UltimateUnstoppable",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -406,8 +379,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Poltergeist_small.png",
     "augmentNameId": "VeilOfWarding",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -418,8 +390,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WitchfulThinking_small.png",
     "augmentNameId": "ARAM_WitchfulThinking",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -430,8 +401,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Escapade_small.png",
     "augmentNameId": "ARAM_escAPADe",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -442,8 +412,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/AllForYou_small.png",
     "augmentNameId": "ARAM_AllForYou",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -465,8 +434,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BigBrain_small.png",
     "augmentNameId": "ARAM_BigBrain",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -510,8 +478,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CelestialBody_small.png",
     "augmentNameId": "ARAM_CelestialBody",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -522,8 +489,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CriticalHealing_small.png",
     "augmentNameId": "ARAM_CriticalHealing",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -534,8 +500,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CriticalRhythm_small.png",
     "augmentNameId": "CriticalRhythm",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -546,8 +511,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DawnbringersResolve_small.png",
     "augmentNameId": "ARAM_DawnbringersResolve",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -558,8 +522,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlowActingPainkillers_small.png",
     "augmentNameId": "ARAM_DivineIntervention",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -570,8 +533,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/EtherealWeapon_small.png",
     "augmentNameId": "ARAM_EtherealWeapon",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -582,8 +544,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Firebrand_small.png",
     "augmentNameId": "ARAM_Firebrand",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -594,8 +555,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Flash2_small.png",
     "augmentNameId": "Flash2",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -606,8 +566,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Flashy_small.png",
     "augmentNameId": "ARAM_Flashy",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -629,8 +588,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GetExcited_small.png",
     "augmentNameId": "ARAM_GetExcited",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -652,8 +610,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ItsCritical_small.png",
     "augmentNameId": "ARAM_ItsCritical",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -664,8 +621,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ItsKillingTime_small.png",
     "augmentNameId": "ARAM_ItsKillingTime",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -676,8 +632,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MagicMissile_small.png",
     "augmentNameId": "ARAM_MagicMissile",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -688,8 +643,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Marksmage_small.png",
     "augmentNameId": "ARAM_Marksmage",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -700,8 +654,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Minionmancer_small.png",
     "augmentNameId": "ARAM_Minionmancer",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -712,8 +665,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Nightstalking_small.png",
     "augmentNameId": "Nightstalking",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -724,8 +676,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OKBoomerang_small.png",
     "augmentNameId": "ARAM_OkBoomerang",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -736,8 +687,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OutlawsGrit_small.png",
     "augmentNameId": "ARAM_OutlawsGrit",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -748,8 +698,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Overflow_small.png",
     "augmentNameId": "ARAM_Overflow",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -760,8 +709,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Perseverance_small.png",
     "augmentNameId": "ARAM_Perseverance",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -772,8 +720,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/RabbleRousing_small.png",
     "augmentNameId": "ARAM_RabbleRousing",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -795,8 +742,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopierWeapons_small.png",
     "augmentNameId": "ARAM_ScopierWeapons",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -807,8 +753,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SearingDawn_small.png",
     "augmentNameId": "ARAM_SearingDawn",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -819,8 +764,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ShrinkRay_small.png",
     "augmentNameId": "ARAM_ShrinkRay",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -831,8 +775,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SkilledSniper_small.png",
     "augmentNameId": "ARAM_SkilledSniper",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -843,8 +786,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SnowballUpgrade_small.png",
     "augmentNameId": "SnowballUpgrade",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -855,8 +797,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SoulSiphon_small.png",
     "augmentNameId": "ARAM_SoulSiphon",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -866,10 +807,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpiritualPurification_small.png",
     "augmentNameId": "ARAM_SpiritualPurification",
-    "modes": [
-      "aram",
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "tank-engine",
@@ -879,8 +817,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Tank_Engine_Small.png",
     "augmentNameId": "ARAM_TankEngine",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -891,8 +828,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ThreadTheNeedle_small.png",
     "augmentNameId": "ARAM_ThreadtheNeedle",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -903,8 +839,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TransmutePrismatic_small.png",
     "augmentNameId": "ARAM_TransmutePrismatic",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -936,9 +871,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Vampired_small.png",
     "augmentNameId": "Vampirism",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "vulnerability",
@@ -948,8 +881,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Vulnerability_small.png",
     "augmentNameId": "ARAM_Vulnerability",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -982,8 +914,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BiggestSnowballEver_small.png",
     "augmentNameId": "BiggestSnowballEver",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -994,8 +925,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/BladeWaltz_small.png",
     "augmentNameId": "ARAM_BladeWaltz",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1006,8 +936,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CantTouchThis_small.png",
     "augmentNameId": "ARAM_CantTouchThis",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1018,8 +947,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CircleOfDeath_small.png",
     "augmentNameId": "ARAM_CircleofDeath",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1030,8 +958,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ClownCollege_small.png",
     "augmentNameId": "ARAM_ClownCollege",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1042,8 +969,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/CourageOfTheColossus_small.png",
     "augmentNameId": "ARAM_CourageoftheColossus",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1054,8 +980,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Cruelty_small.png",
     "augmentNameId": "ARAM_Cruelty",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1077,8 +1002,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DrawYourSword_small.png",
     "augmentNameId": "ARAM_DrawYourSword",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1089,8 +1013,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DualWield_small.png",
     "augmentNameId": "ARAM_DualWield",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1101,8 +1024,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EmpyreamPromise_small.png",
     "augmentNameId": "EmpyreanPromise",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1123,10 +1045,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FanTheHammer_small.png",
     "augmentNameId": "ARAM_FanTheHammer",
-    "modes": [
-      "aram",
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "fey-magic",
@@ -1136,8 +1055,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/FeyMagic_small.png",
     "augmentNameId": "ARAM_FeyMagic",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1148,8 +1066,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/FinalForm_small.png",
     "augmentNameId": "FinalForm",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1160,8 +1077,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/GiantSlayer_small.png",
     "augmentNameId": "ARAM_GiantSlayer",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1172,8 +1088,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GlassCannon_small.png",
     "augmentNameId": "GlassCannon",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1184,8 +1099,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Goldrend_small.png",
     "augmentNameId": "Goldrend",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1196,8 +1110,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Goliath_small.png",
     "augmentNameId": "ARAM_Goliath",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1208,8 +1121,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/InfernalConduit_small.png",
     "augmentNameId": "ARAM_InfernalConduit",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1220,8 +1132,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/JeweledGauntlet_small.png",
     "augmentNameId": "ARAM_JeweledGauntlet",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1254,8 +1165,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MasterOfDuality_small.png",
     "augmentNameId": "ARAM_MasterofDuality",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1266,8 +1176,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MysticPunch_small.png",
     "augmentNameId": "ARAM_MysticPunch",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1278,8 +1187,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WisdomOfAges_small.png",
     "augmentNameId": "OminousPact",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1301,8 +1209,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ProteinShake_small.png",
     "augmentNameId": "ARAM_ProteinShake",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1313,8 +1220,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/QuantumComputing_small.png",
     "augmentNameId": "ARAM_QuantumComputing",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1369,8 +1275,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ScopiestWeapons_small.png",
     "augmentNameId": "ARAM_ScopiestWeapons",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1392,8 +1297,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TapDancer_small.png",
     "augmentNameId": "ARAM_TapDancer",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1404,8 +1308,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/TransmuteChaos_small.png",
     "augmentNameId": "ARAM_TransmuteChaos",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1427,8 +1330,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/UltimateRevolution_small.png",
     "augmentNameId": "ARAM_UltimateRevolution",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1439,8 +1341,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/WindspeakersBlessing_small.png",
     "augmentNameId": "ARAM_WindspeakersBlessing",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1451,8 +1352,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Earthwake_small.png",
     "augmentNameId": "ARAM_Earthwake",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1474,8 +1374,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlapAround_small.png",
     "augmentNameId": "ARAM_SlapAround",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1507,9 +1406,7 @@
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CritnCast_small.png",
     "augmentNameId": "CritNCast",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "critical-missile",
@@ -1518,10 +1415,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/CriticalMissile_small.png",
     "augmentNameId": "CriticalMissile",
-    "modes": [
-      "aram",
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "devil-on-your-shoulder",
@@ -1530,9 +1424,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/LittleDevil_small.png",
     "augmentNameId": "ARAM_LittleDevil",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "donation",
@@ -1542,8 +1434,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Donation_small.png",
     "augmentNameId": "Donation",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1554,8 +1445,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/DualWield_small.png",
     "augmentNameId": "ARAM_DoubleTap",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1565,10 +1455,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dropkick_small.png",
     "augmentNameId": "ARAM_Dropkick",
-    "modes": [
-      "aram",
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "droppybara",
@@ -1577,9 +1464,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/OrbitalLaser_small.png",
     "augmentNameId": "Dropybara_Active",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "empowered-by-the-faithful",
@@ -1599,9 +1484,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Nightstalking_small.png",
     "augmentNameId": "TrainOfTheDead",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "firefox",
@@ -1611,8 +1494,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Firfox_small.png",
     "augmentNameId": "ARAM_Firefox",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1623,8 +1505,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GrowthSpurt_small.png",
     "augmentNameId": "GrowthSpurt",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1635,8 +1516,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GoldenSnowball_small.png",
     "augmentNameId": "GoldenSnowball",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1647,20 +1527,18 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/MadScientist_small.png",
     "augmentNameId": "ARAM_InfernoTriggered",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
     "id": "juiced",
     "name": "Juiced",
-    "description": "Attacks spend mana to deal bonus magic damage based on your max mana. This damage can crit.",
+    "description": "Attacks on enemy champions deal bonus magic damage equal to 7% max mana on-hit (80% for ranged). This damage can crit.",
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Juiced_small.png",
     "augmentNameId": "ARAM_Juiced",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1671,8 +1549,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/KillSecure_small.png",
     "augmentNameId": "KillSecured",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1683,8 +1560,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ARAM_PhenomenalEvil_small.png",
     "augmentNameId": "ARAM_PhenomenalEvil",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1695,8 +1571,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PinballSnowball_small.png",
     "augmentNameId": "PinballSnowball",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1707,8 +1582,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PromQueen_small.png",
     "augmentNameId": "PromQueen",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1752,8 +1626,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Sonata_small.png",
     "augmentNameId": "Sonata",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1764,8 +1637,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SoulEater_small.png",
     "augmentNameId": "SoulEater",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1831,8 +1703,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TwinFire_small.png",
     "augmentNameId": "Twinfire",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1843,8 +1714,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Zealot_small.png",
     "augmentNameId": "ARAM_Zealot",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1877,8 +1747,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Eureka_small.png",
     "augmentNameId": "ARAM_Archmage",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1889,8 +1758,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestBangBang_small.png",
     "augmentNameId": "ARAM_BangBang",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1901,8 +1769,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GlassCannon_small.png",
     "augmentNameId": "ARAM_DivineDomain",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1912,10 +1779,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Drop_Bear_Small.png",
     "augmentNameId": "ARAM_DropBear",
-    "modes": [
-      "aram",
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "en-passant",
@@ -1925,8 +1789,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Dashing_small.png",
     "augmentNameId": "ARAM_EndlessHunt",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1937,8 +1800,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Hellbent_small.png",
     "augmentNameId": "ARAM_Hellbent",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1948,9 +1810,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/HighRoller_small.png",
     "augmentNameId": "ARAM_HighRoller",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "titan-s-resolve",
@@ -1960,8 +1820,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/IAmTheJuggernaut_small.png",
     "augmentNameId": "ARAM_ImTheJuggernaut",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1972,8 +1831,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
     "augmentNameId": "ARAM_Multishot",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -1993,8 +1851,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "ARAM_Quickstep",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2005,8 +1862,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Snowday_small.png",
     "augmentNameId": "ARAM_Snowday",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2028,8 +1884,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpiritBomb_small.png",
     "augmentNameId": "ARAM_SpiritBomb",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2040,8 +1895,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/StackosaurusRex_small.png",
     "augmentNameId": "ARAM_StackosaurusRex",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2052,8 +1906,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
     "augmentNameId": "ARAM_SustainingStrike",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2064,8 +1917,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WeeWooWeeWoo_small.png",
     "augmentNameId": "ARAM_WeeWooWeeWoo",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2075,10 +1927,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/YouchMyCoins_small.png",
     "augmentNameId": "ARAM_YowchMyCoins",
-    "modes": [
-      "aram",
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "echo-cast",
@@ -2088,8 +1937,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
     "augmentNameId": "Ability_SelfAOE_DoubleCast",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2099,10 +1947,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BloodMoney2_small.png",
     "augmentNameId": "BloodMoneyBurn",
-    "modes": [
-      "aram",
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "bonk",
@@ -2112,8 +1957,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "Bonk",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2123,10 +1967,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BrushPower_small.png",
     "augmentNameId": "BrushPower",
-    "modes": [
-      "aram",
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "tooth-fairy",
@@ -2136,8 +1977,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestBurstingTeeth_small.png",
     "augmentNameId": "BurstingTeeth",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2148,8 +1988,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "ChainReaction",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2160,8 +1999,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "DarkWind",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2171,10 +2009,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WhenTheDarknessComes_small.png",
     "augmentNameId": "DimensionShift_Active",
-    "modes": [
-      "aram",
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "don-t-change-the-channel",
@@ -2184,8 +2019,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/DontChangeTheChannel_small.png",
     "augmentNameId": "DontChangeTheChannel",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2196,8 +2030,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
     "augmentNameId": "DoubleDefense",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2207,9 +2040,7 @@
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Adamant_small.png",
     "augmentNameId": "DoubleStrike",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "our-healing",
@@ -2218,10 +2049,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Equillibrium_small.png",
     "augmentNameId": "Equilibrium",
-    "modes": [
-      "aram",
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "shark-bait",
@@ -2231,8 +2059,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/FishBait_small.png",
     "augmentNameId": "FishBait",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2254,8 +2081,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
     "augmentNameId": "ItsGoTime",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2266,8 +2092,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "LittleExtraHelp",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2284,13 +2109,12 @@
   {
     "id": "spell-split",
     "name": "Spell Split",
-    "description": "Upgrades a missile ability: on hit, at max range, or on recast it splits in two, firing opposite ways.",
+    "description": "Upgrades a missile ability: at max range or on recast it splits in two, firing opposite ways.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
     "augmentNameId": "Missile_Split",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2301,8 +2125,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/NatureIsHealing_small.png",
     "augmentNameId": "NatureIsHealing",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2324,8 +2147,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
     "augmentNameId": "Overloaded",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2336,8 +2158,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PatOnTheBack_small.png",
     "augmentNameId": "PatOnTheBack",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2348,8 +2169,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PinCushion_small.png",
     "augmentNameId": "PinCushion",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2359,9 +2179,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestPoroCharge_small.png",
     "augmentNameId": "PoroCharge_Active",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "pressure-cooker",
@@ -2371,8 +2189,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/QuestPressureCooker_small.png",
     "augmentNameId": "PressureCooker",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2392,8 +2209,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SharkTempest_small.png",
     "augmentNameId": "SharkTempest",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2403,9 +2219,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SkipTheBasic_small.png",
     "augmentNameId": "SkipTheBasics",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "snap-back",
@@ -2414,9 +2228,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "SnapBack",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "snowblast",
@@ -2426,8 +2238,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Snowbomb_small.png",
     "augmentNameId": "Snowbomb",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2438,8 +2249,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
     "augmentNameId": "SpellVolley",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2450,8 +2260,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SquishySlappyGrab_small.png",
     "augmentNameId": "SquishySlappyGrab",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2482,8 +2291,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
     "augmentNameId": "TitansPulse",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2494,8 +2302,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
     "augmentNameId": "TrustyWeapon",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2505,9 +2312,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "VoidDash",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "adaptive-ward",
@@ -2517,8 +2322,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
     "augmentNameId": "WardingWeapon",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2529,8 +2333,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/WarlockJuicebox_small.png",
     "augmentNameId": "WarlockJuicebox",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2540,9 +2343,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Marksmage_small.png",
     "augmentNameId": "SpecializedEmpowerment",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "endless-decimation",
@@ -2552,8 +2353,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/EndlessDecimate_small.png",
     "augmentNameId": "EndlessDecimation",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2575,8 +2375,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
     "augmentNameId": "Overkill",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2596,8 +2395,7 @@
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
     "augmentNameId": "ARAM_Terror",
     "modes": [
-      "aram",
-      "classic"
+      "aram"
     ]
   },
   {
@@ -2706,9 +2504,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PoroKing_small.png",
     "augmentNameId": "ARAM_PoroKing",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "poro-blaster",
@@ -2717,9 +2513,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PoroBlast_small.png",
     "augmentNameId": "ARAM_Poro_Blast",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "cheating",
@@ -2872,9 +2666,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BabyKitty_small.png",
     "augmentNameId": "BabyKitty",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "ragebait",
@@ -2883,9 +2675,7 @@
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Stabby_Stabby_Small.png",
     "augmentNameId": "DipDiveDodge",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "do-or-die",
@@ -2894,9 +2684,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Do_or_Die_Small.png",
     "augmentNameId": "DoOrDie",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "don-t-stop-cleavin",
@@ -2905,9 +2693,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dont_Stop_Cleaving_Small.png",
     "augmentNameId": "DontStopCleavin",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "doran-s-biggest-fan",
@@ -2916,9 +2702,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Dorans_Fan_Small.png",
     "augmentNameId": "DoransBiggestFan",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "drink-up",
@@ -2927,9 +2711,7 @@
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Drink_Up_Small.png",
     "augmentNameId": "DrinkUp",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "time-warp-heartsteel",
@@ -2938,9 +2720,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/FS_Heart_Steal_Small.png",
     "augmentNameId": "FutureSightHeartsteel",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "gash",
@@ -2958,9 +2738,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GrandmasChiliOil_small.png",
     "augmentNameId": "GrandmasChiliOil",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "haste-makes-waste",
@@ -2969,9 +2747,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Haste_Makes_Waste_Small.png",
     "augmentNameId": "HasteMakesWaste",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "hat-on-a-hat",
@@ -2989,9 +2765,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Do_or_Die_Small.png",
     "augmentNameId": "HexCore",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "laser-heal",
@@ -3000,9 +2774,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/LaseHeal_small.png",
     "augmentNameId": "LaserHeal",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "reenergize",
@@ -3029,9 +2801,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SnowballUpgrade_small.png",
     "augmentNameId": "SnowballRoulette",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "spirit-of-the-jungle-main",
@@ -3040,9 +2810,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SpiritualPurification_small.png",
     "augmentNameId": "SpiritOfTheJungleMain",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "stabby-stabby",
@@ -3051,9 +2819,7 @@
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Stabby_Stabby_Small.png",
     "augmentNameId": "StabbyStabby",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "summoner-s-safari",
@@ -3062,9 +2828,7 @@
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Stabby_Stabby_Small.png",
     "augmentNameId": "SummonersSafari",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "true-eternity",
@@ -3073,9 +2837,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Do_or_Die_Small.png",
     "augmentNameId": "TrueEternity",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "upgrade-deathfire-grasp",
@@ -3084,9 +2846,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Upgrade_Deathfire_Small.png",
     "augmentNameId": "Upgrade_DeathFireGrasp",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "upgrade-innervating-locket",
@@ -3095,9 +2855,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Upgrade_Innervating_Small.png",
     "augmentNameId": "Upgrade_InnervatingLocket",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "upgrade-mikael-s-blessing",
@@ -3122,7 +2880,7 @@
   {
     "id": "upgrade-ravenous-hydra",
     "name": "Upgrade Ravenous Hydra",
-    "description": "Abilities trigger Cleave and Ravenous Hydra gains 18% life steal. Gain 500 gold.",
+    "description": "Abilities trigger Cleave and Ravenous Hydra gains 20% life steal. Gain 500 gold.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeSheen_small.png",
     "augmentNameId": "Upgrade_Ravenous",
@@ -3157,9 +2915,7 @@
     "rarity": "silver",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Upgrade_ZzrotPortal_Small.png",
     "augmentNameId": "Upgrade_ZzRotPortal",
-    "modes": [
-      "classic"
-    ]
+    "modes": []
   },
   {
     "id": "wind-beneath-blade",
@@ -3177,8 +2933,391 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/LightningStrikes_small.png",
     "augmentNameId": "KeepGoing",
+    "modes": []
+  },
+  {
+    "id": "arcane-axiom",
+    "name": "Arcane Axiom",
+    "description": "When an enemy champion you damaged within 3s dies, refund 15-30% of your ultimate's total cooldown.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ArcaneAxiom_small.png",
+    "augmentNameId": "ArcaneAxiom",
     "modes": [
-      "classic"
+      "aram"
+    ]
+  },
+  {
+    "id": "armored-impact",
+    "name": "Armored Impact",
+    "description": "After casting an ability, your next attack within 10s deals 50-125 (+250% bonus armor) bonus physical damage around the target.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ArmoredImpact_small.png",
+    "augmentNameId": "ArmoredImpact",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "bees",
+    "name": "BEES!!!",
+    "description": "Ability hits on champions throw a beehive. Bees swarm nearby enemies for 2s, slowing 20% and dealing 75-200 magic damage. (15-10s)",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Bees_small.png",
+    "augmentNameId": "BEES",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "big-shot",
+    "name": "Big Shot",
+    "description": "Gain 35% crit damage and 25% bonus AD. 75% of your attack speed is converted into crit damage.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BigShot_small.png",
+    "augmentNameId": "BigShot",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "blue-barrier",
+    "name": "Blue Barrier",
+    "description": "Gain a shield equal to 200-450% of the mana you spend for 1.5s. (Max 300-800 per shield)",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/BlueNote_small.png",
+    "augmentNameId": "BlueBarrier",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "bouncing-bees",
+    "name": "Bouncing Bees",
+    "description": "After an ability, your next attack bounces to the nearest foe for 50-100% damage. Quest: 10/40/163 bounces grant 30 AD, +1 bounce.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/KingMe_large.png",
+    "augmentNameId": "BouncingBees",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "brass-blast",
+    "name": "Brass Blast",
+    "description": "Replace a summoner spell with Brass Blast: charge a trumpet up to 2.5s, then knock back enemies for 120-600 magic damage. (45s)",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Camo_large.png",
+    "augmentNameId": "BrassBlast",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "crimson-cobalt",
+    "name": "CRIMSON COBALT",
+    "description": "Upgrades one ability to mark champions hit for 4s. Attacking a mark deals 100-250 bonus magic damage and cuts its cooldown 65%.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "CrimsonCobalt",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "double-time",
+    "name": "Double Time",
+    "description": "Damaging a champion with 2 different abilities within 4s deals 10% max mana magic damage and permanently grants 25 max mana.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ARAM_PhenomenalEvil_large.png",
+    "augmentNameId": "DoubleTime",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "enchanting-butterflies",
+    "name": "Enchanting Butterflies",
+    "description": "Healing or shielding allies gathers Butterflies. At 7, your next damage fires them: 50-100 magic damage, 75% for the rest.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EnchantedButtery_small.png",
+    "augmentNameId": "EnchantingButterflies",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "flow-of-spirit",
+    "name": "Flow of Spirit",
+    "description": "Upgrades one ability: casting it grants 60-120% attack speed for 4s.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Silver.png",
+    "augmentNameId": "FlowOfSpirit",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "fruitify",
+    "name": "Fruitify",
+    "description": "Takedowns make the enemy drop 3-6 fruit. You and allies can eat them to restore 6% max health and 6% max mana.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/FruitSeason_small.png",
+    "augmentNameId": "Fruitify",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "get-jinxed",
+    "name": "Get Jinxed",
+    "description": "Replace a summoner spell with Get Jinxed!: ride an invulnerable rocket that explodes for 20-640 physical damage. (47s)",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Overextender_small.png",
+    "augmentNameId": "GetJinxed",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "gift-of-the-drowned",
+    "name": "Gift of the Drowned",
+    "description": "All bonus health is converted into lethality (5 per 100 bonus health). Gain 10-25 lethality.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GiftOfTheDrowned_small.png",
+    "augmentNameId": "GiftoftheDrowned",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "group-hug",
+    "name": "Group Hug",
+    "description": "Upgrades an ally-targeted heal or shield ability: it also applies to the 2 closest allied champions near the target.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/EmpyreamPromise_small.png",
+    "augmentNameId": "GroupHug",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "hands-off-the-talent",
+    "name": "Hands off the Talent",
+    "description": "Attacks fired beyond 75% of your max attack range deal 15% bonus AD (+20% AP) bonus physical damage on-hit.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Bonk_large.png",
+    "augmentNameId": "HandsOffTheTalent",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "heavy-is-the-crown",
+    "name": "Heavy Is The Crown",
+    "description": "Gain 10 AD, 25 AP and +10% AD, AP and attack speed, but -5% move speed in combat. Takedowns stack both; lose half on death.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/HeavyIsTheCrown_small.png",
+    "augmentNameId": "HeavyIsTheCrown",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "jeweled-bracelet",
+    "name": "Jeweled Bracelet",
+    "description": "Upgrades one ability so its damage can critically strike. Gain 25% crit chance.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "JeweledBracelet",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "lich-brain",
+    "name": "Lich Brain",
+    "description": "Gain 30 (+4% bonus health) ability power.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/LichBrain_small.png",
+    "augmentNameId": "LichBrain",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "lonely-warrior",
+    "name": "Lonely Warrior",
+    "description": "For each enemy champion within 600, gain 15% attack speed and 10 armor and magic resist.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Adamant_small.png",
+    "augmentNameId": "LonelyWarrior",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "mosh-monster",
+    "name": "Mosh Monster",
+    "description": "Ultimate: gain 300-750 bonus health while active and slow nearby enemies 50%. Takedowns permanently add 15-30 health and radius.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Prismatic.png",
+    "augmentNameId": "MoshMonster",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "no-mana-no-problem",
+    "name": "No Mana, No Problem",
+    "description": "Mana from items is converted into ability power (0.8 per 10 mana). Increase your total ability power by 15%.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/NoManaNoProblem_small.png",
+    "augmentNameId": "NoManaNoProblem",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "recoil",
+    "name": "Recoil",
+    "description": "Upgrades one ability: it deals 25% increased damage and knocks you 450 units backward on cast.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "Recoil",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "salvation",
+    "name": "Salvation",
+    "description": "Below 50% health, release a shockwave that knocks back enemies for 100-500 magic damage and heals allies 200-550. (90s)",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Salvation_small.png",
+    "augmentNameId": "Salvation",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "sap-magic",
+    "name": "Sap Magic",
+    "description": "Every 20s, your next attack deals 80-300 bonus physical damage and heals 50-250. Casting an ability reduces this cooldown by 3s.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/MercysStrike_small.png",
+    "augmentNameId": "SapMagic",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "sound-barrier",
+    "name": "Sound Barrier",
+    "description": "Your shields grant the target ghosting and 20-40% move speed decaying over 1.5s.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SwiftandSafe_small.png",
+    "augmentNameId": "Sound_Barrier",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "still-here",
+    "name": "Still Here",
+    "description": "Gain 2% attack speed and 0.35% life steal for each 1% of missing health.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/StillHere_small.png",
+    "augmentNameId": "StillHere",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "take-em-down-down-down",
+    "name": "Take'em Down Down Down",
+    "description": "Attacks and abilities deal 5-30 bonus magic damage and stack. At 5 stacks, deal 15% missing health damage and heal 67% of it.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TakeEmDownDownDown_small.png",
+    "augmentNameId": "TakeemDownDownDown",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "the-boom-and-the-bass",
+    "name": "The Boom and the Bass",
+    "description": "After an ability, your next attack in 6s is faster, deals 50-200 bonus magic damage, grants 75-150% move speed decaying over 2s.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TheBoomAndTheBass_small.png",
+    "augmentNameId": "TheBoomAndTheBass",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "third-times-the-harm",
+    "name": "Third Times the Harm",
+    "description": "Every third attack on an enemy champion within 4s grants a stack and deals 6% max health (+10 per stack) true damage.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SilverBeats_small.png",
+    "augmentNameId": "ThirdTimesTheHarm",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "tickle-monster",
+    "name": "Tickle Monster",
+    "description": "All bonus AD is converted into attack speed (1.75% per 1 bonus AD). Attacks deal 5-50 bonus magic damage on-hit.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TickleMonster_small.png",
+    "augmentNameId": "TickleMonster",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "totentanz",
+    "name": "Totentanz",
+    "description": "Replace a summoner spell with A Dance with Death: blink forward and become unkillable. Get a takedown within 5s or you die. (70s)",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Totentanz_small.png",
+    "augmentNameId": "Totentanz",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "ultimate-recursion",
+    "name": "Ultimate Recursion",
+    "description": "Gain 50 ultimate ability haste.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Zealot_large.png",
+    "augmentNameId": "UltimateRecursion",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "upgrade-stormsurge",
+    "name": "Upgrade Stormsurge",
+    "description": "Upgrades Stormsurge: Squall detonates for 10% max health magic damage nearby and marks champions hit with Squall. Gain 500 gold.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/UpgradeHubris_small.png",
+    "augmentNameId": "Upgrade_Stormsurge",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "weapon-of-destiny",
+    "name": "Weapon of Destiny",
+    "description": "Your first Legendary item becomes the Weapon of Destiny: takedowns within 3s permanently add 200 gold of stats. Can't be sold.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ProtagonistsSignatureWeapon_small.png",
+    "augmentNameId": "WeaponOfDestiny",
+    "modes": [
+      "aram"
     ]
   }
 ]

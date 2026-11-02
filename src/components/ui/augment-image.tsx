@@ -2,13 +2,14 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { useState } from 'react';
 
-import { augmentImageUrls } from '@/lib/ddragon';
+import { augmentImageUrls, localAugmentIcon } from '@/lib/ddragon';
 
 /**
  * 증강 아이콘 로더 — large(256px) → base(컬러 원본) → small(64px) → 글리프 폴백.
  * 일부 증강은 CDragon에 `_large` 자산이 없고(404) 라이엇의 실제 컬러 아이콘이 접미사
  * 없는 베이스 파일(silver_spoon.png 등)에만 있다. 그래서 large 실패 시 base를 시도해
  * 컬러를 살리고, 그래도 없으면 small(흰 라인아트)·끝내 실패하면 희귀도 글리프를 그린다.
+ * CDN 에 컬러 원본이 아예 없는 증강은 앱에 넣어 둔 이미지(localAugmentIcon)를 먼저 쓴다.
  * 희귀도 테두리/이름 등 장식은 호출측 wrapper가 담당하고, 이 컴포넌트는 이미지+폴백만 책임진다.
  */
 type Step = 0 | 1 | 2 | 3;
@@ -49,7 +50,7 @@ export function AugmentImage({
 
   return (
     <Image
-      source={{ uri: augmentImageUrls(iconPath)[step] }}
+      source={localAugmentIcon(iconPath) ?? { uri: augmentImageUrls(iconPath)[step] }}
       style={{ width: size, height: size }}
       contentFit="contain"
       cachePolicy="memory-disk"

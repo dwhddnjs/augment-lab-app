@@ -37,33 +37,27 @@ import type { ReactNode } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MODE_LABELS } from "@/constants/game-modes";
 import { Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
-import type { GameMode } from "@/lib/build-storage";
 import { useTranslation } from "@/lib/i18n";
 import type { SortKey, useCustomDraft } from "../hooks/use-custom-draft";
 
 const t = {
   ko: {
-    mode: "모드",
     control: "조작",
     quick: "퀵모드",
     sortTitle: "정렬",
     sortDefault: "기본",
     sortName: "이름순",
     sortRarity: "티어순",
-    ...MODE_LABELS.ko,
   },
   en: {
-    mode: "Mode",
     control: "Control",
     quick: "Quick pick",
     sortTitle: "Sort",
     sortDefault: "Default",
     sortName: "Name",
     sortRarity: "Tier",
-    ...MODE_LABELS.en,
   },
 };
 
@@ -134,18 +128,6 @@ export function CustomSettingsDrawer({ draft }: Props) {
         >
           {/* 한 Section 안에 묶는다 — 섹션을 나누면 그룹 사이가 40pt 넘게 벌어진다. */}
           <Section>
-            {group(
-              "mode",
-              <Picker
-                selection={draft.mode}
-                onSelectionChange={(next) => draft.setMode(next as GameMode)}
-                modifiers={pickerModifiers}
-              >
-                <Text modifiers={[tag("aram")]}>{translate("aram")}</Text>
-                <Text modifiers={[tag("classic")]}>{translate("classic")}</Text>
-              </Picker>,
-            )}
-
             {group(
               "control",
               <Toggle

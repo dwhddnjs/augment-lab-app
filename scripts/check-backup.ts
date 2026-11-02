@@ -12,7 +12,7 @@ import {
 
 const builds = JSON.stringify([
   { id: 'a', mode: 'aram', championId: 'Ahri', augmentIds: [], itemIds: [], createdAt: '2026-08-20T00:00:00.000Z' },
-  { id: 'b', mode: 'classic', championId: 'Jinx', augmentIds: [], itemIds: [], createdAt: '2026-08-19T00:00:00.000Z' },
+  { id: 'b', mode: 'aram', championId: 'Jinx', augmentIds: [], itemIds: [], createdAt: '2026-08-19T00:00:00.000Z' },
 ]);
 const exportedAt = '2026-08-20T09:30:00.000Z';
 

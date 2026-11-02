@@ -9,13 +9,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { GAME_MODES } from '@/constants/game-modes';
 import type { AugmentMode } from '@/features/augments/types';
+import type { BuildHeadliner, SkillKey } from '@/features/headliners/types';
 
 const STORAGE_KEY = 'builds:v1';
 
 /**
- * 'aram'    — 칼바람 나락 아수라장
- * 'classic' — 아수라장 클래식 스타일(협곡 맵 453). 증강·플로우는 칼바람과 같고
- *             라운드가 4 또는 5, 아이템이 레트로 세트라는 점만 다르다.
+ * 'aram' — 칼바람 나락 아수라장. 아레나(2026-09-19)·클래식(2026-10-30)은 제거됐다.
+ * 옛 클래식 빌드는 parseBuilds 가 칼바람으로 살리고, 아레나 빌드는 걸러낸다.
  *
  * useAugmentPool 에 그대로 넘기므로 AugmentMode 를 그대로 쓴다(따로 적으면 어긋날 수 있다).
  */
@@ -26,10 +26,12 @@ export interface SavedBuild {
   /** 게임 모드. mode 없는 기존 데이터는 parseBuilds에서 'aram'으로 폴백한다. */
   mode: GameMode;
   championId: string;
-  /** 픽한 증강 id — 최대 6 */
+  /** 픽한 증강 id — 최대 7(K/DA 5픽 + 혼돈 변환 2개) */
   augmentIds: string[];
   /** 선택한 아이템 id — 0~6 */
   itemIds: string[];
+  /** 이번 판 헤드라이너. 커스텀 빌드와 도입 전 빌드에는 없다. */
+  headliner?: BuildHeadliner;
   /** ISO 8601 */
   createdAt: string;
 }
@@ -60,12 +62,32 @@ export function getBuildsSnapshot(): SavedBuild[] | null {
   return cache;
 }
 
+const SKILL_KEYS: unknown[] = ['q', 'w', 'e', 'r'] satisfies SkillKey[];
+
+/**
+ * 헤드라이너 저장값을 정제한다. 라우트 파라미터와 .alab 백업도 여기를 거친다.
+ * id 는 문자열인지만 본다 — 여기서 걸러지면 다음 저장이 디스크에서도 지우므로, 지금 모르는
+ * 헤드라이너도 남겨 두고 표시할 때만 건너뛴다. 깨진 값이면 undefined(빌드는 그대로 산다).
+ */
+export function parseBuildHeadliner(raw: unknown): BuildHeadliner | undefined {
+  if (!raw || typeof raw !== 'object') return undefined;
+  const { id, skills, stickers } = raw as Record<string, unknown>;
+  if (typeof id !== 'string') return undefined;
+  return {
+    id,
+    skills: Array.isArray(skills) ? skills.filter((s) => SKILL_KEYS.includes(s)) : [],
+    stickers: Array.isArray(stickers) ? stickers.filter((s) => typeof s === 'string') : [],
+  };
+}
+
 /**
  * 저장 원문(JSON 문자열)을 빌드 목록으로 해석한다. 복원 확인 다이얼로그의 개수도 이걸로 센다.
  *
  * 항목 단위로 거른다 — 하나가 깨졌다고 전체를 버리면 다음 저장이 빈 목록 + 1개로
  * 디스크를 덮어써 나머지 빌드가 영영 사라진다. mode 필드 도입 전 데이터는 칼바람(aram)으로
- * 간주하고, 모르는 mode(제거된 아레나 등)는 그릴 데이터가 없으니 버린다.
+ * 간주한다. 클래식은 칼바람과 증강 풀이 같아 칼바람으로 살린다 — 버리면 다음 저장이 디스크에서도
+ * 지우고 백업으로도 못 꺼낸다. 레트로 아이템은 데이터에서 빠져 안 그려지지만 id 는 남는다.
+ * 그 밖의 모르는 mode(제거된 아레나)는 증강 풀이 달라 그릴 데이터가 없으니 버린다.
  */
 export function parseBuilds(raw: string | null | undefined): SavedBuild[] {
   let parsed: unknown;
@@ -77,7 +99,11 @@ export function parseBuilds(raw: string | null | undefined): SavedBuild[] {
   if (!Array.isArray(parsed)) return [];
   return parsed.flatMap((b): SavedBuild[] => {
     if (!b || typeof b !== 'object') return [];
-    const build = { ...b, mode: b.mode ?? 'aram' };
+    const build = {
+      ...b,
+      mode: !b.mode || b.mode === 'classic' ? 'aram' : b.mode,
+      headliner: parseBuildHeadliner(b.headliner),
+    };
     const ok =
       GAME_MODES.includes(build.mode) &&
       typeof build.id === 'string' &&
@@ -112,9 +138,8 @@ function generateId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
-export async function listBuilds(mode?: GameMode): Promise<SavedBuild[]> {
-  const builds = await readAll();
-  return mode ? builds.filter((b) => b.mode === mode) : builds;
+export async function listBuilds(): Promise<SavedBuild[]> {
+  return readAll();
 }
 
 export async function getBuild(id: string): Promise<SavedBuild | null> {

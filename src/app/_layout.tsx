@@ -31,6 +31,24 @@ const NAV_THEMES = {
   light: navTheme(DefaultTheme, Theme.light),
 };
 
+// 드래프트 진입은 챔피언 모달이 사라지는 순간 바로 떠야 한다. 페이드로 들어오면 그 사이 가로로 눕힌 홈이 비친다.
+const DRAFT_OPTIONS = {
+  headerShown: false,
+  gestureEnabled: false,
+  animation: 'none',
+} as const;
+
+// 나갈 때의 페이드는 유지한다. 진입 전환이 끝난 뒤에 켜야 진입에 걸리지 않는다.
+function fadeOutAfterEntry({
+  navigation,
+}: {
+  navigation: { setOptions: (options: { animation: 'fade' }) => void };
+}) {
+  return {
+    transitionEnd: () => navigation.setOptions({ animation: 'fade' }),
+  };
+}
+
 export default function RootLayout() {
   const { mode } = useTheme();
   // 첫 설치 시 챔피언 아이콘을 받는 동안 설치 화면(진행률)을 보여준다.
@@ -74,10 +92,10 @@ export default function RootLayout() {
         />
         {/* 모드 선택 — + 버튼이 띄우는 투명 오버레이(딤 + 원형 버튼) */}
         <Stack.Screen name="mode-select" options={{ presentation: 'transparentModal', animation: 'fade', headerShown: false, gestureEnabled: true }} />
-        <Stack.Screen name="aram" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
+        <Stack.Screen name="aram" options={DRAFT_OPTIONS} listeners={fadeOutAfterEntry} />
         <Stack.Screen name="aram-items" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
         {/* 커스텀 — 증강을 직접 골라 담는 가로 화면(뽑기 없음) */}
-        <Stack.Screen name="custom" options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }} />
+        <Stack.Screen name="custom" options={DRAFT_OPTIONS} listeners={fadeOutAfterEntry} />
       </Stack>
     </ThemeProvider>
   );

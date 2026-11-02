@@ -10,6 +10,8 @@ import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import type { Champion } from "@/features/champions/types";
+import { HeadlinerSummary } from "@/features/headliners/components/headliner-summary";
+import type { BuildHeadliner } from "@/features/headliners/types";
 import { useTheme } from "@/hooks/use-theme";
 import { championSquareUrl } from "@/lib/ddragon";
 import { CHAMPION_TAG_LABELS, useTranslation } from "@/lib/i18n";
@@ -23,6 +25,7 @@ interface Props {
   champion: Champion | null;
   itemStatsList: ItemStats[];
   pickedAugments: Augment[];
+  headliner?: BuildHeadliner;
   /** 우측 그리드 실측 너비. 0이면 카드 크기 미정 → 증강 미렌더. */
   augmentGridWidth: number;
   statsLabel: string;
@@ -34,6 +37,7 @@ export function ItemDetailPanel({
   champion,
   itemStatsList,
   pickedAugments,
+  headliner,
   augmentGridWidth,
   statsLabel,
   augmentsLabel,
@@ -109,6 +113,12 @@ export function ItemDetailPanel({
               baseStats={champion.stats}
               itemStatsList={itemStatsList}
             />
+          </View>
+        )}
+
+        {headliner && (
+          <View style={{ marginTop: Spacing.three }}>
+            <HeadlinerSummary headliner={headliner} championId={champion?.id} />
           </View>
         )}
 

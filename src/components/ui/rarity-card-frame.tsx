@@ -1,69 +1,77 @@
+import { Image } from "expo-image";
+import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { AugmentImage } from "@/components/ui/augment-image";
-import { AugmentRarityGlyphs, Radius, Spacing } from "@/constants/theme";
+import {
+  AugmentCardColors,
+  AugmentRarityColors,
+  AugmentRarityGlyphs,
+  HeroOverlay,
+  Spacing,
+} from "@/constants/theme";
 import type { Augment, AugmentRarity } from "@/features/augments/types";
 import { cleanAugmentDescription } from "@/lib/augment-text";
 
-interface RarityStyle {
-  // Outer metallic rim — diagonal brushed-metal sheen.
-  frameImage: string;
-  outerGlow: string;
-  // Body
-  bodyColor: string;
-  // Emblem
-  iconTint: string;
-  // Text
-  title: string;
-  desc: string;
-  highlight: string;
-}
-
-// Each rarity is an intrinsic in-game palette (like the existing AugmentRarityColors),
-// so the metallic/holographic hexes live here rather than in the app theme tokens.
-// 칼바람·커스텀 두 feature가 공유하는 순수 시각 컴포넌트라 components/ui에 둔다.
-const RARITY: Record<AugmentRarity, RarityStyle> = {
-  silver: {
-    frameImage:
-      "linear-gradient(135deg, #34383f 0%, #5b616a 15%, #818892 31%, #3f444c 50%, #6b7079 66%, #383c43 82%, #5e646d 100%)",
-    outerGlow: "0 6px 22px rgba(0,0,0,0.6), 0 0 12px rgba(120,128,140,0.18)",
-    bodyColor: "#0A0B0D",
-    iconTint: "#E4E9F0",
-    title: "#F4F6F9",
-    desc: "#AEB4BD",
-    highlight: "#E6EAF0",
-  },
-  gold: {
-    frameImage:
-      "linear-gradient(135deg, #5c481c 0%, #c9a64e 16%, #f7e9b8 30%, #98782e 48%, #e7c477 64%, #6a4f1f 82%, #d4ad44 100%)",
-    outerGlow: "0 6px 22px rgba(0,0,0,0.55), 0 0 16px rgba(232,179,57,0.32)",
-    bodyColor: "#0B0A07",
-    iconTint: "#F2D98F",
-    title: "#F4F6F9",
-    desc: "#AEB4BD",
-    highlight: "#F2C766",
-  },
-  prismatic: {
-    frameImage:
-      "linear-gradient(135deg, #ffc2e6 0%, #d9b8ff 19%, #ffffff 35%, #aee4ff 52%, #bafcd9 69%, #ffe0c4 85%, #f3c2ff 100%)",
-    outerGlow: "0 6px 24px rgba(0,0,0,0.5), 0 0 18px rgba(198,161,255,0.45)",
-    bodyColor: "#0B0A07",
-    iconTint: "#f3c2ff",
-    title: "#F4F6F9",
-    desc: "#AEB4BD",
-    highlight: "#7A4FC0",
-  },
+/**
+ * 게임의 증강 카드 원본(CDragon `ux/cherry/augments/augmentselection/augmentcard_{bg,frame_<등급>}`).
+ * 512 캔버스에서 카드 영역(313×512)만 잘랐다. 펜타킬 스킬 카드도 같은 배경·골드 프레임을 쓴다.
+ *
+ * 아이콘 뒤 소용돌이 문양(`augmenticon_defaultbacklayer_*`)은 깔지 않는다. 아수라장 증강 아이콘
+ * (`_large`)에 문양이 이미 그려져 있어서, 깔면 두 겹이 된다. 문양이 없는 스킬 아이콘만 쓴다.
+ */
+export const AUGMENT_CARD_ART = {
+  background: require("@/assets/augment-card/bg.png") as number,
+  frame: {
+    silver: require("@/assets/augment-card/frame-silver.png") as number,
+    gold: require("@/assets/augment-card/frame-gold.png") as number,
+    prismatic: require("@/assets/augment-card/frame-prismatic.png") as number,
+  } satisfies Record<AugmentRarity, number>,
 };
 
+/**
+ * 인게임 카드 배치. 실제 칼바람 증강 카드 3장(실버·골드·프리즘) 화면을 재서 얻은 비율이다.
+ * 크기는 카드 폭(W), 세로 위치는 카드 높이(H) 기준이다. 프레임 이미지가 카드 높이에 맞춰 늘어나므로,
+ * 위치도 높이를 따라야 장식선과의 거리가 게임과 같다.
+ */
+const LAYOUT = {
+  iconSize: 0.5, // W. 아이콘 원본(256px 캔버스) 전체
+  iconCenter: 0.227, // H
+  textTop: 0.459, // H. 이름 글자 윗선
+  textBottom: 0.9, // H. 아래 장식선 위(가운데 0.96H, 모서리 꺾임 0.9H)
+  side: 0.14, // W. 프레임 안쪽 선(0.067W)에서 그만큼 더 띄운다. 좁으면 글자가 프레임에 붙어 보인다
+} as const;
+
+/**
+ * 글자 크기는 인게임 비율을 따르지 않는다. 그대로 줄이면 설명이 6.6pt 라 폰에서 읽히지 않는다.
+ * 모든 카드가 같은 크기를 쓴다. 설명 줄 간격은 글자의 1.4배다(그보다 좁으면 줄이 붙어 보인다).
+ * 이름이 두 줄인 카드와 가장 긴 설명까지 이 크기로 들어가게 정했다. 커스텀 그리드는 카드가 좁아서 8pt 로는
+ * 1.4배 간격이 들어가지 않아 7.5pt 다.
+ * 게임은 이름과 설명 사이에 분류 태그(일반·보조)가 있는데, 앱 데이터에 분류가 없어 설명을 이름 바로 밑에 붙인다.
+ */
+const TEXT = {
+  normal: { name: 12, desc: 9, descLine: 12.5, gap: Spacing.one },
+  compact: { name: 10, desc: 7.5, descLine: 10.5, gap: Spacing.one },
+};
+
+/** 이름 줄 상자 윗선에서 한글 글자 윗선까지의 거리(글자 크기 대비). 시뮬레이터에서 재서 맞췄다. */
+const NAME_INK_TOP = 0.18;
+
 /** 카드 비율(세로/가로). 프레임을 쓰지 않는 아이템·프리즘 카드도 이 비율을 따른다. */
-const CARD_ASPECT = 14 / 9;
+export const CARD_ASPECT = 14 / 9;
+
+/**
+ * 카드 모서리 반경(카드 폭 대비). 모서리는 프레임 그림이 그리므로(313px 원본에서 약 20px) Radius 토큰이 아니라
+ * 그림 비율을 따른다. 카드에 겹치는 글로우·체크 베일이 이 값을 써야 모서리가 그림과 맞는다.
+ */
+export const CARD_CORNER = 0.063;
 
 /** 카드 3장 행의 좌우 여백. */
 export const CARD_ROW_PAD = Spacing.four;
 
 /**
- * 드래프트 화면(칼바람·클래식)에서 카드 3장 사이 간격.
+ * 칼바람 드래프트 화면에서 카드 3장 사이 간격.
  */
 export const CARD_GAP = Spacing.four;
 
@@ -109,156 +117,149 @@ interface Props {
   augment: Augment;
   cardWidth: number;
   /**
-   * 커스텀 화면 그리드용 조밀 배치. 카드가 촘촘히 붙으므로 아이콘·여백을 줄이고
-   * 서로 번지는 외곽 글로우를 끈다. 한 장씩 크게 보여주는 칼바람·클래식은 기본값.
+   * 커스텀 화면 그리드용. 카드가 촘촘히 붙어 서로 번지는 외곽 글로우를 끈다.
+   * 배치는 카드 폭에 비례하므로 따로 줄이지 않는다.
    */
   compact?: boolean;
+  variant?: "kda";
 }
 
 export function RarityCardFrame({
   augment,
   cardWidth,
   compact = false,
+  variant,
 }: Props) {
-  const rs = RARITY[augment.rarity];
+  const { rarity } = augment;
+  const tint = AugmentRarityColors[rarity].border; // 카드 안은 모드와 무관하게 어두워 다크 팔레트를 쓴다.
+  const glow =
+    variant === "kda"
+      ? AugmentCardColors.kdaGlow
+      : `0 6px 22px ${AugmentCardColors.shadow}, 0 0 16px ${tint}${AugmentCardColors.glowAlpha[rarity]}`;
+  // 이름이 두 줄이면 설명 한 줄을 내준다. 고정 높이 상자라 줄 수가 넘치면 마지막 줄이 "…" 없이 잘린다.
+  const [nameLines, setNameLines] = useState(1);
 
-  const cardHeight = Math.round(cardWidth * CARD_ASPECT);
-  const framePad = Math.max(3, Math.round(cardWidth * 0.056)); // 카드 태두리 크키 조절
-
-  const iconSize = compact ? 64 : 72; // 증강 아이콘 사이즈;
-
-  const nameSize = compact ? 10 : 12;
-  const descSize = 8;
+  const W = cardWidth;
+  const H = Math.round(W * CARD_ASPECT);
+  const iconSize = Math.round(W * LAYOUT.iconSize);
+  const text = compact ? TEXT.compact : TEXT.normal;
+  const nameLine = text.name * 1.2;
+  const textTop = H * LAYOUT.textTop - NAME_INK_TOP * text.name;
+  const textBottom = H * LAYOUT.textBottom;
+  const descLines = Math.max(
+    1,
+    Math.floor(
+      (textBottom - textTop - nameLine * nameLines - text.gap) / text.descLine,
+    ),
+  );
 
   const segments = splitDescription(
     cleanAugmentDescription(augment.description),
   );
 
   return (
+    // 반경은 그림자 모양만 정한다. 모서리는 프레임 이미지가 그린다(펜타킬 스킬 카드와 같다).
     <View
-      style={[
-        styles.frame,
-        {
-          width: cardWidth,
-          height: cardHeight,
-          padding: framePad,
-          borderRadius: Radius.lg + 3,
-          experimental_backgroundImage: rs.frameImage,
-          boxShadow: compact ? undefined : rs.outerGlow,
-        },
-      ]}
+      style={{
+        width: W,
+        height: H,
+        borderRadius: W * CARD_CORNER,
+        boxShadow: compact ? undefined : glow,
+      }}
     >
-      <View style={[styles.body, { backgroundColor: rs.bodyColor }]}>
-        <View
+      <Image
+        source={AUGMENT_CARD_ART.background}
+        style={StyleSheet.absoluteFill}
+        contentFit="fill"
+      />
+      <Image
+        source={AUGMENT_CARD_ART.frame[rarity]}
+        style={StyleSheet.absoluteFill}
+        contentFit="fill"
+      />
+
+      <View
+        style={[styles.icon, { top: H * LAYOUT.iconCenter - iconSize / 2 }]}
+      >
+        <AugmentImage
+          iconPath={augment.iconPath}
+          size={iconSize}
+          tint={tint}
+          fallbackGlyph={AugmentRarityGlyphs[rarity]}
+          recyclingKey={augment.id}
+        />
+      </View>
+
+      <View
+        style={[
+          styles.text,
+          {
+            top: textTop,
+            height: textBottom - textTop,
+            left: W * LAYOUT.side,
+            right: W * LAYOUT.side,
+            gap: text.gap,
+          },
+        ]}
+      >
+        <ThemedText
+          allowFontScaling={false}
+          numberOfLines={2}
+          // 두 줄이 될 때 "업그레이드"가 "업그레이 / 드"로 갈리지 않게 단어 단위로 끊는다.
+          // 설명은 글자 단위 그대로다 — 단어 단위면 긴 설명이 같은 크기로 들어가지 않는다.
+          lineBreakStrategyIOS="hangul-word"
+          onTextLayout={(e) =>
+            setNameLines(e.nativeEvent.lines.length > 1 ? 2 : 1)
+          }
+          style={[styles.name, { fontSize: text.name, lineHeight: nameLine }]}
+        >
+          {augment.name}
+        </ThemedText>
+        <ThemedText
+          allowFontScaling={false}
+          numberOfLines={descLines}
           style={[
-            styles.content,
-            { paddingTop: Spacing.two },
-            compact && { paddingHorizontal: Spacing.half, gap: Spacing.one },
+            styles.desc,
+            { fontSize: text.desc, lineHeight: text.descLine },
           ]}
         >
-          {/* Emblem with soft halo */}
-          <View
-            style={[
-              styles.iconArea,
-              { marginBottom: compact ? Spacing.half : Spacing.one },
-            ]}
-          >
-            <AugmentImage
-              iconPath={augment.iconPath}
-              size={iconSize}
-              tint={rs.iconTint}
-              fallbackGlyph={AugmentRarityGlyphs[augment.rarity]}
-              recyclingKey={augment.id}
-            />
-          </View>
-          {/* Name */}
-          <View
-            style={{
-              alignItems: "center",
-              gap: Spacing.half,
-              position: "relative",
-              paddingHorizontal: compact ? 4 : 0,
-            }}
-          >
-            <ThemedText
-              numberOfLines={2}
-              style={[
-                styles.name,
-                {
-                  color: rs.title,
-                  fontSize: nameSize,
-                  lineHeight: Math.round(nameSize * 1.18),
-                },
-              ]}
-            >
-              {augment.name}
-            </ThemedText>
-          </View>
-
-          {/* Description */}
-          <ThemedText
-            numberOfLines={6}
-            style={[
-              styles.desc,
-              {
-                color: rs.desc,
-                fontSize: descSize,
-                lineHeight: Math.round(descSize * 1.5),
-              },
-            ]}
-          >
-            {segments.map((s, i) =>
-              s.hl ? (
-                <Text
-                  key={i}
-                  style={{ color: rs.highlight, fontWeight: "700" }}
-                >
-                  {s.text}
-                </Text>
-              ) : (
-                s.text
-              ),
-            )}
-          </ThemedText>
-        </View>
+          {segments.map((s, i) =>
+            s.hl ? (
+              <Text key={i} style={styles.highlight}>
+                {s.text}
+              </Text>
+            ) : (
+              s.text
+            ),
+          )}
+        </ThemedText>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  frame: {
+  icon: {
+    position: "absolute",
+    alignSelf: "center",
+  },
+  text: {
+    position: "absolute",
     overflow: "hidden",
-    borderCurve: "continuous",
-  },
-  body: {
-    flex: 1,
-    borderRadius: Radius.lg,
-    borderCurve: "continuous",
-    overflow: "hidden",
-  },
-  content: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingTop: Spacing.two,
-    paddingBottom: Spacing.half,
-    paddingHorizontal: Spacing.one,
-    gap: Spacing.one,
-  },
-  iconArea: {
-    alignItems: "center",
-    justifyContent: "center",
   },
   name: {
     textAlign: "center",
     fontWeight: "700",
-    marginTop: Spacing.one,
+    color: HeroOverlay.textPrimary,
   },
   desc: {
-    textAlign: "center",
-    paddingHorizontal: Spacing.one,
     flexShrink: 1,
-    marginTop: Spacing.half,
+    textAlign: "center",
+    color: HeroOverlay.textSecondary,
+  },
+  // 설명 안의 골드 금액은 등급과 무관하게 금색이다.
+  highlight: {
+    color: AugmentCardColors.amount,
+    fontWeight: "700",
   },
 });

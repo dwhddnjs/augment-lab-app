@@ -89,7 +89,7 @@ npx expo run:ios --no-bundler --device <udid>
 ## 5. 드라이브할 만한 플로우
 
 ```
-홈(빌드 목록) → [+] → mode-select → 칼바람/클래식/커스텀
+홈(빌드 목록) → [+] → mode-select → 칼바람/커스텀
   → select-champion-modal (챔피언 선택)
   → /aram (landscape 잠금, 증강 카드 3장 × 4라운드)
   → /aram-items (아이템 선택, 저장 체크만 있고 나가기 버튼 없음)

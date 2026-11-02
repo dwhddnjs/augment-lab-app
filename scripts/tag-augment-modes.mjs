@@ -10,7 +10,7 @@
  *   전부 칼바람에 넣었다가, 실제로는 아수라장 클래식 스타일 전용인 증강이 칼바람 풀을 오염시켰다.
  *   모드를 가르는 정답은 augment-lists.json 이다:
  *     KIWI      → 칼바람 나락 아수라장 (aram)
- *     KIWI_JADE → 아수라장 클래식 스타일 (classic)
+ *     KIWI_JADE → 아수라장 클래식 스타일 (앱에서 제거됨 2026-10-30 — 태그하지 않는다)
  *     CHERRY    → 아레나 (앱에서 제거됨 — 가져오지 않는다)
  *
  * 그리고 CDragon 에는 동명 증강이 115쌍 있다(ARAM_ADAPt vs ADAPt 처럼 한쪽만 풀에 속한다).
@@ -31,8 +31,9 @@ const KO_PATH = path.join(root, 'src/features/augments/data/augments.ko.json');
 
 const norm = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]/gi, '');
 const base = (p) => (p || '').replace(/.*\//, '').toLowerCase();
-// modeName → 이 앱에서 쓰는 모드 키. CHERRY 는 아레나라 여기서 다루지 않는다.
-const MODE_OF = { KIWI: 'aram', KIWI_JADE: 'classic' };
+// modeName → 이 앱에서 쓰는 모드 키. 클래식(KIWI_JADE)·아레나(CHERRY)는 앱에서 제거됐다.
+// 두 풀은 아래 resolveNameId 의 동명이인 판별에만 쓴다.
+const MODE_OF = { KIWI: 'aram' };
 
 // augment-lists 의 KIWI 풀에는 들어 있지만 실제 칼바람 드래프트에서는 뜨지 않는 증강.
 // 게임에서 직접 확인한 결과라 데이터보다 우선한다 — 여기 있으면 'aram' 을 붙이지 않는다.
@@ -107,8 +108,8 @@ const unresolved = [];
 const ambiguous = [];
 const iconDiffs = [];
 const forcedOut = [];
-const tally = { aram: 0, classic: 0, both: 0, unreleased: 0 };
-const byMode = { aram: [], classic: [], unreleased: [] };
+const tally = { aram: 0, unreleased: 0 };
+const byMode = { aram: [], unreleased: [] };
 
 for (const a of en) {
   const { a: cdEntry, how } = resolveNameId(a);
@@ -148,25 +149,17 @@ for (const a of en) {
   if (koRec) { koRec.augmentNameId = cdEntry.augmentNameId; koRec.modes = modes; }
 
   if (modes.length === 0) { tally.unreleased++; byMode.unreleased.push(a.name); }
-  else {
-    if (modes.includes('aram')) { tally.aram++; byMode.aram.push(a.name); }
-    if (modes.includes('classic')) { tally.classic++; byMode.classic.push(a.name); }
-    if (modes.length === 2) tally.both++;
-  }
+  else { tally.aram++; byMode.aram.push(a.name); }
 }
 
-// 클래식 풀에 있는데 앱에 아직 없는 증강
+// 칼바람 풀에 있는데 앱에 아직 없는 증강
 const appIds = new Set(en.map((a) => a.augmentNameId).filter(Boolean));
-const missingClassic = [...(pools.get('KIWI_JADE') ?? [])]
-  .filter((nid) => !appIds.has(nid))
-  .map((nid) => ({ nid, name: byNameId.get(nid)?.nameTRA ?? '(CDragon 에 없음)' }));
 const missingAram = [...(pools.get('KIWI') ?? [])]
   .filter((nid) => !appIds.has(nid))
   .map((nid) => ({ nid, name: byNameId.get(nid)?.nameTRA ?? '(CDragon 에 없음)' }));
 
 console.log(`전체 ${en.length}개`);
 console.log(`  칼바람(aram)   ${tally.aram}`);
-console.log(`  클래식(classic) ${tally.classic}   (그중 양쪽 공유 ${tally.both})`);
 console.log(`  미출시(modes=[]) ${tally.unreleased}`);
 
 if (forcedOut.length) {
@@ -190,10 +183,6 @@ console.log('  ' + byMode.unreleased.join(', '));
 if (missingAram.length) {
   console.log(`\n[칼바람 풀에 있는데 앱에 없는 증강] ${missingAram.length}건`);
   missingAram.forEach((m) => console.log(`  ${m.nid} — ${m.name}`));
-}
-if (missingClassic.length) {
-  console.log(`\n[클래식 풀에 있는데 앱에 없는 증강] ${missingClassic.length}건`);
-  missingClassic.forEach((m) => console.log(`  ${m.nid} — ${m.name}`));
 }
 
 if (WRITE) {

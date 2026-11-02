@@ -6,6 +6,9 @@ import { AugmentImage } from "@/components/ui/augment-image";
 import { AugmentRarityGlyphs, Radius, Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
+import { HeadlinerSummary } from "@/features/headliners/components/headliner-summary";
+import { ARAM_ROUNDS } from "@/features/headliners/rules";
+import type { BuildHeadliner } from "@/features/headliners/types";
 import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
@@ -22,9 +25,9 @@ const t = {
   },
 };
 
-// 픽 수보다 한 칸 넉넉하게 — 칼바람 4픽이면 5칸, 클래식 5픽이면 6칸.
+// 픽 수보다 한 칸 넉넉하게 — 칼바람 4픽이면 5칸. 게임의 증강 칸과 같고 5번째는 K/DA 가 채운다.
 // (증강 "혼돈 변환"이 보너스를 주면 그 이상으로 늘어난다.)
-const DEFAULT_SLOTS = 5;
+const SLOTS = ARAM_ROUNDS + 1;
 
 interface AugmentCellProps {
   augment: Augment | null;
@@ -32,7 +35,7 @@ interface AugmentCellProps {
 }
 
 function AugmentCell({ augment, size }: AugmentCellProps) {
-  const { colors } = useTheme();
+  const { mode, colors } = useTheme();
   const rarityColors = useRarityColors();
 
   if (!augment) {
@@ -62,7 +65,7 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
             width: size,
             height: size,
             backgroundColor: colors.surface.sunken,
-            borderColor: colors.border.subtle,
+            borderColor: tint,
           },
         ]}
       >
@@ -79,7 +82,8 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
         numberOfLines={2}
         ellipsizeMode="tail"
         color="secondary"
-        style={[styles.cellName, { width: size }]}
+        // 라이트 모드 등급색은 11pt 글자 대비(4.5:1)에 못 미쳐 이름은 기본 보조색으로 둔다(AugmentRarityColorsLight 주석).
+        style={[styles.cellName, { width: size }, mode === "dark" && { color: tint }]}
       >
         {augment.name}
       </ThemedText>
@@ -92,11 +96,10 @@ interface Props {
   /** Actual drawer container width (from the parent <Drawer>). */
   width: number;
   championId?: string;
-  /** 표시 슬롯 수. 모드별 라운드 수 + 1. */
-  slots?: number;
+  headliner?: BuildHeadliner;
 }
 
-export function PickedDrawer({ picked, width, championId, slots = DEFAULT_SLOTS }: Props) {
+export function PickedDrawer({ picked, width, championId, headliner }: Props) {
   const translate = useTranslation(t);
   const { colors } = useTheme();
 
@@ -115,7 +118,7 @@ export function PickedDrawer({ picked, width, championId, slots = DEFAULT_SLOTS 
     (width - padLeft - padRight - Spacing.two * (COLUMNS - 1)) / COLUMNS;
 
   // Grid grows past the base slots if Transmute: Chaos adds bonus augments.
-  const total = Math.max(slots, picked.length);
+  const total = Math.max(SLOTS, picked.length);
   const cells: (Augment | null)[] = Array.from(
     { length: total },
     (_, i) => picked[i] ?? null,
@@ -139,9 +142,11 @@ export function PickedDrawer({ picked, width, championId, slots = DEFAULT_SLOTS 
 
         {champion && <ChampionSummary champion={champion} />}
 
+        <HeadlinerSummary headliner={headliner} championId={championId} />
+
         <View style={styles.section}>
           <ThemedText type="label" color="secondary">
-            {translate("augments")} {picked.length}/{slots}
+            {translate("augments")} {picked.length}/{SLOTS}
           </ThemedText>
 
           <View style={styles.grid}>

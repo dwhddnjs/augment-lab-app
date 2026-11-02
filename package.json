@@ -44,7 +44,7 @@
     "start": "expo start",
     "ios": "expo run:ios",
     "lint": "expo lint",
-    "data:refresh": "npx tsx scripts/fetch-data/fetch-ddragon.ts && node scripts/parse-item-stats.mjs && node scripts/gen-data-check.mjs",
+    "data:refresh": "npx tsx scripts/fetch-data/fetch-ddragon.ts && npx tsx scripts/fetch-data/fetch-champion-spells.ts && node scripts/parse-item-stats.mjs && node scripts/gen-data-check.mjs",
     "data:tierlist": "npx tsx scripts/fetch-data/fetch-tierlist.ts",
     "data:item-stats": "node scripts/parse-item-stats.mjs"
   },
