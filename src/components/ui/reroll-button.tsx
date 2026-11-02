@@ -22,8 +22,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-import { AugmentRarityColors, Radius, Spacing } from "@/constants/theme";
-import { useRarityColors } from "@/hooks/use-rarity-colors";
+import { CommandLineLightTint, Radius, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 
 const SIZE = 36;
@@ -47,7 +46,6 @@ interface Props {
 
 export function RerollButton({ used, hackedArt, disabled, onPress }: Props) {
   const { colors, mode } = useTheme();
-  const rarityColors = useRarityColors();
   const locked = used || disabled;
   const glowing = hackedArt != null && !locked;
 
@@ -90,14 +88,14 @@ export function RerollButton({ used, hackedArt, disabled, onPress }: Props) {
               source={hackedArt.icon}
               style={styles.fill}
               contentFit="contain"
-              tintColor={mode === "light" ? rarityColors.gold.border : undefined}
+              tintColor={mode === "light" ? CommandLineLightTint.mark : undefined}
             />
             <Animated.View style={[StyleSheet.absoluteFill, flashStyle]}>
               <Image
                 source={hackedArt.flash}
                 style={styles.fill}
                 contentFit="contain"
-                tintColor={mode === "light" ? AugmentRarityColors.gold.border : undefined}
+                tintColor={mode === "light" ? CommandLineLightTint.flash : undefined}
               />
             </Animated.View>
           </Pressable>

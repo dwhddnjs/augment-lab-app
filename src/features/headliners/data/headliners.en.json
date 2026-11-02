@@ -10,7 +10,7 @@
     },
     "heartsteel": {
       "name": "HEARTSTEEL",
-      "description": "Members may put Stickers on your Augments. Pick a stickered Augment for a bonus."
+      "description": "Each round, members put Stickers on 2 Augments. Pick a stickered Augment for a bonus."
     },
     "true-damage": {
       "name": "True Damage",
@@ -34,12 +34,12 @@
     }
   },
   "stickers": {
-    "aphelios": { "name": "Aphelios", "full": "2 Stat Anvils", "short": "2 Stat Anvils" },
-    "ezreal": { "name": "Ezreal", "full": "4 AD & 4 AP per Level", "short": "4 AD & AP per Level" },
-    "kayn": { "name": "Kayn", "full": "5% Omnivamp", "short": "5% Omnivamp" },
-    "ksante": { "name": "K'Sante", "full": "1 Level & Level Cap", "short": "1 Level & Cap" },
-    "sett": { "name": "Sett", "full": "30 Health per Level", "short": "30 Health per Level" },
-    "yone": { "name": "Yone", "full": "40% Attack Speed and 20 Ability Haste", "short": "40% AS & 20 Haste" }
+    "aphelios": { "name": "Aphelios", "full": "2 [k]Stat Anvils[/k]" },
+    "ezreal": { "name": "Ezreal", "full": "[ad]4 AD[/ad] & [ap]4 AP[/ap] per Level" },
+    "kayn": { "name": "Kayn", "full": "[sv]5% Omnivamp[/sv]" },
+    "ksante": { "name": "K'Sante", "full": "[k]1 Level & Level Cap[/k]" },
+    "sett": { "name": "Sett", "full": "[hp]30 Health[/hp] per Level" },
+    "yone": { "name": "Yone", "full": "[as]40% Attack Speed[/as] and 20 Ability Haste" }
   },
   "skills": { "q": "HEAVY", "w": "POWER", "e": "THRASH", "r": "DOOM" },
   "skillTitle": "[e]Empower[/e] [s]{spell}[/s]!",

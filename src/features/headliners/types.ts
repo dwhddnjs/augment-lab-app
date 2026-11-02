@@ -19,8 +19,7 @@ export interface BuildHeadliner {
 
 export interface HeadlinerTexts {
   headliners: Record<HeadlinerId, { name: string; description: string }>;
-  /** full 은 Drawer·결과, short 는 폭이 좁은 카드 툴팁용. */
-  stickers: Record<StickerId, { name: string; full: string; short: string }>;
+  stickers: Record<StickerId, { name: string; full: string }>;
   skills: Record<SkillKey, string>;
   /** {spell} 자리에 스킬 이름이 들어간다. [e]강화 [s]스킬명 [h]회복 [b]보호막 표시는 색으로 그린다. */
   skillTitle: string;

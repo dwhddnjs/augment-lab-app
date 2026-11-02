@@ -26,6 +26,7 @@ import { HeroOverlay, Radius, Spacing } from "@/constants/theme";
 import { useChampionSpells } from "@/features/champions/hooks/use-champion-spells";
 import { HeadlinerLogo } from "@/features/headliners/components/headliner-logo";
 import { useHeadlinerTexts } from "@/features/headliners/hooks/use-headliners";
+import type { HeadlinerId } from "@/features/headliners/types";
 import {
   ARAM_ROUNDS,
   isHeadlinerId,
@@ -40,7 +41,7 @@ import { useTranslation } from "@/lib/i18n";
 import { prefetchOne } from "@/lib/image-prewarm";
 import { lockPortraitAfterExit } from "@/lib/orientation";
 import { AramCard } from "../components/aram-card";
-import { KdaBadge, StickerBadge, StickerTip } from "../components/card-marks";
+import { KdaBadge, StickerLabel, StickerMark } from "../components/card-marks";
 import { HeadlinerReveal } from "../components/headliner-reveal";
 import { PickedDrawer } from "../components/picked-drawer";
 import { RoundIndicator } from "../components/round-indicator";
@@ -70,7 +71,14 @@ const t = {
 
 // 헤더 버튼 좌우 여백 — 카드 영역(CARD_ROW_PAD)보다 넓게 잡아 버튼이 기기 끝에 붙지 않게 한다.
 const HEADER_PAD = Spacing.five; // 32
-const HEADER_LOGO_SIZE = 40;
+// 헤더 로고 크기. 정사각 로고는 40 이면 라운드 pill(약 45pt)과 키가 같아 무거워 보인다.
+// 예외: K/DA 마크는 가로로 길고 얇아서(1.65:1) 28 이면 너무 작고, 꿀벌은 둥근 얼굴 이모트라
+// 같은 28 이면 다른 로고보다 작아 보인다.
+const HEADER_LOGO_SIZE = 28;
+const HEADER_LOGO_SIZES: Partial<Record<HeadlinerId, number>> = {
+  kda: 40,
+  bees: 34,
+};
 // 헤더 밑에서 카드까지 내리는 거리(화면 높이 대비). 모든 헤드라이너가 같은 자리를 쓴다.
 // 카드 위 K/DA 마크가 헤더에서 떨어지면서도, 가장 긴 HEARTSTEEL 줄이 낮은 기기에서 넘치지 않는 값이다.
 const CARD_TOP_RATIO = 0.07;
@@ -217,7 +225,11 @@ export function AramScreen() {
                   }
                   style={styles.headlinerIcon}
                 >
-                  <HeadlinerLogo id={progress.id} size={HEADER_LOGO_SIZE} plain />
+                  <HeadlinerLogo
+                    id={progress.id}
+                    size={HEADER_LOGO_SIZES[progress.id] ?? HEADER_LOGO_SIZE}
+                    plain
+                  />
                 </View>
               )}
               <GlassSurface style={styles.roundBox}>
@@ -280,12 +292,14 @@ export function AramScreen() {
                           isKdaBonusRound ? (
                             <KdaBadge />
                           ) : (
-                            sticker && <StickerBadge sticker={sticker} />
+                            sticker && (
+                              <StickerMark sticker={sticker} rarity={aug.rarity} />
+                            )
                           )
                         }
                         footer={
                           progress.id === "heartsteel" ? (
-                            <StickerTip sticker={sticker} />
+                            <StickerLabel sticker={sticker} cardWidth={cardWidth} />
                           ) : undefined
                         }
                         onPick={() => anim.pick(i, () => leaveIfDone(pick(i)))}

@@ -22,10 +22,11 @@ export const COMMAND_LINE_REROLL = {
   flash: require('@/assets/headliners/command-line-reroll-flash.png') as number,
 };
 
-/** 펜타킬 스킬 카드. 게임의 증강 카드 원본(ux/cherry·kiwi/augments/augmentselection)이다. */
+/**
+ * 펜타킬 스킬 카드에만 있는 장식. 게임 원본(ux/kiwi/augments/augmentselection)이다.
+ * 배경과 골드 프레임은 증강 카드와 같은 것을 쓴다(AUGMENT_CARD_ART).
+ */
 export const SKILL_CARD_ART = {
-  background: require('@/assets/headliners/skill-card-bg.png') as number,
-  frame: require('@/assets/headliners/skill-card-frame.png') as number,
   swirl: require('@/assets/headliners/skill-card-swirl.png') as number,
   iconFrame: require('@/assets/headliners/skill-card-icon-frame.png') as number,
 };

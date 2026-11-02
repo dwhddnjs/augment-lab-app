@@ -4,7 +4,7 @@ import type { Augment, AugmentMode, AugmentRarity } from '@/features/augments/ty
 import {
   nextRarity,
   rollHeadliner,
-  rollSticker,
+  rollRoundStickers,
   roundsFor,
 } from '@/features/headliners/rules';
 import type {
@@ -46,7 +46,7 @@ function pickWeighted(pool: Augment[], count: number, odds = RARITY_ODDS): Augme
 
 function rollSlotStickers(headlinerId: string): (StickerId | null)[] {
   if (headlinerId !== 'heartsteel') return [null, null, null];
-  return [rollSticker(), rollSticker(), rollSticker()];
+  return rollRoundStickers();
 }
 
 /** 픽 한 번의 결과. done 이면 호출부가 nextPicked·nextProgress 로 아이템 선택에 넘어간다. */
@@ -128,13 +128,7 @@ export function useAram(mode: AugmentMode = 'aram', forcedHeadliner?: HeadlinerI
       return next;
     });
     setHackUsed(true);
-    if (progress.id === 'heartsteel') {
-      setSlotStickers((prev) => {
-        const next = [...prev];
-        next[idx] = rollSticker();
-        return next;
-      });
-    }
+    // HEARTSTEEL 스티커는 카드가 아니라 슬롯에 붙어 있어 리롤해도 그대로다.
     return replacement;
   };
 

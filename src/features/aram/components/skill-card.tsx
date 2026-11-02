@@ -1,10 +1,11 @@
 /**
  * SkillCard — 펜타킬 스킬 강화 카드. 게임의 카드 원본(배경·프레임·문양)을 그대로 쌓아 인게임과 같게 그린다.
+ * 배경·골드 프레임은 증강 카드(RarityCardFrame)와 같은 원본이다.
  *
  * 스킬 아이콘은 DDragon 원본이 64px 이라 크게 키우면 깨진다. 게임처럼 문양 안에 작게 둔다.
  */
 import { Image } from "expo-image";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import {
@@ -12,7 +13,11 @@ import {
   type CardEntryMode,
   type CardExitMode,
 } from "@/components/ui/pick-card";
-import { CARD_ASPECT } from "@/components/ui/rarity-card-frame";
+import {
+  AUGMENT_CARD_ART,
+  CARD_ASPECT,
+  CARD_CORNER,
+} from "@/components/ui/rarity-card-frame";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { HeroOverlay, Radius, SkillCardColors, Spacing } from "@/constants/theme";
 import { useChampions } from "@/features/champions/hooks/use-champions";
@@ -21,6 +26,7 @@ import { HEADLINER_LOGOS, SKILL_CARD_ART } from "@/features/headliners/assets";
 import { useHeadlinerTexts } from "@/features/headliners/hooks/use-headliners";
 import type { SkillKey } from "@/features/headliners/types";
 import { championSquareUrl, spellImageUrl } from "@/lib/ddragon";
+import { renderMarked } from "./marked-text";
 
 const LOGO_SIZE = 40;
 const PORTRAIT_SIZE = 32;
@@ -33,19 +39,6 @@ const MARK_COLORS: Record<string, string> = {
   h: SkillCardColors.heal,
   b: SkillCardColors.shield,
 };
-
-/** "[s]스킬[/s] [e]강화[/e]!" 처럼 표시한 구간만 색을 입힌다. */
-function renderMarked(text: string) {
-  return text.split(/(\[[esbh]\].*?\[\/[esbh]\])/).map((part, i) => {
-    const mark = part.match(/^\[([esbh])\](.*)\[\/[esbh]\]$/);
-    if (!mark) return part;
-    return (
-      <Text key={i} style={{ color: MARK_COLORS[mark[1]] }}>
-        {mark[2]}
-      </Text>
-    );
-  });
-}
 
 interface Props {
   skill: SkillKey;
@@ -87,16 +80,20 @@ export function SkillCard({
       <View
         style={[
           styles.card,
-          { width: cardWidth, height: Math.round(cardWidth * CARD_ASPECT) },
+          {
+            width: cardWidth,
+            height: Math.round(cardWidth * CARD_ASPECT),
+            borderRadius: cardWidth * CARD_CORNER,
+          },
         ]}
       >
         <Image
-          source={SKILL_CARD_ART.background}
+          source={AUGMENT_CARD_ART.background}
           style={StyleSheet.absoluteFill}
           contentFit="fill"
         />
         <Image
-          source={SKILL_CARD_ART.frame}
+          source={AUGMENT_CARD_ART.frame.gold}
           style={StyleSheet.absoluteFill}
           contentFit="fill"
         />
@@ -143,14 +140,14 @@ export function SkillCard({
               lineBreakStrategyIOS="hangul-word"
               style={styles.body}
             >
-              {renderMarked(texts.skillTitle.replaceAll("{spell}", spellName))}
+              {renderMarked(texts.skillTitle.replaceAll("{spell}", spellName), MARK_COLORS)}
             </ThemedText>
             <ThemedText
               allowFontScaling={false}
               lineBreakStrategyIOS="hangul-word"
               style={styles.body}
             >
-              {renderMarked(texts.skillBonus.replaceAll("{spell}", spellName))}
+              {renderMarked(texts.skillBonus.replaceAll("{spell}", spellName), MARK_COLORS)}
             </ThemedText>
           </View>
         </View>
@@ -175,7 +172,6 @@ export function SkillCard({
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: Radius.lg,
     boxShadow: SkillCardColors.glow,
   },
   content: {
@@ -201,7 +197,7 @@ const styles = StyleSheet.create({
     lineHeight: 11,
     color: SkillCardColors.key,
   },
-  // 이름·설명 크기는 증강 카드(RarityCardFrame)와 같다.
+  // 이름은 증강 카드(RarityCardFrame 드래프트)와 같은 12pt 다. 설명은 문양 아래 공간이 좁아 8pt 로 둔다.
   name: {
     fontSize: 12,
     lineHeight: 14,

@@ -10,7 +10,7 @@
     },
     "heartsteel": {
       "name": "HEARTSTEEL",
-      "description": "멤버가 일정 확률로 증강에 스티커를 붙입니다. 스티커가 붙은 증강을 선택하면 추가 효과를 얻습니다."
+      "description": "매 라운드 멤버가 증강 2개에 스티커를 붙입니다. 스티커가 붙은 증강을 선택하면 추가 효과를 얻습니다."
     },
     "true-damage": {
       "name": "True Damage",
@@ -34,12 +34,12 @@
     }
   },
   "stickers": {
-    "aphelios": { "name": "아펠리오스", "full": "능력치 모루 2개", "short": "능력치 모루 2개" },
-    "ezreal": { "name": "이즈리얼", "full": "레벨당 공격력 4 및 주문력 4", "short": "레벨당 공격력·주문력 4" },
-    "kayn": { "name": "케인", "full": "모든 피해 흡혈 5%", "short": "모든 피해 흡혈 5%" },
-    "ksante": { "name": "크산테", "full": "레벨 및 레벨 제한 1", "short": "레벨·레벨 제한 +1" },
-    "sett": { "name": "세트", "full": "레벨당 체력 30", "short": "레벨당 체력 30" },
-    "yone": { "name": "요네", "full": "공격 속도 40% 및 스킬 가속 20", "short": "공속 40%·스킬 가속 20" }
+    "aphelios": { "name": "아펠리오스", "full": "[k]능력치 모루[/k] 2개" },
+    "ezreal": { "name": "이즈리얼", "full": "레벨당 [ad]공격력 4[/ad] 및 [ap]주문력 4[/ap]" },
+    "kayn": { "name": "케인", "full": "[sv]모든 피해 흡혈 5%[/sv]" },
+    "ksante": { "name": "크산테", "full": "[k]레벨 및 레벨 제한 1[/k]" },
+    "sett": { "name": "세트", "full": "레벨당 [hp]체력 30[/hp]" },
+    "yone": { "name": "요네", "full": "[as]공격 속도 40%[/as] 및 스킬 가속 20" }
   },
   "skills": { "q": "헤비", "w": "파워", "e": "스래시", "r": "둠" },
   "skillTitle": "[s]{spell}[/s] [e]강화[/e]!",

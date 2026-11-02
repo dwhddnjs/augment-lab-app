@@ -35,7 +35,7 @@ interface AugmentCellProps {
 }
 
 function AugmentCell({ augment, size }: AugmentCellProps) {
-  const { colors } = useTheme();
+  const { mode, colors } = useTheme();
   const rarityColors = useRarityColors();
 
   if (!augment) {
@@ -65,7 +65,7 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
             width: size,
             height: size,
             backgroundColor: colors.surface.sunken,
-            borderColor: colors.border.subtle,
+            borderColor: tint,
           },
         ]}
       >
@@ -82,7 +82,8 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
         numberOfLines={2}
         ellipsizeMode="tail"
         color="secondary"
-        style={[styles.cellName, { width: size }]}
+        // 라이트 모드 등급색은 11pt 글자 대비(4.5:1)에 못 미쳐 이름은 기본 보조색으로 둔다(AugmentRarityColorsLight 주석).
+        style={[styles.cellName, { width: size }, mode === "dark" && { color: tint }]}
       >
         {augment.name}
       </ThemedText>
