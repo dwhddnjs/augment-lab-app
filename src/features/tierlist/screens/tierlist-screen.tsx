@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
   },
   source: {
     paddingHorizontal: INSET,
-    paddingTop: Spacing.four,
+    // 마지막 행 paddingBottom(8)과 합쳐 16 — 티어 구간 사이(배너 marginTop)와 같은 간격.
+    paddingTop: Spacing.two,
   },
 });

@@ -4,6 +4,7 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { AugmentTile } from "@/components/ui/augment-tile";
 import { DetailCardRow } from "@/components/ui/detail-card-row";
 import { HeroOverlay, Spacing } from "@/constants/theme";
+import { useAugmentName } from "@/features/augments/hooks/use-augments";
 import type { Augment } from "@/features/augments/types";
 import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { cleanAugmentDescription } from "@/lib/augment-text";
@@ -17,6 +18,7 @@ interface Props {
 /** 빌드 상세 — 증강 목록(희귀도 카드 행 + 이름 + 설명). */
 export function BuildAugmentList({ augments, label }: Props) {
   const rarityColors = useRarityColors();
+  const augmentName = useAugmentName();
 
   return (
     <View style={styles.section}>
@@ -36,7 +38,7 @@ export function BuildAugmentList({ augments, label }: Props) {
               background={HeroOverlay.cardBase}
             />
           }
-          title={aug.name}
+          title={augmentName(aug)}
           description={cleanAugmentDescription(aug.description)}
         />
       ))}

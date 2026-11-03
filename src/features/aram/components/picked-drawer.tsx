@@ -3,13 +3,18 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { AugmentImage } from "@/components/ui/augment-image";
-import { AugmentRarityGlyphs, Radius, Spacing } from "@/constants/theme";
+import {
+  AugmentRarityColors,
+  AugmentRarityGlyphs,
+  HeroOverlay,
+  Radius,
+  Spacing,
+} from "@/constants/theme";
+import { useAugmentName } from "@/features/augments/hooks/use-augments";
 import type { Augment } from "@/features/augments/types";
 import { useChampions } from "@/features/champions/hooks/use-champions";
 import { HeadlinerSummary } from "@/features/headliners/components/headliner-summary";
-import { ARAM_ROUNDS } from "@/features/headliners/rules";
 import type { BuildHeadliner } from "@/features/headliners/types";
-import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
 import { ChampionSummary } from "./champion-summary";
@@ -25,9 +30,9 @@ const t = {
   },
 };
 
-// 픽 수보다 한 칸 넉넉하게 — 칼바람 4픽이면 5칸. 게임의 증강 칸과 같고 5번째는 K/DA 가 채운다.
-// (증강 "혼돈 변환"이 보너스를 주면 그 이상으로 늘어난다.)
-const SLOTS = ARAM_ROUNDS + 1;
+// 6칸 — 칼바람 4픽에 K/DA 보너스·전환 증강으로 늘어나는 몫까지 3열 두 줄로 담는다.
+// (전환: 혼돈처럼 증강을 더 주면 그 이상으로 늘어난다.)
+const SLOTS = 6;
 
 interface AugmentCellProps {
   augment: Augment | null;
@@ -36,7 +41,7 @@ interface AugmentCellProps {
 
 function AugmentCell({ augment, size }: AugmentCellProps) {
   const { mode, colors } = useTheme();
-  const rarityColors = useRarityColors();
+  const augmentName = useAugmentName();
 
   if (!augment) {
     return (
@@ -54,7 +59,9 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
     );
   }
 
-  const tint = rarityColors[augment.rarity].border;
+  // 증강 아이콘은 어두운 배경 자산이라 모드와 무관하게 앱의 어두운 타일(AugmentTile 과 같은 톤)에 담는다.
+  // 판이 어두우니 테두리·글리프도 다크 팔레트다. 라이트 모드 이름은 아래에서 보조색으로 따로 칠한다.
+  const tint = AugmentRarityColors[augment.rarity].border;
 
   return (
     <View style={[styles.cell, { width: size }]}>
@@ -64,7 +71,7 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
           {
             width: size,
             height: size,
-            backgroundColor: colors.surface.sunken,
+            backgroundColor: HeroOverlay.cardBase,
             borderColor: tint,
           },
         ]}
@@ -72,7 +79,7 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
         <AugmentImage
           key={augment.id}
           iconPath={augment.iconPath}
-          size={Math.round(size * 0.66)}
+          size={Math.round(size * 0.78)}
           tint={tint}
           fallbackGlyph={AugmentRarityGlyphs[augment.rarity] ?? "star-four-points"}
           recyclingKey={augment.id}
@@ -85,7 +92,7 @@ function AugmentCell({ augment, size }: AugmentCellProps) {
         // 라이트 모드 등급색은 11pt 글자 대비(4.5:1)에 못 미쳐 이름은 기본 보조색으로 둔다(AugmentRarityColorsLight 주석).
         style={[styles.cellName, { width: size }, mode === "dark" && { color: tint }]}
       >
-        {augment.name}
+        {augmentName(augment)}
       </ThemedText>
     </View>
   );
@@ -117,7 +124,7 @@ export function PickedDrawer({ picked, width, championId, headliner }: Props) {
   const cellSize =
     (width - padLeft - padRight - Spacing.two * (COLUMNS - 1)) / COLUMNS;
 
-  // Grid grows past the base slots if Transmute: Chaos adds bonus augments.
+  // 전환 증강이 증강을 더 주면 기본 칸 너머로 늘어난다.
   const total = Math.max(SLOTS, picked.length);
   const cells: (Augment | null)[] = Array.from(
     { length: total },
@@ -142,7 +149,7 @@ export function PickedDrawer({ picked, width, championId, headliner }: Props) {
 
         {champion && <ChampionSummary champion={champion} />}
 
-        <HeadlinerSummary headliner={headliner} championId={championId} />
+        <HeadlinerSummary headliner={headliner} championId={championId} compact />
 
         <View style={styles.section}>
           <ThemedText type="label" color="secondary">

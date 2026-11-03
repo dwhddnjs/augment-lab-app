@@ -2,7 +2,12 @@ import { useMemo } from 'react';
 
 import type { Augment, AugmentMode } from '@/features/augments/types';
 import type { Locale } from '@/hooks/use-locale';
-import { useLocalizedData } from '@/lib/i18n';
+import { useLocalizedData, useTranslation } from '@/lib/i18n';
+
+const t = {
+  ko: { transmuted: '전환: ' },
+  en: { transmuted: 'Transmute: ' },
+};
 
 const data: Record<Locale, Augment[]> = {
   ko: require('@/features/augments/data/augments.ko.json'),
@@ -25,4 +30,10 @@ export function useAugments(): Augment[] {
 export function useAugmentPool(mode: AugmentMode): Augment[] {
   const all = useAugments();
   return useMemo(() => all.filter((a) => a.modes?.includes(mode)), [all, mode]);
+}
+
+/** 증강 표시 이름. 전환으로 얻은 증강은 앞에 "전환:" 을 붙인다. */
+export function useAugmentName(): (augment: Augment) => string {
+  const translate = useTranslation(t);
+  return (augment) => (augment.transmuted ? `${translate('transmuted')}${augment.name}` : augment.name);
 }

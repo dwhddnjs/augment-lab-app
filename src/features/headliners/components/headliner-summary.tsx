@@ -1,4 +1,3 @@
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
 
@@ -20,11 +19,12 @@ import { HeadlinerLogo } from "./headliner-logo";
 import { SkillIcon } from "./skill-icon";
 
 const t = {
-  ko: { headliner: "헤드라이너", gold: "골드 +1,000" },
-  en: { headliner: "Headliner", gold: "Gold +1,000" },
+  ko: { headliner: "헤드라이너" },
+  en: { headliner: "Headliner" },
 };
 
-const ICON_SIZE = 40;
+// 좁은 가로 패널(compact)에선 40pt 아이콘이 글자 폭을 먹어 설명이 한 줄 더 내려간다.
+const ICON_SIZE = { normal: 40, compact: 32 };
 const STAT_ANVIL_ICON = cdragonIconUrl(
   "/lol-game-data/assets/ASSETS/Items/Icons2D/220000_StatAnvil.png",
 );
@@ -33,10 +33,12 @@ interface Props {
   /** 없으면(옛 빌드·커스텀 빌드) 아무것도 그리지 않는다. */
   headliner?: BuildHeadliner;
   championId?: string;
+  /** 픽 현황 Drawer·아이템 화면처럼 좁은 패널 — 카드 여백과 아이콘을 줄인다. */
+  compact?: boolean;
 }
 
 /** 이번 판 헤드라이너와 그걸로 얻은 것. Drawer·아이템 패널·빌드 상세가 함께 쓴다. */
-export function HeadlinerSummary({ headliner, championId }: Props) {
+export function HeadlinerSummary({ headliner, championId, compact }: Props) {
   const translate = useTranslation(t);
   const { colors } = useTheme();
   const rarityColors = useRarityColors();
@@ -46,6 +48,8 @@ export function HeadlinerSummary({ headliner, championId }: Props) {
   if (!headliner || !isHeadlinerId(headliner.id)) return null;
   const { name, description } = texts.headliners[headliner.id];
   const accent = rarityColors.gold.border;
+  const iconSize = compact ? ICON_SIZE.compact : ICON_SIZE.normal;
+  const iconBox = { width: iconSize, height: iconSize };
 
   return (
     <View style={styles.section}>
@@ -54,8 +58,9 @@ export function HeadlinerSummary({ headliner, championId }: Props) {
       </ThemedText>
 
       <DetailCardRow
+        compact={compact}
         accentColor={colors.accent.default}
-        icon={<HeadlinerLogo id={headliner.id} size={ICON_SIZE} />}
+        icon={<HeadlinerLogo id={headliner.id} size={iconSize} />}
         title={name}
         description={description}
       />
@@ -63,9 +68,10 @@ export function HeadlinerSummary({ headliner, championId }: Props) {
       {headliner.skills.map((skill) => (
         <DetailCardRow
           key={skill}
+          compact={compact}
           accentColor={accent}
-          icon={<SkillIcon spell={spells?.[skill]} skill={skill} size={ICON_SIZE} />}
-          title={[texts.skills[skill], spells?.[skill].name].filter(Boolean).join(" · ")}
+          icon={<SkillIcon spell={spells?.[skill]} skill={skill} size={iconSize} />}
+          title={[texts.skills[skill], spells?.[skill]?.name].filter(Boolean).join(" · ")}
           description={texts.skillBonusShort}
         />
       ))}
@@ -77,11 +83,12 @@ export function HeadlinerSummary({ headliner, championId }: Props) {
         return (
           <DetailCardRow
             key={id}
+            compact={compact}
             accentColor={accent}
             icon={
               <Image
                 source={STICKER_PORTRAITS[id]}
-                style={styles.portrait}
+                style={[styles.portrait, iconBox]}
                 contentFit="cover"
                 contentPosition="top center"
               />
@@ -100,18 +107,6 @@ export function HeadlinerSummary({ headliner, championId }: Props) {
           />
         );
       })}
-
-      {headliner.id === "disco" && (
-        <DetailCardRow
-          accentColor={accent}
-          icon={
-            <View style={styles.goldIcon}>
-              <MaterialCommunityIcons name="circle-multiple" size={22} color={accent} />
-            </View>
-          }
-          title={translate("gold")}
-        />
-      )}
     </View>
   );
 }
@@ -121,18 +116,10 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
   },
   portrait: {
-    width: ICON_SIZE,
-    height: ICON_SIZE,
     borderRadius: Radius.full,
     backgroundColor: HeroOverlay.cardBase,
   },
   anvil: {
     borderRadius: Radius.sm,
-  },
-  goldIcon: {
-    width: ICON_SIZE,
-    height: ICON_SIZE,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });

@@ -1,5 +1,5 @@
 /**
- * 카드에 붙는 헤드라이너 표식 — HEARTSTEEL 스티커(우상단 멤버 얼굴 + 카드 밑 효과), K/DA 표시.
+ * 카드에 붙는 헤드라이너 표식 — HEARTSTEEL 스티커(좌상단 멤버 얼굴 + 카드 밑 효과), K/DA 표시.
  * 카드 위치는 헤드라이너와 무관하게 같다. HEARTSTEEL 은 카드 밑 효과 줄만큼 리롤 버튼이 내려간다.
  * 가로 화면 예산에 맞춘 크기라 글자 크기 설정을 따르지 않는다.
  */
@@ -9,23 +9,23 @@ import { StyleSheet, Text, View } from "react-native";
 import { ThemedText } from "@/components/themed/themed-text";
 import { CARD_GAP } from "@/components/ui/rarity-card-frame";
 import {
+  AugmentRarityColors,
   HeroOverlay,
   Radius,
   Spacing,
   StatTextColors,
 } from "@/constants/theme";
 import type { AugmentRarity } from "@/features/augments/types";
-import { KDA_MARK, STICKER_PORTRAITS } from "@/features/headliners/assets";
+import { HEADLINER_LOGOS, STICKER_PORTRAITS } from "@/features/headliners/assets";
 import { useHeadlinerTexts } from "@/features/headliners/hooks/use-headliners";
 import type { StickerId } from "@/features/headliners/types";
 import { useLocale } from "@/hooks/use-locale";
-import { useRarityColors } from "@/hooks/use-rarity-colors";
 import { useTheme } from "@/hooks/use-theme";
 import { renderMarked } from "./marked-text";
+import { PORTRAIT_INSET, PORTRAIT_SIZE } from "./skill-card";
 
 // 글로우 여백을 포함한 크기다.
 const KDA_MARK_SIZE = { width: 71, height: 21 };
-const PORTRAIT = 34;
 
 /**
  * 효과 줄 글자 배치. 한국어는 최장 문구(이즈리얼 약 154pt)도 가장 좁은 칸(SE, 카드 135 + 24)에 한 줄이고,
@@ -38,9 +38,9 @@ const STICKER_TEXT = {
 } as const;
 
 /**
- * HEARTSTEEL 스티커 — 카드 우상단 모서리에 걸친 멤버 얼굴. 중심을 둥근 모서리 안쪽에 두고 살짝 기울여 붙인 스티커처럼 보인다.
- * 테두리는 카드 프레임과 같은 등급색 1pt 라 카드에 붙은 장식으로 읽힌다. 없으면 카드 밖 부분의 원이 화면 배경에 묻힌다.
- * 원의 절반이 테마 배경 위라 라이트 모드에선 라이트 짝을 쓴다(다크 실버는 밝은 배경 대비 2:1 이라 사라진다).
+ * HEARTSTEEL 스티커 — 카드 좌상단 모서리에 걸친 멤버 얼굴. 펜타킬 스킬 카드의 챔피언 얼굴과 같은 자리이고, 살짝 기울여 붙인 스티커처럼 보인다.
+ * 테두리는 카드 프레임과 같은 등급색 1pt 라 카드에 붙은 장식으로 읽힌다.
+ * 원은 4pt 만 카드 밖이고 나머지는 어두운 카드 그림 위라, 모드와 무관하게 다크 팔레트다(라이트 짝은 어두운 프레임에 묻힌다).
  */
 export function StickerMark({
   sticker,
@@ -49,7 +49,7 @@ export function StickerMark({
   sticker: StickerId;
   rarity: AugmentRarity;
 }) {
-  const borderColor = useRarityColors()[rarity].border;
+  const borderColor = AugmentRarityColors[rarity].border;
   return (
     <View pointerEvents="none" style={styles.mark}>
       <Image
@@ -108,7 +108,7 @@ export function StickerLabel({
 export function KdaBadge() {
   return (
     <View pointerEvents="none" style={styles.kda}>
-      <Image source={KDA_MARK} style={KDA_MARK_SIZE} contentFit="contain" />
+      <Image source={HEADLINER_LOGOS.kda.source} style={KDA_MARK_SIZE} contentFit="contain" />
     </View>
   );
 }
@@ -116,14 +116,14 @@ export function KdaBadge() {
 const styles = StyleSheet.create({
   mark: {
     position: "absolute",
-    // 원 중심을 카드 우상단 꼭짓점에서 대각선으로 8pt 안쪽, 둥근 모서리 안에 둔다.
-    top: -PORTRAIT / 2 + Spacing.two,
-    right: -PORTRAIT / 2 + Spacing.two,
+    // 펜타킬 스킬 카드 초상과 같은 자리다.
+    top: PORTRAIT_INSET,
+    left: PORTRAIT_INSET,
     transform: [{ rotate: "10deg" }],
   },
   portrait: {
-    width: PORTRAIT,
-    height: PORTRAIT,
+    width: PORTRAIT_SIZE,
+    height: PORTRAIT_SIZE,
     borderRadius: Radius.full,
     borderWidth: 1,
     backgroundColor: HeroOverlay.cardBase,

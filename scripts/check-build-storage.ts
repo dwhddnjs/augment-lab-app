@@ -171,7 +171,29 @@ async function main() {
     '깨진 헤드라이너만 빠지고 빌드는 그대로다',
   );
 
-  console.log('✓ build-storage 쓰기 실패 롤백 · 제거된 모드·깨진 항목 필터 · 헤드라이너 보존 통과');
+  // 10. 전환 표시는 저장·재시작을 거쳐 남고, 깨진 값이면 빌드는 산 채로 표시만 빠진다.
+  const transmuted = await saveBuild({ ...draft, augmentIds: ['a1', 'a2'], transmutedIds: ['a2'] });
+  await reloadBuilds();
+  assert.deepEqual(
+    getBuildsSnapshot()?.find((b) => b.id === transmuted.id)?.transmutedIds,
+    ['a2'],
+    '저장한 전환 표시가 재로드 뒤에도 같다',
+  );
+  assert.deepEqual(
+    parseBuilds(
+      JSON.stringify([
+        { ...draft, id: 'str', createdAt, transmutedIds: 'a1' },
+        { ...draft, id: 'mixed', createdAt, transmutedIds: ['a1', 2] },
+      ]),
+    ).map((b) => [b.id, b.transmutedIds]),
+    [
+      ['str', undefined],
+      ['mixed', ['a1']],
+    ],
+    '깨진 전환 표시만 걸러진다',
+  );
+
+  console.log('✓ build-storage 쓰기 실패 롤백 · 제거된 모드·깨진 항목 필터 · 헤드라이너·전환 표시 보존 통과');
 }
 
 main().catch((e) => {

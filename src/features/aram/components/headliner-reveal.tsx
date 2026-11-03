@@ -142,7 +142,7 @@ export function HeadlinerReveal({ id, onDone }: Props) {
               ]}
             />
             <Image
-              source={HEADLINER_LOGOS[id]}
+              source={HEADLINER_LOGOS[id].source}
               style={[styles.logo, { transform: [{ scale: LOGO_SCALE[id] ?? 1 }] }]}
               contentFit="contain"
             />

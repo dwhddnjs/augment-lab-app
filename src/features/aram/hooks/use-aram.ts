@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useAugmentPool } from '@/features/augments/hooks/use-augments';
-import type { Augment, AugmentMode, AugmentRarity } from '@/features/augments/types';
+import type { Augment, AugmentMode } from '@/features/augments/types';
 import {
   nextRarity,
   rollHeadliner,
@@ -13,31 +13,8 @@ import type {
   SkillKey,
   StickerId,
 } from '@/features/headliners/types';
-import { sampleDistinct } from '@/lib/arrays';
 import { COMMAND_LINE_ODDS, RARITY_ODDS, rollRarity } from '../rarity-odds';
-
-// "Transmute: Chaos" grants extra random augments when picked.
-const TRANSMUTE_CHAOS_ID = 'transmute-chaos';
-const TRANSMUTE_CHAOS_BONUS = 2;
-
-// Draw `count` augments of a single rarity; if that pool is too small, fill the
-// remainder from any rarity so the round is never short.
-function drawOfRarity(
-  pool: Augment[],
-  rarity: AugmentRarity,
-  count: number,
-  used: Set<string> = new Set(),
-): Augment[] {
-  const result = sampleDistinct(
-    pool.filter((a) => a.rarity === rarity),
-    count,
-    used,
-  );
-  if (result.length < count) {
-    result.push(...sampleDistinct(pool, count - result.length, used));
-  }
-  return result;
-}
+import { applyPick, cardPool, drawOfRarity } from '../transmute';
 
 // Same-rarity round: roll one rarity, then draw `count` of it.
 function pickWeighted(pool: Augment[], count: number, odds = RARITY_ODDS): Augment[] {
@@ -73,13 +50,16 @@ export function useAram(mode: AugmentMode = 'aram', forcedHeadliner?: HeadlinerI
   const odds = progress.id === 'command-line' ? COMMAND_LINE_ODDS : RARITY_ODDS;
 
   const initialCards = useMemo(
-    () => pickWeighted(allAugments, 3, odds),
+    () => pickWeighted(cardPool(allAugments, [], []), 3, odds),
     [allAugments, odds],
   );
 
   const [round, setRound] = useState(0);
   const [currentCards, setCurrentCards] = useState<Augment[]>(initialCards);
   const [picked, setPicked] = useState<Augment[]>([]);
+  // 이번 판에 한 번이라도 고르거나 얻은 증강 id. 빌드에서 빠진 것(전환 증강, 판도라로 바뀐 증강)도
+  // 남겨 두어 다시 카드로 나오지 않게 한다. picked 는 빌드에 남는 것만이다.
+  const [taken, setTaken] = useState<Set<string>>(() => new Set());
   // Per-slot reroll usage for the current round; each card may reroll only once.
   const [rerolled, setRerolled] = useState<boolean[]>([false, false, false]);
   const [slotStickers, setSlotStickers] = useState(() => rollSlotStickers(progress.id));
@@ -95,21 +75,15 @@ export function useAram(mode: AugmentMode = 'aram', forcedHeadliner?: HeadlinerI
   // 커맨드 라인: 매 라운드 첫 리롤이 해킹이다. 라운드는 실버·골드로만 시작해 항상 등급이 오른다.
   const hacked = progress.id === 'command-line' && !hackUsed;
 
-  const drawNext = (exclude: Augment[]) => {
-    const excludeIds = new Set(exclude.map((a) => a.id));
-    const pool = allAugments.filter((a) => !excludeIds.has(a.id));
-    return pickWeighted(pool, 3, odds);
-  };
-
   const reroll = (idx: number): Augment | null => {
     // Each card may reroll only once per round.
     if (rerolled[idx]) return null;
 
-    const excludeIds = new Set([
-      ...picked.map((a) => a.id),
-      ...currentCards.filter((_, i) => i !== idx).map((a) => a.id),
-    ]);
-    const pool = allAugments.filter((a) => !excludeIds.has(a.id));
+    const pool = cardPool(
+      allAugments,
+      [...taken, ...currentCards.filter((_, i) => i !== idx).map((a) => a.id)],
+      picked,
+    );
     if (pool.length === 0) return null;
     // 일반 리롤은 그 카드의 등급을 유지하고, 해킹 리롤만 한 등급 올린다.
     const card = currentCards[idx];
@@ -135,17 +109,14 @@ export function useAram(mode: AugmentMode = 'aram', forcedHeadliner?: HeadlinerI
   // Returns the pick result; caller navigates to /aram-items once it's done.
   const pick = (idx: number): PickResult => {
     const chosen = currentCards[idx];
-    const nextPicked = [...picked, chosen];
-
-    // Transmute: Chaos grants 2 extra random augments (any rarity, no dupes).
-    if (chosen.id === TRANSMUTE_CHAOS_ID) {
-      const excludeIds = new Set([
-        ...nextPicked.map((a) => a.id),
-        ...currentCards.map((a) => a.id),
-      ]);
-      const pool = allAugments.filter((a) => !excludeIds.has(a.id));
-      nextPicked.push(...sampleDistinct(pool, TRANSMUTE_CHAOS_BONUS, new Set()));
-    }
+    // 전환으로 얻는 증강은 이미 얻은 것·이번 라운드 카드를 빼고 뽑는다.
+    const { picked: nextPicked, granted } = applyPick(
+      chosen,
+      picked,
+      allAugments,
+      new Set([...taken, ...currentCards.map((c) => c.id)]),
+    );
+    const nextTaken = new Set([...taken, chosen.id, ...granted.map((a) => a.id)]);
 
     const sticker = slotStickers[idx];
     const nextProgress = sticker
@@ -157,11 +128,12 @@ export function useAram(mode: AugmentMode = 'aram', forcedHeadliner?: HeadlinerI
     const done = nextRound >= rounds && progress.id !== 'pentakill';
 
     setPicked(nextPicked);
+    setTaken(nextTaken);
     setRound(nextRound);
     setProgress(nextProgress);
 
     if (nextRound < rounds) {
-      setCurrentCards(drawNext(nextPicked));
+      setCurrentCards(pickWeighted(cardPool(allAugments, nextTaken, nextPicked), 3, odds));
       setRerolled([false, false, false]); // fresh reroll budget each round
       setHackUsed(false);
       setSlotStickers(rollSlotStickers(progress.id));
