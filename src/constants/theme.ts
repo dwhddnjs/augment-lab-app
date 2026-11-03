@@ -222,20 +222,33 @@ export const HeroOverlay = {
 /**
  * 증강 카드(RarityCardFrame) 고유색. 카드 아트가 어두운 고정색이라 라이트/다크 공통이다.
  * - amount: 설명 안 골드 금액 강조. 증강 골드 토큰(샴페인색)은 회색 설명과 너무 가까워 채도 높은 금색을 따로 둔다.
- * - glowAlpha: 외곽 글로우의 등급색 알파(8자리 hex 뒤 2자리). 등급이 오를수록 진하게 번진다.
- * - kdaGlow: K/DA 보너스 카드 글로우(K/DA 마크와 같은 파랑). 등급 프레임은 그대로 두어 티어를 읽을 수 있게 한다.
+ * - shadow: 카드 그림자 — 등급색. 프레임 옆 띠 평균색(골드 #88694E·실버 #777777·프리즘 #968ECA)과 같은 색상각이다.
+ *   light: 밝은 배경 위 그림자. 띠색보다 어둡고 진하게 잡아 등급 색이 비치는 그림자가 되게 했다. 아래로 떨구지 않는다
+ *   (cardShadow 주석). alpha 는 8자리 hex 뒤 2자리.
+ *   dark: 어두운 배경 위 빛. 골드·프리즘은 인게임 캡처에서 잰 값이고(inner·outer 두 겹), 실버는 원본에 빛이 없어 옅게 둔다.
  */
 export const AugmentCardColors = {
   amount: "#E8B339",
-  shadow: "rgba(0,0,0,0.55)",
-  glowAlpha: { silver: "2E", gold: "52", prismatic: "73" },
-  kdaGlow:
-    "0 6px 24px rgba(0,0,0,0.5), 0 0 20px rgba(52,120,255,0.75), 0 0 8px rgba(96,176,255,0.6)",
+  shadow: {
+    light: {
+      alpha: "4D",
+      silver: "#3E434B",
+      gold: "#6B4423",
+      prismatic: "#5B47C2",
+    },
+    dark: {
+      silver: { color: "#D5D8DE", inner: "14", outer: "1A" },
+      gold: { color: "#E9CFAF", inner: "2B", outer: "2B" },
+      prismatic: { color: "#BCACFF", inner: "40", outer: "61" },
+    },
+  },
 } as const;
 
 /** 헤드라이너 고유색(밴드 로고·컨셉). 등장 연출의 무대 조명이라 라이트/다크 공통이다. */
 export const HeadlinerColors = {
-  kda: "#B388FF",
+  // 드래프트의 K/DA 마크(헤더·보너스 카드 위)의 파란 글로우와 같은 계열.
+  // 등장 연출만 보라였다가 드래프트와 색이 어긋나 맞췄다. HEARTSTEEL(#6FB1FF)보다 짙어 구분된다.
+  kda: "#3478FF",
   pentakill: "#D4AF6A",
   heartsteel: "#6FB1FF",
   "true-damage": "#2DD4BF",
@@ -244,13 +257,6 @@ export const HeadlinerColors = {
   bees: "#FFC23D",
   "command-line": "#FFB938",
 } as const;
-
-/**
- * 라이트 모드에서 금색 커맨드 라인 마크를 칠하는 색. 밝은 배경에 묻히지 않도록 진한 금색을 칠하고,
- * 그 위로 밝은 금색이 번쩍인다. 증강 골드 토큰을 빌려 쓰다가, 토큰이 게임 카드의 샴페인색으로
- * 바뀌면서 따로 떼어 냈다.
- */
-export const CommandLineLightTint = { mark: "#AD821F", flash: "#E8B339" } as const;
 
 /**
  * 게임 툴팁의 스탯 글자색(HEARTSTEEL 스티커 문구). 문구 안 `[as]공격 속도 40%[/as]` 처럼 표시한 구간에 입힌다.
@@ -280,7 +286,6 @@ export const StatTextColors = {
 
 /** 펜타킬 스킬 카드의 인게임 고유색. 카드 아트가 어두운 고정색이라 라이트/다크 공통이다. */
 export const SkillCardColors = {
-  glow: "0 0 18px rgba(255,168,84,0.42)",
   portraitRing: "#EBD7B4",
   swirl: "#8F6F4C",
   body: "#AEB4BD",

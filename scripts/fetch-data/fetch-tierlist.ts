@@ -201,7 +201,11 @@ async function main() {
   const dtChamps = await fetchJson(`${DTODO}/data/${ver}/champions.json`);
   if (!dtChamps) throw new Error('dtodo champions.json fetch 실패');
   const stats = new Map<string, any>((dtChamps.data as any[]).map((c) => [String(c.id), c.stats]));
-  const patch: string = cfg.gamePatch ?? '';
+  // aram.gg 는 게임 클라이언트 버전(16.21)을 준다. 공식 패치명은 연도 표기라 앞자리가 10 크다(16.21 → 26.21).
+  // 이미 연도 표기(20 이상)로 오면 그대로 둔다.
+  const patch: string = String(cfg.gamePatch ?? '').replace(/^(\d+)(?=\.)/, (major) =>
+    Number(major) < 20 ? String(Number(major) + 10) : major,
+  );
   const date: string = (dtChamps.data as any[])[0]?.stats?.date ?? '';
 
   console.log(`패치 ${patch} · 집계일 ${date} · dataVersion ${ver}`);

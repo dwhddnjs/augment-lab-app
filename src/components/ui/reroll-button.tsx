@@ -22,7 +22,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-import { CommandLineLightTint, Radius, Spacing } from "@/constants/theme";
+import { Radius, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 
 const SIZE = 36;
@@ -38,7 +38,7 @@ interface Props {
   /** 이번 라운드에 이미 리롤했다 — 영구 잠금. */
   used: boolean;
   /** 다음 리롤이 등급을 올릴 때의 버튼 이미지. */
-  hackedArt?: { icon: number; flash: number };
+  hackedArt?: { icon: number; lightIcon: number; flash: number };
   /** 픽·리롤 연출 중이라 지금은 못 누른다. */
   disabled?: boolean;
   onPress: () => void;
@@ -83,19 +83,17 @@ export function RerollButton({ used, hackedArt, disabled, onPress }: Props) {
               { opacity: disabled ? 0.35 : pressed ? 0.65 : 1 },
             ]}
           >
-            {/* 금색 마크는 밝은 배경에 묻힌다. 라이트 모드는 진한 금색 위로 밝은 금색이 번쩍인다. */}
+            {/* 금색 마크는 밝은 배경에 묻혀 라이트 모드는 그림자를 깐 그림을 쓴다. 번쩍임은 두 모드 같다. */}
             <Image
-              source={hackedArt.icon}
+              source={mode === "light" ? hackedArt.lightIcon : hackedArt.icon}
               style={styles.fill}
               contentFit="contain"
-              tintColor={mode === "light" ? CommandLineLightTint.mark : undefined}
             />
             <Animated.View style={[StyleSheet.absoluteFill, flashStyle]}>
               <Image
                 source={hackedArt.flash}
                 style={styles.fill}
                 contentFit="contain"
-                tintColor={mode === "light" ? CommandLineLightTint.flash : undefined}
               />
             </Animated.View>
           </Pressable>

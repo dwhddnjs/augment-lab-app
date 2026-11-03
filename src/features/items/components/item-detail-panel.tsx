@@ -118,7 +118,11 @@ export function ItemDetailPanel({
 
         {headliner && (
           <View style={{ marginTop: Spacing.three }}>
-            <HeadlinerSummary headliner={headliner} championId={champion?.id} />
+            <HeadlinerSummary
+              headliner={headliner}
+              championId={champion?.id}
+              compact
+            />
           </View>
         )}
 

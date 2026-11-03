@@ -21,6 +21,8 @@ interface Props {
   /** 제목 우측 메타(예: 강화 레벨 별). */
   meta?: React.ReactNode;
   description?: string;
+  /** 좁은 가로 패널(픽 현황 Drawer·아이템 화면)용 — 안쪽 여백과 간격을 줄인다. */
+  compact?: boolean;
 }
 
 export function DetailCardRow({
@@ -29,6 +31,7 @@ export function DetailCardRow({
   title,
   meta,
   description,
+  compact,
 }: Props) {
   const { colors } = useTheme();
   return (
@@ -36,6 +39,7 @@ export function DetailCardRow({
       surface="raised"
       style={[
         styles.row,
+        compact && styles.compact,
         { borderColor: colors.border.subtle, borderLeftColor: accentColor },
       ]}
     >
@@ -66,6 +70,10 @@ const styles = StyleSheet.create({
     borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
     borderLeftWidth: 3,
+  },
+  compact: {
+    gap: Spacing.double,
+    padding: Spacing.double,
   },
   body: {
     flex: 1,
