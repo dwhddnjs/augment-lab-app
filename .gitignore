@@ -46,3 +46,6 @@ example
 
 # 검증 스크린샷 — 저장소에 커밋하지 않는다 (docs/verification/README.md 참고)
 docs/verification/assets/
+
+# Claude Code 워크트리 — EAS 업로드 tarball에 섞여 들어가지 않도록 (.git/info/exclude는 EAS가 안 읽음)
+/.claude/worktrees/
