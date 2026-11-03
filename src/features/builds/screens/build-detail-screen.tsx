@@ -143,9 +143,9 @@ export function BuildDetailScreen() {
   const champion = build
     ? (champions.find((c) => c.id === build.championId) ?? null)
     : null;
-  const buildAugments = (build?.augmentIds ?? [])
-    .map((augId) => augments.find((a) => a.id === augId))
-    .filter((a): a is NonNullable<typeof a> => a != null);
+  const buildAugments = resolveIds(build?.augmentIds, augments).map((a) =>
+    build?.transmutedIds?.includes(a.id) ? { ...a, transmuted: true } : a,
+  );
   const buildItems = resolveIds(build?.itemIds, items);
   const itemStatsList = buildItems.map((it) => it.stats);
 

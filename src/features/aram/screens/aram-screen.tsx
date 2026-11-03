@@ -24,6 +24,7 @@ import {
 import { parseGameMode } from "@/constants/game-modes";
 import { HeroOverlay, Radius, Spacing } from "@/constants/theme";
 import { useChampionSpells } from "@/features/champions/hooks/use-champion-spells";
+import { HEADLINER_LOGOS } from "@/features/headliners/assets";
 import { HeadlinerLogo } from "@/features/headliners/components/headliner-logo";
 import { useHeadlinerTexts } from "@/features/headliners/hooks/use-headliners";
 import type { HeadlinerId } from "@/features/headliners/types";
@@ -71,14 +72,16 @@ const t = {
 
 // 헤더 버튼 좌우 여백 — 카드 영역(CARD_ROW_PAD)보다 넓게 잡아 버튼이 기기 끝에 붙지 않게 한다.
 const HEADER_PAD = Spacing.five; // 32
-// 헤더 로고 크기. 정사각 로고는 40 이면 라운드 pill(약 45pt)과 키가 같아 무거워 보인다.
-// 예외: K/DA 마크는 가로로 길고 얇아서(1.65:1) 28 이면 너무 작고, 꿀벌은 둥근 얼굴 이모트라
-// 같은 28 이면 다른 로고보다 작아 보인다.
-const HEADER_LOGO_SIZE = 28;
-const HEADER_LOGO_SIZES: Partial<Record<HeadlinerId, number>> = {
-  kda: 40,
-  bees: 34,
-};
+// 헤더 로고 크기 — 투명 여백을 뺀 실제 그림(HEADLINER_LOGOS ink)의 긴 변이 32pt 가 되게 맞춘다.
+// 정사각 로고는 40 이면 라운드 pill(약 45pt)과 키가 같아 무거워 보인다.
+// 가로로 긴 K/DA 워드마크는 그림 높이 16pt(폭 약 75pt)다 — 높이를 32pt 로 맞추면 폭이 150pt 로 헤더를 누른다.
+const HEADER_LOGO_INK = 32;
+const HEADER_WORDMARK_INK = 16;
+
+function headerLogoSize(id: HeadlinerId): number {
+  const { aspect = 1, ink = 1 } = HEADLINER_LOGOS[id];
+  return Math.round((aspect > 1 ? HEADER_WORDMARK_INK : HEADER_LOGO_INK) / ink);
+}
 // 헤더 밑에서 카드까지 내리는 거리(화면 높이 대비). 모든 헤드라이너가 같은 자리를 쓴다.
 // 카드 위 K/DA 마크가 헤더에서 떨어지면서도, 가장 긴 HEARTSTEEL 줄이 낮은 기기에서 넘치지 않는 값이다.
 const CARD_TOP_RATIO = 0.07;
@@ -227,7 +230,7 @@ export function AramScreen() {
                 >
                   <HeadlinerLogo
                     id={progress.id}
-                    size={HEADER_LOGO_SIZES[progress.id] ?? HEADER_LOGO_SIZE}
+                    size={headerLogoSize(progress.id)}
                     plain
                   />
                 </View>
@@ -287,7 +290,6 @@ export function AramScreen() {
                         disabled={anim.animating}
                         rerolled={rerolled[i]}
                         hacked={hacked}
-                        variant={isKdaBonusRound ? "kda" : undefined}
                         badge={
                           isKdaBonusRound ? (
                             <KdaBadge />

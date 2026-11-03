@@ -14,9 +14,10 @@ import {
   type CardExitMode,
 } from "@/components/ui/pick-card";
 import {
-  AUGMENT_CARD_ART,
   CARD_ASPECT,
   CARD_CORNER,
+  CardArt,
+  cardShadow,
 } from "@/components/ui/rarity-card-frame";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { HeroOverlay, Radius, SkillCardColors, Spacing } from "@/constants/theme";
@@ -25,11 +26,14 @@ import type { ChampionSpells } from "@/features/champions/types";
 import { HEADLINER_LOGOS, SKILL_CARD_ART } from "@/features/headliners/assets";
 import { useHeadlinerTexts } from "@/features/headliners/hooks/use-headliners";
 import type { SkillKey } from "@/features/headliners/types";
+import { useTheme } from "@/hooks/use-theme";
 import { championSquareUrl, spellImageUrl } from "@/lib/ddragon";
 import { renderMarked } from "./marked-text";
 
 const LOGO_SIZE = 40;
-const PORTRAIT_SIZE = 32;
+/** 챔피언 얼굴 — 좌상단 꼭짓점에서 INSET 만큼 밖으로 걸친다. HEARTSTEEL 스티커(StickerMark)도 같은 자리다. */
+export const PORTRAIT_SIZE = 32;
+export const PORTRAIT_INSET = -Spacing.one;
 const SWIRL_SIZE = 74;
 const ICON_SIZE = 34;
 
@@ -64,6 +68,7 @@ export function SkillCard({
   onPick,
 }: Props) {
   const texts = useHeadlinerTexts();
+  const { mode } = useTheme();
   const champion = useChampions().find((c) => c.id === championId);
   const spell = spells?.[skill];
   const keyLabel = skill.toUpperCase();
@@ -78,25 +83,15 @@ export function SkillCard({
       onPress={onPick}
     >
       <View
-        style={[
-          styles.card,
-          {
-            width: cardWidth,
-            height: Math.round(cardWidth * CARD_ASPECT),
-            borderRadius: cardWidth * CARD_CORNER,
-          },
-        ]}
+        style={{
+          width: cardWidth,
+          height: Math.round(cardWidth * CARD_ASPECT),
+          borderRadius: cardWidth * CARD_CORNER,
+          // 골드 프레임이라 골드 증강과 같은 그림자다.
+          boxShadow: cardShadow("gold", cardWidth, mode),
+        }}
       >
-        <Image
-          source={AUGMENT_CARD_ART.background}
-          style={StyleSheet.absoluteFill}
-          contentFit="fill"
-        />
-        <Image
-          source={AUGMENT_CARD_ART.frame.gold}
-          style={StyleSheet.absoluteFill}
-          contentFit="fill"
-        />
+        <CardArt rarity="gold" width={cardWidth} />
 
         <View style={styles.content}>
           <View style={styles.emblem}>
@@ -161,7 +156,7 @@ export function SkillCard({
           />
         )}
         <Image
-          source={HEADLINER_LOGOS.pentakill}
+          source={HEADLINER_LOGOS.pentakill.source}
           style={styles.logo}
           contentFit="contain"
         />
@@ -171,9 +166,6 @@ export function SkillCard({
 }
 
 const styles = StyleSheet.create({
-  card: {
-    boxShadow: SkillCardColors.glow,
-  },
   content: {
     flex: 1,
     alignItems: "center",
@@ -217,8 +209,8 @@ const styles = StyleSheet.create({
   },
   portrait: {
     position: "absolute",
-    top: -Spacing.one,
-    left: -Spacing.one,
+    top: PORTRAIT_INSET,
+    left: PORTRAIT_INSET,
     borderRadius: Radius.full,
     borderWidth: 1.5,
     borderColor: SkillCardColors.portraitRing,

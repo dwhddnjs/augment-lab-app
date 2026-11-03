@@ -26,8 +26,10 @@ export interface SavedBuild {
   /** 게임 모드. mode 없는 기존 데이터는 parseBuilds에서 'aram'으로 폴백한다. */
   mode: GameMode;
   championId: string;
-  /** 픽한 증강 id — 최대 7(K/DA 5픽 + 혼돈 변환 2개) */
+  /** 얻은 증강 id. 전환 증강 자체는 빠지고 그걸로 얻은 증강이 들어가 개수는 판마다 다르다. */
   augmentIds: string[];
+  /** augmentIds 중 전환 증강으로 얻은 것. 도입 전 빌드와 커스텀 빌드에는 없다. */
+  transmutedIds?: string[];
   /** 선택한 아이템 id — 0~6 */
   itemIds: string[];
   /** 이번 판 헤드라이너. 커스텀 빌드와 도입 전 빌드에는 없다. */
@@ -103,6 +105,9 @@ export function parseBuilds(raw: string | null | undefined): SavedBuild[] {
       ...b,
       mode: !b.mode || b.mode === 'classic' ? 'aram' : b.mode,
       headliner: parseBuildHeadliner(b.headliner),
+      transmutedIds: Array.isArray(b.transmutedIds)
+        ? b.transmutedIds.filter((id: unknown) => typeof id === 'string')
+        : undefined,
     };
     const ok =
       GAME_MODES.includes(build.mode) &&

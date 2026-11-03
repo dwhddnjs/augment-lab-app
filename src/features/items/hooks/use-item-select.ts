@@ -147,6 +147,7 @@ export function useItemSelect({
         mode,
         championId,
         augmentIds: pickedAugments.map((a) => a.id),
+        transmutedIds: pickedAugments.filter((a) => a.transmuted).map((a) => a.id),
         itemIds: selectedIds,
         headliner,
       });

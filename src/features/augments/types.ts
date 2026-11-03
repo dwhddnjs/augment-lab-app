@@ -25,4 +25,9 @@ export interface Augment {
    * 뽑기에는 안 쓰이지만 과거 빌드가 참조할 수 있어 데이터는 남긴다.
    */
   modes?: AugmentMode[];
+  /**
+   * 전환 증강으로 얻었다. 드래프트 결과에만 붙고(데이터 JSON 엔 없다) 표시할 때 이름 앞에 "전환:" 을 붙인다
+   * (useAugmentName). 이름에 직접 넣으면 저장 뒤 사라지고 언어를 바꿔도 따라가지 않는다.
+   */
+  transmuted?: boolean;
 }
