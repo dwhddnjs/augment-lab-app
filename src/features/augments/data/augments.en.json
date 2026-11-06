@@ -708,9 +708,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Perseverance_small.png",
     "augmentNameId": "ARAM_Perseverance",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "rabble-rousing",
@@ -785,9 +783,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SnowballUpgrade_small.png",
     "augmentNameId": "SnowballUpgrade",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "soul-siphon",
@@ -1219,9 +1215,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/QuantumComputing_small.png",
     "augmentNameId": "ARAM_QuantumComputing",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "quest-steel-your-heart",
@@ -1632,7 +1626,7 @@
   {
     "id": "soul-eater",
     "name": "Soul Eater",
-    "description": "Immobilizing or grounding an enemy champion grants you 20 bonus health, stacking infinitely (5 second cooldown per cast instance).",
+    "description": "Immobilizing or grounding an enemy champion grants you 30 bonus health, stacking infinitely (5 second cooldown per cast instance).",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SoulEater_small.png",
     "augmentNameId": "SoulEater",
@@ -1815,7 +1809,7 @@
   {
     "id": "titan-s-resolve",
     "name": "Titan's Resolve",
-    "description": "Dealing or taking damage grants stacks. Every 10 stacks grant adaptive force, armor, MR, size, and tenacity.",
+    "description": "Dealing or taking damage grants stacks. Every 7 stacks grant adaptive force, armor, MR, size, and tenacity.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/IAmTheJuggernaut_small.png",
     "augmentNameId": "ARAM_ImTheJuggernaut",
@@ -2949,7 +2943,7 @@
   {
     "id": "armored-impact",
     "name": "Armored Impact",
-    "description": "After casting an ability, your next attack within 10s deals 50-125 (+250% bonus armor) bonus physical damage around the target.",
+    "description": "After casting an ability, your next attack within 10s deals 25-125 (+220% bonus armor) bonus physical damage around the target.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ArmoredImpact_small.png",
     "augmentNameId": "ArmoredImpact",
@@ -2960,7 +2954,7 @@
   {
     "id": "bees",
     "name": "BEES!!!",
-    "description": "Ability hits on champions throw a beehive. Bees swarm nearby enemies for 2s, slowing 20% and dealing 75-200 magic damage. (15-10s)",
+    "description": "Ability hits on champions throw a beehive. Bees swarm nearby enemies for 2s, slowing 20% and dealing 75-140 magic damage. (15-10s)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Bees_small.png",
     "augmentNameId": "BEES",
@@ -3004,7 +2998,7 @@
   {
     "id": "brass-blast",
     "name": "Brass Blast",
-    "description": "Replace a summoner spell with Brass Blast: charge a trumpet up to 2.5s, then knock back enemies for 120-600 magic damage. (45s)",
+    "description": "Replace a summoner spell with Brass Blast: charge a trumpet up to 2.5s, then knock back enemies for 120-600 magic damage. (50s)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Camo_large.png",
     "augmentNameId": "BrassBlast",
@@ -3235,7 +3229,7 @@
   {
     "id": "take-em-down-down-down",
     "name": "Take'em Down Down Down",
-    "description": "Attacks and abilities deal 5-30 bonus magic damage and stack. At 5 stacks, deal 15% missing health damage and heal 67% of it.",
+    "description": "Attacks and abilities deal 5-30 bonus magic damage and stack. At 5 stacks, deal 17% missing health damage and heal 67% of it.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TakeEmDownDownDown_small.png",
     "augmentNameId": "TakeemDownDownDown",
@@ -3316,6 +3310,28 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ProtagonistsSignatureWeapon_small.png",
     "augmentNameId": "WeaponOfDestiny",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "one-hit-wonder",
+    "name": "One Hit Wonder",
+    "description": "Upgrades an ability: its damage increases by 75% per 100 ability haste, but it no longer benefits from ability haste.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "OneHitWonder",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "rise",
+    "name": "RISE",
+    "description": "Killing a champion with your ultimate lets you recast it within 5s, up to 2 times. Each recast deals 25% more damage.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ZeroHour_large.png",
+    "augmentNameId": "RISE",
     "modes": [
       "aram"
     ]
