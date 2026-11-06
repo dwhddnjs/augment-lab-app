@@ -31,6 +31,7 @@ import type { HeadlinerId } from "@/features/headliners/types";
 import {
   ARAM_ROUNDS,
   isHeadlinerId,
+  roundsFor,
   skillChoices,
 } from "@/features/headliners/rules";
 import { useCardPickAnim } from "@/hooks/use-card-pick-anim";
@@ -42,7 +43,12 @@ import { useTranslation } from "@/lib/i18n";
 import { prefetchOne } from "@/lib/image-prewarm";
 import { lockPortraitAfterExit } from "@/lib/orientation";
 import { AramCard } from "../components/aram-card";
-import { KdaBadge, StickerLabel, StickerMark } from "../components/card-marks";
+import {
+  KdaBadge,
+  StickerLabel,
+  StickerMark,
+  WorldsBadge,
+} from "../components/card-marks";
 import { HeadlinerReveal } from "../components/headliner-reveal";
 import { PickedDrawer } from "../components/picked-drawer";
 import { RoundIndicator } from "../components/round-indicator";
@@ -123,8 +129,14 @@ export function AramScreen() {
 
   const headlinerTexts = useHeadlinerTexts();
   const spells = useChampionSpells(championId);
-  // K/DA 의 5번째 선택은 라운드가 아니라 4라운드를 마친 뒤의 보너스다.
-  const isKdaBonusRound = progress.id === "kda" && round >= ARAM_ROUNDS;
+  // K/DA·열혈 팬의 5번째 선택은 라운드가 아니라 4라운드를 마친 뒤의 보너스다.
+  const bonusId =
+    round >= ARAM_ROUNDS && (progress.id === "kda" || progress.id === "worlds")
+      ? progress.id
+      : null;
+  // 열혈 팬의 21레벨 증강은 5라운드로 센다. K/DA 보너스는 4라운드 뒤 덤이라 `4 / 4` 를 유지한다.
+  const totalRounds =
+    progress.id === "worlds" ? roundsFor(progress.id) : ARAM_ROUNDS;
 
   // portrait 복귀는 handleExit에서 명시적으로 처리한다(중간 orientation 변경 방지).
   const { isLandscape, screenW, screenH } = useLandscapeLock(AFTER_MODAL_MS);
@@ -244,8 +256,8 @@ export function AramScreen() {
                   {translate(needsSkillPick ? "skillRound" : "round")}
                 </ThemedText>
                 <RoundIndicator
-                  round={Math.min(round, ARAM_ROUNDS)}
-                  total={ARAM_ROUNDS}
+                  round={Math.min(round, totalRounds)}
+                  total={totalRounds}
                 />
               </GlassSurface>
             </View>
@@ -291,8 +303,10 @@ export function AramScreen() {
                         rerolled={rerolled[i]}
                         hacked={hacked}
                         badge={
-                          isKdaBonusRound ? (
+                          bonusId === "kda" ? (
                             <KdaBadge />
+                          ) : bonusId === "worlds" ? (
+                            <WorldsBadge cardWidth={cardWidth} />
                           ) : (
                             sticker && (
                               <StickerMark sticker={sticker} rarity={aug.rarity} />

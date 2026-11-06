@@ -1,59 +1,36 @@
 {
   "generatedFrom": "CDragon latest + map30.bin + wiki MayhemAugmentData",
   "newIds": [
-    "arcane-axiom",
-    "armored-impact",
-    "bees",
-    "big-shot",
-    "blue-barrier",
-    "bouncing-bees",
-    "brass-blast",
-    "crimson-cobalt",
-    "double-time",
-    "enchanting-butterflies",
-    "flow-of-spirit",
-    "fruitify",
-    "get-jinxed",
-    "gift-of-the-drowned",
-    "group-hug",
-    "hands-off-the-talent",
-    "heavy-is-the-crown",
-    "jeweled-bracelet",
-    "lich-brain",
-    "lonely-warrior",
-    "mosh-monster",
-    "no-mana-no-problem",
-    "recoil",
-    "salvation",
-    "sap-magic",
-    "sound-barrier",
-    "still-here",
-    "take-em-down-down-down",
-    "the-boom-and-the-bass",
-    "third-times-the-harm",
-    "tickle-monster",
-    "totentanz",
-    "ultimate-recursion",
-    "upgrade-stormsurge",
-    "weapon-of-destiny"
+    "one-hit-wonder",
+    "rise"
   ],
-  "needsNumbers": [],
-  "noCoefficients": [],
-  "missingNumbers": [
+  "needsNumbers": [
     {
-      "id": "adamant",
-      "name": "Adamant",
-      "app": "Immobilizing an enemy or grounding their movement abilities grants armor and magic resist.",
-      "wiki": "Immobilizing or grounding an enemy champion grants 10 bonus armor and bonus magic resistance for 10 seconds, stacking up to 10 times for a total of 100 bonus resistances, and refreshing on subsequent triggers (5 second cooldown per cast instance). This augment is currently disabled.",
-      "appNums": [],
-      "wikiNums": [
-        "10",
-        "10",
-        "10",
-        "100",
-        "5"
+      "id": "one-hit-wonder",
+      "name": "원 히트 원더",
+      "en": "One Hit Wonder",
+      "rarity": "gold",
+      "description": "피해량이 스킬 가속 당% 증가하지만, 더 이상 스킬 가속 효과를 받지 않습니다. 추가 피해량:%",
+      "missingVars": [
+        "AHMultiplier",
+        "Calc_AbilityDamagetoAH",
+        "f1.1*100"
       ]
     },
+    {
+      "id": "rise",
+      "name": "RISE",
+      "en": "RISE",
+      "rarity": "prismatic",
+      "description": "스킬로 적 챔피언을 처치하면 초 안에 해당 스킬을 한 번 재사용할 수 있습니다. 이후 재사용할 때마다 추가 피해를 입힙니다. 최대 2회 추가로 재사용할 수 있으며, 각각 이전보다 증가한 피해를 입힙니다. 모두가 기억하게 만드세요.",
+      "missingVars": [
+        "Calc_RecastWindow",
+        "Calc_RecastDamageMod"
+      ]
+    }
+  ],
+  "noCoefficients": [],
+  "missingNumbers": [
     {
       "id": "dive-bomber",
       "name": "Dive Bomber",
@@ -139,7 +116,7 @@
       "id": "firebrand",
       "name": "Firebrand",
       "app": "Your Attacks apply an infinitely stacking Burn On-Hit, dealing damage over time.",
-      "wiki": "Basic attacks apply a Burn for 5 seconds that deals bonus magic damage equal toThis Burn stacks infinitely and refreshes with each application.",
+      "wiki": "Basic attacks on-hit apply a Burn for 5 seconds that deals bonus magic damage equal toThis Burn stacks infinitely and refreshes with each application.",
       "appNums": [],
       "wikiNums": [
         "5"
@@ -168,18 +145,6 @@
         "15",
         "5",
         "60"
-      ]
-    },
-    {
-      "id": "perseverance",
-      "name": "Perseverance",
-      "app": "Gain hugely increased Health Regen, further increased at low Health.",
-      "wiki": "Grants 1000% base health regeneration, increased to 2000% while below 25% maximum health. This augment is currently disabled.",
-      "appNums": [],
-      "wikiNums": [
-        "1000",
-        "2000",
-        "25"
       ]
     },
     {
@@ -399,33 +364,6 @@
         "75",
         "150",
         "70"
-      ]
-    },
-    {
-      "id": "quantum-computing",
-      "name": "Quantum Computing",
-      "app": "Periodically slash a wide radius. Edge hits slow enemies, deal extra damage, and heal you.",
-      "wiki": "Automatically cast an improved version of when an enemy champion is within 650 units of you, winding up over 0.75 seconds to slash in a 650 radius around you. The slash deals 200 to 350 (+ 75% bonus AD) (+ 45% AP) physical damage to enemies within the area (30 second cooldown). Enemies hit by the outer edge of the circle take bonus physical damage equal to 10% (+ 2.5% per 100 bonus AD) (+ 1.6% per 100 AP) (+ 0.1% per 100 bonus health) of their maximum health and are slowed by 80% decaying over 2 seconds. Additionally, you are healed for 80% of the bonus post-mitigation damage against enemy champions hit by the outer edge. This augment is currently disabled.",
-      "appNums": [],
-      "wikiNums": [
-        "650",
-        "0.75",
-        "650",
-        "200",
-        "350",
-        "75",
-        "45",
-        "30",
-        "10",
-        "2.5",
-        "100",
-        "1.6",
-        "100",
-        "0.1",
-        "100",
-        "80",
-        "2",
-        "80"
       ]
     },
     {
@@ -715,17 +653,17 @@
       "id": "ravenous-bind",
       "name": "Ravenous Bind",
       "app": "Upgrades an immobilizing or grounding ability: it deals bonus magic damage and heals you.",
-      "wiki": "Upgrades one of your champion's abilities that has a immobilizing or grounding effect, empowering the ability to deal 15 to 90 (+ 10% AP) (+ 0.5% of your maximum health) magic damage to affected targets and heal you for 50 to 200 (+ 5% AP) (+ 10% bonus health). The heal is increased by up to 50% based on how long the ability's cooldown is.",
+      "wiki": "Upgrades one of your champion's abilities that has a immobilizing or grounding effect, empowering the ability to deal 15 to 90 (+ 10% AP) (+ 0.5% of your maximum health) magic damage to affected targets and heal you for 75 to 300 (+ 5% AP) (+ 12% bonus health). The heal is increased by up to 50% based on how long the ability's cooldown is.",
       "appNums": [],
       "wikiNums": [
         "15",
         "90",
         "10",
         "0.5",
-        "50",
-        "200",
+        "75",
+        "300",
         "5",
-        "10",
+        "12",
         "50"
       ]
     },
@@ -761,7 +699,7 @@
     {
       "id": "spell-split",
       "name": "Spell Split",
-      "app": "Upgrades a missile ability: on hit, at max range, or on recast it splits in two, firing opposite ways.",
+      "app": "Upgrades a missile ability: at max range or on recast it splits in two, firing opposite ways.",
       "wiki": "Upgrades one of your champion's abilities that has a missile, empowering the ability's missile to split in two over 0.25 seconds upon reaching maximum range, or when recast. Each of the split missiles fire perpendicularly in opposite directions and apply the same effects to enemies they hit. Subsequent missile hits from the same cast against the same enemy deal 30% damage. Recast can be used after 0.15 seconds of the initial cast.",
       "appNums": [],
       "wikiNums": [
@@ -852,7 +790,7 @@
       "id": "squishy-slappy-grab",
       "name": "Squishy Slappy Grab",
       "app": "Periodically tether nearby enemies. Your next attack pulls them in, dealing magic damage and stunning.",
-      "wiki": "When an enemy champion is within 450 units of you, after a 1.5-second delay, you send out Squishy Slappy Hands that latch onto all nearby enemy champions within 800 units, forming a tether between yourself and each target for 4 seconds (30 second cooldown). While the tethers persist (950 tether radius), your next basic attack is empowered to pull all tethered enemies toward you, dealing 50 to 150 (+ 15% bonus health) magic damage to affected targets and stunning them for 0.25 seconds after the pull ends. Targets are pulled over 450 units, reduced to 350 for those farther away from you. Additionally, you gain a 50 to 200 (+ 50% bonus armor) (+ 50% bonus magic resistance) shield for each pulled enemy, lasting for 2.5 seconds.",
+      "wiki": "When an enemy champion is within 450 units of you, after a 1.5-second delay, you send out Squishy Slappy Hands that latch onto all nearby enemy champions within 800 units, forming a tether between yourself and each target for 4 seconds (30 second cooldown). While the tethers persist (950 tether radius), your next basic attack is empowered to pull all tethered enemies toward you, dealing 50 to 150 (+ 15% bonus health) magic damage to affected targets and stunning them for 0.25 seconds after the pull ends. Targets are pulled over 450 units, reduced to 350 for those farther away from you. Additionally, you gain a 100 to 300 (+ 70% bonus armor) (+ 70% bonus magic resistance) shield for each pulled enemy, lasting for 2.5 seconds.",
       "appNums": [],
       "wikiNums": [
         "450",
@@ -867,10 +805,10 @@
         "0.25",
         "450",
         "350",
-        "50",
-        "200",
-        "50",
-        "50",
+        "100",
+        "300",
+        "70",
+        "70",
         "2.5"
       ]
     },
@@ -878,30 +816,13 @@
       "id": "stay-resolute",
       "name": "Stay Resolute",
       "app": "Upgrades an ability: damaging a champion grants armor or MR matching their adaptive type, stacking.",
-      "wiki": "Upgrades one of your champion's abilities, empowering the ability to grant you 1 to 3 for 3 bonus armor or bonus magic resistance permanently when it damages an enemy champion, stacking infinitely (5 second cooldown per target per cast instance). The resistance type granted is based on the target's adaptive type: bonus armor for physical and bonus magic resistance for magic. If this is not your first augment, gain 20 bonus armor and bonus magic resistance.",
+      "wiki": "Upgrades one of your champion's abilities, empowering the ability to grant you 2;3 bonus armor or bonus magic resistance permanently when it damages an enemy champion, stacking infinitely (5 second cooldown per target per cast instance). The resistance type granted is based on the target's adaptive type: bonus armor for physical and bonus magic resistance for magic. If this is not your first augment, gain 20 bonus armor and bonus magic resistance.",
       "appNums": [],
       "wikiNums": [
-        "1",
-        "3",
+        "2",
         "3",
         "5",
         "20"
-      ]
-    },
-    {
-      "id": "void-dash",
-      "name": "Void Dash",
-      "app": "Dashing with the chosen ability creates a void zone that slows enemy champions and deals magic damage.",
-      "wiki": "Upgrades one of your champion's abilities that has a dash, empowering the ability to spawn a void zone (250 radius) at the dash's destination after a 0.3-second delay. Enemy champions within the zone are dealt 80 to 400 (+ 100% ability haste) magic damage and are slowed by 35% for 1 second. This augment is currently disabled.",
-      "appNums": [],
-      "wikiNums": [
-        "250",
-        "0.3",
-        "80",
-        "400",
-        "100",
-        "35",
-        "1"
       ]
     },
     {
@@ -1023,24 +944,10 @@
       ]
     },
     {
-      "id": "leg-day",
-      "name": "Leg Day",
-      "app": "Gain 50 Movement Speed and 40% Slow Resist.",
-      "wiki": "Gain 50 bonus movement speed and 50% slow resist.",
-      "appNums": [
-        "50",
-        "40"
-      ],
-      "wikiNums": [
-        "50",
-        "50"
-      ]
-    },
-    {
       "id": "light-em-up",
       "name": "Light 'em Up!",
       "app": "Every 4th Attack deals additional magic damage On-Hit.",
-      "wiki": "Basic attacks generate a stack, up to 4. The fourth stack consumes them all to quickly launch 4 missiles at the target that each deal 11 to 80 (+ 35% bonus AD) (+ 19% AP) bonus magic damage on-hit, for a total of 11*4 to 80*4 (+ 35*4% bonus AD) (+ 19*4% AP).",
+      "wiki": "Basic attacks on-hit generate a stack, up to 4. The fourth stack consumes them all to quickly launch 4 missiles at the target that each deal 11 to 80 (+ 35% bonus AD) (+ 19% AP) bonus magic damage on-hit, for a total of 11*4 to 80*4 (+ 35*4% bonus AD) (+ 19*4% AP).",
       "appNums": [
         "4"
       ],
@@ -1075,10 +982,11 @@
     {
       "id": "spin-to-win",
       "name": "Spin To Win",
-      "app": "Your spin abilities deal 30% more damage and gain 30 ability haste.",
+      "app": "Your spin abilities deal 30% more damage (50% for ultimates) and gain 30 ability haste.",
       "wiki": "Your spinning abilities deal 30% increased damage and have their cooldown reduced equivalent to 30 ability haste. The damage amplifier is increased to 50% for ultimate abilities.",
       "appNums": [
         "30",
+        "50",
         "30"
       ],
       "wikiNums": [
@@ -1291,22 +1199,6 @@
         "200"
       ],
       "wikiNums": []
-    },
-    {
-      "id": "snowball-upgrade",
-      "name": "Snowball Upgrade",
-      "app": "Mark hails a snowstorm, dealing magic damage and slowing enemies. Mark gains 50 ability haste.",
-      "wiki": "Your Mark is empowered to hail a snowstorm at the location where the target was hit for 2 seconds, granting sight of the area and dealingto enemies within over the duration, as well as slowing them by 50% (+ 6% per 100 AP). Additionally, your cooldown is reduced equivalent to 50 ability haste. If Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark. This augment is currently disabled.",
-      "appNums": [
-        "50"
-      ],
-      "wikiNums": [
-        "2",
-        "50",
-        "6",
-        "100",
-        "50"
-      ]
     },
     {
       "id": "upgrade-infinity-edge",
@@ -1584,34 +1476,23 @@
       ]
     },
     {
-      "id": "devil-on-your-shoulder",
-      "name": "Devil on Your Shoulder",
-      "app": "Lose health over time for 20% bonus true damage. Your hits drop Remnants that heal you on pickup.",
-      "wiki": "Forge a pact with, who drains 0.5% of your current health every second, increased to 5% if there are enemy champions within 1000 units. In return, you deal 20% bonus true damage and your basic attacks and abilities summon a Life Remnant nearby for 5 seconds (0.75-second spawn cooldown). You can absorb a Life Remnant by moving over it, healing you for 50 to 150 (+ 50% bonus AD) (+ 25% AP) and granting you 15% bonus movement speed. This augment is currently disabled.",
-      "appNums": [
-        "20"
-      ],
-      "wikiNums": [
-        "0.5",
-        "5",
-        "1000",
-        "20",
-        "5",
-        "0.75",
-        "50",
-        "150",
-        "50",
-        "25",
-        "15"
-      ]
-    },
-    {
       "id": "donation",
       "name": "Donation",
       "app": "Gain 1750 upon acquiring this augment.",
       "wiki": "Gain upon acquiring this augment.",
       "appNums": [
         "1750"
+      ],
+      "wikiNums": []
+    },
+    {
+      "id": "juiced",
+      "name": "Juiced",
+      "app": "Attacks on enemy champions deal bonus magic damage equal to 7% max mana on-hit (80% for ranged). This damage can crit.",
+      "wiki": "Basic attacks against enemy champions deal bonus magic damage on-hit equal to {{as| of your maximum mana}}. This damage can critically strike for bonus damage.",
+      "appNums": [
+        "7",
+        "80"
       ],
       "wikiNums": []
     },
@@ -1675,13 +1556,13 @@
       "id": "soul-eater",
       "name": "Soul Eater",
       "app": "Immobilizing or grounding an enemy champion grants you 20 bonus health, stacking infinitely (5 second cooldown per cast instance).",
-      "wiki": "Immobilizing or grounding an enemy champion grants you 20 bonus health, stacking infinitely (5 second cooldown per cast instance). If this is not your first augment, gain 300 bonus health.",
+      "wiki": "Immobilizing or grounding an enemy champion grants you 30 bonus health, stacking infinitely (5 second cooldown per cast instance). If this is not your first augment, gain 300 bonus health.",
       "appNums": [
         "20",
         "5"
       ],
       "wikiNums": [
-        "20",
+        "30",
         "5",
         "300"
       ]
@@ -1755,13 +1636,13 @@
       "id": "titan-s-resolve",
       "name": "Titan's Resolve",
       "app": "Dealing or taking damage grants stacks. Every 10 stacks grant adaptive force, armor, MR, size, and tenacity.",
-      "wiki": "You generate a stack of Juggernauting for each instance of damage you deal or take (excluding damage over time), lasting for 6 seconds and refreshing on subsequent damage dealt or taken. For every 10 stacks of Juggernauting, you gain 25*0.6 to 75*0.6 bonus Attack Damage or 25 to 75 Ability Power (Adaptive), 5 to 10 bonus armor and bonus magic resistance, 10% increased size, and 8% tenacity. Stacks expire one by one when the duration ends, with the decay rate being faster the more stacks you have.",
+      "wiki": "You generate a stack of Juggernauting for each instance of damage you deal or take (excluding damage over time), lasting for 6 seconds and refreshing on subsequent damage dealt or taken. For every 7 stacks of Juggernauting, you gain 25*0.6 to 75*0.6 bonus Attack Damage or 25 to 75 Ability Power (Adaptive), 5 to 10 bonus armor and bonus magic resistance, 10% increased size, and 8% tenacity. Stacks expire one by one when the duration ends, with the decay rate being faster the more stacks you have.",
       "appNums": [
         "10"
       ],
       "wikiNums": [
         "6",
-        "10",
+        "7",
         "25",
         "0.6",
         "75",
@@ -1973,10 +1854,10 @@
     {
       "id": "upgrade-ravenous-hydra",
       "name": "Upgrade Ravenous Hydra",
-      "app": "Abilities trigger Cleave and Ravenous Hydra gains 18% life steal. Gain 500 gold.",
+      "app": "Abilities trigger Cleave and Ravenous Hydra gains 20% life steal. Gain 500 gold.",
       "wiki": "Upgrades Ravenous Hydra, increasing its life steal stat to 20% and empowering to trigger its effect on ability hits against enemies (1 second cooldown per ability). Additionally, gain.",
       "appNums": [
-        "18",
+        "20",
         "500"
       ],
       "wikiNums": [
@@ -1998,36 +1879,496 @@
         "9",
         "5"
       ]
+    },
+    {
+      "id": "armored-impact",
+      "name": "Armored Impact",
+      "app": "After casting an ability, your next attack within 10s deals 50-125 (+250% bonus armor) bonus physical damage around the target.",
+      "wiki": "After casting an ability, your next basic attack on-hit within 10 seconds is empowered to deal 25 to 125 (+ 220% bonus armor) bonus physical damage to the target and surrounding enemies.",
+      "appNums": [
+        "10",
+        "50",
+        "125",
+        "250"
+      ],
+      "wikiNums": [
+        "10",
+        "25",
+        "125",
+        "220"
+      ]
+    },
+    {
+      "id": "bees",
+      "name": "BEES!!!",
+      "app": "Ability hits on champions throw a beehive. Bees swarm nearby enemies for 2s, slowing 20% and dealing 75-200 magic damage. (15-10s)",
+      "wiki": "Hitting an enemy champion with an ability causes you to toss a beehive at them over 1.1 seconds, which upon arrival explodes in a 425 radius to swarm enemy champions hit with bees for 2 seconds (15 to 10 second cooldown). While being swarmed, targets are dealtover the duration, applied on-hit effects at 40% effectiveness every 0.5 seconds (4 times total), and are slowed by 20%.",
+      "appNums": [
+        "2",
+        "20",
+        "75",
+        "200",
+        "15",
+        "10"
+      ],
+      "wikiNums": [
+        "1.1",
+        "425",
+        "2",
+        "15",
+        "10",
+        "40",
+        "0.5",
+        "4",
+        "20"
+      ]
+    },
+    {
+      "id": "big-shot",
+      "name": "Big Shot",
+      "app": "Gain 35% crit damage and 25% bonus AD. 75% of your attack speed is converted into crit damage.",
+      "wiki": "Convert 75% of your total attack speed into critical strike damage, at a rate of 0.67% critical strike damage per 1% attack speed. Additionally, you gain 25% bonus attack damage and 35% critical strike damage. Critical strike damage granted from this effect only applies to basic attacks that critically strike.",
+      "appNums": [
+        "35",
+        "25",
+        "75"
+      ],
+      "wikiNums": [
+        "75",
+        "0.67",
+        "1",
+        "25",
+        "35"
+      ]
+    },
+    {
+      "id": "bouncing-bees",
+      "name": "Bouncing Bees",
+      "app": "After an ability, your next attack bounces to the nearest foe for 50-100% damage. Quest: 10/40/163 bounces grant 30 AD, +1 bounce.",
+      "wiki": "After casting an ability, your next basic attack is empowered to bounce a bee from the primary target to the nearest enemy champion within 700 units of them, dealing 50 to 100 of the triggering attack's damage upon arrival. Additionally, you are assigned with quests that require you to bounce bees onto enemy champions a number of times. There are three quest tiers, and each completed tier rewards you with bonus attack damage and an additional bee bounce on the empowered attack that repeats from the new target with each bounce, forming a chain of bee attacks.",
+      "appNums": [
+        "50",
+        "100",
+        "10",
+        "40",
+        "163",
+        "30",
+        "1"
+      ],
+      "wikiNums": [
+        "700",
+        "50",
+        "100"
+      ]
+    },
+    {
+      "id": "brass-blast",
+      "name": "Brass Blast",
+      "app": "Replace a summoner spell with Brass Blast: charge a trumpet up to 2.5s, then knock back enemies for 120-600 magic damage. (45s)",
+      "wiki": "Replace a summoner spell with Brass Blast. Brass Blast -",
+      "appNums": [
+        "2.5",
+        "120",
+        "600",
+        "45"
+      ],
+      "wikiNums": []
+    },
+    {
+      "id": "crimson-cobalt",
+      "name": "CRIMSON COBALT",
+      "app": "Upgrades one ability to mark champions hit for 4s. Attacking a mark deals 100-250 bonus magic damage and cuts its cooldown 65%.",
+      "wiki": "Upgrades one of your champion's abilities, empowering it to mark enemy champions damaged for 4 seconds. Your next basic attack on-hit against a marked target consumes the mark to deal 100 to 250 (+ 70% bonus AD) (+ 35% AP) bonus magic damage and reduce the upgraded ability's current cooldown by 65% of its total cooldown.",
+      "appNums": [
+        "4",
+        "100",
+        "250",
+        "65"
+      ],
+      "wikiNums": [
+        "4",
+        "100",
+        "250",
+        "70",
+        "35",
+        "65"
+      ]
+    },
+    {
+      "id": "double-time",
+      "name": "Double Time",
+      "app": "Damaging a champion with 2 different abilities within 4s deals 10% max mana magic damage and permanently grants 25 max mana.",
+      "wiki": "Dealing damage to an enemy champion with two separate abilities within 4 seconds causes the second ability to deal bonus magic damage equal to 10% maximum mana and permanently increase your maximum mana by 25 (4 second cooldown per target).",
+      "appNums": [
+        "2",
+        "4",
+        "10",
+        "25"
+      ],
+      "wikiNums": [
+        "4",
+        "10",
+        "25",
+        "4"
+      ]
+    },
+    {
+      "id": "enchanting-butterflies",
+      "name": "Enchanting Butterflies",
+      "app": "Healing or shielding allies gathers Butterflies. At 7, your next damage fires them: 50-100 magic damage, 75% for the rest.",
+      "wiki": "Healing or shielding an allied champion causes a Butterfly to gather around you, up to 7. After collecting 7 Butterflies, your next instance of damage against an enemy champion fires all of your Butterflies at them, with the first one dealing 50 to 100 (+ 10% AP) (+ 1% bonus health) (+ 3 per 1% heal and shield power) magic damage and all subsequent Butterflies dealingfor a total damage of 50+(50*0.75*6) to 100+(100*0.75*6) (+ 10+10*0.75*6% AP) (+ 1+1*0.75*6% bonus health) (+ 3+3*0.75*6 per 1% heal and shield power).",
+      "appNums": [
+        "7",
+        "50",
+        "100",
+        "75"
+      ],
+      "wikiNums": [
+        "7",
+        "7",
+        "50",
+        "100",
+        "10",
+        "1",
+        "3",
+        "1",
+        "50",
+        "50",
+        "0.75",
+        "6",
+        "100",
+        "100",
+        "0.75",
+        "6",
+        "10",
+        "10",
+        "0.75",
+        "6",
+        "1",
+        "1",
+        "0.75",
+        "6",
+        "3",
+        "3",
+        "0.75",
+        "6",
+        "1"
+      ]
+    },
+    {
+      "id": "fruitify",
+      "name": "Fruitify",
+      "app": "Takedowns make the enemy drop 3-6 fruit. You and allies can eat them to restore 6% max health and 6% max mana.",
+      "wiki": "Enemy champions that you score a takedown against drop 3;4;5;6 at the location of their death for 10 seconds. You and allied champions can step over a to consume it, healing for 6% of maximum health and restoring 6% of maximum mana as well as 10 energy and Fury (if applicable).",
+      "appNums": [
+        "3",
+        "6",
+        "6",
+        "6"
+      ],
+      "wikiNums": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "10",
+        "6",
+        "6",
+        "10"
+      ]
+    },
+    {
+      "id": "get-jinxed",
+      "name": "Get Jinxed",
+      "app": "Replace a summoner spell with Get Jinxed!: ride an invulnerable rocket that explodes for 20-640 physical damage. (47s)",
+      "wiki": "Replace a summoner spell with Get Jinxed!. Get Jinxed!:",
+      "appNums": [
+        "20",
+        "640",
+        "47"
+      ],
+      "wikiNums": []
+    },
+    {
+      "id": "gift-of-the-drowned",
+      "name": "Gift of the Drowned",
+      "app": "All bonus health is converted into lethality (5 per 100 bonus health). Gain 10-25 lethality.",
+      "wiki": "Convert all of your bonus health into lethality at a rate ofAdditionally, gain 10 to 25 lethality.",
+      "appNums": [
+        "5",
+        "100",
+        "10",
+        "25"
+      ],
+      "wikiNums": [
+        "10",
+        "25"
+      ]
+    },
+    {
+      "id": "group-hug",
+      "name": "Group Hug",
+      "app": "Upgrades an ally-targeted heal or shield ability: it also applies to the 2 closest allied champions near the target.",
+      "wiki": "Upgrades one of your champion's abilities that can target allied champions and has a heal or shield effect, empowering the ability's cast to also target two of the closest allied champions within 500 units of the primary target.",
+      "appNums": [
+        "2"
+      ],
+      "wikiNums": [
+        "500"
+      ]
+    },
+    {
+      "id": "hands-off-the-talent",
+      "name": "Hands off the Talent",
+      "app": "Attacks fired beyond 75% of your max attack range deal 15% bonus AD (+20% AP) bonus physical damage on-hit.",
+      "wiki": "Basic attacks against enemies hit farther than deal 15% bonus AD (+ 20% AP) bonus physical damage.",
+      "appNums": [
+        "75",
+        "15",
+        "20"
+      ],
+      "wikiNums": [
+        "15",
+        "20"
+      ]
+    },
+    {
+      "id": "heavy-is-the-crown",
+      "name": "Heavy Is The Crown",
+      "app": "Gain 10 AD, 25 AP and +10% AD, AP and attack speed, but -5% move speed in combat. Takedowns stack both; lose half on death.",
+      "wiki": "Your total movement speed is now reduced by 5% after 1.5 seconds of entering combat. In return, you gain 10 bonus attack damage and 25 ability power, and your bonus attack damage, ability power, and total attack speed are increased by 10%. The movement speed reduction is removed after 7 seconds of being out of combat. Scoring a takedown against an enemy champion generates a stack of Burden. For each stack, the bonus attack damage, ability power, and total attack speed are increased by 5%, and the total movement speed reduction is increased by 2.5%. The movement speed reduction is capped at 50%. Lose 50% of stacks on death.",
+      "appNums": [
+        "10",
+        "25",
+        "10",
+        "5"
+      ],
+      "wikiNums": [
+        "5",
+        "1.5",
+        "10",
+        "25",
+        "10",
+        "7",
+        "5",
+        "2.5",
+        "50",
+        "50"
+      ]
+    },
+    {
+      "id": "jeweled-bracelet",
+      "name": "Jeweled Bracelet",
+      "app": "Upgrades one ability so its damage can critically strike. Gain 25% crit chance.",
+      "wiki": "Your ultimate ability can now critically strike for (145% +) damage. Additionally, gain 25% critical strike chance.",
+      "appNums": [
+        "25"
+      ],
+      "wikiNums": [
+        "145",
+        "25"
+      ]
+    },
+    {
+      "id": "mosh-monster",
+      "name": "Mosh Monster",
+      "app": "Ultimate: gain 300-750 bonus health while active and slow nearby enemies 50%. Takedowns permanently add 15-30 health and radius.",
+      "wiki": "Casting your ultimate ability grants you 300 to 750 bonus health on-cast and slows enemies within 350 units of you by 50% while it is active. Additionally, scoring a takedown against an enemy champion permanently increases the bonus health gained by 15 to 30 and expands the radius of the slow, tripled if the takedown was scored while your ultimate was active.",
+      "appNums": [
+        "300",
+        "750",
+        "50",
+        "15",
+        "30"
+      ],
+      "wikiNums": [
+        "300",
+        "750",
+        "350",
+        "50",
+        "15",
+        "30"
+      ]
+    },
+    {
+      "id": "salvation",
+      "name": "Salvation",
+      "app": "Below 50% health, release a shockwave that knocks back enemies for 100-500 magic damage and heals allies 200-550. (90s)",
+      "wiki": "Upon dropping below 50% of your maximum health, you unleash a shockwave that expands from your location over 1200 units, dealing 100 to 500 (+ 125% bonus AD) (+ 75% AP) magic damage to enemies hit and healing you and allied champions hit for 200 to 550 (+ 200% bonus AD) (+ 120% AP) (90 second cooldown). Enemy champions hit within the first 600 units of the shockwave are knocked back 450 to 100 units.",
+      "appNums": [
+        "50",
+        "100",
+        "500",
+        "200",
+        "550",
+        "90"
+      ],
+      "wikiNums": [
+        "50",
+        "1200",
+        "100",
+        "500",
+        "125",
+        "75",
+        "200",
+        "550",
+        "200",
+        "120",
+        "90",
+        "600",
+        "450",
+        "100"
+      ]
+    },
+    {
+      "id": "sap-magic",
+      "name": "Sap Magic",
+      "app": "Every 20s, your next attack deals 80-300 bonus physical damage and heals 50-250. Casting an ability reduces this cooldown by 3s.",
+      "wiki": "Your next basic attack on-hit is empowered to deal 80 to 300 (+ 5% bonus health) bonus physical damage and heal you for 50 to 250 (+ 8% maximum health) (20 second cooldown). Casting an ability reduces the cooldown of this effect by 3 seconds.",
+      "appNums": [
+        "20",
+        "80",
+        "300",
+        "50",
+        "250",
+        "3"
+      ],
+      "wikiNums": [
+        "80",
+        "300",
+        "5",
+        "50",
+        "250",
+        "8",
+        "20",
+        "3"
+      ]
+    },
+    {
+      "id": "sound-barrier",
+      "name": "Sound Barrier",
+      "app": "Your shields grant the target ghosting and 20-40% move speed decaying over 1.5s.",
+      "wiki": "Your shields on yourself or allies grant ghosting and 20 to 40 (+ 0.5% per 1% heal and shield power) bonus movement speed that decays over 1.5 seconds (1.5-second cooldown per target).",
+      "appNums": [
+        "20",
+        "40",
+        "1.5"
+      ],
+      "wikiNums": [
+        "20",
+        "40",
+        "0.5",
+        "1",
+        "1.5",
+        "1.5"
+      ]
+    },
+    {
+      "id": "still-here",
+      "name": "Still Here",
+      "app": "Gain 2% attack speed and 0.35% life steal for each 1% of missing health.",
+      "wiki": "Gain key=% (based on your missing health) bonus attack speed and key=% (based on your missing health) life steal.",
+      "appNums": [
+        "2",
+        "0.35",
+        "1"
+      ],
+      "wikiNums": []
+    },
+    {
+      "id": "take-em-down-down-down",
+      "name": "Take'em Down Down Down",
+      "app": "Attacks and abilities deal 5-30 bonus magic damage and stack. At 5 stacks, deal 15% missing health damage and heal 67% of it.",
+      "wiki": "Basic attacks on-hit and ability hits against enemy champions apply a stack for 5 seconds, refreshing on subsequent applications and stacking up to 5 times, and deal {{as||magic damage}} {{as|(+ bonus AD)}} {{as|(+ AP)}} bonus magic damage plus {{as||magic damage}} {{as|(+ bonus AD)}} {{as|(+ AP)}} additional magic damage per stack on the target. The fifth stack against a target consumes them all to deal additional magic damage equal to {{as| of the target's missing health}} and heal you for of the post-mitigation damage dealt.",
+      "appNums": [
+        "5",
+        "30",
+        "5",
+        "15",
+        "67"
+      ],
+      "wikiNums": [
+        "5",
+        "5"
+      ]
+    },
+    {
+      "id": "the-boom-and-the-bass",
+      "name": "The Boom and the Bass",
+      "app": "After an ability, your next attack in 6s is faster, deals 50-200 bonus magic damage, grants 75-150% move speed decaying over 2s.",
+      "wiki": "After casting an ability, your next basic attack on-hit within 6 seconds is empowered to gain 200% bonus attack speed, deal {{as||magic damage}} {{as|(+ bonus AD)}} {{as|(+ AP)}} bonus magic damage, and grant you 75 to 150 bonus movement speed decaying over 2 seconds.",
+      "appNums": [
+        "6",
+        "50",
+        "200",
+        "75",
+        "150",
+        "2"
+      ],
+      "wikiNums": [
+        "6",
+        "200",
+        "75",
+        "150",
+        "2"
+      ]
+    },
+    {
+      "id": "third-times-the-harm",
+      "name": "Third Times the Harm",
+      "app": "Every third attack on an enemy champion within 4s grants a stack and deals 6% max health (+10 per stack) true damage.",
+      "wiki": "Your basic attacks on-hit against enemy champions apply a mark to the target for 4 seconds, refreshing on subsequent hits. Every third attack on-hit against the marked target grants you a stack and deals bonus true damage equal to {{as| of the target's maximum health}} {{as|(+ per stack you have)|true damage}}.",
+      "appNums": [
+        "4",
+        "6",
+        "10"
+      ],
+      "wikiNums": [
+        "4"
+      ]
+    },
+    {
+      "id": "totentanz",
+      "name": "Totentanz",
+      "app": "Replace a summoner spell with A Dance with Death: blink forward and become unkillable. Get a takedown within 5s or you die. (70s)",
+      "wiki": "Replace a summoner spell with A Dance with Death. A Dance with Death:",
+      "appNums": [
+        "5",
+        "70"
+      ],
+      "wikiNums": []
+    },
+    {
+      "id": "upgrade-stormsurge",
+      "name": "Upgrade Stormsurge",
+      "app": "Upgrades Stormsurge: Squall detonates for 10% max health magic damage nearby and marks champions hit with Squall. Gain 500 gold.",
+      "wiki": "Upgrades Stormsurge, empowering to strike the area around the primary target with lightning (350 radius) after its delay, dealing magic damage equal to 10% (+ 2% per 100 AP) of the target's maximum health to enemies hit. Enemy champions hit by the blast are also inflicted with Squall, causing lightning to strike the area around them after the same delay. Subsequent blasts from these secondary targets do not inflict Squall to champions hit. Additionally, gain. Squall's electric field from the target dying before the lightning strike does not apply this augment's effects.",
+      "appNums": [
+        "10",
+        "500"
+      ],
+      "wikiNums": [
+        "350",
+        "10",
+        "2",
+        "100"
+      ]
+    },
+    {
+      "id": "weapon-of-destiny",
+      "name": "Weapon of Destiny",
+      "app": "Your first Legendary item becomes the Weapon of Destiny: takedowns within 3s permanently add 200 gold of stats. Can't be sold.",
+      "wiki": "Upon acquiring this augment, the first eligible Legendary item in your inventory is granted the Weapon of Destiny passive effect. Weapon of Destiny: Scoring a takedown against an enemy champion within 3 seconds of damaging them permanently increases the gold value of all upgradeable stats on this item by exactly, shared equally among them. This item can no longer be sold. Weapon of Destiny scans each item slot in your inventory (from slots 1-6) for an eligible Legendary item, granting the passive effect to the first eligible item that is found.",
+      "appNums": [
+        "3",
+        "200"
+      ],
+      "wikiNums": [
+        "3",
+        "1",
+        "6"
+      ]
     }
   ],
-  "disabled": [
-    {
-      "id": "adamant",
-      "name": "Adamant"
-    },
-    {
-      "id": "perseverance",
-      "name": "Perseverance"
-    },
-    {
-      "id": "snowball-upgrade",
-      "name": "Snowball Upgrade"
-    },
-    {
-      "id": "vampirism",
-      "name": "Vampirism"
-    },
-    {
-      "id": "quantum-computing",
-      "name": "Quantum Computing"
-    },
-    {
-      "id": "devil-on-your-shoulder",
-      "name": "Devil on Your Shoulder"
-    },
-    {
-      "id": "void-dash",
-      "name": "Void Dash"
-    }
-  ]
+  "disabled": []
 }

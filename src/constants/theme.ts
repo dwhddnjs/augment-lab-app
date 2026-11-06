@@ -246,16 +246,21 @@ export const AugmentCardColors = {
 
 /** 헤드라이너 고유색(밴드 로고·컨셉). 등장 연출의 무대 조명이라 라이트/다크 공통이다. */
 export const HeadlinerColors = {
-  // 드래프트의 K/DA 마크(헤더·보너스 카드 위)의 파란 글로우와 같은 계열.
-  // 등장 연출만 보라였다가 드래프트와 색이 어긋나 맞췄다. HEARTSTEEL(#6FB1FF)보다 짙어 구분된다.
-  kda: "#3478FF",
+  // 26.22 K/DA 키 비주얼의 빨강(공식 로고 영상에서 추출). 드래프트 K/DA 마크의 빨간 글로우와 같은 계열이다.
+  kda: "#E83850",
   pentakill: "#D4AF6A",
-  heartsteel: "#6FB1FF",
+  // 연한 연두. 더 옅으면 어두운 무대에 옅게 깔 때 회색으로 탁해진다(귀염둥이 카페 연분홍과 같은 이유).
+  heartsteel: "#B4EE7A",
   "true-damage": "#2DD4BF",
-  disco: "#F472D0",
-  "cafe-cuties": "#FFB0C4",
+  // 연한 보라(라벤더). 더 옅으면 어두운 무대에서 회색으로 탁해진다.
+  disco: "#B58CFF",
+  // 인게임 귀염둥이 카페 배너의 산딸기빛 분홍. 연분홍(#FFB0C4)은 어두운 무대에 옅게 깔면 회색으로 탁해졌다.
+  "cafe-cuties": "#FF6A84",
   bees: "#FFC23D",
-  "command-line": "#FFB938",
+  // 주황. 로고·리롤 아이콘은 금색 그대로라 조명만 바꿔 꿀벌(#FFC23D)과 구분된다.
+  "command-line": "#FF8A3D",
+  // 월드 챔피언십 2026 키 비주얼의 블루. 짙은 로열 블루(#2E5BC9)는 무대에 옅게 깔면 남색으로 가라앉아 밝고 선명하게 올렸다.
+  worlds: "#3D7DFF",
 } as const;
 
 /**

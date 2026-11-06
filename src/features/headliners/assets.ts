@@ -16,9 +16,10 @@ export interface HeadlinerLogoArt {
 // 로고는 위키 원본, 초상은 CDragon kiwi_s3_band_heartsteel_augmentcard_character_* (게임 카드 장식).
 // 등장 연출에서 바로 떠야 해서 앱에 넣어 둔다.
 export const HEADLINER_LOGOS: Record<HeadlinerId, HeadlinerLogoArt> = {
-  // 게임의 K/DA 마스크(kiwi_s3_bandlogo_kda_v3_mask)에 인게임처럼 얼음빛 그라데이션과 파란 글로우를 입혔다.
-  // 위키 원본은 보랏빛 글로우라 드래프트 파랑과 어긋나 쓰지 않는다. 500×147 이고 글로우 여백을 빼면 높이의 73% 가 그림이다.
-  kda: { source: require('@/assets/headliners/kda-mark.png'), aspect: 500 / 147, ink: 0.73 },
+  // 26.22 K/DA 는 크롬 + 빨강이다. 게임 로고(kiwi_s3_bandlogo_kda_v3)를 색 그대로 쓰고 ™ 만 지웠다(앱 크기에선 점 잡음).
+  // 빨간 글로우를 둘러 어두운 배경에서 크롬의 검은 반사가 묻히지 않고 라이트에서도 윤곽이 선다.
+  // 1000×267 이고 글로우 여백을 빼면 높이의 73% 가 그림이다.
+  kda: { source: require('@/assets/headliners/kda-mark.png'), aspect: 1000 / 267, ink: 0.73 },
   pentakill: { source: require('@/assets/headliners/pentakill.png') },
   heartsteel: { source: require('@/assets/headliners/heartsteel.png') },
   'true-damage': { source: require('@/assets/headliners/true-damage.png') },
@@ -33,6 +34,19 @@ export const HEADLINER_LOGOS: Record<HeadlinerId, HeadlinerLogoArt> = {
     // 번진 빛 때문에 82% 만 그림이다.
     ink: 0.82,
   },
+  // 게임 원본 흰 로고(ux/kiwi/augments/augmentselection/kiwi_s3_bandlogo_worlds)를 투명 여백만 잘랐다.
+  // 라이트 모드 판 없는 자리에서는 다른 흰 로고처럼 글자색으로 칠한다(HeadlinerLogo 의 WHITE_LOGOS).
+  worlds: { source: require('@/assets/headliners/worlds.png') },
+};
+
+/**
+ * 열혈 팬 21레벨 카드 윗변에 걸치는 Worlds 로고. 게임 카드 장식(Kiwi_S3_Augment_Worlds)처럼 흰 로고에 파란 빛을 둘렀다.
+ * 625×633 이고 빛 여백을 빼면 77% 가 그림이다(ink).
+ */
+export const WORLDS_CARD_MARK = {
+  source: require('@/assets/headliners/worlds-card.png') as number,
+  ink: 0.77,
+  aspect: 625 / 633,
 };
 
 /** 커맨드 라인 리롤 버튼. 게임 로고(kiwi_s3_bandlogo_project_v2)를 금색으로 입혔고, flash 는 번쩍이는 순간의 레이어다. */

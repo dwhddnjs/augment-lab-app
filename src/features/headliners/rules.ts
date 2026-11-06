@@ -5,7 +5,7 @@
 import type { AugmentRarity } from '@/features/augments/types';
 import type { HeadlinerId, SkillKey, StickerId } from './types';
 
-/** 칼바람 라운드 수. K/DA 는 이 뒤에 보너스 선택이 한 번 더 있다(roundsFor). */
+/** 칼바람 라운드 수. K/DA·열혈 팬은 이 뒤에 보너스 선택이 한 번 더 있다(roundsFor). */
 export const ARAM_ROUNDS = 4;
 
 export const HEADLINER_IDS = [
@@ -17,7 +17,12 @@ export const HEADLINER_IDS = [
   'cafe-cuties',
   'bees',
   'command-line',
+  // 열혈 팬(kiwi_goh_worlds_*, 26.22) — 레벨 제한 21, 21레벨에 추가 증강.
+  'worlds',
 ] as const;
+
+/** 4라운드를 마친 뒤 보너스 증강을 한 번 더 고르는 헤드라이너. K/DA 는 포토카드, 열혈 팬은 21레벨 보상이다. */
+const BONUS_ROUND_IDS: readonly string[] = ['kda', 'worlds'];
 
 export const STICKER_IDS = ['aphelios', 'ezreal', 'kayn', 'ksante', 'sett', 'yone'] as const;
 
@@ -32,7 +37,7 @@ export function rollHeadliner(): HeadlinerId {
 }
 
 export function roundsFor(id: string): number {
-  return id === 'kda' ? ARAM_ROUNDS + 1 : ARAM_ROUNDS;
+  return BONUS_ROUND_IDS.includes(id) ? ARAM_ROUNDS + 1 : ARAM_ROUNDS;
 }
 
 /** 해킹 새로고침이 올려 줄 등급. 프리즘은 위가 없어 null 이다. */
