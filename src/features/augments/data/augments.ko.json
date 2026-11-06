@@ -708,9 +708,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/Perseverance_small.png",
     "augmentNameId": "ARAM_Perseverance",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "rabble-rousing",
@@ -785,9 +783,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SnowballUpgrade_small.png",
     "augmentNameId": "SnowballUpgrade",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "soul-siphon",
@@ -1219,9 +1215,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/QuantumComputing_small.png",
     "augmentNameId": "ARAM_QuantumComputing",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "quest-steel-your-heart",
@@ -1632,7 +1626,7 @@
   {
     "id": "soul-eater",
     "name": "영혼의 포식자",
-    "description": "적 챔피언을 이동 불가 상태로 만들거나 이동 스킬을 봉인하면 최대 체력을 20 얻습니다(무한 중첩). (시전당 재사용 대기시간 5초)",
+    "description": "적 챔피언을 이동 불가 상태로 만들거나 이동 스킬을 봉인하면 최대 체력을 30 얻습니다(무한 중첩). (시전당 재사용 대기시간 5초)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SoulEater_small.png",
     "augmentNameId": "SoulEater",
@@ -1815,7 +1809,7 @@
   {
     "id": "titan-s-resolve",
     "name": "거인의 결의",
-    "description": "피해를 주거나 받을 때마다 중첩을 얻습니다. 10중첩마다 적응형 능력치, 방어력, 마법 저항력, 크기, 강인함을 얻습니다.",
+    "description": "피해를 주거나 받을 때마다 중첩을 얻습니다. 7중첩마다 적응형 능력치, 방어력, 마법 저항력, 크기, 강인함을 얻습니다.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/IAmTheJuggernaut_small.png",
     "augmentNameId": "ARAM_ImTheJuggernaut",
@@ -2949,7 +2943,7 @@
   {
     "id": "armored-impact",
     "name": "장갑 충격",
-    "description": "스킬 사용 후 10초 안에 하는 다음 기본 공격이 대상과 주변 적에게 50~125(+추가 방어력의 250%)의 추가 물리 피해를 입힙니다.",
+    "description": "스킬 사용 후 10초 안에 하는 다음 기본 공격이 대상과 주변 적에게 25~125(+추가 방어력의 220%)의 추가 물리 피해를 입힙니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ArmoredImpact_small.png",
     "augmentNameId": "ArmoredImpact",
@@ -2960,7 +2954,7 @@
   {
     "id": "bees",
     "name": "벌이다!!!",
-    "description": "적 챔피언에게 스킬을 맞히면 벌집을 던집니다. 벌이 주변 적을 2초 동안 20% 둔화시키고 75~200의 마법 피해를 입힙니다. (재사용 15~10초)",
+    "description": "적 챔피언에게 스킬을 맞히면 벌집을 던집니다. 벌이 주변 적을 2초 동안 20% 둔화시키고 75~140의 마법 피해를 입힙니다. (재사용 15~10초)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Bees_small.png",
     "augmentNameId": "BEES",
@@ -3004,7 +2998,7 @@
   {
     "id": "brass-blast",
     "name": "트럼펫 폭발",
-    "description": "소환사 주문이 트럼펫 폭발로 변경됩니다. 최대 2.5초 충전 후 불어 적을 밀어내고 120~600의 마법 피해를 입힙니다. (재사용 45초)",
+    "description": "소환사 주문이 트럼펫 폭발로 변경됩니다. 최대 2.5초 충전 후 불어 적을 밀어내고 120~600의 마법 피해를 입힙니다. (재사용 50초)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Camo_large.png",
     "augmentNameId": "BrassBlast",
@@ -3235,7 +3229,7 @@
   {
     "id": "take-em-down-down-down",
     "name": "전부 다 무너뜨려",
-    "description": "기본 공격과 스킬이 적 챔피언에게 5~30의 추가 마법 피해를 입히고 중첩을 쌓습니다. 5회 중첩 시 잃은 체력의 15% 마법 피해를 입히고 그 67%를 회복합니다.",
+    "description": "기본 공격과 스킬이 적 챔피언에게 5~30의 추가 마법 피해를 입히고 중첩을 쌓습니다. 5회 중첩 시 잃은 체력의 17% 마법 피해를 입히고 그 67%를 회복합니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TakeEmDownDownDown_small.png",
     "augmentNameId": "TakeemDownDownDown",
@@ -3316,6 +3310,28 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ProtagonistsSignatureWeapon_small.png",
     "augmentNameId": "WeaponOfDestiny",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "one-hit-wonder",
+    "name": "원 히트 원더",
+    "description": "선택한 스킬의 피해량이 스킬 가속 100당 75% 증가하지만, 더 이상 스킬 가속 효과를 받지 않습니다.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/GenericAbilityAugmentIcon_Gold.png",
+    "augmentNameId": "OneHitWonder",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "rise",
+    "name": "RISE",
+    "description": "궁극기로 적 챔피언을 처치하면 5초 안에 궁극기를 다시 사용할 수 있습니다(최대 2회). 다시 사용할 때마다 피해량이 25% 증가합니다.",
+    "rarity": "prismatic",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ZeroHour_large.png",
+    "augmentNameId": "RISE",
     "modes": [
       "aram"
     ]

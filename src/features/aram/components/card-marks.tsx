@@ -1,5 +1,5 @@
 /**
- * 카드에 붙는 헤드라이너 표식 — HEARTSTEEL 스티커(좌상단 멤버 얼굴 + 카드 밑 효과), K/DA 표시.
+ * 카드에 붙는 헤드라이너 표식 — HEARTSTEEL 스티커(좌상단 멤버 얼굴 + 카드 밑 효과), 보너스 카드(K/DA·열혈 팬) 표시.
  * 카드 위치는 헤드라이너와 무관하게 같다. HEARTSTEEL 은 카드 밑 효과 줄만큼 리롤 버튼이 내려간다.
  * 가로 화면 예산에 맞춘 크기라 글자 크기 설정을 따르지 않는다.
  */
@@ -16,7 +16,8 @@ import {
   StatTextColors,
 } from "@/constants/theme";
 import type { AugmentRarity } from "@/features/augments/types";
-import { HEADLINER_LOGOS, STICKER_PORTRAITS } from "@/features/headliners/assets";
+import { STICKER_PORTRAITS, WORLDS_CARD_MARK } from "@/features/headliners/assets";
+import { HeadlinerLogo } from "@/features/headliners/components/headliner-logo";
 import { useHeadlinerTexts } from "@/features/headliners/hooks/use-headliners";
 import type { StickerId } from "@/features/headliners/types";
 import { useLocale } from "@/hooks/use-locale";
@@ -24,8 +25,11 @@ import { useTheme } from "@/hooks/use-theme";
 import { renderMarked } from "./marked-text";
 import { PORTRAIT_INSET, PORTRAIT_SIZE } from "./skill-card";
 
-// 글로우 여백을 포함한 크기다.
-const KDA_MARK_SIZE = { width: 71, height: 21 };
+// K/DA 마크 높이(글로우 여백 포함, 폭 79). 더 키우면 CARD_TOP_RATIO 빈자리를 넘어 헤더에 붙는다.
+const KDA_MARK_HEIGHT = 21;
+// Worlds 로고 폭(카드 폭 대비)과 그림 상자 중 윗변 위로 나가는 비율 — 인게임 21레벨 카드 캡처를 재서 맞췄다.
+const WORLDS_MARK_WIDTH = 0.3;
+const WORLDS_MARK_ABOVE = 0.55;
 
 /**
  * 효과 줄 글자 배치. 한국어는 최장 문구(이즈리얼 약 154pt)도 가장 좁은 칸(SE, 카드 135 + 24)에 한 줄이고,
@@ -104,11 +108,26 @@ export function StickerLabel({
   );
 }
 
-/** K/DA 보너스 카드 위 표시. 카드 위 빈자리에 띄워 다른 라운드와 카드 위치가 같다. */
+/** K/DA 보너스 카드 위 마크. 카드 위 빈자리에 띄워 다른 라운드와 카드 위치가 같다. */
 export function KdaBadge() {
   return (
-    <View pointerEvents="none" style={styles.kda}>
-      <Image source={HEADLINER_LOGOS.kda.source} style={KDA_MARK_SIZE} contentFit="contain" />
+    <View pointerEvents="none" style={[styles.bonus, { top: -(KDA_MARK_HEIGHT + Spacing.half) }]}>
+      <HeadlinerLogo id="kda" size={KDA_MARK_HEIGHT} plain />
+    </View>
+  );
+}
+
+/**
+ * 열혈 팬 21레벨 카드의 Worlds 로고. 게임 카드처럼 윗변 가운데에 걸쳐 붙인다 — 로고 폭이 카드의 30%,
+ * 로고 중심이 윗변 바로 위다(인게임 캡처 비율). 빛나는 그림이라 라이트 모드에서도 칠하지 않는다.
+ */
+export function WorldsBadge({ cardWidth }: { cardWidth: number }) {
+  const { source, ink, aspect } = WORLDS_CARD_MARK;
+  const width = (cardWidth * WORLDS_MARK_WIDTH) / ink;
+  const height = width / aspect;
+  return (
+    <View pointerEvents="none" style={[styles.bonus, { top: -height * WORLDS_MARK_ABOVE }]}>
+      <Image source={source} style={{ width, height }} contentFit="contain" />
     </View>
   );
 }
@@ -138,9 +157,8 @@ const styles = StyleSheet.create({
   stickerName: {
     fontWeight: "700",
   },
-  kda: {
+  bonus: {
     position: "absolute",
-    top: -(KDA_MARK_SIZE.height + Spacing.half),
     left: 0,
     right: 0,
     alignItems: "center",

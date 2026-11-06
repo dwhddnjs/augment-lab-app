@@ -12,6 +12,7 @@ const WHITE_LOGOS: HeadlinerId[] = [
   "true-damage",
   "disco",
   "cafe-cuties",
+  "worlds",
 ];
 
 interface Props {

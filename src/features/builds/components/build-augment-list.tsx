@@ -34,7 +34,7 @@ export function BuildAugmentList({ augments, label }: Props) {
               iconPath={aug.iconPath}
               rarity={aug.rarity}
               recyclingKey={aug.id}
-              size={48}
+              size={56}
               background={HeroOverlay.cardBase}
             />
           }

@@ -25,7 +25,7 @@ interface Props {
   disabled: boolean;
   rerolled: boolean;
   hacked: boolean;
-  /** 카드에 겹치는 표식(HEARTSTEEL 멤버 얼굴, K/DA 마크). */
+  /** 카드에 겹치는 표식(HEARTSTEEL 멤버 얼굴, 보너스 카드의 K/DA·Worlds 마크). */
   badge?: React.ReactNode;
   /** 카드 밑 표식(HEARTSTEEL 스티커 효과). */
   footer?: React.ReactNode;

@@ -31,6 +31,10 @@
     "command-line": {
       "name": "Command Line",
       "description": "Only Silver and Gold Augments appear. Your first reroll each round raises that Augment one tier."
+    },
+    "worlds": {
+      "name": "Superfans",
+      "description": "Level cap rises to 21 and you gain bonus XP. Round 5 grants an extra Augment at level 21."
     }
   },
   "stickers": {

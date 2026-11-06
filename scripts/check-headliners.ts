@@ -32,9 +32,10 @@ assert.equal(nextRarity('silver'), 'gold');
 assert.equal(nextRarity('gold'), 'prismatic');
 assert.equal(nextRarity('prismatic'), null);
 
-// K/DA 만 한 번 더 고른다.
-assert.equal(roundsFor('kda'), ARAM_ROUNDS + 1);
-for (const id of HEADLINER_IDS.filter((h) => h !== 'kda')) assert.equal(roundsFor(id), ARAM_ROUNDS);
+// K/DA(포토카드)·열혈 팬(21레벨)만 한 번 더 고른다.
+const BONUS = ['kda', 'worlds'];
+for (const id of BONUS) assert.equal(roundsFor(id), ARAM_ROUNDS + 1);
+for (const id of HEADLINER_IDS.filter((h) => !BONUS.includes(h))) assert.equal(roundsFor(id), ARAM_ROUNDS);
 
 // 아펠리오스 스티커 하나당 모루 2개, 나머지 멤버와 모르는 id 는 0.
 assert.equal(anvilCount([]), 0);
