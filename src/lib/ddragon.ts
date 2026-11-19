@@ -14,6 +14,12 @@ export function championSplashUrl(champId: string) {
   return `${BASE}/cdn/img/champion/splash/${champId}_0.jpg`;
 }
 
+// 챔피언을 가운데 둔 splash(1280×720). 세로 카드에 cover 로 넣으면 높이 기준으로 맞고 가운데가 잘려 남는다.
+// 로딩 아트(308×560)는 카드 폭에서 1.7배 늘어나 흐려져서 이걸 쓴다.
+export function championCenteredUrl(champId: string) {
+  return `${BASE}/cdn/img/champion/centered/${champId}_0.jpg`;
+}
+
 export function itemImageUrl(imageKey: string) {
   return `${CDN}/img/item/${imageKey}`;
 }

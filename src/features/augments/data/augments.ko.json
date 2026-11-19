@@ -2114,7 +2114,7 @@
   {
     "id": "nature-is-healing",
     "name": "자연의 회복",
-    "description": "수풀에 있는 매초 최대 체력의 0.6~2.1%를 회복합니다.",
+    "description": "수풀에 들어가면 1.5초에 걸쳐 체력을 40~300(+잃은 체력의 15%) 회복합니다. (수풀마다 재사용 20초)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/NatureIsHealing_small.png",
     "augmentNameId": "NatureIsHealing",
@@ -2151,9 +2151,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PatOnTheBack_small.png",
     "augmentNameId": "PatOnTheBack",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "porcupine",
@@ -2202,9 +2200,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SharkTempest_small.png",
     "augmentNameId": "SharkTempest",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "ult-bot",
@@ -2231,9 +2227,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Snowbomb_small.png",
     "augmentNameId": "Snowbomb",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "tripleshot",
@@ -2273,9 +2267,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SurgeField_small.png",
     "augmentNameId": "SurgeField",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "stay-resolute",
@@ -2987,7 +2979,7 @@
   {
     "id": "bouncing-bees",
     "name": "튕기는 꿀벌",
-    "description": "스킬 사용 후 다음 기본 공격이 가장 가까운 적에게 튕겨 피해량의 50~100%를 입힙니다. 퀘스트: 10/40/163회 튕기면 공격력 30과 튕김 1회 추가.",
+    "description": "스킬 사용 후 다음 기본 공격이 가장 가까운 적에게 튕겨 피해량의 60%를 입힙니다. 퀘스트: 10/40/163회 튕기면 공격력 30과 튕김 1회 추가.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/KingMe_large.png",
     "augmentNameId": "BouncingBees",
@@ -3185,7 +3177,7 @@
   {
     "id": "salvation",
     "name": "구원",
-    "description": "체력이 50% 아래로 떨어지면 충격파를 방출해 적을 밀어내고 100~500의 마법 피해를 입히며, 아군 챔피언의 체력을 200~550 회복시킵니다. (재사용 90초)",
+    "description": "체력이 50% 아래로 떨어지면 충격파를 방출해 적을 밀어내고 100~500의 마법 피해를 입히며, 아군 챔피언의 체력을 200~550 회복시킵니다. (재사용 70초)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Salvation_small.png",
     "augmentNameId": "Salvation",
@@ -3240,7 +3232,7 @@
   {
     "id": "the-boom-and-the-bass",
     "name": "붐 앤 베이스",
-    "description": "스킬 사용 후 6초 안에 하는 다음 기본 공격이 빨라지고 50~200의 추가 마법 피해를 입히며, 2초에 걸쳐 감소하는 이동 속도를 75~150% 얻습니다.",
+    "description": "스킬 사용 후 6초 안에 하는 다음 기본 공격이 빨라지고 50~175의 추가 마법 피해를 입히며, 2초에 걸쳐 감소하는 이동 속도를 75~150% 얻습니다.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TheBoomAndTheBass_small.png",
     "augmentNameId": "TheBoomAndTheBass",
@@ -3332,6 +3324,50 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ZeroHour_large.png",
     "augmentNameId": "RISE",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "slime-time",
+    "name": "점액 천지",
+    "description": "6초마다 점액을 터뜨려 주변 적에게 40~80+최대 체력의 3~8% 마법 피해를 입힙니다. 챔피언 적중 시 방울이 생기고, 밟으면 최대 체력의 6~15%를 회복합니다.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlimeTime_small.png",
+    "augmentNameId": "ARAM_SlimeTime",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "fortified",
+    "name": "요새화",
+    "description": "방어력을 20 얻고, 추가 방어력이 25% 증가합니다.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Fortified_small.png",
+    "augmentNameId": "Fortified",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "mystic-guard",
+    "name": "신비한 방호",
+    "description": "마법 저항력을 20 얻고, 추가 마법 저항력이 25% 증가합니다.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/MysticGuard_small.png",
+    "augmentNameId": "MysticGuard",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "steadfaster-presence",
+    "name": "더욱 굳건한 태세",
+    "description": "강인함을 20% 얻고, 추가 방어력 및 마법 저항력이 16% 증가합니다. 체력이 40% 아래일 때 방어력·마법 저항력 32%, 강인함 40%로 증가합니다.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SteadfastPresence_small.png",
+    "augmentNameId": "SteadfastPresence",
     "modes": [
       "aram"
     ]

@@ -155,6 +155,7 @@ export function useCustomDraft(initialChampionId: string) {
     try {
       build = await saveBuild({
         mode: "aram",
+        custom: true,
         championId,
         augmentIds: picked.map((a) => a.id),
         itemIds: items.map((it) => it.id),

@@ -2114,7 +2114,7 @@
   {
     "id": "nature-is-healing",
     "name": "Nature is Healing",
-    "description": "Heal yourself for 0.6 to 2.1 of your maximum health for each second that you are within brush.",
+    "description": "Entering brush heals you for 40-300 (+15% missing Health) over 1.5s. (20s cooldown per brush)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/NatureIsHealing_small.png",
     "augmentNameId": "NatureIsHealing",
@@ -2151,9 +2151,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/PatOnTheBack_small.png",
     "augmentNameId": "PatOnTheBack",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "porcupine",
@@ -2202,9 +2200,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SharkTempest_small.png",
     "augmentNameId": "SharkTempest",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "ult-bot",
@@ -2231,9 +2227,7 @@
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Snowbomb_small.png",
     "augmentNameId": "Snowbomb",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "tripleshot",
@@ -2273,9 +2267,7 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SurgeField_small.png",
     "augmentNameId": "SurgeField",
-    "modes": [
-      "aram"
-    ]
+    "modes": []
   },
   {
     "id": "stay-resolute",
@@ -2987,7 +2979,7 @@
   {
     "id": "bouncing-bees",
     "name": "Bouncing Bees",
-    "description": "After an ability, your next attack bounces to the nearest foe for 50-100% damage. Quest: 10/40/163 bounces grant 30 AD, +1 bounce.",
+    "description": "After an ability, your next attack bounces to the nearest foe for 60% damage. Quest: 10/40/163 bounces grant 30 AD, +1 bounce.",
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/KingMe_large.png",
     "augmentNameId": "BouncingBees",
@@ -3185,7 +3177,7 @@
   {
     "id": "salvation",
     "name": "Salvation",
-    "description": "Below 50% health, release a shockwave that knocks back enemies for 100-500 magic damage and heals allies 200-550. (90s)",
+    "description": "Below 50% health, release a shockwave that knocks back enemies for 100-500 magic damage and heals allies 200-550. (70s)",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Salvation_small.png",
     "augmentNameId": "Salvation",
@@ -3240,7 +3232,7 @@
   {
     "id": "the-boom-and-the-bass",
     "name": "The Boom and the Bass",
-    "description": "After an ability, your next attack in 6s is faster, deals 50-200 bonus magic damage, grants 75-150% move speed decaying over 2s.",
+    "description": "After an ability, your next attack in 6s is faster, deals 50-175 bonus magic damage, grants 75-150% move speed decaying over 2s.",
     "rarity": "gold",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/TheBoomAndTheBass_small.png",
     "augmentNameId": "TheBoomAndTheBass",
@@ -3332,6 +3324,50 @@
     "rarity": "prismatic",
     "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/ZeroHour_large.png",
     "augmentNameId": "RISE",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "slime-time",
+    "name": "Slime Time",
+    "description": "Every 6s, autocast slime for 40-80 + 3-8% max Health magic damage nearby. Champion hits drop a blob that heals 6-15% max Health.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/SlimeTime_small.png",
+    "augmentNameId": "ARAM_SlimeTime",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "fortified",
+    "name": "Fortified",
+    "description": "Gain 20 Armor, then increase your bonus Armor by 25%.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/Fortified_small.png",
+    "augmentNameId": "Fortified",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "mystic-guard",
+    "name": "Mystic Guard",
+    "description": "Gain 20 Magic Resist, then increase your bonus Magic Resist by 25%.",
+    "rarity": "silver",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/MysticGuard_small.png",
+    "augmentNameId": "MysticGuard",
+    "modes": [
+      "aram"
+    ]
+  },
+  {
+    "id": "steadfaster-presence",
+    "name": "Steadfaster Presence",
+    "description": "Gain 20% Tenacity and increase your bonus Armor and Magic Resist by 16%. Below 40% Health, increased to 32% and 40% Tenacity.",
+    "rarity": "gold",
+    "iconPath": "/lol-game-data/assets/ASSETS/UX/Kiwi/Augments/Icons/SteadfastPresence_small.png",
+    "augmentNameId": "SteadfastPresence",
     "modes": [
       "aram"
     ]

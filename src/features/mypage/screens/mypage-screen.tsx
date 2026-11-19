@@ -38,6 +38,7 @@ import {
 } from "@/hooks/use-theme-preference";
 import { useTranslation } from "@/lib/i18n";
 import { SettingsRow } from "@/components/ui/settings-row";
+import versionData from "@/lib/version.json";
 
 const GITHUB_URL = "https://github.com/dwhddnjs/aram-augment-lab-app";
 const FEEDBACK_EMAIL = "syd1215no@gmail.com";
@@ -52,7 +53,8 @@ const t = {
     language: "언어",
     dataManage: "데이터 관리",
     info: "정보",
-    version: "버전",
+    version: "앱 버전",
+    patch: "패치 버전",
     github: "GitHub",
     feedback: "피드백 보내기",
     disclaimer:
@@ -67,7 +69,8 @@ const t = {
     language: "Language",
     dataManage: "Manage Data",
     info: "About",
-    version: "Version",
+    version: "App Version",
+    patch: "Game Patch",
     github: "GitHub",
     feedback: "Send feedback",
     disclaimer:
@@ -175,6 +178,13 @@ export function MyPageScreen() {
             label={translate("version")}
             value={version}
             icon="info.circle"
+            iconColor={colors.text.primary}
+            rowBackgroundColor={rowBg}
+          />
+          <SettingsRow
+            label={translate("patch")}
+            value={versionData.patch}
+            icon="gamecontroller"
             iconColor={colors.text.primary}
             rowBackgroundColor={rowBg}
           />

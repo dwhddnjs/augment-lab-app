@@ -138,7 +138,7 @@ export const CARD_GAP = Spacing.four;
 export const CARD_HEIGHT_RATIO = 0.56;
 
 /**
- * 카드 한 장의 너비 — 가로 3장이 들어가는 너비와 화면 높이 제한 중 작은 쪽.
+ * 카드 한 장의 너비 — 가로 count 장(보통 3, 마에스트로 4)이 들어가는 너비와 화면 높이 제한 중 작은 쪽.
  * heightRatio 는 헤더와 아래 리롤 버튼 자리를 남기기 위한 상한으로, 카드 비율을
  * 역산해 너비로 환산한다.
  */
@@ -147,8 +147,9 @@ export function cardWidthFor(
   screenH: number,
   gap: number,
   heightRatio: number,
+  count: number,
 ): number {
-  const byWidth = Math.floor((screenW - CARD_ROW_PAD * 2 - gap * 2) / 3);
+  const byWidth = Math.floor((screenW - CARD_ROW_PAD * 2 - gap * (count - 1)) / count);
   const byHeight = Math.floor((screenH * heightRatio) / CARD_ASPECT);
   return Math.min(byWidth, byHeight);
 }

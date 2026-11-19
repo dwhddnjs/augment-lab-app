@@ -14,6 +14,7 @@ import {
   HEADLINER_IDS,
   STICKER_IDS,
   anvilCount,
+  cardsFor,
   nextRarity,
   rollHeadliner,
   rollRoundStickers,
@@ -36,6 +37,11 @@ assert.equal(nextRarity('prismatic'), null);
 const BONUS = ['kda', 'worlds'];
 for (const id of BONUS) assert.equal(roundsFor(id), ARAM_ROUNDS + 1);
 for (const id of HEADLINER_IDS.filter((h) => !BONUS.includes(h))) assert.equal(roundsFor(id), ARAM_ROUNDS);
+
+// 마에스트로만 카드 4장, 나머지(펜타킬 스킬 카드 포함)와 모르는 id 는 3장.
+assert.equal(cardsFor('maestro'), 4);
+for (const id of HEADLINER_IDS.filter((h) => h !== 'maestro')) assert.equal(cardsFor(id), 3);
+assert.equal(cardsFor('unknown'), 3);
 
 // 아펠리오스 스티커 하나당 모루 2개, 나머지 멤버와 모르는 id 는 0.
 assert.equal(anvilCount([]), 0);
