@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
+import { MoreLink } from "@/components/ui/more-link";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import { useChampions } from "@/features/champions/hooks/use-champions";
@@ -37,11 +38,7 @@ export function TopTierSection() {
         <ThemedText type="heading" style={styles.title}>
           {translate("title")}
         </ThemedText>
-        <Pressable onPress={() => router.navigate("/(tabs)/(tierlist)")} hitSlop={Spacing.two}>
-          <ThemedText type="label" color="accent">
-            {translate("more")}
-          </ThemedText>
-        </Pressable>
+        <MoreLink label={translate("more")} onPress={() => router.navigate("/(tabs)/(tierlist)")} />
       </View>
 
       <ScrollView

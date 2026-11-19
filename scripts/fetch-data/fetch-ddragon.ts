@@ -86,9 +86,12 @@ async function main() {
     console.log(`  → ${items.length} items written`);
   }
 
+  // patch(게임 패치, 마이페이지 표시)는 손으로 올리는 값이라 덮어쓰지 않고 남긴다.
+  const versionPath = path.join(SRC, 'lib/version.json');
+  const prev = JSON.parse(fs.readFileSync(versionPath, 'utf8'));
   fs.writeFileSync(
-    path.join(SRC, 'lib/version.json'),
-    JSON.stringify({ ddragonVersion: version, generatedAt: new Date().toISOString() }, null, 2)
+    versionPath,
+    JSON.stringify({ ...prev, ddragonVersion: version, generatedAt: new Date().toISOString() }, null, 2)
   );
   console.log('\nDone. 단독 실행했다면 이어서 실행할 것: node scripts/parse-item-stats.mjs && node scripts/gen-data-check.mjs');
 }

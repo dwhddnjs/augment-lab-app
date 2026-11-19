@@ -7,9 +7,10 @@
  */
 import { useRouter } from "expo-router";
 import type { ReactNode } from "react";
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
+import { MoreLink } from "@/components/ui/more-link";
 import { BottomTabInset, Spacing } from "@/constants/theme";
 import type { HeadlinerId } from "@/features/headliners/types";
 import { useTheme } from "@/hooks/use-theme";
@@ -70,11 +71,7 @@ export function HomeScreen({ footer }: { footer?: ReactNode }) {
             {translate("recent")}
           </ThemedText>
           {recent.length > 0 && (
-            <Pressable onPress={() => router.push("/builds")} hitSlop={Spacing.two}>
-              <ThemedText type="label" color="accent">
-                {translate("seeAll")}
-              </ThemedText>
-            </Pressable>
+            <MoreLink label={translate("seeAll")} onPress={() => router.push("/builds")} />
           )}
         </View>
 

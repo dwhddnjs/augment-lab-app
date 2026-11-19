@@ -41,6 +41,7 @@ export default function HomeStackLayout() {
         name="builds"
         options={{
           title: translate('builds'),
+          headerBackButtonDisplayMode: 'minimal',
           headerLargeTitle: true,
           headerLargeTitleShadowVisible: false,
         }}

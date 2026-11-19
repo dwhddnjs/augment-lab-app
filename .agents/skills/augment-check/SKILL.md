@@ -26,6 +26,7 @@ node scripts/gen-data-check.mjs   # → docs/index.html
   항목의 id 목록이고, 데이터셋별로 키가 나뉜다(지금은 `aram` 하나). 설명을 손볼 때마다 여기에
   id를 추가할 것.
 - 데이터 변경 후 `docs/index.html`도 **함께 커밋**할 것.
+- 새 패치를 반영하면 `src/lib/version.json` 의 `patch`(마이페이지 "패치 버전")도 올릴 것.
 
 ## 모드 구분이 먼저다 — 여기서 틀리면 전부 틀린다
 
