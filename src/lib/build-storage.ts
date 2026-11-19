@@ -34,6 +34,8 @@ export interface SavedBuild {
   itemIds: string[];
   /** 이번 판 헤드라이너. 커스텀 빌드와 도입 전 빌드에는 없다. */
   headliner?: BuildHeadliner;
+  /** 커스텀 화면에서 만든 빌드. 이 필드 도입 전 커스텀 빌드에는 없어 헤드라이너 없는 칼바람 빌드와 구분되지 않는다. */
+  custom?: true;
   /** ISO 8601 */
   createdAt: string;
 }
@@ -105,6 +107,7 @@ export function parseBuilds(raw: string | null | undefined): SavedBuild[] {
       ...b,
       mode: !b.mode || b.mode === 'classic' ? 'aram' : b.mode,
       headliner: parseBuildHeadliner(b.headliner),
+      custom: b.custom === true ? true : undefined,
       transmutedIds: Array.isArray(b.transmutedIds)
         ? b.transmutedIds.filter((id: unknown) => typeof id === 'string')
         : undefined,

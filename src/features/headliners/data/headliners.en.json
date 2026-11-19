@@ -35,6 +35,22 @@
     "worlds": {
       "name": "Superfans",
       "description": "Level cap rises to 21 and you gain bonus XP. Round 5 grants an extra Augment at level 21."
+    },
+    "arcade": {
+      "name": "Arcade",
+      "description": "Collect Tokens by getting takedowns. Cash in 4 Tokens to revive while dead."
+    },
+    "debonair": {
+      "name": "Debonair",
+      "description": "Augments grant additional Gold and Hats."
+    },
+    "la-ilusion": {
+      "name": "La Ilusión",
+      "description": "Allies drop a candle on death. Pick it up to shield yourself and nearby allies."
+    },
+    "maestro": {
+      "name": "Maestro",
+      "description": "Choose from 4 Augments every round."
     }
   },
   "stickers": {

@@ -3,12 +3,14 @@ import type { HeadlinerId, StickerId } from './types';
 /**
  * 헤드라이너 로고 한 벌. 로고별 예외는 여기에만 둔다 — 그리는 쪽(헤더·등장 연출·판 위 로고)은 이 표만 읽는다.
  * - light: 라이트 모드 판 없는 자리(헤더)에 쓸 그림. 없으면 source 를 그대로 쓴다.
+ * - small: 작은 자리(홈 시작 타일·빌드 카드 배지)에 쓸 그림. 없으면 source 를 그대로 쓴다.
  * - aspect: 판 없이 그릴 때 상자의 가로:세로. 기본 1 — 정사각 상자에 contain 한다.
  * - ink: 상자 대비 실제 그림(투명 여백·번진 빛 제외) 비율. 정사각 로고는 긴 변, 가로로 긴 K/DA 는 높이다. 기본 1.
  */
 export interface HeadlinerLogoArt {
   source: number;
   light?: number;
+  small?: number;
   aspect?: number;
   ink?: number;
 }
@@ -31,12 +33,24 @@ export const HEADLINER_LOGOS: Record<HeadlinerId, HeadlinerLogoArt> = {
     // 원본 금색은 밝은 배경에서 빛 번짐이 묻혀 흐려지고, 단색으로 칠하면 금속 질감이 사라져 탁한 갈색이 된다.
     // 원본 위에 진한 금색(#6B4A0E) 그림자를 은은하게 깔아(캔버스 512 기준 아래 8px·번짐 10px·55%) 금색을 살린 채 윤곽만 세웠다.
     light: require('@/assets/headliners/command-line-light.png'),
+    // 원본은 보이는 픽셀의 72% 가 반투명 빛 번짐이라 40pt 안팎에선 획이 뭉개진다. 알파 60 미만을 지우고
+    // 60~200 을 0~255 로 펴서 번짐을 절반쯤 걷어낸 판이다(모양·색은 원본 그대로).
+    small: require('@/assets/headliners/command-line-small.png'),
     // 번진 빛 때문에 82% 만 그림이다.
     ink: 0.82,
   },
   // 게임 원본 흰 로고(ux/kiwi/augments/augmentselection/kiwi_s3_bandlogo_worlds)를 투명 여백만 잘랐다.
   // 라이트 모드 판 없는 자리에서는 다른 흰 로고처럼 글자색으로 칠한다(HeadlinerLogo 의 WHITE_LOGOS).
   worlds: { source: require('@/assets/headliners/worlds.png') },
+  // 26.23 — 게임 원본(maps/particles/kiwi/kiwi_s3_bandlogo_*)의 투명 여백만 잘랐다.
+  // 아케이드 원본은 침략자 애니메이션 2프레임을 가로로 붙인 512×256 텍스처라 왼쪽 프레임(위키 배지와 같은 자세)만 잘랐다.
+  // 흰 로고는 WHITE_LOGOS 에서 칠한다.
+  arcade: { source: require('@/assets/headliners/arcade.png') },
+  debonair: { source: require('@/assets/headliners/debonair.png') },
+  'la-ilusion': { source: require('@/assets/headliners/la-ilusion.png') },
+  // 게임에 마에스트로 로고 파일이 없다(악보·커튼 파티클뿐). 위키 원본 배지(Maestro_Jhin_Headliner_mayhem_logo)를
+  // 원판째 쓴다 — 원판이 그림 전체라 라이트·다크 어디서나 보인다.
+  maestro: { source: require('@/assets/headliners/maestro.png') },
 };
 
 /**

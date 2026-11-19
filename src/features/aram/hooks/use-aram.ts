@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useAugmentPool } from '@/features/augments/hooks/use-augments';
 import type { Augment, AugmentMode } from '@/features/augments/types';
 import {
+  cardsFor,
   nextRarity,
   rollHeadliner,
   rollRoundStickers,
@@ -22,7 +23,7 @@ function pickWeighted(pool: Augment[], count: number, odds = RARITY_ODDS): Augme
 }
 
 function rollSlotStickers(headlinerId: string): (StickerId | null)[] {
-  if (headlinerId !== 'heartsteel') return [null, null, null];
+  if (headlinerId !== 'heartsteel') return Array<null>(cardsFor(headlinerId)).fill(null);
   return rollRoundStickers();
 }
 
@@ -48,10 +49,13 @@ export function useAram(mode: AugmentMode = 'aram', forcedHeadliner?: HeadlinerI
     stickers: [],
   }));
   const odds = progress.id === 'command-line' ? COMMAND_LINE_ODDS : RARITY_ODDS;
+  // 한 라운드에 펼치는 카드 수. 마에스트로만 4장이고, 헤드라이너는 판 내내 바뀌지 않는다.
+  const cardCount = cardsFor(progress.id);
+  const noRerolls = () => Array<boolean>(cardCount).fill(false);
 
   const initialCards = useMemo(
-    () => pickWeighted(cardPool(allAugments, [], []), 3, odds),
-    [allAugments, odds],
+    () => pickWeighted(cardPool(allAugments, [], []), cardCount, odds),
+    [allAugments, cardCount, odds],
   );
 
   const [round, setRound] = useState(0);
@@ -61,7 +65,7 @@ export function useAram(mode: AugmentMode = 'aram', forcedHeadliner?: HeadlinerI
   // 남겨 두어 다시 카드로 나오지 않게 한다. picked 는 빌드에 남는 것만이다.
   const [taken, setTaken] = useState<Set<string>>(() => new Set());
   // Per-slot reroll usage for the current round; each card may reroll only once.
-  const [rerolled, setRerolled] = useState<boolean[]>([false, false, false]);
+  const [rerolled, setRerolled] = useState<boolean[]>(noRerolls);
   const [slotStickers, setSlotStickers] = useState(() => rollSlotStickers(progress.id));
   const [hackUsed, setHackUsed] = useState(false);
 
@@ -133,8 +137,8 @@ export function useAram(mode: AugmentMode = 'aram', forcedHeadliner?: HeadlinerI
     setProgress(nextProgress);
 
     if (nextRound < rounds) {
-      setCurrentCards(pickWeighted(cardPool(allAugments, nextTaken, nextPicked), 3, odds));
-      setRerolled([false, false, false]); // fresh reroll budget each round
+      setCurrentCards(pickWeighted(cardPool(allAugments, nextTaken, nextPicked), cardCount, odds));
+      setRerolled(noRerolls()); // fresh reroll budget each round
       setHackUsed(false);
       setSlotStickers(rollSlotStickers(progress.id));
     }

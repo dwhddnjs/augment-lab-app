@@ -96,7 +96,7 @@ check(aram.length + unreleased.length === ko.length, '모드 분류에 빠진 �
 // 패치로 증강이 늘거나 줄면 tag-augment-modes.mjs 를 돌린 뒤 이 값을 함께 갱신할 것.
 // 26.21: 신규 35 · 칼바람 풀에서 빠진 14 → 칼바람 213 → 234. 클래식 제거로 전용 31개도 미출시로.
 // 26.22: 신규 2(원 히트 원더·RISE) · 풀에서 빠진 3(인내심·눈덩이 업그레이드·양자 연산, 패치 노트엔 없음) → 233.
-const EXPECTED = { total: 319, aram: 233, unreleased: 86 };
+const EXPECTED = { total: 323, aram: 233, unreleased: 90 };
 check(ko.length === EXPECTED.total, `전체 ${EXPECTED.total}개 유지 (실제 ${ko.length})`);
 check(aram.length === EXPECTED.aram, `칼바람 ${EXPECTED.aram}개 유지 (실제 ${aram.length})`);
 check(unreleased.length === EXPECTED.unreleased, `미출시 ${EXPECTED.unreleased}개 유지 (실제 ${unreleased.length})`);
@@ -111,7 +111,7 @@ for (const id of ['upgrade-sundered-sky', 'upgrade-ravenous-hydra']) {
 // 풀 목록에는 있지만 실제 드래프트에 뜨지 않아 뺀 증강. 스크립트를 다시 돌려도 살아나면 안 된다.
 for (const id of ['double-strike', 'support-main', 'sneakerhead',
                   'adamant', 'void-dash', 'snap-back', 'reload', 'vampirism', 'pursuit-of-power',
-                  'devil-on-your-shoulder']) {
+                  'devil-on-your-shoulder', 'snowblast']) {
   const a = ko.find((x) => x.id === id);
   check(!!a && !a.modes.includes('aram'), `${a?.name ?? id} 가 칼바람에서 빠져 있음`);
 }

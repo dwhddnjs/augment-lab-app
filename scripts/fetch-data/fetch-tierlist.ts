@@ -249,10 +249,13 @@ async function main() {
         const slug = augId.get(a.id) ?? null;
         if (!slug) augMiss++;
         // dtodo가 임계값을 같이 준다. 서버에서 이미 거른 듯하지만 정책이 바뀌면 노이즈가 샌다.
+        // 증강 티어는 1~4 다. 16.22 부터 텐센트 순위가 없는 증강(신규 원 히트 원더·RISE — rank null,
+        // 업로드 표본만 있음)에 5 가 붙어 온다. 등급이 없다는 뜻이라 D 로 그리면 거짓이 되므로 뺀다.
         const ok =
           slug != null &&
           s.winRate != null &&
-          s.tier != null &&
+          s.tier >= 1 &&
+          s.tier <= 4 &&
           (s.games ?? 0) >= (s.winRateMinimumGames ?? 0);
         return ok ? { slug: slug as string, score: s.winRate as number, tier: s.tier as number } : null;
       })

@@ -7,8 +7,8 @@ import { useTheme } from '@/hooks/use-theme';
 import { useTranslation } from '@/lib/i18n';
 
 const t = {
-  ko: { home: '내 빌드' },
-  en: { home: 'My Builds' },
+  ko: { home: '증강 연구소', builds: '내 빌드' },
+  en: { home: 'Augment Lab', builds: 'My Builds' },
 };
 
 export default function HomeStackLayout() {
@@ -33,6 +33,15 @@ export default function HomeStackLayout() {
         name="index"
         options={{
           title: translate('home'),
+          headerLargeTitle: true,
+          headerLargeTitleShadowVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="builds"
+        options={{
+          title: translate('builds'),
+          headerBackButtonDisplayMode: 'minimal',
           headerLargeTitle: true,
           headerLargeTitleShadowVisible: false,
         }}

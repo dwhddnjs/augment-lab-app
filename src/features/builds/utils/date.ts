@@ -1,59 +1,32 @@
 /**
- * 빌드 목록 날짜 유틸 — 저장된 빌드를 '날(day)' 단위 섹션으로 묶고 표시용으로 포맷한다.
+ * 빌드 카드의 날짜 표시 — 오늘·어제는 말로, 그 밖은 "11.18"(다른 해면 "2025.11.18").
  */
 import type { Locale } from "@/hooks/use-locale";
-import type { SavedBuild } from "@/lib/build-storage";
 
-export interface BuildSection {
-  key: string;
-  title: string;
-  data: SavedBuild[];
+const WORDS: Record<Locale, { today: string; yesterday: string }> = {
+  ko: { today: "오늘", yesterday: "어제" },
+  en: { today: "Today", yesterday: "Yesterday" },
+};
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/** 로컬 자정 기준 며칠 전인지. createdAt 은 ISO 문자열. */
+function daysAgo(date: Date, now: Date): number {
+  const midnight = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  return Math.round((midnight(now) - midnight(date)) / DAY_MS);
 }
 
-/** 로컬 기준 같은 '날(day)'을 식별하는 키. createdAt은 ISO 문자열. */
-function dayKey(iso: string): string {
-  const d = new Date(iso);
-  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+export function dayLabel(iso: string, locale: Locale, now = new Date()): string {
+  const date = new Date(iso);
+  const ago = daysAgo(date, now);
+  const words = WORDS[locale] ?? WORDS.en;
+  if (ago === 0) return words.today;
+  if (ago === 1) return words.yesterday;
+  const md = `${date.getMonth() + 1}.${date.getDate()}`;
+  return date.getFullYear() === now.getFullYear() ? md : `${date.getFullYear()}.${md}`;
 }
 
-/** 최신순으로 정렬한 뒤 같은 날짜끼리 섹션으로 묶는다(ISO는 사전순=시간순). */
-export function groupByDate(builds: SavedBuild[], locale: Locale): BuildSection[] {
-  const sorted = [...builds].sort((a, b) =>
-    b.createdAt.localeCompare(a.createdAt),
-  );
-  const sections: BuildSection[] = [];
-  let current: BuildSection | null = null;
-  for (const b of sorted) {
-    const key = dayKey(b.createdAt);
-    if (!current || current.key !== key) {
-      current = {
-        key,
-        title: new Date(b.createdAt).toLocaleDateString(
-          locale === "ko" ? "ko-KR" : "en-US",
-        ),
-        data: [],
-      };
-      sections.push(current);
-    }
-    current.data.push(b);
-  }
-  return sections;
-}
-
-/** "2026. 6. 17." (ko) 또는 "6/17/2026" (en) 형식을 "2026.6.17" 로 통일. */
-export function formatDate(input: string): string {
-  if (input.includes(".")) {
-    const [year, month, day] = input
-      .split(".")
-      .map((v) => v.trim())
-      .filter(Boolean);
-    return `${year}.${Number(month)}.${Number(day)}`;
-  }
-
-  if (input.includes("/")) {
-    const [month, day, year] = input.split("/").map((v) => v.trim());
-    return `${year}.${Number(month)}.${Number(day)}`;
-  }
-
-  throw new Error("지원하지 않는 날짜 형식입니다.");
+/** 최근 7일(오늘 포함) 안에 만든 빌드인지 — 홈 필터 "최근 7일". */
+export function isWithinWeek(iso: string, now = new Date()): boolean {
+  return daysAgo(new Date(iso), now) < 7;
 }

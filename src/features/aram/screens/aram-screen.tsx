@@ -2,7 +2,7 @@
  * 칼바람 드래프트 화면.
  * 모드는 라우트 파라미터로 들어와 아이템 화면(saveBuild)까지 그대로 전달된다.
  *
- * 카드 3장의 선택·리롤 연출은 useCardPickAnim 이, 실제 트랜지션은 PickCard 가 맡는다.
+ * 카드(보통 3장, 마에스트로 4장)의 선택·리롤 연출은 useCardPickAnim 이, 실제 트랜지션은 PickCard 가 맡는다.
  * 헤드라이너 등장 연출이 화면을 덮고, 끝난 뒤에 카드를 그린다 — flip 등장은 카드가 마운트될 때 재생된다.
  */
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -30,6 +30,7 @@ import { useHeadlinerTexts } from "@/features/headliners/hooks/use-headliners";
 import type { HeadlinerId } from "@/features/headliners/types";
 import {
   ARAM_ROUNDS,
+  cardsFor,
   isHeadlinerId,
   roundsFor,
   skillChoices,
@@ -103,12 +104,11 @@ export function AramScreen() {
   } = useLocalSearchParams<{
     championId: string;
     mode?: string;
-    /** 개발 빌드에서 헤드라이너를 고정해 검증한다(augmentlab://aram?...&headliner=kda). */
+    /** 홈 시작 카드에서 고른 헤드라이너. 없으면(랜덤 시작·+ 메뉴) 판마다 무작위다. */
     headliner?: string;
   }>();
   const mode: GameMode = parseGameMode(modeParam);
-  const forcedHeadliner =
-    __DEV__ && isHeadlinerId(headlinerParam) ? headlinerParam : undefined;
+  const forcedHeadliner = isHeadlinerId(headlinerParam) ? headlinerParam : undefined;
 
   const {
     round,
@@ -123,7 +123,9 @@ export function AramScreen() {
     pick,
     pickSkill,
   } = useAram(mode, forcedHeadliner);
-  const anim = useCardPickAnim();
+  // 펜타킬 스킬 카드도 3장이라 같은 수를 쓴다.
+  const cardCount = cardsFor(progress.id);
+  const anim = useCardPickAnim(cardCount);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [introDone, setIntroDone] = useState(false);
 
@@ -141,7 +143,7 @@ export function AramScreen() {
   // portrait 복귀는 handleExit에서 명시적으로 처리한다(중간 orientation 변경 방지).
   const { isLandscape, screenW, screenH } = useLandscapeLock(AFTER_MODAL_MS);
 
-  const cardWidth = cardWidthFor(screenW, screenH, CARD_GAP, CARD_HEIGHT_RATIO);
+  const cardWidth = cardWidthFor(screenW, screenH, CARD_GAP, CARD_HEIGHT_RATIO, cardCount);
   const drawerWidth = Math.min(340, screenW * 0.38);
 
   // 현재 카드의 이미지 캐시를 데워 엠블럼이 카드와 함께 뜨게 한다. 리롤로 한 장이 바뀌어도

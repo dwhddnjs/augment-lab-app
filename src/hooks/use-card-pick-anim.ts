@@ -1,5 +1,5 @@
 /**
- * useCardPickAnim — 카드 3장의 선택·리롤 애니메이션 상태.
+ * useCardPickAnim — 카드 count 장(보통 3, 마에스트로 4)의 선택·리롤 애니메이션 상태.
  *
  * 칼바람 드래프트가 쓰는 연출:
  *   - pick   : 고른 카드 바운스 + 나머지 fade-out → 380ms 뒤 commit
@@ -13,14 +13,13 @@ import type {
   CardExitMode,
 } from "@/components/ui/pick-card";
 
-const NO_EXIT: CardExitMode[] = ["none", "none", "none"];
-const ALL_FLIP: CardEntryMode[] = ["flip", "flip", "flip"];
-
 /** 카드 exit 애니메이션 길이 — 이 뒤에 실제 상태가 바뀐다. */
 const PICK_MS = 380;
 const REROLL_MS = 220;
 
-export function useCardPickAnim() {
+export function useCardPickAnim(count: number) {
+  const NO_EXIT = Array<CardExitMode>(count).fill("none");
+  const ALL_FLIP = Array<CardEntryMode>(count).fill("flip");
   const [exitModes, setExitModes] = useState<CardExitMode[]>(NO_EXIT);
   const [entryModes, setEntryModes] = useState<CardEntryMode[]>(ALL_FLIP);
   const [animating, setAnimating] = useState(false);

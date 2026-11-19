@@ -261,7 +261,21 @@ export const HeadlinerColors = {
   "command-line": "#FF8A3D",
   // 월드 챔피언십 2026 키 비주얼의 블루. 짙은 로열 블루(#2E5BC9)는 무대에 옅게 깔면 남색으로 가라앉아 밝고 선명하게 올렸다.
   worlds: "#3D7DFF",
+  // 26.23 — 위키 배지에서 뽑은 색. 아케이드 침략자의 마젠타, 연미복 보석의 초록, 망자의 환영 금박, 마에스트로 원판의 주홍.
+  arcade: "#E040B0",
+  debonair: "#7CC24A",
+  "la-ilusion": "#D8B85A",
+  maestro: "#E04A22",
 } as const;
+
+/**
+ * 홈의 헤드라이너 조명 알파(8자리 hex 의 뒤 2자리). HeadlinerColors(커스텀 빌드는 민트 accent)에 붙여 쓴다.
+ * - light: 시작 카드 위에서 내리꽂는 무대 조명(45%)
+ * - wash: 시작 카드 로고 뒤에 깔리는 빛(28%)
+ * - edge: 빌드 카드 1px 테두리(40%)
+ * - glow: 빌드 카드 아래로 은은하게 비치는 그림자(30%)
+ */
+export const StageAlpha = { light: "73", wash: "47", edge: "66", glow: "4D" } as const;
 
 /**
  * 게임 툴팁의 스탯 글자색(HEARTSTEEL 스티커 문구). 문구 안 `[as]공격 속도 40%[/as]` 처럼 표시한 구간에 입힌다.
