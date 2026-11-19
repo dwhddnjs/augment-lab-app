@@ -1,34 +1,12 @@
 {
   "generatedFrom": "CDragon latest + map30.bin + wiki MayhemAugmentData",
   "newIds": [
-    "one-hit-wonder",
-    "rise"
+    "slime-time",
+    "fortified",
+    "mystic-guard",
+    "steadfaster-presence"
   ],
-  "needsNumbers": [
-    {
-      "id": "one-hit-wonder",
-      "name": "원 히트 원더",
-      "en": "One Hit Wonder",
-      "rarity": "gold",
-      "description": "피해량이 스킬 가속 당% 증가하지만, 더 이상 스킬 가속 효과를 받지 않습니다. 추가 피해량:%",
-      "missingVars": [
-        "AHMultiplier",
-        "Calc_AbilityDamagetoAH",
-        "f1.1*100"
-      ]
-    },
-    {
-      "id": "rise",
-      "name": "RISE",
-      "en": "RISE",
-      "rarity": "prismatic",
-      "description": "스킬로 적 챔피언을 처치하면 초 안에 해당 스킬을 한 번 재사용할 수 있습니다. 이후 재사용할 때마다 추가 피해를 입힙니다. 최대 2회 추가로 재사용할 수 있으며, 각각 이전보다 증가한 피해를 입힙니다. 모두가 기억하게 만드세요.",
-      "missingVars": [
-        "Calc_RecastWindow",
-        "Calc_RecastDamageMod"
-      ]
-    }
-  ],
+  "needsNumbers": [],
   "noCoefficients": [],
   "missingNumbers": [
     {
@@ -385,7 +363,7 @@
       "id": "firefox",
       "name": "Firefox",
       "app": "Auto-cast: gain move speed and conjure three orbiting flames that strike the nearest enemy for magic damage.",
-      "wiki": "Automatically cast a modified version of, gaining 25% bonus movement speed that decays over 2 seconds and conjuring 3 flames that orbit you clockwise for up to 2.5 seconds at a radius of icononly=true 150 units. The flames will fly toward the nearest visible enemies within icononly=true 550 units, dealing 35 to 160 (+ 25% bonus AD (+ 25% AP) adaptive damage, reduced tofor enemies hit by subsequent flames from the same cast (7 second cooldown).",
+      "wiki": "Automatically cast a modified version of, gaining 25% bonus movement speed that decays over 2 seconds and conjuring 3 flames that orbit you clockwise for up to 2.5 seconds at a radius of icononly=true 150 units. The flames will fly toward the nearest visible enemies within icononly=true 550 units, dealing 45 to 200 (+ 25% bonus AD (+ 40% AP) adaptive damage, reduced tofor enemies hit by subsequent flames from the same cast (7 second cooldown).",
       "appNums": [],
       "wikiNums": [
         "25",
@@ -394,10 +372,10 @@
         "2.5",
         "150",
         "550",
-        "35",
-        "160",
+        "45",
+        "200",
         "25",
-        "25",
+        "40",
         "7"
       ]
     },
@@ -581,20 +559,18 @@
       "id": "spirit-bomb",
       "name": "Spirit Bomb",
       "app": "Heals and shields build a Spirit Bomb. At max it flies to your lowest ally, healing and shielding nearby allies.",
-      "wiki": "Your healing and shielding on yourself or allies builds up a Spirit Bomb on top of you. Once you have healed and shielded a combined total of 200 to 2000, you toss the Spirit Bomb onto the most wounded allied champion over 1.1 seconds. Upon impact, the Spirit Bomb explodes in a 475 radius to heal allied champions within the area for 5 to 15 (+ 3% per 100 AP) of their missing health and grants them a shield for 2 seconds that absorbs damage equal to 10 to 25 (+ 2% per 100 AP) of their current health. Healing and shielding from this effect do not count toward the Spirit Bomb's trigger condition.",
+      "wiki": "Your healing and shielding on yourself or allies builds up a Spirit Bomb on top of you. Once you have healed and shielded a combined total of 200 to 3000, you toss the Spirit Bomb onto the most wounded allied champion over 1.1 seconds. Upon impact, the Spirit Bomb explodes in a 475 radius to heal allied champions within the area for 12% (+ 2.5% per 100 AP) of their missing health and grants them a shield for 2 seconds that absorbs damage equal to 15% (+ 2% per 100 AP) of their current health. Healing and shielding from this effect do not count toward the Spirit Bomb's trigger condition.",
       "appNums": [],
       "wikiNums": [
         "200",
-        "2000",
+        "3000",
         "1.1",
         "475",
-        "5",
-        "15",
-        "3",
+        "12",
+        "2.5",
         "100",
         "2",
-        "10",
-        "25",
+        "15",
         "2",
         "100"
       ]
@@ -726,22 +702,6 @@
         "1.5",
         "460",
         "1.5"
-      ]
-    },
-    {
-      "id": "pat-on-the-back",
-      "name": "Pat On The Back",
-      "app": "Being near an ally grants a shield and move speed, stacking and refreshing on each pass.",
-      "wiki": "Whenever you are within 200 units of an allied champion, they pat you on the back, granting you a 50 to 150 (+ 25% bonus movement speed) shield and 30% bonus movement speed for 3 seconds (9 second cooldown). Subsequent passes only refresh the duration of the effects.",
-      "appNums": [],
-      "wikiNums": [
-        "200",
-        "50",
-        "150",
-        "25",
-        "30",
-        "3",
-        "9"
       ]
     },
     {
@@ -1230,7 +1190,7 @@
       "id": "vulnerability",
       "name": "Vulnerability",
       "app": "Your Item and damage over time effects can Critically Strike. Gain 25% Crit chance.",
-      "wiki": "Damage dealt by items and damage over time effects can now critically strike for (145% +) damage (5 second cooldown per cast instance). Additionally, gain 25% critical strike chance. If both Jeweled Gauntlet and Vulnerability are equipped, only rolls the critical strike chance of the augment that has the higher critical damage (or either if equal).",
+      "wiki": "Damage dealt by items and damage over time effects can now critically strike for (145% +) damage (5 second cooldown per cast instance). Additionally, gain 25% critical strike chance.",
       "appNums": [
         "25"
       ],
@@ -1386,6 +1346,27 @@
         "35",
         "15",
         "50"
+      ]
+    },
+    {
+      "id": "jeweled-gauntlet",
+      "name": "Jeweled Gauntlet",
+      "app": "Your abilities can critically strike for 145% damage. Also gain 25% (+4.5% per 100 AP) critical strike chance.",
+      "wiki": "Your abilities can now critically strike for (145% +) damage. Additionally, gain 25% (+ 4.5% per 100 AP) critical strike chance. If Jeweled Gauntlet and Jeweled Bracelet are both equipped, their critical strike chances can be rolled simultaneously, stacking their critical strike damage modifiers additively and allowing the ultimate ability to critically strike twice, for a total damage multiplier of (100% + (2(45% +)).",
+      "appNums": [
+        "145",
+        "25",
+        "4.5",
+        "100"
+      ],
+      "wikiNums": [
+        "145",
+        "25",
+        "4.5",
+        "100",
+        "100",
+        "2",
+        "45"
       ]
     },
     {
@@ -1555,10 +1536,10 @@
     {
       "id": "soul-eater",
       "name": "Soul Eater",
-      "app": "Immobilizing or grounding an enemy champion grants you 20 bonus health, stacking infinitely (5 second cooldown per cast instance).",
+      "app": "Immobilizing or grounding an enemy champion grants you 30 bonus health, stacking infinitely (5 second cooldown per cast instance).",
       "wiki": "Immobilizing or grounding an enemy champion grants you 30 bonus health, stacking infinitely (5 second cooldown per cast instance). If this is not your first augment, gain 300 bonus health.",
       "appNums": [
-        "20",
+        "30",
         "5"
       ],
       "wikiNums": [
@@ -1635,10 +1616,10 @@
     {
       "id": "titan-s-resolve",
       "name": "Titan's Resolve",
-      "app": "Dealing or taking damage grants stacks. Every 10 stacks grant adaptive force, armor, MR, size, and tenacity.",
+      "app": "Dealing or taking damage grants stacks. Every 7 stacks grant adaptive force, armor, MR, size, and tenacity.",
       "wiki": "You generate a stack of Juggernauting for each instance of damage you deal or take (excluding damage over time), lasting for 6 seconds and refreshing on subsequent damage dealt or taken. For every 7 stacks of Juggernauting, you gain 25*0.6 to 75*0.6 bonus Attack Damage or 25 to 75 Ability Power (Adaptive), 5 to 10 bonus armor and bonus magic resistance, 10% increased size, and 8% tenacity. Stacks expire one by one when the duration ends, with the decay rate being faster the more stacks you have.",
       "appNums": [
-        "10"
+        "7"
       ],
       "wikiNums": [
         "6",
@@ -1757,30 +1738,10 @@
       ]
     },
     {
-      "id": "shark-tempest",
-      "name": "Shark Tempest",
-      "app": "Sharks circle your Mark, damaging and slowing enemies. On champion hit they circle that spot for 3s.",
-      "wiki": "Your Mark is empowered to circle sharks around it in a 300 radius, dealing 100 to 200 magic damage to enemies it passes through as it travels and slowing targets hit by 40% for 1 second. If the missile hits an enemy champion, the sharks circle around their location in a 425 radius instead for 3 seconds, dealingto enemies within the area and slowing them by 40% for 3 seconds. If Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
-      "appNums": [
-        "3"
-      ],
-      "wikiNums": [
-        "300",
-        "100",
-        "200",
-        "40",
-        "1",
-        "425",
-        "3",
-        "40",
-        "3"
-      ]
-    },
-    {
       "id": "snowblast",
       "name": "Snowblast",
       "app": "Mark's dash deals 100% more damage and on arrival knocks up the target and knocks back nearby enemies. Mark gains 100 haste.",
-      "wiki": "Empowers the Dash spell from Mark to deal 100% increased damage and upon arrival cause you to knock up the target for 0.5 seconds and knock back nearby enemies. Additionally, your cooldown is reduced equivalent to 100 ability haste. If Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
+      "wiki": "Empowers the Dash spell from Mark to deal 100% increased damage and upon arrival cause you to knock up the target for 0.5 seconds and knock back nearby enemies. Additionally, your cooldown is reduced equivalent to 100 ability haste. If Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark. This augment is currently disabled.",
       "appNums": [
         "100",
         "100"
@@ -1789,22 +1750,6 @@
         "100",
         "0.5",
         "100"
-      ]
-    },
-    {
-      "id": "surge-field",
-      "name": "Surge Field",
-      "app": "Your ultimate spawns a zone granting ability haste and move speed. Inside, reflect 20% of your damage.",
-      "wiki": "Upon casting your ultimate ability, you spawn a surge zone beneath you that has a 300 radius. While you are within the zone, you gain 50 ability haste and 40% bonus movement speed, and your damage dealt to enemy champions fires missiles at them that deal 20% of the triggering damage instance pre-mitigation as bonus magic damage. The missile effect cannot trigger from itself. The zone lasts indefinitely as long as you stay within its radius. If you leave the zone's radius for the first time, it moves to your current location. Exiting the zone a second time causes it to disappear if you do not re-enter the area within 1.25 seconds.",
-      "appNums": [
-        "20"
-      ],
-      "wikiNums": [
-        "300",
-        "50",
-        "40",
-        "20",
-        "1.25"
       ]
     },
     {
@@ -1881,33 +1826,15 @@
       ]
     },
     {
-      "id": "armored-impact",
-      "name": "Armored Impact",
-      "app": "After casting an ability, your next attack within 10s deals 50-125 (+250% bonus armor) bonus physical damage around the target.",
-      "wiki": "After casting an ability, your next basic attack on-hit within 10 seconds is empowered to deal 25 to 125 (+ 220% bonus armor) bonus physical damage to the target and surrounding enemies.",
-      "appNums": [
-        "10",
-        "50",
-        "125",
-        "250"
-      ],
-      "wikiNums": [
-        "10",
-        "25",
-        "125",
-        "220"
-      ]
-    },
-    {
       "id": "bees",
       "name": "BEES!!!",
-      "app": "Ability hits on champions throw a beehive. Bees swarm nearby enemies for 2s, slowing 20% and dealing 75-200 magic damage. (15-10s)",
+      "app": "Ability hits on champions throw a beehive. Bees swarm nearby enemies for 2s, slowing 20% and dealing 75-140 magic damage. (15-10s)",
       "wiki": "Hitting an enemy champion with an ability causes you to toss a beehive at them over 1.1 seconds, which upon arrival explodes in a 425 radius to swarm enemy champions hit with bees for 2 seconds (15 to 10 second cooldown). While being swarmed, targets are dealtover the duration, applied on-hit effects at 40% effectiveness every 0.5 seconds (4 times total), and are slowed by 20%.",
       "appNums": [
         "2",
         "20",
         "75",
-        "200",
+        "140",
         "15",
         "10"
       ],
@@ -1927,7 +1854,7 @@
       "id": "big-shot",
       "name": "Big Shot",
       "app": "Gain 35% crit damage and 25% bonus AD. 75% of your attack speed is converted into crit damage.",
-      "wiki": "Convert 75% of your total attack speed into critical strike damage, at a rate of 0.67% critical strike damage per 1% attack speed. Additionally, you gain 25% bonus attack damage and 35% critical strike damage. Critical strike damage granted from this effect only applies to basic attacks that critically strike.",
+      "wiki": "Convert 75% of your total attack speed into critical strike damage, at a rate of 0.67% critical strike damage per 1% attack speed. Additionally, you gain 25% bonus attack damage and 35% critical strike damage.",
       "appNums": [
         "35",
         "25",
@@ -1945,7 +1872,7 @@
       "id": "bouncing-bees",
       "name": "Bouncing Bees",
       "app": "After an ability, your next attack bounces to the nearest foe for 50-100% damage. Quest: 10/40/163 bounces grant 30 AD, +1 bounce.",
-      "wiki": "After casting an ability, your next basic attack is empowered to bounce a bee from the primary target to the nearest enemy champion within 700 units of them, dealing 50 to 100 of the triggering attack's damage upon arrival. Additionally, you are assigned with quests that require you to bounce bees onto enemy champions a number of times. There are three quest tiers, and each completed tier rewards you with bonus attack damage and an additional bee bounce on the empowered attack that repeats from the new target with each bounce, forming a chain of bee attacks.",
+      "wiki": "After casting an ability, your next basic attack is empowered to bounce a bee from the primary target to the nearest enemy champion within 700 units of them, dealing 60% of the triggering attack's damage upon arrival. Additionally, you are assigned with quests that require you to bounce bees onto enemy champions a number of times. There are three quest tiers, and each completed tier rewards you with bonus attack damage and an additional bee bounce on the empowered attack that repeats from the new target with each bounce, forming a chain of bee attacks.",
       "appNums": [
         "50",
         "100",
@@ -1957,20 +1884,19 @@
       ],
       "wikiNums": [
         "700",
-        "50",
-        "100"
+        "60"
       ]
     },
     {
       "id": "brass-blast",
       "name": "Brass Blast",
-      "app": "Replace a summoner spell with Brass Blast: charge a trumpet up to 2.5s, then knock back enemies for 120-600 magic damage. (45s)",
+      "app": "Replace a summoner spell with Brass Blast: charge a trumpet up to 2.5s, then knock back enemies for 120-600 magic damage. (50s)",
       "wiki": "Replace a summoner spell with Brass Blast. Brass Blast -",
       "appNums": [
         "2.5",
         "120",
         "600",
-        "45"
+        "50"
       ],
       "wikiNums": []
     },
@@ -2016,7 +1942,7 @@
       "id": "enchanting-butterflies",
       "name": "Enchanting Butterflies",
       "app": "Healing or shielding allies gathers Butterflies. At 7, your next damage fires them: 50-100 magic damage, 75% for the rest.",
-      "wiki": "Healing or shielding an allied champion causes a Butterfly to gather around you, up to 7. After collecting 7 Butterflies, your next instance of damage against an enemy champion fires all of your Butterflies at them, with the first one dealing 50 to 100 (+ 10% AP) (+ 1% bonus health) (+ 3 per 1% heal and shield power) magic damage and all subsequent Butterflies dealingfor a total damage of 50+(50*0.75*6) to 100+(100*0.75*6) (+ 10+10*0.75*6% AP) (+ 1+1*0.75*6% bonus health) (+ 3+3*0.75*6 per 1% heal and shield power).",
+      "wiki": "Healing or shielding an allied champion causes a Butterfly to gather around you, up to 7. While you have Butterflies, your next instance of damage against an enemy champion fires all of your collected Butterflies at them, with the first one dealing 50 to 100 (+ 10% AP) (+ 1% bonus health) (+ 3 per 1% heal and shield power) magic damage and all subsequent Butterflies dealingfor a total damage of 50+(50*0.75*6) to 100+(100*0.75*6) (+ 10+10*0.75*6% AP) (+ 1+1*0.75*6% bonus health) (+ 3+3*0.75*6 per 1% heal and shield power).",
       "appNums": [
         "7",
         "50",
@@ -2024,7 +1950,6 @@
         "75"
       ],
       "wikiNums": [
-        "7",
         "7",
         "50",
         "100",
@@ -2109,12 +2034,12 @@
       "id": "group-hug",
       "name": "Group Hug",
       "app": "Upgrades an ally-targeted heal or shield ability: it also applies to the 2 closest allied champions near the target.",
-      "wiki": "Upgrades one of your champion's abilities that can target allied champions and has a heal or shield effect, empowering the ability's cast to also target two of the closest allied champions within 500 units of the primary target.",
+      "wiki": "Upgrades one of your champion's abilities that can target allied champions and has a heal or shield effect, empowering the ability's cast to also target two of the closest allied champions within 600 units of the primary target.",
       "appNums": [
         "2"
       ],
       "wikiNums": [
-        "500"
+        "600"
       ]
     },
     {
@@ -2160,13 +2085,16 @@
       "id": "jeweled-bracelet",
       "name": "Jeweled Bracelet",
       "app": "Upgrades one ability so its damage can critically strike. Gain 25% crit chance.",
-      "wiki": "Your ultimate ability can now critically strike for (145% +) damage. Additionally, gain 25% critical strike chance.",
+      "wiki": "Your ultimate ability can now critically strike for (145% +) damage. Additionally, gain 25% critical strike chance. If Jeweled Bracelet and Jeweled Gauntlet are both equipped, their critical strike chances can be rolled simultaneously, stacking their critical strike damage modifiers additively and allowing the ultimate ability to critically strike twice, for a total damage multiplier of (100% + (2(45% +)).",
       "appNums": [
         "25"
       ],
       "wikiNums": [
         "145",
-        "25"
+        "25",
+        "100",
+        "2",
+        "45"
       ]
     },
     {
@@ -2191,10 +2119,26 @@
       ]
     },
     {
+      "id": "no-mana-no-problem",
+      "name": "No Mana, No Problem",
+      "app": "Mana from items is converted into ability power (0.8 per 10 mana). Increase your total ability power by 15%.",
+      "wiki": "Convert all of the mana you gain from items into ability power at a rate of 1 ability power per 10 mana from items. Additionally, increase your ability power by 15%.",
+      "appNums": [
+        "0.8",
+        "10",
+        "15"
+      ],
+      "wikiNums": [
+        "1",
+        "10",
+        "15"
+      ]
+    },
+    {
       "id": "salvation",
       "name": "Salvation",
       "app": "Below 50% health, release a shockwave that knocks back enemies for 100-500 magic damage and heals allies 200-550. (90s)",
-      "wiki": "Upon dropping below 50% of your maximum health, you unleash a shockwave that expands from your location over 1200 units, dealing 100 to 500 (+ 125% bonus AD) (+ 75% AP) magic damage to enemies hit and healing you and allied champions hit for 200 to 550 (+ 200% bonus AD) (+ 120% AP) (90 second cooldown). Enemy champions hit within the first 600 units of the shockwave are knocked back 450 to 100 units.",
+      "wiki": "Upon dropping below 50% of your maximum health, you unleash a shockwave that expands from your location over 1200 units, dealing 100 to 500 (+ 125% bonus AD) (+ 75% AP) magic damage to enemies hit and healing you and allied champions hit for 200 to 550 (+ 200% bonus AD) (+ 120% AP) (70 second cooldown). Enemy champions hit within the first 600 units of the shockwave are knocked back 450 to 100 units.",
       "appNums": [
         "50",
         "100",
@@ -2214,7 +2158,7 @@
         "550",
         "200",
         "120",
-        "90",
+        "70",
         "600",
         "450",
         "100"
@@ -2278,13 +2222,13 @@
     {
       "id": "take-em-down-down-down",
       "name": "Take'em Down Down Down",
-      "app": "Attacks and abilities deal 5-30 bonus magic damage and stack. At 5 stacks, deal 15% missing health damage and heal 67% of it.",
+      "app": "Attacks and abilities deal 5-30 bonus magic damage and stack. At 5 stacks, deal 17% missing health damage and heal 67% of it.",
       "wiki": "Basic attacks on-hit and ability hits against enemy champions apply a stack for 5 seconds, refreshing on subsequent applications and stacking up to 5 times, and deal {{as||magic damage}} {{as|(+ bonus AD)}} {{as|(+ AP)}} bonus magic damage plus {{as||magic damage}} {{as|(+ bonus AD)}} {{as|(+ AP)}} additional magic damage per stack on the target. The fifth stack against a target consumes them all to deal additional magic damage equal to {{as| of the target's missing health}} and heal you for of the post-mitigation damage dealt.",
       "appNums": [
         "5",
         "30",
         "5",
-        "15",
+        "17",
         "67"
       ],
       "wikiNums": [
@@ -2317,7 +2261,7 @@
       "id": "third-times-the-harm",
       "name": "Third Times the Harm",
       "app": "Every third attack on an enemy champion within 4s grants a stack and deals 6% max health (+10 per stack) true damage.",
-      "wiki": "Your basic attacks on-hit against enemy champions apply a mark to the target for 4 seconds, refreshing on subsequent hits. Every third attack on-hit against the marked target grants you a stack and deals bonus true damage equal to {{as| of the target's maximum health}} {{as|(+ per stack you have)|true damage}}.",
+      "wiki": "Your basic attacks on-hit against enemy champions apply a mark to the target for 4 seconds, refreshing on subsequent hits. Every third attack on-hit against the marked target grants you a permanent stack and deals bonus true damage equal to {{as| of the target's maximum health}} {{as|(+ per stack you have)|true damage}}. This effect stacks infinitely.",
       "appNums": [
         "4",
         "6",
@@ -2342,7 +2286,7 @@
       "id": "upgrade-stormsurge",
       "name": "Upgrade Stormsurge",
       "app": "Upgrades Stormsurge: Squall detonates for 10% max health magic damage nearby and marks champions hit with Squall. Gain 500 gold.",
-      "wiki": "Upgrades Stormsurge, empowering to strike the area around the primary target with lightning (350 radius) after its delay, dealing magic damage equal to 10% (+ 2% per 100 AP) of the target's maximum health to enemies hit. Enemy champions hit by the blast are also inflicted with Squall, causing lightning to strike the area around them after the same delay. Subsequent blasts from these secondary targets do not inflict Squall to champions hit. Additionally, gain. Squall's electric field from the target dying before the lightning strike does not apply this augment's effects.",
+      "wiki": "Upgrades Stormsurge, empowering to strike the area around the primary target with lightning (350 radius) after its delay, dealing magic damage equal to 10% (+ 2% per 100 AP) of the target's maximum health to enemies hit. Enemy champions hit by the blast are also inflicted with Squall, causing lightning to strike the area around them after the same delay, dealing the same damage. Subsequent blasts from these secondary targets do not inflict Squall to champions hit. Additionally, gain. Squall's electric field from the target dying before the lightning strike does not apply this augment's effects.",
       "appNums": [
         "10",
         "500"
@@ -2368,7 +2312,43 @@
         "1",
         "6"
       ]
+    },
+    {
+      "id": "one-hit-wonder",
+      "name": "One Hit Wonder",
+      "app": "Upgrades an ability: its damage increases by 75% per 100 ability haste, but it no longer benefits from ability haste.",
+      "wiki": "The cooldown of one of your champion's abilities is no longer affected by ability haste. In return, that ability now deals 7.5% increased damage per 10 ability haste you have.",
+      "appNums": [
+        "75",
+        "100"
+      ],
+      "wikiNums": [
+        "7.5",
+        "10"
+      ]
+    },
+    {
+      "id": "rise",
+      "name": "RISE",
+      "app": "Killing a champion with your ultimate lets you recast it within 5s, up to 2 times. Each recast deals 25% more damage.",
+      "wiki": "Your ultimate ability now gains a recast for 5 seconds if you kill an enemy champion within 3 seconds of damaging them with the spell. This may occur up to 2 times from the ultimate's initial cast, for a total of two recasts. The recast mimics the active effects of the ultimate ability as it was initially cast, but causes it to also deal 25% more damage than the previous cast.",
+      "appNums": [
+        "5",
+        "2",
+        "25"
+      ],
+      "wikiNums": [
+        "5",
+        "3",
+        "2",
+        "25"
+      ]
     }
   ],
-  "disabled": []
+  "disabled": [
+    {
+      "id": "snowblast",
+      "name": "Snowblast"
+    }
+  ]
 }

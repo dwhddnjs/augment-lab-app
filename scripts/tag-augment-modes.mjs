@@ -49,6 +49,9 @@ const NOT_IN_ARAM = new Set([
   'Vampirism',              // 흡혈병
   'SpecializedEmpowerment', // 위력 추구
   'ARAM_LittleDevil',       // 어깨 위의 악마
+  // 26.21 출시일에 서버에서 꺼진 12종 중 26.23 에도 꺼져 있는 것. 위키 MayhemAugmentData 11-19 판이
+  // 나머지 8종의 "currently disabled" 표기는 지웠고 이것만 남겼다(docs/plans/2026-11-20-*).
+  'Snowbomb',               // 눈 폭발
 ]);
 
 async function getJson(url) {

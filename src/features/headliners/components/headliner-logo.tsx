@@ -13,6 +13,8 @@ const WHITE_LOGOS: HeadlinerId[] = [
   "disco",
   "cafe-cuties",
   "worlds",
+  "arcade",
+  "la-ilusion",
 ];
 
 interface Props {

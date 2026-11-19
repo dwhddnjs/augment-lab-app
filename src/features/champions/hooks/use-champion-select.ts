@@ -43,7 +43,8 @@ export function useChampionSelect() {
   const { locale } = useLocale();
   const router = useRouter();
   const navigation = useNavigation();
-  const params = useLocalSearchParams<{ mode?: string }>();
+  // headliner — 홈 시작 카드에서 고른 헤드라이너. 여기선 해석하지 않고 드래프트로 그대로 넘긴다.
+  const params = useLocalSearchParams<{ mode?: string; headliner?: string }>();
   const mode: LaunchMode = parseLaunchMode(params.mode);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
@@ -113,7 +114,7 @@ export function useChampionSelect() {
       aram: () =>
         router.replace({
           pathname: "/aram",
-          params: { championId, mode: "aram" },
+          params: { championId, mode: "aram", ...(params.headliner && { headliner: params.headliner }) },
         }),
       // 커스텀은 뽑기가 없어 championId 만 나른다.
       custom: () =>
