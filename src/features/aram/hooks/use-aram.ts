@@ -4,6 +4,7 @@ import type { Augment, AugmentMode } from '@/features/augments/types';
 import {
   cardsFor,
   nextRarity,
+  rerollSlotSticker,
   rollHeadliner,
   rollRoundStickers,
   roundsFor,
@@ -83,11 +84,8 @@ export function useAram(mode: AugmentMode = 'aram', forcedHeadliner?: HeadlinerI
     // Each card may reroll only once per round.
     if (rerolled[idx]) return null;
 
-    const pool = cardPool(
-      allAugments,
-      [...taken, ...currentCards.filter((_, i) => i !== idx).map((a) => a.id)],
-      picked,
-    );
+    // 리롤하는 카드 자신도 뺀다 — 남겨 두면 같은 카드가 다시 나와 리롤 기회만 쓰고 끝난다.
+    const pool = cardPool(allAugments, [...taken, ...currentCards.map((a) => a.id)], picked);
     if (pool.length === 0) return null;
     // 일반 리롤은 그 카드의 등급을 유지하고, 해킹 리롤만 한 등급 올린다.
     const card = currentCards[idx];
@@ -106,7 +104,8 @@ export function useAram(mode: AugmentMode = 'aram', forcedHeadliner?: HeadlinerI
       return next;
     });
     setHackUsed(true);
-    // HEARTSTEEL 스티커는 카드가 아니라 슬롯에 붙어 있어 리롤해도 그대로다.
+    // HEARTSTEEL 스티커는 슬롯에 붙어 있어 리롤해도 그대로다. 빈 칸만 리롤로 멤버가 붙기도 한다.
+    if (progress.id === 'heartsteel') setSlotStickers(rerollSlotSticker(slotStickers, idx));
     return replacement;
   };
 

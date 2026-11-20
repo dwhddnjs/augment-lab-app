@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
+import { InsetView } from "@/components/ui/inset-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { AugmentImage } from "@/components/ui/augment-image";
 import {
@@ -132,7 +132,7 @@ export function PickedDrawer({ picked, width, championId, headliner }: Props) {
   );
 
   return (
-    <SafeAreaView
+    <InsetView
       style={[styles.container, { backgroundColor: colors.surface.base }]}
       edges={["top", "bottom"]}
     >
@@ -163,7 +163,7 @@ export function PickedDrawer({ picked, width, championId, headliner }: Props) {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </InsetView>
   );
 }
 

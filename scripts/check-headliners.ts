@@ -16,6 +16,7 @@ import {
   anvilCount,
   cardsFor,
   nextRarity,
+  rerollSlotSticker,
   rollHeadliner,
   rollRoundStickers,
   roundsFor,
@@ -105,5 +106,21 @@ for (let i = 0; i < ROLLS; i++) {
 }
 for (const n of emptySlots) assert.ok(Math.abs(n / ROLLS - 1 / 3) <= TOLERANCE, '빈 칸 위치가 치우친다');
 assert.equal(seen.size, STICKER_IDS.length);
+
+// 리롤: 붙은 멤버는 그대로, 빈 칸은 가끔 다른 칸에 없는 멤버가 붙는다.
+let filled = 0;
+for (let i = 0; i < ROLLS; i++) {
+  const before = rollRoundStickers();
+  const kept = before.findIndex((s) => s !== null);
+  assert.equal(rerollSlotSticker(before, kept), before, '붙어 있던 멤버가 리롤로 바뀌었다');
+  const empty = before.indexOf(null);
+  const after = rerollSlotSticker(before, empty);
+  after.forEach((s, j) => j !== empty && assert.equal(s, before[j], '리롤하지 않은 칸이 바뀌었다'));
+  if (after[empty] === null) continue;
+  filled += 1;
+  assert.equal(new Set(after).size, 3, '리롤로 같은 멤버가 두 번 붙었다');
+}
+// rules.ts REROLL_STICKER_CHANCE(0.5). 값을 바꾸면 여기도 함께 바꾼다 — 실수로 바뀐 확률을 잡으려고 상수를 import 하지 않는다.
+assert.ok(Math.abs(filled / ROLLS - 0.5) <= TOLERANCE, '빈 칸 리롤에 멤버가 붙는 확률이 0.5 가 아니다');
 
 console.log('✓ 헤드라이너 규칙 정상');

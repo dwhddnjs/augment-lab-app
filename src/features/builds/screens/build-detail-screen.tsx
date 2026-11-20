@@ -8,10 +8,9 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { Stack } from "expo-router/stack";
-import * as ScreenOrientation from "expo-screen-orientation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, Pressable, StyleSheet, View } from "react-native";
 import Animated, {
   Extrapolation,
@@ -126,15 +125,6 @@ export function BuildDetailScreen() {
       active = false;
     };
   }, [id]);
-
-  // 홈(portrait)에서만 진입하지만, 드래프트 직후 회전 잔상에 대한 안전망.
-  useFocusEffect(
-    useCallback(() => {
-      ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT_UP,
-      ).catch(() => {});
-    }, []),
-  );
 
   const champions = useChampions();
   const augments = useAugments();
