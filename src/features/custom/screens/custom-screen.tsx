@@ -10,7 +10,7 @@
  * Drawer 를 걷어내면 여기서 직접 감싸야 한다.
  */
 import * as Haptics from "expo-haptics";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
@@ -20,21 +20,20 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 import {
-  SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import { scheduleOnRN } from "react-native-worklets";
 
+import { InsetView } from "@/components/ui/inset-view";
 import { ThemedView } from "@/components/themed/themed-view";
 import { AugmentTile } from "@/components/ui/augment-tile";
 import { GlassButton } from "@/components/ui/glass-button";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
-import { AFTER_MODAL_MS, useLandscapeLock } from "@/hooks/use-landscape-lock";
+import { useCloseDraft } from "@/hooks/use-close-draft";
 import { useTheme } from "@/hooks/use-theme";
 import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
-import { lockPortraitAfterExit } from "@/lib/orientation";
 import { AugmentSearchField } from "../components/augment-search-field";
 import {
   AugmentPickGrid,
@@ -83,12 +82,11 @@ const GHOST = 64;
 // ─── 화면 진입 래퍼 (landscape 가드) ─────────────────────────────────────────
 export function CustomScreen() {
   const { championId } = useLocalSearchParams<{ championId: string }>();
-  useLandscapeLock(AFTER_MODAL_MS);
 
-  // 이 화면은 모달 위에 떠서 window 치수가 늦게 따라오므로 자체 onLayout으로 잰다.
-  // 세로 값은 아예 담지 않는다 — 회전 잠금 중에도 앱 전환 복귀 같은 순간에 세로
-  // 레이아웃이 한 프레임 들어올 수 있고, 그때 CustomContent 가 unmount 되면 담아둔
-  // 증강·아이템이 통째로 사라진다(상태가 전부 그 안의 useCustomDraft 에 있다).
+  // 가로 전체 화면 모달이지만 회전과 함께 뜨는 동안 첫 몇 프레임은 세로 크기로 배치된다. 가로 크기가 들어온 뒤에
+  // 그린다 — 바로 그리면 세로로 배치된 본문과 설정 서랍이 비치고, 다시 배치하느라 오히려 늦게 자리 잡았다.
+  // 세로 값은 아예 담지 않는다 — 앱 전환 복귀 같은 순간에 세로 레이아웃이 한 프레임 들어올 수 있고, 그때
+  // CustomContent 가 unmount 되면 담아둔 증강·아이템이 통째로 사라진다(상태가 전부 그 안의 useCustomDraft 에 있다).
   const [dims, setDims] = useState({ w: 0, h: 0 });
   const isLandscape = dims.w > 0;
 
@@ -117,7 +115,7 @@ function CustomContent({
 }) {
   const translate = useTranslation(t);
   const { colors } = useTheme();
-  const router = useRouter();
+  const closeDraft = useCloseDraft();
   const insets = useSafeAreaInsets();
   const draft = useCustomDraft(initialChampionId);
 
@@ -197,10 +195,8 @@ function CustomContent({
       {
         text: translate("exitOk"),
         style: "destructive",
-        onPress: () => {
-          router.dismissTo("/");
-          lockPortraitAfterExit();
-        },
+        // 닫으면 iOS 가 세로로 돌린다(useCloseDraft).
+        onPress: closeDraft.exit,
       },
     ]);
   };
@@ -220,7 +216,7 @@ function CustomContent({
       <ThemedView style={styles.container}>
         {/* bottom inset 은 여기서 먹지 않는다 — 리스트가 화면 끝까지 흐르고,
             마지막 줄만 각 리스트의 contentContainer 가 홈 인디케이터만큼 띄운다. */}
-        <SafeAreaView style={styles.safe} edges={["top", "left", "right"]}>
+        <InsetView style={styles.safe} edges={["top", "left", "right"]}>
           {/* 헤더 — 나가기 / 검색 / 증강·아이템 토글 / 저장 / 설정 */}
           <View style={[styles.header, { paddingHorizontal: HEADER_PAD }]}>
             <GlassButton
@@ -325,7 +321,7 @@ function CustomContent({
               </>
             )}
           </View>
-        </SafeAreaView>
+        </InsetView>
 
         {/* 드래그 고스트 — FlatList 가 children 을 클리핑하므로 화면 최상단에 둔다.
             셀 안에 두면 좌측 패널 경계에서 잘려 우측까지 못 간다. */}

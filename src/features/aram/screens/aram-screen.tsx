@@ -9,8 +9,8 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
-import { SafeAreaView } from "react-native-safe-area-context";
 
+import { InsetView } from "@/components/ui/inset-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
@@ -22,12 +22,11 @@ import {
   cardWidthFor,
 } from "@/components/ui/rarity-card-frame";
 import { parseGameMode } from "@/constants/game-modes";
-import { HeroOverlay, Radius, Spacing } from "@/constants/theme";
+import { Radius, Spacing } from "@/constants/theme";
 import { useChampionSpells } from "@/features/champions/hooks/use-champion-spells";
-import { HEADLINER_LOGOS } from "@/features/headliners/assets";
+import { logoBoxHeight } from "@/features/headliners/assets";
 import { HeadlinerLogo } from "@/features/headliners/components/headliner-logo";
 import { useHeadlinerTexts } from "@/features/headliners/hooks/use-headliners";
-import type { HeadlinerId } from "@/features/headliners/types";
 import {
   ARAM_ROUNDS,
   cardsFor,
@@ -36,13 +35,13 @@ import {
   skillChoices,
 } from "@/features/headliners/rules";
 import { useCardPickAnim } from "@/hooks/use-card-pick-anim";
-import { AFTER_MODAL_MS, useLandscapeLock } from "@/hooks/use-landscape-lock";
+import { useCloseDraft } from "@/hooks/use-close-draft";
+import { useLandscapeSize } from "@/hooks/use-landscape-size";
 import { useTheme } from "@/hooks/use-theme";
 import type { GameMode } from "@/lib/build-storage";
 import { augmentImageUrls, spellImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
 import { prefetchOne } from "@/lib/image-prewarm";
-import { lockPortraitAfterExit } from "@/lib/orientation";
 import { AramCard } from "../components/aram-card";
 import {
   KdaBadge,
@@ -79,16 +78,10 @@ const t = {
 
 // 헤더 버튼 좌우 여백 — 카드 영역(CARD_ROW_PAD)보다 넓게 잡아 버튼이 기기 끝에 붙지 않게 한다.
 const HEADER_PAD = Spacing.five; // 32
-// 헤더 로고 크기 — 투명 여백을 뺀 실제 그림(HEADLINER_LOGOS ink)의 긴 변이 32pt 가 되게 맞춘다.
+// 헤더 로고 크기 — 투명 여백을 뺀 실제 그림의 긴 변이 32pt 가 되게 맞춘다(logoBoxHeight).
 // 정사각 로고는 40 이면 라운드 pill(약 45pt)과 키가 같아 무거워 보인다.
 // 가로로 긴 K/DA 워드마크는 그림 높이 16pt(폭 약 75pt)다 — 높이를 32pt 로 맞추면 폭이 150pt 로 헤더를 누른다.
 const HEADER_LOGO_INK = 32;
-const HEADER_WORDMARK_INK = 16;
-
-function headerLogoSize(id: HeadlinerId): number {
-  const { aspect = 1, ink = 1 } = HEADLINER_LOGOS[id];
-  return Math.round((aspect > 1 ? HEADER_WORDMARK_INK : HEADER_LOGO_INK) / ink);
-}
 // 헤더 밑에서 카드까지 내리는 거리(화면 높이 대비). 모든 헤드라이너가 같은 자리를 쓴다.
 // 카드 위 K/DA 마크가 헤더에서 떨어지면서도, 가장 긴 HEARTSTEEL 줄이 낮은 기기에서 넘치지 않는 값이다.
 const CARD_TOP_RATIO = 0.07;
@@ -97,6 +90,7 @@ export function AramScreen() {
   const translate = useTranslation(t);
   const { colors } = useTheme();
   const router = useRouter();
+  const closeDraft = useCloseDraft();
   const {
     championId,
     mode: modeParam,
@@ -140,8 +134,7 @@ export function AramScreen() {
   const totalRounds =
     progress.id === "worlds" ? roundsFor(progress.id) : ARAM_ROUNDS;
 
-  // portrait 복귀는 handleExit에서 명시적으로 처리한다(중간 orientation 변경 방지).
-  const { isLandscape, screenW, screenH } = useLandscapeLock(AFTER_MODAL_MS);
+  const { screenW, screenH } = useLandscapeSize();
 
   const cardWidth = cardWidthFor(screenW, screenH, CARD_GAP, CARD_HEIGHT_RATIO, cardCount);
   const drawerWidth = Math.min(340, screenW * 0.38);
@@ -163,9 +156,11 @@ export function AramScreen() {
 
   // 마지막 라운드를 고르면 아이템 선택으로 넘어간다. 픽 연출이 끝난 뒤 호출되므로
   // 도중에 화면을 나가면 훅이 타이머를 끊어 이 콜백 자체가 실행되지 않는다.
+  // 넘어가면 true — 카드 연출이 다음 라운드를 돌리지 않고 멈춘다(useCardPickAnim).
   const leaveIfDone = ({ done, nextPicked, nextProgress }: PickResult) => {
-    if (!done) return;
-    router.replace({
+    if (!done) return false;
+    // 갈아 끼우지(replace) 않고 위에 쌓는다 — 이 모달을 닫는 순간 세로로 돌았다가 다시 가로로 돈다.
+    router.push({
       pathname: "/aram-items",
       params: {
         picked: JSON.stringify(nextPicked),
@@ -174,6 +169,7 @@ export function AramScreen() {
         mode,
       },
     });
+    return true;
   };
 
   const handleExit = () => {
@@ -185,21 +181,12 @@ export function AramScreen() {
         {
           text: translate("exitOk"),
           style: "destructive",
-          onPress: () => {
-            router.dismissTo("/");
-            lockPortraitAfterExit();
-          },
+          // 닫으면 iOS 가 세로로 돌린다(useCloseDraft).
+          onPress: closeDraft.exit,
         },
       ],
     );
   };
-
-  // 회전은 useLandscapeLock 이 건다. 시트가 걷히면 바로 무대로 이어지도록 라이트 모드에서도 어둡게 둔다.
-  // 회전이 끝날 때까지 카드 렌더를 보류해, 카드가 portrait 레이아웃으로 먼저
-  // 떴다가 reflow되는 일을 막는다.
-  if (!isLandscape) {
-    return <View style={styles.rotating} />;
-  }
 
   return (
     <Drawer
@@ -220,7 +207,7 @@ export function AramScreen() {
       )}
     >
       <ThemedView style={styles.container}>
-        <SafeAreaView
+        <InsetView
           style={styles.safe}
           edges={["top", "bottom", "left", "right"]}
         >
@@ -244,7 +231,7 @@ export function AramScreen() {
                 >
                   <HeadlinerLogo
                     id={progress.id}
-                    size={headerLogoSize(progress.id)}
+                    size={logoBoxHeight(progress.id, HEADER_LOGO_INK)}
                     plain
                   />
                 </View>
@@ -327,7 +314,7 @@ export function AramScreen() {
                   })}
             </CardRow>
           )}
-        </SafeAreaView>
+        </InsetView>
 
         {!introDone && isHeadlinerId(progress.id) && (
           <HeadlinerReveal id={progress.id} onDone={() => setIntroDone(true)} />
@@ -340,10 +327,6 @@ export function AramScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  rotating: {
-    flex: 1,
-    backgroundColor: HeroOverlay.cardBase,
   },
   safe: {
     flex: 1,

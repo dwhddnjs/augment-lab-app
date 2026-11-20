@@ -18,8 +18,8 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
+import { InsetView } from "@/components/ui/inset-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { GlassSurface } from "@/components/ui/glass-surface";
 import { RemoteImage } from "@/components/ui/remote-image";
@@ -72,7 +72,7 @@ export function ChampionChangeOverlay({
 
       {/* 세로 inset 은 먹지 않는다 — bottom(홈 인디케이터 21pt)을 먹으면 시트가
           그만큼 위로 쏠려 화면 한가운데가 아니게 된다. 가로만 노치를 피한다. */}
-      <SafeAreaView
+      <InsetView
         style={styles.safe}
         edges={["left", "right"]}
         pointerEvents="box-none"
@@ -163,7 +163,7 @@ export function ChampionChangeOverlay({
             )}
           </View>
         </GlassSurface>
-      </SafeAreaView>
+      </InsetView>
     </View>
   );
 }

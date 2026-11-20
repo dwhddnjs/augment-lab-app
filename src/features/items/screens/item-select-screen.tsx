@@ -10,16 +10,15 @@
 import { useLocalSearchParams } from "expo-router";
 import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { GlassButton } from "@/components/ui/glass-button";
+import { InsetView } from "@/components/ui/inset-view";
 import { parseGameMode } from "@/constants/game-modes";
 import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import type { BuildHeadliner } from "@/features/headliners/types";
-import { useLandscapeLock } from "@/hooks/use-landscape-lock";
 import { useTheme } from "@/hooks/use-theme";
 import { parseBuildHeadliner, type GameMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
@@ -39,6 +38,16 @@ function parseHeadlinerParam(json?: string) {
   }
 }
 
+// 같은 이유로 깨진 증강 목록은 빈 목록으로 본다(아이템만 담은 빌드가 된다).
+function parsePickedParam(json?: string): Augment[] {
+  try {
+    const parsed: unknown = json ? JSON.parse(json) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 // ─── 화면 진입 래퍼 (landscape 가드) ─────────────────────────────────────────
 export function ItemSelectScreen() {
   const {
@@ -53,24 +62,20 @@ export function ItemSelectScreen() {
     mode?: string;
   }>();
   const mode: GameMode = parseGameMode(modeParam);
-  const pickedAugments: Augment[] = useMemo(
-    () => (pickedJson ? JSON.parse(pickedJson) : []),
-    [pickedJson],
-  );
+  const pickedAugments = useMemo(() => parsePickedParam(pickedJson), [pickedJson]);
   const headliner = parseHeadlinerParam(headlinerJson);
 
-  useLandscapeLock();
-
-  // 이 화면은 모달 위에 떠서 window 치수가 늦게 따라오므로 자체 onLayout으로 잰다.
-  const [dims, setDims] = useState({ w: 0, h: 0 });
-  const isLandscape = dims.w > dims.h && dims.w > 0;
+  // 커스텀 화면처럼 가로 크기가 들어온 뒤에 그리고, 한 번 그리면 내리지 않는다 — 세로 크기가 한 프레임
+  // 들어와(앱 전환 복귀 등) 본문이 unmount 되면 담아 둔 아이템이 날아가고, 저장 중이면 저장 흐름이
+  // "나갔다"고 보고(useAlive) 빌드 상세로 넘어가지 않는다.
+  const [isLandscape, setIsLandscape] = useState(false);
 
   return (
     <ThemedView
       style={styles.container}
       onLayout={(e) => {
         const { width, height } = e.nativeEvent.layout;
-        setDims({ w: width, h: height });
+        if (width > height) setIsLandscape(true);
       }}
     >
       {isLandscape && (
@@ -120,7 +125,7 @@ function ItemSelectContent({
   return (
     // "right"가 빠지면 헤더 오른쪽 끝의 저장 버튼이 홈 인디케이터 제스처 영역에
     // 걸려 탭이 시스템에 먹힌다 — 눌리지 않는 저장 버튼이 된다.
-    <SafeAreaView style={styles.safe} edges={["top", "left", "right"]}>
+    <InsetView style={styles.safe} edges={["top", "left", "right"]}>
       {/* 헤더 — 나가기 + 타이틀 + 선택 수 + 저장 버튼 */}
       <View style={styles.header}>
         <GlassButton
@@ -188,7 +193,7 @@ function ItemSelectContent({
           onAugmentGridLayout={onAugmentGridLayout}
         />
       </View>
-    </SafeAreaView>
+    </InsetView>
   );
 }
 
@@ -200,7 +205,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     // 나가기 버튼과 타이틀이 붙어 보이지 않도록 gap을 넓게. 왼쪽 패딩은
-    // SafeAreaView의 left inset 위에 얹히므로 작게 유지한다.
+    // 안전 영역 left inset 위에 얹히므로 작게 유지한다.
     gap: Spacing.three,
     paddingLeft: Spacing.two,
     paddingRight: Spacing.three,

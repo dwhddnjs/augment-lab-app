@@ -35,8 +35,8 @@ import {
 } from "@expo/ui/swift-ui/modifiers";
 import type { ReactNode } from "react";
 import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
+import { InsetView } from "@/components/ui/inset-view";
 import { Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
@@ -107,7 +107,7 @@ export function CustomSettingsDrawer({ draft }: Props) {
 
   return (
     // 우측 inset 을 빼는 이유는 picked-drawer 와 같다 — 넣으면 유령 여백이 생긴다.
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+    <InsetView style={styles.container} edges={["top", "bottom"]}>
       {/* key={themeMode} — expo-ui가 SwiftUI Picker의 tint를 런타임 테마 변경 시
           갱신하지 않아, 모드가 바뀌면 Host를 remount해 강제 반영(mypage와 동일). */}
       {/* ignoreSafeArea — 드로어가 화면 trailing 끝에 붙어 있어 Host 가 창의
@@ -156,7 +156,7 @@ export function CustomSettingsDrawer({ draft }: Props) {
           </Section>
         </List>
       </Host>
-    </SafeAreaView>
+    </InsetView>
   );
 }
 

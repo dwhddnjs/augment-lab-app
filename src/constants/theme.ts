@@ -212,6 +212,8 @@ export const HeroOverlay = {
     "rgba(8,9,11,0.55)",
     "rgba(8,9,11,0.7)",
   ],
+  // 왼쪽 위 모서리 scrim — 판 없이 얹은 헤드라이너 로고(빌드 카드)가 밝은 splash 위에서도 서게 한다.
+  scrimCorner: ["rgba(8,9,11,0.6)", "rgba(8,9,11,0.25)", "rgba(8,9,11,0)"],
   cardBase: "#0A0B0D", // splash 로드 전/빈 영역 베이스
   tileBg: "rgba(0,0,0,0.45)", // 증강·아이템 타일 배경
   tileBorder: "rgba(255,255,255,0.14)", // 아이템 타일 테두리
