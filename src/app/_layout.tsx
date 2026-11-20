@@ -1,4 +1,5 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
+import * as Sentry from '@sentry/react-native';
+import { DarkTheme, DefaultTheme, ThemeProvider, useSegments } from 'expo-router';
 import { Stack } from 'expo-router/stack';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useEffect } from 'react';
@@ -10,6 +11,7 @@ import { useImagePrewarm } from '@/hooks/use-image-prewarm';
 import { loadLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 import { loadThemePreference } from '@/hooks/use-theme-preference';
+import { trackScreen } from '@/lib/analytics';
 
 /** 네비게이션 컨테이너(헤더·배경) 색을 앱 테마 토큰에 맞춘다. */
 function navTheme(base: typeof DefaultTheme, c: (typeof Theme)[keyof typeof Theme]) {
@@ -49,7 +51,7 @@ const DRAFT_OPTIONS = {
   animation: 'fade',
 } as const;
 
-export default function RootLayout() {
+function RootLayout() {
   const { mode } = useTheme();
   // 첫 설치 시 챔피언 아이콘을 받는 동안 설치 화면(진행률)을 보여준다.
   const { showSetup, progress } = useImagePrewarm();
@@ -67,6 +69,11 @@ export default function RootLayout() {
   useEffect(() => {
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
   }, []);
+
+  // 화면 이름 = 라우트 파일 경로(`/(tabs)/(home)`, `/build/[id]` …). usePathname 은 탭 그룹 index가
+  // 전부 `/` 로 뭉치고 빌드 id가 섞여 화면별로 묶을 수 없다.
+  const screen = '/' + useSegments().join('/');
+  useEffect(() => trackScreen(screen), [screen]);
 
   return (
     <ThemeProvider value={NAV_THEMES[mode]}>
@@ -124,3 +131,5 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
+
+export default Sentry.wrap(RootLayout);
