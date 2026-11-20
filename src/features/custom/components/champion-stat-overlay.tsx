@@ -8,8 +8,8 @@
  * 화면에선 항목이 시트 높이를 넘으므로 스크롤에 태운다.
  */
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
+import { InsetView } from "@/components/ui/inset-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { GlassSurface } from "@/components/ui/glass-surface";
 import { RemoteImage } from "@/components/ui/remote-image";
@@ -42,7 +42,7 @@ export function ChampionStatOverlay({ champion, items, onClose }: Props) {
     <View style={[styles.backdrop, { backgroundColor: colors.surface.overlay }]}>
       <Pressable style={StyleSheet.absoluteFill} onPress={onClose} />
 
-      <SafeAreaView
+      <InsetView
         style={styles.safe}
         edges={["left", "right"]}
         pointerEvents="box-none"
@@ -91,7 +91,7 @@ export function ChampionStatOverlay({ champion, items, onClose }: Props) {
             />
           </ScrollView>
         </GlassSurface>
-      </SafeAreaView>
+      </InsetView>
     </View>
   );
 }

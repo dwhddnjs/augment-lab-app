@@ -6,8 +6,6 @@
  * 토글(target)로 갈아끼우며 검색어(query)를 공유한다. drawer 설정(모드/퀵모드/정렬)도
  * 여기 로컬 state — 이 화면 말고 읽는 곳이 없어 전역 스토어를 만들 이유가 없다.
  */
-import { useRouter } from "expo-router";
-import * as ScreenOrientation from "expo-screen-orientation";
 import { useState } from "react";
 
 import { useAugmentPool } from "@/features/augments/hooks/use-augments";
@@ -17,10 +15,10 @@ import { useItemPool } from "@/features/items/hooks/use-items";
 import { FILTERS, type FilterKey } from "@/features/items/item-filters";
 import { MAX_ITEMS, type Item } from "@/features/items/types";
 import { useAlive } from "@/hooks/use-alive";
+import { useCloseDraft } from "@/hooks/use-close-draft";
 import { useLocale } from "@/hooks/use-locale";
 import { saveBuild } from "@/lib/build-storage";
 import { matchName } from "@/lib/hangul";
-import { lockOrientation } from "@/lib/orientation";
 
 export type SortKey = "default" | "name" | "rarity";
 
@@ -48,8 +46,8 @@ export type SaveError = "invalid" | "failed";
 
 export function useCustomDraft(initialChampionId: string) {
   const { locale } = useLocale();
-  const router = useRouter();
   const alive = useAlive();
+  const closeDraft = useCloseDraft();
   const champions = useChampions();
 
   // params 는 초기값으로만 쓴다 — 패널의 "챔피언 변경"이 setState 한 번으로 끝나도록.
@@ -165,20 +163,9 @@ export function useCustomDraft(initialChampionId: string) {
       setSaving(false);
       return;
     }
-    // 저장을 기다리는 동안 헤더의 나가기가 계속 살아 있다. 이미 나갔으면 회전도
-    // navigation 도 하지 않는다 — 방향은 나가기 경로가 되돌려 놨다.
+    // 저장을 기다리는 동안 헤더의 나가기가 계속 살아 있다. 이미 나갔으면 이동하지 않는다.
     if (!alive.current) return;
-    // 회전이 끝난 뒤 navigation 을 시작한다. 바로 이동하면 landscape 상태로
-    // 빌드 상세가 mount 돼 회전 잔상이 보인다(아이템 선택 화면과 같은 이유).
-    await lockOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
-    if (!alive.current) return;
-    // dismissTo + push 를 잇달아 부르지 말 것. expo-router 는 라우팅 액션을 큐에 모아
-    // 한 배치에서 dispatch 하고, 두 번째 액션은 첫 번째가 반영되기 전의 state 를 읽는다.
-    // 릴리즈 빌드에서는 둘이 확실히 같은 배치에 들어가 화면 제거와 추가가 한 프레임에
-    // 겹치고, 세로 복귀 회전까지 동시에 일어나 빌드 상세가 죽은 프레임으로 떴다
-    // (뒤로가기를 눌러야 되살아났다). 진입이 replace 체인이라 스택은
-    // [(tabs), 드래프트화면] — replace 한 번이면 결과가 같고 전환도 1회다.
-    router.replace({ pathname: "/build/[id]", params: { id: build.id } });
+    closeDraft.openBuild(build.id);
   };
 
   return {

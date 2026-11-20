@@ -44,15 +44,19 @@ export function useCardPickAnim(count: number) {
   // 같은 렌더 스냅샷에서 픽을 계산해 한 장이 조용히 사라진다(마지막 라운드면 replace 가 두 번).
   const busy = useRef(false);
 
-  /** 선택 — exit 연출이 끝난 뒤 commit() 을 실행하고 다음 카드를 flip 으로 맞이한다. */
-  const pick = (idx: number, commit: () => void) => {
+  /**
+   * 선택 — exit 연출이 끝난 뒤 commit() 을 실행하고 다음 카드를 flip 으로 맞이한다.
+   * commit 이 true(화면을 떠남)를 돌려주면 고른 모습 그대로 멈춘다 — 다음 화면이 페이드로 덮는 동안
+   * 카드를 다시 돌리면 다음 라운드가 시작되는 것처럼 보인다. busy 도 풀지 않아 더 누를 수 없다.
+   */
+  const pick = (idx: number, commit: () => boolean) => {
     if (busy.current) return;
     busy.current = true;
     setAnimating(true);
     setExitModes(NO_EXIT.map((_, i) => (i === idx ? "picked" : "unchosen")));
     timer.current = setTimeout(() => {
+      if (commit()) return;
       busy.current = false;
-      commit();
       setExitModes(NO_EXIT);
       setEntryModes(ALL_FLIP);
       setRoundKey((k) => k + 1);

@@ -18,7 +18,7 @@ import {
   StageAlpha,
   Theme,
 } from "@/constants/theme";
-import { HEADLINER_LOGOS } from "@/features/headliners/assets";
+import { HEADLINER_LOGOS, logoBoxHeight } from "@/features/headliners/assets";
 import { useHeadlinerTexts } from "@/features/headliners/hooks/use-headliners";
 import { DRAFT_EVENT_IDS, HEADLINER_IDS } from "@/features/headliners/rules";
 import type { HeadlinerId } from "@/features/headliners/types";
@@ -102,8 +102,10 @@ export function StartCard({ onStart }: Props) {
         {LINEUP.map((id) => {
           const { name } = texts.headliners[id];
           const { source, small, aspect = 1 } = HEADLINER_LOGOS[id];
+          // 투명 여백을 뺀 그림이 LOGO 가 되게 상자를 키운다(빌드 카드·드래프트 헤더와 같은 logoBoxHeight).
+          // 안 그러면 여백이 큰 bees·커맨드 라인만 2할쯤 작아 보인다. 그림 칸(art)보다 큰 상자는 위아래로 넘친다.
           // 가로로 긴 로고(K/DA)는 타일 폭에 맞춰 줄인다.
-          const logoW = Math.min(LOGO * aspect, TILE_W - Spacing.double);
+          const logoW = Math.min(logoBoxHeight(id, LOGO) * aspect, TILE_W - Spacing.double);
           return (
             <Tile
               key={id}

@@ -1,3 +1,5 @@
+import { Image } from 'react-native';
+
 import type { HeadlinerId, StickerId } from './types';
 
 /**
@@ -6,6 +8,7 @@ import type { HeadlinerId, StickerId } from './types';
  * - small: 작은 자리(홈 시작 타일·빌드 카드 배지)에 쓸 그림. 없으면 source 를 그대로 쓴다.
  * - aspect: 판 없이 그릴 때 상자의 가로:세로. 기본 1 — 정사각 상자에 contain 한다.
  * - ink: 상자 대비 실제 그림(투명 여백·번진 빛 제외) 비율. 정사각 로고는 긴 변, 가로로 긴 K/DA 는 높이다. 기본 1.
+ * - inkLeft: 그린 폭 대비 왼쪽 투명 여백. 없으면 정사각 로고는 (1 - ink) / 2(좌우가 같다), 가로로 긴 로고는 0.
  */
 export interface HeadlinerLogoArt {
   source: number;
@@ -13,6 +16,7 @@ export interface HeadlinerLogoArt {
   small?: number;
   aspect?: number;
   ink?: number;
+  inkLeft?: number;
 }
 
 // 로고는 위키 원본, 초상은 CDragon kiwi_s3_band_heartsteel_augmentcard_character_* (게임 카드 장식).
@@ -20,8 +24,8 @@ export interface HeadlinerLogoArt {
 export const HEADLINER_LOGOS: Record<HeadlinerId, HeadlinerLogoArt> = {
   // 26.22 K/DA 는 크롬 + 빨강이다. 게임 로고(kiwi_s3_bandlogo_kda_v3)를 색 그대로 쓰고 ™ 만 지웠다(앱 크기에선 점 잡음).
   // 빨간 글로우를 둘러 어두운 배경에서 크롬의 검은 반사가 묻히지 않고 라이트에서도 윤곽이 선다.
-  // 1000×267 이고 글로우 여백을 빼면 높이의 73% 가 그림이다.
-  kda: { source: require('@/assets/headliners/kda-mark.png'), aspect: 1000 / 267, ink: 0.73 },
+  // 1000×267 이고 글로우 여백을 빼면 높이의 73%, 폭의 90%(좌우 5% 씩)가 그림이다.
+  kda: { source: require('@/assets/headliners/kda-mark.png'), aspect: 1000 / 267, ink: 0.73, inkLeft: 0.05 },
   pentakill: { source: require('@/assets/headliners/pentakill.png') },
   heartsteel: { source: require('@/assets/headliners/heartsteel.png') },
   'true-damage': { source: require('@/assets/headliners/true-damage.png') },
@@ -52,6 +56,27 @@ export const HEADLINER_LOGOS: Record<HeadlinerId, HeadlinerLogoArt> = {
   // 원판째 쓴다 — 원판이 그림 전체라 라이트·다크 어디서나 보인다.
   maestro: { source: require('@/assets/headliners/maestro.png') },
 };
+
+/**
+ * 판 없이 그리는 로고의 상자 높이 — 투명 여백을 뺀 실제 그림(ink)의 긴 변이 `inkSize`pt 가 되게 한다.
+ * 가로로 긴 워드마크(K/DA)는 그림 높이를 절반만 준다. 같은 높이로 두면 폭이 네 배로 늘어 혼자 튄다.
+ */
+export function logoBoxHeight(id: HeadlinerId, inkSize: number): number {
+  const { aspect = 1, ink = 1 } = HEADLINER_LOGOS[id];
+  return Math.round((aspect > 1 ? inkSize / 2 : inkSize) / ink);
+}
+
+/**
+ * 상자 왼쪽 끝에서 실제 그림 왼쪽 끝까지(pt). 그림을 다른 요소의 세로선에 맞출 때 그만큼 당긴다.
+ * contain 으로 남는 좌우 여백(세로로 긴 원본은 정사각 상자에서 폭이 남는다) + 원본 안 투명 여백(inkLeft)이다.
+ */
+export function logoInkLeft(id: HeadlinerId, boxHeight: number): number {
+  const { source, small, aspect = 1, ink = 1, inkLeft } = HEADLINER_LOGOS[id];
+  const { width, height } = Image.resolveAssetSource(small ?? source);
+  const boxW = boxHeight * aspect;
+  const drawnW = Math.min(boxW, boxHeight * (width / height));
+  return (boxW - drawnW) / 2 + drawnW * (inkLeft ?? (aspect > 1 ? 0 : (1 - ink) / 2));
+}
 
 /**
  * 열혈 팬 21레벨 카드 윗변에 걸치는 Worlds 로고. 게임 카드 장식(Kiwi_S3_Augment_Worlds)처럼 흰 로고에 파란 빛을 둘렀다.

@@ -79,13 +79,28 @@ export function skillChoices(chosen: SkillKey[]): SkillKey[] {
 
 /**
  * 라운드의 슬롯 3칸 스티커. 무작위 두 칸에 서로 다른 멤버가 붙고 한 칸은 비운다(플레이 경험 기준).
- * 슬롯에 붙는 것이라 그 칸을 리롤해도 바뀌지 않는다.
+ * 붙은 멤버는 그 칸을 리롤해도 그대로다. 빈 칸의 리롤은 rerollSlotSticker.
  */
 export function rollRoundStickers(): (StickerId | null)[] {
   const members: StickerId[] = [...STICKER_IDS];
   const draw = () => members.splice(Math.floor(Math.random() * members.length), 1)[0];
   const empty = Math.floor(Math.random() * 3);
   return [0, 1, 2].map((i) => (i === empty ? null : draw()));
+}
+
+/** 리롤한 빈 칸에 멤버가 붙을 확률. ponytail: 공개값이 없다 — 플레이 경험("가끔 붙는다")으로 정했다. 실측이 생기면 바꾼다. */
+const REROLL_STICKER_CHANCE = 0.5;
+
+/**
+ * idx 칸을 리롤한 뒤의 스티커. 멤버가 붙어 있던 칸은 그대로고, 빈 칸은 REROLL_STICKER_CHANCE 로
+ * 다른 칸에 없는 멤버가 붙는다(26.23 플레이 경험 — 빈 3번 칸을 리롤하자 아펠리오스가 붙었다).
+ */
+export function rerollSlotSticker(stickers: (StickerId | null)[], idx: number): (StickerId | null)[] {
+  if (stickers[idx] || Math.random() >= REROLL_STICKER_CHANCE) return stickers;
+  const free = STICKER_IDS.filter((id) => !stickers.includes(id));
+  const next = [...stickers];
+  next[idx] = free[Math.floor(Math.random() * free.length)];
+  return next;
 }
 
 export function anvilCount(stickers: string[]): number {

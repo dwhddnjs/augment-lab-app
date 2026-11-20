@@ -43,6 +43,8 @@ export interface SavedBuild {
 // 인메모리 캐시 + 구독 — 저장/삭제가 즉시 구독자(목록 화면)에 반영되도록 한다.
 // null = 아직 디스크에서 로드 전. 캐시는 항상 최신순(desc) 정렬 상태를 유지한다.
 let cache: SavedBuild[] | null = null;
+// 디스크를 못 읽어 빈 캐시로 폴백한 상태인지. 이대로 쓰면 디스크의 빌드를 통째로 덮어쓴다(readForWrite).
+let readFailed = false;
 const listeners = new Set<() => void>();
 
 function emit(): void {
@@ -128,13 +130,27 @@ async function readAll(): Promise<SavedBuild[]> {
   try {
     // 백업 복원도 reloadBuilds → 여기를 거치므로 걸러내는 곳은 parseBuilds 한 군데다.
     cache = sortDesc(parseBuilds(await AsyncStorage.getItem(STORAGE_KEY)));
+    readFailed = false;
   } catch {
-    // 저장소를 못 읽으면 빈 목록으로 폴백 — 다음 저장에서 덮어쓴다.
+    // 저장소를 못 읽으면(IO 오류) 화면은 빈 목록으로 폴백한다. 깨진 JSON 은 parseBuilds 가 먼저 삼키므로
+    // 여기는 디스크에 빌드가 그대로 있을 수 있는 경우다 — 쓰기는 readForWrite 가 막는다.
     cache = [];
+    readFailed = true;
   }
   // 최초 로드 완료를 구독자에게 알린다(스냅샷 null→배열).
   emit();
   return cache;
+}
+
+/**
+ * 쓰기 직전의 목록. 지난 읽기가 실패했으면 다시 읽고, 그래도 못 읽으면 던진다(호출부가 저장 실패로 알린다).
+ * 실패로 비어 있는 캐시에 한 개를 얹어 쓰면 디스크의 기존 빌드가 전부 사라진다.
+ */
+async function readForWrite(): Promise<SavedBuild[]> {
+  if (readFailed) cache = null;
+  const builds = await readAll();
+  if (readFailed) throw new Error('build storage unreadable');
+  return builds;
 }
 
 async function writeAll(builds: SavedBuild[]): Promise<void> {
@@ -163,7 +179,7 @@ export async function saveBuild(
     id: generateId(),
     createdAt: new Date().toISOString(),
   };
-  const builds = await readAll();
+  const builds = await readForWrite();
   // 캐시를 먼저 갱신하고 알린 뒤 디스크에 기록 — 목록이 즉시 반영된다.
   cache = sortDesc([build, ...builds]);
   emit();
@@ -181,7 +197,7 @@ export async function saveBuild(
 }
 
 export async function removeBuild(id: string): Promise<void> {
-  const builds = await readAll();
+  const builds = await readForWrite();
   cache = builds.filter((b) => b.id !== id);
   emit();
   try {

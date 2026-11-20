@@ -2,7 +2,8 @@
  * BuildCard — 홈 그리드의 저장된 빌드 카드 한 장(세로 컬렉션 카드).
  * 챔피언 splash(가운데 정렬판)가 카드를 채우고, 그 판의 헤드라이너 색은 테두리·그림자에만 묻힌다(그림은 가리지 않는다).
  * 왼쪽 위 배지는 헤드라이너 로고, 커스텀 빌드는 커스텀 아이콘이다(+ 메뉴의 커스텀과 같은 아이콘).
- * 둘 다 없는 빌드(헤드라이너 도입 전 칼바람)는 배지·색 없이 그린다.
+ * 배지는 원판 없이 모서리 scrim 위에 얹는다 — 원판은 가로로 긴 K/DA 만 캡슐로 늘어나 혼자 튀었고,
+ * 정사각 로고는 원 안에서 작아졌다. 둘 다 없는 빌드(헤드라이너 도입 전 칼바람)는 배지·색 없이 그린다.
  */
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Image } from "expo-image";
@@ -22,7 +23,7 @@ import {
 } from "@/constants/theme";
 import { useAugments } from "@/features/augments/hooks/use-augments";
 import { useChampions } from "@/features/champions/hooks/use-champions";
-import { HEADLINER_LOGOS } from "@/features/headliners/assets";
+import { HEADLINER_LOGOS, logoBoxHeight, logoInkLeft } from "@/features/headliners/assets";
 import { isHeadlinerId } from "@/features/headliners/rules";
 import { useLocale } from "@/hooks/use-locale";
 import type { SavedBuild } from "@/lib/build-storage";
@@ -41,11 +42,14 @@ export const BUILD_CARD_ASPECT = 0.7;
 const PAD = Spacing.double;
 const AUG_SIZE = 26;
 const AUG_GAP = Spacing.one;
-const BADGE_ICON = 18;
-/** 배지 안 헤드라이너 로고. 로고는 그림이 상자를 꽉 채워서 아이콘보다 작게 둬야 원 안에 여백이 고르게 남는다. */
-const BADGE_LOGO = 15;
-/** 배지 지름. 정사각 아이콘(커스텀·대부분의 로고)은 원, 가로로 긴 로고(K/DA)만 캡슐로 늘어난다. */
-const BADGE = 26;
+/** 배지 그림의 긴 변(투명 여백 제외, logoBoxHeight). K/DA 워드마크는 높이가 이 절반이라 폭이 약 60pt 다. */
+const BADGE_INK = 24;
+/** 날짜 캡슐 높이. 윗줄 높이도 이 값으로 고정한다. */
+const PILL = 26;
+/** 배지 상자 왼쪽 끝 — 아래 챔피언 이름(PAD)과 같은 세로선. 그림 왼쪽 끝은 각 배지가 여백만큼 당겨 맞춘다. */
+const BADGE_LEFT = PAD - Spacing.two;
+/** MaterialCommunityIcons 글리프는 24 격자 안에 사방 2 씩 여백을 둔다. */
+const MDI_INSET = 2 / 24;
 
 /** 카드 조명색 — 커스텀은 민트, 헤드라이너는 그 색, 둘 다 없으면 없음. 카드 위는 모드 무관 어두운 톤이라 다크 토큰을 쓴다. */
 function stageColor(build: SavedBuild): string | null {
@@ -112,7 +116,20 @@ export function BuildCard({ build, width, onPress, onLongPress }: Props) {
           style={StyleSheet.absoluteFill}
         />
 
-        {/* 테두리는 그림 위에 따로 얹는다 — 카드 자체 border 는 그림 아래 깔려 가려진다. */}
+        {/* 배지 자리만 어둡게 — 그림 전체를 덮지 않도록 왼쪽 위 모서리에서 대각선으로 걷힌다.
+            테두리보다 먼저 깐다. 위에 얹으면 왼쪽 위 테두리 색이 걷혀 다른 변과 달라진다. */}
+        {tone && (
+          <LinearGradient
+            pointerEvents="none"
+            colors={HeroOverlay.scrimCorner}
+            locations={[0, 0.45, 1]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.6, y: 0.3 }}
+            style={StyleSheet.absoluteFill}
+          />
+        )}
+
+        {/* 테두리는 그림·scrim 위에 따로 얹는다 — 카드 자체 border 는 그림 아래 깔려 가려진다. */}
         <View
           pointerEvents="none"
           style={[
@@ -182,10 +199,14 @@ export function BuildCard({ build, width, onPress, onLongPress }: Props) {
 function StageBadge({ build, label }: { build: SavedBuild; label: string }) {
   if (build.custom) {
     return (
-      <View style={styles.badge} accessible accessibilityLabel={label}>
+      <View
+        style={{ marginLeft: BADGE_LEFT - BADGE_INK * MDI_INSET }}
+        accessible
+        accessibilityLabel={label}
+      >
         <MaterialCommunityIcons
           name={LAUNCH_ICONS.custom}
-          size={BADGE_ICON}
+          size={BADGE_INK}
           color={Theme.dark.accent.default}
         />
       </View>
@@ -195,11 +216,12 @@ function StageBadge({ build, label }: { build: SavedBuild; label: string }) {
   if (!id || !isHeadlinerId(id)) return <View />;
   // 판 위가 늘 어두워서 라이트 모드용 그림(light)·흰 로고 칠하기 없이 원본을 그린다.
   const { source, small, aspect = 1 } = HEADLINER_LOGOS[id];
+  const height = logoBoxHeight(id, BADGE_INK);
   return (
-    <View style={styles.badge}>
+    <View style={{ marginLeft: BADGE_LEFT - logoInkLeft(id, height) }}>
       <Image
         source={small ?? source}
-        style={{ width: BADGE_LOGO * aspect, height: BADGE_LOGO }}
+        style={{ width: height * aspect, height }}
         contentFit="contain"
       />
     </View>
@@ -222,35 +244,29 @@ const styles = StyleSheet.create({
     borderRadius: Radius.xl,
     borderCurve: "continuous",
   },
+  // 높이를 캡슐에 고정한다 — 배지 상자는 로고마다 높이가 달라(bees 30 · K/DA 16) 그대로 두면 줄이 늘어나
+  // 날짜 캡슐이 카드마다 1.5~2pt 씩 내려간다. 캡슐보다 큰 배지는 위아래로 고르게 넘친다.
   topRow: {
     position: "absolute",
     top: Spacing.two,
     left: Spacing.two,
     right: Spacing.two,
+    height: PILL,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
-  badge: {
-    height: BADGE,
-    minWidth: BADGE,
-    paddingHorizontal: (BADGE - BADGE_ICON) / 2,
-    borderRadius: Radius.full,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: HeroOverlay.tileBg,
-  },
-  // 날짜 — 배지와 높이를 맞춘 글자 캡슐.
+  // 날짜 — 글자 캡슐. 배지와 세로 중심을 맞춘다(topRow alignItems).
   pill: {
-    height: BADGE,
-    minWidth: BADGE,
+    height: PILL,
+    minWidth: PILL,
     paddingHorizontal: Spacing.one + Spacing.half,
     borderRadius: Radius.full,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: HeroOverlay.tileBg,
   },
-  // caption(12pt)은 26pt 원 배지 옆에서 커 보여 한 단계 줄인다.
+  // caption(12pt)은 26pt 캡슐 안에서 커 보여 한 단계 줄인다.
   pillText: {
     fontSize: 11,
     lineHeight: 13,

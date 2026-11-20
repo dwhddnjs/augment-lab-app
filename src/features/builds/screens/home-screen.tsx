@@ -5,8 +5,8 @@
  *
  * S티어 줄은 티어리스트(다른 화면 도메인)의 것이라 여기서 import 하지 않고 라우트 파일이 footer 로 끼운다.
  */
-import { useRouter } from "expo-router";
-import type { ReactNode } from "react";
+import { useFocusEffect, useRouter } from "expo-router";
+import { useCallback, useRef, type ReactNode } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
@@ -47,8 +47,19 @@ export function HomeScreen({ footer }: { footer?: ReactNode }) {
   const builds = useBuilds();
   const recent = (builds ?? []).slice(0, RECENT_COUNT);
 
+  // 타일을 빠르게 두 번 누르면 챔피언 선택 모달이 두 장 쌓인다. 모달이 떠 있는 동안(홈이 포커스를 잃은 동안)
+  // 한 번만 연다 — 홈으로 돌아오면 다시 열 수 있다.
+  const starting = useRef(false);
+  useFocusEffect(
+    useCallback(() => {
+      starting.current = false;
+    }, []),
+  );
+
   // 헤드라이너를 고르면 챔피언 선택 → 드래프트까지 그 값을 나른다. 없으면 판마다 무작위.
   const startAram = (headliner?: HeadlinerId) => {
+    if (starting.current) return;
+    starting.current = true;
     router.push({
       pathname: "/select-champion-modal",
       params: { mode: "aram", ...(headliner && { headliner }) },
