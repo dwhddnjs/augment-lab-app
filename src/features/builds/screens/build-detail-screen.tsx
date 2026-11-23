@@ -35,6 +35,7 @@ import { useTheme } from "@/hooks/use-theme";
 import { getBuild, removeBuild, type SavedBuild } from "@/lib/build-storage";
 import { championSplashUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
+import { maybeRequestReview } from "@/lib/review";
 import { BuildAugmentList } from "../components/build-augment-list";
 import { BuildChampionHeader } from "../components/build-champion-header";
 import { BuildItemRow } from "../components/build-item-row";
@@ -70,13 +71,16 @@ const SHEET_OVERLAP = 24;
 const COLLAPSE_DISTANCE = BANNER_HEIGHT - SHEET_OVERLAP;
 // 당겨서 이미지를 더 키울 수 있는 여유분.
 const PULL_EXTRA = 140;
+// 저장하고 들어온 뒤 리뷰 요청까지 — 가로 → 세로 회전이 끝나고 결과를 본 뒤에 띄운다.
+const REVIEW_DELAY_MS = 1000;
 
 export function BuildDetailScreen() {
   const translate = useTranslation(t);
   const { colors } = useTheme();
   const { locale } = useLocale();
   const router = useRouter();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  // saved — 드래프트에서 방금 저장하고 들어왔다(src/hooks/use-close-draft.ts).
+  const { id, saved } = useLocalSearchParams<{ id: string; saved?: string }>();
 
   // id가 없으면 조회할 것이 없으므로 곧장 not-found 상태로 시작한다.
   const [loaded, setLoaded] = useState(!id);
@@ -125,6 +129,13 @@ export function BuildDetailScreen() {
       active = false;
     };
   }, [id]);
+
+  // 방금 만든 빌드를 보여 준 뒤에 리뷰를 청한다(2개째부터, 평생 1회 — lib/review).
+  useEffect(() => {
+    if (!saved || !build) return;
+    const timer = setTimeout(maybeRequestReview, REVIEW_DELAY_MS);
+    return () => clearTimeout(timer);
+  }, [saved, build]);
 
   const champions = useChampions();
   const augments = useAugments();

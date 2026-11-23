@@ -1,7 +1,6 @@
 import * as Sentry from '@sentry/react-native';
 import { DarkTheme, DefaultTheme, ThemeProvider, useSegments } from 'expo-router';
 import { Stack } from 'expo-router/stack';
-import * as ScreenOrientation from 'expo-screen-orientation';
 import { useEffect } from 'react';
 
 import { AnimatedSplashOverlay } from '@/components/navigation/animated-splash-overlay';
@@ -12,6 +11,7 @@ import { loadLocale } from '@/hooks/use-locale';
 import { useTheme } from '@/hooks/use-theme';
 import { loadThemePreference } from '@/hooks/use-theme-preference';
 import { trackScreen } from '@/lib/analytics';
+import { lockPortrait, releaseLandscape } from '@/lib/orientation';
 
 /** 네비게이션 컨테이너(헤더·배경) 색을 앱 테마 토큰에 맞춘다. */
 function navTheme(base: typeof DefaultTheme, c: (typeof Theme)[keyof typeof Theme]) {
@@ -66,8 +66,9 @@ function RootLayout() {
   // 드래프트가 아닌 화면에 orientation 옵션을 주지 말 것: 하나라도 있으면 루트 컨트롤러가 이 잠금 대신
   // react-native-screens 에 묻고, 그쪽은 탭 안 홈 화면(옵션 없음)을 "거꾸로 빼고 전부"로 답한다. 그래서
   // 빌드 상세에서 뒤로 오면 홈이 가로로 돌았다.
+  // 저장으로 드래프트를 닫을 때만 가로를 잠깐 붙잡고, 빌드 상세가 나타나면 푼다(lib/orientation).
   useEffect(() => {
-    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
+    lockPortrait();
   }, []);
 
   // 화면 이름 = 라우트 파일 경로(`/(tabs)/(home)`, `/build/[id]` …). usePathname 은 탭 그룹 index가
@@ -84,8 +85,10 @@ function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         {/* 빌드 상세 — 탭바 위에 떠서 풀스크린으로 덮는다(탭바 숨김).
             챔피언 배너가 헤더 영역까지 채우는 투명 collapsing 헤더. */}
-        {/* 드래프트에서 저장하고 들어올 때(saved)는 드래프트 모달 아래에 애니메이션 없이 깐다. 가려진 채
-            밀려 들어오는 애니메이션이 끝나야 세로 회전이 시작돼, 그동안 빌드 상세가 가로로 멈춰 보였다.
+        {/* 드래프트에서 저장하고 들어올 때(saved)는 드래프트 모달 아래에 'none' 전환으로 깐다. 밀려 들어오는
+            애니메이션이면 그게 끝나야 세로 회전이 시작돼, 그동안 빌드 상세가 가로로 멈춰 보였다.
+            'none' 도 전환이다 — 그 전환이 진행 중이어야 시트가 기다림 없이 닫히고, 끝날 때까지는 가로를
+            붙잡아 둔다(useCloseDraft). 전환이 끝나면(transitionEnd) 붙잡은 가로를 풀어 세로로 돌린다.
             들어온 뒤에는 기본으로 되돌린다 — 그대로 두면 뒤로가기 스와이프가 손가락을 따라가지 않는다. */}
         <Stack.Screen
           name="build/[id]"
@@ -98,13 +101,17 @@ function RootLayout() {
           })}
           listeners={({ navigation }) => ({
             transitionEnd: (e) => {
-              if (!e.data.closing) navigation.setOptions({ animation: 'default' });
+              if (e.data.closing) return;
+              releaseLandscape();
+              navigation.setOptions({ animation: 'default' });
             },
           })}
         />
         {/* 헤더 세부(타이틀·검색바)는 화면 내부 Stack.Screen에서 로케일·상태와 함께 주입 */}
         {/* 모달 시트 — large title collapse/검색바는 화면 내부에서 native 헤더로 처리 */}
-        {/* 드래프트가 이 시트 위에 쌓인다. 저장할 때는 묶음째 애니메이션 없이 닫는다(close=cut, useCloseDraft). */}
+        {/* 드래프트가 이 시트 위에 쌓이고, 닫힐 때 묶음째 이 시트의 애니메이션을 따른다. 드래프트를 띄울 때
+            close=cut(저장: 애니메이션 없이)을 걸고, 나가기 확인창이 떠 있는 동안만 fade 다
+            (use-champion-select, useCloseDraft). */}
         <Stack.Screen
           name="select-champion-modal"
           options={({ route }) => ({
