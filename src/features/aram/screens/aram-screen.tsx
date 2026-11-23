@@ -7,7 +7,7 @@
  */
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
 
 import { InsetView } from "@/components/ui/inset-view";
@@ -172,21 +172,12 @@ export function AramScreen() {
     return true;
   };
 
-  const handleExit = () => {
-    Alert.alert(
-      translate("exitConfirmAram"),
-      "",
-      [
-        { text: translate("exitCancel"), style: "cancel" },
-        {
-          text: translate("exitOk"),
-          style: "destructive",
-          // 닫으면 iOS 가 세로로 돌린다(useCloseDraft).
-          onPress: closeDraft.exit,
-        },
-      ],
-    );
-  };
+  const handleExit = () =>
+    closeDraft.confirmExit({
+      title: translate("exitConfirmAram"),
+      cancel: translate("exitCancel"),
+      ok: translate("exitOk"),
+    });
 
   return (
     <Drawer

@@ -1,5 +1,5 @@
 /**
- * HomeScreen — 홈 탭. 시작 카드(헤드라이너 골라 시작·랜덤 시작) → 최근 빌드 캐러셀 → (라우트가 넣어 주는) 지금 S티어.
+ * HomeScreen — 홈 탭. 시작 카드(헤드라이너 골라 시작) → 최근 빌드 캐러셀 → (라우트가 넣어 주는) 지금 S티어.
  * 전체 빌드는 "전체 보기"로 내 빌드 그리드(BuildListScreen)에서 본다.
  * 화면 타이틀은 (home) 스택의 native large-title 헤더가 제공한다.
  *
@@ -16,6 +16,7 @@ import type { HeadlinerId } from "@/features/headliners/types";
 import { useTheme } from "@/hooks/use-theme";
 import { useTranslation } from "@/lib/i18n";
 import { BuildCard } from "../components/build-card";
+import { EmptyBuildCard } from "../components/empty-build-card";
 import { StartCard } from "../components/start-card";
 import { useBuilds } from "../hooks/use-builds";
 import { useConfirmDelete } from "../hooks/use-confirm-delete";
@@ -24,12 +25,10 @@ const t = {
   ko: {
     recent: "최근 빌드",
     seeAll: "전체 보기",
-    emptyHint: "빌드를 완료하면 여기에 쌓여요",
   },
   en: {
     recent: "Recent Builds",
     seeAll: "See All",
-    emptyHint: "Finish a build to see it here",
   },
 };
 
@@ -56,13 +55,13 @@ export function HomeScreen({ footer }: { footer?: ReactNode }) {
     }, []),
   );
 
-  // 헤드라이너를 고르면 챔피언 선택 → 드래프트까지 그 값을 나른다. 없으면 판마다 무작위.
-  const startAram = (headliner?: HeadlinerId) => {
+  // 고른 헤드라이너를 챔피언 선택 → 드래프트까지 나른다. 랜덤 시작은 탭바 + → 칼바람이다.
+  const startAram = (headliner: HeadlinerId) => {
     if (starting.current) return;
     starting.current = true;
     router.push({
       pathname: "/select-champion-modal",
-      params: { mode: "aram", ...(headliner && { headliner }) },
+      params: { mode: "aram", headliner },
     });
   };
 
@@ -86,10 +85,9 @@ export function HomeScreen({ footer }: { footer?: ReactNode }) {
           )}
         </View>
 
+        {/* 빈 자리도 카드 모양으로 둔다 — 첫 빌드가 그 자리에 들어선다는 게 보이고, 누르면 바로 시작한다. */}
         {builds != null && recent.length === 0 && (
-          <ThemedText type="caption" color="tertiary">
-            {translate("emptyHint")}
-          </ThemedText>
+          <EmptyBuildCard width={RECENT_CARD} onPress={() => router.push("/mode-select")} />
         )}
 
         {recent.length > 0 && (

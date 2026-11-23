@@ -83,8 +83,12 @@ export function useChampionSelect() {
     startingRef.current = true;
     const championId = selectedId;
     // 시트 위에 드래프트(가로 전체 화면 모달)를 쌓는다. 시트를 먼저 닫으면(replace) 시트가 걷힌 뒤
-    // 홈이 비쳤다가 드래프트가 뜬다. 나갈 때·저장할 때 시트까지 한꺼번에 닫힌다.
-    // 닫는 방식은 useCloseDraft 가 정한다.
+    // 홈이 비쳤다가 드래프트가 뜬다. 나갈 때·저장할 때 시트까지 한꺼번에 닫힌다(useCloseDraft).
+    // 묶음은 시트의 애니메이션 설정대로 닫히므로, 저장 경로(애니메이션 없이 닫기)를 지금 정해 둔다.
+    // 저장 순간에 바꾸면 그 값이 네이티브에 닿기 전에 닫힘이 들어가는 경합이 생긴다 — 그러면 페이드로 닫혀
+    // 빌드 상세가 가로로 멈춰 보였다가 돌았다. 나가기는 확인창이 떠 있는 동안 fade 로 바꾼다(useCloseDraft).
+    // 드래프트가 덮고 있는 동안 시트의 애니메이션은 쓰이지 않는다.
+    router.setParams({ close: "cut" });
     // 드래프트 → 아이템 → saveBuild 까지 mode 파라미터가 저장 모드를 나른다.
     //
     // 삼항이 아니라 Record 인 이유: 삼항으로 두면 새 모드가 조용히 칼바람으로 흡수된다

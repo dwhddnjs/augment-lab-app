@@ -8,7 +8,7 @@
  * 필터·선택·그리드 계산·저장은 useItemSelect 가 맡는다.
  */
 import { useLocalSearchParams } from "expo-router";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed/themed-text";
@@ -19,6 +19,7 @@ import { parseGameMode } from "@/constants/game-modes";
 import { Spacing } from "@/constants/theme";
 import type { Augment } from "@/features/augments/types";
 import type { BuildHeadliner } from "@/features/headliners/types";
+import { useLandscapeReady } from "@/hooks/use-landscape-ready";
 import { useTheme } from "@/hooks/use-theme";
 import { parseBuildHeadliner, type GameMode } from "@/lib/build-storage";
 import { itemImageUrl } from "@/lib/ddragon";
@@ -65,20 +66,14 @@ export function ItemSelectScreen() {
   const pickedAugments = useMemo(() => parsePickedParam(pickedJson), [pickedJson]);
   const headliner = parseHeadlinerParam(headlinerJson);
 
-  // 커스텀 화면처럼 가로 크기가 들어온 뒤에 그리고, 한 번 그리면 내리지 않는다 — 세로 크기가 한 프레임
-  // 들어와(앱 전환 복귀 등) 본문이 unmount 되면 담아 둔 아이템이 날아가고, 저장 중이면 저장 흐름이
-  // "나갔다"고 보고(useAlive) 빌드 상세로 넘어가지 않는다.
-  const [isLandscape, setIsLandscape] = useState(false);
+  // 커스텀 화면처럼 가로 크기·안전 영역이 들어온 뒤에 그리고, 한 번 그리면 내리지 않는다 — 본문이
+  // unmount 되면 담아 둔 아이템이 날아가고, 저장 중이면 저장 흐름이 "나갔다"고 보고(useAlive) 빌드 상세로
+  // 넘어가지 않는다.
+  const { ready, onLayout } = useLandscapeReady();
 
   return (
-    <ThemedView
-      style={styles.container}
-      onLayout={(e) => {
-        const { width, height } = e.nativeEvent.layout;
-        if (width > height) setIsLandscape(true);
-      }}
-    >
-      {isLandscape && (
+    <ThemedView style={styles.container} onLayout={onLayout}>
+      {ready && (
         <ItemSelectContent
           pickedAugments={pickedAugments}
           headliner={headliner}
@@ -125,7 +120,8 @@ function ItemSelectContent({
   return (
     // "right"가 빠지면 헤더 오른쪽 끝의 저장 버튼이 홈 인디케이터 제스처 영역에
     // 걸려 탭이 시스템에 먹힌다 — 눌리지 않는 저장 버튼이 된다.
-    <InsetView style={styles.safe} edges={["top", "left", "right"]}>
+    // top 은 쓰지 않는다 — 가로에선 항상 0 인데 회전 뒤 늦게 0 이 된다(useLandscapeReady).
+    <InsetView style={styles.safe} edges={["left", "right"]}>
       {/* 헤더 — 나가기 + 타이틀 + 선택 수 + 저장 버튼 */}
       <View style={styles.header}>
         <GlassButton

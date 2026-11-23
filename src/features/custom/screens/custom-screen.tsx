@@ -31,6 +31,7 @@ import { GlassButton } from "@/components/ui/glass-button";
 import { RemoteImage } from "@/components/ui/remote-image";
 import { Radius, Spacing } from "@/constants/theme";
 import { useCloseDraft } from "@/hooks/use-close-draft";
+import { useLandscapeReady } from "@/hooks/use-landscape-ready";
 import { useTheme } from "@/hooks/use-theme";
 import { itemImageUrl } from "@/lib/ddragon";
 import { useTranslation } from "@/lib/i18n";
@@ -83,23 +84,15 @@ const GHOST = 64;
 export function CustomScreen() {
   const { championId } = useLocalSearchParams<{ championId: string }>();
 
-  // 가로 전체 화면 모달이지만 회전과 함께 뜨는 동안 첫 몇 프레임은 세로 크기로 배치된다. 가로 크기가 들어온 뒤에
-  // 그린다 — 바로 그리면 세로로 배치된 본문과 설정 서랍이 비치고, 다시 배치하느라 오히려 늦게 자리 잡았다.
-  // 세로 값은 아예 담지 않는다 — 앱 전환 복귀 같은 순간에 세로 레이아웃이 한 프레임 들어올 수 있고, 그때
-  // CustomContent 가 unmount 되면 담아둔 증강·아이템이 통째로 사라진다(상태가 전부 그 안의 useCustomDraft 에 있다).
-  const [dims, setDims] = useState({ w: 0, h: 0 });
-  const isLandscape = dims.w > 0;
+  // 가로 전체 화면 모달이지만 회전과 함께 뜨는 동안 첫 몇 프레임은 세로 크기·세로 안전 영역이다. 둘 다 가로가 된 뒤에
+  // 그린다 — 바로 그리면 세로로 배치된 본문과 설정 서랍이 비치고, 헤더가 위아래로 튀었다(useLandscapeReady).
+  // 상태가 전부 CustomContent 안의 useCustomDraft 에 있어, 한 번 그리면 내리지 않는다.
+  const { ready, size, onLayout } = useLandscapeReady();
 
   return (
-    <ThemedView
-      style={styles.container}
-      onLayout={(e) => {
-        const { width, height } = e.nativeEvent.layout;
-        if (width > height) setDims({ w: width, h: height });
-      }}
-    >
-      {isLandscape && (
-        <CustomContent initialChampionId={championId ?? ""} screenW={dims.w} />
+    <ThemedView style={styles.container} onLayout={onLayout}>
+      {ready && size && (
+        <CustomContent initialChampionId={championId ?? ""} screenW={size.w} />
       )}
     </ThemedView>
   );
@@ -189,17 +182,13 @@ function CustomContent({
     if (absoluteX > dropBoundary) commit(payload);
   };
 
-  const handleExit = () => {
-    Alert.alert(translate("exitConfirm"), translate("exitMessage"), [
-      { text: translate("exitCancel"), style: "cancel" },
-      {
-        text: translate("exitOk"),
-        style: "destructive",
-        // 닫으면 iOS 가 세로로 돌린다(useCloseDraft).
-        onPress: closeDraft.exit,
-      },
-    ]);
-  };
+  const handleExit = () =>
+    closeDraft.confirmExit({
+      title: translate("exitConfirm"),
+      message: translate("exitMessage"),
+      cancel: translate("exitCancel"),
+      ok: translate("exitOk"),
+    });
 
   return (
     <Drawer
@@ -215,8 +204,9 @@ function CustomContent({
     >
       <ThemedView style={styles.container}>
         {/* bottom inset 은 여기서 먹지 않는다 — 리스트가 화면 끝까지 흐르고,
-            마지막 줄만 각 리스트의 contentContainer 가 홈 인디케이터만큼 띄운다. */}
-        <InsetView style={styles.safe} edges={["top", "left", "right"]}>
+            마지막 줄만 각 리스트의 contentContainer 가 홈 인디케이터만큼 띄운다.
+            top 도 먹지 않는다 — 가로에선 항상 0 인데 회전 뒤 약 1초 늦게 0 이 되어 헤더가 튀었다(useLandscapeReady). */}
+        <InsetView style={styles.safe} edges={["left", "right"]}>
           {/* 헤더 — 나가기 / 검색 / 증강·아이템 토글 / 저장 / 설정 */}
           <View style={[styles.header, { paddingHorizontal: HEADER_PAD }]}>
             <GlassButton
@@ -379,7 +369,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: Spacing.two,
-    // safe-area top inset 위에 얹히므로 상단 패딩은 작게.
+    // 가로에서는 위 안전 영역이 0 이라(useLandscapeReady) 이 값이 곧 화면 위 여백이다.
     paddingTop: Spacing.two,
     paddingBottom: Spacing.one,
   },
