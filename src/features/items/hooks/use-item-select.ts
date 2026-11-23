@@ -162,16 +162,12 @@ export function useItemSelect({
 
   // 저장 외의 유일한 출구. 그냥 pop하면 landscape가 잠긴 채 홈으로 튕기므로
   // 홈으로 보낸 뒤 portrait로 되돌린다(빌드는 저장하지 않는다).
-  const handleExit = () => {
-    Alert.alert(translate("exitConfirm"), "", [
-      { text: translate("exitCancel"), style: "cancel" },
-      {
-        text: translate("exitOk"),
-        style: "destructive",
-        onPress: closeDraft.exit,
-      },
-    ]);
-  };
+  const handleExit = () =>
+    closeDraft.confirmExit({
+      title: translate("exitConfirm"),
+      cancel: translate("exitCancel"),
+      ok: translate("exitOk"),
+    });
 
   return {
     translate,
