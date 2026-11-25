@@ -49,7 +49,10 @@ public struct GameData: Sendable {
         championsByKey = Dictionary(champions.map { ($0.key, $0) }, uniquingKeysWith: { a, _ in a })
         championSpells = try load("champion-spells.\(l).json")
 
-        items = try load("items.\(l).json")
+        var items: [Item] = try load("items.\(l).json")
+        let order = itemStatKeyOrder(try Data(contentsOf: url("items.\(l).json")))
+        if order.count == items.count { for i in items.indices { items[i].statOrder = order[i] } }
+        self.items = items
         itemsById = Dictionary(items.map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a })
         let poolIds = Set(try load("aram-item-ids.json") as [String])
         itemPool = items.filter { poolIds.contains($0.id) }
@@ -74,6 +77,20 @@ public struct GameData: Sendable {
     public func displayName(_ augment: Augment) -> String {
         guard augment.transmuted else { return augment.name }
         return (locale == .ko ? "전환: " : "Transmute: ") + augment.name
+    }
+}
+
+/// 아이템 JSON 원문에서 각 `"stats": {…}`의 키를 나온 순서대로 읽는다(파서는 키 순서를 버린다).
+/// 아이템마다 `stats`가 정확히 하나라서 배열 순서가 아이템 순서와 같다.
+func itemStatKeyOrder(_ data: Data) -> [[String]] {
+    let text = String(decoding: data, as: UTF8.self)
+    let block = try! NSRegularExpression(pattern: #""stats"\s*:\s*\{([^{}]*)\}"#)
+    let key = try! NSRegularExpression(pattern: #""([^"]+)"\s*:"#)
+    let ns = text as NSString
+    return block.matches(in: text, range: NSRange(location: 0, length: ns.length)).map { m in
+        let inner = ns.substring(with: m.range(at: 1))
+        let ins = inner as NSString
+        return key.matches(in: inner, range: NSRange(location: 0, length: ins.length)).map { ins.substring(with: $0.range(at: 1)) }
     }
 }
 

@@ -69,3 +69,8 @@ rn: src/features/*/hooks/use-*.ts, src/features/*/types.ts, src/lib/ddragon.ts, 
   - 데이터 내용은 지금처럼 `scripts/check-augment-data.mjs`가 지킨다.
   - Swift 테스트는 로더가 RN 훅과 같은 결과를 내는지 본다(풀 필터·아이템 순서·ko/en 정렬·티어 join).
 - **확인**: `make -C native/ios test` 16개 통과(2 suites), `make -C native/ios build` 통과(경고 0)
+
+### 2026-11-26 · 보강 — 아이템 스탯 키 순서
+- I-02c를 하다 발견했다: RN `formatItemStats`는 `Object.entries(stats)` 순서(= JSON 키 순서 = 설명문 순서)로 출력한다. 그런데 Swift 딕셔너리와 Foundation JSON 파서는 순서를 버린다. 아이템별 순서가 전역 순서로 정리되지도 않는다(충돌 104건).
+- 그래서 `Item.statOrder`를 추가했다. `GameData`가 원문의 `"stats": {…}` 키를 나온 순서대로 읽어 채운다(254개 = 아이템 수, 개수가 다르면 빈 배열).
+- 테스트 17개 통과(순서 검사 + 3153 예시)

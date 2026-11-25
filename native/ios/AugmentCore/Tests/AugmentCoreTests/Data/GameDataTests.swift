@@ -31,6 +31,14 @@ struct GameDataTests {
         #expect(d.itemPool.count == ids.count) // aram-item-ids는 전부 items에 있어야 한다
     }
 
+    @Test(arguments: AppLocale.allCases)
+    func itemStatOrderFollowsJson(locale: AppLocale) throws {
+        let d = try RepoData.gameData(locale)
+        #expect(d.items.allSatisfy { Set($0.statOrder) == Set($0.stats.keys) && $0.statOrder.count == $0.stats.count })
+        // 3153(안개의 검): 원문 순서 공격력 → 공격 속도 → 생명력 흡수
+        #expect(d.itemsById["3153"]?.statOrder == ["attackdamage", "attackspeed", "lifesteal"])
+    }
+
     @Test func localesShareIdsAndOrder() throws {
         let ko = try RepoData.gameData(.ko), en = try RepoData.gameData(.en)
         #expect(ko.augments.map(\.id) == en.augments.map(\.id))
