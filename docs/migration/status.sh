@@ -14,6 +14,9 @@ if [ "${1:-}" = diff ]; then
   [ -n "$f" ] || { echo "작업 $2 없음"; exit 1; }
   owns=$(field "$f" owns)
   case "$owns" in "("*) echo "$2 는 직렬 작업 — owns 검사 없음"; exit 0 ;; esac
+  # 스텁 최초 생성은 허용한다 (stubs: "<경로> (→ ID), …")
+  stubs=$(field "$f" stubs | sed 's/ ([^)]*)//g')
+  [ -n "$stubs" ] && owns="$owns, $stubs"
   base=$(git merge-base dev HEAD)
   bad=0
   while IFS= read -r p; do
