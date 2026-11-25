@@ -84,6 +84,13 @@ public struct Item: Codable, Hashable, Identifiable, Sendable {
     /// 정규화된 스탯. flat 키는 절대값, 비율 키는 0.4 = 40% (RN `ItemStats`). 계산은 I-02c.
     public var stats: [String: Double]
     public var imageKey: String
+    /// `stats`의 원본 JSON 키 순서. RN `formatItemStats`가 `Object.entries` 순서(= 설명문 순서)로 출력해서 필요하다.
+    /// 딕셔너리는 순서를 잃으므로 `GameData`가 원문에서 따로 읽어 채운다. 못 읽으면 빈 배열.
+    public var statOrder: [String] = []
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, description, plaintext, gold, tags, stats, imageKey
+    }
 }
 
 public struct HeadlinerTexts: Codable, Hashable, Sendable {
