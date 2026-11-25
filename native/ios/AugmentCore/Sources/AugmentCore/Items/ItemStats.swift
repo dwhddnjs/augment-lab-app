@@ -102,12 +102,9 @@ public func formatItemStats(_ stats: [String: Double], order: [String], _ locale
         let alias = key == "movespeedFlat" || key == "movespeedPercent" ? "movespeed" : key
         guard let meta = StatKey(rawValue: alias)?.meta else { return nil }
         let ratio = ratioKeys.contains(key)
-        return "\(meta.label(locale)) \(jsNumber(oneDecimal(ratio ? value * 100 : value)))\(ratio ? "%" : "")"
+        return "\(meta.label(locale)) \(jsNumber(Double(jsToFixed(ratio ? value * 100 : value, 1))!))\(ratio ? "%" : "")"
     }.joined(separator: " · ")
 }
 
-/// JS `parseFloat(v.toFixed(1))`
-func oneDecimal(_ v: Double) -> Double { (v * 10).rounded() / 10 }
-
-/// JS 숫자 → 문자열 (정수면 소수점 없이)
+/// JS 숫자 → 문자열 (정수면 소수점 없이). 반올림은 `jsToFixed`(Tierlist.swift) — JS `parseFloat(v.toFixed(1))`
 func jsNumber(_ v: Double) -> String { v == v.rounded() && abs(v) < 1e15 ? String(Int(v)) : String(v) }

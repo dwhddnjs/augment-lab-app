@@ -68,6 +68,7 @@ iOS 작업 45개: `ios/`. 동작 명세(정답지): `spec/` — RN 코드에서 
 3. 커밋 → `git push -u origin native/<ID>` → `gh pr create --base dev`
 4. 사용자에게 안내한다: "PR 열었음. **사용자 확인** 항목을 시뮬레이터에서 봐 주세요. 리뷰까지 원하면 `/ship`."
 5. 사용자가 확인하고 머지하면 완료다. 머지 후 워크트리 정리: `git worktree remove .claude/worktrees/<ID>`
+   - **디스크 주의**: 워크트리마다 iOS 빌드 캐시(`.build/ios`)가 약 4.6GB 쌓인다. 머지된 워크트리는 바로 지운다(2026-11-26에 9개가 쌓여 디스크가 가득 찼다).
 
 ### 4. 5시간 한도 95% (자동 경고)
 훅(`.claude/hooks/usage-guard.sh`)이 95%를 감지하면 이런 지시가 들어온다. 받으면 **새 단계를 시작하지 말고**:
