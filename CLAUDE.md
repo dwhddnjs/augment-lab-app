@@ -4,6 +4,13 @@
 
 @AGENTS.md
 
+## 네이티브 마이그레이션 진행 중 (iOS SwiftUI → Android Compose)
+
+- `native/` 작업이거나 사용자가 작업 ID(`I-xx`·`A-xx`)를 말하면, **먼저 `docs/migration/README.md`의 "세션 규칙"만 읽고** 지정된 작업 파일(`docs/migration/ios|android/<ID>-*.md`)로 시작한다.
+- 진행 상황 확인: `bash docs/migration/status.sh`. 작업마다 브랜치 `native/<ID>`와 워크트리 `.claude/worktrees/<ID>`를 따로 쓰고, 수정은 작업 파일의 `owns` 경로 안에서만 한다.
+- 5시간 한도 95% 경고(`.claude/hooks/usage-guard.sh`)를 받으면 새 단계를 시작하지 않는다. 진행 기록 → 커밋 → push 후 멈춘다.
+- 아래 RN 규칙(`src/`)은 R-01(RN 제거)까지 그대로 유효하다.
+
 ## 작업별 skill — 시작 전 반드시 읽을 것
 
 - **UI 작업**(컴포넌트·리스트·폼·컨트롤·시트·메뉴·헤더·라우팅) → `.agents/skills/expo-ui/SKILL.md`. 진짜 네이티브가 hero. universal `@expo/ui` 1순위, 안 될 때만 RN으로 내려간다.

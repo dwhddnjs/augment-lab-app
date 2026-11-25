@@ -44,6 +44,10 @@ example
 /android
 /build
 
+# 네이티브 앱 빌드 산출물 (native/ios Makefile의 derivedData, 워크트리마다 생김)
+.build/
+native/android/keystore.properties
+
 # 검증 스크린샷 — 저장소에 커밋하지 않는다 (docs/verification/README.md 참고)
 docs/verification/assets/
 
