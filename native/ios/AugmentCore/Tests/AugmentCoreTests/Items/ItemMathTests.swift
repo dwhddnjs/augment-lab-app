@@ -87,6 +87,12 @@ struct ItemMathTests {
         #expect(itemCategoryOverrides.count == 32)
     }
 
+    /// JS `toFixed` 반올림: 1.45 → "1.4"(이진값 1.4499…). 단순 `rounded()`는 "1.5"가 된다.
+    @Test func formatRoundsLikeJsToFixed() {
+        #expect(formatItemStats(["lethality": 1.45], order: ["lethality"], .ko) == "물리 관통력 1.4")
+        #expect(formatItemStats(["crit": 0.0145], order: ["crit"], .ko) == "치명타 확률 1.5%")
+    }
+
     @Test func formatUsesJsonKeyOrderFromData() throws {
         let d = try RepoData.gameData(.ko)
         #expect(formatItemStats(try #require(d.itemsById["3153"]), .ko) == "공격력 40 · 공격 속도 25% · 생명력 흡수 10%")

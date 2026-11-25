@@ -32,7 +32,7 @@ rn: src/features/tierlist/tiers.ts, src/features/tierlist/hooks/use-augment-grou
 
 ## 승격 후보
 <!-- 공용 파일(다른 작업 소유)을 바꿔야 했던 것. 임시로 자기 폴더에 구현하고 여기에 적는다. -->
-- **I-02c 후속**: `formatItemStats`의 `oneDecimal`(= `rounded()`)을 이 작업의 `jsToFixed(_:1)`로 바꾸면 반올림 동률까지 RN과 같아진다. 두 PR이 모두 머지된 뒤 한 줄만 고치면 된다(같은 모듈이라 호출만 하면 됨).
+- ~~**I-02c 후속**~~ → `native/fix-merge`에서 반영 완료(1.45가 RN처럼 "1.4"로 표시됨, 테스트 추가). `formatItemStats`의 `oneDecimal`(= `rounded()`)을 이 작업의 `jsToFixed(_:1)`로 바꾸면 반올림 동률까지 RN과 같아진다. 두 PR이 모두 머지된 뒤 한 줄만 고치면 된다(같은 모듈이라 호출만 하면 됨).
 
 ## 진행 기록
 <!-- 세션마다 아래에 추가: ### YYYY-MM-DD · 한 일 / 다음 단계 / 주의점 -->
