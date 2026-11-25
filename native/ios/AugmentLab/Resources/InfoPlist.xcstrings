@@ -1,0 +1,12 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Augment Lab" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "증강 연구소" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

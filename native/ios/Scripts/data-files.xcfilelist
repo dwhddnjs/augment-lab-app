@@ -1,0 +1,16 @@
+# 앱 번들 Data/로 복사할 JSON (RN과 공용). 추가하면 data-outputs.xcfilelist도 함께 고친다.
+$(SRCROOT)/../../src/features/augments/data/augments.ko.json
+$(SRCROOT)/../../src/features/augments/data/augments.en.json
+$(SRCROOT)/../../src/features/champions/data/champions.ko.json
+$(SRCROOT)/../../src/features/champions/data/champions.en.json
+$(SRCROOT)/../../src/features/champions/data/champion-spells.ko.json
+$(SRCROOT)/../../src/features/champions/data/champion-spells.en.json
+$(SRCROOT)/../../src/features/headliners/data/headliners.ko.json
+$(SRCROOT)/../../src/features/headliners/data/headliners.en.json
+$(SRCROOT)/../../src/features/items/data/items.ko.json
+$(SRCROOT)/../../src/features/items/data/items.en.json
+$(SRCROOT)/../../src/features/items/data/aram-item-ids.json
+$(SRCROOT)/../../src/features/tierlist/data/tierlist.json
+$(SRCROOT)/../../src/features/tierlist/data/tierlist-items.ko.json
+$(SRCROOT)/../../src/features/tierlist/data/tierlist-items.en.json
+$(SRCROOT)/../../src/lib/version.json
