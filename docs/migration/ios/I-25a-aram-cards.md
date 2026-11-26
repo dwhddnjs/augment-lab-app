@@ -17,8 +17,8 @@ rn: src/components/ui/{pick-card,reroll-button}.tsx, src/hooks/use-card-pick-ani
 카드 한 장의 모양과 움직임을 완성한다. 엔진과는 값만 주고받는다(입력: 카드 데이터·상태, 출력: 탭·리롤 콜백).
 
 ## 체크리스트
-- [ ] `PickCard`: 뒤집기 등장(index×90), 페이드 등장, 선택·비선택·리롤 퇴장 수치 그대로, rotateY 0일 때만 탭
-- [ ] 선택 확정 380ms, 리롤 교체 220ms 타이밍 헬퍼
+- [x] `PickCard`: 뒤집기 등장(index×90), 페이드 등장, 선택·비선택·리롤 퇴장 수치 그대로, rotateY 0일 때만 탭
+- [x] 선택 확정 380ms, 리롤 교체 220ms 타이밍 헬퍼
 - [ ] `RerollButton` + 해킹 점멸(1300ms 주기)
 - [ ] `AramCard`, `SkillCard`, `CardMarks`(KDA·Worlds 배지, 스티커)
 - [ ] Preview: 카드 3장 행에서 등장·선택 재생
