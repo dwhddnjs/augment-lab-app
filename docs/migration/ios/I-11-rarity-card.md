@@ -19,7 +19,7 @@ rn: src/components/ui/{rarity-card-frame,augment-tile,augment-image}.tsx
 ## 체크리스트
 - [x] `RarityCardFrame`: 14:9, 모서리, 아트 2겹, 배치 비율, 글자 크기(일반·compact), 설명 줄 수 계산, 골드 수치 강조, 그림자·글로우(라이트·다크), 카드 텍스트 Dynamic Type 끔
 - [x] 카드 폭 계산 헬퍼(§2.6)
-- [ ] `AugmentTile`
+- [x] `AugmentTile`
 - [ ] Preview: 희귀도 3종 × 라이트·다크 × 일반·compact
 
 ## 완료 기준
