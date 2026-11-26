@@ -17,7 +17,7 @@ rn: src/features/headliners/{assets.ts,components/*}, src/components/ui/detail-c
 빌드 상세·드래프트·아이템 선택이 함께 쓰는 헤드라이너 조각을 만든다.
 
 ## 체크리스트
-- [ ] `HeadlinerAssets`(로고·잉크 메타)
+- [x] `HeadlinerAssets`(로고·잉크 메타)
 - [ ] `HeadlinerLogo`(plain·light·흰 로고 틴트 규칙)
 - [ ] `SkillIcon`
 - [ ] `MarkedText`(색 키 → StatTextColors·SkillCardColors)
