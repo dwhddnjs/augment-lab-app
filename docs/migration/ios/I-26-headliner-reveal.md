@@ -17,12 +17,12 @@ rn: src/features/aram/components/headliner-reveal.tsx
 드래프트 시작 연출을 수치 그대로 옮긴다.
 
 ## 체크리스트
-- [ ] 무대, wash, 로고(+aura, heartsteel 0.78), 세로선, 문구 3줄 지연
-- [ ] 2600ms 자동 닫기, 탭으로 건너뛰기, 300ms 페이드 → `onDone`
-- [ ] Reduce Motion 무시
+- [x] 무대, wash, 로고(+aura, heartsteel 0.78), 세로선, 문구 3줄 지연
+- [x] 2600ms 자동 닫기, 탭으로 건너뛰기, 300ms 페이드 → `onDone`
+- [x] Reduce Motion 무시
 
 ## 완료 기준
-- [ ] `make -C native/ios build` 통과
+- [x] `make -C native/ios build` 통과
 - [ ] `bash docs/migration/status.sh diff I-26` → 소유 경로 밖 변경 없음
 - [ ] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
 
