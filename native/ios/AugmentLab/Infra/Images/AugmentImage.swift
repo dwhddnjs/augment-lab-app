@@ -21,7 +21,7 @@ struct AugmentImage: View {
     var body: some View {
         content
             .frame(width: size, height: size)
-            .id(iconPath) // 다른 증강으로 바뀌면 처음 URL부터 다시
+            .onChange(of: iconPath) { step = 0 } // 다른 증강으로 바뀌면 처음 URL부터 다시
     }
 
     @ViewBuilder private var content: some View {
