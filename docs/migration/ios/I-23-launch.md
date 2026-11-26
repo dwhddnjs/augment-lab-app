@@ -35,7 +35,6 @@ rn: src/components/navigation/mode-select-overlay.tsx, src/features/champions/**
 ## 승격 후보
 <!-- 공용 파일(다른 작업 소유)을 바꿔야 했던 것. 임시로 자기 폴더에 구현하고 여기에 적는다. -->
 - **화면별 큰 제목 크기 `LargeTitleSize`**(`ChampionSelectScreen.swift` 안 private): 티어리스트 챔피언 모달(I-31)도 큰 제목이 28이다. 두 곳에서 쓰게 되면 `UI/Common`(I-15)으로 옮긴다.
-- **눌림 효과 없는 버튼 스타일 `NoFeedback`**: 이 작업 두 파일과 Shell `CustomTabBar`의 `Bare`가 같은 코드다. `UI/Common`으로 옮길 후보.
 
 ## 진행 기록
 <!-- 세션마다 아래에 추가: ### YYYY-MM-DD · 한 일 / 다음 단계 / 주의점 -->

@@ -143,7 +143,7 @@ private struct ChampionGrid: View {
                 .padding(Self.chipPadding)
                 .background(active ? palette.accent.subtle : .clear, in: Radius.shape(Radius.md))
         }
-        .buttonStyle(NoFeedback())
+        .buttonStyle(NoFeedbackButtonStyle())
     }
 
     private func cell(_ champion: Champion) -> some View {
@@ -164,7 +164,7 @@ private struct ChampionGrid: View {
             .padding(Spacing.one)
             .contentShape(Rectangle())
         }
-        .buttonStyle(NoFeedback())
+        .buttonStyle(NoFeedbackButtonStyle())
         .accessibilityAddTraits(selected ? .isSelected : [])
     }
 }
@@ -215,7 +215,3 @@ private struct LargeTitleSize: UIViewControllerRepresentable {
     }
 }
 
-/// RN Pressable처럼 눌림 효과 없음
-private struct NoFeedback: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View { configuration.label }
-}

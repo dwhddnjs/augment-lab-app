@@ -72,11 +72,7 @@ struct ModeSelectOverlay: View {
             .overlay(Circle().strokeBorder(Self.onScrimAccent, lineWidth: Self.border))
             .contentShape(Circle())
         }
-        .buttonStyle(NoFeedback())
+        .buttonStyle(NoFeedbackButtonStyle())
     }
 }
 
-/// RN Pressable처럼 눌림 효과 없음
-private struct NoFeedback: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View { configuration.label }
-}
