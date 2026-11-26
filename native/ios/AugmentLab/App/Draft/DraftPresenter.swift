@@ -16,7 +16,7 @@ final class DraftPresenter {
     /// 칼바람 위에 쌓인 아이템 선택
     private(set) var items: ItemSelectParams?
 
-    /// 표시할 화면에 루트 환경(`router`, `router.settings`)을 다시 넣을 때 쓴다.
+    /// 표시할 화면에 루트 환경(`appEnvironment(router)`)을 다시 넣을 때 쓴다.
     @ObservationIgnored unowned let router: Router
     @ObservationIgnored private weak var host: UIViewController?
 
@@ -68,10 +68,8 @@ final class DraftPresenter {
         while let next = top.presentedViewController, !next.isBeingDismissed { top = next }
 
         self.items = items
-        let content = DraftStack(draft: draft, presenter: self)
-            .environment(router)
-            .environment(router.settings)
-            .providesPalette()
+        // UIKit으로 띄워 SwiftUI 환경이 끊긴다 → 루트와 같은 한 벌을 다시 넣는다
+        let content = DraftStack(draft: draft, presenter: self).appEnvironment(router)
         let vc = DraftHostingController(rootView: AnyView(content))
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .crossDissolve
