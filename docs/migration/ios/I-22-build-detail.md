@@ -17,15 +17,15 @@ rn: src/features/builds/screens/build-detail-screen.tsx, src/features/builds/com
 빌드 상세 화면과 리뷰 요청을 만든다.
 
 ## 체크리스트
-- [ ] 배너: 높이 보간, 당기면 확대, 그라데이션 6단
-- [ ] 투명 헤더 → glass 배경·제목 페이드(124.2~220.8)
+- [x] 배너: 높이 보간, 당기면 확대, 그라데이션 6단
+- [x] 투명 헤더 → glass 배경·제목 페이드(124.2~220.8)
 - [x] 시트: 겹침 24, 모서리 24, 구성 5블록
-- [ ] 휴지통(확인 → 삭제 완료 → 뒤로)
+- [x] 휴지통(확인 → 삭제 완료 → 뒤로)
 - [x] `saved`면 1초 뒤 리뷰 요청(조건 3개, 평생 1회)
-- [ ] 없는 빌드 안내
+- [x] 없는 빌드 안내
 
 ## 완료 기준
-- [ ] `make -C native/ios build` 통과
+- [x] `make -C native/ios build` 통과
 - [ ] `bash docs/migration/status.sh diff I-22` → 소유 경로 밖 변경 없음
 - [ ] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
 
