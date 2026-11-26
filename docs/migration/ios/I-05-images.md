@@ -21,7 +21,7 @@ rn: src/lib/image-prewarm.ts, src/hooks/use-image-prewarm.ts, src/components/ui/
 - [x] `RemoteImage`: 로딩 배경 raised, 200ms 페이드, cover
 - [x] `AugmentImage`: 로컬 아이콘 → large → base → small → 희귀도 글리프(0.62)
 - [x] `prefetch(chain)`: URL마다 15초 타임아웃과 경쟁, 성공하면 멈춤
-- [ ] `@Observable PrewarmService`
+- [x] `@Observable PrewarmService`
     - 체인 순서·중복 제거(Map 의미) → 현재 473개
     - 동시 작업자 12, 진행률(실패도 셈)
     - 플래그 `prewarm:done:<ver>`
