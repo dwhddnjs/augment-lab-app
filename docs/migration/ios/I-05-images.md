@@ -17,7 +17,7 @@ rn: src/lib/image-prewarm.ts, src/hooks/use-image-prewarm.ts, src/components/ui/
 모든 이미지 표시와 첫 실행 프리웜을 담당한다.
 
 ## 체크리스트
-- [ ] SDWebImage 설정: 기본 캐시 사용(기존 캐시와 이어지게), 디스크 만료 무제한
+- [x] SDWebImage 설정: 기본 캐시 사용(기존 캐시와 이어지게), 디스크 만료 무제한
 - [ ] `RemoteImage`: 로딩 배경 raised, 200ms 페이드, cover
 - [ ] `AugmentImage`: 로컬 아이콘 → large → base → small → 희귀도 글리프(0.62)
 - [ ] `prefetch(chain)`: URL마다 15초 타임아웃과 경쟁, 성공하면 멈춤
