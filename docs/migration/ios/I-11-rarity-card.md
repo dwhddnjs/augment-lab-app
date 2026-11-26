@@ -17,8 +17,8 @@ rn: src/components/ui/{rarity-card-frame,augment-tile,augment-image}.tsx
 앱의 얼굴인 증강 카드를 픽셀 단위로 옮긴다.
 
 ## 체크리스트
-- [ ] `RarityCardFrame`: 14:9, 모서리, 아트 2겹, 배치 비율, 글자 크기(일반·compact), 설명 줄 수 계산, 골드 수치 강조, 그림자·글로우(라이트·다크), 카드 텍스트 Dynamic Type 끔
-- [ ] 카드 폭 계산 헬퍼(§2.6)
+- [x] `RarityCardFrame`: 14:9, 모서리, 아트 2겹, 배치 비율, 글자 크기(일반·compact), 설명 줄 수 계산, 골드 수치 강조, 그림자·글로우(라이트·다크), 카드 텍스트 Dynamic Type 끔
+- [x] 카드 폭 계산 헬퍼(§2.6)
 - [ ] `AugmentTile`
 - [ ] Preview: 희귀도 3종 × 라이트·다크 × 일반·compact
 
