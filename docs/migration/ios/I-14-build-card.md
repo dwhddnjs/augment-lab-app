@@ -19,7 +19,7 @@ rn: src/features/builds/components/build-card.tsx, src/features/builds/hooks/use
 ## 체크리스트
 - [ ] `BuildCard`(scrim 2종, 커스텀 accent, 눌림 0.92, 글로우 근사)
 - [ ] 삭제 확인 알림 헬퍼
-- [ ] `dayLabel`, `isWithinWeek`(로컬 자정 기준)
+- [x] `dayLabel`, `isWithinWeek`(로컬 자정 기준)
 
 ## 완료 기준
 - [ ] `make -C native/ios build` 통과
