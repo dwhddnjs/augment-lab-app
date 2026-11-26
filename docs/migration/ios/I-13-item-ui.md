@@ -17,12 +17,12 @@ rn: src/features/items/components/{item-stat-panel,item-filter-bar,filter-icon}.
 아이템 화면 3곳이 쓰는 패널과 필터 바를 만든다.
 
 ## 체크리스트
-- [ ] `ItemStatPanel`(핵심 13 + 0이 아닌 추가 스탯, base·added·total 표시)
+- [x] `ItemStatPanel`(핵심 13 + 0이 아닌 추가 스탯, base·added·total 표시)
 - [x] `ItemFilterBar`(세로 44, 탭 8, 재탭 해제)
 - [x] `FilterIcon`
 
 ## 완료 기준
-- [ ] `make -C native/ios build` 통과
+- [x] `make -C native/ios build` 통과
 - [ ] `bash docs/migration/status.sh diff I-13` → 소유 경로 밖 변경 없음
 - [ ] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
 
