@@ -17,12 +17,12 @@ rn: src/features/builds/components/build-card.tsx, src/features/builds/hooks/use
 홈과 내 빌드가 함께 쓰는 빌드 카드를 만든다.
 
 ## 체크리스트
-- [ ] `BuildCard`(scrim 2종, 커스텀 accent, 눌림 0.92, 글로우 근사)
+- [x] `BuildCard`(scrim 2종, 커스텀 accent, 눌림 0.92, 글로우 근사)
 - [x] 삭제 확인 알림 헬퍼
 - [x] `dayLabel`, `isWithinWeek`(로컬 자정 기준)
 
 ## 완료 기준
-- [ ] `make -C native/ios build` 통과
+- [x] `make -C native/ios build` 통과
 - [ ] `bash docs/migration/status.sh diff I-14` → 소유 경로 밖 변경 없음
 - [ ] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
 
