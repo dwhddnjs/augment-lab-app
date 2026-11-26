@@ -19,7 +19,7 @@ rn: src/components/ui/{pick-card,reroll-button}.tsx, src/hooks/use-card-pick-ani
 ## 체크리스트
 - [x] `PickCard`: 뒤집기 등장(index×90), 페이드 등장, 선택·비선택·리롤 퇴장 수치 그대로, rotateY 0일 때만 탭
 - [x] 선택 확정 380ms, 리롤 교체 220ms 타이밍 헬퍼
-- [ ] `RerollButton` + 해킹 점멸(1300ms 주기)
+- [x] `RerollButton` + 해킹 점멸(1300ms 주기)
 - [ ] `AramCard`, `SkillCard`, `CardMarks`(KDA·Worlds 배지, 스티커)
 - [ ] Preview: 카드 3장 행에서 등장·선택 재생
 
