@@ -20,7 +20,7 @@ rn: src/features/custom/hooks/use-custom-draft.ts
 - [x] 필터(티어 + matchName), 정렬 3종(`RARITY_RANK` → 이름)
 - [x] `toggleTarget`(질의 비움), `add`/`addItem` 결과 3종(이전 값 기준 판정), 한도 5/6, 제거, `clear`, `setChampionId`(담은 것 유지)
 - [x] 저장 검증과 저장 페이로드
-- [ ] 테스트: 빠른 연타(연속 add) 시 한도·중복이 정확한지
+- [x] 테스트: 빠른 연타(연속 add) 시 한도·중복이 정확한지
 
 ## 완료 기준
 - [ ] `make -C native/ios build` 통과
