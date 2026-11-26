@@ -22,10 +22,10 @@ rn: src/features/headliners/{assets.ts,components/*}, src/components/ui/detail-c
 - [x] `SkillIcon`
 - [x] `MarkedText`(색 키 → StatTextColors·SkillCardColors)
 - [x] `DetailCardRow`
-- [ ] `HeadlinerSummary`(+compact)
+- [x] `HeadlinerSummary`(+compact)
 
 ## 완료 기준
-- [ ] `make -C native/ios build` 통과
+- [x] `make -C native/ios build` 통과
 - [ ] `bash docs/migration/status.sh diff I-12b` → 소유 경로 밖 변경 없음
 - [ ] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
 
