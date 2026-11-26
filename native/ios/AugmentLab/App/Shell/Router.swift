@@ -1,5 +1,6 @@
 import AugmentCore
 import Observation
+import SwiftUI
 
 /// 화면 이동의 유일한 입구 (app-shell §3). 루트에서 하나 만들어 `.environment(router)`로 넘긴다.
 ///
@@ -14,11 +15,17 @@ final class Router {
     var sheet: Sheet?
     var modeSelectShown = false
 
-    /// 드래프트 표시(I-06b). 루트 환경을 다시 넣어야 해서 설정을 함께 들고 있다.
+    /// 앱 전역 저장소. 루트 밖(드래프트 풀스크린)에서도 같은 환경을 다시 넣을 수 있게 함께 든다 → `appEnvironment`
     @ObservationIgnored let settings: AppSettings
+    @ObservationIgnored let gameData: GameDataStore
+    @ObservationIgnored let builds: BuildStore
     @ObservationIgnored private(set) lazy var drafts = DraftPresenter(router: self)
 
-    init(settings: AppSettings) { self.settings = settings }
+    init(settings: AppSettings, gameData: GameDataStore, builds: BuildStore) {
+        self.settings = settings
+        self.gameData = gameData
+        self.builds = builds
+    }
 
     /// 현재 탭 스택에 쌓는다.
     func push(_ route: StackRoute) { paths[tab, default: []].append(route) }
@@ -83,5 +90,17 @@ final class Router {
     /// 빌드 상세는 탭바를 덮는다.
     var hidesTabBar: Bool {
         if case .build? = paths[tab]?.last { true } else { false }
+    }
+}
+
+extension View {
+    /// 앱 전역 환경 한 벌: Router · AppSettings · GameDataStore · BuildStore · 팔레트.
+    /// 루트와 드래프트 풀스크린(UIKit으로 띄워 환경이 끊긴다)이 같이 쓴다 — 전역 저장소를 늘리면 여기 한 곳만 고친다.
+    func appEnvironment(_ router: Router) -> some View {
+        environment(router)
+            .environment(router.settings)
+            .environment(router.gameData)
+            .environment(router.builds)
+            .providesPalette()
     }
 }

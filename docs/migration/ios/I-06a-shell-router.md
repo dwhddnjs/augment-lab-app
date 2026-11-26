@@ -71,6 +71,9 @@ rn: src/app/_layout.tsx, src/app/(tabs)/**, src/components/navigation/{app-tabs,
   - `router.settings`: 표시할 화면에 환경을 다시 넣을 때 쓴다
   - `AppDelegate`: 빈 클래스
 - I-06c가 채울 자리: `Boot.start(settings:)`(앱 init에서 호출) · `BootOverlay`(셸 ZStack 맨 위에 깔린다)
+- **전역 환경**(후속 커밋): 앱 루트에서 아래를 하나씩 만들고 `.appEnvironment(router)`로 한 번에 넣는다.
+  - `AppSettings` · `GameDataStore`(로케일이 바뀌면 `setLocale`) · `BuildStore`
+  - 같은 함수를 드래프트 풀스크린(I-06b)도 쓴다. 전역 저장소가 늘면 `Router.swift`의 `appEnvironment` 한 곳만 고친다.
 
 **설계 메모**
 - 빌드 상세는 RN의 루트 스택 대신 **현재 탭 스택**에 push 하고 탭바를 숨긴다. 탭 상태가 남는 결과는 같다.

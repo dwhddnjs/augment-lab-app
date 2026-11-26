@@ -16,8 +16,15 @@ struct AugmentLabApp: App {
         // 이관(I-04c) → 설정 다시 읽기 → 프리웜. 설정을 화면이 읽기 전에 끝난다.
         Boot.start(settings: settings)
         Self.styleNavigationBars()
+        let gameData: GameDataStore
+        do {
+            gameData = try GameDataStore(locale: settings.locale)
+        } catch {
+            // 번들 JSON이 깨졌다 = 빌드가 잘못됐다. 데이터 없이 띄울 화면이 없다.
+            fatalError("번들 게임 데이터를 읽지 못함: \(error)")
+        }
         _settings = State(initialValue: settings)
-        _router = State(initialValue: Router(settings: settings))
+        _router = State(initialValue: Router(settings: settings, gameData: gameData, builds: BuildStore()))
         #if DEBUG
         Route.selfCheck()
         #endif
@@ -26,9 +33,10 @@ struct AugmentLabApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environment(router)
+                .appEnvironment(router)
                 .appSettings(settings)
-                .providesPalette()
+                // 데이터(챔피언·증강·아이템 이름)는 로케일을 따라 다시 읽는다
+                .onChange(of: settings.locale) { _, locale in router.gameData.setLocale(locale) }
         }
         // 체류시간에서 백그라운드 시간을 뺀다 (§7 screen_left)
         .onChange(of: scenePhase) { _, phase in
