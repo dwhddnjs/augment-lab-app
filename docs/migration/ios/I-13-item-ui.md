@@ -18,7 +18,7 @@ rn: src/features/items/components/{item-stat-panel,item-filter-bar,filter-icon}.
 
 ## 체크리스트
 - [ ] `ItemStatPanel`(핵심 13 + 0이 아닌 추가 스탯, base·added·total 표시)
-- [ ] `ItemFilterBar`(세로 44, 탭 8, 재탭 해제)
+- [x] `ItemFilterBar`(세로 44, 탭 8, 재탭 해제)
 - [x] `FilterIcon`
 
 ## 완료 기준
