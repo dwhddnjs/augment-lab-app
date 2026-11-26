@@ -18,8 +18,8 @@ rn: src/features/aram/components/{picked-drawer,champion-summary}.tsx
 
 ## 체크리스트
 - [x] 서랍: 오른쪽 front, 폭 min(340, 38%), 스프링 수치, 딤 0.5, 가장자리 스와이프 규칙, 스와이프 허용 여부를 바깥에서 받음
-- [ ] `ChampionSummary`, `HeadlinerSummary compact`, 3열 증강 그리드(`max(6, n)` 칸, "n/6")
-- [ ] 라이트 모드 이름 색 규칙
+- [x] `ChampionSummary`, `HeadlinerSummary compact`, 3열 증강 그리드(`max(6, n)` 칸, "n/6")
+- [x] 라이트 모드 이름 색 규칙
 
 ## 완료 기준
 - [ ] `make -C native/ios build` 통과
