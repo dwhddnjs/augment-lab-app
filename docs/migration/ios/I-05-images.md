@@ -19,7 +19,7 @@ rn: src/lib/image-prewarm.ts, src/hooks/use-image-prewarm.ts, src/components/ui/
 ## 체크리스트
 - [x] SDWebImage 설정: 기본 캐시 사용(기존 캐시와 이어지게), 디스크 만료 무제한
 - [x] `RemoteImage`: 로딩 배경 raised, 200ms 페이드, cover
-- [ ] `AugmentImage`: 로컬 아이콘 → large → base → small → 희귀도 글리프(0.62)
+- [x] `AugmentImage`: 로컬 아이콘 → large → base → small → 희귀도 글리프(0.62)
 - [ ] `prefetch(chain)`: URL마다 15초 타임아웃과 경쟁, 성공하면 멈춤
 - [ ] `@Observable PrewarmService`
     - 체인 순서·중복 제거(Map 의미) → 현재 473개
