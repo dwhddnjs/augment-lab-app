@@ -20,7 +20,7 @@ rn: src/features/headliners/{assets.ts,components/*}, src/components/ui/detail-c
 - [x] `HeadlinerAssets`(로고·잉크 메타)
 - [x] `HeadlinerLogo`(plain·light·흰 로고 틴트 규칙)
 - [x] `SkillIcon`
-- [ ] `MarkedText`(색 키 → StatTextColors·SkillCardColors)
+- [x] `MarkedText`(색 키 → StatTextColors·SkillCardColors)
 - [ ] `DetailCardRow`
 - [ ] `HeadlinerSummary`(+compact)
 

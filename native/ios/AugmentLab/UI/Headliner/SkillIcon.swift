@@ -24,7 +24,7 @@ public struct SkillIcon: View {
                     .clipShape(Radius.shape(Radius.md))
             }
             Text(skill.rawValue.uppercased())
-                .font(.system(size: (badge * 0.6).rounded(), weight: fontWeight(800)))
+                .font(.system(size: (badge * 0.6).rounded(), weight: .heavy)) // RN 800
                 .foregroundStyle(HeroOverlay.textPrimary)
                 .frame(width: badge, height: badge)
                 .background(HeroOverlay.cardBase, in: Radius.shape(Radius.sm))
