@@ -26,7 +26,7 @@ rn: src/lib/image-prewarm.ts, src/hooks/use-image-prewarm.ts, src/components/ui/
     - 동시 작업자 12, 진행률(실패도 셈)
     - 플래그 `prewarm:done:<ver>`
     - 보충: 첫 URL 캐시 확인, `scenePhase == .active`마다 실행
-- [ ] 단위 테스트가 어려운 부분은 체인 목록 생성 함수만 따로 빼서 검증한다(473개, 순서)
+- [x] 단위 테스트가 어려운 부분은 체인 목록 생성 함수만 따로 빼서 검증한다(473개, 순서)
 
 ## 완료 기준
 - [ ] `make -C native/ios build` 통과
