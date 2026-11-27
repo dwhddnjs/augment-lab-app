@@ -44,3 +44,7 @@ rn: src/features/tierlist/screens/tierlist-screen.tsx
 - 검증: 빌드 통과. **사용자/fd 시뮬 확인 필요**(첫 행 y가 RN 0.292와 같은지).
 - 주의: 첫 프레임에 펼친 상태가 한 번 보일 수 있다(다음 런루프에 접음). 거슬리면 원인은 SwiftUI 서랍 기본값이라 이 방식의 한계다.
 
+### 2026-11-27 · c1 (3차)
+- fd 2차 확인: 검색창은 숨었지만 너무 올라감(첫 행 y 0.164, 큰 제목까지 접힘). 원인: UIKit이 서랍을 접으면서 인셋을 줄이고 오프셋도 보정 → 올린 만큼이 두 번 먹음.
+- fd가 짚은 "ScrollView를 감싸면 내비 바가 못 잡음"은 해당 없음 — NavigationStack → TierlistScreen 루트가 바로 ScrollView.
+- 한 일: ① 검색창 높이만큼 밀어 서랍을 접게 하고 ② 다음 런루프에 새 맨 위(-adjustedContentInset.top)로 되돌린다. 빌드 통과. **fd/사용자 시뮬 확인 필요**.

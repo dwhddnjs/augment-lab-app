@@ -104,7 +104,14 @@ private struct CollapseSearchOnFirstAppear: UIViewRepresentable {
             // 맨 위에 있을 때만 — 다른 탭에서 돌아왔을 때 스크롤 위치를 건드리지 않는다
             let top = -scroll.adjustedContentInset.top
             guard scroll.contentOffset.y <= top else { return }
+            // ① 검색창 높이만큼 밀어 서랍을 접게 한다. UIKit은 접으면서 인셋을 줄이고 오프셋도 보정해서
+            //    목록이 너무 올라간다(큰 제목까지 접힘 — fd 2차 확인: 첫 행 y 0.164).
             scroll.setContentOffset(CGPoint(x: scroll.contentOffset.x, y: top + bar.frame.height), animated: false)
+            // ② 접힌 뒤의 새 맨 위로 되돌린다. 맨 위에 딱 맞추면 서랍은 접힌 채(끌어내려야 나옴), 큰 제목은 다시 펼쳐진다.
+            DispatchQueue.main.async { [weak scroll] in
+                guard let scroll else { return }
+                scroll.setContentOffset(CGPoint(x: scroll.contentOffset.x, y: -scroll.adjustedContentInset.top), animated: false)
+            }
         }
 
         private func ancestor<T: UIView>(_: T.Type) -> T? {
