@@ -36,29 +36,33 @@ struct TierlistScreen: View {
                         .multilineTextAlignment(.center)
                         .padding(.top, Spacing.five)
                 }
+                // 띠 하나 = LazyVStack 자식 하나(tier로 식별). 띠와 행을 형제로 펼치고 행을 순번(\.offset)으로 식별하면
+                // 검색으로 화면 밖에 있던 띠가 들어올 때 행이 비어 나왔다(fd: "te" → B·D 띠만 있고 칸이 빔).
                 ForEach(sections, id: \.tier) { section in
-                    TierMark(section.tier, size: .heading, cornerRadius: Radius.full)
-                        .frame(height: Spacing.five)
-                        .background(palette.surface.raised, in: Capsule())
-                        .padding(.horizontal, Self.inset)
-                        .padding(.top, Spacing.three)
-                        .padding(.bottom, Spacing.two)
-                    ForEach(Array(section.rows.enumerated()), id: \.offset) { _, row in
-                        HStack(spacing: Spacing.two) {
-                            ForEach(row, id: \.key) { entry in
-                                if let champion = data.championsByKey[entry.key] {
-                                    TierlistChampionCell(champion: champion, row: entry, cdn: data.cdn, pickShort: t("pickShort")) {
-                                        router.presentTierlistChampion(entry.key)
+                    VStack(spacing: 0) {
+                        TierMark(section.tier, size: .heading, cornerRadius: Radius.full)
+                            .frame(height: Spacing.five)
+                            .background(palette.surface.raised, in: Capsule())
+                            .padding(.horizontal, Self.inset)
+                            .padding(.top, Spacing.three)
+                            .padding(.bottom, Spacing.two)
+                        ForEach(Array(section.rows.enumerated()), id: \.offset) { _, row in
+                            HStack(spacing: Spacing.two) {
+                                ForEach(row, id: \.key) { entry in
+                                    if let champion = data.championsByKey[entry.key] {
+                                        TierlistChampionCell(champion: champion, row: entry, cdn: data.cdn, pickShort: t("pickShort")) {
+                                            router.presentTierlistChampion(entry.key)
+                                        }
                                     }
                                 }
+                                // 덜 찬 마지막 행의 빈 칸 — 없으면 마지막 카드가 폭 전체로 늘어난다
+                                ForEach(0..<(Tierlist.columns - row.count), id: \.self) { _ in
+                                    Color.clear.frame(maxWidth: .infinity, maxHeight: 0)
+                                }
                             }
-                            // 덜 찬 마지막 행의 빈 칸 — 없으면 마지막 카드가 폭 전체로 늘어난다
-                            ForEach(0..<(Tierlist.columns - row.count), id: \.self) { _ in
-                                Color.clear.frame(maxWidth: .infinity, maxHeight: 0)
-                            }
+                            .padding(.horizontal, Self.inset)
+                            .padding(.bottom, Spacing.two)
                         }
-                        .padding(.horizontal, Self.inset)
-                        .padding(.bottom, Spacing.two)
                     }
                 }
                 // 마지막 행 paddingBottom(8)과 합쳐 16 — 티어 구간 사이(배너 위 여백)와 같은 간격

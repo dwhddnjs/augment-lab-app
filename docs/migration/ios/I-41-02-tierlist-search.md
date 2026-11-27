@@ -56,3 +56,9 @@ rn: src/features/tierlist/screens/tierlist-screen.tsx
 - 한 일: SwiftUI `.searchable`을 빼고 UIKit `UISearchController`를 내비 스택 뷰컨트롤러의 `navigationItem.searchController`에 직접 붙인다(`hidesSearchBarWhenScrolling = true`, `preferredSearchBarPlacement = .stacked`) — RN react-native-screens와 같은 방식. 검색어는 `UISearchResultsUpdating` → `query`. 빈 검색 드래그 취소는 `dismissSearch` 대신 `controller.isActive = false`. 자리표시·틴트·글자색은 기존 L10n·팔레트 토큰.
 - 검증: 빌드 통과. **fd/사용자 시뮬 확인 필요** — 첫 화면 검색창 숨김·큰 제목 펼침·첫 행 y≈0.292, 끌어내리면 나옴, 검색 입력/취소, 라이트·다크 색.
 - 주의: SwiftUI가 navigationItem을 다시 갱신하며 searchController를 지우면 검색창이 사라진다 → 그때는 updateUIView에서 다시 붙이는 지금 구조로 회복되는지 확인.
+### 2026-11-27 · c1 (6차 — 한도 95%로 정지)
+- fd 5차 확인: 6개 전부 ✅(첫 행 y 0.292 = RN, 깜빡임 없음, 끌어내리면 검색창, 필터·취소, 빈 검색 스크롤 취소, 다크 색, 탭 왕복).
+- 새 차이: 검색 "te" → RN은 S·B·D 모두 채움, 네이티브는 B·D 띠만 있고 칸이 빔. (fd 추정 useStagedExpand는 챔피언 모달의 증강 섹션 것이라 해당 없음, Tierlist.sections 로직도 정상)
+- 한 일: LazyVStack 직속 자식을 "띠 하나 = VStack 하나(tier로 식별)"로 묶음 — 띠·행을 형제로 펼치고 행을 \.offset으로 식별하던 구조가 원인으로 추정. 빌드 통과.
+- 다음에 할 첫 행동: fd에 "te" 재촬영 요청(S·B·D 모두 채워지는지, 검색 없을 때 스크롤 성능 그대로인지). ✅면 #126 리뷰 요청.
+- 주의: 원인 추정이 틀리면 다음 후보는 행 id를 "\(tier)-\(offset)"로 바꾸기.
