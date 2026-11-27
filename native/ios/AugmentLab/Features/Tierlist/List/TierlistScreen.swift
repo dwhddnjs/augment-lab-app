@@ -16,6 +16,7 @@ struct TierlistScreen: View {
     @Environment(GameDataStore.self) private var store
     @Environment(\.palette) private var palette
     @State private var query = ""
+    @State private var search = TierlistSearch()
 
     /// 격자·배너 공통 좌우 인셋
     private static let inset = Spacing.three
@@ -69,67 +70,80 @@ struct TierlistScreen: View {
                     .padding(.top, Spacing.two)
             }
             .padding(.bottom, Spacing.five)
-            .background(CollapseSearchOnFirstAppear().allowsHitTesting(false))
+            .background(
+                SearchControllerAttacher(search: search, placeholder: t("searchPlaceholder"),
+                                         tint: UIColor(palette.accent.default), text: UIColor(palette.text.primary))
+                    .allowsHitTesting(false)
+            )
         }
         .scrollIndicators(.hidden)
         .scrollDismissesKeyboard(.immediately)
-        .modifier(CancelEmptySearchOnDrag(query: query))
+        .modifier(CancelEmptySearchOnDrag(query: query) { search.controller.isActive = false })
         .background(palette.surface.base)
-        .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .automatic), prompt: t("searchPlaceholder"))
+        .onAppear { search.onChange = { query = $0 } }
     }
 }
 
-/// RN(react-native-screens)은 검색창이 처음엔 접혀 있고 끌어내려야 보인다. SwiftUI 서랍은 처음에 펼쳐 둔다
-/// (붙이는 시점을 늦춰도 iOS 26.5에서 펼쳐짐 — fd 확인). → 첫 등장 때 목록을 검색창 높이만큼 한 번 올린다.
-/// 사용자가 살짝 밀어 올린 것과 같아서 UIKit이 서랍을 접고, 첫 행이 큰 제목 바로 아래(RN 위치)에 온다.
-// ponytail: UIKit 계층을 더듬는다(SwiftUI에 "처음엔 접힘" API 없음). SwiftUI가 지원하면 이 뷰를 지울 것.
-private struct CollapseSearchOnFirstAppear: UIViewRepresentable {
-    func makeUIView(context: Context) -> UIView { Probe() }
-    func updateUIView(_ uiView: UIView, context: Context) {}
+/// 검색창은 SwiftUI `.searchable` 대신 UIKit `UISearchController`를 내비 아이템에 직접 붙인다(RN react-native-screens와 같은 방식).
+/// SwiftUI 서랍은 처음에 펼쳐져 목록이 ≈60pt 내려갔고, 오프셋으로 접는 방식은 큰 제목 레이아웃과 계속 어긋났다(I-41-02 진행 기록).
+/// UIKit 기본값(`hidesSearchBarWhenScrolling = true`)이면 처음엔 접혀 있고 끌어내려야 나온다 = RN `hideWhenScrolling: true`.
+@MainActor
+final class TierlistSearch: NSObject, UISearchResultsUpdating {
+    let controller = UISearchController(searchResultsController: nil)
+    var onChange: (String) -> Void = { _ in }
 
-    private final class Probe: UIView {
-        private var done = false
-        override func didMoveToWindow() {
-            super.didMoveToWindow()
-            guard window != nil, !done else { return }
-            // 내비게이션 바·검색 서랍 배치가 끝난 다음 런루프에서
-            DispatchQueue.main.async { [weak self] in self?.collapse() }
+    override init() {
+        super.init()
+        controller.obscuresBackgroundDuringPresentation = false
+        controller.hidesNavigationBarDuringPresentation = true
+        controller.searchResultsUpdater = self
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        onChange(searchController.searchBar.text ?? "")
+    }
+}
+
+/// 이 화면을 띄운 뷰컨트롤러(내비 스택의 한 칸)를 찾아 `navigationItem.searchController`를 붙인다.
+/// 첫 레이아웃 전에 붙이도록 superview에 들어오는 즉시 시도하고, 창에 들어올 때 한 번 더 확인한다.
+// ponytail: UIKit 계층을 더듬는다. SwiftUI `.searchable`에 "처음엔 접힘" 옵션이 생기면 이 파일의 UIKit 부분을 지우고 되돌릴 것.
+private struct SearchControllerAttacher: UIViewRepresentable {
+    let search: TierlistSearch
+    let placeholder: String
+    let tint: UIColor
+    let text: UIColor
+
+    func makeUIView(context: Context) -> Probe { Probe(search: search) }
+
+    func updateUIView(_ probe: Probe, context: Context) {
+        let bar = search.controller.searchBar
+        bar.placeholder = placeholder
+        bar.tintColor = tint
+        bar.searchTextField.textColor = text
+        probe.attach()
+    }
+
+    final class Probe: UIView {
+        private let search: TierlistSearch
+        init(search: TierlistSearch) { self.search = search; super.init(frame: .zero) }
+        required init?(coder: NSCoder) { nil }
+
+        override func didMoveToSuperview() { super.didMoveToSuperview(); attach() }
+        override func didMoveToWindow() { super.didMoveToWindow(); attach() }
+
+        func attach() {
+            guard let vc = stackController(), vc.navigationItem.searchController !== search.controller else { return }
+            vc.navigationItem.searchController = search.controller
+            vc.navigationItem.hidesSearchBarWhenScrolling = true
+            vc.navigationItem.preferredSearchBarPlacement = .stacked
+            vc.definesPresentationContext = true
         }
 
-        private func collapse() {
-            guard !done, let scroll = ancestor(UIScrollView.self),
-                  let bar = nearestController()?.navigationItem.searchController?.searchBar,
-                  bar.frame.height > 0, bar.window != nil else { return }
-            done = true
-            // 맨 위에 있을 때만 — 다른 탭에서 돌아왔을 때 스크롤 위치를 건드리지 않는다
-            let top = -scroll.adjustedContentInset.top
-            guard scroll.contentOffset.y <= top else { return }
-            // 서랍만 접히고 큰 제목은 펼친 상태의 맨 위 = 지금 맨 위 + 검색창 높이. 미리 잡아 둔다.
-            let target = CGPoint(x: scroll.contentOffset.x, y: top + bar.frame.height)
-            // ① 그 위치로 밀어 서랍을 접게 한다. UIKit은 접으면서 오프셋을 또 보정해 큰 제목까지 접는다
-            //    (fd 2차 확인: 첫 행 y 0.164).
-            scroll.setContentOffset(target, animated: false)
-            // ② 다음 런루프에 ①의 목표로 다시 놓는다. 접힌 제목 기준 맨 위(-adjustedContentInset.top)로 되돌리면
-            //    작은 제목으로 굳는다(fd 3차 확인: 첫 행 y 0.232, 큰 제목 높이 ≈52pt 차이).
-            //    목표는 그보다 위라 큰 제목이 다시 펼쳐지고, 서랍은 큰 제목 다음에야 나오니 접힌 채 남는다.
-            DispatchQueue.main.async { [weak scroll, weak self] in
-                guard let scroll else { return }
-                scroll.setContentOffset(target, animated: false)
-                self?.nearestController()?.navigationController?.navigationBar.layoutIfNeeded()
-            }
-        }
-
-        private func ancestor<T: UIView>(_: T.Type) -> T? {
-            var v = superview
-            while let cur = v { if let hit = cur as? T { return hit }; v = cur.superview }
-            return nil
-        }
-
-        /// 검색창을 가진 가장 가까운 뷰컨트롤러(SwiftUI가 navigationItem.searchController를 붙인 곳)
-        private func nearestController() -> UIViewController? {
+        /// 내비게이션 컨트롤러 스택에 직접 올라 있는 뷰컨트롤러 — 내비 바가 그 navigationItem을 그린다
+        private func stackController() -> UIViewController? {
             var r: UIResponder? = self
             while let cur = r {
-                if let vc = cur as? UIViewController, vc.navigationItem.searchController != nil { return vc }
+                if let vc = cur as? UIViewController, let nav = vc.navigationController, nav.viewControllers.contains(vc) { return vc }
                 r = cur.next
             }
             return nil
@@ -183,7 +197,7 @@ private struct TierlistChampionCell: View {
 // ponytail: 스크롤 시작 신호(onScrollPhaseChange)가 iOS 18부터라 17은 키보드만 내린다. 17에서도 필요하면 UIScrollView 델리게이트로.
 private struct CancelEmptySearchOnDrag: ViewModifier {
     let query: String
-    @Environment(\.dismissSearch) private var dismissSearch
+    let dismissSearch: () -> Void
 
     func body(content: Content) -> some View {
         if #available(iOS 18, *) {

@@ -51,3 +51,8 @@ rn: src/features/tierlist/screens/tierlist-screen.tsx
 ### 2026-11-27 · c1 (4차)
 - fd 3차 확인: 검색창 숨김·S 띠 보임 ✅, 그러나 큰 제목이 작은 제목으로 접힌 채(첫 행 y 0.232, RN 0.292, ≈52pt = 큰 제목 높이). 원인: ②에서 접힌 제목 기준 인셋(-adjustedContentInset.top)으로 되돌려 작은 제목 상태로 굳음.
 - 한 일: ②의 목표를 ①에서 미리 잡은 값(처음 맨 위 + 검색창 높이 = 서랍만 접힌 큰 제목 상태의 맨 위)으로 바꾸고, 되돌린 뒤 내비 바 레이아웃 한 번. 빌드 통과. **fd/사용자 시뮬 확인 필요**.
+### 2026-11-27 · c1 (5차 — 방식 전환)
+- fd 4차 확인: 더 나빠짐(큰 제목이 검색창과 겹쳐 그려짐, 첫 행 y 0.42). 오프셋을 손으로 맞추는 방식은 큰 제목/서랍 레이아웃과 계속 어긋나서 폐기.
+- 한 일: SwiftUI `.searchable`을 빼고 UIKit `UISearchController`를 내비 스택 뷰컨트롤러의 `navigationItem.searchController`에 직접 붙인다(`hidesSearchBarWhenScrolling = true`, `preferredSearchBarPlacement = .stacked`) — RN react-native-screens와 같은 방식. 검색어는 `UISearchResultsUpdating` → `query`. 빈 검색 드래그 취소는 `dismissSearch` 대신 `controller.isActive = false`. 자리표시·틴트·글자색은 기존 L10n·팔레트 토큰.
+- 검증: 빌드 통과. **fd/사용자 시뮬 확인 필요** — 첫 화면 검색창 숨김·큰 제목 펼침·첫 행 y≈0.292, 끌어내리면 나옴, 검색 입력/취소, 라이트·다크 색.
+- 주의: SwiftUI가 navigationItem을 다시 갱신하며 searchController를 지우면 검색창이 사라진다 → 그때는 updateUIView에서 다시 붙이는 지금 구조로 회복되는지 확인.
