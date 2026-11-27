@@ -52,7 +52,10 @@ struct RootView: View {
                 set: { if let tab = $0 { router.selectTab(tab) } else { router.showModeSelect() } }
             )) {
                 Tab(t("home"), systemImage: "house", value: AppTab?.some(.home)) { stack(.home) }
-                Tab(t("tierlist"), systemImage: "chart.bar", value: AppTab?.some(.tierlist)) { stack(.tierlist) }
+                // SwiftUI 탭바는 심볼을 .fill로 바꾼다 — chart.bar는 RN(UIKit 탭바)처럼 외곽선 막대로 둔다
+                Tab(value: AppTab?.some(.tierlist)) { stack(.tierlist) } label: {
+                    Label(t("tierlist"), systemImage: "chart.bar").environment(\.symbolVariants, .none)
+                }
                 Tab(t("mypage"), systemImage: "person.crop.circle", value: AppTab?.some(.mypage)) { stack(.mypage) }
                 Tab(t("plus"), systemImage: "plus", value: AppTab?.none, role: .search) { Color.clear }
             }
