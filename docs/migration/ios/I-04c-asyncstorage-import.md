@@ -2,7 +2,7 @@
 id: I-04c
 title: 기존 사용자 데이터 이관 (AsyncStorage)
 wave: W0
-status: todo
+status: done
 depends: I-04a, I-03
 owns: native/ios/AugmentCore/Sources/AugmentCore/Migration/, native/ios/AugmentCore/Tests/AugmentCoreTests/Migration/
 spec: storage.md §4
@@ -17,18 +17,18 @@ rn: node_modules/@react-native-async-storage/async-storage/ios/RNCAsyncStorage.m
 1.6.2(RN)에서 업데이트한 사용자의 빌드·테마·언어가 그대로 남게 한다. **데이터 손실 방지 작업이라 가장 엄격하게 한다.**
 
 ## 체크리스트
-- [ ] 경로: `Application Support/<bundleId>/RCTAsyncLocalStorage_V1/`(+ 선택 폴백 `Documents/RCTAsyncLocalStorage_V1`)
-- [ ] manifest 읽기 규칙: 키 없음 / `null` → md5 파일 / 문자열. MD5는 CryptoKit `Insecure.MD5`, 소문자 hex.
-- [ ] 키 5개 이관: builds(parse 경유), theme, locale, review, 현재 버전 프리웜 플래그
-- [ ] 완료 표시 `migration:asyncstorage:v1` — 이미 있으면 건너뛴다. **원본 폴더는 지우지 않는다.**
-- [ ] 실패해도 앱은 계속 진행한다. 결과(옮긴 키 수·오류)를 돌려줘서 Sentry breadcrumb로 남길 수 있게 한다.
-- [ ] 테스트: 픽스처 폴더 3종(인라인 값, `null` + md5 파일, md5 파일 누락), 두 번 실행해도 결과 같음, 미리 계산한 md5 이름 5개 일치
+- [x] 경로: `Application Support/<bundleId>/RCTAsyncLocalStorage_V1/`(+ 선택 폴백 `Documents/RCTAsyncLocalStorage_V1`)
+- [x] manifest 읽기 규칙: 키 없음 / `null` → md5 파일 / 문자열. MD5는 CryptoKit `Insecure.MD5`, 소문자 hex.
+- [x] 키 5개 이관: builds(parse 경유), theme, locale, review, 현재 버전 프리웜 플래그
+- [x] 완료 표시 `migration:asyncstorage:v1` — 이미 있으면 건너뛴다. **원본 폴더는 지우지 않는다.**
+- [x] 실패해도 앱은 계속 진행한다. 결과(옮긴 키 수·오류)를 돌려줘서 Sentry breadcrumb로 남길 수 있게 한다.
+- [x] 테스트: 픽스처 폴더 3종(인라인 값, `null` + md5 파일, md5 파일 누락), 두 번 실행해도 결과 같음, 미리 계산한 md5 이름 5개 일치
 
 ## 완료 기준
-- [ ] `make -C native/ios build` 통과
-- [ ] `make -C native/ios test` 통과
-- [ ] `bash docs/migration/status.sh diff I-04c` → 소유 경로 밖 변경 없음
-- [ ] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
+- [x] `make -C native/ios build` 통과
+- [x] `make -C native/ios test` 통과
+- [x] `bash docs/migration/status.sh diff I-04c` → 소유 경로 밖 변경 없음
+- [x] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
 
 ## 사용자 확인 (사용자가 시뮬레이터에서 보고 체크)
 - [ ] I-42 리허설에서 실제 업데이트 설치로 확인한다
@@ -38,3 +38,13 @@ rn: node_modules/@react-native-async-storage/async-storage/ios/RNCAsyncStorage.m
 
 ## 진행 기록
 <!-- 세션마다 아래에 추가: ### YYYY-MM-DD · 한 일 / 다음 단계 / 주의점 -->
+
+### 2026-11-27 · 완료
+- 한 일: `Migration/AsyncStorageImport.swift` — `AsyncStorageImport(settingsStore:buildFile:ddragonVersion:directories:).run() -> Result{skipped, moved, errors, completed}`. 경로 `Application Support/<bundleId>/RCTAsyncLocalStorage_V1` → 폴백 `Documents/RCTAsyncLocalStorage_V1`. manifest 규칙(키 없음/null→md5 파일/문자열), MD5는 CryptoKit `Insecure.MD5` 소문자 hex. 키 5개(builds는 `Builds.parse` 경유), 완료 표시 `migration:asyncstorage:v1`, 원본 폴더 보존.
+- 테스트: md5 이름 5개, 픽스처 3종(인라인·null+파일·파일 누락), 두 번 실행 동일, 덮어쓰기 방지, Documents 폴백·신규 설치, 오류 시 미완료·재시도.
+- 주의점
+  - **새 저장소에 이미 있는 키는 덮어쓰지 않는다**(spec보다 한 단계 엄격). 지난 실행이 중간에 실패해 완료 표시가 없을 때, 그 사이 새로 저장한 빌드·설정을 옛 값으로 지우지 않기 위해서다. 첫 실행에는 새 저장소가 비어 있어 결과가 spec과 같다.
+  - 읽기·쓰기 오류가 하나라도 있으면 완료 표시를 남기지 않는다 → 다음 실행에 빠진 키만 다시 옮긴다. manifest 자체가 없으면(신규 설치) 바로 완료.
+  - I-06c(부팅): 설정 로드·`BuildStore.load()` **전에** 실행할 것. `settingsStore`는 `UserDefaultsStore()`, `buildFile`은 `FileKeyValueStore()`, `ddragonVersion`은 `GameData.version.ddragonVersion`. 결과의 `moved.count`·`errors`를 Sentry breadcrumb로.
+  - `native/I-04a`(#88) 위에 쌓았다. #88 머지 전에는 `status.sh diff I-04c`가 Storage/ 파일을 잡는다(I-04a 것).
+- 사용자가 볼 것: I-42 리허설에서 실제 1.6.2 → 네이티브 업데이트로 확인.
