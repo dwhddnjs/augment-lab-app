@@ -52,9 +52,9 @@ final class DraftPresenter {
     }
 
     /// 나가기 확인창. 취소하면 아무 일도 없다.
-    func confirm(title: String, cancel: String, ok: String, onConfirm: @escaping () -> Void) {
+    func confirm(title: String, message: String? = nil, cancel: String, ok: String, onConfirm: @escaping () -> Void) {
         guard let host else { return }
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: cancel, style: .cancel))
         alert.addAction(UIAlertAction(title: ok, style: .destructive) { _ in onConfirm() })
         host.present(alert, animated: true)
