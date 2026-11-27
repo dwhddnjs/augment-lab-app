@@ -42,7 +42,16 @@ npm run ios            # iOS 시뮬레이터
 npm run lint           # ESLint
 ```
 
-테스트 러너 미설정.
+테스트 러너 미설정(RN).
+
+네이티브 iOS(`native/ios`, SwiftUI — R-01 이후 이쪽만 남는다):
+
+```bash
+make -C native/ios build   # 시뮬레이터용 빌드(derivedData = 저장소 루트 .build/ios)
+make -C native/ios test    # AugmentCore 단위 테스트(swift test, Swift Testing)
+make -C native/ios clean   # 빌드 캐시 삭제(워크트리마다 5~7GB)
+npm run data:refresh       # 패치 데이터 갱신 — RN·네이티브 공용 JSON(src/**/data)을 고친다
+```
 
 ## 아키텍처
 
@@ -86,3 +95,25 @@ feature 는 두 종류다 — 이 구분이 아래 경계 규칙의 전제다:
 
 - `@/`→`src/`, `@/assets/`→`assets/`(`tsconfig.json`)
 - React Compiler 자동 실행 — 프로파일링 없이 `useMemo`/`useCallback` 수동 추가 금지. **예외**: `useFocusEffect`(Expo Router)는 `useCallback` 필수.
+
+## 네이티브 iOS 아키텍처 (`native/ios`)
+
+```
+native/ios/
+├── AugmentCore/      # Swift 패키지 — UI 없는 순수 로직(데이터 모델·칼바람/커스텀 규칙·저장소·백업·이관). 테스트는 Tests/
+├── AugmentLab/       # 앱 타깃(SwiftUI)
+│   ├── App/          # 셸(탭·라우터)·부팅·드래프트 표시
+│   ├── Features/     # 화면 단위 (RN features/<화면 도메인>/screens 대응)
+│   ├── UI/           # 두 개 이상 화면이 쓰는 공용 UI (RN components/ 대응)
+│   ├── Design/       # 토큰(Palette·Spacing·Radius 등) — RN theme.ts 대응. 숫자·색 리터럴 대신 이것만 쓴다
+│   ├── Infra/        # 이미지 로딩·분석·설정 저장 연결
+│   ├── Resources/    # 폰트·InfoPlist 번역
+│   └── Assets.xcassets # 앱에 넣는 이미지(증강 로컬 아이콘 augments-*, 헤드라이너 등)
+├── Scripts/          # 빌드 단계 스크립트(copy-data.sh 등)
+└── Config/           # Info.plist
+```
+
+- **데이터는 RN과 공용이다.** 앱은 `src/features/*/data/*.json`·`src/lib/version.json`을 복사해 번들 `Data/`에 넣는다(빌드 단계 "Copy Data JSON" → `Scripts/copy-data.sh`). 목록은 `Scripts/data-files.xcfilelist`, 결과는 `data-outputs.xcfilelist` — JSON 파일을 새로 만들면 둘 다 고친다. 입력 목록에 있으니 JSON만 바뀌어도 다음 빌드에 다시 복사된다.
+- 번역은 파일 상단 `L10n(ko:en:)` → `L.t(settings.locale)("키")`. 키 누락 시 en 폴백(위 i18n 원칙과 같다).
+- 경계 규칙은 RN과 같다: 화면(`Features/`)끼리 참조 금지, 공유는 `UI/`·`AugmentCore`로 올린다. 앱은 모듈이 하나라 `private` 타입도 같은 이름의 `internal` 타입과 부딪힌다 — 새 internal 타입 이름엔 기능 접두어를 붙인다.
+- 새 의존성(SPM 패키지)을 함부로 추가하지 않는다.
