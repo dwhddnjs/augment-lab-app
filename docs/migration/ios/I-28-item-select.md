@@ -2,7 +2,7 @@
 id: I-28
 title: 아이템 선택
 wave: W2
-status: todo
+status: done
 depends: I-04a, I-06b, I-11, I-12b, I-13
 owns: native/ios/AugmentLab/Features/ItemSelect/
 spec: item-select.md
@@ -26,8 +26,8 @@ rn: src/features/items/screens/item-select-screen.tsx, src/features/items/hooks/
 
 ## 완료 기준
 - [x] `make -C native/ios build` 통과
-- [ ] `bash docs/migration/status.sh diff I-28` → 소유 경로 밖 변경 없음
-- [ ] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
+- [x] `bash docs/migration/status.sh diff I-28` → 소유 경로 밖 변경 없음
+- [x] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
 
 ## 사용자 확인 (사용자가 시뮬레이터에서 보고 체크)
 - [ ] 저장 → 세로 빌드 상세(회전 1회)
@@ -50,3 +50,8 @@ rn: src/features/items/screens/item-select-screen.tsx, src/features/items/hooks/
   - 저장은 `BuildStore.save`가 동기라 RN `useAlive` 확인이 필요 없다. `mode`는 GameMode가 aram뿐이라 save에 인자가 없다.
   - 점선 빈 칸은 dash [3, 3] 근사(`ponytail:` 표시).
   - prefetch는 `SDWebImagePrefetcher.prefetchURLs`(RN `Image.prefetch(urls)`와 같은 일괄 받기).
+
+### 2026-11-27 · 완료 (세션 5d가 c1의 wip를 이어받음)
+- 코드는 바꾸지 않았다. 다시 빌드해 통과를 확인했다(I-06a 캐시를 `DERIVED=`로 재사용).
+- 이 작업 고유의 변경(`f17dada`)은 `Features/ItemSelect/` 두 파일과 이 작업 파일뿐이다. `status.sh diff`의 나머지 항목은 의존 브랜치 몫이다.
+- **머지 순서**: #97(I-06b), #96(I-11), #90(I-12b), #98(I-13)이 머지된 뒤 이 PR을 머지한다.
