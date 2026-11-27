@@ -35,7 +35,7 @@ rn: src/features/custom/screens/custom-screen.tsx, src/features/custom/component
 
 ## 승격 후보
 <!-- 공용 파일(다른 작업 소유)을 바꿔야 했던 것. 임시로 자기 폴더에 구현하고 여기에 적는다. -->
-- `CloseDraft.confirmExit(title:message:cancel:ok:)` — RN 확인창은 메시지 "담은 증강과 아이템은 저장되지 않습니다."도 띄우는데 지금 계약(I-06b)엔 message가 없어 제목만 띄운다. 생기면 `CustomScreen` header의 `promote:` 줄에 넣는다.
+- ~~`CloseDraft.confirmExit` message~~ — 5d가 #97(e753d43)에 추가해서 반영함.
 - `SideDrawer`(I-27 `Features/Aram/Drawer/`) → `UI/`. 지금은 스와이프만 뺀 복사본 `SettingsDrawer`(`Screen/CustomSettingsDrawer.swift`).
 
 ## 진행 기록

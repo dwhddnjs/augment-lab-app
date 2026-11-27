@@ -2,9 +2,9 @@ import AugmentCore
 import SwiftUI
 
 private let L = L10n(
-    ko: ["exitConfirm": "커스텀을 종료할까요?", "exitOk": "종료", "exitCancel": "계속", "save": "저장", "settings": "설정",
+    ko: ["exitConfirm": "커스텀을 종료할까요?", "exitMessage": "담은 증강과 아이템은 저장되지 않습니다.", "exitOk": "종료", "exitCancel": "계속", "save": "저장", "settings": "설정",
          "saveError": "빌드 저장에 실패했어요", "saveEmpty": "저장할 내용이 없어요", "ok": "확인"],
-    en: ["exitConfirm": "Exit Custom?", "exitOk": "Exit", "exitCancel": "Continue", "save": "Save", "settings": "Settings",
+    en: ["exitConfirm": "Exit Custom?", "exitMessage": "Your picks won't be saved.", "exitOk": "Exit", "exitCancel": "Continue", "save": "Save", "settings": "Settings",
          "saveError": "Failed to save the build", "saveEmpty": "Nothing to save yet", "ok": "OK"]
 )
 
@@ -127,8 +127,7 @@ private struct CustomContent: View {
     private func header(_ t: @escaping (String) -> String) -> some View {
         HStack(spacing: Spacing.two) {
             GlassButton(systemImage: "xmark", fallbackIcon: "close", role: .cancel, accessibilityLabel: t("exitOk")) {
-                // promote: RN은 메시지 "담은 증강과 아이템은 저장되지 않습니다."도 띄운다 — CloseDraft.confirmExit에 message가 없다(I-06b).
-                router.closeDraft.confirmExit(title: t("exitConfirm"), cancel: t("exitCancel"), ok: t("exitOk"))
+                router.closeDraft.confirmExit(title: t("exitConfirm"), message: t("exitMessage"), cancel: t("exitCancel"), ok: t("exitOk"))
             }
             Spacer(minLength: 0)
             GlassButton(systemImage: "checkmark", fallbackIcon: "check", tint: palette.accent.default, accessibilityLabel: t("save")) { save(t) }
