@@ -36,6 +36,7 @@ struct MyPageScreen: View {
         let row = palette.surface.raised
         let icon = palette.text.primary
         List {
+            // Picker 스타일은 RN처럼 기본(automatic) — 리스트 안에선 행 어디를 눌러도 메뉴가 열린다. `.menu`를 박으면 오른쪽 값만 눌린다.
             Section(t("general")) {
                 Picker(selection: Binding { settings.theme } set: { settings.setTheme($0) }) {
                     Text(t("system")).tag(ThemePreference.system)
@@ -44,7 +45,6 @@ struct MyPageScreen: View {
                 } label: {
                     RowLabel(icon: "circle.lefthalf.filled", label: t("theme"), color: icon)
                 }
-                .pickerStyle(.menu)
                 .tint(palette.accent.default)
                 .listRowBackground(row)
 
@@ -54,7 +54,6 @@ struct MyPageScreen: View {
                 } label: {
                     RowLabel(icon: "globe", label: t("language"), color: icon)
                 }
-                .pickerStyle(.menu)
                 .tint(palette.accent.default)
                 .listRowBackground(row)
 

@@ -68,8 +68,9 @@ private struct AramDraftView: View {
             PickedDrawer(picked: draft.picked, width: width, championId: params.championId, headlinerId: id.rawValue,
                          skills: draft.progress.skills, stickers: draft.progress.stickers.map(\.rawValue))
         }
-        // RN useLandscapeSize — 회전 전 프레임에도 긴 변을 가로로 본다
-        .background { Color.clear.ignoresSafeArea().onGeometryChange(for: CGSize.self, of: \.size) { screen = $0 } }
+        // RN useLandscapeSize(창 전체 크기) — 회전 전 프레임에도 긴 변을 가로로 본다.
+        // 안전 영역을 더해 창 크기로 되돌린다. 배경에 ignoresSafeArea만 걸면 안전 영역을 뺀 크기가 와서 카드가 RN보다 ≈4% 작았다(I-41-06).
+        .onGeometryChange(for: CGSize.self, of: Self.windowSize) { screen = $0 }
         // 떠난 화면에서 commit이 돌면 아이템 화면이 뒤늦게 다시 쌓인다
         .onDisappear { anim.cancel() }
         // 리롤로 한 장만 바뀌어도 받는다(이미 받은 장은 캐시라 바로 끝난다)
@@ -90,6 +91,11 @@ private struct AramDraftView: View {
                 for url in urls { group.addTask { await ImagePrefetch.prefetch([url]) } }
             }
         }
+    }
+
+    private static func windowSize(_ geo: GeometryProxy) -> CGSize {
+        let i = geo.safeAreaInsets
+        return CGSize(width: geo.size.width + i.leading + i.trailing, height: geo.size.height + i.top + i.bottom)
     }
 
     private var spells: ChampionSpells? { store.data.championSpells[params.championId] }
