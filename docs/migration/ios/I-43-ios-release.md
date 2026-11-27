@@ -46,3 +46,14 @@ TestFlight에 올릴 수 있는 상태로 만든다.
   - `native/ios/RELEASE.md` — 서명·토큰·빌드 번호(EAS 원격도 맞추기)·아카이브·업로드·TestFlight·dSYM 확인, '새로운 기능' 초안 ko·en.
 - 남은 것: 서명 팀 선택(사용자), I-41·I-42 끝난 뒤 '새로운 기능' 2·3번째 줄 확정, 사용자 확인 2줄(TestFlight 실행·Sentry 심볼) → done/PR.
 - 주의점: 이 브랜치는 dev 위다. pbxproj를 건드렸으니(빌드 번호 2곳 + 빌드 단계 1개) 다른 작업이 pbxproj를 바꾸면 이걸 다시 쌓는다. 아카이브로 EAS 밖에서 올리면 `eas build:version:set -p ios`로 원격 번호를 맞춰야 RN 핫픽스 빌드가 안 겹친다.
+
+### 2026-11-27 · dev 반영 (5d) — 사용자 단계만 남김
+- fd의 준비분(PrivacyInfo·빌드 번호 25·dSYM 단계·RELEASE.md)에 dev를 합쳤다(충돌 없음). 빌드 통과 후 dev에 넣었다. 이제 사용자는 dev에서 바로 Xcode로 아카이브하면 된다.
+- '새로운 기능' 확인 결과를 RELEASE.md에 적었다. 3번째 줄은 확정이고, 2번째 줄은 사용자가 정한다.
+- **남은 것(사용자)**
+  1. Xcode 서명 팀 선택
+  2. 아카이브 → TestFlight(RELEASE.md 절차)
+  3. TestFlight 빌드가 기기에서 실행되는지 확인
+  4. Sentry 테스트 오류에 심볼이 붙는지 확인
+  5. `eas build:version:set -p ios`로 원격 빌드 번호를 25로 맞추기
+- 끝나면 이 파일의 체크 3줄을 채우고 `status: done`으로 바꾼다.
