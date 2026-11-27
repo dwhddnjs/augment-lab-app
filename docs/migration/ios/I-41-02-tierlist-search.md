@@ -62,3 +62,5 @@ rn: src/features/tierlist/screens/tierlist-screen.tsx
 - 한 일: LazyVStack 직속 자식을 "띠 하나 = VStack 하나(tier로 식별)"로 묶음 — 띠·행을 형제로 펼치고 행을 \.offset으로 식별하던 구조가 원인으로 추정. 빌드 통과.
 - 다음에 할 첫 행동: fd에 "te" 재촬영 요청(S·B·D 모두 채워지는지, 검색 없을 때 스크롤 성능 그대로인지). ✅면 #126 리뷰 요청.
 - 주의: 원인 추정이 틀리면 다음 후보는 행 id를 "\(tier)-\(offset)"로 바꾸기.
+### 2026-11-27 · c1 (7차 — 마무리)
+- 5d 시뮬 재검증(dev Release, 2A6A4C13, 19:47): 첫 행 y 0.292 = RN, 검색 "te" → S·B(Malphite)·D(K'Sante) 모두 채워짐 = RN. 6차 추정(띠마다 VStack)이 맞았음 → 후속 PR 불필요. 끝.
