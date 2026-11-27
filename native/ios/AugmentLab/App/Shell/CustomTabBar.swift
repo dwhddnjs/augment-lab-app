@@ -35,7 +35,7 @@ struct CustomTabBar: View {
             }
             .accessibilityLabel(t("plus"))
         }
-        .buttonStyle(Bare())
+        .buttonStyle(NoFeedbackButtonStyle())
         .padding(.horizontal, Spacing.three)
         .frame(height: max(0, Self.height - bottomInset))
         .background {
@@ -64,7 +64,3 @@ private extension View {
     func slot() -> some View { frame(maxWidth: .infinity, maxHeight: .infinity).contentShape(Rectangle()) }
 }
 
-/// RN Pressable처럼 눌림 효과 없음
-private struct Bare: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View { configuration.label }
-}

@@ -2,7 +2,7 @@
 id: I-29c
 title: 커스텀 선택 패널·오버레이
 wave: W2
-status: todo
+status: done
 depends: I-13, I-29a
 owns: native/ios/AugmentLab/Features/Custom/Selected/
 spec: custom.md §2
@@ -17,15 +17,15 @@ rn: src/features/custom/components/{selected-panel,selected-champion-row,pick-co
 오른쪽 패널과 화면 안 오버레이 2개를 만든다.
 
 ## 체크리스트
-- [ ] `SelectedChampionRow` + pill 3개(정보·변경·재시작 — 확인창 없음)
-- [ ] 5:5 두 열, 열 전환(selection 햅틱), x 배지
-- [ ] 드롭 강조 베일
-- [ ] `ChampionChangeOverlay`(100%×90%, 검색 + 그리드), `ChampionStatOverlay`(42%×90%)
+- [x] `SelectedChampionRow` + pill 3개(정보·변경·재시작 — 확인창 없음)
+- [x] 5:5 두 열, 열 전환(selection 햅틱), x 배지
+- [x] 드롭 강조 베일
+- [x] `ChampionChangeOverlay`(100%×90%, 검색 + 그리드), `ChampionStatOverlay`(42%×90%)
 
 ## 완료 기준
-- [ ] `make -C native/ios build` 통과
-- [ ] `bash docs/migration/status.sh diff I-29c` → 소유 경로 밖 변경 없음
-- [ ] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
+- [x] `make -C native/ios build` 통과
+- [x] `bash docs/migration/status.sh diff I-29c` → 소유 경로 밖 변경 없음
+- [x] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
 
 ## 사용자 확인 (사용자가 시뮬레이터에서 보고 체크)
 - [ ] 챔피언을 바꿔도 담은 것이 남는다
@@ -35,3 +35,17 @@ rn: src/features/custom/components/{selected-panel,selected-champion-row,pick-co
 
 ## 진행 기록
 <!-- 세션마다 아래에 추가: ### YYYY-MM-DD · 한 일 / 다음 단계 / 주의점 -->
+
+### 2026-11-27 · wip (5시간 한도 98%로 멈춤)
+- 마친 줄: 체크리스트 4줄 전부 + build 통과. `Features/Custom/Selected/` 4개
+  - `SelectedPanel(champion:picked:items:target:dropping:bottomInset:onSwitchTarget:onRemove:onRemoveItem:onShowStats:onChangeChampion:onClear:)`
+  - `SelectedChampionRow`, `PickColumn`·`PickList`·`RemoveBadge`·`EmptyHint`·`LeftAccentBackground`·`PressDim`, `ChampionChangeOverlay(selectedId:onSelect:onClose:)`, `ChampionStatOverlay(champion:items:onClose:)`
+- 쌓은 곳: native/I-29a(#92) + native/I-13(#98, #89 포함) + native/I-11(#96 — 행의 `AugmentTile`).
+- 다음에 할 첫 행동: `bash docs/migration/status.sh diff I-29c`는 쌓은 브랜치 파일이 잡히니 `git diff --name-only native/I-13...HEAD`로 내 파일만인지 확인 → frontmatter `status: done` + 완료 기록 → push → `gh pr create --base dev`(본문에 #92·#98·#96 위라고 적기) → `.build` 삭제 → 보드에 API 올리기. 그다음 I-29b(fd 예정, 보드에 적어 둠).
+- 주의점: 왼쪽 굵은 테두리(`LeftAccentBackground`)는 안쪽 모서리를 원으로 근사했다(RN은 5×8 타원). 오버레이는 키보드에 밀리지 않게 `.ignoresSafeArea(.keyboard)`(RN도 KeyboardAvoiding 없음).
+
+
+### 2026-11-27 · 완료
+- 소유 경로 확인: `git diff --name-only native/I-13...HEAD` → `Features/Custom/Selected/` 4개 + 이 파일뿐(나머지는 쌓은 I-11·I-29a 파일).
+- PR은 #92·#98·#96 위에 쌓았다 — 그 셋이 dev에 먼저 머지되면 diff가 이 작업 파일만 남는다.
+- 화면 조립(I-29d)이 쓸 것: `draft.championId = id`로 바꾸면 `picked`·`items`는 그대로다(오버레이는 라우트가 아니다). 드롭 경계 계산은 화면 몫, 패널은 `dropping`만 받는다.
