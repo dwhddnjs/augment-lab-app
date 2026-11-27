@@ -62,3 +62,12 @@ TestFlight에 올릴 수 있는 상태로 만든다.
 - 팀을 RN 앱과 같은 `W6FUWFHBPW`로 정해 pbxproj(Debug·Release)에 넣었다. RN `ios/` 프로젝트의 `DEVELOPMENT_TEAM`과 같은 값이다.
 - 확인: 업로드 없이 Release 아카이브를 해 봤다(`generic/platform=iOS`, Sentry 업로드 끔). ARCHIVE SUCCEEDED. 서명은 Apple Development, TeamIdentifier W6FUWFHBPW, 번들 ID com.augmentlab, 2.0.0 (25), dSYM 포함.
 - **남은 것(사용자 승인 필요 — 외부로 나가는 단계)**: 배포 인증서 생성과 TestFlight 업로드, 기기 실행, Sentry 심볼 확인, `eas build:version:set -p ios`로 25 맞추기. 이 Mac에는 배포 인증서와 `SENTRY_AUTH_TOKEN`이 없다.
+
+### 2026-11-27 · TestFlight 업로드 (5d, 사용자 승인 후)
+- 아카이브: `~/Library/Developer/Xcode/Archives/2026-11-27/AugmentLab-2.0.0-25.xcarchive`(dev ed16ba1, 2.0.0 (25)). dSYM UUID `72B8EC3A-4097-3179-9189-1F65C294314B`.
+- `xcodebuild -exportArchive`(app-store-connect, upload, `-allowProvisioningUpdates`) → **Upload succeeded / EXPORT SUCCEEDED**.
+  - 경고 1: iOS 26.5 SDK로 빌드됨. 2027년 4월부터는 iOS 27 SDK(Xcode 27)가 필요하다.
+  - 경고 2: Apple 심볼 업로드에서 Sentry.framework dSYM이 빠졌다. 바이너리로 들어온 SDK라서 생긴 것이고, 우리 앱 dSYM이나 Sentry 쪽 심볼과는 관계없다.
+- EAS 원격 iOS 빌드 번호를 24에서 25로 맞췄다(`eas build:version:get -p ios` = 25).
+- 아카이브 때 `SENTRY_AUTH_TOKEN`이 없어 dSYM 업로드를 건너뛰었다. RELEASE.md 6번 명령으로 사용자가 올린다.
+- **남은 것(사용자)**: TestFlight 처리가 끝나면 기기에 설치해 실행 확인, Sentry dSYM 업로드와 심볼 확인. 끝나면 "I-43 마무리"라고 하면 된다.
