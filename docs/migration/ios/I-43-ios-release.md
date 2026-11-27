@@ -19,7 +19,7 @@ TestFlight에 올릴 수 있는 상태로 만든다.
 ## 체크리스트
 - [x] PrivacyInfo.xcprivacy = app.json `privacyManifests`와 동일
 - [x] 버전 2.0.0, 빌드 번호 > EAS 원격 값(`eas build:version:get -p ios`)
-- [ ] 서명(Xcode 자동, 팀 선택은 사용자)
+- [x] 서명(Xcode 자동, 팀 W6FUWFHBPW = RN 앱 팀)
 - [x] Sentry dSYM 업로드 빌드 단계
 - [x] 아카이브 → TestFlight 업로드 절차 문서화
 - [x] App Store '새로운 기능' 문구 초안(ko·en)
@@ -57,3 +57,8 @@ TestFlight에 올릴 수 있는 상태로 만든다.
   4. Sentry 테스트 오류에 심볼이 붙는지 확인
   5. `eas build:version:set -p ios`로 원격 빌드 번호를 25로 맞추기
 - 끝나면 이 파일의 체크 3줄을 채우고 `status: done`으로 바꾼다.
+
+### 2026-11-27 · 서명 팀 (5d)
+- 팀을 RN 앱과 같은 `W6FUWFHBPW`로 정해 pbxproj(Debug·Release)에 넣었다. RN `ios/` 프로젝트의 `DEVELOPMENT_TEAM`과 같은 값이다.
+- 확인: 업로드 없이 Release 아카이브를 해 봤다(`generic/platform=iOS`, Sentry 업로드 끔). ARCHIVE SUCCEEDED. 서명은 Apple Development, TeamIdentifier W6FUWFHBPW, 번들 ID com.augmentlab, 2.0.0 (25), dSYM 포함.
+- **남은 것(사용자 승인 필요 — 외부로 나가는 단계)**: 배포 인증서 생성과 TestFlight 업로드, 기기 실행, Sentry 심볼 확인, `eas build:version:set -p ios`로 25 맞추기. 이 Mac에는 배포 인증서와 `SENTRY_AUTH_TOKEN`이 없다.
