@@ -74,7 +74,24 @@ struct TierlistScreen: View {
         .scrollDismissesKeyboard(.immediately)
         .modifier(CancelEmptySearchOnDrag(query: query))
         .background(palette.surface.base)
-        .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .automatic), prompt: t("searchPlaceholder"))
+        .modifier(DeferredSearchable(query: $query, prompt: t("searchPlaceholder")))
+    }
+}
+
+/// RN(react-native-screens)은 화면이 뜬 뒤에 검색창을 붙여서 처음엔 접혀 있고 끌어내려야 보인다.
+/// SwiftUI `.navigationBarDrawer(.automatic)`는 처음에 펼쳐 둔다 → 첫 등장 뒤에 붙여 같은 순서로 맞춘다.
+// ponytail: iOS 17엔 "처음엔 접힘" API가 없어 붙이는 시점으로 맞춘다. 첫 프레임에 검색창이 보이면 붙이는 시점을 한 프레임 더 늦출 것.
+private struct DeferredSearchable: ViewModifier {
+    @Binding var query: String
+    let prompt: String
+    @State private var attached = false
+
+    func body(content: Content) -> some View {
+        if attached {
+            content.searchable(text: $query, placement: .navigationBarDrawer(displayMode: .automatic), prompt: prompt)
+        } else {
+            content.onAppear { attached = true }
+        }
     }
 }
 
