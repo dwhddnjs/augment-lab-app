@@ -26,13 +26,15 @@ public struct SettingsRow: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(label).foregroundStyle(labelColor ?? Color(uiColor: .label))
                     if let description {
-                        Text(description).font(.footnote).foregroundStyle(Color(uiColor: .secondaryLabel))
+                        Text(description).font(.footnote)
                     }
                 }
                 Spacer()
-                if let value { Text(value).foregroundStyle(Color(uiColor: .secondaryLabel)) }
+                // RN 코드는 secondaryLabel·tertiaryLabel을 적었지만 @expo/ui가 그 이름을 못 읽어(색 문자열 변환 실패 → 수정자 무시)
+                // 실제 화면은 기본 전경색이었다. 화면에 보이던 대로 맞춘다(I-41-04).
+                if let value { Text(value) }
                 if action != nil {
-                    Image(systemName: "chevron.right").font(.system(size: 13)).foregroundStyle(Color(uiColor: .tertiaryLabel))
+                    Image(systemName: "chevron.right").font(.system(size: 13))
                 }
             }
             .contentShape(Rectangle())
