@@ -2,7 +2,7 @@ import AugmentCore
 import SwiftUI
 
 /// 8열 아이템 그리드 (RN `items/components/item-grid.tsx`). 위·좌·우 1pt `border.subtle`(아래는 없음).
-struct ItemGrid: View {
+struct ItemSelectGrid: View {
     static let columns = 8
     /// 셀 사이 간격 — 셀 크기를 역산할 때 같은 값을 쓴다
     static let cellGap = Spacing.one

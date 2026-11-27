@@ -65,7 +65,7 @@ private struct ItemSelectContent: View {
                 HStack(spacing: 0) {
                     HStack(spacing: 0) {
                         ItemFilterBar(active: filter) { filter = $0 }
-                        ItemGrid(items: shown, cellSize: ItemGrid.cellSize(areaWidth: leftWidth - ItemFilterBar.width),
+                        ItemSelectGrid(items: shown, cellSize: ItemSelectGrid.cellSize(areaWidth: leftWidth - ItemFilterBar.width),
                                  selectedIds: selectedIds, onItemPress: toggle)
                     }
                     .frame(width: leftWidth)
