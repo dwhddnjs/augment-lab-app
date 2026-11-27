@@ -2,7 +2,7 @@
 id: I-25b
 title: 칼바람 화면 조립
 wave: W2
-status: todo
+status: done
 depends: I-06b, I-10, I-24, I-25a, I-26, I-27
 owns: native/ios/AugmentLab/Features/Aram/Screen/
 spec: aram.md §1·§3
@@ -17,17 +17,17 @@ rn: src/features/aram/screens/aram-screen.tsx, src/features/aram/components/roun
 엔진·카드·연출·서랍을 붙여 드래프트를 완성한다.
 
 ## 체크리스트
-- [ ] 파라미터 검증(헤드라이너 무작위 폴백)
-- [ ] 헤더: X(종료 확인), 로고 + 라운드 pill(펜타킬 "스킬 강화"), 목록 버튼
-- [ ] 등장 연출 → 카드 마운트, busy 가드
-- [ ] 마지막 라운드: 고른 카드 그대로 멈춘 채 아이템 화면으로(쌓기)
-- [ ] 현재 카드·펜타킬 스펠 prefetch
-- [ ] 스텁의 임시 버튼 제거
+- [x] 파라미터 검증(헤드라이너 무작위 폴백)
+- [x] 헤더: X(종료 확인), 로고 + 라운드 pill(펜타킬 "스킬 강화"), 목록 버튼
+- [x] 등장 연출 → 카드 마운트, busy 가드
+- [x] 마지막 라운드: 고른 카드 그대로 멈춘 채 아이템 화면으로(쌓기)
+- [x] 현재 카드·펜타킬 스펠 prefetch
+- [x] 스텁의 임시 버튼 제거
 
 ## 완료 기준
-- [ ] `make -C native/ios build` 통과
-- [ ] `bash docs/migration/status.sh diff I-25b` → 소유 경로 밖 변경 없음
-- [ ] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
+- [x] `make -C native/ios build` 통과
+- [x] `bash docs/migration/status.sh diff I-25b` → 소유 경로 밖 변경 없음
+- [x] frontmatter `status: done`, 아래 진행 기록 작성 → 커밋 → push → `gh pr create --base dev`
 
 ## 사용자 확인 (사용자가 시뮬레이터에서 보고 체크)
 - [ ] 13종 헤드라이너로 한 판씩: 라운드 수·카드 수·스티커·스킬 선택
@@ -36,6 +36,7 @@ rn: src/features/aram/screens/aram-screen.tsx, src/features/aram/components/roun
 
 ## 승격 후보
 <!-- 공용 파일(다른 작업 소유)을 바꿔야 했던 것. 임시로 자기 폴더에 구현하고 여기에 적는다. -->
+- 없음. `RoundIndicator`는 칼바람만 써서 이 폴더에 뒀다.
 
 ## 진행 기록
 <!-- 세션마다 아래에 추가: ### YYYY-MM-DD · 한 일 / 다음 단계 / 주의점 -->
@@ -62,3 +63,25 @@ rn: src/features/aram/screens/aram-screen.tsx, src/features/aram/components/roun
 - **주의점**
   - 드래프트 안 환경은 I-06b의 `appEnvironment`(Router·AppSettings·GameDataStore·BuildStore·palette)뿐이다.
   - 등장 연출 `HeadlinerReveal(id:onDone:)`(I-26)을 먼저 덮고, 끝나면 `introDone`에 카드를 마운트한다.
+
+### 2026-11-27 · 화면 조립 완료 (세션 5d)
+- **한 일**
+  - `AramScreen`: 바깥 뷰는 `GameDataStore`에서 뽑기 풀만 꺼낸다. 안쪽 `AramDraftView`가 init에서 `AramDraft`와 `CardPickAnim(count: cardCount)`를 만든다.
+  - 헤드라이너가 없으면 `AramDraft`가 무작위로 고른다. 무효한 id는 이미 `Route(url:)`에서 nil이 된다.
+  - 헤더: X → `confirmExit`, pill(label 800 + `RoundIndicator`), 목록 → 서랍.
+    - 로고는 pill 왼쪽 바깥 12에 overlay와 alignmentGuide로 붙였다. 라운드 표시가 한가운데 남는다.
+  - 등장 연출: `HeadlinerReveal`이 덮고, `introDone`이 되면 카드를 마운트한다. 서랍 스와이프도 그때 켠다.
+  - 카드
+    - 표식: 4라운드 뒤 kda/worlds 보너스가 먼저고, 그다음 HEARTSTEEL 스티커다.
+    - HEARTSTEEL은 `StickerLine`, 펜타킬 스킬 라운드는 `SkillCard`를 쓴다.
+  - 마지막 픽은 `leaveIfDone`이 `router.pushItems`로 쌓는다. 펜타킬 스킬은 결과의 progress에서 꺼낸다.
+    - true를 돌려주면 카드가 고른 모습으로 멈춘다.
+    - 화면을 떠날 때 `anim.cancel()`을 부른다.
+  - 미리 받기: 현재 카드 id가 바뀔 때마다 `.task(id:)`로 받는다. 펜타킬 스펠 4개는 한 번만 받는다.
+  - 카드 폭: 안전 영역을 무시한 배경의 크기를 긴 변·짧은 변으로 잰다(RN `useLandscapeSize`).
+  - 스텁의 임시 버튼 3개를 지웠다.
+- **확인**
+  - `make -C native/ios build`가 통과했다(I-06a 캐시를 `DERIVED=`로 재사용).
+  - `status.sh diff`의 owns 밖 항목은 모두 아직 머지되지 않은 의존 브랜치(I-06b·I-24·I-25a·I-26·I-27)에서 온 것이다. 이 작업이 바꾼 것은 `Aram/Screen/` 두 파일뿐이다.
+- **머지 순서**: #97(I-06b), #91(I-24), #103(I-25a), #95(I-26), #108(I-27)이 머지된 뒤 이 PR을 머지한다.
+- **사용자 확인 남음**: 13종 헤드라이너, 리롤 1회, 종료 → 홈 세로(시뮬레이터).
