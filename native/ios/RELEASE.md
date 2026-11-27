@@ -4,7 +4,7 @@ RN은 EAS(`eas build -p ios --profile production`)로 올렸다. 네이티브는
 
 ## 0. 한 번만
 
-- **서명**: Xcode → AugmentLab 타깃 → Signing & Capabilities → *Automatically manage signing* 켠 채 **Team만 고른다**. 프로젝트는 `CODE_SIGN_STYLE = Automatic`이고 팀은 비워 뒀다(사용자 몫).
+- **서명**: Xcode → AugmentLab 타깃 → Signing & Capabilities → *Automatically manage signing*(`CODE_SIGN_STYLE = Automatic`), 팀 `W6FUWFHBPW`(RN 앱과 같은 팀)가 프로젝트에 들어 있다. 이 Mac에는 개발 인증서만 있어서, 처음 내보낼 때 Xcode가 배포 인증서를 만들도록 Xcode에 Apple ID 로그인이 필요하다.
 - **Sentry 토큰**: dSYM 업로드는 `SENTRY_AUTH_TOKEN` 환경변수를 읽는다(EAS production 환경에 있는 것과 같은 값, Sentry → Settings → Auth Tokens). Xcode를 터미널에서 띄워 넘긴다.
   ```sh
   SENTRY_AUTH_TOKEN=<토큰> open native/ios/AugmentLab.xcodeproj
