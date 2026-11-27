@@ -104,13 +104,18 @@ private struct CollapseSearchOnFirstAppear: UIViewRepresentable {
             // 맨 위에 있을 때만 — 다른 탭에서 돌아왔을 때 스크롤 위치를 건드리지 않는다
             let top = -scroll.adjustedContentInset.top
             guard scroll.contentOffset.y <= top else { return }
-            // ① 검색창 높이만큼 밀어 서랍을 접게 한다. UIKit은 접으면서 인셋을 줄이고 오프셋도 보정해서
-            //    목록이 너무 올라간다(큰 제목까지 접힘 — fd 2차 확인: 첫 행 y 0.164).
-            scroll.setContentOffset(CGPoint(x: scroll.contentOffset.x, y: top + bar.frame.height), animated: false)
-            // ② 접힌 뒤의 새 맨 위로 되돌린다. 맨 위에 딱 맞추면 서랍은 접힌 채(끌어내려야 나옴), 큰 제목은 다시 펼쳐진다.
-            DispatchQueue.main.async { [weak scroll] in
+            // 서랍만 접히고 큰 제목은 펼친 상태의 맨 위 = 지금 맨 위 + 검색창 높이. 미리 잡아 둔다.
+            let target = CGPoint(x: scroll.contentOffset.x, y: top + bar.frame.height)
+            // ① 그 위치로 밀어 서랍을 접게 한다. UIKit은 접으면서 오프셋을 또 보정해 큰 제목까지 접는다
+            //    (fd 2차 확인: 첫 행 y 0.164).
+            scroll.setContentOffset(target, animated: false)
+            // ② 다음 런루프에 ①의 목표로 다시 놓는다. 접힌 제목 기준 맨 위(-adjustedContentInset.top)로 되돌리면
+            //    작은 제목으로 굳는다(fd 3차 확인: 첫 행 y 0.232, 큰 제목 높이 ≈52pt 차이).
+            //    목표는 그보다 위라 큰 제목이 다시 펼쳐지고, 서랍은 큰 제목 다음에야 나오니 접힌 채 남는다.
+            DispatchQueue.main.async { [weak scroll, weak self] in
                 guard let scroll else { return }
-                scroll.setContentOffset(CGPoint(x: scroll.contentOffset.x, y: -scroll.adjustedContentInset.top), animated: false)
+                scroll.setContentOffset(target, animated: false)
+                self?.nearestController()?.navigationController?.navigationBar.layoutIfNeeded()
             }
         }
 
