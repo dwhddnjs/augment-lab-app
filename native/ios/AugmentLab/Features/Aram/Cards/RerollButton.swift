@@ -1,4 +1,7 @@
+import AugmentCore
 import SwiftUI
+
+private let L = L10n(ko: ["reroll": "다시 뽑기"], en: ["reroll": "Reroll"])
 
 /// 카드 밑 원형 리롤 버튼 (RN `reroll-button.tsx`). spec/design-system.md §2.5·§3.5.
 /// 카드당 1회 — 쓰면(used) 가라앉은 표면 + 흐린 아이콘으로 잠긴다. 연출 중(disabled)에는 안 쓴 버튼도 흐려진다.
@@ -15,6 +18,7 @@ struct RerollButton: View {
     static let hackedArtSize: CGFloat = 50
     static let flashScale: CGFloat = 0.14
 
+    @Environment(AppSettings.self) private var settings
     @Environment(\.palette) private var palette
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var flash = 0.0
@@ -22,6 +26,11 @@ struct RerollButton: View {
     private var locked: Bool { used || disabled }
 
     var body: some View {
+        // 아이콘 글리프는 읽히지 않는다(IconView) — 버튼 이름을 따로 준다
+        content.accessibilityLabel(L.t(settings.locale)("reroll"))
+    }
+
+    @ViewBuilder private var content: some View {
         if hacked && !used {
             hackedButton
         } else {

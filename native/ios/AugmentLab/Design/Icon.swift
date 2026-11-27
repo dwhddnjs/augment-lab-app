@@ -15,7 +15,12 @@ public struct IconView: View {
 
     public init(_ icon: Icon, size: CGFloat) { self.icon = icon; self.size = size }
 
+    /// 장식이다 — 아이콘 폰트 글자(사용 영역 문자)가 VoiceOver에 "U+F0450"처럼 읽히지 않게 숨긴다. 뜻이 있는 버튼은 버튼에 이름을 준다.
     public var body: some View {
+        glyph.accessibilityHidden(true)
+    }
+
+    @ViewBuilder private var glyph: some View {
         switch icon {
         case .sf(let name):
             Image(systemName: name).font(.system(size: size))
