@@ -22,8 +22,9 @@ struct CloseDraft {
 
     /// 나가기 경로: 확인창 → 확인이면 탭으로 페이드하며 닫는다.
     /// 닫기 전에 세로로 바꿔 두어 회전이 닫는 전환과 함께 일어나게 한다(RN은 닫힌 뒤 돌아 가로 홈이 0.5초 보였다).
-    func confirmExit(title: String, cancel: String, ok: String) {
-        router.drafts.confirm(title: title, cancel: cancel, ok: ok) { [router] in
+    /// `message`: 제목 아래 설명(커스텀의 "담은 증강과 아이템은 저장되지 않습니다." 등). 없으면 제목만.
+    func confirmExit(title: String, message: String? = nil, cancel: String, ok: String) {
+        router.drafts.confirm(title: title, message: message, cancel: cancel, ok: ok) { [router] in
             OrientationLock.set(.portrait)
             router.drafts.close(animated: true)
         }
