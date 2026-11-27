@@ -67,6 +67,7 @@
 				AA0000000000000000000031 /* Frameworks */,
 				AA0000000000000000000033 /* Resources */,
 				AA0000000000000000000034 /* Copy Data JSON */,
+				AA0000000000000000000099 /* Upload dSYM to Sentry */,
 			);
 			buildRules = (
 			);
@@ -157,6 +158,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/copy-data.sh\"\n";
+		};
+		AA0000000000000000000099 /* Upload dSYM to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			name = "Upload dSYM to Sentry";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/upload-dsym.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
