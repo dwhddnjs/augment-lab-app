@@ -38,3 +38,9 @@ rn: src/features/tierlist/screens/tierlist-screen.tsx
 - 한 일: `TierlistScreen`에 `DeferredSearchable` — 첫 `onAppear` 뒤에 `.searchable`을 붙인다. 검색창이 사라지는 게 아니라 RN처럼 접힌 채 붙으므로 S 띠도 RN 높이에서 시작해야 한다.
 - 검증: `make -C native/ios build` 통과. 시뮬레이터는 c1 규칙상 안 돌림 → **사용자 확인 필요**.
 - 주의: 첫 프레임에 검색창이 잠깐 보이면 붙이는 시점을 한 프레임 더 늦춘다(ponytail 주석).
+### 2026-11-27 · c1 (2차)
+- fd 시뮬 확인(iOS 26.5): 1차(첫 onAppear 뒤 .searchable 부착)는 효과 없음 — 검색창이 여전히 펼쳐져 첫 행 y 0.36.
+- 한 일: 부착 지연은 되돌리고 `CollapseSearchOnFirstAppear`(UIViewRepresentable) 추가 — 첫 등장 때 맨 위에 있으면 목록을 검색창 높이만큼 한 번 올린다. 사용자가 살짝 밀어 올린 것과 같아 UIKit이 서랍을 접는다. 다른 탭에서 돌아올 땐(맨 위가 아니면) 건드리지 않는다.
+- 검증: 빌드 통과. **사용자/fd 시뮬 확인 필요**(첫 행 y가 RN 0.292와 같은지).
+- 주의: 첫 프레임에 펼친 상태가 한 번 보일 수 있다(다음 런루프에 접음). 거슬리면 원인은 SwiftUI 서랍 기본값이라 이 방식의 한계다.
+

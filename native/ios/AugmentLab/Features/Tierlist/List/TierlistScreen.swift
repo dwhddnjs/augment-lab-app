@@ -69,28 +69,58 @@ struct TierlistScreen: View {
                     .padding(.top, Spacing.two)
             }
             .padding(.bottom, Spacing.five)
+            .background(CollapseSearchOnFirstAppear().allowsHitTesting(false))
         }
         .scrollIndicators(.hidden)
         .scrollDismissesKeyboard(.immediately)
         .modifier(CancelEmptySearchOnDrag(query: query))
         .background(palette.surface.base)
-        .modifier(DeferredSearchable(query: $query, prompt: t("searchPlaceholder")))
+        .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .automatic), prompt: t("searchPlaceholder"))
     }
 }
 
-/// RN(react-native-screens)은 화면이 뜬 뒤에 검색창을 붙여서 처음엔 접혀 있고 끌어내려야 보인다.
-/// SwiftUI `.navigationBarDrawer(.automatic)`는 처음에 펼쳐 둔다 → 첫 등장 뒤에 붙여 같은 순서로 맞춘다.
-// ponytail: iOS 17엔 "처음엔 접힘" API가 없어 붙이는 시점으로 맞춘다. 첫 프레임에 검색창이 보이면 붙이는 시점을 한 프레임 더 늦출 것.
-private struct DeferredSearchable: ViewModifier {
-    @Binding var query: String
-    let prompt: String
-    @State private var attached = false
+/// RN(react-native-screens)은 검색창이 처음엔 접혀 있고 끌어내려야 보인다. SwiftUI 서랍은 처음에 펼쳐 둔다
+/// (붙이는 시점을 늦춰도 iOS 26.5에서 펼쳐짐 — fd 확인). → 첫 등장 때 목록을 검색창 높이만큼 한 번 올린다.
+/// 사용자가 살짝 밀어 올린 것과 같아서 UIKit이 서랍을 접고, 첫 행이 큰 제목 바로 아래(RN 위치)에 온다.
+// ponytail: UIKit 계층을 더듬는다(SwiftUI에 "처음엔 접힘" API 없음). SwiftUI가 지원하면 이 뷰를 지울 것.
+private struct CollapseSearchOnFirstAppear: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView { Probe() }
+    func updateUIView(_ uiView: UIView, context: Context) {}
 
-    func body(content: Content) -> some View {
-        if attached {
-            content.searchable(text: $query, placement: .navigationBarDrawer(displayMode: .automatic), prompt: prompt)
-        } else {
-            content.onAppear { attached = true }
+    private final class Probe: UIView {
+        private var done = false
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            guard window != nil, !done else { return }
+            // 내비게이션 바·검색 서랍 배치가 끝난 다음 런루프에서
+            DispatchQueue.main.async { [weak self] in self?.collapse() }
+        }
+
+        private func collapse() {
+            guard !done, let scroll = ancestor(UIScrollView.self),
+                  let bar = nearestController()?.navigationItem.searchController?.searchBar,
+                  bar.frame.height > 0, bar.window != nil else { return }
+            done = true
+            // 맨 위에 있을 때만 — 다른 탭에서 돌아왔을 때 스크롤 위치를 건드리지 않는다
+            let top = -scroll.adjustedContentInset.top
+            guard scroll.contentOffset.y <= top else { return }
+            scroll.setContentOffset(CGPoint(x: scroll.contentOffset.x, y: top + bar.frame.height), animated: false)
+        }
+
+        private func ancestor<T: UIView>(_: T.Type) -> T? {
+            var v = superview
+            while let cur = v { if let hit = cur as? T { return hit }; v = cur.superview }
+            return nil
+        }
+
+        /// 검색창을 가진 가장 가까운 뷰컨트롤러(SwiftUI가 navigationItem.searchController를 붙인 곳)
+        private func nearestController() -> UIViewController? {
+            var r: UIResponder? = self
+            while let cur = r {
+                if let vc = cur as? UIViewController, vc.navigationItem.searchController != nil { return vc }
+                r = cur.next
+            }
+            return nil
         }
     }
 }
