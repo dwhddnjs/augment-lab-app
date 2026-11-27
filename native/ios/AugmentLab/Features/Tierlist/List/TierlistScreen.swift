@@ -16,6 +16,7 @@ struct TierlistScreen: View {
     @Environment(GameDataStore.self) private var store
     @Environment(\.palette) private var palette
     @State private var query = ""
+    @State private var search = TierlistSearch()
 
     /// 격자·배너 공통 좌우 인셋
     private static let inset = Spacing.three
@@ -35,29 +36,33 @@ struct TierlistScreen: View {
                         .multilineTextAlignment(.center)
                         .padding(.top, Spacing.five)
                 }
+                // 띠 하나 = LazyVStack 자식 하나(tier로 식별). 띠와 행을 형제로 펼치고 행을 순번(\.offset)으로 식별하면
+                // 검색으로 화면 밖에 있던 띠가 들어올 때 행이 비어 나왔다(fd: "te" → B·D 띠만 있고 칸이 빔).
                 ForEach(sections, id: \.tier) { section in
-                    TierMark(section.tier, size: .heading, cornerRadius: Radius.full)
-                        .frame(height: Spacing.five)
-                        .background(palette.surface.raised, in: Capsule())
-                        .padding(.horizontal, Self.inset)
-                        .padding(.top, Spacing.three)
-                        .padding(.bottom, Spacing.two)
-                    ForEach(Array(section.rows.enumerated()), id: \.offset) { _, row in
-                        HStack(spacing: Spacing.two) {
-                            ForEach(row, id: \.key) { entry in
-                                if let champion = data.championsByKey[entry.key] {
-                                    TierlistChampionCell(champion: champion, row: entry, cdn: data.cdn, pickShort: t("pickShort")) {
-                                        router.presentTierlistChampion(entry.key)
+                    VStack(spacing: 0) {
+                        TierMark(section.tier, size: .heading, cornerRadius: Radius.full)
+                            .frame(height: Spacing.five)
+                            .background(palette.surface.raised, in: Capsule())
+                            .padding(.horizontal, Self.inset)
+                            .padding(.top, Spacing.three)
+                            .padding(.bottom, Spacing.two)
+                        ForEach(Array(section.rows.enumerated()), id: \.offset) { _, row in
+                            HStack(spacing: Spacing.two) {
+                                ForEach(row, id: \.key) { entry in
+                                    if let champion = data.championsByKey[entry.key] {
+                                        TierlistChampionCell(champion: champion, row: entry, cdn: data.cdn, pickShort: t("pickShort")) {
+                                            router.presentTierlistChampion(entry.key)
+                                        }
                                     }
                                 }
+                                // 덜 찬 마지막 행의 빈 칸 — 없으면 마지막 카드가 폭 전체로 늘어난다
+                                ForEach(0..<(Tierlist.columns - row.count), id: \.self) { _ in
+                                    Color.clear.frame(maxWidth: .infinity, maxHeight: 0)
+                                }
                             }
-                            // 덜 찬 마지막 행의 빈 칸 — 없으면 마지막 카드가 폭 전체로 늘어난다
-                            ForEach(0..<(Tierlist.columns - row.count), id: \.self) { _ in
-                                Color.clear.frame(maxWidth: .infinity, maxHeight: 0)
-                            }
+                            .padding(.horizontal, Self.inset)
+                            .padding(.bottom, Spacing.two)
                         }
-                        .padding(.horizontal, Self.inset)
-                        .padding(.bottom, Spacing.two)
                     }
                 }
                 // 마지막 행 paddingBottom(8)과 합쳐 16 — 티어 구간 사이(배너 위 여백)와 같은 간격
@@ -69,28 +74,83 @@ struct TierlistScreen: View {
                     .padding(.top, Spacing.two)
             }
             .padding(.bottom, Spacing.five)
+            .background(
+                SearchControllerAttacher(search: search, placeholder: t("searchPlaceholder"),
+                                         tint: UIColor(palette.accent.default), text: UIColor(palette.text.primary))
+                    .allowsHitTesting(false)
+            )
         }
         .scrollIndicators(.hidden)
         .scrollDismissesKeyboard(.immediately)
-        .modifier(CancelEmptySearchOnDrag(query: query))
+        .modifier(CancelEmptySearchOnDrag(query: query) { search.controller.isActive = false })
         .background(palette.surface.base)
-        .modifier(DeferredSearchable(query: $query, prompt: t("searchPlaceholder")))
+        .onAppear { search.onChange = { query = $0 } }
     }
 }
 
-/// RN(react-native-screens)은 화면이 뜬 뒤에 검색창을 붙여서 처음엔 접혀 있고 끌어내려야 보인다.
-/// SwiftUI `.navigationBarDrawer(.automatic)`는 처음에 펼쳐 둔다 → 첫 등장 뒤에 붙여 같은 순서로 맞춘다.
-// ponytail: iOS 17엔 "처음엔 접힘" API가 없어 붙이는 시점으로 맞춘다. 첫 프레임에 검색창이 보이면 붙이는 시점을 한 프레임 더 늦출 것.
-private struct DeferredSearchable: ViewModifier {
-    @Binding var query: String
-    let prompt: String
-    @State private var attached = false
+/// 검색창은 SwiftUI `.searchable` 대신 UIKit `UISearchController`를 내비 아이템에 직접 붙인다(RN react-native-screens와 같은 방식).
+/// SwiftUI 서랍은 처음에 펼쳐져 목록이 ≈60pt 내려갔고, 오프셋으로 접는 방식은 큰 제목 레이아웃과 계속 어긋났다(I-41-02 진행 기록).
+/// UIKit 기본값(`hidesSearchBarWhenScrolling = true`)이면 처음엔 접혀 있고 끌어내려야 나온다 = RN `hideWhenScrolling: true`.
+@MainActor
+final class TierlistSearch: NSObject, UISearchResultsUpdating {
+    let controller = UISearchController(searchResultsController: nil)
+    var onChange: (String) -> Void = { _ in }
 
-    func body(content: Content) -> some View {
-        if attached {
-            content.searchable(text: $query, placement: .navigationBarDrawer(displayMode: .automatic), prompt: prompt)
-        } else {
-            content.onAppear { attached = true }
+    override init() {
+        super.init()
+        controller.obscuresBackgroundDuringPresentation = false
+        controller.hidesNavigationBarDuringPresentation = true
+        controller.searchResultsUpdater = self
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        onChange(searchController.searchBar.text ?? "")
+    }
+}
+
+/// 이 화면을 띄운 뷰컨트롤러(내비 스택의 한 칸)를 찾아 `navigationItem.searchController`를 붙인다.
+/// 첫 레이아웃 전에 붙이도록 superview에 들어오는 즉시 시도하고, 창에 들어올 때 한 번 더 확인한다.
+// ponytail: UIKit 계층을 더듬는다. SwiftUI `.searchable`에 "처음엔 접힘" 옵션이 생기면 이 파일의 UIKit 부분을 지우고 되돌릴 것.
+private struct SearchControllerAttacher: UIViewRepresentable {
+    let search: TierlistSearch
+    let placeholder: String
+    let tint: UIColor
+    let text: UIColor
+
+    func makeUIView(context: Context) -> Probe { Probe(search: search) }
+
+    func updateUIView(_ probe: Probe, context: Context) {
+        let bar = search.controller.searchBar
+        bar.placeholder = placeholder
+        bar.tintColor = tint
+        bar.searchTextField.textColor = text
+        probe.attach()
+    }
+
+    final class Probe: UIView {
+        private let search: TierlistSearch
+        init(search: TierlistSearch) { self.search = search; super.init(frame: .zero) }
+        required init?(coder: NSCoder) { nil }
+
+        override func didMoveToSuperview() { super.didMoveToSuperview(); attach() }
+        override func didMoveToWindow() { super.didMoveToWindow(); attach() }
+
+        func attach() {
+            guard let vc = stackController(), vc.navigationItem.searchController !== search.controller else { return }
+            vc.navigationItem.searchController = search.controller
+            vc.navigationItem.hidesSearchBarWhenScrolling = true
+            vc.navigationItem.preferredSearchBarPlacement = .stacked
+            vc.definesPresentationContext = true
+        }
+
+        /// 내비게이션 컨트롤러 스택에 직접 올라 있는 뷰컨트롤러 — 내비 바가 그 navigationItem을 그린다
+        private func stackController() -> UIViewController? {
+            var r: UIResponder? = self
+            while let cur = r {
+                if let vc = cur as? UIViewController, let nav = vc.navigationController, nav.viewControllers.contains(vc) { return vc }
+                r = cur.next
+            }
+            return nil
         }
     }
 }
@@ -141,7 +201,7 @@ private struct TierlistChampionCell: View {
 // ponytail: 스크롤 시작 신호(onScrollPhaseChange)가 iOS 18부터라 17은 키보드만 내린다. 17에서도 필요하면 UIScrollView 델리게이트로.
 private struct CancelEmptySearchOnDrag: ViewModifier {
     let query: String
-    @Environment(\.dismissSearch) private var dismissSearch
+    let dismissSearch: () -> Void
 
     func body(content: Content) -> some View {
         if #available(iOS 18, *) {

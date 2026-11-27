@@ -38,3 +38,27 @@ rn: src/features/tierlist/screens/tierlist-screen.tsx
 - 한 일: `TierlistScreen`에 `DeferredSearchable` — 첫 `onAppear` 뒤에 `.searchable`을 붙인다. 검색창이 사라지는 게 아니라 RN처럼 접힌 채 붙으므로 S 띠도 RN 높이에서 시작해야 한다.
 - 검증: `make -C native/ios build` 통과. 시뮬레이터는 c1 규칙상 안 돌림 → **사용자 확인 필요**.
 - 주의: 첫 프레임에 검색창이 잠깐 보이면 붙이는 시점을 한 프레임 더 늦춘다(ponytail 주석).
+### 2026-11-27 · c1 (2차)
+- fd 시뮬 확인(iOS 26.5): 1차(첫 onAppear 뒤 .searchable 부착)는 효과 없음 — 검색창이 여전히 펼쳐져 첫 행 y 0.36.
+- 한 일: 부착 지연은 되돌리고 `CollapseSearchOnFirstAppear`(UIViewRepresentable) 추가 — 첫 등장 때 맨 위에 있으면 목록을 검색창 높이만큼 한 번 올린다. 사용자가 살짝 밀어 올린 것과 같아 UIKit이 서랍을 접는다. 다른 탭에서 돌아올 땐(맨 위가 아니면) 건드리지 않는다.
+- 검증: 빌드 통과. **사용자/fd 시뮬 확인 필요**(첫 행 y가 RN 0.292와 같은지).
+- 주의: 첫 프레임에 펼친 상태가 한 번 보일 수 있다(다음 런루프에 접음). 거슬리면 원인은 SwiftUI 서랍 기본값이라 이 방식의 한계다.
+
+### 2026-11-27 · c1 (3차)
+- fd 2차 확인: 검색창은 숨었지만 너무 올라감(첫 행 y 0.164, 큰 제목까지 접힘). 원인: UIKit이 서랍을 접으면서 인셋을 줄이고 오프셋도 보정 → 올린 만큼이 두 번 먹음.
+- fd가 짚은 "ScrollView를 감싸면 내비 바가 못 잡음"은 해당 없음 — NavigationStack → TierlistScreen 루트가 바로 ScrollView.
+- 한 일: ① 검색창 높이만큼 밀어 서랍을 접게 하고 ② 다음 런루프에 새 맨 위(-adjustedContentInset.top)로 되돌린다. 빌드 통과. **fd/사용자 시뮬 확인 필요**.
+### 2026-11-27 · c1 (4차)
+- fd 3차 확인: 검색창 숨김·S 띠 보임 ✅, 그러나 큰 제목이 작은 제목으로 접힌 채(첫 행 y 0.232, RN 0.292, ≈52pt = 큰 제목 높이). 원인: ②에서 접힌 제목 기준 인셋(-adjustedContentInset.top)으로 되돌려 작은 제목 상태로 굳음.
+- 한 일: ②의 목표를 ①에서 미리 잡은 값(처음 맨 위 + 검색창 높이 = 서랍만 접힌 큰 제목 상태의 맨 위)으로 바꾸고, 되돌린 뒤 내비 바 레이아웃 한 번. 빌드 통과. **fd/사용자 시뮬 확인 필요**.
+### 2026-11-27 · c1 (5차 — 방식 전환)
+- fd 4차 확인: 더 나빠짐(큰 제목이 검색창과 겹쳐 그려짐, 첫 행 y 0.42). 오프셋을 손으로 맞추는 방식은 큰 제목/서랍 레이아웃과 계속 어긋나서 폐기.
+- 한 일: SwiftUI `.searchable`을 빼고 UIKit `UISearchController`를 내비 스택 뷰컨트롤러의 `navigationItem.searchController`에 직접 붙인다(`hidesSearchBarWhenScrolling = true`, `preferredSearchBarPlacement = .stacked`) — RN react-native-screens와 같은 방식. 검색어는 `UISearchResultsUpdating` → `query`. 빈 검색 드래그 취소는 `dismissSearch` 대신 `controller.isActive = false`. 자리표시·틴트·글자색은 기존 L10n·팔레트 토큰.
+- 검증: 빌드 통과. **fd/사용자 시뮬 확인 필요** — 첫 화면 검색창 숨김·큰 제목 펼침·첫 행 y≈0.292, 끌어내리면 나옴, 검색 입력/취소, 라이트·다크 색.
+- 주의: SwiftUI가 navigationItem을 다시 갱신하며 searchController를 지우면 검색창이 사라진다 → 그때는 updateUIView에서 다시 붙이는 지금 구조로 회복되는지 확인.
+### 2026-11-27 · c1 (6차 — 한도 95%로 정지)
+- fd 5차 확인: 6개 전부 ✅(첫 행 y 0.292 = RN, 깜빡임 없음, 끌어내리면 검색창, 필터·취소, 빈 검색 스크롤 취소, 다크 색, 탭 왕복).
+- 새 차이: 검색 "te" → RN은 S·B·D 모두 채움, 네이티브는 B·D 띠만 있고 칸이 빔. (fd 추정 useStagedExpand는 챔피언 모달의 증강 섹션 것이라 해당 없음, Tierlist.sections 로직도 정상)
+- 한 일: LazyVStack 직속 자식을 "띠 하나 = VStack 하나(tier로 식별)"로 묶음 — 띠·행을 형제로 펼치고 행을 \.offset으로 식별하던 구조가 원인으로 추정. 빌드 통과.
+- 다음에 할 첫 행동: fd에 "te" 재촬영 요청(S·B·D 모두 채워지는지, 검색 없을 때 스크롤 성능 그대로인지). ✅면 #126 리뷰 요청.
+- 주의: 원인 추정이 틀리면 다음 후보는 행 id를 "\(tier)-\(offset)"로 바꾸기.
