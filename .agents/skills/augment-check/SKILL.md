@@ -42,9 +42,13 @@ make -C native/ios test    # AugmentCore 테스트가 저장소 JSON을 그대�
 - **JSON 파일을 새로 만들면** `native/ios/Scripts/data-files.xcfilelist`와 `data-outputs.xcfilelist`에
   한 줄씩 넣는다. 빠뜨리면 네이티브 번들에 안 들어간다.
 - **테스트가 데이터 검사 역할을 한다.** `GameDataTests.itemPoolKeepsItemOrder`는
-  `aram-item-ids.json`의 id가 전부 `items.*.json`에 있어야 통과한다 — DDragon이 아이템을 지우면
-  여기서 걸린다(2026-11-27 리허설: 16.16.1 → 16.23.1 갱신에서 `3097` 폭풍갈퀴가 빠져 111 → 110).
-  진열 풀에서 그 id를 뺄지 사람이 정한다.
+  `aram-item-ids.json`의 id가 전부 `items.*.json`에 있어야 통과한다 — DDragon이 아이템을 지우거나
+  **id를 바꾸면** 여기서 걸린다.
+- **걸리면 "삭제"로 단정하지 말고 이전·새 DDragon `item.json`을 이름으로 대조한다.** 라이엇은 같은
+  아이템의 id를 바꾸기도 한다(16.16.1 → 16.23.1: 폭풍갈퀴 `3097` → `3095`, 이름·가격·스탯 동일 —
+  16.16.1의 `3095`는 맵 비활성 "과거 아이템"이라 필터에서 빠져 있었다). id가 바뀐 것이면
+  `aram-item-ids.json`의 id를 바꾸고, 저장된 빌드의 옛 id(`itemIds`)도 새 id로 읽히게 해야 한다
+  (안 하면 옛 빌드에서 그 아이템이 사라진다).
 - `CustomDraftTests` 등의 **개수·해시**(`count`·`hash`)는 RN 결과를 박아 둔 스냅샷이다.
   패치로 풀이 정말 바뀌었으면 `check-augment-data.mjs`의 `EXPECTED`처럼 지우지 말고 갱신하고,
   바뀐 내용을 검증 기록에 남긴다.
