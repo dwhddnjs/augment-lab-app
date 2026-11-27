@@ -28,6 +28,29 @@ node scripts/gen-data-check.mjs   # → docs/index.html
 - 데이터 변경 후 `docs/index.html`도 **함께 커밋**할 것.
 - 새 패치를 반영하면 `src/lib/version.json` 의 `patch`(마이페이지 "패치 버전")도 올릴 것.
 
+## 네이티브 앱(`native/ios`)도 같은 JSON을 쓴다
+
+RN과 네이티브는 데이터 파일을 **하나만** 둔다. 네이티브는 빌드 단계 "Copy Data JSON"
+(`native/ios/Scripts/copy-data.sh`)이 `src/features/*/data/*.json`·`src/lib/version.json`을 번들
+`Data/`로 복사한다. 그래서 데이터를 고친 뒤에는 RN 확인과 함께 다음 둘을 돌린다:
+
+```bash
+make -C native/ios build   # JSON만 바뀌어도 다시 복사된다(입력 목록 data-files.xcfilelist)
+make -C native/ios test    # AugmentCore 테스트가 저장소 JSON을 그대로 읽어 정합성을 본다
+```
+
+- **JSON 파일을 새로 만들면** `native/ios/Scripts/data-files.xcfilelist`와 `data-outputs.xcfilelist`에
+  한 줄씩 넣는다. 빠뜨리면 네이티브 번들에 안 들어간다.
+- **테스트가 데이터 검사 역할을 한다.** `GameDataTests.itemPoolKeepsItemOrder`는
+  `aram-item-ids.json`의 id가 전부 `items.*.json`에 있어야 통과한다 — DDragon이 아이템을 지우면
+  여기서 걸린다(2026-11-27 리허설: 16.16.1 → 16.23.1 갱신에서 `3097` 폭풍갈퀴가 빠져 111 → 110).
+  진열 풀에서 그 id를 뺄지 사람이 정한다.
+- `CustomDraftTests` 등의 **개수·해시**(`count`·`hash`)는 RN 결과를 박아 둔 스냅샷이다.
+  패치로 풀이 정말 바뀌었으면 `check-augment-data.mjs`의 `EXPECTED`처럼 지우지 말고 갱신하고,
+  바뀐 내용을 검증 기록에 남긴다.
+- 설명 길이 기준이 되는 네이티브 카드는 `native/ios/AugmentLab/UI/Cards/RarityCardFrame.swift`
+  (`TextSpec` — 글자 크기 고정, 글 칸을 넘으면 잘린다)다. RN `rarity-card-frame.tsx`는 R-01까지 함께 본다.
+
 ## 모드 구분이 먼저다 — 여기서 틀리면 전부 틀린다
 
 `cherry-augments.json` 에는 **모드 구분이 없다.** 여기 있는 증강을 전부 칼바람으로 넣으면
@@ -120,7 +143,10 @@ UI 가 아니라 데이터에서 맞춘다 — `rarity-card-frame.tsx` 가 `numb
   - 위키 `<이름>_mayhem_augment.png`(CDragon `_large` 와 픽셀 동일)를
     `assets/augments/<CDragon 파일명에서 _small 뺀 것>.png` 로 넣는다.
   - `src/lib/ddragon.ts` `LOCAL_AUGMENT_ICONS` 에 등록한다. 검수 페이지는 이 표를 읽어 그리므로, 등록을 빠뜨리면 검수 페이지에서도 흰 실루엣으로 보인다.
-  - CDragon 이 `_large` 를 내면 표와 파일을 지운다.
+  - **네이티브도 등록한다**: 같은 png를 `native/ios/AugmentLab/Assets.xcassets/augments-<이름>.imageset/`에
+    넣고(`Contents.json`은 기존 imageset 복사), `AugmentCore/Sources/AugmentCore/Data/CDN.swift`의
+    `localAugmentNames`에 이름을 추가한다. `CDNTests`가 `assets/augments/` 파일 목록과 이 표가 같은지 본다.
+  - CDragon 이 `_large` 를 내면 표와 파일을 지운다(네이티브 imageset·`localAugmentNames` 포함).
 
 - **ARAM Mayhem 증강은 `.../UX/Kiwi/Augments/Icons/...` 폴더 사용**. `Cherry`/`Strawberry`(Arena) 폴더를 쓰지 말 것.
 - CDragon `cherry-augments.json`에서 rarity(`kSilver`/`kGold`/`kPrismatic`)가 데이터와 일치하는 `Kiwi` 항목을 정답으로 삼는다.
