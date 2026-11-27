@@ -4,8 +4,8 @@ import SwiftUI
 import UIKit
 
 private let L = L10n(
-    ko: ["title": "챔피언 선택", "searchPlaceholder": "챔피언 검색 (초성 가능)", "start": "시작하기", "cancel": "취소"],
-    en: ["title": "Select Champion", "searchPlaceholder": "Search champions", "start": "Start", "cancel": "Cancel"]
+    ko: ["title": "챔피언 선택", "searchPlaceholder": "챔피언 검색 (초성 가능)", "start": "시작하기", "cancel": "취소", "all": "전체"],
+    en: ["title": "Select Champion", "searchPlaceholder": "Search champions", "start": "Start", "cancel": "Cancel", "all": "All"]
 )
 
 /// 챔피언 선택 시트 (launch.md §2). 큰 제목(28) + 시스템 검색창, 왼쪽 X · 오른쪽 ✓.
@@ -37,7 +37,7 @@ struct ChampionSelectScreen: View {
                 .navigationTitle(t("title"))
                 .navigationBarTitleDisplayMode(.large)
                 .background(LargeTitleSize(size: Self.largeTitleSize))
-                .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .automatic), prompt: t("searchPlaceholder"))
+                .searchable(text: $query, placement: Self.searchPlacement, prompt: t("searchPlaceholder"))
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button { router.back() } label: { headerIcon("xmark", palette.text.secondary) }
@@ -60,6 +60,12 @@ struct ChampionSelectScreen: View {
             let urls = store.data.champions.map { cdn.championSquareURL($0.imageKey) } + championTags.compactMap(CDN.championClassIconURL)
             SDWebImagePrefetcher.shared.prefetchURLs(urls)
         }
+    }
+
+    /// iOS 26+는 RN(react-native-screens)처럼 아래에 떠 있는 글라스 막대 — 키보드와 함께 올라온다.
+    /// 그 아래는 RN도 제목 밑 서랍이다.
+    private static var searchPlacement: SearchFieldPlacement {
+        if #available(iOS 26, *) { .toolbar } else { .navigationBarDrawer(displayMode: .automatic) }
     }
 
     private var listData: [Champion] {
@@ -97,6 +103,7 @@ private struct ChampionGrid: View {
     @Binding var selectedId: String?
     @Binding var selectedTag: String?
 
+    @Environment(AppSettings.self) private var settings
     @Environment(\.palette) private var palette
     @Environment(\.dismissSearch) private var dismissSearch
 
@@ -109,12 +116,12 @@ private struct ChampionGrid: View {
         ScrollView {
             // 필터는 리스트 헤더로 함께 스크롤된다(고정 안 함)
             HStack(spacing: Spacing.two) {
-                chip(active: selectedTag == nil, tap: { selectedTag = nil }) {
+                chip(active: selectedTag == nil, label: L.t(settings.locale)("all"), tap: { selectedTag = nil }) {
                     Image(systemName: "square.grid.2x2.fill").resizable().scaledToFit()
                 }
                 ForEach(championTags, id: \.self) { tag in
                     // 같은 칩을 다시 누르면 필터가 풀린다
-                    chip(active: selectedTag == tag, tap: { selectedTag = selectedTag == tag ? nil : tag }) {
+                    chip(active: selectedTag == tag, label: championTagLabel(tag, settings.locale), tap: { selectedTag = selectedTag == tag ? nil : tag }) {
                         WebImage(url: CDN.championClassIconURL(tag)) { $0.resizable().renderingMode(.template).scaledToFit() } placeholder: { Color.clear }
                     }
                 }
@@ -135,7 +142,8 @@ private struct ChampionGrid: View {
         .background(palette.surface.base)
     }
 
-    private func chip(active: Bool, tap: @escaping () -> Void, @ViewBuilder icon: () -> some View) -> some View {
+    /// `label`: VoiceOver 이름 — 없으면 SF 심볼 이름("격자 2x2")이나 빈 이름으로 읽힌다(I-41 검수)
+    private func chip(active: Bool, label: String, tap: @escaping () -> Void, @ViewBuilder icon: () -> some View) -> some View {
         Button(action: tap) {
             icon()
                 .frame(width: Self.chipIcon, height: Self.chipIcon)
@@ -144,6 +152,8 @@ private struct ChampionGrid: View {
                 .background(active ? palette.accent.subtle : .clear, in: Radius.shape(Radius.md))
         }
         .buttonStyle(NoFeedbackButtonStyle())
+        .accessibilityLabel(label)
+        .accessibilityAddTraits(active ? .isSelected : [])
     }
 
     private func cell(_ champion: Champion) -> some View {

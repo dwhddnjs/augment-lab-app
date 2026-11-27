@@ -105,9 +105,9 @@ struct BuildDetailScreen: View {
         return GeometryReader { geo in
             ZStack(alignment: .top) {
                 palette.surface.base
+                // 폭을 숫자로 못 박는다 — `scaledToFill` 그림은 maxWidth만으로는 안 줄어 ZStack(과 그 안 스크롤)을 화면보다 넓혔다(I-41-01).
                 banner(champion)
-                    .frame(height: BuildDetailScroll.bannerHeight(scrollY))
-                    .frame(maxWidth: .infinity)
+                    .frame(width: geo.size.width, height: BuildDetailScroll.bannerHeight(scrollY))
                     .clipped()
                     .allowsHitTesting(false)
 
@@ -132,6 +132,8 @@ struct BuildDetailScreen: View {
             .ignoresSafeArea(edges: .top)
         }
         .toolbarBackground(.hidden, for: .navigationBar)
+        // 배너(어두운 일러스트) 위에선 라이트 모드도 흰 상태바 — RN과 같게. 헤더가 접혀 바탕이 덮이면 테마를 따른다.
+        .toolbarColorScheme(fade < 0.5 ? .dark : palette.scheme, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {

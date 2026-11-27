@@ -4,6 +4,7 @@ import UIKit
 
 private let L = L10n(
     ko: [
+        "title": "데이터 관리",
         "backupSection": "백업 · 복원",
         "backupFooter": "백업 파일(.alab)에는 저장된 빌드와 테마·언어 설정이 담깁니다. 앱을 지우기 전에 백업해 두면 재설치 후 그대로 되돌릴 수 있어요.",
         "backup": "백업",
@@ -30,6 +31,7 @@ private let L = L10n(
         "ok": "확인",
     ],
     en: [
+        "title": "Manage Data",
         "backupSection": "Backup & Restore",
         "backupFooter": "A backup file (.alab) holds your saved builds and theme/language settings. Back up before deleting the app to restore everything after reinstalling.",
         "backup": "Back Up",
@@ -111,6 +113,12 @@ struct DataManageScreen: View {
         .listStyle(.insetGrouped)
         .scrollContentBackground(.hidden)
         .background(palette.surface.base)
+        // 셸의 `toolbarRole(.editor)`(뒤로 버튼 화살표만)가 inline 제목을 왼쪽에 붙인다 — RN 기본 헤더처럼 가운데에 둔다
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(t("title")).font(.headline).accessibilityAddTraits(.isHeader)
+            }
+        }
         // 형식 필터 없음(RN과 같음 — .alab은 등록된 형식이 없다)
         .fileImporter(isPresented: $importing, allowedContentTypes: [.item], allowsMultipleSelection: false) { result in
             pickedFile(result.map { $0.first }, t)
